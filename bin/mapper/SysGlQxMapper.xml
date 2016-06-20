@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyx.mapper.SysGlQxMapper">
+  <resultMap id="BaseResultMap" type="com.zyx.model.SysGlQx">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="GL_ID" jdbcType="VARCHAR" property="glId" />
+    <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+    <result column="FX_QX" jdbcType="INTEGER" property="fxQx" />
+    <result column="FW_QX" jdbcType="INTEGER" property="fwQx" />
+    <result column="QX1" jdbcType="INTEGER" property="qx1" />
+    <result column="QX2" jdbcType="INTEGER" property="qx2" />
+    <result column="QX3" jdbcType="INTEGER" property="qx3" />
+    <result column="QX4" jdbcType="INTEGER" property="qx4" />
+  </resultMap>
+</mapper>

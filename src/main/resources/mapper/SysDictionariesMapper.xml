@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyx.mapper.SysDictionariesMapper">
+  <resultMap id="BaseResultMap" type="com.zyx.model.SysDictionaries">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="ZD_ID" jdbcType="VARCHAR" property="zdId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="BIANMA" jdbcType="VARCHAR" property="bianma" />
+    <result column="ORDY_BY" jdbcType="INTEGER" property="ordyBy" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="JB" jdbcType="INTEGER" property="jb" />
+    <result column="P_BM" jdbcType="VARCHAR" property="pBm" />
+  </resultMap>
+</mapper>

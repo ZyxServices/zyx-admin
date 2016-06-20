@@ -1,0 +1,14 @@
+*.prefs
+*.svn-base
+.metadata/
+.project
+target/
+*.project
+*.classpath
+*.log.*
+.setting/
+.idea/
+*.iml
+*.class
+*.log
+lib/

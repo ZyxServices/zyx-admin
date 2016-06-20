@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyx.mapper.SysUserQxMapper">
+  <resultMap id="BaseResultMap" type="com.zyx.model.SysUserQx">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="U_ID" jdbcType="VARCHAR" property="uId" />
+    <result column="C1" jdbcType="INTEGER" property="c1" />
+    <result column="C2" jdbcType="INTEGER" property="c2" />
+    <result column="C3" jdbcType="INTEGER" property="c3" />
+    <result column="C4" jdbcType="INTEGER" property="c4" />
+    <result column="Q1" jdbcType="INTEGER" property="q1" />
+    <result column="Q2" jdbcType="INTEGER" property="q2" />
+    <result column="Q3" jdbcType="INTEGER" property="q3" />
+    <result column="Q4" jdbcType="INTEGER" property="q4" />
+  </resultMap>
+</mapper>

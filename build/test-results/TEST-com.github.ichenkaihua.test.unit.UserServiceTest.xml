@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.github.ichenkaihua.test.unit.UserServiceTest" tests="2" skipped="0" failures="1" errors="0" timestamp="2016-06-20T05:12:11" hostname="zhanghr-pc" time="0.437">
+  <properties/>
+  <testcase name="test" classname="com.github.ichenkaihua.test.unit.UserServiceTest" time="0.301">
+    <failure message="org.springframework.dao.DataIntegrityViolationException: &#13;&#10;### Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Column 'USER_ID' cannot be null&#13;&#10;### The error may involve com.zyx.mapper.SysUserMapper.insert-Inline&#13;&#10;### The error occurred while setting parameters&#13;&#10;### SQL: INSERT INTO SYS_USER  ( ID,USER_ID,USERNAME,PASSWORD,NAME,RIGHTS,ROLE_ID,LAST_LOGIN,IP,STATUS,BZ,SKIN,EMAIL,NUMBER,PHONE ) VALUES( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,? )&#13;&#10;### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Column 'USER_ID' cannot be null&#10;; SQL []; Column 'USER_ID' cannot be null; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Column 'USER_ID' cannot be null" type="org.springframework.dao.DataIntegrityViolationException">org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Column 'USER_ID' cannot be null
+### The error may involve com.zyx.mapper.SysUserMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO SYS_USER  ( ID,USER_ID,USERNAME,PASSWORD,NAME,RIGHTS,ROLE_ID,LAST_LOGIN,IP,STATUS,BZ,SKIN,EMAIL,NUMBER,PHONE ) VALUES( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,? )
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Column 'USER_ID' cannot be null
+; SQL []; Column 'USER_ID' cannot be null; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Column 'USER_ID' cannot be null
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:85)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:73)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:81)
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:75)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:447)
+	at com.sun.proxy.$Proxy31.insert(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:279)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:56)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:53)
+	at com.sun.proxy.$Proxy39.insert(Unknown Source)
+	at com.zyx.service.UserService.addUser(UserService.java:42)
+	at com.github.ichenkaihua.test.unit.UserServiceTest.test(UserServiceTest.java:26)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:254)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:193)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.runTestClass(JUnitTestClassExecuter.java:112)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecuter.execute(JUnitTestClassExecuter.java:56)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassProcessor.processTestClass(JUnitTestClassProcessor.java:66)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.gradle.messaging.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+	at org.gradle.messaging.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.messaging.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:32)
+	at org.gradle.messaging.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:93)
+	at com.sun.proxy.$Proxy2.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:109)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.gradle.messaging.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
+	at org.gradle.messaging.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.messaging.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:364)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:54)
+	at org.gradle.internal.concurrent.StoppableExecutorImpl$1.run(StoppableExecutorImpl.java:40)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Column 'USER_ID' cannot be null
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:404)
+	at com.mysql.jdbc.Util.getInstance(Util.java:387)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:932)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3878)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3814)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2478)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2625)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2551)
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1861)
+	at com.mysql.jdbc.PreparedStatement.execute(PreparedStatement.java:1192)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:46)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:63)
+	at com.sun.proxy.$Proxy41.update(Unknown Source)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:198)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:185)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:434)
+	... 56 more
+</failure>
+  </testcase>
+  <testcase name="emTest" classname="com.github.ichenkaihua.test.unit.UserServiceTest" time="0.135"/>
+  <system-out><![CDATA[2016-06-20 13:12:11 [Test worker] INFO  org.springframework.test.context.support.DefaultTestContextBootstrapper(259) - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-06-20 13:12:11 [Test worker] INFO  org.springframework.test.context.support.DefaultTestContextBootstrapper(185) - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@2caecb63, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@55eb298, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@3bd738c9, org.springframework.test.context.support.DirtiesContextTestExecutionListener@c7510d, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5ae867a5, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@2ad2d412]
+2016-06-20 13:12:11 [Test worker] INFO  org.springframework.test.context.transaction.TransactionContext(101) - Began transaction (1) for test context [DefaultTestContext@264b874b testClass = UserServiceTest, testInstance = com.github.ichenkaihua.test.unit.UserServiceTest@6fa1e320, testMethod = test@UserServiceTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@2841a0f1 testClass = UserServiceTest, locations = '{classpath:spring-config-test.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.jdbc.datasource.DataSourceTransactionManager@6942d313]; rollback [true]
+2016-06-20 13:12:11 [Test worker] INFO  org.springframework.beans.factory.xml.XmlBeanDefinitionReader(317) - Loading XML bean definitions from class path resource [org/springframework/jdbc/support/sql-error-codes.xml]
+2016-06-20 13:12:11 [Test worker] INFO  org.springframework.jdbc.support.SQLErrorCodesFactory(126) - SQLErrorCodes loaded: [DB2, Derby, H2, HSQL, Informix, MS-SQL, MySQL, Oracle, PostgreSQL, Sybase, Hana]
+2016-06-20 13:12:11 [Test worker] INFO  org.springframework.test.context.transaction.TransactionContext(136) - Rolled back transaction for test context [DefaultTestContext@264b874b testClass = UserServiceTest, testInstance = com.github.ichenkaihua.test.unit.UserServiceTest@6fa1e320, testMethod = test@UserServiceTest, testException = org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Column 'USER_ID' cannot be null
+### The error may involve com.zyx.mapper.SysUserMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO SYS_USER  ( ID,USER_ID,USERNAME,PASSWORD,NAME,RIGHTS,ROLE_ID,LAST_LOGIN,IP,STATUS,BZ,SKIN,EMAIL,NUMBER,PHONE ) VALUES( ?,?,?,?,?,?,?,?,?,?,?,?,?,?,? )
+### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Column 'USER_ID' cannot be null
+; SQL []; Column 'USER_ID' cannot be null; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Column 'USER_ID' cannot be null, mergedContextConfiguration = [MergedContextConfiguration@2841a0f1 testClass = UserServiceTest, locations = '{classpath:spring-config-test.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]].
+2016-06-20 13:12:11 [Test worker] INFO  org.springframework.test.context.transaction.TransactionContext(101) - Began transaction (1) for test context [DefaultTestContext@264b874b testClass = UserServiceTest, testInstance = com.github.ichenkaihua.test.unit.UserServiceTest@57baf56b, testMethod = emTest@BaseUnitTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@2841a0f1 testClass = UserServiceTest, locations = '{classpath:spring-config-test.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]; transaction manager [org.springframework.jdbc.datasource.DataSourceTransactionManager@6942d313]; rollback [true]
+2016-06-20 13:12:11 [Test worker] INFO  org.springframework.test.context.transaction.TransactionContext(136) - Rolled back transaction for test context [DefaultTestContext@264b874b testClass = UserServiceTest, testInstance = com.github.ichenkaihua.test.unit.UserServiceTest@57baf56b, testMethod = emTest@BaseUnitTest, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@2841a0f1 testClass = UserServiceTest, locations = '{classpath:spring-config-test.xml}', classes = '{}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]].
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

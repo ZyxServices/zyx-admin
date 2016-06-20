@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.github.ichenkaihua.test.common.CommonTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2016-06-20T05:12:07" hostname="zhanghr-pc" time="0.011">
+  <properties/>
+  <testcase name="testSimpleDateFromat" classname="com.github.ichenkaihua.test.common.CommonTest" time="0.007"/>
+  <testcase name="testFileUtls" classname="com.github.ichenkaihua.test.common.CommonTest" time="0.0"/>
+  <testcase name="testRandomString" classname="com.github.ichenkaihua.test.common.CommonTest" time="0.001"/>
+  <system-out><![CDATA[2016-06-20-13-12-07
+
+Oz7QM
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
