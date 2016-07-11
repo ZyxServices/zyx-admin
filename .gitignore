@@ -13,3 +13,5 @@ target/
 *.log
 lib/
 build/
+.bin
+.lock
