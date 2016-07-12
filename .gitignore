@@ -15,3 +15,5 @@ lib/
 build/
 .bin
 .lock
+classes
+.gradle/
