@@ -17,7 +17,7 @@
   <meta content="" name="author" />
 
   <!-- BEGIN GLOBAL MANDATORY STYLES -->
-  <jsp:include page="../public/styles.jsp"/>
+  <jsp:include page="../public/common-styles.jsp"/>
 </head>
 <body class="page-header-fixed">
 <jsp:include page="../public/header.jsp"/>
@@ -183,6 +183,34 @@
 <!-- BEGIN FOOTER -->
 
 <jsp:include page="../public/footer.jsp"/>
+<jsp:include page="../public/common-js.jsp"/>
+<script src="../js/app.js" type="text/javascript"></script>
+<script src="../js/index.js" type="text/javascript"></script>
+<script type="text/javascript" src="../js/activity/list.js"></script>
+<script>
+
+  jQuery(document).ready(function() {
+
+    App.init(); // initlayout and core plugins
+
+    Index.init();
+
+    Index.initJQVMAP(); // init index page's custom scripts
+
+    Index.initCalendar(); // init index page's custom scripts
+
+    Index.initCharts(); // init index page's custom scripts
+
+    Index.initChat();
+
+    Index.initMiniCharts();
+
+    Index.initDashboardDaterange();
+
+    Index.initIntro();
+
+  });
+
+</script>
 </body>
-<script type="text/javascript" src="../../js/activity/list.js"></script>
 </html>
