@@ -6,33 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<script src="../js/jquery-1.10.1.min.js" type="text/javascript"></script>
-
-<script src="../js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-
-<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-
-<script src="../js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
-
-<script src="../js/bootstrap.min.js" type="text/javascript"></script>
-
-<!--[if lt IE 9]>
-
-<script src="../js/excanvas.min.js"></script>
-
-<script src="../js/respond.min.js"></script>
-
-<![endif]-->
-
-<script src="../js/jquery.slimscroll.min.js" type="text/javascript"></script>
-
-<script src="../js/jquery.blockui.min.js" type="text/javascript"></script>
-
-<script src="../js/jquery.cookie.min.js" type="text/javascript"></script>
-
-<script src="../js/jquery.uniform.min.js" type="text/javascript" ></script>
-
-<!-- END CORE PLUGINS -->
 
 <!-- BEGIN CORE PLUGINS -->
 
@@ -99,8 +72,4 @@
 <script src="../js/jquery.sparkline.min.js" type="text/javascript"></script>
 
 <script src="../js/bootstrap-table.js" type="text/javascript"></script>
-
-<script src="../js/app.js" type="text/javascript"></script>
-
-<script src="../js/index.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL PLUGINS -->

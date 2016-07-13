@@ -126,6 +126,11 @@
 
         <!-- BEGIN DASHBOARD STATS -->
 
+        <div class="row-fluid margin-bottom-10">
+          <div class="span6">
+            <a class="add-activity-btn" href="#">创建活动</a>
+          </div>
+        </div>
         <div class="row-fluid">
           <div class="span12 responsive">
             <table id="activity-list-table">
@@ -192,22 +197,6 @@
   jQuery(document).ready(function() {
 
     App.init(); // initlayout and core plugins
-
-    Index.init();
-
-    Index.initJQVMAP(); // init index page's custom scripts
-
-    Index.initCalendar(); // init index page's custom scripts
-
-    Index.initCharts(); // init index page's custom scripts
-
-    Index.initChat();
-
-    Index.initMiniCharts();
-
-    Index.initDashboardDaterange();
-
-    Index.initIntro();
 
   });
 
