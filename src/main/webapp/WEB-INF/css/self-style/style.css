@@ -1,6 +1,12 @@
-.add-activity-btn{
-    display: inline-block;
-    background: #00A1F1;
-    padding: 10px 20px;
-    color: #fff;
+/*summernote中样式修改*/
+.note-editor .modal{
+    display: none;
+}
+.note-editor .close span{
+    display: none;
+}
+.note-popover .popover-content, .panel-heading.note-toolbar {
+    padding: 0 0 5px 5px;
+    margin: 0;
+    background: #e5e5e5;
 }

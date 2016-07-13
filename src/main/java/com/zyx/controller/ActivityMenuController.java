@@ -15,8 +15,12 @@ package com.zyx.controller;
  @RequestMapping("/activity")
  public class ActivityMenuController {
              @RequestMapping(value = "/list", method = RequestMethod.GET)
-             public ModelAndView roles() {
-        
+             public ModelAndView list() {
                  return  new ModelAndView("/activity/list");
+             }
+
+             @RequestMapping(value = "/create", method = RequestMethod.GET)
+             public ModelAndView create(String a) {
+                 return  new ModelAndView("/activity/create");
              }
      }

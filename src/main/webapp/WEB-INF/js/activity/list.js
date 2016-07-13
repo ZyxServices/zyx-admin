@@ -7,6 +7,8 @@ $(function(){
         pagination: true,
         smartDisplay: false,
         cache: false,
+        search: true,
+        strictSearch: true,
         height:"300",
         uniqueId: "id",
         pageSize: 20,

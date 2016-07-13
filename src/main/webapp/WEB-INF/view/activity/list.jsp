@@ -12,7 +12,7 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-  <meta content="基于Bootstrap的网站后台模板Metronic DEMO" name="description" />
+  <meta content="体育家-活动列表" name="description" />
 
   <meta content="" name="author" />
 
@@ -128,7 +128,7 @@
 
         <div class="row-fluid margin-bottom-10">
           <div class="span6">
-            <a class="add-activity-btn" href="#">创建活动</a>
+            <a class="btn btn-default" href="<%=request.getContextPath()%>/activity/create">创建活动</a>
           </div>
         </div>
         <div class="row-fluid">
