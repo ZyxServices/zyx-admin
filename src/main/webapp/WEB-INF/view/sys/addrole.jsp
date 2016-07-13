@@ -15,23 +15,23 @@
 	<meta content="" name="author" />
 
 
-	<link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	<link href="../../css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
-	<link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-	<link href="../../css/style-metro.css" rel="stylesheet" type="text/css"/>
-	<link href="../../css/style.css" rel="stylesheet" type="text/css"/>
-	<link href="../../css/style-responsive.css" rel="stylesheet" type="text/css"/>
-	<link href="../../css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
-	<link href="../../css/uniform.default.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/style-metro.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/style-responsive.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+	<link href="../css/uniform.default.css" rel="stylesheet" type="text/css"/>
 
-	<link href="../../css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
-	<link href="../../css/daterangepicker.css" rel="stylesheet" type="text/css" />
-	<link href="../../css/fullcalendar.css" rel="stylesheet" type="text/css"/>
-	<link href="../../css/jqvmap.css" rel="stylesheet" type="text/css" ..="screen"/>
-	<link href="../../css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" ..="screen"/>
+	<link href="../css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/daterangepicker.css" rel="stylesheet" type="text/css" />
+	<link href="../css/fullcalendar.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/jqvmap.css" rel="stylesheet" type="text/css" ..="screen"/>
+	<link href="../css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" ..="screen"/>
 
 
-	<link rel="shortcut icon" href="../../images/favicon.ico" />
+	<link rel="shortcut icon" href="../images/favicon.ico" />
 
 </head>
 
