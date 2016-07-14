@@ -175,16 +175,21 @@
             </a>
 
             <ul class="sub-menu">
-
                 <li >
-
-                    <a href="#">
+                    <a href="<%=request.getContextPath()%>/circle/circlelist">
 
                         <i class="icon-time"></i>
 
                         圈子列表</a>
 
                 </li>
+     <%--           <li>
+                    <a href="<%=request.getContextPath()%>/circle/circlecreat">
+                        <i class="icon-time"></i>
+
+                        圈子列表</a>
+
+                </li>--%>
 
                 <li >
 
