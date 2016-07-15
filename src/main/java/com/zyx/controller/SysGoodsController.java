@@ -17,19 +17,17 @@ import java.util.List;
 @RequestMapping("/shop")
 public class SysGoodsController {
     @Autowired
-    SysRoleService sysRoleService;
 
     @RequestMapping(value = "/goods", method = RequestMethod.GET)
-    public ModelAndView goAddRole() {
+    public ModelAndView goods() {
         ModelAndView view = new ModelAndView("/shop/goods");
         return view;
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView roles() {
+    @RequestMapping(value = "/order", method = RequestMethod.GET)
+    public ModelAndView order() {
         ModelAndView view = new ModelAndView("/shop/order");
-        List<SysRole> roles = sysRoleService.getSysRole(null);
-        view.addObject("roles", roles);
         return view;
     }
+
 }

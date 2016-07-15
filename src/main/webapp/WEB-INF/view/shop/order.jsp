@@ -2,10 +2,10 @@
 <html>
 <head>
 <head>
-  <title>直播操作</title>
+  <title>订单管理</title>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <meta content="体育家-直播操作" name="description"/>
+  <meta content="体育家-订单管理" name="description"/>
   <meta content="" name="author"/>
   <jsp:include page="../public/common-styles.jsp"/>
 </head>
@@ -13,7 +13,7 @@
 <div class="container-fluid" style="padding-top: 20px ">
   <div class="live_index">
     <div class="live_operate">
-      <h3 style="margin: 0;display: inline-block">直播操作 </h3>
+      <h3 style="margin: 0;display: inline-block">订单管理 </h3>
       <button class="fr btn btn-default btn-lg" style="margin-top: 10px">分类排序</button>
 
       <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
@@ -38,4 +38,4 @@
   </div>
 </div>
 <jsp:include page="../public/common-footer.jsp"/>
-<script type="text/javascript" src="../js/live/live.js"></script>
+<script type="text/javascript" src="../js/shop/order.js"></script>

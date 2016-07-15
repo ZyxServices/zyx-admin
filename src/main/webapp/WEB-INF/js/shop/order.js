@@ -1,5 +1,5 @@
 /**
- * Created by 文楷 on 2016/7/14.
+ * Created by 文楷 on 2016/7/15.
  */
 var $table = $('#live_table'),
     $remove = $('#remove');
@@ -93,7 +93,7 @@ function initTable() {
         }
     });
     $table.on('all.bs.table', function (e, name, args) {
-        console.log(name, args);
+        //console.log(name, args);
     });
     $remove.click(function () {
         var ids = getIdSelections();
@@ -110,58 +110,58 @@ function initTable() {
         });
     });
 }
-    function getIdSelections() {
-        return $.map($table.bootstrapTable('getSelections'), function (row) {
-            return row.id
+function getIdSelections() {
+    return $.map($table.bootstrapTable('getSelections'), function (row) {
+        return row.id
+    });
+}
+
+function getHeight() {
+    return $(window).height() - $('h1').outerHeight(true);
+}
+//操作
+function operateFormatter(value, row, index) {
+    return [
+        '<a class="preview p5"   href="javascript:void(0)" title="preview">预览</a>',
+        '<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>',
+        '<a class="Shield p5" href="javascript:void(0)" title="Shield">屏蔽</a>',
+        '<a class="remove p5" href="javascript:void(0)" title="remove">删除</a>'
+    ].join('');
+}
+//查看Url
+function seeUrlFormatter(value, row, index) {
+    return [
+        '<a class="seeUrl p5"   href="javascript:void(0)" title="Like">查看</a>',
+    ].join('');
+}
+//操作事件
+var operateEventssssss = {
+    'click .preview': function (e, value, row, index) {
+        alert('You click like action, row: ' + JSON.stringify(row));
+    },
+    'click .recommend': function (e, value, row, index) {
+
+    },
+    'click .Shield': function (e, value, row, index) {
+
+    },
+    'click .remove': function (e, value, row, index) {
+        $('#live_table').bootstrapTable('remove', {
+            field: 'id',
+            values: [row.id]
         });
     }
-
-    function getHeight() {
-        return $(window).height() - $('h1').outerHeight(true);
+};
+//查看Url事件
+var seeUrl={
+    'click .seeUrl': function (e, value, row, index) {
+        alert('You click like seeUrl action, row: ' + JSON.stringify(row));
     }
-    //操作
-    function operateFormatter(value, row, index) {
-        return [
-            '<a class="preview p5"   href="javascript:void(0)" title="preview">预览</a>',
-            '<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>',
-            '<a class="Shield p5" href="javascript:void(0)" title="Shield">屏蔽</a>',
-            '<a class="remove p5" href="javascript:void(0)" title="remove">删除</a>'
-        ].join('');
-    }
-   //查看Url
-    function seeUrlFormatter(value, row, index) {
-        return [
-            '<a class="seeUrl p5"   href="javascript:void(0)" title="Like">查看</a>',
-        ].join('');
-    }
-    //操作事件
-    var operateEventssssss = {
-        'click .preview': function (e, value, row, index) {
-            alert('You click like action, row: ' + JSON.stringify(row));
-        },
-        'click .recommend': function (e, value, row, index) {
-
-        },
-        'click .Shield': function (e, value, row, index) {
-
-        },
-        'click .remove': function (e, value, row, index) {
-            $('#live_table').bootstrapTable('remove', {
-                field: 'id',
-                values: [row.id]
-            });
-        }
-    };
-    //查看Url事件
-     var seeUrl={
-         'click .seeUrl': function (e, value, row, index) {
-             alert('You click like seeUrl action, row: ' + JSON.stringify(row));
-         }
-     }
-    $(function () {
-        $(".create_live").click(function () {
-            $(".create_liveType").addClass('on')
-            $(".live_index").addClass('hide')
-        })
-        initTable();
+}
+$(function () {
+    $(".create_live").click(function () {
+        $(".create_liveType").addClass('on')
+        $(".live_index").addClass('hide')
     })
+    initTable();
+})
