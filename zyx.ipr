@@ -1,0 +1,1178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactManager">
+    <artifact type="exploded-war" name="admin">
+      <output-path>$PROJECT_DIR$/out/artifacts/admin</output-path>
+      <root id="root">
+        <element id="directory" name="WEB-INF">
+          <element id="directory" name="classes">
+            <element id="module-output" name="zyx_main" />
+          </element>
+          <element id="directory" name="lib">
+            <element id="library" level="project" name="Gradle: org.springframework:spring-webmvc:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-orm:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-context-support:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: mysql:mysql-connector-java:5.1.38" />
+            <element id="library" level="project" name="Gradle: org.mybatis:mybatis:3.4.0" />
+            <element id="library" level="project" name="Gradle: org.mybatis:mybatis-spring:1.3.0" />
+            <element id="library" level="project" name="Gradle: com.github.pagehelper:pagehelper:4.1.3" />
+            <element id="library" level="project" name="Gradle: org.apache.shiro:shiro-spring:1.2.4" />
+            <element id="library" level="project" name="Gradle: org.apache.shiro:shiro-web:1.2.4" />
+            <element id="library" level="project" name="Gradle: org.apache.tomcat:tomcat-jdbc:8.0.33" />
+            <element id="library" level="project" name="Gradle: javax.mail:mail:1.4.7" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.7.3" />
+            <element id="library" level="project" name="Gradle: org.aspectj:aspectjweaver:1.8.9" />
+            <element id="library" level="project" name="Gradle: commons-fileupload:commons-fileupload:1.3.1" />
+            <element id="library" level="project" name="Gradle: org.slf4j:slf4j-log4j12:1.7.21" />
+            <element id="library" level="project" name="Gradle: tk.mybatis:mapper:3.3.8" />
+            <element id="library" level="project" name="Gradle: javax.servlet:jstl:1.2" />
+            <element id="library" level="project" name="Gradle: taglibs:standard:1.1.2" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.7.3" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-swagger2:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-swagger-ui:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-staticdocs:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.github.robwin:assertj-swagger:0.1.2" />
+            <element id="library" level="project" name="Gradle: javax.websocket:javax.websocket-api:1.0" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-beans:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-context:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-core:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-expression:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-web:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-jdbc:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-tx:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: com.github.jsqlparser:jsqlparser:0.9.4" />
+            <element id="library" level="project" name="Gradle: org.apache.shiro:shiro-core:1.2.4" />
+            <element id="library" level="project" name="Gradle: org.apache.tomcat:tomcat-juli:8.0.33" />
+            <element id="library" level="project" name="Gradle: javax.activation:activation:1.1" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.7.0" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.7.3" />
+            <element id="library" level="project" name="Gradle: org.slf4j:slf4j-api:1.7.21" />
+            <element id="library" level="project" name="Gradle: log4j:log4j:1.2.17" />
+            <element id="library" level="project" name="Gradle: javax.persistence:persistence-api:1.0" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.7.3" />
+            <element id="library" level="project" name="Gradle: org.codehaus.woodstox:stax2-api:3.1.4" />
+            <element id="library" level="project" name="Gradle: io.swagger:swagger-annotations:1.5.6" />
+            <element id="library" level="project" name="Gradle: io.swagger:swagger-models:1.5.6" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-spi:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-schema:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-swagger-common:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-spring-web:2.4.0" />
+            <element id="library" level="project" name="Gradle: com.google.guava:guava:18.0" />
+            <element id="library" level="project" name="Gradle: com.fasterxml:classmate:1.3.1" />
+            <element id="library" level="project" name="Gradle: org.springframework.plugin:spring-plugin-core:1.2.0.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework.plugin:spring-plugin-metadata:1.2.0.RELEASE" />
+            <element id="library" level="project" name="Gradle: io.github.robwin:swagger2markup:0.9.2" />
+            <element id="library" level="project" name="Gradle: commons-collections:commons-collections:3.2.1" />
+            <element id="library" level="project" name="Gradle: org.assertj:assertj-core:2.0.0" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-aop:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: commons-logging:commons-logging:1.2" />
+            <element id="library" level="project" name="Gradle: commons-beanutils:commons-beanutils:1.8.3" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-core:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.github.robwin:markup-document-builder:0.1.5" />
+            <element id="library" level="project" name="Gradle: com.github.marschall:memoryfilesystem:0.6.4" />
+            <element id="library" level="project" name="Gradle: aopalliance:aopalliance:1.0" />
+            <element id="library" level="project" name="Gradle: io.swagger:swagger-compat-spec-parser:1.0.13" />
+            <element id="library" level="project" name="Gradle: io.swagger:swagger-core:1.5.4" />
+            <element id="library" level="project" name="Gradle: io.swagger:swagger-parser:1.0.13" />
+            <element id="library" level="project" name="Gradle: com.github.fge:json-schema-validator:2.2.3" />
+            <element id="library" level="project" name="Gradle: com.github.fge:json-patch:1.6" />
+            <element id="library" level="project" name="Gradle: org.apache.httpcomponents:httpclient:4.3.3" />
+            <element id="library" level="project" name="Gradle: org.apache.commons:commons-lang3:3.2.1" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-joda:2.4.5" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.4.5" />
+            <element id="library" level="project" name="Gradle: javax.validation:validation-api:1.1.0.Final" />
+            <element id="library" level="project" name="Gradle: org.slf4j:slf4j-ext:1.6.3" />
+            <element id="library" level="project" name="Gradle: joda-time:joda-time:2.3" />
+            <element id="library" level="project" name="Gradle: com.github.fge:json-schema-core:1.2.1" />
+            <element id="library" level="project" name="Gradle: com.googlecode.libphonenumber:libphonenumber:6.0" />
+            <element id="library" level="project" name="Gradle: javax.mail:mailapi:1.4.3" />
+            <element id="library" level="project" name="Gradle: com.google.code.findbugs:jsr305:2.0.1" />
+            <element id="library" level="project" name="Gradle: net.sf.jopt-simple:jopt-simple:4.6" />
+            <element id="library" level="project" name="Gradle: com.github.fge:jackson-coreutils:1.6" />
+            <element id="library" level="project" name="Gradle: org.apache.httpcomponents:httpcore:4.3.2" />
+            <element id="library" level="project" name="Gradle: commons-codec:commons-codec:1.6" />
+            <element id="library" level="project" name="Gradle: org.yaml:snakeyaml:1.12" />
+            <element id="library" level="project" name="Gradle: ch.qos.cal10n:cal10n-api:0.7.4" />
+            <element id="library" level="project" name="Gradle: com.github.fge:uri-template:0.9" />
+            <element id="library" level="project" name="Gradle: org.mozilla:rhino:1.7R4" />
+            <element id="library" level="project" name="Gradle: com.github.fge:msg-simple:1.1" />
+            <element id="library" level="project" name="Gradle: com.github.fge:btf:1.2" />
+            <element id="library" level="project" name="Gradle: commons-io:commons-io:2.4" />
+            <element id="library" level="project" name="Gradle: javax.servlet:javax.servlet-api:3.1.0" />
+          </element>
+        </element>
+      </root>
+    </artifact>
+    <artifact type="war" name="Gradle : zyx-2.0.war">
+      <output-path>$PROJECT_DIR$/out/artifacts/zyx</output-path>
+      <properties id="gradle-properties">
+        <options external-project-path="$PROJECT_DIR$" />
+      </properties>
+      <root id="archive" name="zyx-2.0.war">
+        <element id="javaee-facet-resources" facet="zyx_main/web/Web Gradle : zyx-2.0.war" />
+        <element id="directory" name="WEB-INF">
+          <element id="directory" name="classes">
+            <element id="module-output" name="zyx_main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/build/resources/main" />
+          </element>
+          <element id="directory" name="lib">
+            <element id="library" level="project" name="Gradle: org.springframework:spring-webmvc:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-orm:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-context-support:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: mysql:mysql-connector-java:5.1.38" />
+            <element id="library" level="project" name="Gradle: org.mybatis:mybatis:3.4.0" />
+            <element id="library" level="project" name="Gradle: org.mybatis:mybatis-spring:1.3.0" />
+            <element id="library" level="project" name="Gradle: com.github.pagehelper:pagehelper:4.1.3" />
+            <element id="library" level="project" name="Gradle: org.apache.shiro:shiro-spring:1.2.4" />
+            <element id="library" level="project" name="Gradle: org.apache.shiro:shiro-web:1.2.4" />
+            <element id="library" level="project" name="Gradle: org.apache.tomcat:tomcat-jdbc:8.0.33" />
+            <element id="library" level="project" name="Gradle: javax.mail:mail:1.4.7" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.7.3" />
+            <element id="library" level="project" name="Gradle: org.aspectj:aspectjweaver:1.8.9" />
+            <element id="library" level="project" name="Gradle: commons-fileupload:commons-fileupload:1.3.1" />
+            <element id="library" level="project" name="Gradle: org.slf4j:slf4j-log4j12:1.7.21" />
+            <element id="library" level="project" name="Gradle: tk.mybatis:mapper:3.3.8" />
+            <element id="library" level="project" name="Gradle: javax.servlet:jstl:1.2" />
+            <element id="library" level="project" name="Gradle: taglibs:standard:1.1.2" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.7.3" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-swagger2:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-swagger-ui:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-staticdocs:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.github.robwin:assertj-swagger:0.1.2" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-beans:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-context:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-core:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-expression:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-web:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-jdbc:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-tx:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: com.github.jsqlparser:jsqlparser:0.9.4" />
+            <element id="library" level="project" name="Gradle: org.apache.shiro:shiro-core:1.2.4" />
+            <element id="library" level="project" name="Gradle: org.apache.tomcat:tomcat-juli:8.0.33" />
+            <element id="library" level="project" name="Gradle: javax.activation:activation:1.1" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.7.0" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.7.3" />
+            <element id="library" level="project" name="Gradle: org.slf4j:slf4j-api:1.7.21" />
+            <element id="library" level="project" name="Gradle: log4j:log4j:1.2.17" />
+            <element id="library" level="project" name="Gradle: javax.persistence:persistence-api:1.0" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.7.3" />
+            <element id="library" level="project" name="Gradle: org.codehaus.woodstox:stax2-api:3.1.4" />
+            <element id="library" level="project" name="Gradle: io.swagger:swagger-annotations:1.5.6" />
+            <element id="library" level="project" name="Gradle: io.swagger:swagger-models:1.5.6" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-spi:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-schema:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-swagger-common:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-spring-web:2.4.0" />
+            <element id="library" level="project" name="Gradle: com.google.guava:guava:18.0" />
+            <element id="library" level="project" name="Gradle: com.fasterxml:classmate:1.3.1" />
+            <element id="library" level="project" name="Gradle: org.springframework.plugin:spring-plugin-core:1.2.0.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework.plugin:spring-plugin-metadata:1.2.0.RELEASE" />
+            <element id="library" level="project" name="Gradle: io.github.robwin:swagger2markup:0.9.2" />
+            <element id="library" level="project" name="Gradle: commons-collections:commons-collections:3.2.1" />
+            <element id="library" level="project" name="Gradle: org.assertj:assertj-core:2.0.0" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-aop:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: commons-logging:commons-logging:1.2" />
+            <element id="library" level="project" name="Gradle: commons-beanutils:commons-beanutils:1.8.3" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-core:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.github.robwin:markup-document-builder:0.1.5" />
+            <element id="library" level="project" name="Gradle: com.github.marschall:memoryfilesystem:0.6.4" />
+            <element id="library" level="project" name="Gradle: aopalliance:aopalliance:1.0" />
+            <element id="library" level="project" name="Gradle: io.swagger:swagger-compat-spec-parser:1.0.13" />
+            <element id="library" level="project" name="Gradle: io.swagger:swagger-core:1.5.4" />
+            <element id="library" level="project" name="Gradle: io.swagger:swagger-parser:1.0.13" />
+            <element id="library" level="project" name="Gradle: com.github.fge:json-schema-validator:2.2.3" />
+            <element id="library" level="project" name="Gradle: com.github.fge:json-patch:1.6" />
+            <element id="library" level="project" name="Gradle: org.apache.httpcomponents:httpclient:4.3.3" />
+            <element id="library" level="project" name="Gradle: org.apache.commons:commons-lang3:3.2.1" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-joda:2.4.5" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.4.5" />
+            <element id="library" level="project" name="Gradle: javax.validation:validation-api:1.1.0.Final" />
+            <element id="library" level="project" name="Gradle: org.slf4j:slf4j-ext:1.6.3" />
+            <element id="library" level="project" name="Gradle: joda-time:joda-time:2.3" />
+            <element id="library" level="project" name="Gradle: com.github.fge:json-schema-core:1.2.1" />
+            <element id="library" level="project" name="Gradle: com.googlecode.libphonenumber:libphonenumber:6.0" />
+            <element id="library" level="project" name="Gradle: javax.mail:mailapi:1.4.3" />
+            <element id="library" level="project" name="Gradle: com.google.code.findbugs:jsr305:2.0.1" />
+            <element id="library" level="project" name="Gradle: net.sf.jopt-simple:jopt-simple:4.6" />
+            <element id="library" level="project" name="Gradle: com.github.fge:jackson-coreutils:1.6" />
+            <element id="library" level="project" name="Gradle: org.apache.httpcomponents:httpcore:4.3.2" />
+            <element id="library" level="project" name="Gradle: commons-codec:commons-codec:1.6" />
+            <element id="library" level="project" name="Gradle: org.yaml:snakeyaml:1.12" />
+            <element id="library" level="project" name="Gradle: ch.qos.cal10n:cal10n-api:0.7.4" />
+            <element id="library" level="project" name="Gradle: com.github.fge:uri-template:0.9" />
+            <element id="library" level="project" name="Gradle: org.mozilla:rhino:1.7R4" />
+            <element id="library" level="project" name="Gradle: com.github.fge:msg-simple:1.1" />
+            <element id="library" level="project" name="Gradle: com.github.fge:btf:1.2" />
+            <element id="library" level="project" name="Gradle: commons-io:commons-io:2.4" />
+          </element>
+        </element>
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/out/artifacts/zyx/exploded/zyx-2.0.war/META-INF/MANIFEST.MF" />
+        </element>
+      </root>
+    </artifact>
+    <artifact type="exploded-war" name="Gradle : zyx-2.0.war (exploded)">
+      <output-path>$PROJECT_DIR$/out/artifacts/zyx/exploded/zyx-2.0.war</output-path>
+      <properties id="gradle-properties">
+        <options external-project-path="$PROJECT_DIR$" />
+      </properties>
+      <root id="root">
+        <element id="javaee-facet-resources" facet="zyx_main/web/Web Gradle : zyx-2.0.war" />
+        <element id="directory" name="WEB-INF">
+          <element id="directory" name="classes">
+            <element id="module-output" name="zyx_main" />
+            <element id="dir-copy" path="$PROJECT_DIR$/build/resources/main" />
+          </element>
+          <element id="directory" name="lib">
+            <element id="library" level="project" name="Gradle: org.springframework:spring-webmvc:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-orm:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-context-support:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: mysql:mysql-connector-java:5.1.38" />
+            <element id="library" level="project" name="Gradle: org.mybatis:mybatis:3.4.0" />
+            <element id="library" level="project" name="Gradle: org.mybatis:mybatis-spring:1.3.0" />
+            <element id="library" level="project" name="Gradle: com.github.pagehelper:pagehelper:4.1.3" />
+            <element id="library" level="project" name="Gradle: org.apache.shiro:shiro-spring:1.2.4" />
+            <element id="library" level="project" name="Gradle: org.apache.shiro:shiro-web:1.2.4" />
+            <element id="library" level="project" name="Gradle: org.apache.tomcat:tomcat-jdbc:8.0.33" />
+            <element id="library" level="project" name="Gradle: javax.mail:mail:1.4.7" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.7.3" />
+            <element id="library" level="project" name="Gradle: org.aspectj:aspectjweaver:1.8.9" />
+            <element id="library" level="project" name="Gradle: commons-fileupload:commons-fileupload:1.3.1" />
+            <element id="library" level="project" name="Gradle: org.slf4j:slf4j-log4j12:1.7.21" />
+            <element id="library" level="project" name="Gradle: tk.mybatis:mapper:3.3.8" />
+            <element id="library" level="project" name="Gradle: javax.servlet:jstl:1.2" />
+            <element id="library" level="project" name="Gradle: taglibs:standard:1.1.2" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.7.3" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-swagger2:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-swagger-ui:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-staticdocs:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.github.robwin:assertj-swagger:0.1.2" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-beans:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-context:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-core:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-expression:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-web:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-jdbc:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-tx:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: com.github.jsqlparser:jsqlparser:0.9.4" />
+            <element id="library" level="project" name="Gradle: org.apache.shiro:shiro-core:1.2.4" />
+            <element id="library" level="project" name="Gradle: org.apache.tomcat:tomcat-juli:8.0.33" />
+            <element id="library" level="project" name="Gradle: javax.activation:activation:1.1" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.7.0" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.7.3" />
+            <element id="library" level="project" name="Gradle: org.slf4j:slf4j-api:1.7.21" />
+            <element id="library" level="project" name="Gradle: log4j:log4j:1.2.17" />
+            <element id="library" level="project" name="Gradle: javax.persistence:persistence-api:1.0" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.7.3" />
+            <element id="library" level="project" name="Gradle: org.codehaus.woodstox:stax2-api:3.1.4" />
+            <element id="library" level="project" name="Gradle: io.swagger:swagger-annotations:1.5.6" />
+            <element id="library" level="project" name="Gradle: io.swagger:swagger-models:1.5.6" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-spi:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-schema:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-swagger-common:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-spring-web:2.4.0" />
+            <element id="library" level="project" name="Gradle: com.google.guava:guava:18.0" />
+            <element id="library" level="project" name="Gradle: com.fasterxml:classmate:1.3.1" />
+            <element id="library" level="project" name="Gradle: org.springframework.plugin:spring-plugin-core:1.2.0.RELEASE" />
+            <element id="library" level="project" name="Gradle: org.springframework.plugin:spring-plugin-metadata:1.2.0.RELEASE" />
+            <element id="library" level="project" name="Gradle: io.github.robwin:swagger2markup:0.9.2" />
+            <element id="library" level="project" name="Gradle: commons-collections:commons-collections:3.2.1" />
+            <element id="library" level="project" name="Gradle: org.assertj:assertj-core:2.0.0" />
+            <element id="library" level="project" name="Gradle: org.springframework:spring-aop:4.2.5.RELEASE" />
+            <element id="library" level="project" name="Gradle: commons-logging:commons-logging:1.2" />
+            <element id="library" level="project" name="Gradle: commons-beanutils:commons-beanutils:1.8.3" />
+            <element id="library" level="project" name="Gradle: io.springfox:springfox-core:2.4.0" />
+            <element id="library" level="project" name="Gradle: io.github.robwin:markup-document-builder:0.1.5" />
+            <element id="library" level="project" name="Gradle: com.github.marschall:memoryfilesystem:0.6.4" />
+            <element id="library" level="project" name="Gradle: aopalliance:aopalliance:1.0" />
+            <element id="library" level="project" name="Gradle: io.swagger:swagger-compat-spec-parser:1.0.13" />
+            <element id="library" level="project" name="Gradle: io.swagger:swagger-core:1.5.4" />
+            <element id="library" level="project" name="Gradle: io.swagger:swagger-parser:1.0.13" />
+            <element id="library" level="project" name="Gradle: com.github.fge:json-schema-validator:2.2.3" />
+            <element id="library" level="project" name="Gradle: com.github.fge:json-patch:1.6" />
+            <element id="library" level="project" name="Gradle: org.apache.httpcomponents:httpclient:4.3.3" />
+            <element id="library" level="project" name="Gradle: org.apache.commons:commons-lang3:3.2.1" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-joda:2.4.5" />
+            <element id="library" level="project" name="Gradle: com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.4.5" />
+            <element id="library" level="project" name="Gradle: javax.validation:validation-api:1.1.0.Final" />
+            <element id="library" level="project" name="Gradle: org.slf4j:slf4j-ext:1.6.3" />
+            <element id="library" level="project" name="Gradle: joda-time:joda-time:2.3" />
+            <element id="library" level="project" name="Gradle: com.github.fge:json-schema-core:1.2.1" />
+            <element id="library" level="project" name="Gradle: com.googlecode.libphonenumber:libphonenumber:6.0" />
+            <element id="library" level="project" name="Gradle: javax.mail:mailapi:1.4.3" />
+            <element id="library" level="project" name="Gradle: com.google.code.findbugs:jsr305:2.0.1" />
+            <element id="library" level="project" name="Gradle: net.sf.jopt-simple:jopt-simple:4.6" />
+            <element id="library" level="project" name="Gradle: com.github.fge:jackson-coreutils:1.6" />
+            <element id="library" level="project" name="Gradle: org.apache.httpcomponents:httpcore:4.3.2" />
+            <element id="library" level="project" name="Gradle: commons-codec:commons-codec:1.6" />
+            <element id="library" level="project" name="Gradle: org.yaml:snakeyaml:1.12" />
+            <element id="library" level="project" name="Gradle: ch.qos.cal10n:cal10n-api:0.7.4" />
+            <element id="library" level="project" name="Gradle: com.github.fge:uri-template:0.9" />
+            <element id="library" level="project" name="Gradle: org.mozilla:rhino:1.7R4" />
+            <element id="library" level="project" name="Gradle: com.github.fge:msg-simple:1.1" />
+            <element id="library" level="project" name="Gradle: com.github.fge:btf:1.2" />
+            <element id="library" level="project" name="Gradle: commons-io:commons-io:2.4" />
+          </element>
+        </element>
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/out/artifacts/zyx/exploded/zyx-2.0.war/META-INF/MANIFEST.MF" />
+        </element>
+      </root>
+    </artifact>
+  </component>
+  <component name="CompilerConfiguration">
+    <resourceExtensions />
+    <wildcardResourcePatterns />
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="zyx_main" target="1.8" />
+      <module name="zyx_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="CopyrightManager" default="" />
+  <component name="DependencyValidationManager">
+    <option name="SKIP_IMPORT_STATEMENTS" value="false" />
+  </component>
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="LOCAL" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="C:/Program Files/gradle-2.13" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/zyx.iml" filepath="$PROJECT_DIR$/.idea/modules/zyx.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/zyx_main.iml" filepath="$PROJECT_DIR$/.idea/modules/zyx_main.iml" group="zyx" />
+    </modules>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+  </component>
+  <component name="libraryTable">
+    <library name="Gradle: aopalliance:aopalliance:1.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/aopalliance/aopalliance/1.0/235ba8b489512805ac13a8f9ea77a1ca5ebe3e8/aopalliance-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/aopalliance/aopalliance/1.0/4a4b6d692e17846a9f3da036438a7ac491d3c814/aopalliance-1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: ch.qos.cal10n:cal10n-api:0.7.4">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/ch.qos.cal10n/cal10n-api/0.7.4/132b7e1702af0335cf4259d30aaf959264db688f/cal10n-api-0.7.4.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/ch.qos.cal10n/cal10n-api/0.7.4/995bc582ad5ba0568e6ec0ef10b78f0e8c03764c/cal10n-api-0.7.4-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.7.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.7.0/19f42c154ffc689f40a77613bc32caeb17d744e3/jackson-annotations-2.7.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.7.0/d0d412f71000701f765e1e280764e92337c659f5/jackson-annotations-2.7.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.fasterxml.jackson.core:jackson-core:2.7.3">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.7.3/1499b854ae9f370409792db5af1b552dc7d9682f/jackson-core-2.7.3.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.7.3/40a980d44cc06f8facc1b184c13a1bbd04944ebe/jackson-core-2.7.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.7.3">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.7.3/f12e6cd05cbaecd74d16e685d45b627732939e42/jackson-databind-2.7.3.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.7.3/42e1a9bae2802bc0b53efa3d96ba7cfaf9dcd9fc/jackson-databind-2.7.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.7.3">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.dataformat/jackson-dataformat-xml/2.7.3/248d61e1b17c7f69ee96886b8be00ef1ce31094a/jackson-dataformat-xml-2.7.3.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.dataformat/jackson-dataformat-xml/2.7.3/ea7594be76de4c8ef169ffeb3c2e4cc20f8cd93e/jackson-dataformat-xml-2.7.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.4.5">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml/2.4.5/918e84a84ee0b202bb74bab590119b01bbea9830/jackson-dataformat-yaml-2.4.5.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml/2.4.5/e72d41838bd7eec1fbe32d8fdc978a637d673f3a/jackson-dataformat-yaml-2.4.5-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-joda:2.4.5">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.datatype/jackson-datatype-joda/2.4.5/830f7e1a9d69674900d1fa066d6ba27112ec6ca9/jackson-datatype-joda-2.4.5.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.datatype/jackson-datatype-joda/2.4.5/370c2e6144cd9c63cd5f96894e4df98ab28b8455/jackson-datatype-joda-2.4.5-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.7.3">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.module/jackson-module-jaxb-annotations/2.7.3/bbd83f4c2453dd352fe1fc98ce8f67cef3df14d5/jackson-module-jaxb-annotations-2.7.3.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.module/jackson-module-jaxb-annotations/2.7.3/6d1a3d618fb09b5b426d50952b0b6698225bbe8d/jackson-module-jaxb-annotations-2.7.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.fasterxml:classmate:1.3.1">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml/classmate/1.3.1/2ad2fd09dcf5607ca96f8ef432096a96986c40a/classmate-1.3.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml/classmate/1.3.1/9553ee8c29df95f56207662c68a163601b26231e/classmate-1.3.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.github.fge:btf:1.2">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.fge/btf/1.2/9e66651022eb86301b348d57e6f59459effc343b/btf-1.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.fge/btf/1.2/a38c09aeeee6a2fc168cb296ed75cfe014789cfc/btf-1.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.github.fge:jackson-coreutils:1.6">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.fge/jackson-coreutils/1.6/9e6af56eb7cc2a65700b289abc7ee2bd170fd231/jackson-coreutils-1.6.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.fge/jackson-coreutils/1.6/f8fbbad472448377312aeb01c4519805cbb3f076/jackson-coreutils-1.6-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.github.fge:json-patch:1.6">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.fge/json-patch/1.6/8c7a8da998228261d5eec90c5aeb382d1ff723c/json-patch-1.6.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.fge/json-patch/1.6/7111c784c4972d5587979e66b21310cdd9ed1ef6/json-patch-1.6-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.github.fge:json-schema-core:1.2.1">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.fge/json-schema-core/1.2.1/248410bcfeac7d50b9b4eb03f311fd554962794a/json-schema-core-1.2.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.fge/json-schema-core/1.2.1/d219d68a23a4b1f2b3194151a297a5c36fc83f59/json-schema-core-1.2.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.github.fge:json-schema-validator:2.2.3">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.fge/json-schema-validator/2.2.3/6708b4ea223564a5db416738cf401a28d503948/json-schema-validator-2.2.3.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.fge/json-schema-validator/2.2.3/2e3e92a1458bcd82cdf2a70016531065f95e9fce/json-schema-validator-2.2.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.github.fge:msg-simple:1.1">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.fge/msg-simple/1.1/f261263e13dd4cfa93cc6b83f1f58f619097a2c4/msg-simple-1.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.fge/msg-simple/1.1/d2edffa8b1f911531725430bcbb2ac3870f19323/msg-simple-1.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.github.fge:uri-template:0.9">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.fge/uri-template/0.9/ab1ad5804d3c7d640f21059085df5be340e97929/uri-template-0.9.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.fge/uri-template/0.9/1e9f7f9fbe0d8395b708186f2ddc674271a940a7/uri-template-0.9-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.github.jsqlparser:jsqlparser:0.9.4">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.jsqlparser/jsqlparser/0.9.4/d119e16701c8331eac4345579506b31abb1da791/jsqlparser-0.9.4.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.jsqlparser/jsqlparser/0.9.4/6370f223eb73309795a3d12692e52af233fa7c73/jsqlparser-0.9.4-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.github.marschall:memoryfilesystem:0.6.4">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.marschall/memoryfilesystem/0.6.4/c6b6b11f5c4681fd54e0099fbde0ee6f40fbaf1e/memoryfilesystem-0.6.4.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.marschall/memoryfilesystem/0.6.4/ba2f40c71bc91141c516c039a600f5f5a67fbdb0/memoryfilesystem-0.6.4-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.github.pagehelper:pagehelper:4.1.3">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.pagehelper/pagehelper/4.1.3/cc45c4b5113fc8192675f6a233ea2e7a15e483e3/pagehelper-4.1.3.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.pagehelper/pagehelper/4.1.3/492e5a15a651f67b5ae52f5b47a36592b6a72e0f/pagehelper-4.1.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.google.code.findbugs:jsr305:2.0.1">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/2.0.1/516c03b21d50a644d538de0f0369c620989cd8f0/jsr305-2.0.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Gradle: com.google.guava:guava:18.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/18.0/cce0823396aa693798f8882e64213b1772032b09/guava-18.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/18.0/ad97fe8faaf01a3d3faacecd58e8fa6e78a973ca/guava-18.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: com.googlecode.libphonenumber:libphonenumber:6.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.libphonenumber/libphonenumber/6.0/64ab017d97b44eafa7a149bbd8dddfdf967b40de/libphonenumber-6.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.libphonenumber/libphonenumber/6.0/eeeefefe7fd98235aec72a5f145e6d2e79cf56f6/libphonenumber-6.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: commons-beanutils:commons-beanutils:1.8.3">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-beanutils/commons-beanutils/1.8.3/686ef3410bcf4ab8ce7fd0b899e832aaba5facf7/commons-beanutils-1.8.3.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-beanutils/commons-beanutils/1.8.3/170d03db4cb48be2f8f35ce3243d62c4b2204e2e/commons-beanutils-1.8.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: commons-codec:commons-codec:1.6">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.6/b7f0fc8f61ecadeb3695f0b9464755eee44374d4/commons-codec-1.6.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.6/61e9f9d11fe3e12ec62f633006e99d75fd7f19c8/commons-codec-1.6-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: commons-collections:commons-collections:3.2.1">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-collections/commons-collections/3.2.1/761ea405b9b37ced573d2df0d1e3a4e0f9edc668/commons-collections-3.2.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-collections/commons-collections/3.2.1/fa095ef874374e5b2a11f8b06c26a5d68c7cb3a4/commons-collections-3.2.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: commons-fileupload:commons-fileupload:1.3.1">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-fileupload/commons-fileupload/1.3.1/c621b54583719ac0310404463d6d99db27e1052c/commons-fileupload-1.3.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-fileupload/commons-fileupload/1.3.1/a1fa20f7f3ad210f4b2eb51b63be3f0273be263a/commons-fileupload-1.3.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: commons-io:commons-io:2.4">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.4/f2d8698c46d1167ff24b06a840a87d91a02db891/commons-io-2.4-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: commons-logging:commons-logging:1.2">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/ecf26c7507d67782a3bbd148d170b31dfad001aa/commons-logging-1.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: io.github.robwin:assertj-swagger:0.1.2">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.robwin/assertj-swagger/0.1.2/f25dbed324c668d9db2365cc34e3fc53d6eba5e6/assertj-swagger-0.1.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.robwin/assertj-swagger/0.1.2/d70421e63d409387d0ec08114f403dbf9d8370f3/assertj-swagger-0.1.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: io.github.robwin:markup-document-builder:0.1.5">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.robwin/markup-document-builder/0.1.5/ac23b3a2e34923ac4ad05ecd950ac18ad24f20ff/markup-document-builder-0.1.5.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.robwin/markup-document-builder/0.1.5/71b6fe8cb71e581ed8736579085d9398eea3c681/markup-document-builder-0.1.5-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: io.github.robwin:swagger2markup:0.9.2">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.robwin/swagger2markup/0.9.2/1828032b952ccd1fbd525ac0a46cfcc15e0176f7/swagger2markup-0.9.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.robwin/swagger2markup/0.9.2/aecd3f2688145c2b1ec0cce7dcb3c476030cf88f/swagger2markup-0.9.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: io.springfox:springfox-core:2.4.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-core/2.4.0/e11854b8ede27b6eafa56c29e08e6a0e7ac4c278/springfox-core-2.4.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-core/2.4.0/1a66edd5247a94bace6bb71fb0473535974e832c/springfox-core-2.4.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: io.springfox:springfox-schema:2.4.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-schema/2.4.0/5ccdc3f47cf6b888bcf8fd2c127a9dc7b68057d7/springfox-schema-2.4.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-schema/2.4.0/bd37dce307425f0a25da8ce53e8c26df634c66d2/springfox-schema-2.4.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: io.springfox:springfox-spi:2.4.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-spi/2.4.0/c822599f794e24f3b9350cde430e848d80032306/springfox-spi-2.4.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-spi/2.4.0/5a408ccb5e9816ac72a718bd7ab0f57d545a95a6/springfox-spi-2.4.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: io.springfox:springfox-spring-web:2.4.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-spring-web/2.4.0/3cbfea59cc9eec05f278e68d1cbf85de98bab563/springfox-spring-web-2.4.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-spring-web/2.4.0/46c9c327f1a54badf683ccdd43716b31547dedd/springfox-spring-web-2.4.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: io.springfox:springfox-staticdocs:2.4.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-staticdocs/2.4.0/38f2969ff0f8f49c49e2c07a73a76d3ca03edc83/springfox-staticdocs-2.4.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-staticdocs/2.4.0/dbfa85c5c697934da6defc52505df253251ea07f/springfox-staticdocs-2.4.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: io.springfox:springfox-swagger-common:2.4.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-swagger-common/2.4.0/8fe40ed5b97575890c82a04511e57f4c089c9a7b/springfox-swagger-common-2.4.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-swagger-common/2.4.0/6877f229e3aa2134571d998a67bfc49e023847be/springfox-swagger-common-2.4.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: io.springfox:springfox-swagger-ui:2.4.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-swagger-ui/2.4.0/1205fbe70fbbcf6c87b3059a45772e56d8ce6615/springfox-swagger-ui-2.4.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-swagger-ui/2.4.0/df631df1d70910a8b8e5a70db9a3372128a6a43f/springfox-swagger-ui-2.4.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: io.springfox:springfox-swagger2:2.4.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-swagger2/2.4.0/c6919bdec913eb5e8204a7757cf86f34201f6aac/springfox-swagger2-2.4.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-swagger2/2.4.0/6524161b7269296f22007a980b41f6b69893a869/springfox-swagger2-2.4.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: io.swagger:swagger-annotations:1.5.6">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.swagger/swagger-annotations/1.5.6/feb5c3bbf4d4c16b24bcccef23d234451e95abf3/swagger-annotations-1.5.6.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.swagger/swagger-annotations/1.5.6/5bd9a6d91db0fd930eeffeb81563fa2f0a7c18a8/swagger-annotations-1.5.6-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: io.swagger:swagger-compat-spec-parser:1.0.13">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.swagger/swagger-compat-spec-parser/1.0.13/52a61fa30ed96b95f8c2eb1cd0a88149fce28133/swagger-compat-spec-parser-1.0.13.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.swagger/swagger-compat-spec-parser/1.0.13/9b5a5a4b9808b7dd4c77e6bb2712627a5e6744f4/swagger-compat-spec-parser-1.0.13-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: io.swagger:swagger-core:1.5.4">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.swagger/swagger-core/1.5.4/ed9d5cb44f888fa34c9071afbf8d0916f2dfb7e/swagger-core-1.5.4.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.swagger/swagger-core/1.5.4/7544a23aafa73f05c5d0804c2c0a95def1cfe763/swagger-core-1.5.4-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: io.swagger:swagger-models:1.5.6">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.swagger/swagger-models/1.5.6/e5c36321b8bbd1e4f10858b5ceededdeeb4844e1/swagger-models-1.5.6.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.swagger/swagger-models/1.5.6/2b18b8ca9f00878419d7118327b2854f2c8b18/swagger-models-1.5.6-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: io.swagger:swagger-parser:1.0.13">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.swagger/swagger-parser/1.0.13/1de172858472bd00f529904f2dea07df2a795b31/swagger-parser-1.0.13.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.swagger/swagger-parser/1.0.13/39e1a64f429bcfcdc22b218e6ed0422129c29d2/swagger-parser-1.0.13-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: javax.activation:activation:1.1">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.activation/activation/1.1/e6cb541461c2834bdea3eb920f1884d1eb508b50/activation-1.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.activation/activation/1.1/3697e9f67a2ed7ac5f589cff30f21173299440/activation-1.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: javax.mail:mail:1.4.7">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.mail/mail/1.4.7/9add058589d5d85adeb625859bf2c5eeaaedf12d/mail-1.4.7.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.mail/mail/1.4.7/bb76e5678cdb3e7488bb5578a8461e82fba5fe36/mail-1.4.7-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: javax.mail:mailapi:1.4.3">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.mail/mailapi/1.4.3/124600e35d9031da50e5f67661ffa741541f8f6a/mailapi-1.4.3.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.mail/mailapi/1.4.3/c84b0b9535d2ffe70b8323ba9a433e0a991fa411/mailapi-1.4.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: javax.persistence:persistence-api:1.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.persistence/persistence-api/1.0/5725f57873e05e068803e2bf9d5a8ea3740ffec5/persistence-api-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.persistence/persistence-api/1.0/2773a7910e8f0c7d59749dc4fcef2a4b94fcf85a/persistence-api-1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: javax.servlet:javax.servlet-api:3.1.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.servlet/javax.servlet-api/3.1.0/3cd63d075497751784b2fa84be59432f4905bf7c/javax.servlet-api-3.1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.servlet/javax.servlet-api/3.1.0/ab3976d4574c48d22dc1abf6a9e8bd0fdf928223/javax.servlet-api-3.1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: javax.servlet:jstl:1.2">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.servlet/jstl/1.2/74aca283cd4f4b4f3e425f5820cda58f44409547/jstl-1.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.servlet/jstl/1.2/2f5877ef15adb721421e80f5aa2b6fe069eec8ed/jstl-1.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: javax.validation:validation-api:1.1.0.Final">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.1.0.Final/8613ae82954779d518631e05daa73a6a954817d5/validation-api-1.1.0.Final.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.validation/validation-api/1.1.0.Final/7d49b53caed9bd81d172807c3e096d24f3c57090/validation-api-1.1.0.Final-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: javax.websocket:javax.websocket-api:1.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.websocket/javax.websocket-api/1.0/fc843b649d4a1dcb0497669d262befa3918c7ba8/javax.websocket-api-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.websocket/javax.websocket-api/1.0/107b0fdc7ca320b54dc1393e01585be5883ff348/javax.websocket-api-1.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: joda-time:joda-time:2.3">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/joda-time/joda-time/2.3/56498efd17752898cfcc3868c1b6211a07b12b8f/joda-time-2.3.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/joda-time/joda-time/2.3/ecd8588d8ce0963eb443de31d5fea29e3205f160/joda-time-2.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: log4j:log4j:1.2.17">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/log4j/log4j/1.2.17/5af35056b4d257e4b64b9e8069c0746e8b08629f/log4j-1.2.17.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/log4j/log4j/1.2.17/677abe279b68c5e7490d6d50c6951376238d7d3e/log4j-1.2.17-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: mysql:mysql-connector-java:5.1.38">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/mysql/mysql-connector-java/5.1.38/dbbd7cd309ce167ec8367de4e41c63c2c8593cc5/mysql-connector-java-5.1.38.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/mysql/mysql-connector-java/5.1.38/b83cac8c938dfb9b7a8e191e2d482be88eb8280c/mysql-connector-java-5.1.38-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: net.sf.jopt-simple:jopt-simple:4.6">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/4.6/306816fb57cf94f108a43c95731b08934dcae15c/jopt-simple-4.6.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/4.6/9cd14a61d7aa7d554f251ef285a6f2c65caf7b65/jopt-simple-4.6-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.apache.commons:commons-lang3:3.2.1">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.2.1/66f13681add50ca9e4546ffabafaaac7645db3cf/commons-lang3-3.2.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.2.1/77e5da73ecc389bda26f9953fd91e9b53b571a6f/commons-lang3-3.2.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.apache.httpcomponents:httpclient:4.3.3">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.3.3/18f4247ff4572a074444572cee34647c43e7c9c7/httpclient-4.3.3.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.3.3/65cba03c4f6207f2885f88206fcf52c53f8d111b/httpclient-4.3.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.apache.httpcomponents:httpcore:4.3.2">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.3.2/31fbbff1ddbf98f3aa7377c94d33b0447c646b6e/httpcore-4.3.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.3.2/4809f38359edeea9487f747e09aa58ec8d3a54c5/httpcore-4.3.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.apache.shiro:shiro-core:1.2.4">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.shiro/shiro-core/1.2.4/88d46aa726ecbd626380324564b58e29232f1fcf/shiro-core-1.2.4.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.shiro/shiro-core/1.2.4/587b13cdeff146c9fc6de8f8269505714e9d7215/shiro-core-1.2.4-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.apache.shiro:shiro-spring:1.2.4">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.shiro/shiro-spring/1.2.4/584cf608719252dd4c0e7bc4d3b3dd7d4fe2e4d2/shiro-spring-1.2.4.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.shiro/shiro-spring/1.2.4/cfedfb5f0398613d198d71836d8fc1ed8da081a5/shiro-spring-1.2.4-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.apache.shiro:shiro-web:1.2.4">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.shiro/shiro-web/1.2.4/b8bc8646de7d7aa495cf6bc65f0e97da030c46f5/shiro-web-1.2.4.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.shiro/shiro-web/1.2.4/e2d2522f1e96fb6004938ede120bc0111599c22f/shiro-web-1.2.4-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.apache.tomcat:tomcat-jdbc:8.0.33">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat/tomcat-jdbc/8.0.33/7f1b6d609f9c2e045e8d7759e96605841fffdf82/tomcat-jdbc-8.0.33.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat/tomcat-jdbc/8.0.33/44290ba0798f1e2a62095bbebffaea2e158394f3/tomcat-jdbc-8.0.33-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.apache.tomcat:tomcat-juli:8.0.33">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat/tomcat-juli/8.0.33/330aecfa895156cea91c576cb6609537152761f9/tomcat-juli-8.0.33.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat/tomcat-juli/8.0.33/975fa5fa28c1d91786d06e9bd2c6bd1768d1eea8/tomcat-juli-8.0.33-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.aspectj:aspectjweaver:1.8.9">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.aspectj/aspectjweaver/1.8.9/db28774f477f07220eac18d5ec9c4e01f48589d7/aspectjweaver-1.8.9.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.aspectj/aspectjweaver/1.8.9/9a10b6740c821d03b800a6062284b4a99de4fbeb/aspectjweaver-1.8.9-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.assertj:assertj-core:2.0.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.assertj/assertj-core/2.0.0/3557c67231bdeae9f9bbd38dfcc1431e48a4cc9f/assertj-core-2.0.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.assertj/assertj-core/2.0.0/d937129a5a34743368171eac02b930ecda1c4ff8/assertj-core-2.0.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.codehaus.woodstox:stax2-api:3.1.4">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.woodstox/stax2-api/3.1.4/ac19014b1e6a7c08aad07fe114af792676b685b7/stax2-api-3.1.4.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.woodstox/stax2-api/3.1.4/b40604d61c01cc081a4a7bdfc562aa9847ee8857/stax2-api-3.1.4-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.mozilla:rhino:1.7R4">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mozilla/rhino/1.7R4/e982f2136574b9a423186fbaeaaa98dc3e5a5288/rhino-1.7R4.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mozilla/rhino/1.7R4/f0bd5ea08604d7a674606064649292a740f5cf1f/rhino-1.7R4-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.mybatis:mybatis-spring:1.3.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mybatis/mybatis-spring/1.3.0/d1dbdc46cac543447ffd5aeda59f1a9bb34f0912/mybatis-spring-1.3.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mybatis/mybatis-spring/1.3.0/2022be53ff19021a08c89fe58d52fdb28c654e75/mybatis-spring-1.3.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.mybatis:mybatis:3.4.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mybatis/mybatis/3.4.0/1b37a54d8ab403e56cb3ed717c25193474efa226/mybatis-3.4.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mybatis/mybatis/3.4.0/3016ffd7d9d008bf6b230d01de711f9da046d68e/mybatis-3.4.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.slf4j:slf4j-api:1.7.21">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.21/139535a69a4239db087de9bab0bee568bf8e0b70/slf4j-api-1.7.21.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.21/f285ac123f201fb4b028bac556928d7cf527ef48/slf4j-api-1.7.21-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.slf4j:slf4j-ext:1.6.3">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-ext/1.6.3/5cd0f7bfbdefbb18bec7b6f152c9952795c0921b/slf4j-ext-1.6.3.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-ext/1.6.3/4285b8d2df3199153231558879b4defc1ee83f32/slf4j-ext-1.6.3-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.slf4j:slf4j-log4j12:1.7.21">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-log4j12/1.7.21/7238b064d1aba20da2ac03217d700d91e02460fa/slf4j-log4j12-1.7.21.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-log4j12/1.7.21/16b1333786ea93d16bff6fb0f5e3b82716d1b008/slf4j-log4j12-1.7.21-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.springframework.plugin:spring-plugin-core:1.2.0.RELEASE">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.plugin/spring-plugin-core/1.2.0.RELEASE/f380e7760032e7d929184f8ad8a33716b75c0657/spring-plugin-core-1.2.0.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.plugin/spring-plugin-core/1.2.0.RELEASE/112d82259202fa909d51cf7ccefae0c5523f1373/spring-plugin-core-1.2.0.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.springframework.plugin:spring-plugin-metadata:1.2.0.RELEASE">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.plugin/spring-plugin-metadata/1.2.0.RELEASE/97223fc496b6cab31602eedbd4202aa4fff0d44f/spring-plugin-metadata-1.2.0.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.plugin/spring-plugin-metadata/1.2.0.RELEASE/6551604dd9c0619bae2f5a244580fa9a0dc646bf/spring-plugin-metadata-1.2.0.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.springframework:spring-aop:4.2.5.RELEASE">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/4.2.5.RELEASE/858d6c70909b3ce7e07b59fc936f8ccfcd81c0aa/spring-aop-4.2.5.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/4.2.5.RELEASE/436d3d6181bbf498d8409525b449eb4ed94a2c5f/spring-aop-4.2.5.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.springframework:spring-beans:4.2.5.RELEASE">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.2.5.RELEASE/fa992ae40f6fc47117282164e0433b71da385e94/spring-beans-4.2.5.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.2.5.RELEASE/6135730c939697c15f33f092a64396bb21d6ba0e/spring-beans-4.2.5.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.springframework:spring-context-support:4.2.5.RELEASE">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context-support/4.2.5.RELEASE/72db9c52e8bd2dc3290cd51114583731f818356b/spring-context-support-4.2.5.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context-support/4.2.5.RELEASE/fc1909a46540ac15e8accb3ed0620c32936372eb/spring-context-support-4.2.5.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.springframework:spring-context:4.2.5.RELEASE">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.2.5.RELEASE/a75e18322c7b362fe1daa26a245ae672ec0f3138/spring-context-4.2.5.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.2.5.RELEASE/8bcd5b15133bb5423cdc9f33da7e4ac585fd783a/spring-context-4.2.5.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.springframework:spring-core:4.2.5.RELEASE">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/4.2.5.RELEASE/251207b29f0f38f61e3495a2f7fb053cf1bfe8c/spring-core-4.2.5.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/4.2.5.RELEASE/86b9af475e134ba9f5c3843f33ff3ecd6cf95883/spring-core-4.2.5.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.springframework:spring-expression:4.2.5.RELEASE">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.2.5.RELEASE/a42bdfb833d0be6c18429aea3fb0fba81f85c6e8/spring-expression-4.2.5.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.2.5.RELEASE/c55ae1e0e6858098c2b2b22a7a9638d6cd76db8d/spring-expression-4.2.5.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.springframework:spring-jdbc:4.2.5.RELEASE">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jdbc/4.2.5.RELEASE/205d2f1b902eac16a2ece772dc5ac6090b7e0b6f/spring-jdbc-4.2.5.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jdbc/4.2.5.RELEASE/8f0aaf6080b3a6d6cb7c52865ecef98b97a55f0b/spring-jdbc-4.2.5.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.springframework:spring-orm:4.2.5.RELEASE">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-orm/4.2.5.RELEASE/60625981b837ba93e603d3068d69c6397ecb3ad2/spring-orm-4.2.5.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-orm/4.2.5.RELEASE/30e26c9f41924d5a91a33855f01b8c8028917cd5/spring-orm-4.2.5.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.springframework:spring-tx:4.2.5.RELEASE">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-tx/4.2.5.RELEASE/7395321fe937272d9b781a13985e04ab2dcd6210/spring-tx-4.2.5.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-tx/4.2.5.RELEASE/424b0f6388fd0778648b67deeeb9250f84e1fbb8/spring-tx-4.2.5.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.springframework:spring-web:4.2.5.RELEASE">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/4.2.5.RELEASE/49cd2430884b77172aa81e3fc33ef668ea1dab30/spring-web-4.2.5.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/4.2.5.RELEASE/6d6268e82b35921d9daf4cfda9a2f1bd99afd87a/spring-web-4.2.5.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.springframework:spring-webmvc:4.2.5.RELEASE">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-webmvc/4.2.5.RELEASE/cf463cce3e4453eb4b9a69de2dcdfd60c3c57e0/spring-webmvc-4.2.5.RELEASE.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-webmvc/4.2.5.RELEASE/4defda95bd56638dee17b63637f50dc8be771283/spring-webmvc-4.2.5.RELEASE-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: org.yaml:snakeyaml:1.12">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.yaml/snakeyaml/1.12/ebe66a6b88caab31d7a19571ad23656377523545/snakeyaml-1.12.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.yaml/snakeyaml/1.12/f86c67beb22f7d1edb5d6c6a3c4dab77a23234da/snakeyaml-1.12-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: taglibs:standard:1.1.2">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/taglibs/standard/1.1.2/a17e8a4d9a1f7fcc5eed606721c9ed6b7f18acf7/standard-1.1.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/taglibs/standard/1.1.2/df8e0d90d896837d12eebaf7abf7bcf07ad0f4e4/standard-1.1.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: tk.mybatis:mapper:3.3.8">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/tk.mybatis/mapper/3.3.8/f5f2280d4bc52ff8849f22ef1d956508810470bc/mapper-3.3.8.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/tk.mybatis/mapper/3.3.8/37710297741e7046e1e8a928cda7188ee9d06472/mapper-3.3.8-sources.jar!/" />
+      </SOURCES>
+    </library>
+  </component>
+</project>
