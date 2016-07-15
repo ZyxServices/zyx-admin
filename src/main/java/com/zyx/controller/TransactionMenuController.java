@@ -10,13 +10,13 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/transaction")
-public class OrderMenuController {
+public class TransactionMenuController {
     @RequestMapping(value = "/order", method = RequestMethod.GET)
     public ModelAndView banner() {
         return  new ModelAndView("/transaction/order");
     }
-   /* @RequestMapping(value = "/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/recharge", method = RequestMethod.GET)
     public ModelAndView create(String a) {
-        return  new ModelAndView("/homepage/create");
-    }*/
+        return  new ModelAndView("/transaction/recharge");
+    }
 }
