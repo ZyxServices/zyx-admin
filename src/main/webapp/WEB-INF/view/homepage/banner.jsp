@@ -138,13 +138,13 @@
                         <table id="homepage-list-table">
                             <thead>
                             <tr>
-                                <td data-checkbox="true"></td>
-                                <td data-field="id">ID</td>
-                                <td data-field="url">跳转url</td>
-                                <td data-field="image">图片</td>
-                                <td data-field="order">排序</td>
-                                <td data-field="activation">是否激活</td>
-                                <td data-formatter="operate">操作</td>
+                                <th data-checkbox="true"></th>
+                                <th data-field="id">ID</th>
+                                <th data-field="url">跳转url</th>
+                                <th data-field="image">图片</th>
+                                <th data-field="order">排序</th>
+                                <th data-field="activation">是否激活</th>
+                                <th data-formatter="operate">操作</th>
                             </tr>
                             </thead>
                         </table>
