@@ -92,9 +92,9 @@ function initTable() {
             });
         }
     });
-    $table.on('all.bs.table', function (e, name, args) {
-        console.log(name, args);
-    });
+    //$table.on('all.bs.table', function (e, name, args) {
+    //    //console.log(name, args);
+    //});
     $remove.click(function () {
         var ids = getIdSelections();
         $table.bootstrapTable('remove', {
@@ -103,11 +103,6 @@ function initTable() {
             values: ids
         });
         $remove.prop('disabled', true);
-    });
-    $(window).resize(function () {
-        $table.bootstrapTable('resetView', {
-            height: getHeight()
-        });
     });
 }
     function getIdSelections() {
