@@ -131,7 +131,7 @@
 
                         <div class="control-group">
                             <label class="control-label">内容</label>
-                            <div class="controls">
+                            <div class="controls summernote">
                                 <div id="activity-summernote"></div>
                             </div>
                         </div>

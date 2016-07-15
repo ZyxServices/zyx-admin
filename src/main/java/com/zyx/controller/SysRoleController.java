@@ -14,21 +14,21 @@ import com.zyx.service.SysRoleService;
 @Controller
 @RequestMapping("/sysrole")
 public class SysRoleController {
-	@Autowired
-	SysRoleService sysRoleService;
-	
-	 @RequestMapping(value = "/goAdd", method = RequestMethod.GET)
-		public ModelAndView goAddRole() {
-		    ModelAndView view = new ModelAndView("/sys/addrole");
-			return view;
-		}
-	 
-	 @RequestMapping(value = "/list", method = RequestMethod.GET)
-		public ModelAndView roles() {
-			 ModelAndView view = new ModelAndView("/sys/listrole");
-			List<SysRole> roles = sysRoleService.getSysRole(null);
-			view.addObject("roles", roles);
-			return view;
-		}
+    @Autowired
+    SysRoleService sysRoleService;
+
+    @RequestMapping(value = "/goAdd", method = RequestMethod.GET)
+    public ModelAndView goAddRole() {
+        ModelAndView view = new ModelAndView("/sys/addrole");
+        return view;
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ModelAndView roles() {
+        ModelAndView view = new ModelAndView("/sys/listrole");
+        List<SysRole> roles = sysRoleService.getSysRole(null);
+        view.addObject("roles", roles);
+        return view;
+    }
 
 }
