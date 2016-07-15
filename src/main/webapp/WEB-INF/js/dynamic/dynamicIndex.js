@@ -37,8 +37,7 @@ function initTable() {
             {field: 'online', title: '收藏量', sortable: true},
             {field: 'comment', title: '浏览量'},
             {field: 'operation', title: '操作', align: 'center', events: operateEventssssss, formatter: operateFormatter},
-            {field: 'Report', title: '举报'},
-            {field: 'see', title: '查看url', events: seeUrl, formatter: seeUrlFormatter}],
+            {field: 'Report', title: '举报'}],
         data: [{
             id: 1,
             class: '广场',
@@ -52,8 +51,7 @@ function initTable() {
             comment: '765',
             praise: '231',
             share: '142',
-            Report: '正常',
-            see: '查看'
+            Report: '正常'
         }, {
             id: 2,
             class: '大咖',
@@ -67,8 +65,7 @@ function initTable() {
             comment: '765',
             praise: '231',
             share: '142',
-            Report: '80人举报',
-            see: '查看'
+            Report: '80人举报'
         }]
     });
     // sometimes footer render error.

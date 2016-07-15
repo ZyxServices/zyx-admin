@@ -13,7 +13,6 @@
     <div class="live_index">
         <div class="live_operate">
             <h3 style="margin: 0;display: inline-block">直播操作 </h3>
-            <button class="fr btn btn-default btn-lg" style="margin-top: 10px">分类排序</button>
             <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
             <button class="create_live btn btn-default btn-lg ">创建直播分类</button>
         </div>
@@ -37,8 +36,9 @@
         <button class="btn btn-danger">确定</button>
         <button onclick="window.location.reload();" class="btn btn-danger">返回</button>
         
-        <h3 style="margin: 0;display: inline-block">编辑直播分类 </h3>
+        <h3 style="margin: 0;display: block">编辑直播分类 </h3>
         <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
+        <table id="editLive"></table>
     </div>
 </div>
 <jsp:include page="../public/common-footer.jsp"/>

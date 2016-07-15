@@ -39,8 +39,7 @@ function initTable() {
             {field: 'praise', title: '点赞量', sortable: true},
             {field: 'share', title: '分享量', sortable: true},
             {field: 'operation', title: '操作', align: 'center', events: operateEventssssss, formatter: operateFormatter},
-            {field: 'Report', title: '举报'},
-            {field: 'see', title: '查看url', events: seeUrl, formatter: seeUrlFormatter}],
+            {field: 'Report', title: '举报'}],
         data: [{
             id: 1,
             class: '广场',
@@ -54,8 +53,7 @@ function initTable() {
             comment: '765',
             praise: '231',
             share: '142',
-            Report: '正常',
-            see: '查看'
+            Report: '正常'
         }, {
             id: 2,
             class: '大咖',
@@ -69,8 +67,40 @@ function initTable() {
             comment: '765',
             praise: '231',
             share: '142',
-            Report: '80人举报',
-            see: '查看'
+            Report: '80人举报'
+        }]
+    });
+
+    $('#editLive').bootstrapTable({
+        striped: true,           //是否显示行间隔色
+        cache: true,            //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        pagination: true,          //是否显示分页（*）
+        paginationPreText: "上一页",
+        paginationNextText: "下一页",
+        pageNumber: 1,            //初始化加载第一页，默认第一页
+        pageSize: 2,            //每页的记录行数（*）
+        checkbox: true,
+        checkboxHeader: "true",
+        sortable: true,           //是否启用排序
+        sortOrder: "asc",          //排序方式
+        pageList: [1, 25, 50, 100],    //可供选择的每页的行数（*）
+        strictSearch: true,
+        height: 460,            //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+        uniqueId: "id",           //每一行的唯一标识，一般为主键列
+        search: true,
+        //  clickToSelect: true,        //是否启用点击选中行
+        //showColumns: true,
+        //showHeader: true,
+        columns: [{field: 'state', checkbox: true, align: 'center', valign: 'middle'},
+            {field: 'id', title: 'id', align: 'center', valign: 'middle'},
+            {field: 'class', title: '类别'},
+            {field: 'operation', title: '操作', align: 'center', events: operateEventssssss, formatter: operateFormatter},],
+        data: [{
+            id: 1,
+            class: '广场'
+        }, {
+            id: 2,
+            class: '大咖'
         }]
     });
     // sometimes footer render error.

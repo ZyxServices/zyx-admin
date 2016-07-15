@@ -20,7 +20,7 @@
   <div class="live_index">
     <div class="live_operate">
       <h3 style="margin: 0;display: inline-block">动态操作</h3>
-      <button class="fr btn btn-default btn-lg" style="margin-top: 10px">查看已认证用户</button>
+      <%--<button class="fr btn btn-default btn-lg" style="margin-top: 10px">查看已认证用户</button>--%>
       <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
       <button class="create_live btn btn-default btn-lg ">发布动态</button>
     </div>
@@ -35,11 +35,13 @@
     </div>
   </div>
   <div class="create_liveType">
-    <h3 style="margin: 0;display: inline-block">创建直播分类 </h3>
+    <h3 style="margin: 0;display: inline-block">发布动态 </h3>
+    <h5 style="margin: 0;display: inline-block">图文动态 </h5>
+    <h5 style="margin: 0;display: inline-block">语音动态 </h5>
     <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
-    <span>创建名称</span>
-    <input type="text"/>
-    <button class="btn btn-danger">确定</button>
+    <input style="width: 40%; height: 20%" type="text"/>
+    <input style="display: block" type="file"/>
+    <button class="btn btn-danger"><发布></发布></button>
     <button onclick="window.location.reload();" class="btn btn-danger">返回</button>
   </div>
 </div>

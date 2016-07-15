@@ -40,7 +40,7 @@ function initTable() {
             {field: 'share', title: '生日'},
             {field: 'place', title: '所在地'},
             {field: 'operation', title: '操作', align: 'center', events: operateEventssssss, formatter: operateFormatter},
-            {field: 'see', title: '查看url', events: seeUrl, formatter: seeUrlFormatter}],
+ ],
         data: [{
             id: 1,
             class: '广场',
@@ -55,7 +55,6 @@ function initTable() {
             praise: '231',
             share: '142',
             Report: '正常',
-            see: '查看'
         }, {
             id: 2,
             class: '大咖',
@@ -70,7 +69,6 @@ function initTable() {
             praise: '231',
             share: '142',
             Report: '80人举报',
-            see: '查看'
         }]
     });
     // sometimes footer render error.

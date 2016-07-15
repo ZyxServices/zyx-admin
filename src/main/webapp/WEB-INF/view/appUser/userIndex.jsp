@@ -36,12 +36,78 @@
     </div>
   </div>
   <div class="create_liveType">
-    <h3 style="margin: 0;display: inline-block">创建直播分类 </h3>
+    <h3 style="margin: 0;display: inline-block">创建用户 </h3>
     <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
-    <span>创建名称</span>
-    <input type="text"/>
-    <button class="btn btn-danger">确定</button>
-    <button onclick="window.location.reload();" class="btn btn-danger">返回</button>
+    <form class="form-horizontal" role="form">
+      <div class="control-group">
+        <label class="control-label">账号</label>
+        <div class="controls">
+          <input type="text" class="span6 m-wrap" />
+          <span class="help-inline">*</span>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">密码</label>
+        <div class="controls">
+          <input type="text" class="span6 m-wrap" />
+          <span class="help-inline">*</span>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">头像</label>
+        <div class="controls">
+          <input  type="file">
+          <span class="help-inline">只能上传一张图片</span>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">性别</label>
+        <div class="controls">
+          <select class="span6 m-wrap">
+            <option>男</option>
+            <option>女</option>
+          </select>
+          <span class="help-inline">*</span>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">年龄</label>
+        <div class="controls">
+          <input type="text" class="span6 m-wrap" />
+          <span class="help-inline">*</span>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">所在地</label>
+        <div class="controls">
+          <input type="text" class="span6 m-wrap" />
+          <span class="help-inline">*</span>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">认证信息</label>
+        <div class="controls">
+          <input type="text" class="span6 m-wrap" />
+          <span class="help-inline">*</span>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">认证资料</label>
+        <div class="controls">
+          <input  type="file">
+          <span  class="help-inline">上传图片</span>
+        </div>
+      </div>
+      <button class="btn">确认创建</button>
+    </form>
+
   </div>
 </div>
 <jsp:include page="../public/common-footer.jsp"/>
