@@ -33,7 +33,8 @@
         <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
         <span>创建名称</span>
         <input type="text"/>
-        <button>确定</button>
+        <button class="btn btn-danger">确定</button>
+        <button class="btn btn-danger">返回</button>
     </div>
 </div>
 <jsp:include page="../public/common-footer.jsp"/>
