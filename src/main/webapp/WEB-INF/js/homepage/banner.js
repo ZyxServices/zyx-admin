@@ -1,18 +1,14 @@
 /**
- * Created by ZYX on 2016/7/12.
+ * Created by ZYX on 2016/7/14.
  */
 $(function(){
-    $("#activity-list-table").bootstrapTable({
+    $("#homepage-list-table").bootstrapTable({
         data: [{
             id: 1,
-            name: 'Item 1',
-            time: '2016-07-15',
-            startTime: '2016-07-15',
-            createPerson: '....',
-            place: '....',
-            pv: '12',
-            report: '12',
-            url: 'baidu.com'
+            url: 'baidu.com',
+            image: 'Item 1',
+            order: '1',
+            activation: '是'
         }],
         locale: 'zh-US',
         pagination: true,
@@ -36,7 +32,6 @@ function operate(value, row, index) {
     var d = '<a href="#" onclick="del(\''+ row.id +'\')">删除</a> ';
     return e + d;
 }
-
 function modify(id) {
     console.log(id)
 }

@@ -722,7 +722,7 @@ var App = function () {
             //core handlers
             handleInit();
             handleResponsiveOnResize(); // set and handle responsive    
-            handleUniform();        
+            // handleUniform();
             handleScrollers(); // handles slim scrolling contents 
             handleResponsiveOnInit(); // handler responsive elements on page load
 

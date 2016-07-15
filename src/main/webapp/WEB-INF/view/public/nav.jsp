@@ -74,7 +74,7 @@
 
                 <li >
 
-                    <a href="#">
+                    <a href="<%=request.getContextPath()%>/homepage/banner">
 
                         首页轮播图</a>
 
@@ -266,7 +266,7 @@
 
                     <ul class="sub-menu">
 
-                        <li><a href="#">订单查询</a></li>
+                        <li><a href="<%=request.getContextPath()%>/transaction/order">订单查询</a></li>
 
                         <li><a href="#">Sample Link 2</a></li>
 

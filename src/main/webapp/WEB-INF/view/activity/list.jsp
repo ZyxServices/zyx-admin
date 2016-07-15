@@ -18,6 +18,7 @@
 
   <!-- BEGIN GLOBAL MANDATORY STYLES -->
   <jsp:include page="../public/common-styles.jsp"/>
+  <link rel="stylesheet" href="../css/self-style/style.css" />
 </head>
 <body class="page-header-fixed">
 <jsp:include page="../public/header.jsp"/>
@@ -137,33 +138,18 @@
               <thead>
               <tr>
                 <th data-checkbox="true"></th>
-                <th>id</th>
-                <th>组合名称</th>
-                <th>发布时间</th>
-                <th>开始时间</th>
-                <th>创建人</th>
-                <th>活动地点</th>
-                <th>浏览量</th>
-                <th>操作</th>
-                <th>举报状态</th>
-                <th>查看url</th>
+                <th data-field="id">id</th>
+                <th data-field="name">组合名称</th>
+                <th data-field="time">发布时间</th>
+                <th data-field="startTime">开始时间</th>
+                <th data-field="createPerson">创建人</th>
+                <th data-field="place">活动地点</th>
+                <th data-field="pv">浏览量</th>
+                <th data-field="report">举报状态</th>
+                <th data-field="url">查看url</th>
+                <th data-formatter="operate">操作</th>
               </tr>
               </thead>
-             <%-- <tbody>
-              <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>7</td>
-                <td>8</td>
-                <td>9</td>
-                <td>12</td>
-                <td>11</td>
-              </tr>
-              </tbody>--%>
             </table>
           </div>
 

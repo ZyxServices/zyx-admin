@@ -1,8 +1,8 @@
 /**
- * Created by ZYX on 2016/7/12.
+ * Created by ZYX on 2016/7/14.
  */
 $(function(){
-    $("#activity-list-table").bootstrapTable({
+    $("#order-list-table").bootstrapTable({
         data: [{
             id: 1,
             name: 'Item 1',
@@ -30,13 +30,6 @@ $(function(){
         }
     })
 })
-
-function operate(value, row, index) {
-    var e = '<a href="#" onclick="modify(\''+ row.id + '\')">修改</a> ';
-    var d = '<a href="#" onclick="del(\''+ row.id +'\')">删除</a> ';
-    return e + d;
-}
-
 function modify(id) {
     console.log(id)
 }
