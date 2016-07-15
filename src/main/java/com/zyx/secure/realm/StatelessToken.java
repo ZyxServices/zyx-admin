@@ -45,7 +45,6 @@ public class StatelessToken implements AuthenticationToken {
 	}
 
 	// 返回用户验证信息
-	@Override
 	public Object getCredentials() {
 		return password;
 	}
@@ -79,7 +78,6 @@ public class StatelessToken implements AuthenticationToken {
 				+ password + "]";
 	}
 
-	@Override
 	public Object getPrincipal() {
 		return userPrincipal;
 	}

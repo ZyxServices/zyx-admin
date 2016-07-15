@@ -43,7 +43,7 @@
         </li>
 <%--动态--%>
         <li class="" >
-            <a href="#">
+            <a href="<%=request.getContextPath()%>/dynamic/dynamicIndex">
                 <i class="icon-table"></i>
                 <span class="title">动态</span>
             </a>
@@ -88,7 +88,7 @@
         </li>
 <%--用户--%>
         <li class="" >
-            <a href="<%=request.getContextPath()%>/syuser/list">
+            <a href="<%=request.getContextPath()%>/appUser/userIndex">
                 <i class="icon-cogs"></i>
                 <span class="title">用户</span>
             </a>

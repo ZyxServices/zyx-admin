@@ -11,23 +11,15 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 /**
- * Created by 文楷 on 2016/7/14.
+ * Created by 文楷 on 2016/7/13.
  */
 @Controller
-@RequestMapping("/shop")
-public class SysGoodsController {
-    @Autowired
-
-    @RequestMapping(value = "/goods", method = RequestMethod.GET)
-    public ModelAndView goods() {
-        ModelAndView view = new ModelAndView("/shop/goods");
+@RequestMapping("/live")
+public class LiveContoller {
+    @RequestMapping(value = "/living", method = RequestMethod.GET)
+    public ModelAndView live() {
+        ModelAndView view = new ModelAndView("/live/living");
         return view;
-    }
 
-    @RequestMapping(value = "/order", method = RequestMethod.GET)
-    public ModelAndView order() {
-        ModelAndView view = new ModelAndView("/shop/order");
-        return view;
     }
-
 }
