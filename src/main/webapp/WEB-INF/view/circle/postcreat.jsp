@@ -12,7 +12,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <meta content="体育家-圈子列表" name="description" />
+    <meta content="体育家-帖子创建" name="description" />
 
     <meta content="" name="author" />
 
@@ -65,7 +65,7 @@
 
                     <h3 class="page-title">
 
-                        圈子<small>statistics and more</small>
+                        帖子发布<small>statistics and more</small>
 
                     </h3>
 
@@ -75,13 +75,13 @@
 
                             <i class="icon-home"></i>
 
-                            <a href="javascript:void(0)">圈子</a>
+                            <a href="javascript:void(0)">帖子</a>
 
                             <i class="icon-angle-right"></i>
 
                         </li>
 
-                        <li><a href="#">创建</a></li>
+                        <li><a href="#">发布帖子</a></li>
 
                         <li class="pull-right no-text-shadow">
 
@@ -114,48 +114,16 @@
 
                     <form class="form-horizontal" role="form">
                         <div class="control-group">
-                            <label class="control-label">名称</label>
-                            <div class="controls">
-                                <input type="text" class="span6 m-wrap" />
-                                <span class="help-inline">*</span>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label">头像</label>
-                            <div class="controls">
-                                <input type="file" name="avatar" role="button" value="上传图片" >
-                                <span class="help-inline">只能上传一张图片</span>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label">类别</label>
-                            <div class="controls">
-                                <input type="text" class="span6 m-wrap" />
-                                <span class="help-inline">*</span>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label">简介</label>
-                            <div class="controls">
-                                <input type="text" class="span6 m-wrap" />
-                                <span class="help-inline">*</span>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label">圈主</label>
+                            <label class="control-label">标题</label>
                             <div class="controls">
                                 <input type="text" class="span6 m-wrap" />
                                 <span class="help-inline">*</span>
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label">管理员</label>
+                            <label class="control-label">内容</label>
                             <div class="controls">
-                                <input type="text" class="span6 m-wrap" />
-                                <span class="help-inline">*</span>
+                                <div id="post-summernote"></div>
                             </div>
                         </div>
 
@@ -190,8 +158,8 @@
 
 <jsp:include page="../public/footer.jsp"/>
 <jsp:include page="../public/common-js.jsp"/>
-<script src="../js/app.js" type="text/javascript"></script>
-<script src="../js/index.js" type="text/javascript"></script>
-<script type="text/javascript" src="../js/activity/create.js"></script>
+<script src="../../js/app.js" type="text/javascript"></script>
+<script src="../../js/index.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../js/activity/create.js"></script>
 </body>
 </html>

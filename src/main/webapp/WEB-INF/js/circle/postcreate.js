@@ -1,8 +1,9 @@
 /**
- * Created by ZYX on 2016/7/13.
+ * Created by guochunyan on 2016/7/14.
  */
-$(document).ready(function() {
+$(function(){
     $('#post-summernote').summernote({
         height:200
     });
-});
+
+})

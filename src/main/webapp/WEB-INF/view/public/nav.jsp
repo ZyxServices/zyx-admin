@@ -190,16 +190,16 @@
                         圈子列表</a>
 
                 </li>--%>
-
                 <li >
 
-                    <a href="#">
+                    <a href="<%=request.getContextPath()%>/circle/circlepost">
 
                         <i class="icon-cogs"></i>
 
-                        圈子审核</a>
+                        帖子列表</a>
 
                 </li>
+
 
             </ul>
 
