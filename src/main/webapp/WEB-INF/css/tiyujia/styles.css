@@ -1,0 +1,23 @@
+@charset "UTF-8";
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.p5{
+    padding: 5px;
+}
+.hide{
+    display: none;
+}
+
+.live_manage{
+    margin-top: 20px;
+}
+.create_liveType{
+    display: none;
+}
+.create_liveType.on{
+    display: block;
+}

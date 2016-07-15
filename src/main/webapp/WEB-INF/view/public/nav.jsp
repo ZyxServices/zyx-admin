@@ -94,7 +94,7 @@
 
         <li class="">
 
-            <a href="javascript:;">
+            <a href="">
 
                 <i class="icon-bookmark-empty"></i>
 
@@ -127,9 +127,9 @@
 
         </li>
 
-        <li class="">
+        <li class="" >
 
-            <a href="javascript:;">
+            <a href="<%=request.getContextPath()%>/live/living">
 
                 <i class="icon-table"></i>
 
@@ -139,26 +139,26 @@
 
             </a>
 
-            <ul class="sub-menu">
+            <%--<ul class="sub-menu">--%>
 
-                <li >
+                <%--<li >--%>
 
-                    <a href="#">
+                    <%--<a href="">--%>
 
-                        图文直播列表</a>
+                        <%--图文直播列表</a>--%>
 
-                </li>
+                <%--</li>--%>
 
-                <li >
+                <%--<li >--%>
 
-                    <a href="#">
+                    <%--<a href="#">--%>
 
-                        视频直播列表</a>
+                        <%--视频直播列表</a>--%>
 
-                </li>
+                <%--</li>--%>
 
 
-            </ul>
+            <%--</ul>--%>
 
         </li>
 
@@ -221,17 +221,17 @@
 
                 <li >
 
-                    <a href="#">
+                    <a href="<%=request.getContextPath()%>/shop/goods">
 
-                        发布商品</a>
+                        商品</a>
 
                 </li>
 
                 <li >
 
-                    <a href="#">
+                    <a href="<%=request.getContextPath()%>/shop/order">
 
-                        商品下架</a>
+                        订单</a>
 
                 </li>
 
