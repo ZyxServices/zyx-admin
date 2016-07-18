@@ -44,19 +44,19 @@
 
         <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
-        <div id="portlet-config" class="modal hide">
+        <div class="modal hide">
 
             <div class="modal-header">
 
                 <button data-dismiss="modal" class="close" type="button"></button>
 
-                <h3>Widget Settings</h3>
+                <h3>删除</h3>
 
             </div>
 
             <div class="modal-body">
 
-                Widget settings form goes here
+                确定删除？
 
             </div>
 
@@ -66,19 +66,13 @@
 
         <!-- BEGIN PAGE CONTAINER-->
 
-        <div class="container-fluid">
+        <div class="container-fluid" id="circleList">
 
             <!-- BEGIN PAGE HEADER-->
 
             <div class="row-fluid">
 
                 <div class="span12">
-
-                    <!-- BEGIN STYLE CUSTOMIZER -->
-
-                    <jsp:include page="../public/color-panel.jsp"/>
-
-                    <!-- END BEGIN STYLE CUSTOMIZER -->
 
                     <!-- BEGIN PAGE TITLE & BREADCRUMB-->
 
@@ -126,13 +120,13 @@
 
             <!-- END PAGE HEADER-->
 
-            <div id="activity-list">
+            <div id="circle-list">
 
                 <!-- BEGIN DASHBOARD STATS -->
 
                 <div class="row-fluid margin-bottom-10">
                     <div class="span6">
-                        <a class="btn btn-default" href="<%=request.getContextPath()%>/circle/circlecreat">创建圈子</a>
+                        <a class="btn btn-default" href="javaScript:void(0)" onclick="circleCreate()">创建圈子</a>
                     </div>
                 </div>
                 <div class="row-fluid">
@@ -155,21 +149,6 @@
                                 <th>查看url</th>
                             </tr>
                             </thead>
-                            <%-- <tbody>
-                             <tr>
-                               <td>1</td>
-                               <td>2</td>
-                               <td>3</td>
-                               <td>4</td>
-                               <td>5</td>
-                               <td>6</td>
-                               <td>7</td>
-                               <td>8</td>
-                               <td>9</td>
-                               <td>12</td>
-                               <td>11</td>
-                             </tr>
-                             </tbody>--%>
                         </table>
                     </div>
 
@@ -181,6 +160,129 @@
 
         </div>
 
+        <%--创建圈子--%>
+        <div class="container-fluid hide" id="circleCreate">
+
+            <!-- BEGIN PAGE HEADER-->
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                    <h3 class="page-title">
+
+                        圈子<small>statistics and more</small>
+
+                    </h3>
+
+                    <ul class="breadcrumb">
+
+                        <li>
+
+                            <i class="icon-home"></i>
+
+                            <a href="javascript:void(0)">圈子</a>
+
+                            <i class="icon-angle-right"></i>
+
+                        </li>
+
+                        <li><a href="#">创建</a></li>
+
+                        <li class="pull-right no-text-shadow">
+
+                            <div class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive" data-tablet="" data-desktop="tooltips" data-placement="top" data-original-title="Change dashboard date range">
+
+                                <i class="icon-calendar"></i>
+
+                                <span></span>
+
+                                <i class="icon-angle-down"></i>
+
+                            </div>
+
+                        </li>
+
+                    </ul>
+
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+
+                </div>
+
+            </div>
+
+            <!-- END PAGE HEADER-->
+
+            <div id="activity-create">
+
+                <!-- BEGIN DASHBOARD STATS -->
+                <div class="row-fluid">
+
+                    <form class="form-horizontal" role="form">
+                        <div class="control-group">
+                            <label class="control-label">名称</label>
+                            <div class="controls">
+                                <input type="text" class="span6 m-wrap" />
+                                <span class="help-inline">*</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">头像</label>
+                            <div class="controls">
+                                <input type="file" name="avatar" role="button" value="上传图片" >
+                                <span class="help-inline">只能上传一张图片</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">类别</label>
+                            <div class="controls">
+                                <input type="text" class="span6 m-wrap" />
+                                <span class="help-inline">*</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">简介</label>
+                            <div class="controls">
+                                <input type="text" class="span6 m-wrap" />
+                                <span class="help-inline">*</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">圈主</label>
+                            <div class="controls">
+                                <input type="text" class="span6 m-wrap" />
+                                <span class="help-inline">*</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">管理员</label>
+                            <div class="controls">
+                                <input type="text" class="span6 m-wrap" />
+                                <span class="help-inline">*</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label"></label>
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button class="btn btn-default">确定</button>
+                                <a href="javascript:void(0)" onclick="window.location.reload();" class="btn btn-default">返回</a>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <!-- END DASHBOARD STATS -->
+
+            </div>
+
+        </div>
         <!-- END PAGE CONTAINER-->
 
     </div>

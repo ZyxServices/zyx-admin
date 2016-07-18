@@ -15,9 +15,4 @@ package com.zyx.controller.menu;
              public ModelAndView list() {
                  return  new ModelAndView("/activity/list");
              }
-
-             @RequestMapping(value = "/create", method = RequestMethod.GET)
-             public ModelAndView create(String a) {
-                 return  new ModelAndView("/activity/create");
-             }
      }

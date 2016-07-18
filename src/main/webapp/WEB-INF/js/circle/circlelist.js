@@ -19,3 +19,8 @@ $(function(){
         }
     })
 })
+
+function circleCreate(){
+    $("#circleList").hide();
+    $("#circleCreate").show();
+}

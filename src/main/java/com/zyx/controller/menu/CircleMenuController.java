@@ -13,17 +13,9 @@ public class CircleMenuController {
         return new ModelAndView("/circle/circlelist");
     }
 
-    @RequestMapping(value = "/circlecreat", method = RequestMethod.GET)
-    public ModelAndView circleCreate() {
-        return new ModelAndView("/circle/circlecreat");
-    }
     @RequestMapping(value = "/circlepost", method = RequestMethod.GET)
     public ModelAndView circlePost() {
         return new ModelAndView("/circle/circlepost");
-    }
-    @RequestMapping(value = "/postcreat", method = RequestMethod.GET)
-    public ModelAndView postCreat() {
-        return new ModelAndView("/circle/postcreat");
     }
 }
 

@@ -83,7 +83,7 @@
         var urlLength = url.split("/").length;
         var getMenuObj = url.split("/")[urlLength-2];
         var getSecondMenuObj = url.split("/")[urlLength-1];
-        if(getMenuObj == "circle" || getMenuObj == "shop" || getMenuObj == "homepage"){
+        if(getMenuObj == "circle" || getMenuObj == "shop" || getMenuObj == "homepage" || getMenuObj == "banner"){
             $("."+getMenuObj).addClass("open");
             $("."+getMenuObj).addClass("active");
             $("."+getMenuObj).find(".arrow").addClass("open");

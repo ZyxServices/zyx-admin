@@ -18,6 +18,7 @@
 
   <!-- BEGIN GLOBAL MANDATORY STYLES -->
   <jsp:include page="../public/common-styles.jsp"/>
+  <link rel="stylesheet" href="../css/summernote.css" />
   <link rel="stylesheet" href="../css/self-style/style.css" />
 </head>
 <body class="page-header-fixed">
@@ -303,7 +304,7 @@
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                 <button class="btn btn-default">确定</button>
-                <a href="javascript:void(0)" class="btn btn-default" onclick="htmlBack()">返回</a>
+                <a href="javascript:void(0)" class="btn btn-default" onclick="window.location.reload();">返回</a>
               </div>
             </div>
           </form>

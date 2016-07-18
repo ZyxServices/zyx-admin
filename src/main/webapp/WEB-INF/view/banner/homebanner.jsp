@@ -42,19 +42,19 @@
 
         <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
-        <div id="portlet-config" class="modal hide">
+        <div class="modal hide">
 
             <div class="modal-header">
 
                 <button data-dismiss="modal" class="close" type="button"></button>
 
-                <h3>Widget Settings</h3>
+                <h3>删除banner</h3>
 
             </div>
 
             <div class="modal-body">
 
-                Widget settings form goes here
+                确定删除banner？
 
             </div>
 
@@ -64,19 +64,13 @@
 
         <!-- BEGIN PAGE CONTAINER-->
 
-        <div class="container-fluid">
+        <div class="container-fluid" id="bannerList">
 
             <!-- BEGIN PAGE HEADER-->
 
             <div class="row-fluid">
 
                 <div class="span12">
-
-                    <!-- BEGIN STYLE CUSTOMIZER -->
-
-                    <jsp:include page="../public/color-panel.jsp"/>
-
-                    <!-- END BEGIN STYLE CUSTOMIZER -->
 
                     <!-- BEGIN PAGE TITLE & BREADCRUMB-->
 
@@ -99,21 +93,6 @@
                         </li>
 
                         <li><a href="#">列表</a></li>
-
-                        <li class="pull-right no-text-shadow">
-
-                            <div id="dashboard-report-range" class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive" data-tablet="" data-desktop="tooltips" data-placement="top" data-original-title="Change dashboard date range">
-
-                                <i class="icon-calendar"></i>
-
-                                <span></span>
-
-                                <i class="icon-angle-down"></i>
-
-                            </div>
-
-                        </li>
-
                     </ul>
 
                     <!-- END PAGE TITLE & BREADCRUMB-->
@@ -130,7 +109,8 @@
 
                 <div class="row-fluid margin-bottom-10">
                     <div class="span6">
-                        <a class="btn btn-default" href="<%=request.getContextPath()%>/homepage/create">上传banner</a>
+                        <a class="btn btn-default" href="javascript:void(0)" onclick="createBanner()">上传banner</a>
+                        <%--<a class="btn btn-default" href="<%=request.getContextPath()%>/homepage/create">上传banner</a>--%>
                     </div>
                 </div>
                 <div class="row-fluid">
@@ -157,7 +137,99 @@
             </div>
 
         </div>
+        <%--创建banner--%>
+        <div class="container-fluid hide" id="bannerCreate">
 
+            <!-- BEGIN PAGE HEADER-->
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                    <h3 class="page-title">
+
+                        上传banner<small>statistics and more</small>
+
+                    </h3>
+
+                    <ul class="breadcrumb">
+
+                        <li>
+
+                            <i class="icon-home"></i>
+
+                            <a href="javascript:void(0)">首页banner</a>
+
+                            <i class="icon-angle-right"></i>
+
+                        </li>
+
+                        <li><a href="#">创建</a></li>
+                    </ul>
+
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+
+                </div>
+
+            </div>
+
+            <!-- END PAGE HEADER-->
+
+            <div id="activity-create">
+
+                <!-- BEGIN DASHBOARD STATS -->
+                <div class="row-fluid">
+
+                    <form class="form-horizontal" role="form">
+                        <div class="control-group">
+                            <label class="control-label">url</label>
+                            <div class="controls">
+                                <input type="text" class="span6 m-wrap" />
+                                <span class="help-inline">*</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">banner排序</label>
+                            <div class="controls">
+                                <input type="text" class="span6 m-wrap" />
+                                <span class="help-inline">*</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">banner状态</label>
+                            <div class="controls">
+                                <label class="checkbox"><input type="radio" name="bannerState">激活</label>
+                                <label class="checkbox"><input type="radio" name="bannerState">未激活</label>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">封面</label>
+                            <div class="controls">
+                                <button class="btn btn-default">上传图片</button>
+                                <span class="help-inline">只能上传一张图片</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button class="btn btn-default">确定</button>
+                                <a href="javascript:(0)" class="btn btn-default" onclick="window.location.reload();">返回</a>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <!-- END DASHBOARD STATS -->
+
+            </div>
+
+        </div>
         <!-- END PAGE CONTAINER-->
 
     </div>
@@ -174,19 +246,12 @@
 <jsp:include page="../public/common-js.jsp"/>
 <script src="../js/app.js" type="text/javascript"></script>
 <script src="../js/index.js" type="text/javascript"></script>
-<script type="text/javascript" src="../js/homepage/banner.js"></script>
+<script type="text/javascript" src="../js/banner/homebanner.js"></script>
 <script>
 
     jQuery(document).ready(function() {
 
         App.init(); // initlayout and core plugins
-        /* jQuery('.page-sidebar').find('li').removeClass('active');
-         jQuery('.page-sidebar').find('li.activity').addClass('open');
-         jQuery('.page-sidebar').find('li.activity').find('.arrow').addClass("open");
-         jQuery('.page-sidebar').find('li.activity').find('.sub-menu').addClass('open');
-         jQuery('.page-sidebar').find('li.activity').find('.sub-menu').slideDown(200);
-         //    jQuery('.page-sidebar').find('li.activity').find('.sub-menu').find(".list").css({"backgroundColor":"#e02222","color":"#fff"});
-         jQuery('.page-sidebar').find('li.activity').find('.sub-menu').find(".list a").css({"backgroundColor":"#e02222","color":"#fff"});*/
 
     });
 

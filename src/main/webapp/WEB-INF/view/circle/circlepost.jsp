@@ -44,19 +44,19 @@
 
         <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
-        <div id="portlet-config" class="modal hide">
+        <div class="modal hide">
 
             <div class="modal-header">
 
                 <button data-dismiss="modal" class="close" type="button"></button>
 
-                <h3>Widget Settings</h3>
+                <h3>删除帖子</h3>
 
             </div>
 
             <div class="modal-body">
 
-                Widget settings form goes here
+                确定删除？
 
             </div>
 
@@ -66,20 +66,13 @@
 
         <!-- BEGIN PAGE CONTAINER-->
 
-        <div class="container-fluid">
+        <div class="container-fluid" id="postList">
 
             <!-- BEGIN PAGE HEADER-->
 
             <div class="row-fluid">
 
                 <div class="span12">
-
-                    <!-- BEGIN STYLE CUSTOMIZER -->
-
-                    <jsp:include page="../public/color-panel.jsp"/>
-
-                    <!-- END BEGIN STYLE CUSTOMIZER -->
-
                     <!-- BEGIN PAGE TITLE & BREADCRUMB-->
 
                     <h3 class="page-title">
@@ -103,23 +96,6 @@
 
                         <li><a href="#">列表</a></li>
 
-                        <li class="pull-right no-text-shadow">
-
-                            <div id="dashboard-report-range"
-                                 class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive"
-                                 data-tablet="" data-desktop="tooltips" data-placement="top"
-                                 data-original-title="Change dashboard date range">
-
-                                <i class="icon-calendar"></i>
-
-                                <span></span>
-
-                                <i class="icon-angle-down"></i>
-
-                            </div>
-
-                        </li>
-
                     </ul>
 
                     <!-- END PAGE TITLE & BREADCRUMB-->
@@ -130,13 +106,13 @@
 
             <!-- END PAGE HEADER-->
 
-            <div id="activity-list">
+            <div id="post-list">
 
                 <!-- BEGIN DASHBOARD STATS -->
 
                 <div class="row-fluid margin-bottom-10">
                     <div class="span6">
-                        <a class="btn btn-default" href="<%=request.getContextPath()%>/circle/postcreat">发布帖子</a>
+                        <a class="btn btn-default" href="javascript:void (0)" onclick="createPost()">发布帖子</a>
                     </div>
                 </div>
                 <div class="row-fluid">
@@ -165,6 +141,98 @@
                 </div>
                 <!-- END DASHBOARD STATS -->
             </div>
+        </div>
+        <%--创建帖子--%>
+
+        <div class="container-fluid hide" id="postCreate">
+
+            <!-- BEGIN PAGE HEADER-->
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                    <h3 class="page-title">
+
+                        帖子发布<small>statistics and more</small>
+
+                    </h3>
+
+                    <ul class="breadcrumb">
+
+                        <li>
+
+                            <i class="icon-home"></i>
+
+                            <a href="javascript:void(0)">帖子</a>
+
+                            <i class="icon-angle-right"></i>
+
+                        </li>
+
+                        <li><a href="#">发布帖子</a></li>
+
+                        <li class="pull-right no-text-shadow">
+
+                            <div class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive" data-tablet="" data-desktop="tooltips" data-placement="top" data-original-title="Change dashboard date range">
+
+                                <i class="icon-calendar"></i>
+
+                                <span></span>
+
+                                <i class="icon-angle-down"></i>
+
+                            </div>
+
+                        </li>
+
+                    </ul>
+
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+
+                </div>
+
+            </div>
+
+            <!-- END PAGE HEADER-->
+
+            <div id="activity-create">
+
+                <!-- BEGIN DASHBOARD STATS -->
+                <div class="row-fluid">
+
+                    <form class="form-horizontal" role="form">
+                        <div class="control-group">
+                            <label class="control-label">标题</label>
+                            <div class="controls">
+                                <input type="text" class="span6 m-wrap" />
+                                <span class="help-inline">*</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">内容</label>
+                            <div class="controls">
+                                <div id="post-summernote"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label"></label>
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button class="btn btn-default">确定</button>
+                                <a href="javascript:void(0)" class="btn btn-default" onclick="window.location.reload();">返回</a>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <!-- END DASHBOARD STATS -->
+
+            </div>
+
         </div>
         <!-- END PAGE CONTAINER-->
     </div>

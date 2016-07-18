@@ -20,7 +20,7 @@
                 </div>
             </form>
         </li>
-        <li class="start active ">
+        <li class="start">
             <a href="<%=request.getContextPath()%>/indexPage">
                 <i class="icon-home"></i>
                 <span class="title">首页</span>
@@ -44,7 +44,7 @@
             </a>
         </li>
 <%--动态--%>
-        <li class="" >
+        <li class="dynamic" >
             <a href="<%=request.getContextPath()%>/dynamic/dynamicIndex">
                 <i class="icon-table"></i>
                 <span class="title">动态</span>
@@ -86,7 +86,7 @@
             </ul>
         </li>
 <%--用户--%>
-        <li class="" >
+        <li class="appUser" >
             <a href="<%=request.getContextPath()%>/appUser/userIndex">
                 <i class="icon-cogs"></i>
                 <span class="title">用户</span>
@@ -102,7 +102,7 @@
             </a>
         </li>
 <%--banner推荐--%>
-        <li class="">
+        <li class="banner">
             <a href="javascript:;">
                 <i class="icon-cogs"></i>
                 <span class="title">banner推荐</span>
@@ -110,17 +110,8 @@
                 <span class="selected hide"></span>
             </a>
             <ul class="sub-menu">
-                <li >
-                    <a href="<%=request.getContextPath()%>/homepage/banner">首页banner推荐（活动）</a>
-                </li>
-                <li >
-                    <a href="<%=request.getContextPath()%>/homepage/banner">看台banner推荐</a>
-                </li>
-                <li >
-                    <a href="<%=request.getContextPath()%>/homepage/banner">精选圈子banner推荐</a>
-                </li>
-                <li >
-                    <a href="<%=request.getContextPath()%>/homepage/banner">背包banner推荐</a>
+                <li class="homebanner">
+                    <a href="<%=request.getContextPath()%>/banner/homebanner">首页banner推荐（活动）</a>
                 </li>
             </ul>
         </li>

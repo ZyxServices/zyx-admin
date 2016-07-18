@@ -15,9 +15,4 @@ public class DynamicMenuController {
         public ModelAndView dynamicIndex() {
             return new ModelAndView("/dynamic/dynamicIndex");
         }
-
-        @RequestMapping(value = "/circlecreat", method = RequestMethod.GET)
-        public ModelAndView circleCreate() {
-            return new ModelAndView("/circle/circlecreat");
-        }
 }

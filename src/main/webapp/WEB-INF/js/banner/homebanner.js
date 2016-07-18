@@ -38,3 +38,8 @@ function modify(id) {
 function del(id) {
     console.log(id)
 }
+
+function createBanner() {
+    $("#bannerList").hide();
+    $("#bannerCreate").show();
+}

@@ -2,7 +2,7 @@
  * Created by ZYX on 2016/7/13.
  */
 $(document).ready(function() {
-    $('#post-summernote').summernote({
+    $('#activity-summernote').summernote({
         height:200
     });
 });

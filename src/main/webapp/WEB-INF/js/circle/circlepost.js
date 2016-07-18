@@ -19,3 +19,8 @@ $(function(){
         }
     })
 })
+
+function createPost() {
+    $("#postList").hide();
+    $("#postCreate").show();
+}

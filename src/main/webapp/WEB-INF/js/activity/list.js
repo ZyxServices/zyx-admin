@@ -2,6 +2,9 @@
  * Created by ZYX on 2016/7/12.
  */
 $(function(){
+    $('#activity-summernote').summernote({
+        height:200
+    });
     $("#activity-list-table").bootstrapTable({
         data: [{
             id: 1,
@@ -45,10 +48,7 @@ function del(id) {
 }
 
 function createActivity() {
-    $("#activityList").hide();
     $("#activityCreate").show();
-}
-function htmlBack() {
-    $("#activityList").show();
-    $("#activityCreate").hide();
+    $("#activityList").hide();
+
 }

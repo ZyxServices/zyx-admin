@@ -16,8 +16,4 @@ public class AppUserMenuController {
         return new ModelAndView("/appUser/userIndex");
     }
 
-    @RequestMapping(value = "/circlecreat", method = RequestMethod.GET)
-    public ModelAndView circleCreate() {
-        return new ModelAndView("/circle/circlecreat");
-    }
 }
