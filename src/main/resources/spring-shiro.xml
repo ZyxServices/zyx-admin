@@ -1,79 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
         http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
         ">
 
+    <!-- Realm实现 -->
+    <bean id="statelessRealm" class="com.zyx.secure.realm.StatelessRealm">
+        <property name="cachingEnabled" value="false"/>
+    </bean>
 
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="sessionValidationSchedulerEnabled" value="false"/>
+    </bean>
 
-	<!-- Realm实现 -->
-	<bean id="statelessRealm" class="com.zyx.secure.realm.StatelessRealm">
-		<property name="cachingEnabled" value="false" />
-	</bean>
+    <bean id="sessionStorageEvaluator" class="org.apache.shiro.mgt.DefaultSessionStorageEvaluator">
+        <property name="sessionStorageEnabled" value="false"/>
+    </bean>
 
+    <bean id="subjectDAO" class="org.apache.shiro.mgt.DefaultSubjectDAO">
+        <property name="sessionStorageEvaluator" ref="sessionStorageEvaluator"/>
+    </bean>
 
-	
-	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
-		<property name="sessionValidationSchedulerEnabled" value="false" />
-	</bean>
+    <!-- 安全管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="statelessRealm"/>
+        <property name="subjectDAO" ref="subjectDAO"/>
+        <!-- <property name="subjectFactory" ref="subjectFactory" /> -->
+        <property name="sessionManager" ref="sessionManager"/>
+    </bean>
 
+    <!-- restNossion过滤器 -->
+    <bean id="restNosession"
+          class="com.zyx.secure.filter.NoSesstionHttpMethodPermissionFilter"/>
 
+    <!-- restNossion过滤器 -->
+    <bean id="zyxRoleFilter"
+          class="com.zyx.secure.filter.MyHttpMethodPermissionFilter"/>
 
-	<!-- 安全管理器 -->
-	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="realm" ref="statelessRealm" />
-		<property name="subjectDAO.sessionStorageEvaluator.sessionStorageEnabled"
-			value="false" />
-		<!-- <property name="subjectFactory" ref="subjectFactory" /> -->
-		<property name="sessionManager" ref="sessionManager" />
-	</bean>
+    <!-- Shiro的Web过滤器 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/index"/>
+        <property name="unauthorizedUrl" value="/login/unauth"/>
+        <property name="filters">
+            <map>
 
+                <!-- 将重写的rest覆盖系统rest -->
+                <entry key="rest" value-ref="restNosession"/>
+                <entry key="authc" value-ref="zyxRoleFilter"/>
+            </map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                /users/**=noSessionCreation,rest
+                /syuser/goAdd=authc
+                /syuser/list=anon
+                /sysrole/goAdd=noSessionCreation,rest
+                /sysrole/list=authc
+                /sysmenu/goAdd=noSessionCreation,rest
+                /sysmenu/list=authc
+                /login = authc
+            </value>
+        </property>
+    </bean>
 
-	<!-- restNossion过滤器 -->
-	<bean id="restNosession"
-		class="com.zyx.secure.filter.NoSesstionHttpMethodPermissionFilter" />
-		
-		<!-- restNossion过滤器 -->
-	 <bean id="zyxRoleFilter"
-		class="com.zyx.secure.filter.MyHttpMethodPermissionFilter" /> 
-
-	<!-- Shiro的Web过滤器 -->
-	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-		<property name="securityManager" ref="securityManager" />
-		 <property name="loginUrl" value="/index" />
-    	 <property name="unauthorizedUrl" value="/login/unauth" /> 
-		<property name="filters">
-			<map>
-
-				<!-- 将重写的rest覆盖系统rest -->
-				<entry key="rest" value-ref="restNosession" />
-				<entry key="authc" value-ref="zyxRoleFilter" /> 
-			</map>
-		</property>
-		<property name="filterChainDefinitions">
-			<value>
-				/users/**=noSessionCreation,rest
-				/syuser/goAdd=authc      
-				/syuser/list=anon 
-				/sysrole/goAdd=noSessionCreation,rest      
-				/sysrole/list=authc  
-				/sysmenu/goAdd=noSessionCreation,rest      
-				/sysmenu/list=authc   
-				/login = authc   
-			</value>
-		</property>
-	</bean>
-
-	<!-- Shiro生命周期处理器 -->
-	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
-
-
-
-
-
-
-
+    <!-- Shiro生命周期处理器 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
 </beans>
