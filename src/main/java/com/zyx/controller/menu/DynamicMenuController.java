@@ -1,4 +1,4 @@
-package com.zyx.controller;
+package com.zyx.controller.menu;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/dynamic")
-public class dynmanicContronller {
+public class DynamicMenuController {
         @RequestMapping(value = "/dynamicIndex", method = RequestMethod.GET)
         public ModelAndView dynamicIndex() {
             return new ModelAndView("/dynamic/dynamicIndex");

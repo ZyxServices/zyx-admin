@@ -1,4 +1,4 @@
-package com.zyx.controller;
+package com.zyx.controller.menu;
 
 import java.util.List;
 

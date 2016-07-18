@@ -1,4 +1,4 @@
-package com.zyx.controller;
+package com.zyx.controller.menu;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

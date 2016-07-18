@@ -1,4 +1,4 @@
-package com.zyx.controller;
+package com.zyx.controller.menu;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,14 +9,14 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by ZYX on 2016/7/14.
  */
 @Controller
-@RequestMapping("/homepage")
-public class HomePageMenuController {
-    @RequestMapping(value = "/banner", method = RequestMethod.GET)
+@RequestMapping("/transaction")
+public class TransactionMenuController {
+    @RequestMapping(value = "/order", method = RequestMethod.GET)
     public ModelAndView banner() {
-        return  new ModelAndView("/homepage/banner");
+        return  new ModelAndView("/transaction/order");
     }
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/recharge", method = RequestMethod.GET)
     public ModelAndView create(String a) {
-        return  new ModelAndView("/homepage/create");
+        return  new ModelAndView("/transaction/recharge");
     }
 }
