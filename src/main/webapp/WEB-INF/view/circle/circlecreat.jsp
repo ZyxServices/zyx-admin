@@ -194,4 +194,11 @@
 <script src="../js/index.js" type="text/javascript"></script>
 <script type="text/javascript" src="../js/activity/create.js"></script>
 </body>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+
+        App.init(); // initlayout and core plugins
+
+    });
+</script>
 </html>

@@ -76,4 +76,24 @@
 <!-- END PAGE LEVEL PLUGINS -->
 <script src="../js/summernote.min.js" type="text/javascript"></script>
 
+<script type="text/javascript">
 
+    $(function(){
+        var url = window.location.href;
+        var urlLength = url.split("/").length;
+        var getMenuObj = url.split("/")[urlLength-2];
+        var getSecondMenuObj = url.split("/")[urlLength-1];
+        if(getMenuObj == "circle" || getMenuObj == "shop" || getMenuObj == "homepage"){
+            $("."+getMenuObj).addClass("open");
+            $("."+getMenuObj).addClass("active");
+            $("."+getMenuObj).find(".arrow").addClass("open");
+            $("."+getMenuObj).find(".selected").show();
+            $("."+getMenuObj).find(".sub-menu").show();
+            $("."+getSecondMenuObj).addClass("active");
+        }else{
+            $("."+getMenuObj).addClass("active");
+            $("."+getMenuObj).find(".selected").show();
+        }
+    })
+
+</script>

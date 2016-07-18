@@ -124,7 +124,7 @@
 
             <!-- END PAGE HEADER-->
 
-            <div id="activity-list">
+            <div id="banner-list">
 
                 <!-- BEGIN DASHBOARD STATS -->
 
