@@ -3,7 +3,6 @@ package com.github.ichenkaihua.test.unit;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.zyx.model.SysUser;
 import com.zyx.service.UserService;
 
 /**

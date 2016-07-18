@@ -1,10 +1,10 @@
 package com.zyx.secure.realm;
 
 
+import com.zyx.model.SysUser;
 import org.apache.shiro.authc.AuthenticationToken;
 
 import com.zyx.jopo.UserPrincipal;
-import com.zyx.model.SysUser;
 
 /**
  * 认证令牌的封装

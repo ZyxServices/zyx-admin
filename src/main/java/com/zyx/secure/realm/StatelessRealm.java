@@ -1,6 +1,7 @@
 package com.zyx.secure.realm;
 
 
+import com.zyx.model.SysUser;
 import org.apache.log4j.Logger;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -11,7 +12,6 @@ import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.zyx.jopo.UserPrincipal;
-import com.zyx.model.SysUser;
 import com.zyx.service.SysUserService;
 
 /**
@@ -38,7 +38,7 @@ public class StatelessRealm extends AuthorizingRealm {
 
 		String pass = statelessToken.getPassword();
 		
-		SysUser	user = sysUserService.getUserByNamePass(userPrincipal.getUsername(),pass);
+		SysUser user = sysUserService.getUserByNamePass(userPrincipal.getUsername(),pass);
 
 		/*User user = userService.getUserByPhonePass(userPrincipal.getUsername(),
 				pass);*/

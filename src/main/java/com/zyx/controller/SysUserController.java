@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import com.zyx.model.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zyx.jopo.ErrorResponseEntity;
-import com.zyx.model.SysUser;
 import com.zyx.service.SysUserService;
 
 @Controller

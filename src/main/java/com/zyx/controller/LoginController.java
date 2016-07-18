@@ -1,13 +1,11 @@
 package com.zyx.controller;
 
-import java.util.List;
-
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import com.zyx.model.SysUser;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.zyx.Contants;
 import com.zyx.jopo.UserPrincipal;
-import com.zyx.model.SysUser;
 import com.zyx.secure.realm.StatelessToken;
 import com.zyx.service.SysUserService;
 

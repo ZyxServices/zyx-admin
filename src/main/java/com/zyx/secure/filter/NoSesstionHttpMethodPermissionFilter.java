@@ -7,6 +7,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.zyx.model.SysUser;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter;
 import org.slf4j.Logger;
@@ -14,7 +15,6 @@ import org.slf4j.LoggerFactory;
 
 import com.zyx.Contants;
 import com.zyx.jopo.UserPrincipal;
-import com.zyx.model.SysUser;
 import com.zyx.secure.realm.StatelessToken;
 
 public class NoSesstionHttpMethodPermissionFilter extends

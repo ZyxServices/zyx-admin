@@ -9,9 +9,7 @@ import org.apache.shiro.web.filter.authz.AuthorizationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.zyx.Contants;
 import com.zyx.jopo.UserPrincipal;
-import com.zyx.model.SysUser;
 
 public class MyHttpMethodPermissionFilter  extends AuthorizationFilter   {
 	private static Logger logger = LoggerFactory

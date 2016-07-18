@@ -2,12 +2,10 @@ package com.zyx.service;
 
 import java.util.List;
 
+import com.zyx.mapper.SysRoleMapper;
+import com.zyx.model.SysRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.zyx.mapper.SysRoleMapper;
-import com.zyx.model.SysMenu;
-import com.zyx.model.SysRole;
 
 @Service
 public class SysRoleService {

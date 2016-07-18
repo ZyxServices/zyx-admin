@@ -2,6 +2,7 @@ package com.zyx.controller;
 
 import java.util.List;
 
+import com.zyx.model.SysMenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zyx.jopo.ErrorResponseEntity;
-import com.zyx.model.SysMenu;
 import com.zyx.service.SysMenuService;
 
 import io.swagger.annotations.ApiParam;
