@@ -20,7 +20,7 @@
                 </div>
             </form>
         </li>
-        <li class="start active ">
+        <li class="start">
             <a href="<%=request.getContextPath()%>/login/in">
                 <i class="icon-home"></i>
                 <span class="title">首页</span>
@@ -28,17 +28,19 @@
             </a>
         </li>
 <%--活动--%>
-        <li class="">
+        <li class="activity">
             <a href="<%=request.getContextPath()%>/activity/list">
                 <i class="icon-bookmark-empty"></i>
                 <span class="title">活动</span>
+                <span class="selected hide"></span>
             </a>
         </li>
 <%--直播--%>
-        <li class="" >
+        <li class="live" >
             <a href="<%=request.getContextPath()%>/live/living">
                 <i class="icon-table"></i>
                 <span class="title">直播</span>
+                <span class="selected hide"></span>
             </a>
         </li>
 <%--动态--%>
@@ -46,42 +48,39 @@
             <a href="<%=request.getContextPath()%>/dynamic/dynamicIndex">
                 <i class="icon-table"></i>
                 <span class="title">动态</span>
+                <span class="selected hide"></span>
             </a>
         </li>
 <%--圈子--%>
-        <li class="">
+        <li class="circle">
             <a href="javascript:;">
                 <i class="icon-briefcase"></i>
                 <span class="title">圈子</span>
-                <span class="arrow "></span>
+                <span class="arrow"></span>
+                <span class="selected hide"></span>
             </a>
             <ul class="sub-menu">
-                <li >
-                    <a href="<%=request.getContextPath()%>/circle/circlelist">圈子列表</a>
+                <li class="circlelist circlecreat">
+                    <a href="<%=request.getContextPath()%>/circle/circlelist">圈子列表<span class="selected"></span></a>
                 </li>
-                <li >
-
-                    <a href="<%=request.getContextPath()%>/circle/circlepost">
-
-                        <i class="icon-cogs"></i>
-
-                        帖子列表</a>
-
+                <li class="circlepost postcreat">
+                    <a href="<%=request.getContextPath()%>/circle/circlepost">帖子列表</a>
                 </li>
             </ul>
         </li>
 <%--商城--%>
-        <li class="">
+        <li class="shop">
             <a href="javascript:;">
                 <i class="icon-gift"></i>
                 <span class="title">商城</span>
                 <span class="arrow "></span>
+                <span class="selected hide"></span>
             </a>
             <ul class="sub-menu">
-                <li >
+                <li class="goods">
                     <a href="<%=request.getContextPath()%>/shop/goods">商品</a>
                 </li>
-                <li >
+                <li class="order">
                     <a href="<%=request.getContextPath()%>/shop/order">订单</a>
                 </li>
             </ul>
@@ -91,6 +90,7 @@
             <a href="<%=request.getContextPath()%>/appUser/userIndex">
                 <i class="icon-cogs"></i>
                 <span class="title">用户</span>
+                <span class="selected hide"></span>
             </a>
         </li>
 <%--消息--%>
@@ -98,6 +98,7 @@
             <a href="#">
                 <i class="icon-gift"></i>
                 <span class="title">消息</span>
+                <span class="selected hide"></span>
             </a>
         </li>
 <%--banner推荐--%>
@@ -106,6 +107,7 @@
                 <i class="icon-cogs"></i>
                 <span class="title">banner推荐</span>
                 <span class="arrow "></span>
+                <span class="selected hide"></span>
             </a>
             <ul class="sub-menu">
                 <li >
@@ -128,6 +130,7 @@
                 <i class="icon-folder-open"></i>
                 <span class="title">管理员管理</span>
                 <span class="arrow "></span>
+                <span class="selected hide"></span>
             </a>
             <ul class="sub-menu">
                 <li>

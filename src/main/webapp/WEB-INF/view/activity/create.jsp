@@ -42,12 +42,9 @@
 
     <div class="page-content">
 
-        <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-        <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
         <!-- BEGIN PAGE CONTAINER-->
 
-        <div class="container-fluid">
+        <div class="container-fluid" id="activityCreate">
 
             <!-- BEGIN PAGE HEADER-->
 
@@ -263,6 +260,7 @@
 <script type="text/javascript" src="../js/activity/create.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
+
         App.init(); // initlayout and core plugins
 
     });

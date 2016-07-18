@@ -43,3 +43,12 @@ function modify(id) {
 function del(id) {
     console.log(id)
 }
+
+function createActivity() {
+    $("#activityList").hide();
+    $("#activityCreate").show();
+}
+function htmlBack() {
+    $("#activityList").show();
+    $("#activityCreate").hide();
+}

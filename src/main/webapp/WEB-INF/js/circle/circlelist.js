@@ -9,7 +9,6 @@ $(function(){
         cache: false,
         search: true,
         strictSearch: true,
-        height:"300",
         uniqueId: "id",
         pageSize: 20,
         pageList: new Array(20, 50, 100),

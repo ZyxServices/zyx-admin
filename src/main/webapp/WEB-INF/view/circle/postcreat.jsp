@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="../css/summernote.css" />
     <link rel="stylesheet" href="../css/self-style/style.css" />
 
-
 </head>
 <body class="page-header-fixed">
 <jsp:include page="../public/header.jsp"/>
