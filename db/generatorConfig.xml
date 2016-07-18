@@ -82,5 +82,17 @@
 			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
 		</table>
 
+
+
+		<!--Live直播 模块表构建-->
+		<!--直播信息-->
+		<table tableName="t_live" domainObjectName="LiveInfo">
+			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
+		</table>
+		<!--直播标签-->
+		<table tableName="t_live_lab" domainObjectName="LiveLab">
+			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
+		</table>
+
 	</context>
 </generatorConfiguration>
