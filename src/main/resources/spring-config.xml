@@ -23,7 +23,7 @@
 
 	<!-- 扫描注解，除去web层注解，web层注解在mvc配置中扫描 -->
 	<context:component-scan
-		base-package="com.github.ichenkaihua.compoment,com.github.ichenkaihua.mapper,com.github.ichenkaihua.service,com.zyx.mapper,com.zyx.service">
+		base-package="com.zyx.compoment,com.zyx.mapper,com.zyx.service">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 		<context:exclude-filter type="annotation"

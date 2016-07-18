@@ -24,8 +24,6 @@ task download(type: Copy) {
 
 configurations {
     mybatisGenerator
-
-
 }
 
 //配置插件仓库

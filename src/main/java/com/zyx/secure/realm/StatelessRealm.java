@@ -2,10 +2,7 @@ package com.zyx.secure.realm;
 
 
 import org.apache.log4j.Logger;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -44,11 +41,11 @@ public class StatelessRealm extends AuthorizingRealm {
 		SysUser	user = sysUserService.getUserByNamePass(userPrincipal.getUsername(),pass);
 
 		/*User user = userService.getUserByPhonePass(userPrincipal.getUsername(),
-				pass);
+				pass);*/
 
 		if (user == null) {
 			throw new AccountException();
-		}*/
+		}
 
 		statelessToken.setUser(user);
 		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo();
