@@ -34,7 +34,7 @@ public class StatelessRealm extends AuthorizingRealm {
 
 		StatelessToken statelessToken = (StatelessToken) token;
 
-		UserPrincipal userPrincipal = (UserPrincipal) statelessToken.getUserPrincipal();
+		UserPrincipal userPrincipal = statelessToken.getUserPrincipal();
 
 		String pass = statelessToken.getPassword();
 		

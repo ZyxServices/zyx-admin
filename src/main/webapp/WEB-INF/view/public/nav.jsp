@@ -20,8 +20,8 @@
                 </div>
             </form>
         </li>
-        <li class="start">
-            <a href="<%=request.getContextPath()%>/login/in">
+        <li class="start active ">
+            <a href="<%=request.getContextPath()%>/indexPage">
                 <i class="icon-home"></i>
                 <span class="title">首页</span>
                 <span class="selected"></span>

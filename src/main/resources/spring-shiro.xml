@@ -61,7 +61,7 @@
 				/sysrole/list=authc  
 				/sysmenu/goAdd=noSessionCreation,rest      
 				/sysmenu/list=authc   
-				/login = authc   
+				<!--/login = authc   -->
 			</value>
 		</property>
 	</bean>

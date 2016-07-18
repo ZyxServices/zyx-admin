@@ -22,8 +22,11 @@ public class HomeController {
     //http://www.phpddt.com/dhtml/bootstrap-metronic.html
    @RequestMapping("/index")
     public ModelAndView home(){
-	   System.out.println("============================================");
         return new ModelAndView("/login");
     }
 
+    @RequestMapping("/indexPage")
+    public ModelAndView indexPage(){
+        return new ModelAndView("/index");
+    }
 }
