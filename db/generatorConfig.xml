@@ -47,7 +47,38 @@
 			identity="true"/> </table> -->
 
 
-		<table tableName="%">
+		<!--<table tableName="%">
+			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
+		</table>-->
+
+		<table tableName="SYS_APP_USER">
+			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
+		</table>
+		<table tableName="SYS_DICTIONARIES">
+			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
+		</table>
+		<table tableName="SYS_GL_QX">
+			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
+		</table>
+		<table tableName="SYS_MENU">
+			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
+		</table>
+		<table tableName="SYS_ROLE">
+			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
+		</table>
+		<table tableName="SYS_USER">
+			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
+		</table>
+		<table tableName="SYS_USER_QX">
+			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
+		</table>
+		<table tableName="member">
+			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
+		</table>
+		<table tableName="devaluation">
+			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
+		</table>
+		<table tableName="user" domainObjectName="AppUser">
 			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
 		</table>
 

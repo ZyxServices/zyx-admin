@@ -19,11 +19,11 @@ public class UserServiceTest extends  BaseUnitTest{
     @Test
   //  @Ignore
     public void test(){
-    	SysUser user = new SysUser();
-        user.setUsername("陈开华");
-        user.setPassword("密码");
-        userService.addUser(user);
-        System.out.println(user);
+//    	SysUser user = new SysUser();
+//        user.setUsername("陈开华");
+//        user.setPassword("密码");
+//        userService.addUser(user);
+//        System.out.println(user);
     }
 
 }

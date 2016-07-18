@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *          Copyright (c)2016 tyj-版权所有
  * @title AppUserController.java
  */
-@Controller
+@Controller("appUserController")
 @RequestMapping("/v1/user/app")
 public class AppUserController {
 

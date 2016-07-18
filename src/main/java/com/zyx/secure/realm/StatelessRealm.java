@@ -1,6 +1,5 @@
 package com.zyx.secure.realm;
 
-
 import com.zyx.jopo.UserPrincipal;
 import com.zyx.model.SysUser;
 import com.zyx.service.SysUserService;

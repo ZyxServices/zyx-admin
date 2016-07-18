@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyx.mapper.AppUserMapper">
-    <resultMap id="BaseResultMap" type="com.zyx.model.AppUser">
-        <!--
-          WARNING - @mbggenerated
-        -->
-        <id column="ID" jdbcType="INTEGER" property="id"/>
-        <result column="USER_ID" jdbcType="VARCHAR" property="userId"/>
-        <result column="USERNAME" jdbcType="VARCHAR" property="username"/>
-        <result column="PASSWORD" jdbcType="VARCHAR" property="password"/>
-        <result column="NAME" jdbcType="VARCHAR" property="name"/>
-        <result column="RIGHTS" jdbcType="VARCHAR" property="rights"/>
-        <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId"/>
-        <result column="LAST_LOGIN" jdbcType="VARCHAR" property="lastLogin"/>
-        <result column="IP" jdbcType="VARCHAR" property="ip"/>
-        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
-        <result column="BZ" jdbcType="VARCHAR" property="bz"/>
-        <result column="PHONE" jdbcType="VARCHAR" property="phone"/>
-        <result column="SFID" jdbcType="VARCHAR" property="sfid"/>
-        <result column="START_TIME" jdbcType="VARCHAR" property="startTime"/>
-        <result column="END_TIME" jdbcType="VARCHAR" property="endTime"/>
-        <result column="YEARS" jdbcType="INTEGER" property="years"/>
-        <result column="NUMBER" jdbcType="VARCHAR" property="number"/>
-        <result column="EMAIL" jdbcType="VARCHAR" property="email"/>
-    </resultMap>
+  <resultMap id="BaseResultMap" type="com.zyx.model.AppUser">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="lastLoginTime" jdbcType="TIMESTAMP" property="lastlogintime" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+  </resultMap>
 </mapper>
