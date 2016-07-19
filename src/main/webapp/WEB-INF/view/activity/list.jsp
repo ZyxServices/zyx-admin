@@ -41,8 +41,8 @@
   <div class="page-content">
 
     <!-- BEGIN PAGE CONTAINER-->
-
-    <div class="container-fluid" id="activityList">
+<%--活动列表--%>
+    <div class="container-fluid hide" id="activityList">
 
       <!-- BEGIN PAGE HEADER-->
 
@@ -120,7 +120,7 @@
     </div>
 
     <%--活动创建--%>
-    <div class="container-fluid hide" id="activityCreate">
+    <div class="container-fluid" id="activityCreate">
 
       <!-- BEGIN PAGE HEADER-->
 
@@ -155,20 +155,6 @@
             </li>
 
             <li><a href="#">创建</a></li>
-
-            <li class="pull-right no-text-shadow">
-
-              <div class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive" data-tablet="" data-desktop="tooltips" data-placement="top" data-original-title="Change dashboard date range">
-
-                <i class="icon-calendar"></i>
-
-                <span></span>
-
-                <i class="icon-angle-down"></i>
-
-              </div>
-
-            </li>
 
           </ul>
 
@@ -205,7 +191,9 @@
             <div class="control-group">
               <label class="control-label">内容</label>
               <div class="controls summernote">
-                <div id="activity-summernote"></div>
+                <div class="span6">
+                  <div id="activity-summernote"></div>
+                </div>
               </div>
             </div>
 
@@ -298,6 +286,109 @@
                   <option>否</option>
                 </select>
                 <span class="help-inline">*</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-default">确定</button>
+                <a href="javascript:void(0)" class="btn btn-default" onclick="window.location.reload();">返回</a>
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+        <!-- END DASHBOARD STATS -->
+
+      </div>
+
+    </div>
+    <%--活动推荐--%>
+    <div class="container-fluid hide" id="activityRecommend">
+
+      <!-- BEGIN PAGE HEADER-->
+
+      <div class="row-fluid">
+
+        <div class="span12">
+
+          <!-- BEGIN STYLE CUSTOMIZER -->
+
+          <jsp:include page="../public/color-panel.jsp"/>
+
+          <!-- END BEGIN STYLE CUSTOMIZER -->
+
+          <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+          <h3 class="page-title">
+
+            活动推荐<small>statistics and more</small>
+
+          </h3>
+
+          <ul class="breadcrumb">
+
+            <li>
+
+              <i class="icon-home"></i>
+
+              <a href="javascript:void(0)">活动</a>
+
+              <i class="icon-angle-right"></i>
+
+            </li>
+
+            <li><a href="#">首页活动banner上传</a></li>
+
+          </ul>
+
+          <!-- END PAGE TITLE & BREADCRUMB-->
+
+        </div>
+
+      </div>
+
+      <!-- END PAGE HEADER-->
+
+      <div id="activity-recommend">
+
+        <!-- BEGIN DASHBOARD STATS -->
+        <div class="row-fluid">
+
+          <form class="form-horizontal" role="form">
+            <div class="control-group">
+              <label class="control-label">活动名称</label>
+              <div class="controls">
+                <input type="text" class="span6 m-wrap" />
+                <span class="help-inline">*</span>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">banner排序</label>
+              <div class="controls">
+                <select class="span6 m-wrap">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">图片</label>
+              <div class="controls">
+                <input type="file">
+                <button class="btn btn-default">上传图片</button>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">用户报名必填</label>
+              <div class="controls">
+                <label class="radio"><input type="radio" name="activation">激活</label>
+                <label class="radio"><input type="radio" name="activation">未激活</label>
               </div>
             </div>
 

@@ -72,14 +72,32 @@ $(function(){
 })
 
 function operate(value, row, index) {
-    var e = '<a href="#" onclick="modify(\''+ row.id + '\')">修改</a> ';
-    var d = '<a href="#" onclick="del(\''+ row.id +'\')">删除</a> ';
-    return e + d;
+    return [
+        '<a class="preview p5"   href="javascript:void(0)" title="preview" onclick="previewActivity(\''+ row.id + '\')">预览</a>',
+        '<a class="recommend p5" href="javascript:void(0)" title="recommend" onclick="recommend(\''+ row.id + '\')">推荐</a>',
+        '<a class="recommend p5" href="javascript:void(0)" title="recommend" onclick="modify(\''+ row.id + '\')">编辑</a>',
+        '<a class="Shield p5" href="javascript:void(0)" title="Shield" onclick="shield(\''+ row.id + '\')">屏蔽</a>',
+        '<a class="remove p5" href="javascript:void(0)" title="remove" onclick="del(\''+ row.id + '\')">删除</a>'
+    ].join('');
 }
-
+/*预览*/
+function previewActivity(id) {
+    console.log(id)
+}
+/*推荐*/
+function recommend(id) {
+    $("#activityRecommend").show();
+    $("#activityList").hide();
+}
+/*编辑*/
 function modify(id) {
     console.log(id)
 }
+/*屏蔽*/
+function shield(id) {
+    console.log(id)
+}
+/*删除*/
 function del(id) {
     console.log(id)
 }

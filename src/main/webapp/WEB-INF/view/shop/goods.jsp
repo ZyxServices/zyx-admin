@@ -8,6 +8,8 @@
     <meta content="" name="author"/>
     <jsp:include page="../public/common-styles.jsp"/>
 </head>
+<body class="page-header-fixed">
+<jsp:include page="../public/header.jsp"/>
 <div class="page-container">
     <jsp:include page="../public/nav.jsp"/>
     <div class="page-content">
@@ -50,4 +52,5 @@
     </div>
 </div>
 <jsp:include page="../public/common-footer.jsp"/>
+</body>
 <script type="text/javascript" src="../../js/shop/goods.js"></script>
