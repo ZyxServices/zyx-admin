@@ -6,6 +6,8 @@ import com.zyx.service.BaseService;
 import com.zyx.service.activity.DevaluationService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * Created by SubDong on 16-7-12.
  *
@@ -18,5 +20,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DevaluationServiceImpl extends BaseService<DevaluationMapper,Devaluation> implements DevaluationService {
+
+    @Resource
+    DevaluationMapper devaluationMapper;
+
 
 }

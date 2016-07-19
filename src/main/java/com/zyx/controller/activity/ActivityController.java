@@ -1,9 +1,10 @@
 package com.zyx.controller.activity;
 
+import com.zyx.parm.QueryActivityParm;
+import com.zyx.service.activity.ActivityService;
 import com.zyx.service.activity.DevaluationService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +35,9 @@ public class ActivityController {
     @Resource
     private DevaluationService devaluationService;
 
+    @Resource
+    private ActivityService activityService;
+
     @RequestMapping(value = "/release", method = RequestMethod.POST)
     @ApiOperation(value = "活动接口", notes = "活动发布")
     public ModelAndView release(@RequestParam(name = "token", required = true) String token,
@@ -57,6 +61,18 @@ public class ActivityController {
 
 
         Map<String, Object> map = new HashMap<>();
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "/query", method = RequestMethod.GET)
+    @ApiOperation(value = "活动接口", notes = "活动发布")
+    public ModelAndView query() {
+
+        AbstractView jsonView = new MappingJackson2JsonView();
+
+        QueryActivityParm param= new QueryActivityParm();
+        Map<String, Object> map = activityService.queryActivity(param);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }

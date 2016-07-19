@@ -5,6 +5,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.common.Mapper;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -12,8 +13,6 @@ import java.util.List;
  */
 public class BaseService<Mapp extends Mapper<M>,M> implements  Mapper<M>{
 
-
-    @Autowired
     Mapp mapper;
 
 

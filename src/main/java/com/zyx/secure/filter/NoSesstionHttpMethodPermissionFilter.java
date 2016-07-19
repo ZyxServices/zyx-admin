@@ -13,7 +13,7 @@ import org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.zyx.Contants;
+import com.zyx.constants.Constants;
 import com.zyx.jopo.UserPrincipal;
 import com.zyx.secure.realm.StatelessToken;
 
@@ -54,7 +54,7 @@ public class NoSesstionHttpMethodPermissionFilter extends
 				getSubject(request, response).login(token);
 				// 如果认证成功，则增加request的属性，用于@CurrentUser注解使用
 				SysUser user = token.getUser();
-				request.setAttribute(Contants.CURRENT_USER, user);
+				request.setAttribute(Constants.CURRENT_USER, user);
 
 			} catch (AuthenticationException e) {
 				logger.info("认证失败! "+e.getClass().getSimpleName());

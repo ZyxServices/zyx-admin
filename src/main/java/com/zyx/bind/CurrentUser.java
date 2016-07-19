@@ -23,7 +23,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.zyx.Contants;
+import com.zyx.constants.Constants;
 
 
 /**
@@ -42,6 +42,6 @@ public @interface CurrentUser {
      *sss
      * @return
      */
-    String value() default Contants.CURRENT_USER;
+    String value() default Constants.CURRENT_USER;
 
 }

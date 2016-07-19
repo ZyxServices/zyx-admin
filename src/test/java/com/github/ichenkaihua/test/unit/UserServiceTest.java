@@ -8,8 +8,7 @@ import com.zyx.service.UserService;
 /**
  * Created by chenkaihua on 15-9-15.
  */
-public class UserServiceTest extends  BaseUnitTest{
-
+public class UserServiceTest {
 
 
     @Autowired
@@ -17,8 +16,8 @@ public class UserServiceTest extends  BaseUnitTest{
 
 
     @Test
-  //  @Ignore
-    public void test(){
+    //  @Ignore
+    public void test() {
 //    	SysUser user = new SysUser();
 //        user.setUsername("陈开华");
 //        user.setPassword("密码");

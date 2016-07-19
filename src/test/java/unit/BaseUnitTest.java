@@ -1,4 +1,4 @@
-package com.github.ichenkaihua.test.unit;
+package unit;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

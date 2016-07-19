@@ -1,11 +1,11 @@
 package com.zyx.controller;
-import com.zyx.Contants;
+
+import com.zyx.constants.Constants;
 import com.zyx.jopo.UserPrincipal;
 import com.zyx.model.SysUser;
 import com.zyx.secure.realm.StatelessToken;
 import com.zyx.service.SysUserService;
 import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.ServletRequest;
 
 @Controller
 @RequestMapping("/login")
@@ -35,8 +33,8 @@ public class LoginController {
                 SecurityUtils.getSubject().login(token);
                 // 如果认证成功，则增加request的属性，用于@CurrentUser注解使用
                 SysUser user = token.getUser();
-                request.setAttribute(Contants.CURRENT_USER, user);
-                SecurityUtils.getSubject().getSession().setAttribute(Contants.CURRENT_USER, user);
+                request.setAttribute(Constants.CURRENT_USER, user);
+                SecurityUtils.getSubject().getSession().setAttribute(Constants.CURRENT_USER, user);
 
             } catch (AuthenticationException e) {
                 System.out.println("认证失败! " + e.getClass().getSimpleName());
