@@ -73,8 +73,12 @@
 <script src="../../js/jquery.sparkline.min.js" type="text/javascript"></script>
 
 <script src="../../js/bootstrap-table.js" type="text/javascript"></script>
+
+<script src="../../js/bootstrap-table-zh-CN.min.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <script src="../../js/summernote.min.js" type="text/javascript"></script>
+
+<script src="../../js/dataformat.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 

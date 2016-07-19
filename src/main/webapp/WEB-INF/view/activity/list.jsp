@@ -333,7 +333,6 @@
 <script src="../../js/app.js" type="text/javascript"></script>
 <%--<script src="../js/index.js" type="text/javascript"></script>--%>
 <script type="text/javascript" src="../../js/activity/list.js"></script>
-<script src="../../js/dataformat.js" type="text/javascript"></script>
 <script>
 
   jQuery(document).ready(function() {
