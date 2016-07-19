@@ -1,9 +1,6 @@
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-
-<body class="page-header-fixed">
-
 <!-- BEGIN HEADER -->
 
 <jsp:include page="../public/header.jsp"/>

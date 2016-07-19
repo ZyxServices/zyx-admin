@@ -1,8 +1,4 @@
-</div>
 
-<!-- END PAGE -->
-
-</div>
 
 <!-- END CONTAINER -->
 
@@ -32,5 +28,3 @@
 
 </script>
 
-
-</html>
