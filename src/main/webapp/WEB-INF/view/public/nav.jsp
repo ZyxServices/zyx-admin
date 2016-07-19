@@ -21,7 +21,7 @@
             </form>
         </li>
         <li class="start">
-            <a href="<%=request.getContextPath()%>/indexPage">
+            <a href="<%=request.getContextPath()%>/menu/login/in">
                 <i class="icon-home"></i>
                 <span class="title">首页</span>
                 <span class="selected"></span>
@@ -29,7 +29,7 @@
         </li>
 <%--活动--%>
         <li class="activity">
-            <a href="<%=request.getContextPath()%>/activity/list">
+            <a href="<%=request.getContextPath()%>/menu/activity/list">
                 <i class="icon-bookmark-empty"></i>
                 <span class="title">活动</span>
                 <span class="selected hide"></span>
@@ -37,15 +37,15 @@
         </li>
 <%--直播--%>
         <li class="live" >
-            <a href="<%=request.getContextPath()%>/live/living">
+            <a href="<%=request.getContextPath()%>/menu/live/living">
                 <i class="icon-table"></i>
                 <span class="title">直播</span>
                 <span class="selected hide"></span>
             </a>
         </li>
 <%--动态--%>
-        <li class="dynamic" >
-            <a href="<%=request.getContextPath()%>/dynamic/dynamicIndex">
+        <li class="" >
+            <a href="<%=request.getContextPath()%>/menu/dynamic/dynamicIndex">
                 <i class="icon-table"></i>
                 <span class="title">动态</span>
                 <span class="selected hide"></span>
@@ -61,10 +61,10 @@
             </a>
             <ul class="sub-menu">
                 <li class="circlelist circlecreat">
-                    <a href="<%=request.getContextPath()%>/circle/circlelist">圈子列表<span class="selected"></span></a>
+                    <a href="<%=request.getContextPath()%>/menu/circle/circlelist">圈子列表<span class="selected"></span></a>
                 </li>
                 <li class="circlepost postcreat">
-                    <a href="<%=request.getContextPath()%>/circle/circlepost">帖子列表</a>
+                    <a href="<%=request.getContextPath()%>/menu/circle/circlepost">帖子列表</a>
                 </li>
             </ul>
         </li>
@@ -78,16 +78,16 @@
             </a>
             <ul class="sub-menu">
                 <li class="goods">
-                    <a href="<%=request.getContextPath()%>/shop/goods">商品</a>
+                    <a href="<%=request.getContextPath()%>/menu/shop/goods">商品</a>
                 </li>
                 <li class="order">
-                    <a href="<%=request.getContextPath()%>/shop/order">订单</a>
+                    <a href="<%=request.getContextPath()%>/menu/shop/order">订单</a>
                 </li>
             </ul>
         </li>
 <%--用户--%>
-        <li class="appUser" >
-            <a href="<%=request.getContextPath()%>/appUser/userIndex">
+        <li class="" >
+            <a href="<%=request.getContextPath()%>/menu/appUser/userIndex">
                 <i class="icon-cogs"></i>
                 <span class="title">用户</span>
                 <span class="selected hide"></span>
@@ -102,7 +102,7 @@
             </a>
         </li>
 <%--banner推荐--%>
-        <li class="banner">
+        <li class="">
             <a href="javascript:;">
                 <i class="icon-cogs"></i>
                 <span class="title">banner推荐</span>
@@ -110,8 +110,17 @@
                 <span class="selected hide"></span>
             </a>
             <ul class="sub-menu">
-                <li class="homebanner">
-                    <a href="<%=request.getContextPath()%>/banner/homebanner">首页banner推荐（活动）</a>
+                <li >
+                    <a href="<%=request.getContextPath()%>/menu/homepage/banner">首页banner推荐（活动）</a>
+                </li>
+                <li >
+                    <a href="<%=request.getContextPath()%>/menu/homepage/banner">看台banner推荐</a>
+                </li>
+                <li >
+                    <a href="<%=request.getContextPath()%>/menu/homepage/banner">精选圈子banner推荐</a>
+                </li>
+                <li >
+                    <a href="<%=request.getContextPath()%>/menu/homepage/banner">背包banner推荐</a>
                 </li>
             </ul>
         </li>
@@ -125,7 +134,7 @@
             </a>
             <ul class="sub-menu">
                 <li>
-                    <a href="#">管理员列表</a>
+                    <a href="<%=request.getContextPath()%>/menu/sysmenu/list">管理员列表</a>
                     <a href="#">权限设置</a>
                 </li>
             </ul>
