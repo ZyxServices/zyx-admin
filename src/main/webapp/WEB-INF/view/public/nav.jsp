@@ -102,7 +102,7 @@
             </a>
         </li>
 <%--banner推荐--%>
-        <li class="banner">
+        <li class="">
             <a href="javascript:;">
                 <i class="icon-cogs"></i>
                 <span class="title">banner推荐</span>
@@ -111,7 +111,16 @@
             </a>
             <ul class="sub-menu">
                 <li class="homebanner">
-                    <a href="<%=request.getContextPath()%>/menu/banner/homebanner">首页banner推荐（活动）</a>
+                    <a href="<%=request.getContextPath()%>/menu/homepage/banner">首页banner推荐（活动）</a>
+                </li>
+                <li >
+                    <a href="<%=request.getContextPath()%>/menu/homepage/banner">看台banner推荐</a>
+                </li>
+                <li >
+                    <a href="<%=request.getContextPath()%>/menu/homepage/banner">精选圈子banner推荐</a>
+                </li>
+                <li >
+                    <a href="<%=request.getContextPath()%>/menu/homepage/banner">背包banner推荐</a>
                 </li>
             </ul>
         </li>
@@ -125,7 +134,7 @@
             </a>
             <ul class="sub-menu">
                 <li>
-                    <a href="#">管理员列表</a>
+                    <a href="<%=request.getContextPath()%>/menu/sysmenu/list">管理员列表</a>
                     <a href="#">权限设置</a>
                 </li>
             </ul>
