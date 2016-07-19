@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by MrDeng on 2016/7/19.
  */
 @Controller
-@RequestMapping(path = "menu")
+@RequestMapping("/menu")
 public class MenuController {
     @RequestMapping(value = "/activity/list", method = RequestMethod.GET)
     public ModelAndView redirectActivity() {
@@ -34,16 +34,6 @@ public class MenuController {
     @RequestMapping(value = "/dynamic/dynamicIndex", method = RequestMethod.GET)
     public ModelAndView redirectDynamicIndex() {
         return new ModelAndView("/dynamic/dynamicIndex");
-    }
-
-    @RequestMapping("/index")
-    public ModelAndView home() {
-        return new ModelAndView("/login");
-    }
-
-    @RequestMapping("/indexPage")
-    public ModelAndView indexPage() {
-        return new ModelAndView("/index");
     }
 
     @RequestMapping(value = "/homepage/banner", method = RequestMethod.GET)

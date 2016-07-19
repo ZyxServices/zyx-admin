@@ -1,4 +1,3 @@
-
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
@@ -7,7 +6,7 @@
 
 <!-- BEGIN HEADER -->
 
-<jsp:include page="../public/header.jsp"/>
+<jsp:include page="<%=request.getContextPath()%>/public/header.jsp"/>
 
 <!-- END HEADER -->
 
@@ -15,36 +14,38 @@
 
 <div class="page-container">
 
-  <!-- BEGIN SIDEBAR -->
+    <!-- BEGIN SIDEBAR -->
 
-  <jsp:include page="../public/nav.jsp"/>
+    <jsp:include page="<%=request.getContextPath()%>/public/nav.jsp"/>
 
-  <!-- END SIDEBAR -->
+    <!-- END SIDEBAR -->
 
-  <!-- BEGIN PAGE -->
+    <!-- BEGIN PAGE -->
 
-  <div class="page-content">
+    <div class="page-content">
 
-    <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+        <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
-    <div id="portlet-config" class="modal hide">
+        <div id="portlet-config" class="modal hide">
 
-      <div class="modal-header">
+            <div class="modal-header">
 
-        <button data-dismiss="modal" class="close" type="button"></button>
+                <button data-dismiss="modal" class="close" type="button"></button>
 
-        <h3>Widget Settings</h3>
+                <h3>Widget Settings</h3>
 
-      </div>
+            </div>
 
-      <div class="modal-body">
+            <div class="modal-body">
 
-        Widget settings form goes here
+                Widget settings form goes here
 
-      </div>
+            </div>
 
+        </div>
+
+        <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+
+        <!-- BEGIN PAGE CONTAINER-->
     </div>
-
-    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
-    <!-- BEGIN PAGE CONTAINER-->
+</div>

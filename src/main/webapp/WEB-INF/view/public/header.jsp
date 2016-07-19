@@ -18,7 +18,7 @@
 
             <a class="brand" href="index.html">
 
-                <img src="../images/logo.png" alt="logo"/>
+                <img src="<%=request.getContextPath()%>/images/logo.png" alt="logo"/>
 
             </a>
 
@@ -28,7 +28,7 @@
 
             <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
 
-                <img src="../images/menu-toggler.png" alt="" />
+                <img src="<%=request.getContextPath()%>/images/menu-toggler.png" alt="" />
 
             </a>
 
@@ -178,7 +178,7 @@
 
                             <a href="inbox.html?a=view">
 
-                                <span class="photo"><img src="../images/avatar2.jpg" alt="" /></span>
+                                <span class="photo"><img src="<%=request.getContextPath()%>/images/avatar2.jpg" alt="" /></span>
 
 								<span class="subject">
 
@@ -204,7 +204,7 @@
 
                             <a href="inbox.html?a=view">
 
-                                <span class="photo"><img src="./../images/avatar3.jpg" alt="" /></span>
+                                <span class="photo"><img src="<%=request.getContextPath()%>/images/avatar3.jpg" alt="" /></span>
 
 								<span class="subject">
 
@@ -230,7 +230,7 @@
 
                             <a href="inbox.html?a=view">
 
-                                <span class="photo"><img src="./../images/avatar1.jpg" alt="" /></span>
+                                <span class="photo"><img src="<%=request.getContextPath()%>/images/avatar1.jpg" alt="" /></span>
 
 								<span class="subject">
 
@@ -434,7 +434,7 @@
 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-                        <img alt="" src="../images/avatar1_small.jpg" />
+                        <img alt="" src="<%=request.getContextPath()%>/images/avatar1_small.jpg" />
 
                         <span class="username">Bob Nilson</span>
 

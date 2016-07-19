@@ -46,7 +46,7 @@ public class LoginController {
             }
 
         }
-        return new ModelAndView("redirect:/indexPage");
+        return new ModelAndView("redirect:/home");
 
     }
 
