@@ -36,14 +36,9 @@ public class MenuController {
         return new ModelAndView("/dynamic/dynamicIndex");
     }
 
-    @RequestMapping(value = "/homepage/banner", method = RequestMethod.GET)
+    @RequestMapping(value = "/banner/homebanner", method = RequestMethod.GET)
     public ModelAndView redirectBanner() {
-        return new ModelAndView("/homepage/banner");
-    }
-
-    @RequestMapping(value = "/homepage/create", method = RequestMethod.GET)
-    public ModelAndView redirectCreate() {
-        return new ModelAndView("/homepage/create");
+        return new ModelAndView("/banner/homebanner");
     }
 
     @RequestMapping(value = "/live/living", method = RequestMethod.GET)
@@ -59,15 +54,5 @@ public class MenuController {
     @RequestMapping(value = "/shop/order", method = RequestMethod.GET)
     public ModelAndView redirectOrder() {
         return new ModelAndView("/shop/order");
-    }
-
-    @RequestMapping(value = "/transaction/order", method = RequestMethod.GET)
-    public ModelAndView redirectTransactionOrder() {
-        return new ModelAndView("/transaction/order");
-    }
-
-    @RequestMapping(value = "/transaction/recharge", method = RequestMethod.GET)
-    public ModelAndView redirectTransactionRecharge() {
-        return new ModelAndView("/transaction/recharge");
     }
 }

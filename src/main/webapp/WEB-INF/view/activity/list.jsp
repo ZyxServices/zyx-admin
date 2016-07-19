@@ -18,8 +18,8 @@
 
   <!-- BEGIN GLOBAL MANDATORY STYLES -->
   <jsp:include page="../public/common-styles.jsp"/>
-  <link rel="stylesheet" href="../css/summernote.css" />
-  <link rel="stylesheet" href="../css/self-style/style.css" />
+  <link rel="stylesheet" href="../../css/summernote.css" />
+  <link rel="stylesheet" href="../../css/self-style/style.css" />
 </head>
 <body class="page-header-fixed">
 <jsp:include page="../public/header.jsp"/>
@@ -330,9 +330,9 @@
 
 <jsp:include page="../public/footer.jsp"/>
 <jsp:include page="../public/common-js.jsp"/>
-<script src="../js/app.js" type="text/javascript"></script>
+<script src="../../js/app.js" type="text/javascript"></script>
 <%--<script src="../js/index.js" type="text/javascript"></script>--%>
-<script type="text/javascript" src="../js/activity/list.js"></script>
+<script type="text/javascript" src="../../js/activity/list.js"></script>
 <script>
 
   jQuery(document).ready(function() {
