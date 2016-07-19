@@ -16,7 +16,7 @@ public class MenuController {
         return new ModelAndView("/activity/list");
     }
 
-    @RequestMapping(value = "/user/userIndex", method = RequestMethod.GET)
+    @RequestMapping(value = "/appUser/userIndex", method = RequestMethod.GET)
     public ModelAndView redirectAppUser() {
         return new ModelAndView("/appUser/userIndex");
     }

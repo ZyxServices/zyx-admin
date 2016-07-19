@@ -6,7 +6,7 @@
 
 <!-- BEGIN HEADER -->
 
-<jsp:include page="<%=request.getContextPath()%>/public/header.jsp"/>
+<jsp:include page="../public/header.jsp"/>
 
 <!-- END HEADER -->
 
@@ -16,7 +16,7 @@
 
     <!-- BEGIN SIDEBAR -->
 
-    <jsp:include page="<%=request.getContextPath()%>/public/nav.jsp"/>
+    <jsp:include page="../public/nav.jsp"/>
 
     <!-- END SIDEBAR -->
 
@@ -47,5 +47,3 @@
         <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
         <!-- BEGIN PAGE CONTAINER-->
-    </div>
-</div>

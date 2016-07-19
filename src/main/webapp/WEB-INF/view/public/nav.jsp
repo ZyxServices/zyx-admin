@@ -134,7 +134,7 @@
             </a>
             <ul class="sub-menu">
                 <li>
-                    <a href="<%=request.getContextPath()%>/menu/sysmenu/list">管理员列表</a>
+                    <a href="<%=request.getContextPath()%>/sysmenu/list">管理员列表</a>
                     <a href="#">权限设置</a>
                 </li>
             </ul>
