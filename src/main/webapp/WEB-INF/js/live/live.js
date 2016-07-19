@@ -147,7 +147,7 @@ function initTable() {
     //操作
     function operateFormatter(value, row, index) {
         return [
-            '<a class="preview p5"   href="javascript:void(0)" title="preview">预览</a>',
+            '<a class="edit p5"   href="javascript:void(0)" title="preview">编辑</a>',
             '<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>',
             '<a class="Shield p5" href="javascript:void(0)" title="Shield">屏蔽</a>',
             '<a class="remove p5" href="javascript:void(0)" title="remove">删除</a>'
@@ -161,7 +161,7 @@ function initTable() {
     }
     //操作事件
     var operateEventssssss = {
-        'click .preview': function (e, value, row, index) {
+        'click .edit': function (e, value, row, index) {
             alert('You click like action, row: ' + JSON.stringify(row));
         },
         'click .recommend': function (e, value, row, index) {
