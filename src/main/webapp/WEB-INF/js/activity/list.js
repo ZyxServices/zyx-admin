@@ -2,35 +2,72 @@
  * Created by ZYX on 2016/7/12.
  */
 $(function(){
+
+    $("#appQueryEnd").click(function () {
+        $('#userTable').bootstrapTable("refresh")
+    })
+    function queryParams(params) {
+        return {
+            pageDataNum: params.limit,
+            pageNum: (params.offset + 1)
+        };
+    }
+
+    function fromData(res) {
+        if(res.state == 480){
+            $("#content-wrapper").html("<section class='content'>无权限</section>");
+            return false;
+        }
+        if (res.state == 200) {
+            var dataArray = [];
+            var datas = res.data;
+            datas.forEach(function (item, a) {
+                var dataObj = {};
+                dataObj.id = item.id;
+                dataObj.name = item.title;
+                dataObj.time = (new Date(item.createTime).format("yyyy-mm-dd HH:MM:ss"));
+                dataObj.startTime = (new Date(item.startTime).format("yyyy-mm-dd HH:MM:ss"));
+                dataObj.createPerson = item.userId;
+                dataObj.address = item.address;
+                dataObj.pv = 0;
+                dataObj.report = 0;
+                dataObj.url = 0;
+                dataArray.push(dataObj)
+            });
+            if (datas.length == 0) {
+                var dataObj = {};
+                dataArray.push(dataObj);
+            }
+            return {
+                rows: dataArray,
+                total: res.dataCount
+            }
+        }
+
+    }
+
+
     $('#activity-summernote').summernote({
         height:200
     });
     $("#activity-list-table").bootstrapTable({
-        data: [{
-            id: 1,
-            name: 'Item 1',
-            time: '2016-07-15',
-            startTime: '2016-07-15',
-            createPerson: '....',
-            place: '....',
-            pv: '12',
-            report: '12',
-            url: 'baidu.com'
-        }],
-        locale: 'zh-US',
-        pagination: true,
-        smartDisplay: false,
+        url: "/activity/queryActivity",
+        method: 'post',
+        dataType: "json",
         cache: false,
-        search: true,
-        strictSearch: true,
-        uniqueId: "id",
-        pageSize: 20,
-        pageList: new Array(20, 50, 100),
+        striped: true,
+        pagination: true, //分页
+        singleSelect: true,
+        search: false,
+        pageList: [5, 10, 20, 50],
+        contentType: "application/x-www-form-urlencoded",
+        minimumCountColumns: 2,
         paginationPreText: "上一页",
         paginationNextText: "下一页",
         sidePagination: 'server',
-        queryParams: function (params) {
-        }
+        queryParams: queryParams,
+        responseHandler: fromData
+
     })
 })
 

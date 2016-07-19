@@ -101,7 +101,7 @@
                 <th data-field="time">发布时间</th>
                 <th data-field="startTime">开始时间</th>
                 <th data-field="createPerson">创建人</th>
-                <th data-field="place">活动地点</th>
+                <th data-field="address">活动地点</th>
                 <th data-field="pv">浏览量</th>
                 <th data-field="report">举报状态</th>
                 <th data-field="url">查看url</th>
@@ -333,6 +333,7 @@
 <script src="../../js/app.js" type="text/javascript"></script>
 <%--<script src="../js/index.js" type="text/javascript"></script>--%>
 <script type="text/javascript" src="../../js/activity/list.js"></script>
+<script src="../../js/dataformat.js" type="text/javascript"></script>
 <script>
 
   jQuery(document).ready(function() {

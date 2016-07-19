@@ -51,7 +51,7 @@
 			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
 		</table>-->
 
-		<table tableName="SYS_APP_USER">
+<!--		<table tableName="SYS_APP_USER">
 			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
 		</table>
 		<table tableName="SYS_DICTIONARIES">
@@ -82,15 +82,18 @@
 			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
 		</table>
 
-
-
-		<!--Live直播 模块表构建-->
-		<!--直播信息-->
+		&lt;!&ndash;Live直播 模块表构建&ndash;&gt;
+		&lt;!&ndash;直播信息&ndash;&gt;
 		<table tableName="t_live" domainObjectName="LiveInfo">
 			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
 		</table>
-		<!--直播标签-->
+		&lt;!&ndash;直播标签&ndash;&gt;
 		<table tableName="t_live_lab" domainObjectName="LiveLab">
+			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
+		</table>-->
+
+
+		<table tableName="activity" domainObjectName="Activity">
 			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
 		</table>
 

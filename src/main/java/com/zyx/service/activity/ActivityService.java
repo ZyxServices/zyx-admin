@@ -19,9 +19,10 @@ public interface ActivityService {
     /**
      * 多条条件查询活动
      *
-     * @param parm
+     * @param pageDataNumber
+     * @param pageNumber
      * @return
      */
-    Map<String, Object> queryActivity(QueryActivityParm parm);
+    Map<String, Object> queryActivity(int pageDataNumber, int pageNumber);
 
 }
