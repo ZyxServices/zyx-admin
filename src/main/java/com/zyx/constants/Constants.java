@@ -1,8 +1,12 @@
 package com.zyx.constants;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 public interface Constants {
 
     String CURRENT_USER = "user";
+    ////////////// 系统标识符 开始//////////////////
     /**
      * 状态 标志
      */
@@ -142,5 +146,31 @@ public interface Constants {
     String MSG_REQUEST_ERROR = "request error";
 
     String MSG_REQUEST_UNAUTHORIZED = "unauthorized request";
+
+    ////////////// 系统消息 结束//////////////////
+
+    /**
+     * 系统错误
+     */
+    Map<String, Object> MAP_500 = new ConcurrentHashMap() {{
+        put(Constants.STATE, Constants.ERROR_500);
+        put(Constants.ERROR_MSG, Constants.MSG_ERROR);
+    }};
+
+    /**
+     * TOKEN失效，401无权限请求
+     */
+    Map<String, Object> MAP_TOKEN_FAILURE = new ConcurrentHashMap() {{
+        put(Constants.STATE, Constants.REQUEST_UNAUTHORIZED);
+        put(Constants.ERROR_MSG, Constants.MSG_REQUEST_UNAUTHORIZED);
+    }};
+
+    /**
+     * 参数缺失
+     */
+    Map<String, Object> MAP_PARAM_MISS = new ConcurrentHashMap() {{
+        put(Constants.STATE, Constants.PARAM_MISS);
+        put(Constants.ERROR_MSG, Constants.MSG_PARAM_MISS);
+    }};
 
 }

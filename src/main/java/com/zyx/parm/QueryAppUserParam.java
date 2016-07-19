@@ -10,25 +10,7 @@ import java.io.Serializable;
  *          Copyright (c)2016 tyj-版权所有
  * @title QueryAppUserParam.java
  */
-public class QueryAppUserParam implements Serializable {
+public class QueryAppUserParam extends QueryParm{
 
-    private Integer pageNumber;
 
-    private Integer pageSize;
-
-    public Integer getPageNumber() {
-        return pageNumber;
-    }
-
-    public void setPageNumber(Integer pageNumber) {
-        this.pageNumber = pageNumber;
-    }
-
-    public Integer getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
-    }
 }

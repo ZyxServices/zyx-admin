@@ -20,7 +20,7 @@ public class LiveLab {
     /**
      * 直播类型
      */
-    private String type;
+    private String lab;
 
     /**
      * 类型描述
@@ -71,19 +71,19 @@ public class LiveLab {
     /**
      * 获取直播类型
      *
-     * @return type - 直播类型
+     * @return lab - 直播类型
      */
-    public String getType() {
-        return type;
+    public String getLab() {
+        return lab;
     }
 
     /**
      * 设置直播类型
      *
-     * @param type 直播类型
+     * @param lab 直播类型
      */
-    public void setType(String type) {
-        this.type = type;
+    public void setLab(String lab) {
+        this.lab = lab;
     }
 
     /**

@@ -17,10 +17,10 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
 }
 
-task download(type: Copy) {  
-  from configurations.runtime  
-  into 'g:\\gradlelib' //下载后存放jar包的位置  
-}  
+task download(type: Copy) {
+    from configurations.runtime
+    into 'g:\\gradlelib' //下载后存放jar包的位置
+}
 
 configurations {
     mybatisGenerator
@@ -32,7 +32,7 @@ buildscript {
     repositories {
         def REPOSITORY_URL = 'https://maven.oschina.net/content/groups/public'
         all { ArtifactRepository repo ->
-            if(repo instanceof MavenArtifactRepository){
+            if (repo instanceof MavenArtifactRepository) {
                 def url = repo.url.toString()
                 if (url.startsWith('https://repo1.maven.org/maven2') || url.startsWith('https://jcenter.bintray.com/')) {
                     project.logger.lifecycle "Repository ${repo.url} replaced by $REPOSITORY_URL."
@@ -127,7 +127,7 @@ test {
 }
 
 convertSwagger2markup {
-    dependsOn clean,test
+    dependsOn clean, test
     inputDir swaggerOutputDir
     examplesDir asciiDocOutputDir
     pathsGroupedBy io.github.robwin.swagger2markup.GroupBy.TAGS
@@ -141,15 +141,15 @@ asciidoctor {
     }
     backends = ['html5', 'pdf']
     attributes = [
-            doctype: 'book',
+            doctype             : 'book',
             'source-highlighter': 'coderay',
-            toc: 'left',
-            toclevels: '3',
-            numbered: '',
-            sectlinks: '',
-            sectanchors: '',
-            hardbreaks: '',
-            generated: asciiDocOutputDir
+            toc                 : 'left',
+            toclevels           : '3',
+            numbered            : '',
+            sectlinks           : '',
+            sectanchors         : '',
+            hardbreaks          : '',
+            generated           : asciiDocOutputDir
     ]
 }
 
@@ -207,12 +207,15 @@ dependencies {
     compile 'org.slf4j:slf4j-log4j12:1.7.21'
     compile 'tk.mybatis:mapper:3.3.8'
     providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
-    
-     compile 'javax.servlet:jstl:1.2'
-     compile 'taglibs:standard:1.1.2'
+
+    compile 'javax.servlet:jstl:1.2'
+    compile 'taglibs:standard:1.1.2'
 
 
     compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.7.3'
+
+    // https://mvnrepository.com/artifact/redis.clients/jedis
+    compile group: 'redis.clients', name: 'jedis', version: '2.8.1'
 
     //swagger
     compile "io.springfox:springfox-swagger2:2.4.0"
