@@ -47,14 +47,14 @@ public class RequestLogFilter extends AbstractFilter {
 	@Override
 	public void doFilter(HttpServletRequest request,
 			HttpServletResponse response, FilterChain chain,
-			HttpSession session, String menthod, String url)
+			HttpSession session, String method, String url)
 			throws IOException, ServletException {
 		logger.info("Accept:{}",request.getHeader("Accept"));
 		logger.info("Content-Type:{}",request.getHeader("Content-Type"));
 		logger.info("------开始过滤--------");
 
 		long before = System.currentTimeMillis();
-		logger.info("拦截到请求:{} : {}{}", menthod,url,getParamsString(request.getParameterMap()));
+		logger.info("拦截到请求:{} : {}{}", method,url,getParamsString(request.getParameterMap()));
 
 
 		chain.doFilter(request, response);
