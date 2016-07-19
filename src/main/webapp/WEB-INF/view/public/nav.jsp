@@ -20,7 +20,7 @@
                 </div>
             </form>
         </li>
-        <li class="start">
+        <li class="start home">
             <a href="<%=request.getContextPath()%>/home">
                 <i class="icon-home"></i>
                 <span class="title">首页</span>
