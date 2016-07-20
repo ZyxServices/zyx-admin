@@ -2,7 +2,10 @@ package com.zyx.controller.live;
 
 import com.zyx.common.enums.LiveLabEnum;
 import com.zyx.constants.LiveConstants;
+import com.zyx.model.LiveInfo;
 import com.zyx.model.LiveLab;
+import com.zyx.parm.live.LiveInfoParm;
+import com.zyx.service.live.LiveInfoService;
 import com.zyx.service.live.LiveLabService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,6 +33,8 @@ public class LiveController {
 
     @Autowired
     LiveLabService liveLabService;
+    @Autowired
+    LiveInfoService liveInfoService;
     @RequestMapping(path = "/lab/create",method = {RequestMethod.POST})
     @ApiOperation(value = "添加直播标签************", notes = "直播-添加直播标签")
     public ModelAndView addLiveLab(@RequestParam(name = "lab", required = true) String lab, @RequestParam(name = "desc", required = false) String desc) {
@@ -93,9 +98,12 @@ public class LiveController {
 
     @RequestMapping(path = "/lab/update",method = {RequestMethod.POST})
     @ApiOperation(value = "更新直播标签", notes = "直播-更新直播标签")
-    public ModelAndView deleteLiveLab(@RequestParam(name = "id", required = false) Integer id, @RequestParam(name = "lab", required = false) String lab, @RequestParam(name = "desc", required = false) String desc) {
+    public ModelAndView updateLiveLab(@RequestParam(name = "id", required = true) Integer id,
+                                      @RequestParam(name = "lab", required = false) String lab,
+                                      @RequestParam(name = "desc", required = false) String desc,
+                                      @RequestParam(name = "desc", required = false) Integer state) {
         Map<String, Object> result = new HashMap<>();
-        if (id==null||((null == lab || lab.isEmpty()) && (null == desc || desc.isEmpty()))) {
+        if (id==null||((null == lab || lab.isEmpty()) && (null == desc || desc.isEmpty())&&null == state)) {
             result.put(LiveConstants.STATE, LiveConstants.PARAM_MISS);
             result.put(LiveConstants.ERROR_MSG, LiveConstants.MSG_PARAM_MISS);
         } else {
@@ -103,6 +111,7 @@ public class LiveController {
             liveLab.setId(id);
             liveLab.setLab(lab.trim());
             liveLab.setLab(desc.trim());
+            liveLab.setState(state);
             liveLabService.updateLiveLab(liveLab);
             result.put(LiveConstants.STATE, LiveConstants.SUCCESS);
         }
@@ -110,9 +119,16 @@ public class LiveController {
         jsonView.setAttributesMap(result);
         return new ModelAndView(jsonView);
     }
-
-    public ModelAndView getLiveInfos(@RequestParam(name = "lab", required = true) String lab, @RequestParam(name = "desc", required = false) String desc) {
+    @RequestMapping(path = "/list",method = {RequestMethod.GET})
+    @ApiOperation(value = "获取直播", notes = "直播-获取直播")
+    public ModelAndView getLiveInfos(@RequestParam(name = "pageSize", required = true)Integer pageSize, @RequestParam(name = "pageNumber", required = false) Integer pageNumber) {
         Map<String, Object> result = new HashMap<>();
+        LiveInfoParm param =new LiveInfoParm();
+        param.setPageNumber(pageNumber);
+        param.setPageSize(pageSize);
+        List<LiveInfo> liveInfos = liveInfoService.getLiveInfos(param);
+        result.put(LiveConstants.STATE, LiveConstants.SUCCESS);
+        result.put(LiveConstants.DATA,liveInfos);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(result);
         return new ModelAndView(jsonView);

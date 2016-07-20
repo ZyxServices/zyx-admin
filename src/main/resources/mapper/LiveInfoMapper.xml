@@ -16,6 +16,7 @@
     <result column="lab" jdbcType="INTEGER" property="lab" />
     <result column="bgm_url" jdbcType="VARCHAR" property="bgmUrl" />
     <result column="vedio_url" jdbcType="VARCHAR" property="vedioUrl" />
-    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="del" jdbcType="INTEGER" property="del" />
   </resultMap>
 </mapper>

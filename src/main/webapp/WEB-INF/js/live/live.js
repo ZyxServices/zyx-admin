@@ -114,7 +114,7 @@ function initTable() {
         $table.bootstrapTable('resetView');
     }, 200);
     $table.on('check.bs.table uncheck.bs.table ' +
-    'check-all.bs.table uncheck-all.bs.table', function () {
+        'check-all.bs.table uncheck-all.bs.table', function () {
         $remove.prop('disabled', !$table.bootstrapTable('getSelections').length);
         // save your data, here just save the current page
         selections = getIdSelections();
@@ -196,15 +196,17 @@ function operateFormatterclass(value, row, index) {
 //操作分类事件
 var operateEventclass = {
     'click .edit': function (e, value, row, index) {
+        // 调用接口/v1/live/lab/update?id=1&lab=NBA&desc=AAAA;  id必填 lab/desc必填一个否则返回23000
         alert('You click like action, row: ' + JSON.stringify(row));
     },
     'click .recommend': function (e, value, row, index) {
-
+        // 调用接口/v1/live/lab/update?state=1;   注：-1 屏蔽   0 正常  1 推荐
     },
     'click .Shield': function (e, value, row, index) {
-
+        // 调用接口 /v1/live/lab/update?state=-1;
     },
     'click .remove': function (e, value, row, index) {
+        // 调用接口/v1/live/lab/update?id=1 id必须传  做好提示 物理删除
         $('#editLive').bootstrapTable('remove', {
             field: 'id',
             values: [row.id]

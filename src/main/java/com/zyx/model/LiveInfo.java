@@ -65,7 +65,9 @@ public class LiveInfo {
     /**
      * 0-未开始，1-正在直播，2-直播结束
      */
-    private Integer status;
+    private Integer state;
+
+    private Integer del;
 
     /**
      * @return id
@@ -264,18 +266,32 @@ public class LiveInfo {
     /**
      * 获取0-未开始，1-正在直播，2-直播结束
      *
-     * @return status - 0-未开始，1-正在直播，2-直播结束
+     * @return state - 0-未开始，1-正在直播，2-直播结束
      */
-    public Integer getStatus() {
-        return status;
+    public Integer getState() {
+        return state;
     }
 
     /**
      * 设置0-未开始，1-正在直播，2-直播结束
      *
-     * @param status 0-未开始，1-正在直播，2-直播结束
+     * @param state 0-未开始，1-正在直播，2-直播结束
      */
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
+    /**
+     * @return del
+     */
+    public Integer getDel() {
+        return del;
+    }
+
+    /**
+     * @param del
+     */
+    public void setDel(Integer del) {
+        this.del = del;
     }
 }

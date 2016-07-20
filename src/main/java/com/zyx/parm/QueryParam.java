@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by MrDeng on 2016/7/19.
  * 查询通用
  */
-public abstract class QueryParm  implements Serializable {
+public abstract class QueryParam implements Serializable {
 
     private Integer pageNumber;
 

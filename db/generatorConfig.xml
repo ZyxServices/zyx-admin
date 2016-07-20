@@ -51,7 +51,7 @@
 			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
 		</table>-->
 
-		<table tableName="SYS_APP_USER">
+<!--		<table tableName="SYS_APP_USER">
 			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
 		</table>
 		<table tableName="SYS_DICTIONARIES">
@@ -80,14 +80,14 @@
 		</table>
 		<table tableName="user" domainObjectName="AppUser">
 			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
-		</table>
+		</table>-->
 
 		<!--系统模块 表构建-->
 		<!--举报-->
-		<table tableName="t_report" domainObjectName="Report">
+		<!--<table tableName="t_report" domainObjectName="Report">
 			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
 		</table>
-
+-->
 		<!--Live直播模块表构建-->
 		<!--直播信息-->
 		<table tableName="t_live" domainObjectName="LiveInfo">
@@ -99,9 +99,9 @@
 		</table>
 
 
-		<table tableName="activity" domainObjectName="Activity">
+		<!--<table tableName="activity" domainObjectName="Activity">
 			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
-		</table>
+		</table>-->
 
 
 	</context>

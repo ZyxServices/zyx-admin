@@ -33,6 +33,11 @@ public class LiveLab {
     private Integer state;
 
     /**
+     * 记录状态
+     */
+    private Integer del;
+
+    /**
      * 获取主键ID
      *
      * @return id - 主键ID
@@ -120,5 +125,23 @@ public class LiveLab {
      */
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    /**
+     * 获取记录状态
+     *
+     * @return del - 记录状态
+     */
+    public Integer getDel() {
+        return del;
+    }
+
+    /**
+     * 设置记录状态
+     *
+     * @param del 记录状态
+     */
+    public void setDel(Integer del) {
+        this.del = del;
     }
 }
