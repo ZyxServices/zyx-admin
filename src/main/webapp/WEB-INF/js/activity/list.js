@@ -157,3 +157,22 @@ function createActivity() {
     $("#activityList").hide();
 
 }
+/*是否需要审核*/
+function isReviewed(obj) {
+    $("#userRequired").toggle(500);
+}
+
+/*选择更多*/
+function choiceMore() {
+    $("#addChoice").toggle(500);
+    $("#addBtn").hide();
+}
+/*增加用户必填的字段*/
+function createRequired() {
+    var requiredVal = $("#requiredVal").val();
+    var val = '<label class="checkbox"><input type="checkbox">'+requiredVal+'</label>';
+    $("#addBtn").before(val);
+    $("#requiredVal").val('');
+    $("#addBtn").show();
+    $("#addChoice").toggle(500);
+}

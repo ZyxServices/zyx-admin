@@ -178,8 +178,7 @@
             <div class="control-group">
               <label class="control-label">封面</label>
               <div class="controls">
-                <button type="submit" class="btn btn-default">上传图片</button>
-                <span class="help-inline">只能上传一张图片</span>
+                <input type="file" class="file">
               </div>
             </div>
 
@@ -245,14 +244,25 @@
               <div class="controls">
                 <select class="span6 m-wrap">
                   <option>所有人</option>
-                  <option>朋友</option>
-                  <option>自己</option>
+                  <option>我的粉丝</option>
+                  <option>我的关注</option>
                 </select>
                 <span class="help-inline">*</span>
               </div>
             </div>
 
             <div class="control-group">
+              <label class="control-label">是否需要审核申请者</label>
+              <div class="controls">
+                <select class="span6 m-wrap" onchange="isReviewed(this)">
+                  <option value="0">否</option>
+                  <option value="1">是</option>
+                </select>
+                <span class="help-inline">*</span>
+              </div>
+            </div>
+
+            <div class="control-group hide" id="userRequired">
               <label class="control-label">用户报名必填</label>
               <div class="controls">
                 <label class="checkbox"><input type="checkbox">手机号码</label>
@@ -261,18 +271,14 @@
                 <label class="checkbox"><input type="checkbox">性别</label>
                 <label class="checkbox"><input type="checkbox">年龄</label>
                 <label class="checkbox"><input type="checkbox">地址</label>
-                <a href="#">选择更多</a>
+                <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>
               </div>
             </div>
 
-            <div class="control-group">
-              <label class="control-label">是否需要审核申请者</label>
+            <div class="control-group hide" id="addChoice">
+              <label class="control-label"></label>
               <div class="controls">
-                <select class="span6 m-wrap">
-                  <option>是</option>
-                  <option>否</option>
-                </select>
-                <span class="help-inline">*</span>
+                <input type="text" class="span3 m-wrap" id="requiredVal"><a href="javascript:void(0)" class="btn btn-default" onclick="createRequired()">确定</a>
               </div>
             </div>
 
@@ -374,7 +380,7 @@
             <div class="control-group">
               <label class="control-label">用户报名必填</label>
               <div class="controls">
-                <label class="radio"><input type="radio" name="activation">激活</label>
+                <label class="radio"><input type="radio" checked name="activation">激活</label>
                 <label class="radio"><input type="radio" name="activation">未激活</label>
               </div>
             </div>
