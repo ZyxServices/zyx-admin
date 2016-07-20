@@ -116,7 +116,7 @@
             </ul>
         </li>
 <%--管理员管理--%>
-        <li class="">
+        <li class="sys">
             <a href="javascript:;">
                 <i class="icon-folder-open"></i>
                 <span class="title">管理员管理</span>
@@ -124,9 +124,11 @@
                 <span class="selected hide"></span>
             </a>
             <ul class="sub-menu">
-                <li>
-                    <a href="#">管理员列表</a>
-                    <a href="#">权限设置</a>
+                <li class="admin">
+                    <a href="<%=request.getContextPath()%>/menu/sys/admin">管理员列表</a>
+                </li>
+                <li class="jurisdiction">
+                    <a href="<%=request.getContextPath()%>/menu/sys/jurisdiction">权限设置</a>
                 </li>
             </ul>
         </li>

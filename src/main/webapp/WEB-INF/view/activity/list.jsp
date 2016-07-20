@@ -42,7 +42,7 @@
   <div class="page-content">
 
     <!-- BEGIN PAGE CONTAINER-->
-<%--活动列表--%>
+    <%--活动列表--%>
     <div class="container-fluid" id="activityList">
 
       <!-- BEGIN PAGE HEADER-->

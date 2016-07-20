@@ -55,4 +55,14 @@ public class MenuController {
     public ModelAndView redirectOrder() {
         return new ModelAndView("/shop/order");
     }
+
+    @RequestMapping(value = "/sys/admin", method = RequestMethod.GET)
+    public ModelAndView redirectAdmin() {
+        return new ModelAndView("/sys/admin");
+    }
+
+    @RequestMapping(value = "/sys/jurisdiction", method = RequestMethod.GET)
+    public ModelAndView redirectJurisdiction() {
+        return new ModelAndView("/sys/jurisdiction");
+    }
 }
