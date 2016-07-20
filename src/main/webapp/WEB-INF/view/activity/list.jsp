@@ -19,6 +19,7 @@
   <!-- BEGIN GLOBAL MANDATORY STYLES -->
   <jsp:include page="../public/common-styles.jsp"/>
   <link rel="stylesheet" href="../../css/summernote.css" />
+  <link rel="stylesheet" href="../../css/datetimepicker.css" />
   <link rel="stylesheet" href="../../css/self-style/style.css" />
 </head>
 <body class="page-header-fixed">
@@ -42,7 +43,7 @@
 
     <!-- BEGIN PAGE CONTAINER-->
 <%--活动列表--%>
-    <div class="container-fluid hide" id="activityList">
+    <div class="container-fluid" id="activityList">
 
       <!-- BEGIN PAGE HEADER-->
 
@@ -120,19 +121,13 @@
     </div>
 
     <%--活动创建--%>
-    <div class="container-fluid" id="activityCreate">
+    <div class="container-fluid hide" id="activityCreate">
 
       <!-- BEGIN PAGE HEADER-->
 
       <div class="row-fluid">
 
         <div class="span12">
-
-          <!-- BEGIN STYLE CUSTOMIZER -->
-
-          <jsp:include page="../public/color-panel.jsp"/>
-
-          <!-- END BEGIN STYLE CUSTOMIZER -->
 
           <!-- BEGIN PAGE TITLE & BREADCRUMB-->
 
@@ -200,7 +195,9 @@
             <div class="control-group">
               <label class="control-label">时间</label>
               <div class="controls">
-                <input type="text" class="span6 m-wrap" />
+                <div class="span3"><input type="text" class="span12 m-wrap" id="activityStartTime" placeholder="活动开始时间"/></div>
+
+                <div class="span3"><input type="text" class="span12 m-wrap" id="activityEndTime" placeholder="活动结束时间"/></div>
                 <span class="help-inline">*</span>
               </div>
             </div>
@@ -213,26 +210,16 @@
               </div>
             </div>
 
-            <div class="control-group">
-              <label class="control-label">组合</label>
-              <div class="controls">
-                <select class="span6 m-wrap">
-                  <option>世界杯</option>
-                  <option>欧洲杯</option>
-                  <option>亚洲杯</option>
-                </select>
-                <span class="help-inline">*</span>
-              </div>
-            </div>
-
             <hr>
 
             <h4>高级选项</h4>
 
             <div class="control-group">
-              <label class="control-label">报名时间</label>
+              <label class="control-label">时间</label>
               <div class="controls">
-                <input type="text" class="span6 m-wrap" />
+                <div class="span3"><input type="text" class="span12 m-wrap" id="signStartTime" placeholder="开始报名时间"/></div>
+
+                <div class="span3"><input type="text" class="span12 m-wrap" id="signEndTime" placeholder="报名结束时间"/></div>
                 <span class="help-inline">*</span>
               </div>
             </div>
@@ -421,8 +408,8 @@
 
 <jsp:include page="../public/footer.jsp"/>
 <jsp:include page="../public/common-js.jsp"/>
+
 <script src="../../js/app.js" type="text/javascript"></script>
-<%--<script src="../js/index.js" type="text/javascript"></script>--%>
 <script type="text/javascript" src="../../js/activity/list.js"></script>
 <script>
 

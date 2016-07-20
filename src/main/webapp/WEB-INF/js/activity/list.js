@@ -69,6 +69,55 @@ $(function(){
         responseHandler: fromData
 
     })
+    $('#activityStartTime').datetimepicker({
+        language:  'zh-CN',
+        format: 'yyyy-mm-dd hh:ii',
+        weekStart: true,
+        todayBtn: true,
+        autoclose: true,
+        todayHighlight: 1,
+        minView: false,
+        forceParse: true,
+        pickerPosition: "bottom-left",
+        showMeridian: false
+      });
+    $('#activityEndTime').datetimepicker({
+        language:  'zh-CN',
+        format: 'yyyy-mm-dd hh:ii',
+        weekStart: true,
+        todayBtn: true,
+        autoclose: true,
+        todayHighlight: true,
+        minView: false,
+        forceParse: true,
+        pickerPosition: "bottom-left",
+        showMeridian: false
+      });
+    $('#signStartTime').datetimepicker({
+        language:  'zh-CN',
+        weekStart: true,
+        format: 'yyyy-mm-dd hh:ii',
+        todayBtn: true,
+        autoclose: true,
+        todayHighlight: 1,
+        minView: false,
+        forceParse: true,
+        pickerPosition: "bottom-left",
+        showMeridian: false
+    });
+    $('#signEndTime').datetimepicker({
+        language:  'zh-CN',
+        weekStart: true,
+        todayBtn: true,
+        format: 'yyyy-mm-dd hh:ii',
+        autoclose: true,
+        todayHighlight: true,
+        minView: false,
+        forceParse: true,
+        pickerPosition: "bottom-left",
+        showMeridian: false
+    });
+
 })
 
 function operate(value, row, index) {
@@ -91,7 +140,8 @@ function recommend(id) {
 }
 /*编辑*/
 function modify(id) {
-    console.log(id)
+    $("#activityCreate").show();
+    $("#activityList").hide();
 }
 /*屏蔽*/
 function shield(id) {
