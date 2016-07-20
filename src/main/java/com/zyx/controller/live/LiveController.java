@@ -1,12 +1,16 @@
 package com.zyx.controller.live;
 
+import com.zyx.common.enums.LiveLabEnum;
 import com.zyx.constants.LiveConstants;
 import com.zyx.model.LiveLab;
 import com.zyx.service.live.LiveLabService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.AbstractView;
@@ -21,12 +25,13 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(path = "/v1/live")
+//@Api(description = "直播相关接口")
 public class LiveController {
 
     @Autowired
     LiveLabService liveLabService;
-
-    @RequestMapping(path = "/lab/create")
+    @RequestMapping(path = "/lab/create",method = {RequestMethod.POST})
+    @ApiOperation(value = "添加直播标签************", notes = "直播-添加直播标签")
     public ModelAndView addLiveLab(@RequestParam(name = "lab", required = true) String lab, @RequestParam(name = "desc", required = false) String desc) {
         Map<String, Object> result = new HashMap<>();
         if (null == lab || lab.isEmpty()) {
@@ -37,7 +42,9 @@ public class LiveController {
             if (liveLab == null) {
                 liveLab = new LiveLab();
                 liveLab.setLab(lab.trim());
-                liveLab.setDesc(desc.trim());
+                liveLab.setDescription(desc.trim());
+                liveLab.setCreateTime(System.currentTimeMillis());
+                liveLab.setState(LiveLabEnum.USING.getStatus());
                 liveLabService.addLiveLab(liveLab);
                 result.put(LiveConstants.STATE, LiveConstants.SUCCESS);
             } else {
@@ -50,18 +57,26 @@ public class LiveController {
         return new ModelAndView(jsonView);
     }
 
-    @RequestMapping(path = "/lab/list")
+    @RequestMapping(path = "/lab/list",method = {RequestMethod.POST,RequestMethod.GET})
+    @ApiOperation(value = "获取直播标签列表", notes = "直播-获取直播标签列表")
     public ModelAndView getLiveLabList() {
         Map<String, Object> result = new HashMap<>();
-        List<LiveLab> labs = liveLabService.getAllLabs();
-        result.put(LiveConstants.STATE, LiveConstants.SUCCESS);
-        result.put(LiveConstants.DATA, labs);
+        try {
+
+            List<LiveLab> labs = liveLabService.getAllLabs();
+
+            result.put(LiveConstants.STATE, LiveConstants.SUCCESS);
+            result.put(LiveConstants.DATA, labs);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(result);
         return new ModelAndView(jsonView);
     }
 
-    @RequestMapping(path = "/lab/delete")
+    @RequestMapping(path = "/lab/delete",method = {RequestMethod.POST})
+    @ApiOperation(value = "删除直播标签", notes = "直播-删除直播标签")
     public ModelAndView deleteLiveLab(@RequestParam(name = "lab", required = true) Integer id) {
         Map<String, Object> result = new HashMap<>();
         if (null == id) {
@@ -76,7 +91,8 @@ public class LiveController {
         return new ModelAndView(jsonView);
     }
 
-    @RequestMapping(path = "/lab/update")
+    @RequestMapping(path = "/lab/update",method = {RequestMethod.POST})
+    @ApiOperation(value = "更新直播标签", notes = "直播-更新直播标签")
     public ModelAndView deleteLiveLab(@RequestParam(name = "id", required = false) Integer id, @RequestParam(name = "lab", required = false) String lab, @RequestParam(name = "desc", required = false) String desc) {
         Map<String, Object> result = new HashMap<>();
         if (id==null||((null == lab || lab.isEmpty()) && (null == desc || desc.isEmpty()))) {
@@ -95,5 +111,11 @@ public class LiveController {
         return new ModelAndView(jsonView);
     }
 
+    public ModelAndView getLiveInfos(@RequestParam(name = "lab", required = true) String lab, @RequestParam(name = "desc", required = false) String desc) {
+        Map<String, Object> result = new HashMap<>();
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(result);
+        return new ModelAndView(jsonView);
+    }
 
 }

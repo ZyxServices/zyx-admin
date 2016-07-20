@@ -25,12 +25,12 @@ public class LiveLab {
     /**
      * 类型描述
      */
-    private String desc;
+    private String description;
 
     /**
      * 直播标签1-正常
      */
-    private Integer status;
+    private Integer state;
 
     /**
      * 获取主键ID
@@ -89,36 +89,36 @@ public class LiveLab {
     /**
      * 获取类型描述
      *
-     * @return desc - 类型描述
+     * @return description - 类型描述
      */
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
     /**
      * 设置类型描述
      *
-     * @param desc 类型描述
+     * @param description 类型描述
      */
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**
      * 获取直播标签1-正常
      *
-     * @return status - 直播标签1-正常
+     * @return state - 直播标签1-正常
      */
-    public Integer getStatus() {
-        return status;
+    public Integer getState() {
+        return state;
     }
 
     /**
      * 设置直播标签1-正常
      *
-     * @param status 直播标签1-正常
+     * @param state 直播标签1-正常
      */
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setState(Integer state) {
+        this.state = state;
     }
 }
