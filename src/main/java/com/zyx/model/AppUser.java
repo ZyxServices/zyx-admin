@@ -1,6 +1,5 @@
 package com.zyx.model;
 
-import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "user")
@@ -39,13 +38,13 @@ public class AppUser {
      */
     private String address;
 
-    private Date birthday;
+    private Long birthday;
 
     /**
      * 最后登录时间
      */
     @Column(name = "lastLoginTime")
-    private Date lastlogintime;
+    private Long lastlogintime;
 
     /**
      * 身份证
@@ -67,6 +66,21 @@ public class AppUser {
      */
     @Column(name = "create_time")
     private Long createTime;
+
+    /**
+     * 是否认证字段
+     */
+    private Integer authenticate;
+
+    /**
+     * 是否屏蔽
+     */
+    private Boolean mask;
+
+    /**
+     * 是否删除
+     */
+    private Boolean del;
 
     /**
      * @return id
@@ -193,14 +207,14 @@ public class AppUser {
     /**
      * @return birthday
      */
-    public Date getBirthday() {
+    public Long getBirthday() {
         return birthday;
     }
 
     /**
      * @param birthday
      */
-    public void setBirthday(Date birthday) {
+    public void setBirthday(Long birthday) {
         this.birthday = birthday;
     }
 
@@ -209,7 +223,7 @@ public class AppUser {
      *
      * @return lastLoginTime - 最后登录时间
      */
-    public Date getLastlogintime() {
+    public Long getLastlogintime() {
         return lastlogintime;
     }
 
@@ -218,7 +232,7 @@ public class AppUser {
      *
      * @param lastlogintime 最后登录时间
      */
-    public void setLastlogintime(Date lastlogintime) {
+    public void setLastlogintime(Long lastlogintime) {
         this.lastlogintime = lastlogintime;
     }
 
@@ -292,5 +306,59 @@ public class AppUser {
      */
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    /**
+     * 获取是否认证字段
+     *
+     * @return authenticate - 是否认证字段0未认证，1待审核，2已认证，3认证失败
+     */
+    public Integer getAuthenticate() {
+        return authenticate;
+    }
+
+    /**
+     * 设置是否认证字段
+     *
+     * @param authenticate 是否认证字段
+     */
+    public void setAuthenticate(Integer authenticate) {
+        this.authenticate = authenticate;
+    }
+
+    /**
+     * 获取是否屏蔽
+     *
+     * @return mask - 是否屏蔽
+     */
+    public Boolean getMask() {
+        return mask;
+    }
+
+    /**
+     * 设置是否屏蔽
+     *
+     * @param mask 是否屏蔽
+     */
+    public void setMask(Boolean mask) {
+        this.mask = mask;
+    }
+
+    /**
+     * 获取是否删除
+     *
+     * @return del - 是否删除
+     */
+    public Boolean getDel() {
+        return del;
+    }
+
+    /**
+     * 设置是否删除
+     *
+     * @param del 是否删除
+     */
+    public void setDel(Boolean del) {
+        this.del = del;
     }
 }

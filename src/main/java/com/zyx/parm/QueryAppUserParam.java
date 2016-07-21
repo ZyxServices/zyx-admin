@@ -10,5 +10,43 @@ package com.zyx.parm;
  */
 public class QueryAppUserParam extends QueryParam {
 
+    private String searchText;
 
+    private Integer authenticate;
+
+    private Boolean mask;
+
+    private Boolean del;
+
+    public String getSearchText() {
+        return searchText;
+    }
+
+    public void setSearchText(String searchText) {
+        this.searchText = searchText;
+    }
+
+    public Integer getAuthenticate() {
+        return authenticate;
+    }
+
+    public void setAuthenticate(Integer authenticate) {
+        this.authenticate = authenticate;
+    }
+
+    public Boolean getMask() {
+        return mask;
+    }
+
+    public void setMask(Boolean mask) {
+        this.mask = mask;
+    }
+
+    public Boolean getDel() {
+        return del;
+    }
+
+    public void setDel(Boolean del) {
+        this.del = del;
+    }
 }

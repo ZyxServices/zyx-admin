@@ -15,8 +15,8 @@
             <form class="sidebar-search">
                 <div class="input-box">
                     <a href="javascript:;" class="remove"></a>
-                    <input type="text" placeholder="Search..." />
-                    <input type="button" class="submit" value=" " />
+                    <input type="text" placeholder="Search..."/>
+                    <input type="button" class="submit" value=" "/>
                 </div>
             </form>
         </li>
@@ -27,7 +27,7 @@
                 <span class="selected"></span>
             </a>
         </li>
-<%--活动--%>
+        <%--活动--%>
         <li class="activity">
             <a href="<%=request.getContextPath()%>/menu/activity/list">
                 <i class="icon-bookmark-empty"></i>
@@ -35,23 +35,23 @@
                 <span class="selected hide"></span>
             </a>
         </li>
-<%--直播--%>
-        <li class="live" >
+        <%--直播--%>
+        <li class="live">
             <a href="<%=request.getContextPath()%>/menu/live/living">
                 <i class="icon-table"></i>
                 <span class="title">直播</span>
                 <span class="selected hide"></span>
             </a>
         </li>
-<%--动态--%>
-        <li class="dynamic" >
+        <%--动态--%>
+        <li class="dynamic">
             <a href="<%=request.getContextPath()%>/menu/dynamic/dynamicIndex">
                 <i class="icon-table"></i>
                 <span class="title">动态</span>
                 <span class="selected hide"></span>
             </a>
         </li>
-<%--圈子--%>
+        <%--圈子--%>
         <li class="circle">
             <a href="javascript:;">
                 <i class="icon-briefcase"></i>
@@ -61,14 +61,15 @@
             </a>
             <ul class="sub-menu">
                 <li class="circlelist circlecreat">
-                    <a href="<%=request.getContextPath()%>/menu/circle/circlelist">圈子列表<span class="selected"></span></a>
+                    <a href="<%=request.getContextPath()%>/menu/circle/circlelist">圈子列表<span
+                            class="selected"></span></a>
                 </li>
                 <li class="circlepost postcreat">
                     <a href="<%=request.getContextPath()%>/menu/circle/circlepost">帖子列表</a>
                 </li>
             </ul>
         </li>
-<%--商城--%>
+        <%--商城--%>
         <li class="shop">
             <a href="javascript:;">
                 <i class="icon-gift"></i>
@@ -85,23 +86,35 @@
                 </li>
             </ul>
         </li>
-<%--用户--%>
-        <li class="appUser" >
-            <a href="<%=request.getContextPath()%>/menu/appUser/userIndex">
+        <%--用户--%>
+        <li class="appUser">
+            <a href="javascript:void(0)">
                 <i class="icon-cogs"></i>
-                <span class="title">用户</span>
+                <span class="title">APP用户管理</span>
+                <span class="arrow"></span>
                 <span class="selected hide"></span>
             </a>
+            <ul class="sub-menu">
+                <li class="user-all">
+                    <a href="<%=request.getContextPath()%>/menu/appUser/userIndex">用户列表</a>
+                </li>
+                <li class="user-yrz">
+                    <a href="<%=request.getContextPath()%>/menu/appUser/yrzAppUser">已认证用户</a>
+                </li>
+                <li class="user-dsh">
+                    <a href="<%=request.getContextPath()%>/menu/appUser/dshAppUser">待审核用户</a>
+                </li>
+            </ul>
         </li>
-<%--消息--%>
-        <li class="" >
+        <%--消息--%>
+        <li class="">
             <a href="#">
                 <i class="icon-gift"></i>
                 <span class="title">消息</span>
                 <span class="selected hide"></span>
             </a>
         </li>
-<%--banner推荐--%>
+        <%--banner推荐--%>
         <li class="banner">
             <a href="javascript:;">
                 <i class="icon-cogs"></i>
@@ -115,8 +128,8 @@
                 </li>
             </ul>
         </li>
-<%--管理员管理--%>
-        <li class="sys">
+        <%--管理员管理--%>
+        <li class="">
             <a href="javascript:;">
                 <i class="icon-folder-open"></i>
                 <span class="title">管理员管理</span>
@@ -124,11 +137,9 @@
                 <span class="selected hide"></span>
             </a>
             <ul class="sub-menu">
-                <li class="admin">
-                    <a href="<%=request.getContextPath()%>/menu/sys/admin">管理员列表</a>
-                </li>
-                <li class="jurisdiction">
-                    <a href="<%=request.getContextPath()%>/menu/sys/jurisdiction">权限设置</a>
+                <li>
+                    <a href="#">管理员列表</a>
+                    <a href="#">权限设置</a>
                 </li>
             </ul>
         </li>

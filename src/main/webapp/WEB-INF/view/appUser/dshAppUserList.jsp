@@ -30,15 +30,9 @@
         </div>
         <div class="container-fluid" style="padding-top: 20px ">
             <div class="live_index">
-                <div class="live_operate">
-                    <h3 style="margin: 0;display: inline-block">用户操作 </h3>
-                    <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
-                    <button class="create_live btn btn-default btn-lg ">创建用户</button>
-                </div>
                 <div class="live_manage">
-                    <h3 style="margin: 0;display: inline-block">用户管理 - 用户列表</h3>
+                    <h3 style="margin: 0;display: inline-block">用户管理 - 待审核用户列表</h3>
                     <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
-                    <button class="fl btn btn-default ">自动/手动排序优先</button>
                     <table id="app_user_table" class="table table-hover"
                            data-pagination="true"
                            data-show-refresh="true"
@@ -137,4 +131,4 @@
 <jsp:include page="../public/common-footer.jsp"/>
 </body>
 <script type="text/javascript" src="../../js/appUser/appUserCommon.js"></script>
-<script type="text/javascript" src="../../js/appUser/userIndex.js"></script>
+<script type="text/javascript" src="../../js/appUser/dshAppUser.js"></script>

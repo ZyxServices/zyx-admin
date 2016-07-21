@@ -28,13 +28,88 @@ public class AppUserController {
     @Autowired
     AppUserService appUserService;
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView query(@RequestParam Integer pageSize, @RequestParam Integer pageNumber) {
+    @RequestMapping(value = "/list/all", method = RequestMethod.GET)
+    public ModelAndView list(@RequestParam Integer pageSize, @RequestParam Integer pageNumber, @RequestParam(required = false) String searchText) {
         AbstractView jsonView = new MappingJackson2JsonView();
         QueryAppUserParam param = new QueryAppUserParam();
         param.setPageSize(pageSize);
         param.setPageNumber(pageNumber);
+        param.setSearchText(searchText);
         Map<String, Object> map = appUserService.queryList(param);
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "/list/yrz", method = RequestMethod.GET)
+    public ModelAndView yrzList(@RequestParam Integer pageSize, @RequestParam Integer pageNumber, @RequestParam(required = false) String searchText) {
+        AbstractView jsonView = new MappingJackson2JsonView();
+        QueryAppUserParam param = new QueryAppUserParam();
+        param.setPageSize(pageSize);
+        param.setPageNumber(pageNumber);
+        param.setSearchText(searchText);
+        param.setAuthenticate(2);// 已认证用户
+        Map<String, Object> map = appUserService.queryList(param);
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "/list/dsh", method = RequestMethod.GET)
+    public ModelAndView dshList(@RequestParam Integer pageSize, @RequestParam Integer pageNumber, @RequestParam(required = false) String searchText) {
+        AbstractView jsonView = new MappingJackson2JsonView();
+        QueryAppUserParam param = new QueryAppUserParam();
+        param.setPageSize(pageSize);
+        param.setPageNumber(pageNumber);
+        param.setSearchText(searchText);
+        param.setAuthenticate(1);// 待审核用户
+        Map<String, Object> map = appUserService.queryList(param);
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "/del", method = RequestMethod.GET)
+    public ModelAndView del(@RequestParam Integer id) {
+        AbstractView jsonView = new MappingJackson2JsonView();
+        Map<String, Object> map = appUserService.del(id);
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "/unDel", method = RequestMethod.GET)
+    public ModelAndView unDel(@RequestParam Integer id) {
+        AbstractView jsonView = new MappingJackson2JsonView();
+        Map<String, Object> map = appUserService.unDel(id);
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "/mask", method = RequestMethod.GET)
+    public ModelAndView mask(@RequestParam Integer id) {
+        AbstractView jsonView = new MappingJackson2JsonView();
+        Map<String, Object> map = appUserService.mask(id);
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "/unMask", method = RequestMethod.GET)
+    public ModelAndView unMask(@RequestParam Integer id) {
+        AbstractView jsonView = new MappingJackson2JsonView();
+        Map<String, Object> map = appUserService.unMask(id);
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "/authPass", method = RequestMethod.GET)
+    public ModelAndView authPass(@RequestParam Integer id) {
+        AbstractView jsonView = new MappingJackson2JsonView();
+        Map<String, Object> map = appUserService.authAppUser(id, 2);
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "/authFail", method = RequestMethod.GET)
+    public ModelAndView authFail(@RequestParam Integer id) {
+        AbstractView jsonView = new MappingJackson2JsonView();
+        Map<String, Object> map = appUserService.authAppUser(id, 3);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }

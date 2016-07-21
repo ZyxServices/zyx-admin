@@ -1,6 +1,8 @@
 /**
  * Created by 文楷 on 2016/7/15.
  */
+var $table = $('#live_table'),
+    $remove = $('#remove');
 function initTable() {
     //先销毁表格
     $('#app_user_table').bootstrapTable('destroy');
@@ -23,7 +25,7 @@ function initTable() {
         search: true,
         sidePagination: "server",
         method: "get",
-        url: "/v1/appUser/list/all",
+        url: "/v1/appUser/list/yrz",
         queryParamsType: "undefined",
         queryParams: function queryParams(params) {   //设置查询参数
             var param = {
@@ -53,10 +55,14 @@ function initTable() {
             {field: 'startTime', title: '动态数量', sortable: true},
             {field: 'overTime', title: '金币数量', sortable: true},
             {field: 'createTime', title: '注册时间', sortable: true, formatter: dateFormatter},
+            // {field: 'lastlogintime', title: '最后登录时间', sortable: true, formatter: dateFormatter},
+            // {field: 'sex', title: '性别'},
+            // {field: 'birthday', title: '生日', formatter: dateFormatter},
+            // {field: 'address', title: '所在地'},
             {field: 'operation', title: '操作', align: 'center', events: operateEvent, formatter: operateFormatter}]
     });
 }
-// 操作
+//操作
 function operateFormatter(value, row, index) {
     var _html = [];
 
@@ -79,10 +85,11 @@ function operateFormatter(value, row, index) {
 
     return _html.join('');
 }
+
 $(function () {
     $(".create_live").click(function () {
         $(".create_liveType").addClass('on')
         $(".live_index").addClass('hide')
     })
     initTable();
-});
+})

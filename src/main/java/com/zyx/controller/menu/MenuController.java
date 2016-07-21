@@ -21,6 +21,16 @@ public class MenuController {
         return new ModelAndView("/appUser/userIndex");
     }
 
+    @RequestMapping(value = "/appUser/yrzAppUser", method = RequestMethod.GET)
+    public ModelAndView redirectYrzAppUser() {
+        return new ModelAndView("/appUser/yrzAppUserList");
+    }
+
+    @RequestMapping(value = "/appUser/dshAppUser", method = RequestMethod.GET)
+    public ModelAndView redirectDshAppAuthUser() {
+        return new ModelAndView("/appUser/dshAppUserList");
+    }
+
     @RequestMapping(value = "/circle/circlelist", method = RequestMethod.GET)
     public ModelAndView redirectCircleList() {
         return new ModelAndView("/circle/circlelist");

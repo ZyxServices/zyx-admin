@@ -1,22 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyx.mapper.AppUserMapper">
-  <resultMap id="BaseResultMap" type="com.zyx.model.AppUser">
-    <!--
-      WARNING - @mbggenerated
-    -->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="birthday" jdbcType="DATE" property="birthday" />
-    <result column="lastLoginTime" jdbcType="TIMESTAMP" property="lastlogintime" />
-    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
-    <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="sex" jdbcType="INTEGER" property="sex" />
-    <result column="create_time" jdbcType="BIGINT" property="createTime" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.zyx.model.AppUser">
+        <!--
+          WARNING - @mbggenerated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="birthday" jdbcType="BIGINT" property="birthday"/>
+        <result column="lastLoginTime" jdbcType="BIGINT" property="lastlogintime"/>
+        <result column="idcard" jdbcType="VARCHAR" property="idcard"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="sex" jdbcType="INTEGER" property="sex"/>
+        <result column="create_time" jdbcType="BIGINT" property="createTime"/>
+        <result column="authenticate" jdbcType="INTEGER" property="authenticate"/>
+        <result column="mask" jdbcType="BIT" property="mask"/>
+        <result column="del" jdbcType="BIT" property="del"/>
+    </resultMap>
+
+    <update id="delByPrimaryKey" parameterType="Integer">
+        update user set del = 1 where id = #{id}
+    </update>
+
+    <update id="unDelByPrimaryKey" parameterType="Integer">
+        update user set del = 0 where id = #{id}
+    </update>
+
+    <update id="maskByPrimaryKey" parameterType="Integer">
+        update user set mask = 1 where id = #{id}
+    </update>
+
+    <update id="unMaskByPrimaryKey" parameterType="Integer">
+        update user set mask = 0 where id = #{id}
+    </update>
+
+    <update id="authAppUserByPrimaryKey" parameterType="Integer">
+        update user set authenticate = #{1} where id = #{0}
+    </update>
+
 </mapper>

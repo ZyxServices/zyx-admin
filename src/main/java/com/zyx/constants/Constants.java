@@ -124,6 +124,26 @@ public interface Constants {
      * 文件格式错误
      */
     int AUTH_ERROR_903 = 903;
+    /**
+     * 删除失败
+     */
+    int ERROR_DEL_1001 = 1001;
+
+    /**
+     * 恢复删除失败
+     */
+    int ERROR_UN_DEL_1002 = 1002;
+
+    /**
+     * 屏蔽失败
+     */
+    int ERROR_MASK_1003 = 1003;
+
+    /**
+     * 恢复屏蔽失败
+     */
+    int ERROR_UN_MASK_1004 = 1004;
+
     ////////
     ////////////// 系统状态码 结束//////////////////
 
@@ -146,6 +166,27 @@ public interface Constants {
     String MSG_REQUEST_ERROR = "request error";
 
     String MSG_REQUEST_UNAUTHORIZED = "unauthorized request";
+
+    /**
+     * 删除失败
+     */
+    String ERROR_DEL_1001_MSG = "删除失败";
+
+    /**
+     * 恢复删除失败
+     */
+    String ERROR_UN_DEL_1002_MSG = "恢复删除失败";
+
+    /**
+     * 屏蔽失败
+     */
+    String ERROR_MASK_1003_MSG = "屏蔽失败";
+
+    /**
+     * 恢复屏蔽失败
+     */
+    String ERROR_UN_MASK_1004_MSG = "恢复屏蔽失败";
+
 
     ////////////// 系统消息 结束//////////////////
 
@@ -173,4 +214,43 @@ public interface Constants {
         put(Constants.ERROR_MSG, Constants.MSG_PARAM_MISS);
     }};
 
+    /**
+     * 参数缺失
+     */
+    Map<String, Object> MAP_BASE_SUCCESS = new ConcurrentHashMap() {{
+        put(Constants.STATE, SUCCESS);
+        put(Constants.ERROR_MSG, MSG_SUCCESS);
+    }};
+
+    /**
+     * 数据库错误，删除失败
+     */
+    Map<String, Object> MAP_DEL_ERROR = new ConcurrentHashMap() {{
+        put(Constants.STATE, ERROR_DEL_1001);
+        put(Constants.ERROR_MSG, ERROR_DEL_1001_MSG);
+    }};
+
+    /**
+     * 数据库错误，删除恢复失败
+     */
+    Map<String, Object> MAP_UN_DEL_ERROR = new ConcurrentHashMap() {{
+        put(Constants.STATE, ERROR_UN_DEL_1002);
+        put(Constants.ERROR_MSG, ERROR_UN_DEL_1002_MSG);
+    }};
+
+    /**
+     * 数据库错误，屏蔽
+     */
+    Map<String, Object> MAP_MASK_ERROR = new ConcurrentHashMap() {{
+        put(Constants.STATE, ERROR_MASK_1003);
+        put(Constants.ERROR_MSG, ERROR_MASK_1003_MSG);
+    }};
+
+    /**
+     * 数据库错误，屏蔽恢复失败
+     */
+    Map<String, Object> MAP_UN_MASK_ERROR = new ConcurrentHashMap() {{
+        put(Constants.STATE, ERROR_UN_MASK_1004);
+        put(Constants.ERROR_MSG, ERROR_UN_MASK_1004_MSG);
+    }};
 }
