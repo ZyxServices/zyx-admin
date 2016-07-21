@@ -102,6 +102,74 @@
 		<!--<table tableName="activity" domainObjectName="Activity">
 			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
 		</table>-->
+		<!--<table tableName="SYS_APP_USER">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+		<!--<table tableName="SYS_DICTIONARIES">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+		<!--<table tableName="SYS_GL_QX">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+		<!--<table tableName="SYS_MENU">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+		<!--<table tableName="SYS_ROLE">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+		<!--<table tableName="SYS_USER">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+		<!--<table tableName="SYS_USER_QX">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+		<!--<table tableName="member">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+		<!--<table tableName="devaluation">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+		<!--<table tableName="user" domainObjectName="AppUser">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+
+		<!--&lt;!&ndash;系统模块 表构建&ndash;&gt;-->
+		<!--&lt;!&ndash;举报&ndash;&gt;-->
+		<!--<table tableName="t_report" domainObjectName="Report">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+
+		<!--&lt;!&ndash;Live直播模块表构建&ndash;&gt;-->
+		<!--&lt;!&ndash;直播信息&ndash;&gt;-->
+		<!--<table tableName="t_live" domainObjectName="LiveInfo">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+		<!--&lt;!&ndash;直播标签&ndash;&gt;-->
+		<!--<table tableName="t_live_lab" domainObjectName="LiveLab">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+
+		<!--<table tableName="circle" domainObjectName="Circle">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+		<!--<table tableName="circleItem" domainObjectName="CircleItem">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+		<!--<table tableName="concern" domainObjectName="Concern">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+		<!--<table tableName="meet" domainObjectName="Meet">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+		<!--<table tableName="myconcern" domainObjectName="MyConcern">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+		<!--<table tableName="reply" domainObjectName="Reply">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
+		<!--<table tableName="zan" domainObjectName="Zan">-->
+			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
+		<!--</table>-->
 
 
 	</context>
