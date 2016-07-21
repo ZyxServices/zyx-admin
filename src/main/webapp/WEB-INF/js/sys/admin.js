@@ -11,6 +11,10 @@ $(function () {
         pageList: [5, 10, 20, 50],
         minimumCountColumns: 2,
         paginationPreText: "上一页",
-        paginationNextText: "下一页",
+        paginationNextText: "下一页"
     })
 })
+function createAdministrators() {
+    $("#administratorsList").hide();
+    $("#administratorsCreate").show();
+}

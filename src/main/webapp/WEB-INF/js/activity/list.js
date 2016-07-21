@@ -49,7 +49,8 @@ $(function () {
     }
 
     $('#activity-summernote').summernote({
-        height: 200
+        lang: 'zh-CN',
+        height:200
     });
     $("#activity-list-table").bootstrapTable({
         url: "/activity/queryActivity",

@@ -86,7 +86,7 @@
 
                 <div class="row-fluid margin-bottom-10">
                     <div class="span6">
-                        <a class="btn btn-default" href="javascript:void(0)" onclick="createJurisdictionlist()">创建权限等级</a>
+                        <a class="btn btn-default" href="javascript:void(0)" onclick="createJurisdiction()">创建权限等级</a>
                     </div>
                 </div>
                 <div class="row-fluid">

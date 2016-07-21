@@ -23,6 +23,7 @@
 <script type="text/javascript" src="../../js/bootstrap-datetimepicker.zh-CN.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <script src="../../js/summernote.min.js" type="text/javascript"></script>
+<script src="../../js/summernote-zh-CN.js" type="text/javascript"></script>
 
 <script src="../../js/dataformat.js" type="text/javascript"></script>
 
