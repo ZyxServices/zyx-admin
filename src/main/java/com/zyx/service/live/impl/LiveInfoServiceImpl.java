@@ -3,6 +3,7 @@ package com.zyx.service.live.impl;
 import com.zyx.mapper.LiveInfoMapper;
 import com.zyx.model.LiveInfo;
 import com.zyx.parm.live.LiveInfoParm;
+import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.live.LiveInfoService;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +16,24 @@ import java.util.List;
  * Created by MrDeng on 2016/7/18.
  */
 @Service("liveInfoService")
-public class LiveInfoServiceImpl implements LiveInfoService {
+public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements LiveInfoService {
     @Autowired
     LiveInfoMapper liveInfoMapper;
+
+    @Override
+    public void addLiveInfo(LiveInfo liveInfo) {
+        liveInfo.setDel(0);
+        liveInfoMapper.insert(liveInfo);
+    }
+
     @Override
     public List<LiveInfo> getLiveInfos(LiveInfoParm param) {
-        if(param.getPageNumber()!=null&&param.getPageNumber()>=0&&param.getPageSize()!=null&&param.getPageSize()>0){
+        Example example = new Example(LiveInfo.class);
+        if (param.getPageNumber() != null && param.getPageNumber() >= 0 && param.getPageSize() != null && param.getPageSize() > 0) {
             RowBounds rowBounds = new RowBounds((param.getPageNumber() - 1) * param.getPageSize(), param.getPageSize());
-            Example example = new Example(LiveInfo.class);
-            return liveInfoMapper.selectByExampleAndRowBounds(example,rowBounds);
+            return liveInfoMapper.selectByExampleAndRowBounds(example, rowBounds);
+        } else {
+            return liveInfoMapper.selectByExample(example);
         }
-       return null;
     }
 }
