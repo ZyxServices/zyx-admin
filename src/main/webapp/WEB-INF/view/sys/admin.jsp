@@ -33,6 +33,20 @@
     <div class="page-content">
 
         <!-- BEGIN PAGE CONTAINER-->
+        <%--modal删除--%>
+        <div id="admin-del" class="modal fade">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"></button>
+                <h3>管理员删除</h3>
+            </div>
+            <div class="modal-body">
+                该管理员的所有数据将被完全删除，不能再进行操作
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default">确定</button>
+                <button class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
         <%--管理员列表--%>
         <div class="container-fluid" id="administratorsList">
 
@@ -158,7 +172,7 @@
                         <div class="control-group">
                             <label class="control-label">管理员名称</label>
                             <div class="controls">
-                                <input type="text" class="span6 m-wrap"/>
+                                <input type="text" class="span6 form-control"/>
                                 <span class="help-inline">*</span>
                             </div>
                         </div>
@@ -166,7 +180,7 @@
                         <div class="control-group">
                             <label class="control-label">权限等级</label>
                             <div class="controls">
-                                <select class="span6 m-wrap">
+                                <select class="span6 form-control">
                                     <option>一级</option>
                                     <option>二级</option>
                                     <option>三级</option>

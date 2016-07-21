@@ -42,6 +42,34 @@
   <div class="page-content">
 
     <!-- BEGIN PAGE CONTAINER-->
+    <%--modal删除--%>
+    <div id="activity-del" class="modal fade">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button"></button>
+        <h3>活动删除</h3>
+      </div>
+      <div class="modal-body">
+        该活动的所有数据将被完全删除，不能再被浏览
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default">确定</button>
+        <button class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+    <%--modal屏蔽--%>
+    <div id="activity-shield" class="modal fade">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button"></button>
+        <h3>活动屏蔽</h3>
+      </div>
+      <div class="modal-body">
+        屏蔽之后，该活动将不在首页活动和活动列表页展示，“我的关注”和“我的”中活动保留，仍可以被浏览
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default">确定</button>
+        <button class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div>
     <%--活动列表--%>
     <div class="container-fluid" id="activityList">
 

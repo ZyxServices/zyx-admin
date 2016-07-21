@@ -40,6 +40,20 @@
     <div class="page-content">
 
         <!-- BEGIN PAGE CONTAINER-->
+        <%--modal删除--%>
+        <div id="jurisdiction-del" class="modal fade">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button"></button>
+                <h3>权限等级删除</h3>
+            </div>
+            <div class="modal-body">
+                该权限等级及该等级下的管理员数据，将被完全删除，不能再进行操作
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default">确定</button>
+                <button class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
         <%--权限列表--%>
         <div class="container-fluid" id="jurisdictionList">
 
@@ -164,7 +178,7 @@
                         <div class="control-group">
                             <label class="control-label">等级</label>
                             <div class="controls">
-                                <select class="span6 m-wrap">
+                                <select class="span6 form-control">
                                     <option>一级</option>
                                     <option>二级</option>
                                     <option>三级</option>
@@ -176,7 +190,7 @@
                         <div class="control-group">
                             <label class="control-label">该权限等级管理员</label>
                             <div class="controls">
-                                <input type="text" class="span6 m-wrap"/>
+                                <input type="text" class="span6 form-control"/>
                                 <span class="help-inline">+</span>
                             </div>
                         </div>
@@ -184,7 +198,7 @@
                         <div class="control-group">
                             <label class="control-label">等级权限</label>
                             <div class="controls">
-                                <input type="text" class="span6 m-wrap"/><%--树的结构，含复选框--%>
+                                <input type="text" class="span6 form-control"/><%--树的结构，含复选框--%>
                             </div>
                         </div>
 

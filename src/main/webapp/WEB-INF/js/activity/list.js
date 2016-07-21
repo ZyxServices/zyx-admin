@@ -156,11 +156,12 @@ function modify(id) {
 }
 /*屏蔽*/
 function shield(id) {
-    console.log(id)
+    console.log(id);
+    $("#activity-shield").modal('toggle');
 }
 /*删除*/
 function del(id) {
-    console.log(id)
+    $("#activity-del").modal('toggle');
 }
 
 function createActivity() {
