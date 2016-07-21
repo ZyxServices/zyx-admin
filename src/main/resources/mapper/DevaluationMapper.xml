@@ -9,5 +9,7 @@
     <result column="types" jdbcType="INTEGER" property="types" />
     <result column="devaluation_id" jdbcType="INTEGER" property="devaluationId" />
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="sequence" jdbcType="INTEGER" property="sequence" />
   </resultMap>
 </mapper>

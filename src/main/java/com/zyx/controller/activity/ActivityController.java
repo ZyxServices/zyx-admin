@@ -1,10 +1,8 @@
 package com.zyx.controller.activity;
 
-import com.zyx.parm.QueryActivityParm;
 import com.zyx.service.activity.ActivityService;
-import com.zyx.service.activity.DevaluationService;
+import com.zyx.service.devaluation.DevaluationService;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.auth.In;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -65,15 +63,15 @@ public class ActivityController {
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
-
-    @RequestMapping(value = "/queryActivity", method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/queryActivity", method = {RequestMethod.GET, RequestMethod.POST})
     @ApiOperation(value = "活动接口", notes = "活动发布")
     public ModelAndView queryActivity(@RequestParam(name = "pageDataNum", required = true) Integer pageDataNum,
-                                      @RequestParam(name = "pageNum", required = true) Integer pageNum) {
+                                      @RequestParam(name = "pageNum", required = true) Integer pageNum,
+                                      @RequestParam(name = "search", required = false) String search) {
 
         AbstractView jsonView = new MappingJackson2JsonView();
 
-        Map<String, Object> map = activityService.queryActivity(pageDataNum, pageNum);
+        Map<String, Object> map = activityService.queryActivity(pageDataNum, pageNum, search);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }

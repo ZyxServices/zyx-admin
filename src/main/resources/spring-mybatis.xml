@@ -19,7 +19,6 @@
 		<property name="mapperLocations">
 			<list>
 				<value>classpath*:mapper/*.xml</value>
-				<value>classpath*:mapper/*/*.xml</value>
 			</list>
 		</property>
 		<property name="typeAliasesPackage" value="com.zyx.model" />

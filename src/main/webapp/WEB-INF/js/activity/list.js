@@ -1,20 +1,22 @@
 /**
  * Created by ZYX on 2016/7/12.
  */
-$(function(){
+$(function () {
 
     $("#appQueryEnd").click(function () {
         $('#userTable').bootstrapTable("refresh")
     })
     function queryParams(params) {
+        console.log(params)
         return {
             pageDataNum: params.limit,
-            pageNum: (params.offset + 1)
+            pageNum: (params.offset + 1),
+            search:params.search
         };
     }
 
     function fromData(res) {
-        if(res.state == 480){
+        if (res.state == 480) {
             $("#content-wrapper").html("<section class='content'>无权限</section>");
             return false;
         }
@@ -25,8 +27,8 @@ $(function(){
                 var dataObj = {};
                 dataObj.id = item.id;
                 dataObj.name = item.title;
-                dataObj.time = (new Date(item.createTime).format("yyyy-mm-dd HH:MM:ss"));
-                dataObj.startTime = (new Date(item.startTime).format("yyyy-mm-dd HH:MM:ss"));
+                dataObj.time = item.createTime;
+                dataObj.startTime = item.startTime;
                 dataObj.createPerson = item.userId;
                 dataObj.address = item.address;
                 dataObj.pv = 0;
@@ -38,39 +40,44 @@ $(function(){
                 var dataObj = {};
                 dataArray.push(dataObj);
             }
+            console.log(dataArray)
             return {
                 rows: dataArray,
                 total: res.dataCount
             }
         }
-
     }
 
-
     $('#activity-summernote').summernote({
-        height:200
+        height: 200
     });
     $("#activity-list-table").bootstrapTable({
         url: "/activity/queryActivity",
-        method: 'post',
-        dataType: "json",
-        cache: false,
-        striped: true,
-        pagination: true, //分页
-        singleSelect: true,
-        search: false,
-        pageList: [5, 10, 20, 50],
-        contentType: "application/x-www-form-urlencoded",
-        minimumCountColumns: 2,
+        toolbar: '#toolbar',        //工具按钮用哪个容器
+        striped: true,           //是否显示行间隔色
+        cache: true,            //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+        pagination: true,          //是否显示分页（*）
         paginationPreText: "上一页",
         paginationNextText: "下一页",
-        sidePagination: 'server',
+        pageNumber: 1,            //初始化加载第一页，默认第一页
+        pageSize: 10,            //每页的记录行数（*）
+        pageList: [10, 15, 20, 25],  //记录数可选列表
+        checkbox: true,
+        checkboxHeader: "true",
+        sortable: true,           //是否启用排序
+        strictSearch: true,
+        height: 500,            //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+        uniqueId: "id",           //每一行的唯一标识，一般为主键列
+        search: true,
+        sidePagination: "server",
+        method: "get",
+        queryParamsType: "limit",
         queryParams: queryParams,
         responseHandler: fromData
 
     })
     $('#activityStartTime').datetimepicker({
-        language:  'zh-CN',
+        language: 'zh-CN',
         format: 'yyyy-mm-dd hh:ii',
         weekStart: true,
         todayBtn: true,
@@ -80,9 +87,9 @@ $(function(){
         forceParse: true,
         pickerPosition: "bottom-left",
         showMeridian: false
-      });
+    });
     $('#activityEndTime').datetimepicker({
-        language:  'zh-CN',
+        language: 'zh-CN',
         format: 'yyyy-mm-dd hh:ii',
         weekStart: true,
         todayBtn: true,
@@ -92,9 +99,9 @@ $(function(){
         forceParse: true,
         pickerPosition: "bottom-left",
         showMeridian: false
-      });
+    });
     $('#signStartTime').datetimepicker({
-        language:  'zh-CN',
+        language: 'zh-CN',
         weekStart: true,
         format: 'yyyy-mm-dd hh:ii',
         todayBtn: true,
@@ -106,7 +113,7 @@ $(function(){
         showMeridian: false
     });
     $('#signEndTime').datetimepicker({
-        language:  'zh-CN',
+        language: 'zh-CN',
         weekStart: true,
         todayBtn: true,
         format: 'yyyy-mm-dd hh:ii',
@@ -122,12 +129,15 @@ $(function(){
 
 function operate(value, row, index) {
     return [
-        '<a class="preview p5"   href="javascript:void(0)" title="preview" onclick="previewActivity(\''+ row.id + '\')">预览</a>',
-        '<a class="recommend p5" href="javascript:void(0)" title="recommend" onclick="recommend(\''+ row.id + '\')">推荐</a>',
-        '<a class="recommend p5" href="javascript:void(0)" title="recommend" onclick="modify(\''+ row.id + '\')">编辑</a>',
-        '<a class="Shield p5" href="javascript:void(0)" title="Shield" onclick="shield(\''+ row.id + '\')">屏蔽</a>',
-        '<a class="remove p5" href="javascript:void(0)" title="remove" onclick="del(\''+ row.id + '\')">删除</a>'
+        '<a class="preview p5"   href="javascript:void(0)" title="preview" onclick="previewActivity(\'' + row.id + '\')">预览</a>',
+        '<a class="recommend p5" href="javascript:void(0)" title="recommend" onclick="recommend(\'' + row.id + '\')">推荐</a>',
+        '<a class="recommend p5" href="javascript:void(0)" title="recommend" onclick="modify(\'' + row.id + '\')">编辑</a>',
+        '<a class="Shield p5" href="javascript:void(0)" title="Shield" onclick="shield(\'' + row.id + '\')">屏蔽</a>',
+        '<a class="remove p5" href="javascript:void(0)" title="remove" onclick="del(\'' + row.id + '\')">删除</a>'
     ].join('');
+}
+function timeFormat(data) {
+    return new Date(data).format("yyyy-mm-dd HH:MM:ss")
 }
 /*预览*/
 function previewActivity(id) {

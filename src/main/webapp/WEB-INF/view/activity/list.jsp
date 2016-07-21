@@ -93,14 +93,14 @@
         </div>
         <div class="row-fluid">
           <div class="span12 responsive">
-            <table id="activity-list-table">
+            <table class="table table-hover" id="activity-list-table">
               <thead>
               <tr>
                 <th data-checkbox="true"></th>
                 <th data-field="id">id</th>
                 <th data-field="name">组合名称</th>
-                <th data-field="time">发布时间</th>
-                <th data-field="startTime">开始时间</th>
+                <th data-field="time"  data-formatter="timeFormat">发布时间</th>
+                <th data-field="startTime"  data-formatter="timeFormat">开始时间</th>
                 <th data-field="createPerson">创建人</th>
                 <th data-field="address">活动地点</th>
                 <th data-field="pv">浏览量</th>

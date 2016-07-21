@@ -23,6 +23,18 @@ public class Devaluation {
     private Long createTime;
 
     /**
+     * 图片地址
+     */
+    @Column(name = "image")
+    private String image;
+
+    /**
+     * 首推排序
+     */
+    @Column(name = "sequence")
+    private Integer sequence;
+
+    /**
      * @return id
      */
     public Integer getId() {
@@ -84,5 +96,41 @@ public class Devaluation {
      */
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    /**
+     * 获取图片地址
+     *
+     * @return image - 图片地址
+     */
+    public String getImage() {
+        return image;
+    }
+
+    /**
+     * 设置图片地址
+     *
+     * @param image 图片地址
+     */
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    /**
+     * 获取首推排序
+     *
+     * @return sequence - 首推排序
+     */
+    public Integer getSequence() {
+        return sequence;
+    }
+
+    /**
+     * 设置首推排序
+     *
+     * @param sequence 首推排序
+     */
+    public void setSequence(Integer sequence) {
+        this.sequence = sequence;
     }
 }

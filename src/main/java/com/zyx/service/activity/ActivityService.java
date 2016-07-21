@@ -23,6 +23,6 @@ public interface ActivityService {
      * @param pageNumber
      * @return
      */
-    Map<String, Object> queryActivity(int pageDataNumber, int pageNumber);
+    Map<String, Object> queryActivity(int pageDataNumber, int pageNumber,String searchText);
 
 }

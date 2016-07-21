@@ -30,7 +30,7 @@ public class ActivityServiceImpl implements ActivityService {
     private ActivityMapper activityMapper;
 
     @Override
-    public Map<String, Object> queryActivity(int pageDataNumber, int pageNumber) {
+    public Map<String, Object> queryActivity(int pageDataNumber, int pageNumber,String searchText) {
 
         QueryActivityParm parm = new QueryActivityParm();
 
@@ -46,12 +46,16 @@ public class ActivityServiceImpl implements ActivityService {
                 parm.setPage((pageDataNumber * pageNumber) - 1);
             }
         }
-
+        parm.setGroupName(searchText);
         List<Activity> activities = activityMapper.queryActivity(parm);
+
+        int i = activityMapper.selectCount(null);
         if (activities != null && activities.size() > 0) {
-            return MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", activities);
+            Map<String, Object> map = MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", activities);
+            map.put("dataCount", i);
+            return map;
         } else {
-            return MapUtils.buildErrorMap(Constants.NO_DATA,"差无数据");
+            return MapUtils.buildErrorMap(Constants.NO_DATA, "差无数据");
         }
     }
 }

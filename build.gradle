@@ -222,6 +222,11 @@ dependencies {
     compile 'io.springfox:springfox-swagger-ui:2.4.0'
     compile 'io.springfox:springfox-staticdocs:2.4.0'
 
+    //reids
+    compile 'redis.clients:jedis:2.8.1'
+    compile 'org.springframework.data:spring-data-redis:1.7.2.RELEASE'
+
+
     testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc:1.1.0.RC1'
     compile 'io.github.robwin:assertj-swagger:0.1.2'
     testCompile 'com.fasterxml.jackson.module:jackson-module-jsonSchema:2.4.0'
