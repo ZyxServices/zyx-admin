@@ -49,7 +49,7 @@ public class AppUserService {
                 criteria2.andEqualTo("authenticate", param.getAuthenticate());
             }
             List<AppUser> ss = appUserMapper.selectByExampleAndRowBounds(example, row);
-            int count = appUserMapper.selectCount(new AppUser());
+            int count = appUserMapper.selectCountByExample(example);
             map.put("rows", ss);
             map.put("total", count);
         } catch (Exception e) {

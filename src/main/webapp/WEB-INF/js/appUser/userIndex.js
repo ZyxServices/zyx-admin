@@ -72,7 +72,7 @@ function operateFormatter(value, row, index) {
             _html.push('<a class="mask p5" href="javascript:void(0)" title="mask">屏蔽</a>');
         }
         if (row["authenticate"] == 1) {// 待审核
-            _html.push('<a class="auth p5" href="javascript:void(0)" title="auth">审核</a>');
+            // _html.push('<a class="auth p5" href="javascript:void(0)" title="auth">审核</a>');
         }
         _html.push('<a class="del p5" href="javascript:void(0)" title="del">删除</a>');
     }
