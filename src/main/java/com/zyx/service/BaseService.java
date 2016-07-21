@@ -1,108 +1,53 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014 abel533@gmail.com
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
 package com.zyx.service;
 
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.session.RowBounds;
-import org.springframework.beans.factory.annotation.Autowired;
-import tk.mybatis.mapper.common.Mapper;
+import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * Created by chenkaihua on 15-12-23.
+ * 通用接口
  */
-public class BaseService<Mapp extends Mapper<M>,M> implements  Mapper<M>{
+@Service
+public interface BaseService<T> {
 
-    Mapp mapper;
+    T selectByKey(Object key);
 
+    int save(T entity);
 
-    @Override
-    public int deleteByExample(Object example) {
-        return mapper.deleteByExample(example);
-    }
+    int delete(Object key);
 
-    @Override
-    public int deleteByPrimaryKey(Object key) {
-        return mapper.deleteByPrimaryKey(key);
-    }
+    int updateAll(T entity);
 
-    @Override
-    public int delete(M record) {
-        return mapper.delete(record);
-    }
+    int updateNotNull(T entity);
 
-    @Override
-    public int insert(M record) {
-        return mapper.insert(record);
-    }
+    List<T> selectByExample(Object example);
 
-    @Override
-    public int insertSelective(M record) {
-        return mapper.insertSelective(record);
-    }
-
-    @Override
-    public List<M> selectAll() {
-        return mapper.selectAll();
-    }
-
-    @Override
-    public List<M> selectByExample(Object example) {
-        return mapper.selectByExample(example);
-    }
-
-    @Override
-    public List<M> selectByExampleAndRowBounds(Object example, RowBounds rowBounds) {
-        return mapper.selectByExampleAndRowBounds(example,rowBounds);
-    }
-
-    @Override
-    public M selectByPrimaryKey(Object key) {
-        return mapper.selectByPrimaryKey(key);
-    }
-
-    @Override
-    public int selectCountByExample(Object example) {
-        return mapper.selectCountByExample(example);
-    }
-
-    @Override
-    public int selectCount(M record) {
-        return mapper.selectCount(record);
-    }
-
-    @Override
-    public List<M> select(M record) {
-        return mapper.select(record);
-    }
-
-    @Override
-    public M selectOne(M record) {
-        return mapper.selectOne(record);
-    }
-
-    @Override
-    public List<M> selectByRowBounds(M record, RowBounds rowBounds) {
-        return mapper.selectByRowBounds(record,rowBounds);
-    }
-
-    @Override
-    public int updateByExample(@Param("record") M record, @Param("example") Object example) {
-        return mapper.updateByExample(record,example);
-    }
-
-    @Override
-    public int updateByExampleSelective(@Param("record") M record, @Param("example") Object example) {
-        return mapper.updateByExampleSelective(record,example);
-    }
-
-    @Override
-    public int updateByPrimaryKey(M record) {
-        return mapper.updateByPrimaryKey(record);
-    }
-
-    @Override
-    public int updateByPrimaryKeySelective(M record) {
-        return mapper.updateByPrimaryKeySelective(record);
-    }
+    List<T> select(T record);
+    
+    int selectCount(T record);
+    //TODO 其他...
 }
