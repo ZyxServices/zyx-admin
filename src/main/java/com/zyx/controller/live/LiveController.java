@@ -67,9 +67,7 @@ public class LiveController {
     public ModelAndView getLiveLabList() {
         Map<String, Object> result = new HashMap<>();
         try {
-
             List<LiveLab> labs = liveLabService.getAllLabs();
-
             result.put(LiveConstants.STATE, LiveConstants.SUCCESS);
             result.put(LiveConstants.DATA, labs);
         }catch (Exception e){
@@ -101,20 +99,25 @@ public class LiveController {
     public ModelAndView updateLiveLab(@RequestParam(name = "id", required = true) Integer id,
                                       @RequestParam(name = "lab", required = false) String lab,
                                       @RequestParam(name = "desc", required = false) String desc,
-                                      @RequestParam(name = "desc", required = false) Integer state) {
+                                      @RequestParam(name = "state", required = false) Integer state) {
         Map<String, Object> result = new HashMap<>();
-        if (id==null||((null == lab || lab.isEmpty()) && (null == desc || desc.isEmpty())&&null == state)) {
-            result.put(LiveConstants.STATE, LiveConstants.PARAM_MISS);
-            result.put(LiveConstants.ERROR_MSG, LiveConstants.MSG_PARAM_MISS);
-        } else {
-            LiveLab liveLab = new LiveLab();
-            liveLab.setId(id);
-            liveLab.setLab(lab.trim());
-            liveLab.setLab(desc.trim());
-            liveLab.setState(state);
-            liveLabService.updateLiveLab(liveLab);
-            result.put(LiveConstants.STATE, LiveConstants.SUCCESS);
+        try {
+            if (id==null||((null == lab || lab.isEmpty()) && (null == desc || desc.isEmpty())&&null == state)) {
+                result.put(LiveConstants.STATE, LiveConstants.PARAM_MISS);
+                result.put(LiveConstants.ERROR_MSG, LiveConstants.MSG_PARAM_MISS);
+            } else {
+                LiveLab liveLab = new LiveLab();
+                liveLab.setId(id);
+                liveLab.setLab(lab.trim());
+                liveLab.setLab(desc.trim());
+                liveLab.setState(state);
+                liveLabService.updateLiveLab(liveLab);
+                result.put(LiveConstants.STATE, LiveConstants.SUCCESS);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(result);
         return new ModelAndView(jsonView);

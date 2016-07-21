@@ -19,6 +19,7 @@ public class LiveLabServiceImpl implements LiveLabService {
 
     @Override
     public void addLiveLab(LiveLab liveLab) {
+        liveLab.setDel(0);
         liveLabMapper.insert(liveLab);
     }
 
@@ -49,6 +50,6 @@ public class LiveLabServiceImpl implements LiveLabService {
 
     @Override
     public void updateLiveLab(LiveLab liveLab) {
-        liveLabMapper.updateByPrimaryKey(liveLab);
+        liveLabMapper.updateByPrimaryKeySelective(liveLab);
     }
 }
