@@ -126,7 +126,7 @@
                 <th data-checkbox="true"></th>
                 <th data-field="id">id</th>
                 <th data-field="name">活动组合名称</th>
-                <th data-field="time"  data-formatter="timeFormat">活动发布时间</th>
+                <th data-field="time"  data-formatter="timeFormat">组合发布时间</th>
                 <th data-field="startTime"  data-formatter="timeFormat">浏览量</th>
                 <th data-formatter="operate">操作</th>
               </tr>

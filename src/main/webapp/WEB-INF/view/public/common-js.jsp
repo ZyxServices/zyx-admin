@@ -39,7 +39,8 @@
             $("." + getSecondMenuObj).find(".selected").show();
             return;
         }
-        if (getMenuObj == "circle" || getMenuObj == "shop" || getMenuObj == "homepage" || getMenuObj == "banner" || getMenuObj == "sys" || getMenuObj == "activity") {
+        console.log(getMenuObj)
+        if (getMenuObj == "circle" || getMenuObj == "shop" || getMenuObj == "appUser" || getMenuObj == "homepage" || getMenuObj == "banner" || getMenuObj == "sys" || getMenuObj == "activity") {
             $("." + getMenuObj).addClass("open");
             $("." + getMenuObj).addClass("active");
             $("." + getMenuObj).find(".arrow").addClass("open");

@@ -106,13 +106,13 @@
                 <span class="selected hide"></span>
             </a>
             <ul class="sub-menu">
-                <li class="user-all">
+                <li class="userIndex">
                     <a href="<%=request.getContextPath()%>/menu/appUser/userIndex">用户列表</a>
                 </li>
-                <li class="user-yrz">
+                <li class="yrzAppUser">
                     <a href="<%=request.getContextPath()%>/menu/appUser/yrzAppUser">已认证用户</a>
                 </li>
-                <li class="user-dsh">
+                <li class="dshAppUser">
                     <a href="<%=request.getContextPath()%>/menu/appUser/dshAppUser">待审核用户</a>
                 </li>
             </ul>
