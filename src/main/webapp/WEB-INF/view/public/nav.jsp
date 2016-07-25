@@ -119,7 +119,7 @@
         </li>
         <%--消息--%>
         <li class="">
-            <a href="#">
+            <a href="<%=request.getContextPath()%>/menu/message/messageIndex">
                 <i class="icon-gift"></i>
                 <span class="title">消息</span>
                 <span class="selected hide"></span>

@@ -80,4 +80,7 @@ public class MenuController {
     public ModelAndView redirectJurisdiction() {
         return new ModelAndView("/sys/jurisdiction");
     }
+
+    @RequestMapping(value = "/message/messageIndex", method = RequestMethod.GET)
+    public ModelAndView messageIndex() {return new ModelAndView("/message/messageIndex"); }
 }
