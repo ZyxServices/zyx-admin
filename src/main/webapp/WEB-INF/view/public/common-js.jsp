@@ -40,7 +40,6 @@
             $("." + getSecondMenuObj).find(".selected").show();
             return;
         }
-        console.log(getMenuObj)
         if (getMenuObj == "circle" || getMenuObj == "shop" || getMenuObj == "appUser" || getMenuObj == "homepage" || getMenuObj == "banner" || getMenuObj == "sys" || getMenuObj == "activity") {
             $("." + getMenuObj).addClass("open");
             $("." + getMenuObj).addClass("active");

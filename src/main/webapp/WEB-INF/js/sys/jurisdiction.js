@@ -8,6 +8,8 @@ $(function () {
         pagination: true, //分页
         singleSelect: true,
         search: false,
+        height: 500,
+        smartDisplay: false,
         pageList: [5, 10, 20, 50],
         minimumCountColumns: 2,
         paginationPreText: "上一页",
