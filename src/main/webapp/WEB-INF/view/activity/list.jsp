@@ -377,18 +377,23 @@
         <!-- BEGIN DASHBOARD STATS -->
         <div class="row-fluid">
 
-          <form action="/deva/queryActivity" method="post"  enctype="multipart/form-data" class="form-horizontal" role="form">
+          <form action="/v1/deva/queryActivity" id="devaForm" method="post"  enctype="multipart/form-data" class="form-horizontal" novalidate="novalidate" role="form">
             <div class="control-group">
-              <label class="control-label">活动名称</label>
+              <label class="control-label">活动标题</label>
               <div class="controls">
                 <sapn class="span6" id="activityName"></sapn>
               </div>
             </div>
-
+            <div class="control-group">
+              <label class="control-label">活动原有封面图</label>
+              <div class="controls">
+                <img id="activityImage" src="">
+              </div>
+            </div>
             <div class="control-group">
               <label class="control-label">banner排序</label>
               <div class="controls">
-                <select class="span6 m-wrap" name="sequence">
+                <select class="span6 m-wrap" id="sequence" name="sequence">
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>

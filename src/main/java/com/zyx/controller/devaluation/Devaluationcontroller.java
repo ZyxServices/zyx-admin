@@ -29,7 +29,7 @@ import java.util.Map;
  * @update 16-7-21 上午11:56
  */
 @Controller
-@RequestMapping("/deva")
+@RequestMapping("/v1/deva")
 public class Devaluationcontroller {
 
     @Resource

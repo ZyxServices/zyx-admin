@@ -30,11 +30,11 @@ configurations {
 buildscript {
 
     repositories {
-        def REPOSITORY_URL = 'https://maven.oschina.net/content/groups/public'
+        def REPOSITORY_URL = 'https://repo1.maven.org/maven2'
         all { ArtifactRepository repo ->
             if (repo instanceof MavenArtifactRepository) {
                 def url = repo.url.toString()
-                if (url.startsWith('https://repo1.maven.org/maven2') || url.startsWith('https://jcenter.bintray.com/')) {
+                if (url.startsWith('https://maven.oschina.net/content/groups/public') || url.startsWith('https://jcenter.bintray.com/')) {
                     project.logger.lifecycle "Repository ${repo.url} replaced by $REPOSITORY_URL."
                     remove repo
                 }

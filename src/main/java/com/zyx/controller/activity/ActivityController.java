@@ -28,7 +28,7 @@ import java.util.Map;
  * @update 16-7-12 下午2:27
  */
 @Controller
-@RequestMapping("/activity")
+@RequestMapping("/v1/activity")
 public class ActivityController {
 
     @Resource

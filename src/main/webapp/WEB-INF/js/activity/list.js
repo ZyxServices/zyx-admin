@@ -7,11 +7,10 @@ $(function () {
         $('#userTable').bootstrapTable("refresh")
     })
     function queryParams(params) {
-        console.log(params)
         return {
             pageDataNum: params.limit,
             pageNum: (params.offset + 1),
-            search:params.search
+            search: params.search
         };
     }
 
@@ -49,10 +48,10 @@ $(function () {
 
     $('#activity-summernote').summernote({
         lang: 'zh-CN',
-        height:200
+        height: 200
     });
     $("#activity-list-table").bootstrapTable({
-        url: "/activity/queryActivity",
+        url: "/v1/activity/queryActivity",
         toolbar: '#toolbar',        //工具按钮用哪个容器
         striped: true,           //是否显示行间隔色
         cache: true,            //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
@@ -126,12 +125,34 @@ $(function () {
         showMeridian: false
     });
 
-})
+});
+
+$('#devaForm').ajaxForm({
+        url: '/v1/deva/queryActivity',
+        type: 'post',
+        dataType: 'json',
+        beforeSubmit: function () {
+            var devaId = $("#devaForm").find('input[name="devaId"]').val();
+            var checked = true;
+            if (devaId == undefined || devaId == "") {
+                alert('未知错误，请刷新页面重试');
+                checked = false;
+            }
+            return checked;
+        },
+        success: function (result) {
+            if (result.state && result.state == 200) {
+                alert(result.successmsg)
+            } else if (result.state && result.state == 303) {
+                alert(result.errmsg)
+            }
+        }
+    });
 
 function operate(value, row, index) {
     return [
         '<a class="preview p5"   href="javascript:void(0)" title="preview" onclick="previewActivity(\'' + row.id + '\')">预览</a>',
-        '<a class="recommend p5" href="javascript:void(0)" title="recommend" onclick="recommend(\'' + row.id + '\',\''+ row.name +'\')">推荐</a>',
+        '<a class="recommend p5" href="javascript:void(0)" title="recommend" onclick="recommend(\'' + row.id + '\',\'' + row.name + '\')">推荐</a>',
         '<a class="recommend p5" href="javascript:void(0)" title="recommend" onclick="modify(\'' + row.id + '\')">编辑</a>',
         '<a class="Shield p5" href="javascript:void(0)" title="Shield" onclick="shield(\'' + row.id + '\')">屏蔽</a>',
         '<a class="remove p5" href="javascript:void(0)" title="remove" onclick="del(\'' + row.id + '\')">删除</a>'
@@ -145,14 +166,44 @@ function previewActivity(id) {
     console.log(id)
 }
 /*推荐*/
-function recommend(id,name) {
-    $("#activityName").html(name);
-    $("#activityId").val(id);
+function recommend(id, name) {
+    $.ajax({
+        url: "/v1/activity/queryActivityById",
+        type: 'POST',
+        dataType: 'json',
+        data: {activityId: id},
+        success: function (result) {
+            if (result.state == 200) {
+                var datas = result.data;
+                $("#activityName").html(datas.title);
+                $("#activityId").val(datas.id);
+                console.log("http://image.tiyujia.com/" + datas.imgUrls)
+                $("#activityImage").attr("src", "http://image.tiyujia.com/" + datas.imgUrls)
+            } else {
+                alert(result.successmsg)
+            }
+        }
+    });
     $("#activityRecommend").show();
     $("#activityList").hide();
 }
 /*编辑*/
 function modify(id) {
+    $.ajax({
+        url: "/v1/activity/queryActivityById",
+        type: 'POST',
+        dataType: 'json',
+        data: {activityId: id},
+        success: function (result) {
+            if (result.state == 200) {
+                console.log(state)
+            } else {
+                alert(result.successmsg)
+            }
+        }
+    });
+
+
     $("#activityCreate").show();
     $("#activityList").hide();
 }
@@ -184,7 +235,7 @@ function choiceMore() {
 /*增加用户必填的字段*/
 function createRequired() {
     var requiredVal = $("#requiredVal").val();
-    var val = '<label class="checkbox"><input type="checkbox">'+requiredVal+'</label>';
+    var val = '<label class="checkbox"><input type="checkbox">' + requiredVal + '</label>';
     $("#addBtn").before(val);
     $("#requiredVal").val('');
     $("#addBtn").show();
