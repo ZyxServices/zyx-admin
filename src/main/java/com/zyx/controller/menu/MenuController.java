@@ -16,6 +16,11 @@ public class MenuController {
         return new ModelAndView("/activity/list");
     }
 
+    @RequestMapping(value = "/activity/group", method = RequestMethod.GET)
+    public ModelAndView redirectGroupActivity() {
+        return new ModelAndView("/activity/group");
+    }
+
     @RequestMapping(value = "/appUser/userIndex", method = RequestMethod.GET)
     public ModelAndView redirectAppUser() {
         return new ModelAndView("/appUser/userIndex");

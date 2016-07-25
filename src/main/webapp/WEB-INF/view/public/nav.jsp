@@ -29,12 +29,23 @@
         </li>
         <%--活动--%>
         <li class="activity">
-            <a href="<%=request.getContextPath()%>/menu/activity/list">
+            <a href="javascript:;">
                 <i class="icon-bookmark-empty"></i>
                 <span class="title">活动</span>
+                <span class="arrow"></span>
                 <span class="selected hide"></span>
             </a>
+            <ul class="sub-menu">
+                <li class="list">
+                    <a href="<%=request.getContextPath()%>/menu/activity/list">活动列表<span
+                            class="selected"></span></a>
+                </li>
+                <li class="group">
+                    <a href="<%=request.getContextPath()%>/menu/activity/group">组合活动</a>
+                </li>
+            </ul>
         </li>
+
         <%--直播--%>
         <li class="live">
             <a href="<%=request.getContextPath()%>/menu/live/living">

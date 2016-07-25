@@ -193,16 +193,28 @@
                         <div class="control-group">
                             <label class="control-label">标题</label>
                             <div class="controls">
-                                <input type="text" class="span6 m-wrap" />
+                                <input type="text" class="span6 form-control" />
                                 <span class="help-inline">*</span>
                             </div>
                         </div>
+
                         <div class="control-group">
                             <label class="control-label">内容</label>
                             <div class="controls summernote">
-                                <div class="span6">
+                                <div class="span6 form-control">
                                     <div id="post-summernote"></div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">所属圈子</label>
+                            <div class="controls">
+                                <select class="span6 form-control">
+                                    <option>123</option>
+                                    <option>123321</option>
+                                </select>
+                                <span class="help-inline">*</span>
                             </div>
                         </div>
 

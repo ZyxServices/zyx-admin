@@ -126,7 +126,7 @@
               <tr>
                 <th data-checkbox="true"></th>
                 <th data-field="id">id</th>
-                <th data-field="name">组合名称</th>
+                <th data-field="name">活动名称</th>
                 <th data-field="time"  data-formatter="timeFormat">发布时间</th>
                 <th data-field="startTime"  data-formatter="timeFormat">开始时间</th>
                 <th data-field="createPerson">创建人</th>
