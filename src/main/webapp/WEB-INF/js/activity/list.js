@@ -40,7 +40,6 @@ $(function () {
                 var dataObj = {};
                 dataArray.push(dataObj);
             }
-            console.log(dataArray)
             return {
                 rows: dataArray,
                 total: res.dataCount
@@ -132,7 +131,7 @@ $(function () {
 function operate(value, row, index) {
     return [
         '<a class="preview p5"   href="javascript:void(0)" title="preview" onclick="previewActivity(\'' + row.id + '\')">预览</a>',
-        '<a class="recommend p5" href="javascript:void(0)" title="recommend" onclick="recommend(\'' + row.id + '\')">推荐</a>',
+        '<a class="recommend p5" href="javascript:void(0)" title="recommend" onclick="recommend(\'' + row.id + '\',\''+ row.name +'\')">推荐</a>',
         '<a class="recommend p5" href="javascript:void(0)" title="recommend" onclick="modify(\'' + row.id + '\')">编辑</a>',
         '<a class="Shield p5" href="javascript:void(0)" title="Shield" onclick="shield(\'' + row.id + '\')">屏蔽</a>',
         '<a class="remove p5" href="javascript:void(0)" title="remove" onclick="del(\'' + row.id + '\')">删除</a>'
@@ -146,7 +145,9 @@ function previewActivity(id) {
     console.log(id)
 }
 /*推荐*/
-function recommend(id) {
+function recommend(id,name) {
+    $("#activityName").html(name);
+    $("#activityId").val(id);
     $("#activityRecommend").show();
     $("#activityList").hide();
 }

@@ -103,6 +103,10 @@ public class Activity {
     @Column(name = "create_time")
     private Long createTime;
 
+    private Integer del;
+
+    private Integer mask;
+
     /**
      * 活动描述
      */
@@ -427,6 +431,34 @@ public class Activity {
      */
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    /**
+     * @return del
+     */
+    public Integer getDel() {
+        return del;
+    }
+
+    /**
+     * @param del
+     */
+    public void setDel(Integer del) {
+        this.del = del;
+    }
+
+    /**
+     * @return mask
+     */
+    public Integer getMask() {
+        return mask;
+    }
+
+    /**
+     * @param mask
+     */
+    public void setMask(Integer mask) {
+        this.mask = mask;
     }
 
     /**

@@ -58,4 +58,18 @@ public class ActivityServiceImpl implements ActivityService {
             return MapUtils.buildErrorMap(Constants.NO_DATA, "差无数据");
         }
     }
+
+    @Override
+    public Map<String, Object> queryActivityById(Integer activityId) {
+        if(activityId != null){
+            Activity activity = activityMapper.selectByPrimaryKey(activityId);
+            if(activity != null){
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", activity);
+            }else{
+                return MapUtils.buildErrorMap(Constants.NO_DATA, "差无数据");
+            }
+        }else{
+            return MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失");
+        }
+    }
 }

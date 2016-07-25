@@ -18,5 +18,4 @@ public interface ActivityMapper extends Mapper<Activity> {
      */
     List<Activity> queryActivity(QueryActivityParm parm);
 
-
 }

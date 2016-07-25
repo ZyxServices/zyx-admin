@@ -85,6 +85,10 @@ public interface Constants {
      * 非法参数 如大小 长度 类型不正确
      */
     int PARAM_ILIGAL = 302;
+    /**
+     * 数据已存在
+     */
+    int DATA_ALREADY_EXISTS = 303;
 
     /// 请求类型代码
     /**

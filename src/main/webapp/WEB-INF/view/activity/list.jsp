@@ -377,39 +377,42 @@
         <!-- BEGIN DASHBOARD STATS -->
         <div class="row-fluid">
 
-          <form class="form-horizontal" role="form">
+          <form action="/deva/queryActivity" method="post"  enctype="multipart/form-data" class="form-horizontal" role="form">
             <div class="control-group">
               <label class="control-label">活动名称</label>
               <div class="controls">
-                <input type="text" class="span6 m-wrap" />
-                <span class="help-inline">*</span>
+                <sapn class="span6" id="activityName"></sapn>
               </div>
             </div>
 
             <div class="control-group">
               <label class="control-label">banner排序</label>
               <div class="controls">
-                <select class="span6 m-wrap">
+                <select class="span6 m-wrap" name="sequence">
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
                 </select>
               </div>
             </div>
-
+            <input type="hidden" name="devaId" id="activityId" value="">
+            <input type="hidden" name="types" value="1">
             <div class="control-group">
               <label class="control-label">图片</label>
               <div class="controls">
-                <input type="file">
+                <input type="file" name="image">
                 <button class="btn btn-default">上传图片</button>
               </div>
             </div>
 
             <div class="control-group">
-              <label class="control-label">用户报名必填</label>
+              <label class="control-label">推荐状态</label>
               <div class="controls">
-                <label class="radio"><input type="radio" checked name="activation">激活</label>
-                <label class="radio"><input type="radio" name="activation">未激活</label>
+                <label class="radio"><input type="radio" checked value="1" name="activation">激活</label>
+                <label class="radio"><input type="radio" value="0" name="activation">未激活</label>
               </div>
             </div>
 

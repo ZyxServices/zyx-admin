@@ -63,6 +63,7 @@ public class ActivityController {
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
+
     @RequestMapping(value = "/queryActivity", method = {RequestMethod.GET, RequestMethod.POST})
     @ApiOperation(value = "活动接口", notes = "活动发布")
     public ModelAndView queryActivity(@RequestParam(name = "pageDataNum", required = true) Integer pageDataNum,
@@ -72,6 +73,17 @@ public class ActivityController {
         AbstractView jsonView = new MappingJackson2JsonView();
 
         Map<String, Object> map = activityService.queryActivity(pageDataNum, pageNum, search);
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "/queryActivityById", method = {RequestMethod.GET, RequestMethod.POST})
+    @ApiOperation(value = "活动接口", notes = "活动发布")
+    public ModelAndView queryActivityById(@RequestParam(name = "activityId", required = true) Integer activityId) {
+
+        AbstractView jsonView = new MappingJackson2JsonView();
+
+        Map<String, Object> map = activityService.queryActivityById(activityId);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }

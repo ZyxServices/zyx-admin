@@ -25,14 +25,14 @@ public class Devaluation {
     /**
      * 图片地址
      */
-    @Column(name = "image")
     private String image;
 
     /**
      * 首推排序
      */
-    @Column(name = "sequence")
     private Integer sequence;
+
+    private Integer activation;
 
     /**
      * @return id
@@ -132,5 +132,19 @@ public class Devaluation {
      */
     public void setSequence(Integer sequence) {
         this.sequence = sequence;
+    }
+
+    /**
+     * @return activation
+     */
+    public Integer getActivation() {
+        return activation;
+    }
+
+    /**
+     * @param activation
+     */
+    public void setActivation(Integer activation) {
+        this.activation = activation;
     }
 }

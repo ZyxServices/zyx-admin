@@ -25,4 +25,12 @@ public interface ActivityService {
      */
     Map<String, Object> queryActivity(int pageDataNumber, int pageNumber,String searchText);
 
+    /**
+     * 通过ID查询活动
+     *
+     * @param activityId
+     * @return
+     */
+    Map<String, Object> queryActivityById(Integer activityId);
+
 }

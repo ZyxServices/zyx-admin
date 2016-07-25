@@ -11,5 +11,6 @@
     <result column="create_time" jdbcType="BIGINT" property="createTime" />
     <result column="image" jdbcType="VARCHAR" property="image" />
     <result column="sequence" jdbcType="INTEGER" property="sequence" />
+    <result column="activation" jdbcType="INTEGER" property="activation" />
   </resultMap>
 </mapper>
