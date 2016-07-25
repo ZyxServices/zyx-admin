@@ -11,7 +11,7 @@ public class Concern {
     @Column(name = "user_id")
     private Integer userId;
 
-    private Integer type;
+    private Integer type;//动态类型1为个人动态，2为活动动态，3为明星动态，4为圈子动态
 
     @Column(name = "topic_content")
     private String topicContent;
