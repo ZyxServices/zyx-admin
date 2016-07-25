@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zyx.mapper.ZanMapper" >
-  <resultMap id="BaseResultMap" type="com.zyx.model.Zan" >
-    <!--
-      WARNING - @mbggenerated
-    -->
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="body_id" property="bodyId" jdbcType="INTEGER" />
-    <result column="body_type" property="bodyType" jdbcType="INTEGER" />
-    <result column="account_id" property="accountId" jdbcType="INTEGER" />
-  </resultMap>
+<mapper namespace="com.zyx.mapper.ZanMapper">
+    <resultMap id="zanMap" type="com.zyx.model.Zan">
+        <!--
+          WARNING - @mbggenerated
+        -->
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="body_id" property="bodyId" jdbcType="INTEGER"/>
+        <result column="body_type" property="bodyType" jdbcType="INTEGER"/>
+        <result column="account_id" property="accountId" jdbcType="INTEGER"/>
+    </resultMap>
 </mapper>
