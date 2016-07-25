@@ -11,6 +11,7 @@ $(function(){
         strictSearch: true,
         uniqueId: "id",
         pageSize: 20,
+        height: 500,
         pageList: new Array(20, 50, 100),
         paginationPreText: "上一页",
         paginationNextText: "下一页",
