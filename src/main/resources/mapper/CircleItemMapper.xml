@@ -15,7 +15,7 @@
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
 
-  <select id="findByPager" resultMap="circleMap">
+  <select id="findByPager" resultMap="circleItemMap">
     SELECT * FROM circleItem ORDER BY create_time DESC  LIMIT #{start},#{end}
   </select>
 </mapper>
