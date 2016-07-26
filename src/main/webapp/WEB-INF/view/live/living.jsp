@@ -42,10 +42,10 @@
                 <h3 style="margin: 0;display: inline-block">创建直播分类 </h3>
                 <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
                 <span>创建名称</span>
-                <input type="text"/>
+                <input id="lab" type="text"/>
                 <span>备注</span>
-                <input type="text"/>
-                <button class="btn btn-danger">确定</button>
+                <input id="desc" type="text"/>
+                <button onclick="operateEventclass.creatLive()" class="btn btn-danger">确定</button>
                 <button onclick="window.location.reload();" class="btn btn-danger">返回</button>
                 <h3 style="margin: 0;display: block">编辑直播分类 </h3>
                 <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
@@ -55,6 +55,7 @@
     </div>
 </div>
 <jsp:include page="../public/common-footer.jsp"/>
+<script type="text/javascript" src="../../js/public/dialog.js"></script>
 <script type="text/javascript" src="../../js/live/live.js"></script>
-</body>
+ </body>
 </html>
