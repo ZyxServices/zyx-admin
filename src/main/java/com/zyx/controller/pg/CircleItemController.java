@@ -24,6 +24,7 @@ public class CircleItemController {
     @Resource
     private CircleService circleService;
 
+    @RequestMapping(value = "circleItemList")
     public ModelAndView findByPager(@RequestParam(value = "start") Integer start,
                                     @RequestParam(value = "pageSize") Integer pageSize) {
         Map<String, Object> map = circleService.findByPager(start, pageSize);

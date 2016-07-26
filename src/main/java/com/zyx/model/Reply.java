@@ -9,7 +9,7 @@ public class Reply {
     private Integer id;
 
     @Column(name = "reply_type")
-    private Integer replyType;
+    private Integer replyType;//回复主体类型，-1为回复id，0为圈子，1为帖子，2为活动，3为动态
 
     @Column(name = "reply_id")
     private Integer replyId;
@@ -18,7 +18,7 @@ public class Reply {
     private Integer replyAccountId;
 
     @Column(name = "reply_state")
-    private Integer replyState;
+    private Integer replyState;//回复类型,0为公开回复，其他类型预留
 
     @Column(name = "create_time")
     private Long createTime;
