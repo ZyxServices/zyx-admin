@@ -45,7 +45,7 @@ public class LiveLabServiceImpl implements LiveLabService {
             LiveLab record = new LiveLab();
             record.setLab(lab);
             List<LiveLab> records = liveLabMapper.select(record);
-            rlab=records != null && records.size() == 1 ? records.get(0) : null;
+            rlab = records != null && records.size() == 1 ? records.get(0) : null;
             redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_ID_LIVE_LAB + rlab.getId(), LiveConstants.HASH_LIVE_ID_LIVE_LAB, rlab);
             redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_LAB_LIVE_LAB + rlab.getLab(), LiveConstants.HASH_LIVE_LAB_LIVE_LAB, rlab);
             return rlab;
@@ -81,12 +81,12 @@ public class LiveLabServiceImpl implements LiveLabService {
 
     @Override
     public void updateLiveLab(LiveLab liveLab) {
-        LiveLab rlab = (LiveLab) redisTemplate.opsForHash().get(LiveConstants.MARK_LIVE_LAB_LIVE_LAB + liveLab.getLab(), LiveConstants.HASH_LIVE_LAB_LIVE_LAB);
-        if (null == rlab) {
-            redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_ID_LIVE_LAB + liveLab.getId(), LiveConstants.HASH_LIVE_ID_LIVE_LAB, liveLab);
-            redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_LAB_LIVE_LAB + liveLab.getLab(), LiveConstants.HASH_LIVE_LAB_LIVE_LAB, liveLab);
-            liveLabMapper.updateByPrimaryKeySelective(liveLab);
+        LiveLab rlab = (LiveLab) redisTemplate.opsForHash().get(LiveConstants.MARK_LIVE_ID_LIVE_LAB + liveLab.getId(), LiveConstants.HASH_LIVE_ID_LIVE_LAB);
+        if (null != rlab) {
+            redisTemplate.opsForHash().delete(LiveConstants.MARK_LIVE_LAB_LIVE_LAB + rlab.getLab(), LiveConstants.HASH_LIVE_LAB_LIVE_LAB);
         }
+        redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_ID_LIVE_LAB + liveLab.getId(), LiveConstants.HASH_LIVE_ID_LIVE_LAB, liveLab);
+        redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_LAB_LIVE_LAB + liveLab.getLab(), LiveConstants.HASH_LIVE_LAB_LIVE_LAB, liveLab);
         liveLabMapper.updateByPrimaryKeySelective(liveLab);
     }
 }
