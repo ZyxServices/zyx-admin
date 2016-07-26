@@ -110,7 +110,7 @@ public class LiveController {
                 LiveLab liveLab = new LiveLab();
                 liveLab.setId(id);
                 liveLab.setLab(lab.trim());
-                liveLab.setLab(desc.trim());
+                liveLab.setDescription(desc.trim());
                 liveLab.setState(state);
                 liveLabService.updateLiveLab(liveLab);
                 result.put(LiveConstants.STATE, LiveConstants.SUCCESS);
