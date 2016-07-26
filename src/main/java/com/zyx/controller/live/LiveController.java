@@ -81,7 +81,7 @@ public class LiveController {
 
     @RequestMapping(path = "/lab/delete", method = {RequestMethod.POST})
     @ApiOperation(value = "删除直播标签", notes = "直播-删除直播标签")
-    public ModelAndView deleteLiveLab(@RequestParam(name = "lab", required = true) Integer id) {
+    public ModelAndView deleteLiveLab(@RequestParam(name = "id", required = true) Integer id) {
         Map<String, Object> result = new HashMap<>();
         if (null == id) {
             result.put(LiveConstants.STATE, LiveConstants.PARAM_MISS);
