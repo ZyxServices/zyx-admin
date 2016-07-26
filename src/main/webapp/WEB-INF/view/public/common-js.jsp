@@ -25,6 +25,7 @@
 <!-- END PAGE LEVEL PLUGINS -->
 <script src="../../js/summernote.min.js" type="text/javascript"></script>
 <script src="../../js/summernote-zh-CN.js" type="text/javascript"></script>
+<script src="../../js/jquery.tree-multiselect.js" type="text/javascript"></script>
 
 <script src="../../js/dataformat.js" type="text/javascript"></script>
 

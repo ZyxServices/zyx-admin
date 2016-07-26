@@ -198,7 +198,52 @@
                         <div class="control-group">
                             <label class="control-label">等级权限</label>
                             <div class="controls">
-                                <input type="text" class="span6 form-control"/><%--树的结构，含复选框--%>
+                                <div class="span6">
+                                    <select id="jurisdiction-select" multiple="multiple">
+                                        <option value="活动创建详情页" data-section="活动">活动创建详情页</option>
+                                        <option value="活动预览详情页" data-section="活动">活动预览详情页</option>
+                                        <option value="活动编辑详情页" data-section="活动">活动编辑详情页</option>
+                                        <option value="活动推荐弹出框" data-section="活动">活动推荐弹出框</option>
+                                        <option value="活动屏蔽弹出框" data-section="活动">活动屏蔽弹出框</option>
+
+                                        <option value="创建直播分类详情页" data-section="直播">创建直播分类详情页</option>
+                                        <option value="分类排序详情页" data-section="直播">分类排序详情页</option>
+                                        <option value="直播预览详情页" data-section="直播">直播预览详情页</option>
+                                        <option value="直播预览详情页" data-section="直播">直播编辑详情页</option>
+                                        <option value="直播推荐弹出框" data-section="直播">直播推荐弹出框</option>
+                                        <option value="直播预告弹出框" data-section="直播">直播预告弹出框</option>
+                                        <option value="直播屏蔽弹出框" data-section="直播">直播屏蔽弹出框</option>
+                                        <option value="直播删除弹出框" data-section="直播">直播删除弹出框</option>
+
+                                        <option value="发布语音动态" data-section="动态/发布动态详情页">发布语音动态</option>
+                                        <option value="发布视频动态" data-section="动态/发布动态详情页">发布视频动态</option>
+                                        <option value="动态预览详情页" data-section="动态">动态预览详情页</option>
+                                        <option value="动态编辑详情页" data-section="动态">动态编辑详情页</option>
+                                        <option value="动态推荐弹出框" data-section="动态">动态推荐弹出框</option>
+                                        <option value="动态屏蔽弹出框" data-section="动态">动态屏蔽弹出框</option>
+                                        <option value="动态删除弹出框" data-section="动态">动态删除弹出框</option>
+
+                                        <option value="创建圈子详情页" data-section="圈子">创建圈子详情页</option>
+                                        <option value="圈子预览详情页" data-section="圈子">圈子预览详情页</option>
+                                        <option value="圈子编辑详情页" data-section="圈子">圈子编辑详情页</option>
+                                        <option value="圈子推荐弹出框" data-section="圈子">圈子推荐弹出框</option>
+                                        <option value="圈子屏蔽弹出框" data-section="圈子">圈子屏蔽弹出框</option>
+                                        <option value="圈子删除弹出框" data-section="圈子">圈子删除弹出框</option>
+                                        <option value="帖子管理详情页" data-section="圈子">帖子管理详情页</option>
+                                        <option value="创建帖子详情页" data-section="圈子">创建帖子详情页</option>
+                                        <option value="创建圈子详情页" data-section="圈子">帖子编辑详情页</option>
+                                        <option value="帖子推荐弹出框" data-section="圈子">帖子推荐弹出框</option>
+                                        <option value="帖子屏蔽弹出框" data-section="圈子">帖子屏蔽弹出框</option>
+                                        <option value="帖子删除弹出框" data-section="圈子">帖子删除弹出框</option>
+
+                                        <option value="创建圈子详情页" data-section="商城">上传商品详情页</option>
+                                        <option value="创建商品分类" data-section="商城">创建商品分类</option>
+                                        <option value="商品分类排序详情页" data-section="商城">商品分类排序详情页</option>
+                                        <option value="商品预览详情页" data-section="商城">商品预览详情页</option>
+                                        <option value="商品编辑详情页" data-section="商城">商品编辑详情页</option>
+                                        <option value="商品推荐弹出框" data-section="商城">商品推荐弹出框</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
