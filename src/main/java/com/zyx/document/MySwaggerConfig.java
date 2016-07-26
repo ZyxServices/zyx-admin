@@ -55,6 +55,16 @@ public class MySwaggerConfig {
                 .apiInfo(liveApiInfo());
     }
     @Bean
+    public Docket pgApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("pg")
+                .select()  // 选择那些路径和api会生成document
+                .apis(RequestHandlerSelectors.basePackage("com.zyx.controller.pg"))
+                .paths(PathSelectors.any()) // 对所有路径进行监控
+                .build()
+                .apiInfo(pgApiInfo());
+    }
+    @Bean
     public Docket userApi() {
         Set<String> set = new HashSet<String>();
 
@@ -79,6 +89,18 @@ public class MySwaggerConfig {
                 "0.1",//版本
                 "成都term",
                 "邓清海",//作者
+                "智悠行",//链接显示文字
+                "http://112.74.112.143:8081/ui/Delta/index.html "//网站链接
+        );
+
+        return apiInfo;
+    }
+    private ApiInfo pgApiInfo() {
+        ApiInfo apiInfo = new ApiInfo("操场Api",//大标题
+                "圈子，动态，帖子相关api",//小标题
+                "0.1",//版本
+                "暂无",
+                new Contact("肖伟", "暂无", "xiaowei@perfect-cn.cn"),//作者
                 "智悠行",//链接显示文字
                 "http://112.74.112.143:8081/ui/Delta/index.html "//网站链接
         );

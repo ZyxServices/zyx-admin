@@ -1,6 +1,7 @@
 package com.zyx.controller.pg;
 
 import com.zyx.service.pg.ReplyService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,7 @@ public class ReplyController {
     private ReplyService replyService;
 
     @RequestMapping(value = "replyList")
+    @ApiOperation(value = "回复列表", notes = "回复列表")
     public ModelAndView findByParams(@RequestParam(value = "reply_type") Integer replyType,
                                      @RequestParam(value = "reply_id") Integer replyId,
                                      @RequestParam(value = "reply_state") Integer replyState) {

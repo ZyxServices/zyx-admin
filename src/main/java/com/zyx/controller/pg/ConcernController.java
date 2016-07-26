@@ -2,6 +2,7 @@ package com.zyx.controller.pg;
 
 import com.zyx.model.Concern;
 import com.zyx.service.pg.ConcernService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,7 @@ public class ConcernController {
     private ConcernService concernService;
 
     @RequestMapping(value = "concernList")
+    @ApiOperation(value = "动态列表", notes = "动态列表")
     public ModelAndView findConcern(@RequestParam(value = "page") Integer page, @RequestParam(value = "pageSize") Integer pageSize) {
         Map<String, Object> map = concernService.findByPager(page, pageSize);
         AbstractView jsonView = new MappingJackson2JsonView();

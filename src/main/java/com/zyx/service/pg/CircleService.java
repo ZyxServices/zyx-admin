@@ -13,4 +13,10 @@ import java.util.Map;
  */
 public interface CircleService extends BaseService<Circle> {
     Map<String, Object> findByPager(Integer start, Integer pageSize);
+
+    Map<String, Object> insertCircle(String title, Integer createId, Integer state, Integer type, String details, String headImgUrl);
+
+    Map<String,Object> findById(Integer id);
+
+    Map<String,Object> tuiJian(Integer circle_id,Integer topSize);
 }

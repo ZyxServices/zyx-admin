@@ -17,6 +17,9 @@ public interface PgConstants extends Constants {
     int PG_ERROR_CODE_33000= 33000;
     String PG_ERROR_CODE_33000_MSG = "添加成功";
 
+    int PG_ERROR_CODE_36000= 36000;
+    String PG_ERROR_CODE_36000_MSG = "修改成功";
+
     int PG_ERROR_CODE_30000 = 30000;
     String PG_ERROR_CODE_30000_MSG = "用户token已经失效，请重新登录";
 
@@ -70,6 +73,9 @@ public interface PgConstants extends Constants {
 
     int PG_ERROR_CODE_30017= 30017;
     String PG_ERROR_CODE_30017_MSG = "主体类型不能为空";
+
+    int PG_ERROR_CODE_30018= 30018;
+    String PG_ERROR_CODE_30018_MSG = "推荐的排序不能为空";
 
     String PG_RESULT = "result";
 }

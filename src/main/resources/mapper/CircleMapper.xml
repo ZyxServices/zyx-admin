@@ -22,4 +22,10 @@
     <select id="findByPager" resultMap="circleMap">
         SELECT * FROM circle ORDER BY create_time DESC  LIMIT #{start},#{end}
     </select>
+    <select id="findById" resultMap="circleMap">
+        SELECT * FROM circle WHERE id=#{id}
+    </select>
+    <update id="tuiJian">
+        UPDATE circle SET top=#{top_size} where id=#{circle_id}
+    </update>
 </mapper>

@@ -10,6 +10,7 @@ public class Devaluation {
 
     /**
      * 模块类型（1、活动.........）
+     * // 1、活动，2,直播，3,圈子，4动态，5用户
      */
     private Integer types;
 
@@ -32,7 +33,7 @@ public class Devaluation {
      */
     private Integer sequence;
 
-    private Integer activation;
+    private Integer activation;//激活0，未激活1
 
     /**
      * @return id
