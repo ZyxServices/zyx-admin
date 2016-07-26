@@ -83,13 +83,18 @@ public class LiveController {
     @ApiOperation(value = "删除直播标签", notes = "直播-删除直播标签")
     public ModelAndView deleteLiveLab(@RequestParam(name = "id", required = true) Integer id) {
         Map<String, Object> result = new HashMap<>();
-        if (null == id) {
-            result.put(LiveConstants.STATE, LiveConstants.PARAM_MISS);
-            result.put(LiveConstants.ERROR_MSG, LiveConstants.MSG_PARAM_MISS);
-        } else {
-            liveLabService.deleteLiveLab(id);
-            result.put(LiveConstants.STATE, LiveConstants.SUCCESS);
+        try {
+            if (null == id) {
+                result.put(LiveConstants.STATE, LiveConstants.PARAM_MISS);
+                result.put(LiveConstants.ERROR_MSG, LiveConstants.MSG_PARAM_MISS);
+            } else {
+                liveLabService.deleteLiveLab(id);
+                result.put(LiveConstants.STATE, LiveConstants.SUCCESS);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(result);
         return new ModelAndView(jsonView);
@@ -109,8 +114,8 @@ public class LiveController {
             } else {
                 LiveLab liveLab = new LiveLab();
                 liveLab.setId(id);
-                liveLab.setLab(lab.trim());
-                liveLab.setDescription(desc.trim());
+                liveLab.setLab(lab==null?null:lab.trim());
+                liveLab.setDescription(desc==null?null:desc.trim());
                 liveLab.setState(state);
                 liveLabService.updateLiveLab(liveLab);
                 result.put(LiveConstants.STATE, LiveConstants.SUCCESS);

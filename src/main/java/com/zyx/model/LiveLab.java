@@ -1,9 +1,10 @@
 package com.zyx.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "t_live_lab")
-public class LiveLab {
+public class LiveLab  implements Serializable{
     /**
      * 主键ID
      */

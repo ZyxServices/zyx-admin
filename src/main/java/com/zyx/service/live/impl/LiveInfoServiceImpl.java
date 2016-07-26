@@ -9,6 +9,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
+import tk.mybatis.mapper.entity.Example.Criteria;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
     @Override
     public List<LiveInfo> getLiveInfos(LiveInfoParm param) {
         Example example = new Example(LiveInfo.class);
+        Criteria criteria = example.createCriteria();
         if (param.getPageNumber() != null && param.getPageNumber() >= 0 && param.getPageSize() != null && param.getPageSize() > 0) {
             RowBounds rowBounds = new RowBounds((param.getPageNumber() - 1) * param.getPageSize(), param.getPageSize());
             return liveInfoMapper.selectByExampleAndRowBounds(example, rowBounds);

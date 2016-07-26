@@ -1,22 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyx.mapper.LiveInfoMapper">
-  <resultMap id="BaseResultMap" type="com.zyx.model.LiveInfo">
-    <!--
-      WARNING - @mbggenerated
-    -->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="create_time" jdbcType="BIGINT" property="createTime" />
-    <result column="auth" jdbcType="INTEGER" property="auth" />
-    <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="start" jdbcType="BIGINT" property="start" />
-    <result column="end" jdbcType="BIGINT" property="end" />
-    <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="lab" jdbcType="INTEGER" property="lab" />
-    <result column="bgm_url" jdbcType="VARCHAR" property="bgmUrl" />
-    <result column="vedio_url" jdbcType="VARCHAR" property="vedioUrl" />
-    <result column="state" jdbcType="INTEGER" property="state" />
-    <result column="del" jdbcType="INTEGER" property="del" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.zyx.model.LiveInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="create_time" jdbcType="BIGINT" property="createTime"/>
+        <result column="auth" jdbcType="INTEGER" property="auth"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="start" jdbcType="BIGINT" property="start"/>
+        <result column="end" jdbcType="BIGINT" property="end"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="lab" jdbcType="INTEGER" property="lab"/>
+        <result column="bgm_url" jdbcType="VARCHAR" property="bgmUrl"/>
+        <result column="vedio_url" jdbcType="VARCHAR" property="vedioUrl"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="del" jdbcType="INTEGER" property="del"/>
+    </resultMap>
+
+    <resultMap id="LiveInfoVo" type="com.zyx.vo.live.LiveInfoVo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="create_time" jdbcType="BIGINT" property="createTime"/>
+        <result column="auth" jdbcType="INTEGER" property="auth"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="start" jdbcType="BIGINT" property="start"/>
+        <result column="end" jdbcType="BIGINT" property="end"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="lab" jdbcType="INTEGER" property="lab"/>
+        <result column="bgm_url" jdbcType="VARCHAR" property="bgmUrl"/>
+        <result column="vedio_url" jdbcType="VARCHAR" property="vedioUrl"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+    </resultMap>
+
+   <!-- <select id="selectVos">
+      SELECT id,create_time,auth,type,start,end,user_id,title,lab,bgm_url,vedio_url,state
+      FROM t_live
+      WHERE
+      1=1
+
+
+    </select>-->
 </mapper>

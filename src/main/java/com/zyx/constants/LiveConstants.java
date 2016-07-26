@@ -16,4 +16,13 @@ public interface LiveConstants extends Constants {
      */
     int ERROR_LIVE_EXIST_LAB = 23002;
     String ERROR_MSG_LIVE_EXIST_LAB = "this lab is exist";
+
+
+
+    /////////////////Redis Mark///////////////////////
+
+    String MARK_LIVE_LAB_LIVE_LAB = "live_lab:";
+    String HASH_LIVE_LAB_LIVE_LAB= "hash_live_lab:";
+    String MARK_LIVE_ID_LIVE_LAB="live_id:";
+    String HASH_LIVE_ID_LIVE_LAB="hash_live_id:";
 }

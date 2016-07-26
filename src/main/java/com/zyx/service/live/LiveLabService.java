@@ -14,7 +14,7 @@ public interface LiveLabService {
 
     public List<LiveLab> getAllLabs();
 
-    public void addLiveLab(LiveLab liveLab);
+    public int addLiveLab(LiveLab liveLab);
 
     public void deleteLiveLab(Integer id);
 
