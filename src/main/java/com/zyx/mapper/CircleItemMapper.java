@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface CircleItemMapper extends Mapper<CircleItem> {
 
-    List<Circle> findByPage(@Param(value = "start") int start, @Param(value = "end") int end);
+    List<CircleItem> findByPager(@Param(value = "start") Integer start, @Param(value = "end") Integer end);
 }
