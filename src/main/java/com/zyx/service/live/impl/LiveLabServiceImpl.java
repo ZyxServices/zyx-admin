@@ -46,8 +46,10 @@ public class LiveLabServiceImpl implements LiveLabService {
             record.setLab(lab);
             List<LiveLab> records = liveLabMapper.select(record);
             rlab = records != null && records.size() == 1 ? records.get(0) : null;
-            redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_ID_LIVE_LAB + rlab.getId(), LiveConstants.HASH_LIVE_ID_LIVE_LAB, rlab);
-            redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_LAB_LIVE_LAB + rlab.getLab(), LiveConstants.HASH_LIVE_LAB_LIVE_LAB, rlab);
+            if(rlab!=null){
+                redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_ID_LIVE_LAB + rlab.getId(), LiveConstants.HASH_LIVE_ID_LIVE_LAB, rlab);
+                redisTemplate.opsForHash().put(LiveConstants.MARK_LIVE_LAB_LIVE_LAB + rlab.getLab(), LiveConstants.HASH_LIVE_LAB_LIVE_LAB, rlab);
+            }
             return rlab;
         }
     }
@@ -80,7 +82,13 @@ public class LiveLabServiceImpl implements LiveLabService {
     }
 
     @Override
+    /**
+     * By ID
+     */
     public void updateLiveLab(LiveLab liveLab) {
+        if(liveLab==null||liveLab.getId()==null||liveLab.getLab()==null){
+            return;
+        }
         LiveLab rlab = (LiveLab) redisTemplate.opsForHash().get(LiveConstants.MARK_LIVE_ID_LIVE_LAB + liveLab.getId(), LiveConstants.HASH_LIVE_ID_LIVE_LAB);
         if (null != rlab) {
             redisTemplate.opsForHash().delete(LiveConstants.MARK_LIVE_LAB_LIVE_LAB + rlab.getLab(), LiveConstants.HASH_LIVE_LAB_LIVE_LAB);
