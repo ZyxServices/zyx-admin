@@ -19,6 +19,7 @@ function initTable() {
         sortOrder: "asc",          //排序方式
         pageList: [1, 25, 50, 100],    //可供选择的每页的行数（*）
         strictSearch: true,
+        smartDisplay: false,
         height: 460,            //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
         uniqueId: "id",           //每一行的唯一标识，一般为主键列
         search: true,

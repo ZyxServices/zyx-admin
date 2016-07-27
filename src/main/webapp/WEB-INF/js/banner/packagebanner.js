@@ -2,10 +2,10 @@
  * Created by ZYX on 2016/7/14.
  */
 $(function(){
-    $("#homepage-list-table").bootstrapTable({
+    $("#package-list-table").bootstrapTable({
         data: [{
             id: 1,
-            url: 'baidu.com',
+            shopname: 'baidu.com',
             image: 'Item 1',
             order: '1',
             activation: '是'
@@ -17,6 +17,7 @@ $(function(){
         search: true,
         strictSearch: true,
         uniqueId: "id",
+        height:500,
         pageSize: 20,
         pageList: new Array(20, 50, 100),
         paginationPreText: "上一页",
@@ -36,10 +37,10 @@ function modify(id) {
     console.log(id)
 }
 function del(id) {
-    console.log(id)
+    $("#delPackageBanner").modal('toggle');
 }
 
-function createBanner() {
-    $("#bannerList").hide();
-    $("#bannerCreate").show();
+function createPackageBanner() {
+    $("#bannerPackageList").hide();
+    $("#bannerPackageCreate").show();
 }
