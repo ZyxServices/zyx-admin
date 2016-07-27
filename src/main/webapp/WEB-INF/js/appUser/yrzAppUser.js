@@ -33,7 +33,9 @@ function initTable() {
             var param = {
                 pageNumber: params.pageNumber,
                 pageSize: params.pageSize,
-                searchText: params.searchText
+                searchText: params.searchText,
+                sortName: params.sortName,
+                sortOrder: params.sortOrder
             };
             return param;
         },

@@ -58,7 +58,7 @@
                         <label class="control-label">账号</label>
 
                         <div class="controls">
-                            <input type="text" class="span6 m-wrap" name="phone"/>
+                            <input type="text" class="span6 m-wrap" name="phone" id="phone"/>
                             <span class="help-inline">*</span>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                         <label class="control-label">密码</label>
 
                         <div class="controls">
-                            <input type="text" class="span6 m-wrap" name="password" />
+                            <input type="text" class="span6 m-wrap" name="password" id="password" />
                             <span class="help-inline">*</span>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                         <label class="control-label">头像</label>
 
                         <div class="controls">
-                            <input type="file" name="avatar">
+                            <input type="file" name="avatar" id="avatar">
                             <span class="help-inline">只能上传一张图片</span>
                         </div>
                     </div>
@@ -85,11 +85,23 @@
                         <label class="control-label">性别</label>
 
                         <div class="controls">
-                            <select class="span6 m-wrap" name="sex">
-                                <option value="0">男</option>
-                                <option value="1">女</option>
+                            <select class="span6 m-wrap" name="sex" id="sex">
+                                <option value="1">男</option>
+                                <option value="0">女</option>
                             </select>
-                            <span class="help-inline">*</span>
+                            <%--<span class="help-inline">*</span>--%>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">官方账号</label>
+
+                        <div class="controls">
+                            <select class="span6 m-wrap" name="official" id="official">
+                                <option value="1">是</option>
+                                <option value="0" selected>否</option>
+                            </select>
+                            <%--<span class="help-inline">*</span>--%>
                         </div>
                     </div>
 
@@ -97,8 +109,8 @@
                         <label class="control-label">所在地</label>
 
                         <div class="controls">
-                            <input type="text" class="span6 m-wrap" name="address"/>
-                            <span class="help-inline">*</span>
+                            <input type="text" class="span6 m-wrap" name="address" id="address"/>
+                            <%--<span class="help-inline">*</span>--%>
                         </div>
                     </div>
 
@@ -106,8 +118,8 @@
                         <label class="control-label">认证信息</label>
 
                         <div class="controls">
-                            <input type="text" class="span6 m-wrap" name="authInfo"/>
-                            <span class="help-inline">*</span>
+                            <input type="text" class="span6 m-wrap" name="authInfo" id="authInfo"/>
+                            <%--<span class="help-inline">*</span>--%>
                         </div>
                     </div>
 
@@ -119,10 +131,6 @@
                             <span class="help-inline">上传图片</span>
                         </div>
 
-                        <div class="controls">
-                            <input type="file" name="authFile">
-                            <span class="help-inline">上传图片</span>
-                        </div>
                     </div>
                     <button type="button" id="createButton" class="btn" onclick="beginCreate()">确认创建
                     </button>
@@ -136,4 +144,4 @@
 <jsp:include page="../public/common-footer.jsp"/>
 </body>
 <script type="text/javascript" src="../../js/appUser/appUserCommon.js"></script>
-<script type="text/javascript" src="../../js/appUser/userIndex.js"></script>
+<script type="text/javascript" src="../../js/appUser/allAppUser.js"></script>

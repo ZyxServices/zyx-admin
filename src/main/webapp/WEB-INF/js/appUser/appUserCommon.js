@@ -31,6 +31,7 @@ function dateFormatter(value, row, index) {
 // 详情显示
 function detailFormatter(index, row, c) {
     var html = [];
+    console.log(row);
     $.each(row, function (key, value) {
         if ("nickname" == key) {
             html.push('<p><b>用户昵称:</b> ' + value + '</p>');
@@ -40,21 +41,39 @@ function detailFormatter(index, row, c) {
             html.push('<p><b>用户头像:</b><img src=' + _t + '></p>');
         }
         if ("sex" == key) {
-            html.push('<p><b>用户性别:</b> ' + value + '</p>');
+            var _temp = value == 1 ? "男" : "女";
+            html.push('<p><b>用户性别:</b> ' + _temp + '</p>');
         }
         if ("phone" == key) {
             html.push('<p><b>手机号码:</b> ' + value + '</p>');
         }
-        if ("birthday" == key) {
-            html.push('<p><b>用户生日:</b> ' + new Date(value).format("yyyy-mm-dd HH:MM:ss") + '</p>');
-        }
-        if ("address" == key) {
+        // if ("birthday" == key) {
+        //     html.push('<p><b>用户生日:</b> ' + new Date(value).format("yyyy-mm-dd HH:MM:ss") + '</p>');
+        // }
+        if ("address" == key && value != null) {
             html.push('<p><b>用户所在地:</b> ' + value + '</p>');
+        }
+        if ("signature" == key) {
+            var _temp = value == null ? "这家伙很懒什么都没有留下" : value;
+            html.push('<p><b>用户签名档:</b> ' + _temp + '</p>');
         }
         if ("lastlogintime" == key) {
             html.push('<p><b>最后登录时间:</b> ' + new Date(value).format("yyyy-mm-dd HH:MM:ss") + '</p>');
         }
     });
+    // 认证信息-待审核
+    // if ("appUserAuthDto" == key && row["authenticate"] == 1) {
+    if (row["appUserAuthDto"]) {
+        var _temp = row["appUserAuthDto"];
+        html.push('<p><b>认证信息:</b> ' + _temp["authInfo"] + '</p>');
+        var _temp_array = _temp["authFile"].split(",");
+        html.push('<p><b>认证图片:</b></p>');
+        _temp_array.forEach(function (a) {
+            var _t = "http://image.tiyujia.com/" + a;
+            html.push('<p><img src=' + _t + '></p>');
+        });
+    }
+    // }
     return html.join('');
 }
 //查看Url

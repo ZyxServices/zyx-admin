@@ -18,6 +18,8 @@ public class QueryAppUserParam extends QueryParam {
 
     private Boolean del;
 
+    private Integer official = 0;
+
     public String getSearchText() {
         return searchText;
     }
@@ -48,5 +50,13 @@ public class QueryAppUserParam extends QueryParam {
 
     public void setDel(Boolean del) {
         this.del = del;
+    }
+
+    public Integer getOfficial() {
+        return official;
+    }
+
+    public void setOfficial(Integer official) {
+        this.official = official;
     }
 }

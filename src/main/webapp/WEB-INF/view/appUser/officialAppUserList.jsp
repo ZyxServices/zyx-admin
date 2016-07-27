@@ -30,15 +30,9 @@
         </div>
         <div class="container-fluid" style="padding-top: 20px ">
             <div class="live_index">
-                <div class="live_operate">
-                    <h3 style="margin: 0;display: inline-block">用户操作 </h3>
-                    <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
-                    <button class="create_live btn btn-default btn-lg ">创建用户</button>
-                </div>
                 <div class="live_manage">
-                    <h3 style="margin: 0;display: inline-block">用户管理 - 用户列表</h3>
+                    <h3 style="margin: 0;display: inline-block">用户管理 - 官方用户列表</h3>
                     <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
-                    <button class="fl btn btn-default ">自动/手动排序优先</button>
                     <table id="app_user_table" class="table table-hover"
                            data-pagination="true"
                            data-show-refresh="true"
@@ -52,13 +46,12 @@
             <div class="create_liveType">
                 <h3 style="margin: 0;display: inline-block">创建用户 </h3>
                 <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
-                <form class="form-horizontal" role="form" id="createAppUserForm" autocomplete="off"
-                      novalidate="novalidate" enctype="multipart/form-data">
+                <form class="form-horizontal" role="form">
                     <div class="control-group">
                         <label class="control-label">账号</label>
 
                         <div class="controls">
-                            <input type="text" class="span6 m-wrap" name="phone"/>
+                            <input type="text" class="span6 m-wrap"/>
                             <span class="help-inline">*</span>
                         </div>
                     </div>
@@ -67,7 +60,7 @@
                         <label class="control-label">密码</label>
 
                         <div class="controls">
-                            <input type="text" class="span6 m-wrap" name="password" />
+                            <input type="text" class="span6 m-wrap"/>
                             <span class="help-inline">*</span>
                         </div>
                     </div>
@@ -76,7 +69,7 @@
                         <label class="control-label">头像</label>
 
                         <div class="controls">
-                            <input type="file" name="avatar">
+                            <input type="file">
                             <span class="help-inline">只能上传一张图片</span>
                         </div>
                     </div>
@@ -85,10 +78,19 @@
                         <label class="control-label">性别</label>
 
                         <div class="controls">
-                            <select class="span6 m-wrap" name="sex">
-                                <option value="0">男</option>
-                                <option value="1">女</option>
+                            <select class="span6 m-wrap">
+                                <option>男</option>
+                                <option>女</option>
                             </select>
+                            <span class="help-inline">*</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">年龄</label>
+
+                        <div class="controls">
+                            <input type="text" class="span6 m-wrap"/>
                             <span class="help-inline">*</span>
                         </div>
                     </div>
@@ -97,7 +99,7 @@
                         <label class="control-label">所在地</label>
 
                         <div class="controls">
-                            <input type="text" class="span6 m-wrap" name="address"/>
+                            <input type="text" class="span6 m-wrap"/>
                             <span class="help-inline">*</span>
                         </div>
                     </div>
@@ -106,7 +108,7 @@
                         <label class="control-label">认证信息</label>
 
                         <div class="controls">
-                            <input type="text" class="span6 m-wrap" name="authInfo"/>
+                            <input type="text" class="span6 m-wrap"/>
                             <span class="help-inline">*</span>
                         </div>
                     </div>
@@ -115,18 +117,11 @@
                         <label class="control-label">认证资料</label>
 
                         <div class="controls">
-                            <input type="file" name="authFile">
-                            <span class="help-inline">上传图片</span>
-                        </div>
-
-                        <div class="controls">
-                            <input type="file" name="authFile">
+                            <input type="file">
                             <span class="help-inline">上传图片</span>
                         </div>
                     </div>
-                    <button type="button" id="createButton" class="btn" onclick="beginCreate()">确认创建
-                    </button>
-                    <button type="button" class="btn" onclick="backToUsers()">返回</button>
+                    <button class="btn">确认创建</button>
                 </form>
 
             </div>
@@ -136,4 +131,4 @@
 <jsp:include page="../public/common-footer.jsp"/>
 </body>
 <script type="text/javascript" src="../../js/appUser/appUserCommon.js"></script>
-<script type="text/javascript" src="../../js/appUser/userIndex.js"></script>
+<script type="text/javascript" src="../../js/appUser/officialAppUser.js"></script>

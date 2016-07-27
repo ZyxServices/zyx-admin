@@ -106,14 +106,17 @@
                 <span class="selected hide"></span>
             </a>
             <ul class="sub-menu">
-                <li class="userIndex">
-                    <a href="<%=request.getContextPath()%>/menu/appUser/userIndex">用户列表</a>
+                <li class="all-app-user">
+                    <a href="<%=request.getContextPath()%>/menu/appUser/allAppUser">普通用户列表</a>
                 </li>
-                <li class="yrzAppUser">
-                    <a href="<%=request.getContextPath()%>/menu/appUser/yrzAppUser">已认证用户</a>
+                <li class="yrz-app-user">
+                    <a href="<%=request.getContextPath()%>/menu/appUser/yrzAppUser">已认证用户列表</a>
                 </li>
-                <li class="dshAppUser">
-                    <a href="<%=request.getContextPath()%>/menu/appUser/dshAppUser">待审核用户</a>
+                <li class="dsh-app-user">
+                    <a href="<%=request.getContextPath()%>/menu/appUser/dshAppUser">待审核用户列表</a>
+                </li>
+                <li class="official-app-user">
+                    <a href="<%=request.getContextPath()%>/menu/appUser/officialAppUser">官方用户列表</a>
                 </li>
             </ul>
         </li>

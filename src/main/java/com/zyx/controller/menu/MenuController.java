@@ -21,9 +21,9 @@ public class MenuController {
         return new ModelAndView("/activity/group");
     }
 
-    @RequestMapping(value = "/appUser/userIndex", method = RequestMethod.GET)
+    @RequestMapping(value = "/appUser/allAppUser", method = RequestMethod.GET)
     public ModelAndView redirectAppUser() {
-        return new ModelAndView("/appUser/userIndex");
+        return new ModelAndView("/appUser/allAppUser");
     }
 
     @RequestMapping(value = "/appUser/yrzAppUser", method = RequestMethod.GET)
@@ -35,6 +35,12 @@ public class MenuController {
     public ModelAndView redirectDshAppAuthUser() {
         return new ModelAndView("/appUser/dshAppUserList");
     }
+
+    @RequestMapping(value = "/appUser/officialAppUser", method = RequestMethod.GET)
+    public ModelAndView redirectOfficialAppUser() {
+        return new ModelAndView("/appUser/officialAppUserList");
+    }
+
 
     @RequestMapping(value = "/circle/circlelist", method = RequestMethod.GET)
     public ModelAndView redirectCircleList() {

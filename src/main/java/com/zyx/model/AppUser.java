@@ -83,6 +83,16 @@ public class AppUser {
     private Boolean del;
 
     /**
+     * 签名档
+     */
+    private String signature;
+
+    /**
+     * 官方字段
+     */
+    private Integer official;
+
+    /**
      * @return id
      */
     public Integer getId() {
@@ -360,5 +370,26 @@ public class AppUser {
      */
     public void setDel(Boolean del) {
         this.del = del;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
+
+    /**
+     * 获取是否官方字段
+     *
+     * @return authenticate - 是否认证字段0普通，1官方
+     */
+    public Integer getOfficial() {
+        return official;
+    }
+
+    public void setOfficial(Integer official) {
+        this.official = official;
     }
 }

@@ -1,8 +1,6 @@
 /**
  * Created by 文楷 on 2016/7/15.
  */
-var $table = $('#live_table'),
-    $remove = $('#remove');
 function initTable() {
     //先销毁表格
     $('#app_user_table').bootstrapTable('destroy');
@@ -21,13 +19,11 @@ function initTable() {
         sortable: true,           //是否启用排序
         sortOrder: "asc",          //排序方式
         strictSearch: true,
-        smartDisplay: false,
-        height:500,
         uniqueId: "id",           //每一行的唯一标识，一般为主键列
         search: true,
         sidePagination: "server",
         method: "get",
-        url: "/v1/appUser/list/dsh",
+        url: "/v1/appUser/list/all",
         queryParamsType: "undefined",
         queryParams: function queryParams(params) {   //设置查询参数
             var param = {
@@ -59,31 +55,84 @@ function initTable() {
             {field: 'startTime', title: '动态数量', sortable: true},
             {field: 'overTime', title: '金币数量', sortable: true},
             {field: 'createTime', title: '注册时间', sortable: true, formatter: dateFormatter},
-            // {field: 'lastlogintime', title: '最后登录时间', sortable: true, formatter: dateFormatter},
-            // {field: 'sex', title: '性别'},
-            // {field: 'birthday', title: '生日', formatter: dateFormatter},
-            // {field: 'address', title: '所在地'},
             {field: 'operation', title: '操作', align: 'center', events: operateEvent, formatter: operateFormatter}]
     });
 }
-//操作
+// 操作
 function operateFormatter(value, row, index) {
     var _html = [];
 
     if (row.del) {
         _html.push('<a class="unDel p5" href="javascript:void(0)" title="unDel">恢复删除</a>');
     } else {
-        _html.push('<a class="authPass p5" href="javascript:void(0)" title="审核通过">审核通过</a>');
-        _html.push('<a class="authFail p5" href="javascript:void(0)" title="审核不通过">审核不通过</a>');
+        // _html.push('<a class="preview p5" href="javascript:void(0)" title="preview">预览</a>');
+        _html.push('<a class="edit p5" href="javascript:void(0)" title="edit">编辑</a>');
+        _html.push('<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>');
+        if (row.mask) {
+            _html.push('<a class="unMask p5" href="javascript:void(0)" title="unMask">恢复屏蔽</a>');
+        } else {
+            _html.push('<a class="mask p5" href="javascript:void(0)" title="mask">屏蔽</a>');
+        }
+        if (row["authenticate"] == 1) {// 待审核
+            // _html.push('<a class="auth p5" href="javascript:void(0)" title="auth">审核</a>');
+        }
+        _html.push('<a class="del p5" href="javascript:void(0)" title="del">删除</a>');
     }
 
     return _html.join('');
 }
-
 $(function () {
     $(".create_live").click(function () {
         $(".create_liveType").addClass('on')
         $(".live_index").addClass('hide')
-    })
+        $("#createButton").attr("disabled", false);
+    });
+
     initTable();
-})
+
+    $("#createAppUserForm").ajaxForm({
+        url: '/v1/appUser/insert',
+        type: 'post',
+        dataType: 'json',
+        beforeSubmit: function () {
+            // $("#createButton").attr("disabled", true);
+            var phone = $("#createAppUserForm").find('#phone').val();
+            var password = $("#createAppUserForm").find('#password').val();
+            var checked = true;
+            if (phone.replace(/\s+/g, "") == '') {
+                alert("请输入账号");
+                checked = false;
+            }
+
+            if (password.replace(/\s+/g, "") == '') {
+                alert("请输入密码");
+                checked = false;
+            }
+
+            return checked;
+        },
+        success: function (result) {
+            if (result.state == 200) {
+                backToUsers();
+            } else {
+                if (result.state == 5001) {
+                    alert("账号已存在");
+                }
+            }
+        },
+        error: function () {
+            $("#createButton").attr("disabled", false);
+        }
+    });
+});
+
+function beginCreate() {
+    $("#createAppUserForm").submit();
+}
+
+function backToUsers() {
+    $(".create_liveType").addClass('hide')
+    $(".create_liveType").removeClass('on')
+    $(".live_index").addClass('on')
+    $(".live_index").removeClass('hide')
+}
