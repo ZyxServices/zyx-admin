@@ -69,7 +69,7 @@ public class ActivityController {
         return new ModelAndView(jsonView);
     }
 
-    @RequestMapping(value = "/update", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ApiOperation(value = "活动接口", notes = "活动修改")
     public ModelAndView update(@RequestParam(name = "id", required = true) Integer id,
                                @RequestParam(name = "userId", required = true) Integer userId,
@@ -131,7 +131,7 @@ public class ActivityController {
         return new ModelAndView(jsonView);
     }
 
-    @RequestMapping(value = "/queryActivity", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/queryActivity", method = RequestMethod.POST)
     @ApiOperation(value = "活动接口", notes = "活动发布")
     public ModelAndView queryActivity(@RequestParam(name = "pageDataNum", required = true) Integer pageDataNum,
                                       @RequestParam(name = "pageNum", required = true) Integer pageNum,
@@ -167,7 +167,7 @@ public class ActivityController {
         return new ModelAndView(jsonView);
     }
 
-    @RequestMapping(value = "/delActivity", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/delActivity", method = RequestMethod.POST)
     @ApiOperation(value = "活动接口", notes = "活动屏蔽")
     public ModelAndView delActivity(@RequestParam(name = "id", required = true) Integer id,
                                     @RequestParam(name = "delType", required = true) Integer delType) {
