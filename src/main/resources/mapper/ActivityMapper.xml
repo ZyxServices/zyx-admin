@@ -1,47 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyx.mapper.ActivityMapper">
-  <resultMap id="activity" type="com.zyx.model.Activity">
-    <!--
-      WARNING - @mbggenerated
-    -->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="img_urls" jdbcType="VARCHAR" property="imgUrls" />
-    <result column="start_time" jdbcType="BIGINT" property="startTime" />
-    <result column="end_time" jdbcType="BIGINT" property="endTime" />
-    <result column="last_time" jdbcType="BIGINT" property="lastTime" />
-    <result column="max_people" jdbcType="INTEGER" property="maxPeople" />
-    <result column="visible" jdbcType="INTEGER" property="visible" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="price" jdbcType="DECIMAL" property="price" />
-    <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="target_url" jdbcType="VARCHAR" property="targetUrl" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="activity_type" jdbcType="INTEGER" property="activityType" />
-    <result column="examine" jdbcType="INTEGER" property="examine" />
-    <result column="member_template" jdbcType="VARCHAR" property="memberTemplate" />
-    <result column="create_time" jdbcType="BIGINT" property="createTime" />
-    <result column="del" jdbcType="INTEGER" property="del" />
-    <result column="mask" jdbcType="INTEGER" property="mask" />
-    <result column="desc_content" jdbcType="LONGVARCHAR" property="descContent" />
-  </resultMap>
+    <resultMap id="activity" type="com.zyx.model.Activity">
+        <!--
+          WARNING - @mbggenerated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="img_urls" jdbcType="VARCHAR" property="imgUrls"/>
+        <result column="start_time" jdbcType="BIGINT" property="startTime"/>
+        <result column="end_time" jdbcType="BIGINT" property="endTime"/>
+        <result column="last_time" jdbcType="BIGINT" property="lastTime"/>
+        <result column="max_people" jdbcType="INTEGER" property="maxPeople"/>
+        <result column="visible" jdbcType="INTEGER" property="visible"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="target_url" jdbcType="VARCHAR" property="targetUrl"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="activity_type" jdbcType="INTEGER" property="activityType"/>
+        <result column="examine" jdbcType="INTEGER" property="examine"/>
+        <result column="member_template" jdbcType="VARCHAR" property="memberTemplate"/>
+        <result column="create_time" jdbcType="BIGINT" property="createTime"/>
+        <result column="del" jdbcType="INTEGER" property="del"/>
+        <result column="mask" jdbcType="INTEGER" property="mask"/>
+        <result column="desc_content" jdbcType="LONGVARCHAR" property="descContent"/>
+    </resultMap>
 
 
-  <select id="queryActivity" parameterType="com.zyx.parm.QueryActivityParm" resultMap="activity">
-    select * from activity where 1=1
-    <if test="groupName != null and groupName != ''">
-      and (title LIKE CONCAT('%','${groupName}','%' ) or address LIKE CONCAT('%','${groupName}','%' ))
-    </if>
-    <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
-      and create_time &gt;= #{startTime}
-      and end_time &lt;= #{endTime}
-    </if>
-    ORDER BY create_time desc
-    <if test="pageNumber != null and page != null">
-      limit #{pageNumber}, #{page}
-    </if>
-  </select>
+    <select id="queryActivity" parameterType="com.zyx.parm.QueryActivityParm" resultMap="activity">
+        select * from activity where 1=1
+        <if test="groupName != null and groupName != ''">
+            and (title LIKE CONCAT('%','${groupName}','%' ) or address LIKE CONCAT('%','${groupName}','%' ))
+        </if>
+        <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+            and create_time &gt;= #{startTime}
+            and end_time &lt;= #{endTime}
+        </if>
+        ORDER BY create_time desc
+        <if test="pageNumber != null and page != null">
+            limit #{pageNumber}, #{page}
+        </if>
+    </select>
+
+    <update id="updateActivity" parameterType="com.zyx.model.Activity">
+        UPDATE activity
+        <set>
+            <if test="title != null and title != ''">
+                title = #{title},
+            </if>
+            <if test="imgUrls != null and imgUrls != ''">
+                img_urls = #{imgUrls},
+            </if>
+            <if test="descContent != null and descContent != ''">
+                desc_content = #{descContent},
+            </if>
+            <if test="startTime != null and startTime != 0">
+                start_time = #{startTime},
+            </if>
+            <if test="endTime != null and endTime != 0">
+                end_time = #{endTime},
+            </if>
+            <if test="lastTime != null and lastTime != 0">
+                last_time = #{lastTime},
+            </if>
+            <if test="maxPeople != null and maxPeople != 0">
+                max_people = #{maxPeople},
+            </if>
+            <if test="visible != null and maxPeople &gt; -1 and maxPeople &lt; 3">
+                visible = #{visible},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="type != null and type &gt; -1 and type &lt; 2">
+                type = #{type},
+            </if>
+            <if test="targetUrl != null and targetUrl != ''">
+                target_url = #{targetUrl},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="activityType != null and activityType &gt; -1 and activityType &lt; 2">
+                activity_type = #{activityType},
+            </if>
+            <if test="examine != null and examine &gt; -1 and examine &lt; 2">
+                examine = #{examine},
+            </if>
+            <if test="memberTemplate != null and memberTemplate != ''">
+                member_template = #{memberTemplate},
+            </if>
+            <if test="del != null">
+                del = #{del},
+            </if>
+            <if test="mask != null">
+                mask = #{mask}
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
 
 </mapper>

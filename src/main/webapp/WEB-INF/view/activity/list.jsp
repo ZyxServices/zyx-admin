@@ -52,7 +52,7 @@
         该活动的所有数据将被完全删除，不能再被浏览
       </div>
       <div class="modal-footer">
-        <button class="btn btn-default">确定</button>
+        <button class="btn btn-default" id="delSuccess">确定</button>
         <button class="btn btn-default" data-dismiss="modal">取消</button>
       </div>
     </div>
@@ -66,7 +66,7 @@
         屏蔽之后，该活动将不在首页活动和活动列表页展示，“我的关注”和“我的”中活动保留，仍可以被浏览
       </div>
       <div class="modal-footer">
-        <button class="btn btn-default">确定</button>
+        <button class="btn btn-default" id="maskSuccess">确定</button>
         <button class="btn btn-default" data-dismiss="modal">取消</button>
       </div>
     </div>
@@ -148,6 +148,7 @@
 
     </div>
 
+
     <%--活动创建--%>
     <div class="container-fluid hide" id="activityCreate">
 
@@ -177,7 +178,7 @@
 
             </li>
 
-            <li><a href="#">创建</a></li>
+            <li><a href="#" id="listTypeRel">创建</a></li>
 
           </ul>
 
@@ -188,17 +189,18 @@
       </div>
 
       <!-- END PAGE HEADER-->
-
       <div id="activity-create">
 
         <!-- BEGIN DASHBOARD STATS -->
         <div class="row-fluid">
 
-          <form class="form-horizontal" role="form">
+          <form action="/v1/activity/release" id="updateFromRel" method="post"  enctype="multipart/form-data" class="form-horizontal" novalidate="novalidate" role="form">
+            <input type="hidden" name="id" id="avtivityIdRel" value="">
+            <input type="hidden" name="userId" id="userIdRel" value="">
             <div class="control-group">
-              <label class="control-label">名称</label>
+              <label class="control-label">标题</label>
               <div class="controls">
-                <input type="text" class="span6 m-wrap" />
+                <input type="text" id="titleRel" name="title" class="span6 m-wrap" />
                 <span class="help-inline">*</span>
               </div>
             </div>
@@ -206,7 +208,10 @@
             <div class="control-group">
               <label class="control-label">封面</label>
               <div class="controls">
-                <input type="file" class="file">
+                <input type="file" name="image" class="file">
+              </div>
+              <div>
+                <img id="imagesRel" style="margin-left:20px" src="">
               </div>
             </div>
 
@@ -214,7 +219,8 @@
               <label class="control-label">内容</label>
               <div class="controls summernote">
                 <div class="span6">
-                  <div id="activity-summernote"></div>
+                  <div id="activity-summernoteRel"></div>
+                  <input id="descRel" type="hidden" name="desc" value="">
                 </div>
               </div>
             </div>
@@ -222,9 +228,9 @@
             <div class="control-group">
               <label class="control-label">时间</label>
               <div class="controls">
-                <div class="span3"><input type="text" class="span12 m-wrap" id="activityStartTime" placeholder="活动开始时间"/></div>
+                <div class="span3"><input type="text" class="span12 m-wrap" id="activityStartTimeRel" name="startTime" placeholder="活动开始时间"/></div>
 
-                <div class="span3"><input type="text" class="span12 m-wrap" id="activityEndTime" placeholder="活动结束时间"/></div>
+                <div class="span3"><input type="text" class="span12 m-wrap" id="activityEndTimeRel" name="endTime" placeholder="活动结束时间"/></div>
                 <span class="help-inline">*</span>
               </div>
             </div>
@@ -232,7 +238,7 @@
             <div class="control-group">
               <label class="control-label">地点</label>
               <div class="controls">
-                <input type="text" class="span6 m-wrap" />
+                <input type="text" id="addressRel" name="address" class="span6 m-wrap" />
                 <span class="help-inline">*</span>
               </div>
             </div>
@@ -244,9 +250,9 @@
             <div class="control-group">
               <label class="control-label">时间</label>
               <div class="controls">
-                <div class="span3"><input type="text" class="span12 m-wrap" id="signStartTime" placeholder="开始报名时间"/></div>
+                <%--          <div class="span3"><input type="text" class="span12 m-wrap" id="signStartTime" placeholder="开始报名时间"/></div>--%>
 
-                <div class="span3"><input type="text" class="span12 m-wrap" id="signEndTime" placeholder="报名结束时间"/></div>
+                <div class="span3"><input type="text" class="span12 m-wrap" id="signEndTimeRel" name="lastTime" placeholder="报名截止时间"/></div>
                 <span class="help-inline">*</span>
               </div>
             </div>
@@ -254,7 +260,7 @@
             <div class="control-group">
               <label class="control-label">人数限制</label>
               <div class="controls">
-                <input type="text" class="span6 m-wrap" />
+                <input type="text" id="maxPeopleRel" name="maxPeople" class="span6 m-wrap" />
                 <span class="help-inline">*</span>
               </div>
             </div>
@@ -262,7 +268,7 @@
             <div class="control-group">
               <label class="control-label">咨询电话</label>
               <div class="controls">
-                <input type="text" class="span6 m-wrap" />
+                <input type="text" id="phoneRel" name="phone" class="span6 m-wrap" />
                 <span class="help-inline">*</span>
               </div>
             </div>
@@ -270,49 +276,48 @@
             <div class="control-group">
               <label class="control-label">可见范围</label>
               <div class="controls">
-                <select class="span6 m-wrap">
-                  <option>所有人</option>
-                  <option>我的粉丝</option>
-                  <option>我的关注</option>
+                <select id="visibleRel" name="visible" class="span6 m-wrap">
+                  <option value="0">所有人</option>
+                  <option value="1">我的粉丝</option>
+                  <option value="2">我的关注</option>
                 </select>
-                <span class="help-inline">*</span>
               </div>
             </div>
 
             <div class="control-group">
               <label class="control-label">是否需要审核申请者</label>
               <div class="controls">
-                <select class="span6 m-wrap" onchange="isReviewed(this)">
+                <select class="span6 m-wrap" id="examineRel" name="examine" onchange="isReviewedRel(this)">
                   <option value="0">否</option>
                   <option value="1">是</option>
                 </select>
-                <span class="help-inline">*</span>
               </div>
             </div>
 
-            <div class="control-group hide" id="userRequired">
+            <div class="control-group hide" id="userRequiredRel">
               <label class="control-label">用户报名必填</label>
-              <div class="controls">
-                <label class="checkbox"><input type="checkbox">手机号码</label>
-                <label class="checkbox"><input type="checkbox">姓名</label>
-                <label class="checkbox"><input type="checkbox">身份证号码</label>
-                <label class="checkbox"><input type="checkbox">性别</label>
-                <label class="checkbox"><input type="checkbox">年龄</label>
-                <label class="checkbox"><input type="checkbox">地址</label>
-                <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>
+              <div class="controls" id="templateRel">
+                <label class="checkbox"><input type="checkbox" value="手机号码">手机号码</label>
+                <label class="checkbox"><input type="checkbox" value="姓名">姓名</label>
+                <label class="checkbox"><input type="checkbox" value="身份证号码">身份证号码</label>
+                <label class="checkbox"><input type="checkbox" value="性别">性别</label>
+                <label class="checkbox"><input type="checkbox" value="年龄">年龄</label>
+                <label class="checkbox"><input type="checkbox" value="地址">地址</label>
+                <a href="javascript:void (0)" onclick="choiceMoreRel()" id="addBtnRel">+</a>
               </div>
             </div>
+            <input type="hidden" id="memberTemplateRel" name="memberTemplate" value="">
 
-            <div class="control-group hide" id="addChoice">
+            <div class="control-group hide" id="addChoiceRel">
               <label class="control-label"></label>
               <div class="controls">
-                <input type="text" class="span3 m-wrap" id="requiredVal"><a href="javascript:void(0)" class="btn btn-default" onclick="createRequired()">确定</a>
+                <input type="text" class="span3 m-wrap" id="requiredValRel"><a href="javascript:void(0)" class="btn btn-default" onclick="createRequiredRel()">确定</a>
               </div>
             </div>
 
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-default">确定</button>
+                <button class="btn btn-default" id="createRel">确定</button>
                 <a href="javascript:void(0)" class="btn btn-default" onclick="window.location.reload();">返回</a>
               </div>
             </div>
@@ -325,6 +330,193 @@
       </div>
 
     </div>
+
+
+    <%--活动创建--%>
+    <div class="container-fluid hide" id="activityModify">
+
+      <!-- BEGIN PAGE HEADER-->
+
+      <div class="row-fluid">
+
+        <div class="span12">
+
+          <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+          <h3 class="page-title">
+
+            活动创建<small>statistics and more</small>
+
+          </h3>
+
+          <ul class="breadcrumb">
+
+            <li>
+
+              <i class="icon-home"></i>
+
+              <a href="javascript:void(0)">活动</a>
+
+              <i class="icon-angle-right"></i>
+
+            </li>
+
+            <li><a href="#" id="listType">创建</a></li>
+
+          </ul>
+
+          <!-- END PAGE TITLE & BREADCRUMB-->
+
+        </div>
+
+      </div>
+
+      <!-- END PAGE HEADER-->
+
+      <div id="activity-modify">
+
+        <!-- BEGIN DASHBOARD STATS -->
+        <div class="row-fluid">
+
+          <form action="/v1/activity/update" id="updateFrom" method="post"  enctype="multipart/form-data" class="form-horizontal" novalidate="novalidate" role="form">
+            <input type="hidden" name="id" id="avtivityId" value="">
+            <input type="hidden" name="userId" id="userId" value="">
+            <div class="control-group">
+              <label class="control-label">标题</label>
+              <div class="controls">
+                <input type="text" id="title" name="title" class="span6 m-wrap" />
+                <span class="help-inline">*</span>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">封面</label>
+              <div class="controls">
+                <input type="file" name="image" class="file">
+              </div>
+              <div>
+                <img id="images" style="margin-left:20px" src="">
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">内容</label>
+              <div class="controls summernote">
+                <div class="span6">
+                  <div id="activity-summernote"></div>
+                  <input id="desc" type="hidden" name="desc" value="">
+                </div>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">时间</label>
+              <div class="controls">
+                <div class="span3"><input type="text" class="span12 m-wrap" id="activityStartTime" name="startTime" placeholder="活动开始时间"/></div>
+
+                <div class="span3"><input type="text" class="span12 m-wrap" id="activityEndTime" name="endTime" placeholder="活动结束时间"/></div>
+                <span class="help-inline">*</span>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">地点</label>
+              <div class="controls">
+                <input type="text" id="address" name="address" class="span6 m-wrap" />
+                <span class="help-inline">*</span>
+              </div>
+            </div>
+
+            <hr>
+
+            <h4>高级选项</h4>
+
+            <div class="control-group">
+              <label class="control-label">时间</label>
+              <div class="controls">
+                <%--          <div class="span3"><input type="text" class="span12 m-wrap" id="signStartTime" placeholder="开始报名时间"/></div>--%>
+
+                <div class="span3"><input type="text" class="span12 m-wrap" id="signEndTime" name="lastTime" placeholder="报名截止时间"/></div>
+                <span class="help-inline">*</span>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">人数限制</label>
+              <div class="controls">
+                <input type="text" id="maxPeople" name="maxPeople" class="span6 m-wrap" />
+                <span class="help-inline">*</span>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">咨询电话</label>
+              <div class="controls">
+                <input type="text" id="phone" name="phone" class="span6 m-wrap" />
+                <span class="help-inline">*</span>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">可见范围</label>
+              <div class="controls">
+                <select id="visible" name="visible" class="span6 m-wrap">
+                  <option value="0">所有人</option>
+                  <option value="1">我的粉丝</option>
+                  <option value="2">我的关注</option>
+                </select>
+                <span class="help-inline">*</span>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">是否需要审核申请者</label>
+              <div class="controls">
+                <select class="span6 m-wrap" id="examine" name="examine" onchange="isReviewed(this)">
+                  <option value="0">否</option>
+                  <option value="1">是</option>
+                </select>
+                <span class="help-inline">*</span>
+              </div>
+            </div>
+
+            <div class="control-group hide" id="userRequired">
+              <label class="control-label">用户报名必填</label>
+              <div class="controls" id="template">
+                <label class="checkbox"><input type="checkbox" value="手机号码">手机号码</label>
+                <label class="checkbox"><input type="checkbox" value="姓名">姓名</label>
+                <label class="checkbox"><input type="checkbox" value="身份证号码">身份证号码</label>
+                <label class="checkbox"><input type="checkbox" value="性别">性别</label>
+                <label class="checkbox"><input type="checkbox" value="年龄">年龄</label>
+                <label class="checkbox"><input type="checkbox" value="地址">地址</label>
+                <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>
+              </div>
+            </div>
+            <input type="hidden" id="memberTemplate" name="memberTemplate" value="">
+
+            <div class="control-group hide" id="addChoice">
+              <label class="control-label"></label>
+              <div class="controls">
+                <input type="text" class="span3 m-wrap" id="requiredVal"><a href="javascript:void(0)" class="btn btn-default" onclick="createRequired()">确定</a>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-default" id="czS">确定</button>
+                <a href="javascript:void(0)" class="btn btn-default" onclick="window.location.reload();">返回</a>
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+        <!-- END DASHBOARD STATS -->
+
+      </div>
+
+    </div>
+
     <%--活动推荐--%>
     <div class="container-fluid hide" id="activityRecommend">
 

@@ -53,7 +53,7 @@ public class Activity {
     private Integer maxPeople;
 
     /**
-     * 活动可见范围（0 所有可见，1朋友可见）
+     * 活动可见范围（0 所有可见，1我的可见，2我的关注）
      */
     private Integer visible;
 
@@ -65,7 +65,7 @@ public class Activity {
     /**
      * 活动价格
      */
-    private Long price;
+    private Double price;
 
     /**
      * 活动分类（0  线上活动，  1线下活动）
@@ -298,7 +298,7 @@ public class Activity {
      *
      * @return price - 活动价格
      */
-    public Long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
@@ -307,7 +307,7 @@ public class Activity {
      *
      * @param price 活动价格
      */
-    public void setPrice(Long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

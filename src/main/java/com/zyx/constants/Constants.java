@@ -90,6 +90,11 @@ public interface Constants {
      */
     int DATA_ALREADY_EXISTS = 303;
 
+    /**
+     * 数据更新失败
+     */
+    int DATA_UPDATE_FAILED = 303;
+
     /// 请求类型代码
     /**
      * 请求错误

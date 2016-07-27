@@ -30,7 +30,7 @@ public class ActivityServiceImpl implements ActivityService {
     private ActivityMapper activityMapper;
 
     @Override
-    public Map<String, Object> queryActivity(int pageDataNumber, int pageNumber,String searchText) {
+    public Map<String, Object> queryActivity(int pageDataNumber, int pageNumber, String searchText) {
 
         QueryActivityParm parm = new QueryActivityParm();
 
@@ -61,15 +61,63 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public Map<String, Object> queryActivityById(Integer activityId) {
-        if(activityId != null){
+        if (activityId != null) {
             Activity activity = activityMapper.selectByPrimaryKey(activityId);
-            if(activity != null){
+            if (activity != null) {
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", activity);
-            }else{
+            } else {
                 return MapUtils.buildErrorMap(Constants.NO_DATA, "差无数据");
             }
-        }else{
+        } else {
             return MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失");
+        }
+    }
+
+    @Override
+    public Map<String, Object> updateActivity(Activity activity) {
+        if (activity != null) {
+            int i = activityMapper.updateActivity(activity);
+            if (i > 0) {
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", "");
+            } else {
+                return MapUtils.buildErrorMap(Constants.DATA_UPDATE_FAILED, "数据更新失败");
+            }
+        } else {
+            return MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失");
+        }
+    }
+
+    @Override
+    public Map<String, Object> maskActivity(int id, int maskType) {
+        if (maskType > -1 && maskType < 2 && id > 0) {
+            Activity activity = new Activity();
+            activity.setId(id);
+            activity.setMask(maskType);
+            int i = activityMapper.updateActivity(activity);
+            if (i > 0) {
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", "");
+            } else {
+                return MapUtils.buildErrorMap(Constants.DATA_UPDATE_FAILED, "数据屏蔽失败");
+            }
+        } else {
+            return MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数有误");
+        }
+    }
+
+    @Override
+    public Map<String, Object> delActivity(int id, int delType) {
+        if (delType > -1 && delType < 2 && id > 0) {
+            Activity activity = new Activity();
+            activity.setId(id);
+            activity.setDel(delType);
+            int i = activityMapper.updateActivity(activity);
+            if (i > 0) {
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", "");
+            } else {
+                return MapUtils.buildErrorMap(Constants.DATA_UPDATE_FAILED, "数据删除失败");
+            }
+        } else {
+            return MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数有误");
         }
     }
 }
