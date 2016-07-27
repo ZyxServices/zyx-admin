@@ -37,18 +37,18 @@ public class Devaluationcontroller {
 
     @RequestMapping(value = "/queryActivity", method = RequestMethod.POST)
     @ApiOperation(value = "活动接口", notes = "活动发布")
-    public ModelAndView queryActivity(@RequestParam(name = "types", required = true) Integer types,
-                                      @RequestParam(name = "devaId", required = true) Integer devaluationId,
+    public ModelAndView queryActivity(@RequestParam(name = "types") Integer types,
+                                      @RequestParam(name = "devaId") Integer devaluationId,
                                       @RequestParam(name = "image", required = false) MultipartFile image,
-                                      @RequestParam(name = "sequence", required = true) Integer sequence,
-                                      @RequestParam(name = "activation", required = true) Integer activation) {
+                                      @RequestParam(name = "sequence") Integer sequence,
+                                      @RequestParam(name = "activation") Integer activation) {
 
         AbstractView jsonView = new MappingJackson2JsonView();
 
         Devaluation devaluation = new Devaluation();
         devaluation.setTypes(types);
         devaluation.setDevaluationId(devaluationId);
-        if(image != null){
+        if (image != null) {
             String uploadFile = FileUploadUtils.uploadFile(image);
             devaluation.setImage(uploadFile);
         }
@@ -56,7 +56,28 @@ public class Devaluationcontroller {
         devaluation.setSequence(sequence);
         devaluation.setActivation(activation);
 
-        Map<String, Object> map = devaluationService.insterActivityDeva(devaluation);
+        Map<String, Object> map = devaluationService.insertActivityDeva(devaluation);
+
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "/appUser", method = RequestMethod.POST)
+    public ModelAndView appUserDeva(@RequestParam(name = "types") Integer types,
+                                      @RequestParam(name = "devaId") Integer devaluationId,
+                                      @RequestParam(name = "sequence") Integer sequence,
+                                      @RequestParam(name = "activation") Integer activation) {
+
+        AbstractView jsonView = new MappingJackson2JsonView();
+
+        Devaluation devaluation = new Devaluation();
+        devaluation.setTypes(types);
+        devaluation.setDevaluationId(devaluationId);
+
+        devaluation.setSequence(sequence);
+        devaluation.setActivation(activation);
+
+        Map<String, Object> map = devaluationService.insertAppUserDeva(devaluation);
 
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);

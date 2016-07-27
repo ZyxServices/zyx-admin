@@ -22,7 +22,7 @@ function initTable() {
         sortOrder: "asc",          //排序方式
         strictSearch: true,
         smartDisplay: false,
-        height:500,
+        height: 500,
         uniqueId: "id",           //每一行的唯一标识，一般为主键列
         search: true,
         sidePagination: "server",
@@ -71,7 +71,7 @@ function operateFormatter(value, row, index) {
     var _html = [];
 
     if (row.del) {
-        _html.push('<a class="unDel p5" href="javascript:void(0)" title="unDel">恢复删除</a>');
+        _html.push('<a class="unDel p5" href="javascript:void(0)" title="unDel">取消删除</a>');
     } else {
         _html.push('<a class="authPass p5" href="javascript:void(0)" title="审核通过">审核通过</a>');
         _html.push('<a class="authFail p5" href="javascript:void(0)" title="审核不通过">审核不通过</a>');
@@ -81,9 +81,5 @@ function operateFormatter(value, row, index) {
 }
 
 $(function () {
-    $(".create_live").click(function () {
-        $(".create_liveType").addClass('on')
-        $(".live_index").addClass('hide')
-    })
     initTable();
-})
+});

@@ -101,7 +101,7 @@
         <li class="appUser">
             <a href="javascript:void(0)">
                 <i class="icon-cogs"></i>
-                <span class="title">APP用户管理</span>
+                <span class="title">用户管理</span>
                 <span class="arrow"></span>
                 <span class="selected hide"></span>
             </a>

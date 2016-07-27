@@ -67,7 +67,7 @@
                         <label class="control-label">密码</label>
 
                         <div class="controls">
-                            <input type="text" class="span6 m-wrap" name="password" id="password" />
+                            <input type="text" class="span6 m-wrap" name="password" id="password"/>
                             <span class="help-inline">*</span>
                         </div>
                     </div>
@@ -141,6 +141,73 @@
         </div>
     </div>
 </div>
+
+<!-- 用户推荐开始 -->
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="appUserRecommend" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <form action="/v1/deva/queryActivity" id="devaForm" method="post" enctype="multipart/form-data"
+                  class="form-horizontal" novalidate="novalidate" role="form">
+            <div class="modal-content">
+                <input id="types" name="types" value="5" type="hidden">
+                <input id="devaId" name="devaId" type="hidden">
+                <input id="activation" name="activation" value="1" type="hidden">
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        用户推荐
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="control-group">
+                        <label class="control-label">用户昵称</label>
+                        <div class="controls" id="devaUserNickname"></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">用户头像</label>
+                        <div class="controls">
+                            <img id="devaUserAvatar" src="">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">首页更多用户推荐</label>
+                        <div class="controls">
+                            <select class="span6 m-wrap" id="sequence" name="sequence">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                                <option>11</option>
+                                <option>12</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button id="devaButton" type="button" class="btn btn-primary" onclick="beginDeva()">
+                        提交更改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+            </form>
+        </div><!-- /.modal -->
+
+</div>
+<!-- 用户推荐结束 -->
 <jsp:include page="../public/common-footer.jsp"/>
 </body>
 <script type="text/javascript" src="../../js/appUser/appUserCommon.js"></script>

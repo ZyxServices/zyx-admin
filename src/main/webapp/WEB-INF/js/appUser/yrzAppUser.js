@@ -21,7 +21,7 @@ function initTable() {
         sortable: true,           //是否启用排序
         sortOrder: "asc",          //排序方式
         smartDisplay: false,
-        height:500,
+        height: 500,
         strictSearch: true,
         uniqueId: "id",           //每一行的唯一标识，一般为主键列
         search: true,
@@ -71,13 +71,13 @@ function operateFormatter(value, row, index) {
     var _html = [];
 
     if (row.del) {
-        _html.push('<a class="unDel p5" href="javascript:void(0)" title="unDel">恢复删除</a>');
+        _html.push('<a class="unDel p5" href="javascript:void(0)" title="unDel">取消删除</a>');
     } else {
         // _html.push('<a class="preview p5" href="javascript:void(0)" title="preview">预览</a>');
         _html.push('<a class="edit p5" href="javascript:void(0)" title="edit">编辑</a>');
         _html.push('<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>');
         if (row.mask) {
-            _html.push('<a class="unMask p5" href="javascript:void(0)" title="unMask">恢复屏蔽</a>');
+            _html.push('<a class="unMask p5" href="javascript:void(0)" title="unMask">取消屏蔽</a>');
         } else {
             _html.push('<a class="mask p5" href="javascript:void(0)" title="mask">屏蔽</a>');
         }
@@ -91,9 +91,5 @@ function operateFormatter(value, row, index) {
 }
 
 $(function () {
-    $(".create_live").click(function () {
-        $(".create_liveType").addClass('on')
-        $(".live_index").addClass('hide')
-    })
     initTable();
-})
+});

@@ -91,7 +91,12 @@ var operateEvent = {
         alert('You click like action, row: ' + JSON.stringify(row));
     },
     'click .recommend': function (e, value, row, index) {
-
+        $("#devaUserNickname").html(row.nickname);
+        $("#devaId").val(row.id);
+        if (row["avatar"]) {
+            $("#devaUserAvatar").attr("src", "http://image.tiyujia.com/" + row["avatar"]);
+        }
+        $("#appUserRecommend").modal('show');
     },
     'click .authPass': function (e, value, row, index) {// 审核通过
         // 弹出审核页面

@@ -63,13 +63,13 @@ function operateFormatter(value, row, index) {
     var _html = [];
 
     if (row.del) {
-        _html.push('<a class="unDel p5" href="javascript:void(0)" title="unDel">恢复删除</a>');
+        _html.push('<a class="unDel p5" href="javascript:void(0)" title="unDel">取消删除</a>');
     } else {
         // _html.push('<a class="preview p5" href="javascript:void(0)" title="preview">预览</a>');
         _html.push('<a class="edit p5" href="javascript:void(0)" title="edit">编辑</a>');
         _html.push('<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>');
         if (row.mask) {
-            _html.push('<a class="unMask p5" href="javascript:void(0)" title="unMask">恢复屏蔽</a>');
+            _html.push('<a class="unMask p5" href="javascript:void(0)" title="unMask">取消屏蔽</a>');
         } else {
             _html.push('<a class="mask p5" href="javascript:void(0)" title="mask">屏蔽</a>');
         }
@@ -81,6 +81,7 @@ function operateFormatter(value, row, index) {
 
     return _html.join('');
 }
+
 $(function () {
     $(".create_live").click(function () {
         $(".create_liveType").addClass('on')
@@ -124,10 +125,37 @@ $(function () {
             $("#createButton").attr("disabled", false);
         }
     });
+
+    $("#devaForm").ajaxForm({
+        url: '/v1/deva/appUser',
+        type: 'post',
+        dataType: 'json',
+        beforeSubmit: function () {
+            $("#devaButton").attr("disabled", true);
+            return true;
+        },
+        success: function (result) {
+            if (result.state == 200) {
+                alert("首推成功");
+                $("#appUserRecommend").modal('hide');
+                $("#devaButton").attr("disabled", false);
+            } else {
+                alert(result["errmsg"]);
+                $("#devaButton").attr("disabled", false);
+            }
+        },
+        error: function () {
+            $("#createButton").attr("disabled", false);
+        }
+    });
 });
 
 function beginCreate() {
     $("#createAppUserForm").submit();
+}
+
+function beginDeva() {
+    $("#devaForm").submit();
 }
 
 function backToUsers() {
