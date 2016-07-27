@@ -173,9 +173,9 @@
 		<!--<table tableName="combination" domainObjectName="Combination">
 			<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
 		</table>-->
-		<table tableName="combined_data" domainObjectName="CombinedData">
+		<!--<table tableName="combined_data" domainObjectName="CombinedData">
 			<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-		</table>
+		</table>-->
 
 
 	</context>
