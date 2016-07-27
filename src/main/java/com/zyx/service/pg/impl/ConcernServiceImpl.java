@@ -1,6 +1,7 @@
 package com.zyx.service.pg.impl;
 
 import com.zyx.constants.Constants;
+import com.zyx.constants.PgConstants;
 import com.zyx.mapper.ConcernMapper;
 import com.zyx.model.Concern;
 import com.zyx.service.BaseServiceImpl;
@@ -33,5 +34,25 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
         List<Concern> concerns = concernMapper.findByPager(start * pageSize, pageSize);
         Map<String, Object> map = MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", concerns);
         return map;
+    }
+
+    @Override
+    public Map<String, Object> findById(Integer id) {
+        Optional.ofNullable(id).orElse(0);
+//        concernM
+        Concern concern = concernMapper.findById(id);
+        if (concern != null) {
+            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, concern);
+        }
+        return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
+    }
+
+    @Override
+    public Map<String, Object> deleteOne(Integer id) {
+        Integer result = concernMapper.deleteOne(id);
+        if (result > 0) {
+            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_37000, PgConstants.PG_ERROR_CODE_37000_MSG, null);
+        }
+        return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
     }
 }

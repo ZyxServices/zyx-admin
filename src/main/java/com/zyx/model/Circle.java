@@ -16,12 +16,12 @@ public class Circle {
     @Column(name = "create_time")
     private Long createTime;
 
-    private Integer state;
+    private Integer state;//状态,可以随业务逻辑增加，但必须在此注明类型说明。0为所有可见,-1为删除
 
     @Column(name = "circle_master")
     private String circleMaster;
 
-    private Integer type;
+    private Integer type;//圈子类型,0未普通圈子，1位明星圈子
 
     @Column(name = "circle_master_id")
     private Integer circleMasterId;
@@ -29,9 +29,9 @@ public class Circle {
     @Column(name = "head_img_url")
     private String headImgUrl;
 
-    private Integer top;
+    private Integer top;//1位置顶，其他都为不置顶,可以作为排序使用
 
-    private Integer hot;
+    private Integer hot;//热度
 
     private String details;
 

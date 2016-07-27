@@ -14,4 +14,8 @@ import java.util.Map;
  */
 public interface ConcernService extends BaseService<Concern> {
     Map<String, Object> findByPager(int start, int pageSize);
+
+    Map<String, Object> findById(Integer id);
+
+    Map<String, Object> deleteOne(Integer id);
 }

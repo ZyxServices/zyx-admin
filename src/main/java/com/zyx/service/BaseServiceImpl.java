@@ -33,14 +33,13 @@ import com.zyx.service.BaseService;
 import tk.mybatis.mapper.common.Mapper;
 
 /**
- * 
+ * @author ZhangHuaRong
+ * @version V1.0
+ *          Copyright (c)2012 chantsoft-版权所有
  * @title BaseService.java
  * @package com.zyx.mapper.service.impl
  * @description TODO
- * @author ZhangHuaRong   
  * @update 2016年5月26日 下午3:02:33
- * @version V1.0  
- * Copyright (c)2012 chantsoft-版权所有
  */
 public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
@@ -77,17 +76,17 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
         return mapper.selectByExample(example);
     }
 
-	@Override
-	public List<T> select(T record) {
-		return mapper.select(record);
-	}
+    @Override
+    public List<T> select(T record) {
+        return mapper.select(record);
+    }
 
-	@Override
-	public int selectCount(T record) {
-		return mapper.selectCount(record);
-	}
-	
+    @Override
+    public int selectCount(T record) {
+        return mapper.selectCount(record);
+    }
+
     //TODO 其他...
-    
-    
+
+
 }

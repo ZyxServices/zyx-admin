@@ -36,7 +36,7 @@ public class CircleController {
      * @param pageSize
      * @return
      */
-    @RequestMapping(value = "circleList")
+    @RequestMapping(value = "circleList", method = RequestMethod.GET)
     @ApiOperation(value = "圈子列表", notes = "圈子列表")
     public ModelAndView findCircleList(@RequestParam(value = "start") Integer start,
                                        @RequestParam(value = "pageSize") Integer pageSize) {
@@ -74,7 +74,7 @@ public class CircleController {
     }
 
     @RequestMapping(value = "getCircle", method = RequestMethod.GET)
-    @ApiOperation(value = "根据圈子id获取一条数据", notes = "根据圈子id获取一条数据")
+    @ApiOperation(value = "获取单条圈子数据", notes = "获取单条圈子数据")
     public ModelAndView getCircle(@RequestParam(value = "id") Integer id) {
         Map<String, Object> map = circleService.findById(id);
         AbstractView jsonView = new MappingJackson2JsonView();
@@ -82,7 +82,16 @@ public class CircleController {
         return new ModelAndView(jsonView);
     }
 
-    @RequestMapping(value = "setTop")
+    @RequestMapping(value = "deleteOne", method = RequestMethod.GET)
+    @ApiOperation(value = "删除圈子", notes = "逻辑删除圈子")
+    public ModelAndView deleteOne(@RequestParam(value = "id") Integer id) {
+        Map<String, Object> map = circleService.deleteOne(id);
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "setTop", method = RequestMethod.GET)
     @ApiOperation(value = "精选圈子推荐", notes = "精选圈子推荐")
     public ModelAndView tuiJian(Integer circleId, Integer topSize) {
         Map<String, Object> map = circleService.tuiJian(circleId, topSize);

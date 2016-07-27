@@ -27,7 +27,7 @@ public class CircleItemController {
     @Resource
     private CircleItemService circleItemService;
 
-    @RequestMapping(value = "circleItemList")
+    @RequestMapping(value = "circleItemList",method = RequestMethod.GET)
     @ApiOperation(value = "帖子列表", notes = "帖子列表")
     public ModelAndView findByPager(@RequestParam(value = "start") Integer start,
                                     @RequestParam(value = "pageSize") Integer pageSize) {

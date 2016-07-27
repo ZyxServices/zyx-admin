@@ -16,7 +16,9 @@ public interface CircleService extends BaseService<Circle> {
 
     Map<String, Object> insertCircle(String title, Integer createId, Integer state, Integer type, String details, String headImgUrl);
 
-    Map<String,Object> findById(Integer id);
+    Map<String, Object> findById(Integer id);
 
-    Map<String,Object> tuiJian(Integer circle_id,Integer topSize);
+    Map<String, Object> tuiJian(Integer circle_id, Integer topSize);
+
+    Map<String, Object> deleteOne(Integer id);
 }
