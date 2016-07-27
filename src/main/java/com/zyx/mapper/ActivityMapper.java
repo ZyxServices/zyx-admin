@@ -18,4 +18,12 @@ public interface ActivityMapper extends Mapper<Activity> {
      */
     List<Activity> queryActivity(QueryActivityParm parm);
 
+    /**
+     * 修改活动
+     *
+     * @param activity
+     * @return
+     */
+    int updateActivity(Activity activity);
+
 }

@@ -1,6 +1,7 @@
 package com.zyx.service.activity;
 
 
+import com.zyx.model.Activity;
 import com.zyx.parm.QueryActivityParm;
 
 import java.util.Map;
@@ -32,5 +33,29 @@ public interface ActivityService {
      * @return
      */
     Map<String, Object> queryActivityById(Integer activityId);
+
+    /**
+     * 修改活动
+     *
+     * @param activity
+     * @return
+     */
+    Map<String, Object> updateActivity(Activity activity);
+
+    /**
+     * 屏蔽活动
+     *
+     * @param maskType
+     * @return
+     */
+    Map<String, Object> maskActivity(int id,int maskType);
+
+    /**
+     * 删除活动 （逻辑删除）
+     *
+     * @param delType
+     * @return
+     */
+    Map<String, Object> delActivity(int id,int delType);
 
 }

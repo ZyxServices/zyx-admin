@@ -51,9 +51,29 @@ public class MenuController {
         return new ModelAndView("/dynamic/dynamicIndex");
     }
 
-    @RequestMapping(value = "/banner/homebanner", method = RequestMethod.GET)
-    public ModelAndView redirectBanner() {
-        return new ModelAndView("/banner/homebanner");
+    @RequestMapping(value = "/banner/activitybanner", method = RequestMethod.GET)
+    public ModelAndView redirectActivityBanner() {
+        return new ModelAndView("/banner/activitybanner");
+    }
+
+    @RequestMapping(value = "/banner/livebanner", method = RequestMethod.GET)
+    public ModelAndView redirectLiveBanner() {
+        return new ModelAndView("/banner/livebanner");
+    }
+
+    @RequestMapping(value = "/banner/circlebanner", method = RequestMethod.GET)
+    public ModelAndView redirectCircleBanner() {
+        return new ModelAndView("/banner/circlebanner");
+    }
+
+    @RequestMapping(value = "/banner/packagebanner", method = RequestMethod.GET)
+    public ModelAndView redirectPackageBanner() {
+        return new ModelAndView("/banner/packagebanner");
+    }
+
+    @RequestMapping(value = "/banner/dynamicbanner", method = RequestMethod.GET)
+    public ModelAndView redirectDynamicBanner() {
+        return new ModelAndView("/banner/dynamicbanner");
     }
 
     @RequestMapping(value = "/live/living", method = RequestMethod.GET)

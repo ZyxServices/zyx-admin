@@ -118,7 +118,7 @@
             </ul>
         </li>
         <%--消息--%>
-        <li class="">
+        <li class="message">
             <a href="<%=request.getContextPath()%>/menu/message/messageIndex">
                 <i class="icon-gift"></i>
                 <span class="title">消息</span>
@@ -134,8 +134,20 @@
                 <span class="selected hide"></span>
             </a>
             <ul class="sub-menu">
-                <li class="homebanner">
-                    <a href="<%=request.getContextPath()%>/menu/banner/homebanner">首页banner推荐（活动）</a>
+                <li class="activitybanner">
+                    <a href="<%=request.getContextPath()%>/menu/banner/activitybanner">活动banner推荐</a>
+                </li>
+                <li class="livebanner">
+                    <a href="<%=request.getContextPath()%>/menu/banner/livebanner">直播banner推荐</a>
+                </li>
+                <li class="circlebanner">
+                    <a href="<%=request.getContextPath()%>/menu/banner/circlebanner">圈子banner推荐</a>
+                </li>
+                <li class="packagebanner">
+                    <a href="<%=request.getContextPath()%>/menu/banner/packagebanner">背包banner推荐</a>
+                </li>
+                <li class="dynamicbanner">
+                    <a href="<%=request.getContextPath()%>/menu/banner/dynamicbanner">动态banner推荐</a>
                 </li>
             </ul>
         </li>

@@ -17,6 +17,7 @@ function initTable() {
         checkboxHeader: "true",
         sortable: true,           //是否启用排序
         sortOrder: "asc",          //排序方式
+        smartDisplay: false,
         pageList: [1, 25, 50, 100],    //可供选择的每页的行数（*）
         strictSearch: true,
         height: 460,            //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zyx.mapper.CombinedDataMapper" >
+  <resultMap id="BaseResultMap" type="com.zyx.model.CombinedData" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="combinedId" property="combinedid" jdbcType="INTEGER" />
+    <result column="dataId" property="dataid" jdbcType="INTEGER" />
+    <result column="types" property="types" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="del" property="del" jdbcType="INTEGER" />
+    <result column="mask" property="mask" jdbcType="INTEGER" />
+  </resultMap>
+</mapper>

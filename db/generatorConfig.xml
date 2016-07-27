@@ -90,13 +90,13 @@
 -->
 		<!--Live直播模块表构建-->
 		<!--直播信息-->
-		<table tableName="t_live" domainObjectName="LiveInfo">
+		<!--<table tableName="t_live" domainObjectName="LiveInfo">
 			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
-		</table>
+		</table>-->
 		<!--直播标签-->
-		<table tableName="t_live_lab" domainObjectName="LiveLab">
+		<!--<table tableName="t_live_lab" domainObjectName="LiveLab">
 			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
-		</table>
+		</table>-->
 
 
 		<!--<table tableName="activity" domainObjectName="Activity">
@@ -170,6 +170,12 @@
 		<!--<table tableName="zan" domainObjectName="Zan">-->
 			<!--<generatedKey column="id" sqlStatement="Mysql" identity="true" />-->
 		<!--</table>-->
+		<!--<table tableName="combination" domainObjectName="Combination">
+			<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+		</table>-->
+		<!--<table tableName="combined_data" domainObjectName="CombinedData">
+			<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+		</table>-->
 
 
 	</context>
