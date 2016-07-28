@@ -125,7 +125,7 @@ var FormValidation = function () {
                     }
                 },
 
-                messages: { // custom messages for radio buttons and checkboxes
+                messages: { // vo messages for radio buttons and checkboxes
                     membership: {
                         required: "Please select a Membership type"
                     },

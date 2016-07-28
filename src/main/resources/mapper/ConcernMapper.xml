@@ -15,15 +15,33 @@
         <result column="video_url" property="videoUrl" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
     </resultMap>
+    <resultMap id="concernVoMap" type="com.zyx.model.vo.ConcernVo" extends="concernMap">
+        <result column="userName" property="userName" jdbcType="VARCHAR"/>
+    </resultMap>
 
     <select id="count">
         SELECT count("id") as count FROM concern
     </select>
 
-    <select id="findByPager" resultMap="concernMap">
-    SELECT * FROM concern WHERE state >=0 ORDER BY create_time DESC  LIMIT #{start},#{end}
+    <select id="findByPager" resultMap="concernVoMap">
+        SELECT
+        concern.id,
+        concern.user_id,
+        concern.type,
+        concern.topic_content,
+        concern.topic_title,
+        concern.topic_visible,
+        concern.img_url,
+        concern.video_url,
+        concern.create_time,
+        concern.state,
+        user.name as userName,
+        user.authenticate
+        FROM
+        concern
+        INNER JOIN user ON concern.user_id = user.id WHERE state >=0 ORDER BY create_time DESC  LIMIT #{start},#{end}
   </select>
-
+    <!--SELECT * FROM concern WHERE state >=0 ORDER BY create_time DESC  LIMIT #{start},#{end}-->
     <select id="findById" resultMap="concernMap">
             SELECT * FROM concern  WHERE id=#{id} AND state >= 0
     </select>

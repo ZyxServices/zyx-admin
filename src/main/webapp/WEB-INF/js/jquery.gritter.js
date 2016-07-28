@@ -127,7 +127,7 @@
 			// Reset
 			this._custom_timer = 0;
 			
-			// A custom fade time set
+			// A vo fade time set
 			if(time_alive){
 				this._custom_timer = time_alive;
 			}

@@ -37,6 +37,7 @@ public class Concern {
     @Column
     private Integer state;//动态状态，-2未屏蔽，-1为删除
 
+
     /**
      * @return id
      */
@@ -170,4 +171,5 @@ public class Concern {
     public void setState(Integer state) {
         this.state = state;
     }
+
 }
