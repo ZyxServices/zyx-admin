@@ -82,7 +82,7 @@ public class CircleController {
         return new ModelAndView(jsonView);
     }
 
-    @RequestMapping(value = "deleteOne", method = RequestMethod.GET)
+    @RequestMapping(value = "deleteOne", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除圈子", notes = "逻辑删除圈子")
     public ModelAndView deleteOne(@RequestParam(value = "id") Integer id) {
         Map<String, Object> map = circleService.deleteOne(id);
@@ -91,9 +91,20 @@ public class CircleController {
         return new ModelAndView(jsonView);
     }
 
+    @RequestMapping(value = "setVisible", method = RequestMethod.DELETE)
+    @ApiOperation(value = "屏蔽圈子", notes = "逻辑屏蔽圈子")
+    public ModelAndView setVisible(@RequestParam(value = "id") Integer id) {
+        Map<String, Object> map = circleService.setVisible(id);
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+
+
     @RequestMapping(value = "setTop", method = RequestMethod.GET)
     @ApiOperation(value = "精选圈子推荐", notes = "精选圈子推荐")
-    public ModelAndView tuiJian(Integer circleId, Integer topSize) {
+    public ModelAndView tuiJian(@RequestParam(value = "circleId") Integer circleId, @RequestParam(value = "topSize") Integer topSize) {
         Map<String, Object> map = circleService.tuiJian(circleId, topSize);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);

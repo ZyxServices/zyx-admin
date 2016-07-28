@@ -27,7 +27,7 @@ public class CircleItemController {
     @Resource
     private CircleItemService circleItemService;
 
-    @RequestMapping(value = "circleItemList",method = RequestMethod.GET)
+    @RequestMapping(value = "circleItemList", method = RequestMethod.GET)
     @ApiOperation(value = "帖子列表", notes = "帖子列表")
     public ModelAndView findByPager(@RequestParam(value = "start") Integer start,
                                     @RequestParam(value = "pageSize") Integer pageSize) {
@@ -37,7 +37,7 @@ public class CircleItemController {
         return new ModelAndView(jsonView);
     }
 
-    @RequestMapping(value = "/v1/circleItem/add", method = RequestMethod.POST)
+    @RequestMapping(value = "createCircleItem", method = RequestMethod.POST)
     @ApiOperation(value = "发布帖子", notes = "发布帖子")
     public ModelAndView addCircleItem(@RequestParam(name = "token") String token,
                                       @RequestParam(name = "circle_id") Integer circle_id,
@@ -45,6 +45,34 @@ public class CircleItemController {
                                       @RequestParam(name = "title") String title,
                                       @RequestParam(name = "content") String content) {
         Map<String, Object> map = circleItemService.addCircleItem(circle_id, create_id, title, content);
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "findOne", method = RequestMethod.GET)
+    @ApiOperation(value = "获取某一条帖子", notes = "获取某一条帖子")
+    public ModelAndView findOne(@RequestParam(value = "id") Integer id) {
+        Map<String, Object> map = circleItemService.findOne(id);
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "deleteOne", method = RequestMethod.DELETE)
+    @ApiOperation(value = "删除某一条帖子", notes = "逻辑删除某一条帖子")
+    public ModelAndView deleteOne(@RequestParam(value = "id") Integer id) {
+        Map<String, Object> map = circleItemService.deleteOne(id);
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+
+    @RequestMapping(value = "setVisible", method = RequestMethod.DELETE)
+    @ApiOperation(value = "屏蔽某一条帖子", notes = "逻辑屏蔽某一条帖子")
+    public ModelAndView setVisible(@RequestParam(value = "id") Integer id) {
+        Map<String, Object> map = circleItemService.setVisible(id);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);

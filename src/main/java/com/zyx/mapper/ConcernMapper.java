@@ -25,6 +25,7 @@ public interface ConcernMapper extends Mapper<Concern> {
 
     /**
      * 查询某一条数据
+     *
      * @param id
      * @return
      */
@@ -32,8 +33,9 @@ public interface ConcernMapper extends Mapper<Concern> {
 
     /**
      * 查询某一条数据
+     *
      * @param id
      * @return
      */
-    Integer deleteOne(@Param(value = "id") Integer id);
+    Integer setState(@Param(value = "state") Integer state, @Param(value = "id") Integer id);
 }

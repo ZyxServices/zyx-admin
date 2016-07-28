@@ -14,4 +14,8 @@ import java.util.Map;
 public interface CircleItemService extends BaseService<CircleItem> {
     Map<String,Object> findByPager(Integer start,Integer pageSize);
     Map<String,Object> addCircleItem(Integer circle_id,Integer create_id,String title,String content);
+    Map<String,Object> findOne(Integer id);
+    Map<String,Object> deleteOne(Integer id);
+    Map<String,Object> setVisible(Integer id);
+
 }

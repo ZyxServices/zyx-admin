@@ -56,4 +56,13 @@ public class ConcernController {
         return new ModelAndView(jsonView);
     }
 
+    @RequestMapping(value = "setVisible",method = RequestMethod.DELETE)
+    @ApiOperation(value = "屏蔽动态", notes = "逻辑屏蔽")
+    public ModelAndView setVisible(@RequestParam(value = "id") Integer id) {
+        Map<String, Object> map = concernService.setVisible(id);
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
 }

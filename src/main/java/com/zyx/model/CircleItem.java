@@ -25,6 +25,8 @@ public class CircleItem {
 
     private String content;
 
+    private Integer state;//帖子状态,0为正常可以访问，-1为删除，如有业务需求，可以再加入
+
     /**
      * @return id
      */
@@ -135,5 +137,13 @@ public class CircleItem {
      */
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 }

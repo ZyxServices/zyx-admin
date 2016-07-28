@@ -1,5 +1,8 @@
 package com.zyx.model;
 
+import org.apache.ibatis.type.JdbcType;
+import tk.mybatis.mapper.annotation.ColumnType;
+
 import javax.persistence.*;
 
 @Table(name = "concern")
@@ -30,6 +33,9 @@ public class Concern {
 
     @Column(name = "create_time")
     private Long createTime;
+
+    @Column
+    private Integer state;//动态状态，-2未屏蔽，-1为删除
 
     /**
      * @return id
@@ -155,5 +161,13 @@ public class Concern {
      */
     public void setCreateTime(Long createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 }

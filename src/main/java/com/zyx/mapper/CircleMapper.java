@@ -13,5 +13,6 @@ public interface CircleMapper extends Mapper<Circle> {
 
     Integer tuiJian(@Param(value = "circle_id") Integer circleId, @Param(value = "top_size") Integer topSize);
 
-    Integer deleteOne(@Param(value = "id") Integer id);
+    Integer setState(@Param(value = "state") Integer state, @Param(value = "id") Integer id);
+
 }

@@ -118,9 +118,18 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
 
     @Override
     public Map<String, Object> deleteOne(Integer id) {
-        Integer result = circleMapper.deleteOne(id);
+        Integer result = circleMapper.setState(-1, id);
         if (result > 0) {
             return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_37000, PgConstants.PG_ERROR_CODE_37000_MSG, null);
+        }
+        return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
+    }
+
+    @Override
+    public Map<String, Object> setVisible(Integer id) {
+        Integer result = circleMapper.setState(-2, id);
+        if (result > 0) {
+            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_38000, PgConstants.PG_ERROR_CODE_38000_MSG, null);
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
     }

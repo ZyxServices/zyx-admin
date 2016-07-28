@@ -18,4 +18,6 @@ public interface ConcernService extends BaseService<Concern> {
     Map<String, Object> findById(Integer id);
 
     Map<String, Object> deleteOne(Integer id);
+
+    Map<String, Object> setVisible(Integer id);
 }

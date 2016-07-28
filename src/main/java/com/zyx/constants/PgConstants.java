@@ -24,6 +24,9 @@ public interface PgConstants extends Constants {
     int PG_ERROR_CODE_37000= 37000;
     String PG_ERROR_CODE_37000_MSG = "删除成功";
 
+    int PG_ERROR_CODE_38000= 38000;
+    String PG_ERROR_CODE_38000_MSG = "屏蔽成功";
+
     int PG_ERROR_CODE_30000 = 30000;
     String PG_ERROR_CODE_30000_MSG = "用户token已经失效，请重新登录";
 

@@ -16,7 +16,7 @@ public class Circle {
     @Column(name = "create_time")
     private Long createTime;
 
-    private Integer state;//状态,可以随业务逻辑增加，但必须在此注明类型说明。0为所有可见,-1为删除
+    private Integer state;//状态,可以随业务逻辑增加，但必须在此注明类型说明。0为所有可见,-1为删除,-2为屏蔽
 
     @Column(name = "circle_master")
     private String circleMaster;

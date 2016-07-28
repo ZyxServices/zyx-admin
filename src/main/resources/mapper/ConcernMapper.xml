@@ -21,14 +21,14 @@
     </select>
 
     <select id="findByPager" resultMap="concernMap">
-    SELECT * FROM concern WHERE type!=-1 ORDER BY create_time DESC  LIMIT #{start},#{end}
+    SELECT * FROM concern WHERE state >=0 ORDER BY create_time DESC  LIMIT #{start},#{end}
   </select>
 
     <select id="findById" resultMap="concernMap">
-            SELECT * FROM concern  WHERE id=#{id} AND type!=-1
+            SELECT * FROM concern  WHERE id=#{id} AND state >= 0
     </select>
 
-    <update id="deleteOne">
-        UPDATE concern SET type=-1 WHERE id=#{id}
+    <update id="setState">
+        UPDATE concern SET state=#{state} WHERE id=#{id}
     </update>
 </mapper>
