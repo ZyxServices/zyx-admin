@@ -16,6 +16,7 @@
 <link href="<%=request.getContextPath()%>/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
 <link href="<%=request.getContextPath()%>/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 <link href="<%=request.getContextPath()%>/css/jquery.tree-multiselect.min.css" rel="stylesheet" type="text/css"/>
+<link href="<%=request.getContextPath()%>/css/bootstrapValidator.css" rel="stylesheet" type="text/css"/>
 <!-- END GLOBAL MANDATORY STYLES -->
 <link rel="shortcut icon" href="<%=request.getContextPath()%>/images/favicon.ico" />
 

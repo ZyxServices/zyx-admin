@@ -2,6 +2,29 @@
  * Created by ZYX on 2016/7/12.
  */
 $(function () {
+    /*表单验证*/
+    $("#group-form").bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields:{
+            'groupname': {
+                validators: {
+                    notEmpty: {
+                        message: '组合名称不能为空'
+                    }
+                }
+            },
+            'cover': {
+                validators: {
+                    notEmpty: {
+                        message: '必须上传图片'
+                    }
+                }
+            }
+        }
+    })
     $("#activity-group-table").bootstrapTable({
         striped: true,           //是否显示行间隔色
         cache: true,            //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
@@ -78,3 +101,8 @@ function createGroupActivity() {
     $("#activityGroupList").hide();
 
 }
+
+$('input[id=lefile]').change(function() {
+    $('#photoCover').html($(this).val());
+    $("#lefile").html($(this).val());
+});

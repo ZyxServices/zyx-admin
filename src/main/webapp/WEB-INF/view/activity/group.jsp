@@ -71,7 +71,7 @@
       </div>
     </div>
     <%--活动列表--%>
-    <div class="container-fluid" id="activityGroupList">
+    <div class="container-fluid hide" id="activityGroupList">
 
       <!-- BEGIN PAGE HEADER-->
 
@@ -143,7 +143,7 @@
     </div>
 
     <%--活动组合创建--%>
-    <div class="container-fluid hide" id="activityGroupCreate">
+    <div class="container-fluid" id="activityGroupCreate">
 
       <!-- BEGIN PAGE HEADER-->
 
@@ -188,22 +188,23 @@
         <!-- BEGIN DASHBOARD STATS -->
         <div class="row-fluid">
 
-          <form class="form-horizontal" role="form">
-            <div class="control-group">
+          <form class="form-horizontal" role="form" id="group-form">
+            <div class="control-group form-group">
               <label class="control-label">组合名称</label>
-              <div class="controls">
-                <input type="text" class="span6 form-control" />
+                <div class="controls col-xs-5">
+                  <input type="text" class="span6" name="groupname"/>
+                  <span class="help-inline">*</span>
+                </div>
+            </div>
+
+            <div class="control-group form-group">
+              <label class="control-label">封面</label>
+              <div class="controls col-xs-5">
+                <input id="lefile" type="file" style="width: 1px;height: 1px;position: absolute;z-index: 1;overflow: hidden" name="cover">
+                <a class="btn btn-default" href="javascript:void (0)" style="position: relative;z-index: 2;" id="photoCover" onclick="$('input[id=lefile]').click();">选择文件</a>
                 <span class="help-inline">*</span>
               </div>
             </div>
-
-            <div class="control-group">
-              <label class="control-label">封面</label>
-              <div class="controls">
-                <input type="file" class="file form-control">
-              </div>
-            </div>
-
             <hr>
 
             <h4>选择活动</h4>
@@ -222,7 +223,6 @@
                       <th data-field="createMan">创建人</th>
                       <th data-field="place">活动地点</th>
                       <th data-field="bv">浏览量</th>
-                      <th data-formatter="operate">操作</th>
                     </tr>
                     </thead>
                   </table>
