@@ -55,8 +55,10 @@ public class CircleController {
     @ApiOperation(value = "添加圈子", notes = "添加圈子")
     public ModelAndView addCircle(@RequestParam("token") String token,
                                   @RequestParam("title") String title,
-                                  @RequestParam("createId") Integer createId,
-                                  @RequestParam("state") Integer state,
+                                  @RequestParam(value = "createId", required = false) Integer createId,
+                                  @RequestParam(value = "state", required = false) Integer state,
+                                  @RequestParam(value = "masterId") Integer masterId,
+                                  @RequestParam(value = "adminIds", required = false) Integer[] adminIds,
                                   @RequestParam("type") Integer type,
                                   @RequestParam("details") String details,
                                   @RequestPart("headImgUrl") MultipartFile headImgUrl) {
@@ -68,7 +70,7 @@ public class CircleController {
 //            jsonView.setAttributesMap(returnResult);
 //            return new ModelAndView(jsonView);
 //        }
-        Map<String, Object> map = circleService.insertCircle(title, createId, state, type, details, "");
+        Map<String, Object> map = circleService.insertCircle(title, createId, state, type, details, "", masterId, adminIds);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
@@ -99,7 +101,6 @@ public class CircleController {
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
-
 
 
     @RequestMapping(value = "setTop", method = RequestMethod.GET)

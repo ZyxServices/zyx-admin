@@ -39,11 +39,11 @@ public class CircleItemController {
 
     @RequestMapping(value = "createCircleItem", method = RequestMethod.POST)
     @ApiOperation(value = "发布帖子", notes = "发布帖子")
-    public ModelAndView addCircleItem(@RequestParam(name = "token") String token,
-                                      @RequestParam(name = "circle_id") Integer circle_id,
-                                      @RequestParam(name = "create_id") Integer create_id,
-                                      @RequestParam(name = "title") String title,
-                                      @RequestParam(name = "content") String content) {
+    public ModelAndView addCircleItem(
+            @RequestParam(name = "circle_id") Integer circle_id,
+            @RequestParam(name = "create_id") Integer create_id,
+            @RequestParam(name = "title") String title,
+            @RequestParam(name = "content") String content) {
         Map<String, Object> map = circleItemService.addCircleItem(circle_id, create_id, title, content);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);

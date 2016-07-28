@@ -33,7 +33,7 @@ public class Circle {
 
     private Integer hot;//热度
 
-    private String details;
+    private String details;//简介
 
     /**
      * @return id

@@ -37,7 +37,7 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
     }
 
     @Override
-    public Map<String, Object> insertCircle(String title, Integer createId, Integer state, Integer type, String details, String headImgUrl) {
+    public Map<String, Object> insertCircle(String title, Integer createId, Integer state, Integer type, String details, String headImgUrl, Integer masterId, Integer[] adminIds) {
         try {
             Circle insertCircle = new Circle();
             if (title == null || Objects.equals(title, "")) {
@@ -66,10 +66,14 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30010, PgConstants.PG_ERROR_CODE_30010_MSG);
             }
             Optional.ofNullable(details).ifPresent(insertCircle::setDetails);
-            if (headImgUrl == null || Objects.equals(headImgUrl, "")) {
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30013, PgConstants.PG_ERROR_CODE_30013_MSG);
-            }
+//            if (headImgUrl == null || Objects.equals(headImgUrl, "")) {
+//                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30013, PgConstants.PG_ERROR_CODE_30013_MSG);
+//            }
             Optional.ofNullable(headImgUrl).ifPresent(insertCircle::setHeadImgUrl);
+            if (masterId == null || Objects.equals(masterId, "")) {
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30019, PgConstants.PG_ERROR_CODE_30019_MSG);
+            }
+            Optional.ofNullable(masterId).ifPresent(insertCircle::setCircleMasterId);
             insertCircle.setCreateTime(new Date().getTime());
             insertCircle.setState(0);
             mapper.insert(insertCircle);
