@@ -70,7 +70,7 @@ public class CircleController {
 //            jsonView.setAttributesMap(returnResult);
 //            return new ModelAndView(jsonView);
 //        }
-        Map<String, Object> map = circleService.insertCircle(title, createId, state, type, details, "", masterId, adminIds);
+        Map<String, Object> map = circleService.insertCircle(title, createId, state, type, details, imgDbUrl, masterId, adminIds);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
