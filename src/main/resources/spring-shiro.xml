@@ -31,6 +31,9 @@
         <property name="sessionManager" ref="sessionManager"/>
     </bean>
 
+    <!-- 登录过滤器 -->
+    <bean id="zyxLoginFilter" class="com.zyx.secure.filter.ZyxLoginFilter"></bean>
+
     <!-- restNossion过滤器 -->
     <bean id="restNosession"
           class="com.zyx.secure.filter.NoSesstionHttpMethodPermissionFilter"/>
@@ -46,10 +49,10 @@
         <property name="unauthorizedUrl" value="/login/unauth"/>
         <property name="filters">
             <map>
-
                 <!-- 将重写的rest覆盖系统rest -->
                 <entry key="rest" value-ref="restNosession"/>
                 <entry key="authc" value-ref="zyxRoleFilter"/>
+                <entry key="ll" value-ref="zyxLoginFilter"></entry>
             </map>
         </property>
         <property name="filterChainDefinitions">
@@ -62,6 +65,7 @@
                 /sysmenu/goAdd=noSessionCreation,rest
                 /sysmenu/list=authc
                 /login = authc
+                /menu/**=ll
             </value>
         </property>
     </bean>

@@ -58,7 +58,7 @@
                         <label class="control-label">账号</label>
 
                         <div class="controls">
-                            <input type="text" class="span6 m-wrap" name="phone"/>
+                            <input type="text" class="span6 m-wrap" name="phone" id="phone"/>
                             <span class="help-inline">*</span>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                         <label class="control-label">密码</label>
 
                         <div class="controls">
-                            <input type="text" class="span6 m-wrap" name="password" />
+                            <input type="text" class="span6 m-wrap" name="password" id="password"/>
                             <span class="help-inline">*</span>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                         <label class="control-label">头像</label>
 
                         <div class="controls">
-                            <input type="file" name="avatar">
+                            <input type="file" name="avatar" id="avatar">
                             <span class="help-inline">只能上传一张图片</span>
                         </div>
                     </div>
@@ -85,11 +85,23 @@
                         <label class="control-label">性别</label>
 
                         <div class="controls">
-                            <select class="span6 m-wrap" name="sex">
-                                <option value="0">男</option>
-                                <option value="1">女</option>
+                            <select class="span6 m-wrap" name="sex" id="sex">
+                                <option value="1">男</option>
+                                <option value="0">女</option>
                             </select>
-                            <span class="help-inline">*</span>
+                            <%--<span class="help-inline">*</span>--%>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">官方账号</label>
+
+                        <div class="controls">
+                            <select class="span6 m-wrap" name="official" id="official">
+                                <option value="1">是</option>
+                                <option value="0" selected>否</option>
+                            </select>
+                            <%--<span class="help-inline">*</span>--%>
                         </div>
                     </div>
 
@@ -97,8 +109,8 @@
                         <label class="control-label">所在地</label>
 
                         <div class="controls">
-                            <input type="text" class="span6 m-wrap" name="address"/>
-                            <span class="help-inline">*</span>
+                            <input type="text" class="span6 m-wrap" name="address" id="address"/>
+                            <%--<span class="help-inline">*</span>--%>
                         </div>
                     </div>
 
@@ -106,8 +118,8 @@
                         <label class="control-label">认证信息</label>
 
                         <div class="controls">
-                            <input type="text" class="span6 m-wrap" name="authInfo"/>
-                            <span class="help-inline">*</span>
+                            <input type="text" class="span6 m-wrap" name="authInfo" id="authInfo"/>
+                            <%--<span class="help-inline">*</span>--%>
                         </div>
                     </div>
 
@@ -119,10 +131,6 @@
                             <span class="help-inline">上传图片</span>
                         </div>
 
-                        <div class="controls">
-                            <input type="file" name="authFile">
-                            <span class="help-inline">上传图片</span>
-                        </div>
                     </div>
                     <button type="button" id="createButton" class="btn" onclick="beginCreate()">确认创建
                     </button>
@@ -133,7 +141,74 @@
         </div>
     </div>
 </div>
+
+<!-- 用户推荐开始 -->
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="appUserRecommend" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <form action="/v1/deva/queryActivity" id="devaForm" method="post" enctype="multipart/form-data"
+                  class="form-horizontal" novalidate="novalidate" role="form">
+            <div class="modal-content">
+                <input id="types" name="types" value="5" type="hidden">
+                <input id="devaId" name="devaId" type="hidden">
+                <input id="activation" name="activation" value="1" type="hidden">
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        用户推荐
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="control-group">
+                        <label class="control-label">用户昵称</label>
+                        <div class="controls" id="devaUserNickname"></div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">用户头像</label>
+                        <div class="controls">
+                            <img id="devaUserAvatar" src="">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">首页更多用户推荐</label>
+                        <div class="controls">
+                            <select class="span6 m-wrap" id="sequence" name="sequence">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                                <option>11</option>
+                                <option>12</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button id="devaButton" type="button" class="btn btn-primary" onclick="beginDeva()">
+                        提交更改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+            </form>
+        </div><!-- /.modal -->
+
+</div>
+<!-- 用户推荐结束 -->
 <jsp:include page="../public/common-footer.jsp"/>
 </body>
 <script type="text/javascript" src="../../js/appUser/appUserCommon.js"></script>
-<script type="text/javascript" src="../../js/appUser/userIndex.js"></script>
+<script type="text/javascript" src="../../js/appUser/allAppUser.js"></script>

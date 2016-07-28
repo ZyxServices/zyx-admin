@@ -19,34 +19,38 @@ import java.util.Map;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title AppUserController.java
+ * @title AppUserQueryController.java
  */
-@Controller("appUserController")
+@Controller("appUserQueryController")
 @RequestMapping("/v1/appUser")
-public class AppUserController {
+public class AppUserQueryController {
 
     @Autowired
     AppUserService appUserService;
 
     @RequestMapping(value = "/list/all", method = RequestMethod.GET)
-    public ModelAndView list(@RequestParam Integer pageSize, @RequestParam Integer pageNumber, @RequestParam(required = false) String searchText) {
+    public ModelAndView list(@RequestParam Integer pageSize, @RequestParam Integer pageNumber, @RequestParam(required = false) String searchText, @RequestParam(required = false) String sortName, @RequestParam(required = false) String sortOrder) {
         AbstractView jsonView = new MappingJackson2JsonView();
         QueryAppUserParam param = new QueryAppUserParam();
         param.setPageSize(pageSize);
-        param.setPageNumber(pageNumber);
+        param.setPageNumber((pageNumber - 1) * pageSize);
         param.setSearchText(searchText);
+        param.setSortName(sortName);
+        param.setSortOrder(sortOrder);
         Map<String, Object> map = appUserService.queryList(param);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
 
     @RequestMapping(value = "/list/yrz", method = RequestMethod.GET)
-    public ModelAndView yrzList(@RequestParam Integer pageSize, @RequestParam Integer pageNumber, @RequestParam(required = false) String searchText) {
+    public ModelAndView yrzList(@RequestParam Integer pageSize, @RequestParam Integer pageNumber, @RequestParam(required = false) String searchText, @RequestParam(required = false) String sortName, @RequestParam(required = false) String sortOrder) {
         AbstractView jsonView = new MappingJackson2JsonView();
         QueryAppUserParam param = new QueryAppUserParam();
         param.setPageSize(pageSize);
-        param.setPageNumber(pageNumber);
+        param.setPageNumber((pageNumber - 1) * pageSize);
         param.setSearchText(searchText);
+        param.setSortName(sortName);
+        param.setSortOrder(sortOrder);
         param.setAuthenticate(2);// 已认证用户
         Map<String, Object> map = appUserService.queryList(param);
         jsonView.setAttributesMap(map);
@@ -54,14 +58,39 @@ public class AppUserController {
     }
 
     @RequestMapping(value = "/list/dsh", method = RequestMethod.GET)
-    public ModelAndView dshList(@RequestParam Integer pageSize, @RequestParam Integer pageNumber, @RequestParam(required = false) String searchText) {
+    public ModelAndView dshList(@RequestParam Integer pageSize, @RequestParam Integer pageNumber, @RequestParam(required = false) String searchText, @RequestParam(required = false) String sortName, @RequestParam(required = false) String sortOrder) {
         AbstractView jsonView = new MappingJackson2JsonView();
         QueryAppUserParam param = new QueryAppUserParam();
         param.setPageSize(pageSize);
-        param.setPageNumber(pageNumber);
+        param.setPageNumber((pageNumber - 1) * pageSize);
         param.setSearchText(searchText);
+        param.setSortName(sortName);
+        param.setSortOrder(sortOrder);
         param.setAuthenticate(1);// 待审核用户
         Map<String, Object> map = appUserService.queryList(param);
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "/list/official", method = RequestMethod.GET)
+    public ModelAndView officialList(@RequestParam Integer pageSize, @RequestParam Integer pageNumber, @RequestParam(required = false) String searchText, @RequestParam(required = false) String sortName, @RequestParam(required = false) String sortOrder) {
+        AbstractView jsonView = new MappingJackson2JsonView();
+        QueryAppUserParam param = new QueryAppUserParam();
+        param.setPageSize(pageSize);
+        param.setPageNumber((pageNumber - 1) * pageSize);
+        param.setSearchText(searchText);
+        param.setSortName(sortName);
+        param.setSortOrder(sortOrder);
+        param.setOfficial(1);
+        Map<String, Object> map = appUserService.queryList(param);
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "/list/official/all", method = RequestMethod.GET)
+    public ModelAndView officialListAll() {
+        AbstractView jsonView = new MappingJackson2JsonView();
+        Map<String, Object> map = appUserService.queryOfficialAccountList();
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }

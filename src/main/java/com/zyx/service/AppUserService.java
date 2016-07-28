@@ -1,18 +1,22 @@
 package com.zyx.service;
 
+import com.zyx.constants.AppUserConstants;
 import com.zyx.constants.Constants;
+import com.zyx.dto.AppUserListDto;
+import com.zyx.dto.OfficialUserListDto;
 import com.zyx.mapper.AppUserMapper;
 import com.zyx.model.AppUser;
 import com.zyx.parm.QueryAppUserParam;
+import com.zyx.parm.appUser.AppUserCreateParam;
 import com.zyx.utils.MapUtils;
 import org.apache.commons.collections.map.HashedMap;
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by wms on 2016/7/15.
@@ -28,29 +32,36 @@ public class AppUserService {
     @Autowired
     AppUserMapper appUserMapper;
 
+    public AppUser selectByPhone(String phone) {
+        AppUser appUser = new AppUser();
+        appUser.setPhone(phone);
+        return appUserMapper.selectOne(appUser);
+    }
+
     public Map<String, Object> queryList(QueryAppUserParam param) {
         Map<String, Object> map = new HashedMap();
 
         try {
-            RowBounds row = new RowBounds((param.getPageNumber() - 1) * param.getPageSize(), param.getPageSize());
+            List<AppUserListDto> _list = appUserMapper.queryAppUserList(param);
+            int count = appUserMapper.selectAppUserListCount(param);
+            map.put("rows", _list);
+            map.put("total", count);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return map;
+    }
+
+    public Map<String, Object> queryOfficialAccountList() {
+        Map<String, Object> map = new HashedMap();
+        try {
             Example example = new Example(AppUser.class);
             Example.Criteria criteria = example.createCriteria();
-            if (param.getSearchText() != null) {
-                criteria.andLike("nickname", "%" + param.getSearchText() + "%");
-            }
-            if (param.getAuthenticate() != null) {
-                criteria.andEqualTo("authenticate", param.getAuthenticate());
-            }
-            Example.Criteria criteria2 = example.or();
-            if (param.getSearchText() != null) {
-                criteria2.andLike("phone", "%" + param.getSearchText() + "%");
-            }
-            if (param.getAuthenticate() != null) {
-                criteria2.andEqualTo("authenticate", param.getAuthenticate());
-            }
-            List<AppUser> ss = appUserMapper.selectByExampleAndRowBounds(example, row);
+            criteria.andEqualTo("official", 1);
+            List<OfficialUserListDto> _list = appUserMapper.queryOfficialAccountList();
             int count = appUserMapper.selectCountByExample(example);
-            map.put("rows", ss);
+            map.put("rows", _list);
             map.put("total", count);
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,7 +123,7 @@ public class AppUserService {
 
     }
 
-    public Map<String,Object> authAppUser(Integer id, int i) {
+    public Map<String, Object> authAppUser(Integer id, int i) {
         try {
             if (appUserMapper.authAppUserByPrimaryKey(id, i) > 0) {
                 return Constants.MAP_BASE_SUCCESS;
@@ -121,6 +132,33 @@ public class AppUserService {
             }
         } catch (Exception e) {
             return Constants.MAP_500;
+        }
+    }
+
+    public Map<String, Object> insertAppUser(AppUserCreateParam param) {
+        AppUser appUser = new AppUser();
+        appUser.setPhone(param.getPhone());
+        appUser.setPassword(param.getPassword());
+        appUser.setAvatar(param.getAvatar());
+        appUser.setCreateTime(System.currentTimeMillis());
+        appUser.setNickname("tiyujia" + new Random().nextLong());
+        appUser.setAddress(param.getAddress());
+        appUser.setSex(param.getSex());
+        appUser.setOfficial(param.getOfficial());
+        appUser.setMask(false);
+        appUser.setDel(false);
+        appUser.setAuthenticate(2);
+        try {
+            int result = appUserMapper.insert(appUser);
+            if (result >= 1) {
+                param.setAppUserId(appUser.getId());
+                appUserMapper.insertAuthInfo(param);
+                return MapUtils.buildSuccessMap(AppUserConstants.SUCCESS, AppUserConstants.MSG_SUCCESS, null);
+            } else {
+                return MapUtils.buildErrorMap(AppUserConstants.ERROR_APP_USER_5002, AppUserConstants.ERROR_APP_USER_5002_MSG);
+            }
+        } catch (Exception e) {
+            return AppUserConstants.MAP_500;
         }
     }
 }

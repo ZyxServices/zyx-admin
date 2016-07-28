@@ -12,6 +12,10 @@ public abstract class QueryParam implements Serializable {
 
     private Integer pageSize;
 
+    private String sortName;
+
+    private String sortOrder;
+
     public Integer getPageNumber() {
         return pageNumber;
     }
@@ -26,5 +30,21 @@ public abstract class QueryParam implements Serializable {
 
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public String getSortName() {
+        return sortName;
+    }
+
+    public void setSortName(String sortName) {
+        this.sortName = sortName;
+    }
+
+    public String getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(String sortOrder) {
+        this.sortOrder = sortOrder;
     }
 }

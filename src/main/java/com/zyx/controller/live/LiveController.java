@@ -48,7 +48,7 @@ public class LiveController {
             if (liveLab == null) {
                 liveLab = new LiveLab();
                 liveLab.setLab(lab.trim());
-                liveLab.setDescription(desc.trim());
+                liveLab.setDescription(desc==null?null:desc.trim());
                 liveLab.setCreateTime(System.currentTimeMillis());
                 liveLab.setState(LiveLabEnum.USING.getStatus());
                 liveLabService.addLiveLab(liveLab);

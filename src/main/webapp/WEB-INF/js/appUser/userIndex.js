@@ -85,6 +85,38 @@ $(function () {
     $(".create_live").click(function () {
         $(".create_liveType").addClass('on')
         $(".live_index").addClass('hide')
-    })
+    });
+
     initTable();
+
+    $("#createAppUserForm").ajaxForm({
+        url: '/app/avatar',
+        type: 'post',
+        dataType: 'json',
+        beforeSubmit: function () {
+            $("#createButton").attr("disabled", true);
+            return true;
+        },
+        success: function (result) {
+            if (result.code == 200) {
+                $("#appAvatar").attr("src", result.uri);
+            } else {
+                $('#alertBox').modal('show');
+                $("#message").html("上传图标失败");
+            }
+        },
+        error: function () {
+        }
+    });
 });
+
+function beginCreate() {
+    $("#createAppUserForm").submit();
+}
+
+function backToUsers() {
+    $(".create_liveType").addClass('hide')
+    $(".create_liveType").removeClass('on')
+    $(".live_index").addClass('on')
+    $(".live_index").removeClass('hide')
+}
