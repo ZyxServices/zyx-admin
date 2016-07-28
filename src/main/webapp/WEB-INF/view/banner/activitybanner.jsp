@@ -42,22 +42,18 @@
 
         <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
-        <div class="modal hide">
-
+        <div class="modal hide" id="delActivityBanner">
             <div class="modal-header">
-
                 <button data-dismiss="modal" class="close" type="button"></button>
-
                 <h3>删除banner</h3>
-
             </div>
-
             <div class="modal-body">
-
-                确定删除banner？
-
+                该banner的所有数据将被完全删除，不能再被浏览。
             </div>
-
+            <div class="modal-footer">
+                <button class="btn btn-default">确定</button>
+                <button class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
         </div>
 
         <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->

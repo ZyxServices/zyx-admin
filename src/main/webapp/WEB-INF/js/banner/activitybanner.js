@@ -37,7 +37,7 @@ function modify(id) {
     console.log(id)
 }
 function del(id) {
-    console.log(id)
+    $("#delActivityBanner").modal('toggle');
 }
 
 function createBanner() {
