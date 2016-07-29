@@ -29,6 +29,7 @@
 <script src="../../js/jquery.tree-multiselect.js" type="text/javascript"></script>
 
 <script src="../../js/dataformat.js" type="text/javascript"></script>
+<script src="../../js/public/dialog.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 

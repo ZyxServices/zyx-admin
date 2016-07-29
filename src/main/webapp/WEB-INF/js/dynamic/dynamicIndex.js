@@ -4,7 +4,9 @@
 var $table = $('#live_table'),
     $remove = $('#remove');
 function initTable() {
-    $('#live_table').bootstrapTable({
+    $('#dynamic_table').bootstrapTable({
+        url: ("/concern/concernList?page=1&pageSize=5"),
+        method: 'get',
         toolbar: '#toolbar',        //工具按钮用哪个容器
         striped: true,           //是否显示行间隔色
         cache: true,            //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
@@ -12,62 +14,31 @@ function initTable() {
         paginationPreText: "上一页",
         paginationNextText: "下一页",
         pageNumber: 1,            //初始化加载第一页，默认第一页
-        pageSize: 2,            //每页的记录行数（*）
+        pageSize: 10,            //每页的记录行数（*）
         checkbox: true,
         checkboxHeader: "true",
-        smartDisplay: false,
         sortable: true,           //是否启用排序
         sortOrder: "asc",          //排序方式
-        pageList: [1, 25, 50, 100],    //可供选择的每页的行数（*）
+        pageList: [25, 50, 100],    //可供选择的每页的行数（*）
         strictSearch: true,
+        smartDisplay: false,
         height: 460,            //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
         uniqueId: "id",           //每一行的唯一标识，一般为主键列
         search: true,
-        //  clickToSelect: true,        //是否启用点击选中行
-        //showColumns: true,
-        //showHeader: true,
+        strictSearch: false,        //是否启用模糊收索
         columns: [{field: 'state', checkbox: true, align: 'center', valign: 'middle'},
             {field: 'id', title: 'id', align: 'center', valign: 'middle'},
-            {field: 'class', title: '发布者'},
-            {field: 'name', title: '发布者是否认证',sortable: true},
-            {field: 'author', title: '发布时间'},
-            {field: 'type', title: '动态类型', sortable: true},
+            {field: 'userId', title: '发布者'},
+            {field: 'name', title: '发布者是否认证', sortable: true},
+            {field: 'createTime', title: '发布时间', formatter: dateTimeFormatter},
+            {field: 'type', title: '动态类型', sortable: true, formatter: typeFormatter},
             {field: 'price', title: '点赞量', sortable: true},
             {field: 'startTime', title: '评论量', sortable: true},
             {field: 'overTime', title: '分享量', sortable: true},
             {field: 'online', title: '收藏量', sortable: true},
             {field: 'comment', title: '浏览量'},
             {field: 'operation', title: '操作', align: 'center', events: operateEventssssss, formatter: operateFormatter},
-            {field: 'Report', title: '举报'}],
-        data: [{
-            id: 1,
-            class: '广场',
-            name: '科比见面会',
-            author: '汪汪',
-            type: '视频直播',
-            price: '正在直播',
-            startTime: '2016-07-14 17:35',
-            overTime: 'Item 1',
-            online: '2987',
-            comment: '765',
-            praise: '231',
-            share: '142',
-            Report: '正常'
-        }, {
-            id: 2,
-            class: '大咖',
-            name: '科比见面会',
-            author: '房房',
-            type: '图文直播',
-            price: '尚未开始',
-            startTime: '2016-07-14 17:35',
-            overTime: 'Item 1',
-            online: '2987',
-            comment: '765',
-            praise: '231',
-            share: '142',
-            Report: '80人举报'
-        }]
+            {field: 'Report', title: '举报'}]
     });
     // sometimes footer render error.
     setTimeout(function () {
@@ -100,6 +71,25 @@ function initTable() {
         });
         $remove.prop('disabled', true);
     });
+}
+//时间戳转化
+function dateTimeFormatter(data) {
+    return [new Date(data).format("yyyy-mm-dd HH:MM:ss")].join('');
+}
+//类型
+function typeFormatter(data) {
+    switch (data) {
+        case 0:
+            return '测试';
+        case 1:
+            return '个人动态';
+        case 2:
+            return '活动动态';
+        case 3:
+            return '明星动态';
+        case 4:
+            return '圈子动态';
+    }
 }
 function getIdSelections() {
     return $.map($table.bootstrapTable('getSelections'), function (row) {
@@ -148,7 +138,7 @@ var operateEventssssss = {
     }
 };
 //查看Url事件
-var seeUrl={
+var seeUrl = {
     'click .seeUrl': function (e, value, row, index) {
         alert('You click like seeUrl action, row: ' + JSON.stringify(row));
     }

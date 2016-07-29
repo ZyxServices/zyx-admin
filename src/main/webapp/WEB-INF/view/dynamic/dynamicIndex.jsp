@@ -43,7 +43,7 @@
                     <button id="remove" class="btn btn-danger" style="margin-left: 10px" disabled>
                         <i class="glyphicon glyphicon-remove"></i> 批量删除
                     </button>
-                    <table id="live_table"></table>
+                    <table id="dynamic_table"></table>
                 </div>
             </div>
             <div class="create_liveType">
