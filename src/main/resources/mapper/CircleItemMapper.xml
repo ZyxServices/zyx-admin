@@ -15,11 +15,31 @@
         <result column="content" property="content" jdbcType="LONGVARCHAR"/>
     </resultMap>
 
-    <select id="findByPager" resultMap="circleItemMap">
-    SELECT * FROM circleItem WHERE state >= 0 ORDER BY create_time DESC  LIMIT #{start},#{end}
+    <resultMap id="circleItemVoMap" type="com.zyx.model.vo.CircleItemVo" extends="circleItemMap">
+        <result column="createUser" property="createUser" jdbcType="VARCHAR"/>
+        <result column="circleTitle" property="circleTitle" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="findByPager" resultMap="circleItemVoMap">
+    SELECT
+    circleItem.id,
+    circleItem.circle_id,
+    circleItem.create_id,
+    circleItem.title,
+    circleItem.content,
+    circleItem.hot,
+    circleItem.create_time,
+    circleItem.top,
+    circleItem.state,
+    `user`.`name` AS createUser,
+    circle.title AS circleTitle
+    FROM
+    circleItem
+    INNER JOIN `user` ON circleItem.create_id = `user`.id
+    INNER JOIN circle ON circleItem.circle_id = circle.id WHERE circleItem.state != -1 ORDER BY create_time DESC  LIMIT #{start},#{end}
   </select>
     <select id="findOne" resultMap="circleItemMap">
-    SELECT * FROM circleItem WHERE id=#{id} AND state >= 0
+    SELECT * FROM circleItem WHERE id=#{id} AND state != -1
   </select>
     <update id="setVisible">
         UPDATE circleItem SET state=#{state} WHERE id=#{id}

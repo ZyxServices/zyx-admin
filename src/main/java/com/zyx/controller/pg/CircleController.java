@@ -55,10 +55,10 @@ public class CircleController {
     @ApiOperation(value = "添加圈子", notes = "添加圈子")
     public ModelAndView addCircle(@RequestParam("token") String token,
                                   @RequestParam("title") String title,
-                                  @RequestParam(value = "createId", required = false) Integer createId,
+                                  @RequestParam(value = "createId") Integer createId,
                                   @RequestParam(value = "state", required = false) Integer state,
                                   @RequestParam(value = "masterId") Integer masterId,
-                                  @RequestParam(value = "adminIds", required = false) Integer[] adminIds,
+                                  @RequestParam(value = "adminIds", required = false) String adminIds,
                                   @RequestParam("type") Integer type,
                                   @RequestParam("details") String details,
                                   @RequestPart("headImgUrl") MultipartFile headImgUrl) {

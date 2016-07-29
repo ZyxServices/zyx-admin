@@ -87,5 +87,10 @@ public interface PgConstants extends Constants {
     int PG_ERROR_CODE_30019= 30019;
     String PG_ERROR_CODE_30019_MSG = "圈主id不能为空";
 
+    int PG_ERROR_CODE_30020= 30020;
+    String PG_ERROR_CODE_30020_MSG = "状态不能为空";
+
+
+
     String PG_RESULT = "result";
 }

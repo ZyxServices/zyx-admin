@@ -10,7 +10,7 @@
         <result column="create_id" property="createId" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="state" property="state" jdbcType="INTEGER"/>
-        <result column="circle_master" property="circleMaster" jdbcType="VARCHAR"/>
+        <result column="admin_ids" property="adminIds" jdbcType="VARCHAR"/>
         <result column="type" property="type" jdbcType="INTEGER"/>
         <result column="circle_master_id" property="circleMasterId" jdbcType="INTEGER"/>
         <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
@@ -19,11 +19,48 @@
         <result column="details" property="details" jdbcType="LONGVARCHAR"/>
     </resultMap>
 
-    <select id="findByPager" resultMap="circleMap">
-        SELECT * FROM circle WHERE state >= 0 ORDER BY create_time DESC  LIMIT #{start},#{end}
+    <resultMap id="circleVo" type="com.zyx.model.vo.CircleVo" extends="circleMap">
+        <result column="userName" property="userName" jdbcType="VARCHAR"/>
+        <result column="masterName" property="masterName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="findByPager" resultMap="circleVo">
+SELECT
+	`circle`.`id` AS `id`,
+	`circle`.`title` AS `title`,
+	`circle`.`create_id` AS `create_id`,
+	`circle`.`create_time` AS `create_time`,
+	`circle`.`state` AS `state`,
+	`circle`.`adminIds` AS `adminIds`,
+	`circle`.`type` AS `type`,
+	`circle`.`circle_master_id` AS `circle_master_id`,
+	`circle`.`details` AS `details`,
+	`circle`.`head_img_url` AS `head_img_url`,
+	`circle`.`top` AS `top`,
+	`circle`.`hot` AS `hot`,
+	`circle`.`admin_ids` AS `admin_ids`,
+	`baseUser`.`name` AS `userName`,
+	`user`.`name` AS `masterName`
+    FROM
+	(
+		(
+			`circle`
+			JOIN `user` `baseUser` ON (
+				(
+					`circle`.`create_id` = `baseUser`.`id`
+				)
+			)
+		)
+		JOIN `user` ON (
+			(
+				`circle`.`circle_master_id` = `user`.`id`
+			)
+		)
+	)
+    WHERE state != -1 ORDER BY create_time DESC  LIMIT #{start},#{end}
     </select>
     <select id="findById" resultMap="circleMap">
-        SELECT * FROM circle WHERE id=#{id} AND state >= 0
+        SELECT * FROM circle WHERE id=#{id} AND state != -1
     </select>
     <update id="tuiJian">
         UPDATE circle SET top=#{top_size} where id=#{circle_id}

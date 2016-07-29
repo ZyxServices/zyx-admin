@@ -1,5 +1,8 @@
 package com.zyx.model;
 
+import org.apache.ibatis.type.JdbcType;
+import tk.mybatis.mapper.annotation.ColumnType;
+
 import javax.persistence.*;
 
 @Table(name = "circle")
@@ -18,8 +21,8 @@ public class Circle {
 
     private Integer state;//状态,可以随业务逻辑增加，但必须在此注明类型说明。0为所有可见,-1为删除,-2为屏蔽
 
-    @Column(name = "circle_master")
-    private String circleMaster;
+    @Column(name = "admin_ids")
+    private String adminIds;//管理员ids
 
     private Integer type;//圈子类型,0未普通圈子，1位明星圈子
 
@@ -105,19 +108,6 @@ public class Circle {
         this.state = state;
     }
 
-    /**
-     * @return circle_master
-     */
-    public String getCircleMaster() {
-        return circleMaster;
-    }
-
-    /**
-     * @param circleMaster
-     */
-    public void setCircleMaster(String circleMaster) {
-        this.circleMaster = circleMaster;
-    }
 
     /**
      * @return type
@@ -201,5 +191,13 @@ public class Circle {
      */
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    public String getAdminIds() {
+        return adminIds;
+    }
+
+    public void setAdminIds(String adminIds) {
+        this.adminIds = adminIds;
     }
 }
