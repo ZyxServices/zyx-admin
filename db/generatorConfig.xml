@@ -9,7 +9,7 @@
 
 
 		<plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-			<property name="mappers" value="tk.mybatis.mapper.common.Mapper" />
+			<property name="mappers" value="com.zyx.mapper.BaseMapper" />
 			<!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
 			<property name="caseSensitive" value="true" />
 		</plugin>
