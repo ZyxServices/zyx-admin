@@ -85,6 +85,20 @@ $(function () {
         forceParse: true,
         pickerPosition: "bottom-left",
         showMeridian: false
+    }).on('hide',function(e) {
+        $('#updateFromRel').data('bootstrapValidator')
+            .updateStatus('startTime', 'NOT_VALIDATED',null)
+            .validateField('startTime');
+    });
+    $('#activityStartTimeRel').on('hide',function(e) {
+        $('#updateFromRel').data('bootstrapValidator')
+            .updateStatus('startTime', 'NOT_VALIDATED',null)
+            .validateField('startTime');
+    });
+    $('#activityEndTimeRel').on('hide',function(e) {
+        $('#updateFromRel').data('bootstrapValidator')
+            .updateStatus('endTime', 'NOT_VALIDATED',null)
+            .validateField('endTime');
     });
     $('#activityEndTime,#activityEndTimeRel').datetimepicker({
         language: 'zh-CN',
@@ -97,6 +111,16 @@ $(function () {
         forceParse: true,
         pickerPosition: "bottom-left",
         showMeridian: false
+    })
+    $('#activityStartTime').on('hide',function(e) {
+        $('#updateFromRel').data('bootstrapValidator')
+            .updateStatus('startTime', 'NOT_VALIDATED',null)
+            .validateField('startTime');
+    });
+    $('#activityEndTime').on('hide',function(e) {
+        $('#updateFromRel').data('bootstrapValidator')
+            .updateStatus('endTime', 'NOT_VALIDATED',null)
+            .validateField('endTime');
     });
     $('#signStartTime,#signStartTimeRel').datetimepicker({
         language: 'zh-CN',
@@ -481,7 +505,11 @@ function del(id, type) {
 function createActivity() {
     $('#activity-summernoteRel').summernote({
         lang: 'zh-CN',
-        height: 200
+        height: 200,
+        onChange:function (content, $editable) {
+            console.log(content);
+            console.log($editable)
+        }
     });
     $("#userIdRel").val();
     $("#activityCreate").show();

@@ -227,11 +227,17 @@
             </div>
 
             <div class="control-group form-group">
-              <label class="control-label">时间</label>
+              <label class="control-label">开始时间</label>
               <div class="controls">
-                <div class="span3 col-xs-5"><input type="text" class="span12 m-wrap" id="activityStartTimeRel" name="startTime" placeholder="活动开始时间"/></div>
+                <div class="span6 col-xs-5"><input type="text" class="span12 m-wrap" id="activityStartTimeRel" name="startTime" placeholder="活动开始时间"/></div>
+                <span class="help-inline required">*</span>
+              </div>
+            </div>
 
-                <div class="span3 col-xs-5"><input type="text" class="span12 m-wrap" id="activityEndTimeRel" name="endTime" placeholder="活动结束时间"/></div>
+            <div class="control-group form-group">
+              <label class="control-label">结束时间</label>
+              <div class="controls">
+                <div class="span6 col-xs-5"><input type="text" class="span12 m-wrap" id="activityEndTimeRel" name="endTime" placeholder="活动结束时间"/></div>
                 <span class="help-inline required">*</span>
               </div>
             </div>
@@ -240,6 +246,23 @@
               <label class="control-label">地点</label>
               <div class="controls col-xs-5">
                 <input type="text" id="addressRel" name="address" class="span6" />
+                <span class="help-inline required">*</span>
+              </div>
+            </div>
+
+            <div class="control-group form-group">
+              <label class="control-label">类型</label>
+              <div class="controls col-xs-5">
+                <label class="radio"><input type="radio" name="onlineActivity" checked>线下活动</label>
+                <label class="radio"><input type="radio" name="onlineActivity">线上活动</label>
+                <span class="help-inline required">*</span>
+              </div>
+            </div>
+
+            <div class="control-group form-group">
+              <label class="control-label">价格</label>
+              <div class="controls col-xs-5">
+                <input type="text" id="priceRel" name="priceRel" class="span6" />
                 <span class="help-inline required">*</span>
               </div>
             </div>
@@ -330,7 +353,7 @@
     </div>
 
 
-    <%--活动创建--%>
+    <%--活动修改--%>
     <div class="container-fluid hide" id="activityModify">
 
       <!-- BEGIN PAGE HEADER-->
@@ -343,7 +366,7 @@
 
           <h3 class="page-title">
 
-            活动创建<small>statistics and more</small>
+            活动修改<small>statistics and more</small>
 
           </h3>
 
@@ -359,7 +382,7 @@
 
             </li>
 
-            <li><a href="#" id="listType">创建</a></li>
+            <li><a href="#" id="listType">修改</a></li>
 
           </ul>
 
@@ -408,11 +431,17 @@
             </div>
 
             <div class="control-group form-group">
-              <label class="control-label">时间</label>
+              <label class="control-label">开始时间</label>
               <div class="controls">
-                <div class="span3 col-xs-5"><input type="text" class="span12 m-wrap" id="activityStartTime" name="startTime" placeholder="活动开始时间"/></div>
+                <div class="span6 col-xs-5"><input type="text" class="span12 m-wrap" id="activityStartTime" name="startTime" placeholder="活动开始时间"/></div>
+                <span class="help-inline required">*</span>
+              </div>
+            </div>
 
-                <div class="span3 col-xs-5"><input type="text" class="span12 m-wrap" id="activityEndTime" name="endTime" placeholder="活动结束时间"/></div>
+            <div class="control-group form-group">
+              <label class="control-label">结束时间</label>
+              <div class="controls">
+                <div class="span6 col-xs-5"><input type="text" class="span12 m-wrap" id="activityEndTime" name="endTime" placeholder="活动结束时间"/></div>
                 <span class="help-inline required">*</span>
               </div>
             </div>
@@ -425,6 +454,22 @@
               </div>
             </div>
 
+            <div class="control-group form-group">
+              <label class="control-label">类型</label>
+              <div class="controls col-xs-5">
+                <label class="radio"><input type="radio" name="onlineActivity" checked>线下活动</label>
+                <label class="radio"><input type="radio" name="onlineActivity">线上活动</label>
+                <span class="help-inline required">*</span>
+              </div>
+            </div>
+
+            <div class="control-group form-group">
+              <label class="control-label">价格</label>
+              <div class="controls col-xs-5">
+                <input type="text" id="price" name="priceRel" class="span6" />
+                <span class="help-inline required">*</span>
+              </div>
+            </div>
             <hr>
 
             <h4>高级选项</h4>
