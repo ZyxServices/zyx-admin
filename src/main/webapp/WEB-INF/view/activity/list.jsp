@@ -194,18 +194,18 @@
         <!-- BEGIN DASHBOARD STATS -->
         <div class="row-fluid">
 
-          <form action="/v1/activity/release" id="updateFromRel" method="post"  enctype="multipart/form-data" class="form-horizontal" novalidate="novalidate" role="form">
+          <form id="updateFromRel" enctype="multipart/form-data" class="form-horizontal" role="form">
             <input type="hidden" name="id" id="avtivityIdRel" value="">
             <input type="hidden" name="userId" id="userIdRel" value="">
-            <div class="control-group">
+            <div class="control-group form-group">
               <label class="control-label">标题</label>
-              <div class="controls">
-                <input type="text" id="titleRel" name="title" class="span6 m-wrap" />
-                <span class="help-inline">*</span>
+              <div class="controls col-xs-5">
+                <input type="text" id="titleRel" name="title" class="span6" />
+                <span class="help-inline required">*</span>
               </div>
             </div>
 
-            <div class="control-group">
+            <div class="control-group form-group">
               <label class="control-label">封面</label>
               <div class="controls">
                 <input type="file" name="image" class="file">
@@ -220,26 +220,27 @@
               <div class="controls summernote">
                 <div class="span6">
                   <div id="activity-summernoteRel"></div>
-                  <input id="descRel" type="hidden" name="desc" value="">
+                  <input id="descRel" type="text" class="hideInput" name="desc" value="">
                 </div>
+                <span class="help-inline required">*</span>
               </div>
             </div>
 
-            <div class="control-group">
+            <div class="control-group form-group">
               <label class="control-label">时间</label>
               <div class="controls">
-                <div class="span3"><input type="text" class="span12 m-wrap" id="activityStartTimeRel" name="startTime" placeholder="活动开始时间"/></div>
+                <div class="span3 col-xs-5"><input type="text" class="span12 m-wrap" id="activityStartTimeRel" name="startTime" placeholder="活动开始时间"/></div>
 
-                <div class="span3"><input type="text" class="span12 m-wrap" id="activityEndTimeRel" name="endTime" placeholder="活动结束时间"/></div>
-                <span class="help-inline">*</span>
+                <div class="span3 col-xs-5"><input type="text" class="span12 m-wrap" id="activityEndTimeRel" name="endTime" placeholder="活动结束时间"/></div>
+                <span class="help-inline required">*</span>
               </div>
             </div>
 
-            <div class="control-group">
+            <div class="control-group form-group">
               <label class="control-label">地点</label>
-              <div class="controls">
-                <input type="text" id="addressRel" name="address" class="span6 m-wrap" />
-                <span class="help-inline">*</span>
+              <div class="controls col-xs-5">
+                <input type="text" id="addressRel" name="address" class="span6" />
+                <span class="help-inline required">*</span>
               </div>
             </div>
 
@@ -253,7 +254,6 @@
                 <%--          <div class="span3"><input type="text" class="span12 m-wrap" id="signStartTime" placeholder="开始报名时间"/></div>--%>
 
                 <div class="span3"><input type="text" class="span12 m-wrap" id="signEndTimeRel" name="lastTime" placeholder="报名截止时间"/></div>
-                <span class="help-inline">*</span>
               </div>
             </div>
 
@@ -261,7 +261,6 @@
               <label class="control-label">人数限制</label>
               <div class="controls">
                 <input type="text" id="maxPeopleRel" name="maxPeople" class="span6 m-wrap" />
-                <span class="help-inline">*</span>
               </div>
             </div>
 
@@ -269,7 +268,6 @@
               <label class="control-label">咨询电话</label>
               <div class="controls">
                 <input type="text" id="phoneRel" name="phone" class="span6 m-wrap" />
-                <span class="help-inline">*</span>
               </div>
             </div>
 
@@ -381,11 +379,11 @@
           <form action="/v1/activity/update" id="updateFrom" method="post"  enctype="multipart/form-data" class="form-horizontal" novalidate="novalidate" role="form">
             <input type="hidden" name="id" id="avtivityId" value="">
             <input type="hidden" name="userId" id="userId" value="">
-            <div class="control-group">
+            <div class="control-group form-group">
               <label class="control-label">标题</label>
-              <div class="controls">
+              <div class="controls col-xs-5">
                 <input type="text" id="title" name="title" class="span6 m-wrap" />
-                <span class="help-inline">*</span>
+                <span class="help-inline required">*</span>
               </div>
             </div>
 
@@ -409,21 +407,21 @@
               </div>
             </div>
 
-            <div class="control-group">
+            <div class="control-group form-group">
               <label class="control-label">时间</label>
               <div class="controls">
-                <div class="span3"><input type="text" class="span12 m-wrap" id="activityStartTime" name="startTime" placeholder="活动开始时间"/></div>
+                <div class="span3 col-xs-5"><input type="text" class="span12 m-wrap" id="activityStartTime" name="startTime" placeholder="活动开始时间"/></div>
 
-                <div class="span3"><input type="text" class="span12 m-wrap" id="activityEndTime" name="endTime" placeholder="活动结束时间"/></div>
-                <span class="help-inline">*</span>
+                <div class="span3 col-xs-5"><input type="text" class="span12 m-wrap" id="activityEndTime" name="endTime" placeholder="活动结束时间"/></div>
+                <span class="help-inline required">*</span>
               </div>
             </div>
 
-            <div class="control-group">
+            <div class="control-group form-group">
               <label class="control-label">地点</label>
-              <div class="controls">
+              <div class="controls col-xs-5">
                 <input type="text" id="address" name="address" class="span6 m-wrap" />
-                <span class="help-inline">*</span>
+                <span class="help-inline required">*</span>
               </div>
             </div>
 
@@ -437,7 +435,6 @@
                 <%--          <div class="span3"><input type="text" class="span12 m-wrap" id="signStartTime" placeholder="开始报名时间"/></div>--%>
 
                 <div class="span3"><input type="text" class="span12 m-wrap" id="signEndTime" name="lastTime" placeholder="报名截止时间"/></div>
-                <span class="help-inline">*</span>
               </div>
             </div>
 
@@ -445,7 +442,6 @@
               <label class="control-label">人数限制</label>
               <div class="controls">
                 <input type="text" id="maxPeople" name="maxPeople" class="span6 m-wrap" />
-                <span class="help-inline">*</span>
               </div>
             </div>
 
@@ -453,7 +449,6 @@
               <label class="control-label">咨询电话</label>
               <div class="controls">
                 <input type="text" id="phone" name="phone" class="span6 m-wrap" />
-                <span class="help-inline">*</span>
               </div>
             </div>
 
@@ -465,7 +460,6 @@
                   <option value="1">我的粉丝</option>
                   <option value="2">我的关注</option>
                 </select>
-                <span class="help-inline">*</span>
               </div>
             </div>
 
@@ -476,7 +470,6 @@
                   <option value="0">否</option>
                   <option value="1">是</option>
                 </select>
-                <span class="help-inline">*</span>
               </div>
             </div>
 

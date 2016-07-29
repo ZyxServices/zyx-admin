@@ -14,6 +14,7 @@
     <meta content="体育家-用户操作" name="description"/>
     <meta content="" name="author"/>
     <jsp:include page="../public/common-styles.jsp"/>
+    <link rel="stylesheet" href="../../css/self-style/style.css" />
 </head>
 <body class="page-header-fixed">
 <jsp:include page="../public/header.jsp"/>
@@ -52,23 +53,22 @@
             <div class="create_liveType">
                 <h3 style="margin: 0;display: inline-block">创建用户 </h3>
                 <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
-                <form class="form-horizontal" role="form" id="createAppUserForm" autocomplete="off"
-                      novalidate="novalidate" enctype="multipart/form-data">
-                    <div class="control-group">
+                <form class="form-horizontal" role="form" id="createAppUserForm" enctype="multipart/form-data">
+                    <div class="control-group form-group">
                         <label class="control-label">账号</label>
 
-                        <div class="controls">
-                            <input type="text" class="span6 m-wrap" name="phone" id="phone"/>
-                            <span class="help-inline">*</span>
+                        <div class="controls col-xs-5">
+                            <input type="text" class="span6" name="phone" id="phone"/>
+                            <span class="help-inline required">*</span>
                         </div>
                     </div>
 
-                    <div class="control-group">
+                    <div class="control-group form-group">
                         <label class="control-label">密码</label>
 
-                        <div class="controls">
-                            <input type="text" class="span6 m-wrap" name="password" id="password"/>
-                            <span class="help-inline">*</span>
+                        <div class="controls col-xs-5">
+                            <input type="text" class="span6" name="password" id="password"/>
+                            <span class="help-inline required">*</span>
                         </div>
                     </div>
 
@@ -77,7 +77,7 @@
 
                         <div class="controls">
                             <input type="file" name="avatar" id="avatar">
-                            <span class="help-inline">只能上传一张图片</span>
+                            <span class="help-inline required">只能上传一张图片</span>
                         </div>
                     </div>
 
@@ -85,7 +85,7 @@
                         <label class="control-label">性别</label>
 
                         <div class="controls">
-                            <select class="span6 m-wrap" name="sex" id="sex">
+                            <select class="span6" name="sex" id="sex">
                                 <option value="1">男</option>
                                 <option value="0">女</option>
                             </select>
@@ -97,7 +97,7 @@
                         <label class="control-label">官方账号</label>
 
                         <div class="controls">
-                            <select class="span6 m-wrap" name="official" id="official">
+                            <select class="span6" name="official" id="official">
                                 <option value="1">是</option>
                                 <option value="0" selected>否</option>
                             </select>
@@ -109,7 +109,7 @@
                         <label class="control-label">所在地</label>
 
                         <div class="controls">
-                            <input type="text" class="span6 m-wrap" name="address" id="address"/>
+                            <input type="text" class="span6" name="address" id="address"/>
                             <%--<span class="help-inline">*</span>--%>
                         </div>
                     </div>
@@ -118,7 +118,7 @@
                         <label class="control-label">认证信息</label>
 
                         <div class="controls">
-                            <input type="text" class="span6 m-wrap" name="authInfo" id="authInfo"/>
+                            <input type="text" class="span6" name="authInfo" id="authInfo"/>
                             <%--<span class="help-inline">*</span>--%>
                         </div>
                     </div>

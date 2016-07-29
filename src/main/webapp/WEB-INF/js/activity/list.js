@@ -526,3 +526,38 @@ function createRequiredRel() {
     $("#addBtnRel").show();
     $("#addChoiceRel").toggle(500);
 }
+
+/*表单验证*/
+$("#updateFromRel").bootstrapValidator({
+    message: '数据无效',
+    feedbackIcons: {
+        validating: 'glyphicon glyphicon-refresh'
+    },
+    fields:{
+        'title': {
+            validators: {
+                notEmpty: {
+                    message: '组合名称不能为空'
+                }
+            }
+        },'startTime': {
+            validators: {
+                notEmpty: {
+                    message: '请选择开始时间'
+                }
+            }
+        },'endTime': {
+            validators: {
+                notEmpty: {
+                    message: '请选择结束时间'
+                }
+            }
+        },'address': {
+            validators: {
+                notEmpty: {
+                    message: '请填写正确的地址'
+                }
+            }
+        }
+    }
+});

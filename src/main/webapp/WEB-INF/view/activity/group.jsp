@@ -71,7 +71,7 @@
       </div>
     </div>
     <%--活动列表--%>
-    <div class="container-fluid hide" id="activityGroupList">
+    <div class="container-fluid" id="activityGroupList">
 
       <!-- BEGIN PAGE HEADER-->
 
@@ -143,7 +143,7 @@
     </div>
 
     <%--活动组合创建--%>
-    <div class="container-fluid" id="activityGroupCreate">
+    <div class="container-fluid hide" id="activityGroupCreate">
 
       <!-- BEGIN PAGE HEADER-->
 
@@ -193,16 +193,16 @@
               <label class="control-label">组合名称</label>
                 <div class="controls col-xs-5">
                   <input type="text" class="span6" name="groupname"/>
-                  <span class="help-inline">*</span>
+                  <span class="help-inline required">*</span>
                 </div>
             </div>
 
             <div class="control-group form-group">
               <label class="control-label">封面</label>
               <div class="controls col-xs-5">
-                <input id="lefile" type="file" style="width: 1px;height: 1px;position: absolute;z-index: 1;overflow: hidden" name="cover">
-                <a class="btn btn-default" href="javascript:void (0)" style="position: relative;z-index: 2;" id="photoCover" onclick="$('input[id=lefile]').click();">选择文件</a>
-                <span class="help-inline">*</span>
+                <input id="lefile" type="file" class="hideInput" name="cover">
+                <a class="btn btn-default" href="javascript:void (0)" id="photoCover" onclick="$('input[id=lefile]').click();">选择文件</a>
+                <span class="help-inline required">*</span>
               </div>
             </div>
             <hr>

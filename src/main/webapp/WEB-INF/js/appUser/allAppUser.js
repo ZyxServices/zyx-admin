@@ -16,6 +16,7 @@ function initTable() {
         pageList: [10, 15, 20, 25],  //记录数可选列表
         checkbox: true,
         checkboxHeader: "true",
+        height: 500,
         sortable: true,           //是否启用排序
         sortOrder: "asc",          //排序方式
         strictSearch: true,
@@ -91,38 +92,26 @@ $(function () {
 
     initTable();
 
-    $("#createAppUserForm").ajaxForm({
-        url: '/v1/appUser/insert',
-        type: 'post',
-        dataType: 'json',
-        beforeSubmit: function () {
-            // $("#createButton").attr("disabled", true);
-            var phone = $("#createAppUserForm").find('#phone').val();
-            var password = $("#createAppUserForm").find('#password').val();
-            var checked = true;
-            if (phone.replace(/\s+/g, "") == '') {
-                alert("请输入账号");
-                checked = false;
-            }
-
-            if (password.replace(/\s+/g, "") == '') {
-                alert("请输入密码");
-                checked = false;
-            }
-
-            return checked;
+    /*表单验证*/
+    $("#createAppUserForm").bootstrapValidator({
+        message: '数据无效',
+        feedbackIcons: {
+            validating: 'glyphicon glyphicon-refresh'
         },
-        success: function (result) {
-            if (result.state == 200) {
-                backToUsers();
-            } else {
-                if (result.state == 5001) {
-                    alert("账号已存在");
+        fields:{
+            'phone': {
+                validators: {
+                    notEmpty: {
+                        message: '账号不能为空'
+                    }
+                }
+            },'password': {
+                validators: {
+                    notEmpty: {
+                        message: '密码必填'
+                    }
                 }
             }
-        },
-        error: function () {
-            $("#createButton").attr("disabled", false);
         }
     });
 
@@ -150,6 +139,43 @@ $(function () {
     });
 });
 
+$("#createAppUserForm").ajaxForm({
+    url: '/v1/appUser/insert',
+    type: 'post',
+    dataType: 'json',
+
+    beforeSubmit: function () {
+        // $("#createButton").attr("disabled", true);
+        // var phone = $("#createAppUserForm").find('#phone').val();
+        // var password = $("#createAppUserForm").find('#password').val();
+        // var checked = true;
+        // if (phone.replace(/\s+/g, "") == '') {
+        //     alert("请输入账号");
+        //     checked = false;
+        // }
+        //
+        // if (password.replace(/\s+/g, "") == '') {
+        //     alert("请输入密码");
+        //     checked = false;
+        // }
+        //
+        // return checked;
+        return $('#createAppUserForm').data('bootstrapValidator').isValid();
+    },
+    success: function (result) {
+        if (result.state == 200) {
+            backToUsers();
+        } else {
+            if (result.state == 5001) {
+                alert("账号已存在");
+            }
+        }
+    },
+    error: function () {
+        $("#createButton").attr("disabled", false);
+    }
+});
+
 function beginCreate() {
     $("#createAppUserForm").submit();
 }
@@ -159,8 +185,9 @@ function beginDeva() {
 }
 
 function backToUsers() {
-    $(".create_liveType").addClass('hide')
-    $(".create_liveType").removeClass('on')
-    $(".live_index").addClass('on')
-    $(".live_index").removeClass('hide')
+    $(".create_liveType").addClass('hide');
+    $(".create_liveType").removeClass('on');
+    $(".live_index").addClass('on');
+    $(".live_index").removeClass('hide');
+    $('#app_user_table').bootstrapTable('refresh');
 }
