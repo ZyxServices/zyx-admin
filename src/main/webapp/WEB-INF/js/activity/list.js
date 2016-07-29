@@ -556,7 +556,7 @@ function createRequiredRel() {
 }
 
 /*表单验证*/
-$("#updateFromRel").bootstrapValidator({
+var returnRromRel = $("#updateFromRel").bootstrapValidator({
     message: '数据无效',
     feedbackIcons: {
         validating: 'glyphicon glyphicon-refresh'

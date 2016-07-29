@@ -44,19 +44,19 @@ public class ActivityController {
 
     @RequestMapping(value = "/release", method = RequestMethod.POST)
     @ApiOperation(value = "活动接口", notes = "活动发布")
-    public ModelAndView release(@RequestParam(name = "token", required = true) String token,
-                                @RequestParam(name = "createId", required = true) Integer createId,
+    public ModelAndView release(@RequestParam(name = "id", required = true) Integer id,
+                                @RequestParam(name = "userId", required = true) Integer userId,
                                 @RequestParam(name = "title", required = true) String title,
                                 @RequestParam(name = "desc", required = true) String desc,
                                 @RequestPart(name = "image", required = true) MultipartFile image,
-                                @RequestParam(name = "startTime", required = true) Long startTime,
-                                @RequestParam(name = "endTime", required = true) Long endTime,
-                                @RequestParam(name = "lastTime", required = true) Long lastTime,
-                                @RequestParam(name = "maxPeople", required = true) Integer maxPeople,
-                                @RequestParam(name = "visible", required = true) Integer visible,
-                                @RequestParam(name = "phone", required = true) String phone,
+                                @RequestParam(name = "startTime", required = true) String startTime,//转时间戳
+                                @RequestParam(name = "endTime", required = true) String endTime,//转时间戳
+                                @RequestParam(name = "lastTime", required = false) String lastTime,//转时间戳
+                                @RequestParam(name = "maxPeople", required = false) Integer maxPeople,
+                                @RequestParam(name = "visible", required = false) Integer visible,
+                                @RequestParam(name = "phone", required = false) String phone,
                                 @RequestParam(name = "price", required = false) Double price,
-                                @RequestParam(name = "type", required = true) Integer type,
+                                @RequestParam(name = "type", required = false) Integer type,
                                 @RequestParam(name = "address", required = false) String address,
                                 @RequestParam(name = "examine", required = false) Integer examine,
                                 @RequestParam(name = "memberTemplate", required = false) String memberTemplate) {
@@ -131,8 +131,8 @@ public class ActivityController {
         return new ModelAndView(jsonView);
     }
 
-    @RequestMapping(value = "/queryActivity", method = RequestMethod.POST)
-    @ApiOperation(value = "活动接口", notes = "活动发布")
+    @RequestMapping(value = "/queryActivity", method = RequestMethod.GET)
+    @ApiOperation(value = "活动接口", notes = "活动查询")
     public ModelAndView queryActivity(@RequestParam(name = "pageDataNum", required = true) Integer pageDataNum,
                                       @RequestParam(name = "pageNum", required = true) Integer pageNum,
                                       @RequestParam(name = "search", required = false) String search) {
@@ -144,8 +144,8 @@ public class ActivityController {
         return new ModelAndView(jsonView);
     }
 
-    @RequestMapping(value = "/queryActivityById", method = {RequestMethod.GET, RequestMethod.POST})
-    @ApiOperation(value = "活动接口", notes = "活动发布")
+    @RequestMapping(value = "/queryActivityById", method = RequestMethod.POST)
+    @ApiOperation(value = "活动接口", notes = "通过id查询活动")
     public ModelAndView queryActivityById(@RequestParam(name = "activityId", required = true) Integer activityId) {
 
         AbstractView jsonView = new MappingJackson2JsonView();
@@ -155,7 +155,7 @@ public class ActivityController {
         return new ModelAndView(jsonView);
     }
 
-    @RequestMapping(value = "/maskActivity", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/maskActivity", method = RequestMethod.POST)
     @ApiOperation(value = "活动接口", notes = "活动屏蔽")
     public ModelAndView maskActivity(@RequestParam(name = "id", required = true) Integer id,
                                      @RequestParam(name = "maskType", required = true) Integer maskType) {
@@ -168,7 +168,7 @@ public class ActivityController {
     }
 
     @RequestMapping(value = "/delActivity", method = RequestMethod.POST)
-    @ApiOperation(value = "活动接口", notes = "活动屏蔽")
+    @ApiOperation(value = "活动接口", notes = "删除活动")
     public ModelAndView delActivity(@RequestParam(name = "id", required = true) Integer id,
                                     @RequestParam(name = "delType", required = true) Integer delType) {
 

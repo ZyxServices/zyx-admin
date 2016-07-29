@@ -194,7 +194,7 @@
         <!-- BEGIN DASHBOARD STATS -->
         <div class="row-fluid">
 
-          <form id="updateFromRel" enctype="multipart/form-data" class="form-horizontal" role="form">
+          <form action="/v1/activity/release" id="updateFromRel" enctype="multipart/form-data" class="form-horizontal" role="form">
             <input type="hidden" name="id" id="avtivityIdRel" value="">
             <input type="hidden" name="userId" id="userIdRel" value="">
             <div class="control-group form-group">
