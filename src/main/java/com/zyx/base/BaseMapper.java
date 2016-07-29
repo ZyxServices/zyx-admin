@@ -1,4 +1,4 @@
-package com.zyx.mapper;
+package com.zyx.base;
 
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.common.MySqlMapper;
