@@ -29,7 +29,7 @@
     </resultMap>
 
 
-    <select id="queryActivity" parameterType="com.zyx.parm.QueryActivityParm" resultMap="activity">
+    <select id="queryActivity" parameterType="com.zyx.parm.activity.QueryActivityParm" resultMap="activity">
         select * from activity where 1=1
         <if test="groupName != null and groupName != ''">
             and (title LIKE CONCAT('%','${groupName}','%' ) or address LIKE CONCAT('%','${groupName}','%' ))

@@ -85,15 +85,7 @@ public interface Constants {
      * 非法参数 如大小 长度 类型不正确
      */
     int PARAM_ILIGAL = 302;
-    /**
-     * 数据已存在
-     */
-    int DATA_ALREADY_EXISTS = 303;
 
-    /**
-     * 数据更新失败
-     */
-    int DATA_UPDATE_FAILED = 303;
 
     /// 请求类型代码
     /**
@@ -114,6 +106,21 @@ public interface Constants {
      * 无数据
      */
     int NO_DATA = 804;
+
+    /**
+     * 数据已存在
+     */
+    int DATA_ALREADY_EXISTS = 805;
+
+    /**
+     * 数据更新失败
+     */
+    int DATA_UPDATE_FAILED = 806;
+
+    /**
+     * 数据插入失败
+     */
+    int DATA_INSERT_FAILED = 807;
 
     //文件类型 900+
 

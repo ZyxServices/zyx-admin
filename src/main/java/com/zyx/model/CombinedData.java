@@ -20,11 +20,6 @@ public class CombinedData {
     @Column(name = "dataId")
     private Integer dataid;
 
-    /**
-     * 模块类型（1 活动 2 直播）
-     */
-    private Integer types;
-
     @Column(name = "create_time")
     private Long createTime;
 
@@ -80,24 +75,6 @@ public class CombinedData {
      */
     public void setDataid(Integer dataid) {
         this.dataid = dataid;
-    }
-
-    /**
-     * 获取模块类型（1 活动 2 直播）
-     *
-     * @return types - 模块类型（1 活动 2 直播）
-     */
-    public Integer getTypes() {
-        return types;
-    }
-
-    /**
-     * 设置模块类型（1 活动 2 直播）
-     *
-     * @param types 模块类型（1 活动 2 直播）
-     */
-    public void setTypes(Integer types) {
-        this.types = types;
     }
 
     /**

@@ -1,7 +1,9 @@
 package com.zyx.mapper;
 
+import com.zyx.base.BaseMapper;
 import com.zyx.model.CombinedData;
-import tk.mybatis.mapper.common.Mapper;
+import org.springframework.stereotype.Repository;
 
-public interface CombinedDataMapper extends Mapper<CombinedData> {
+@Repository("combinedDataMapper")
+public interface CombinedDataMapper extends BaseMapper<CombinedData> {
 }

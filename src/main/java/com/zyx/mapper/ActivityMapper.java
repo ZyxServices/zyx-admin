@@ -1,7 +1,7 @@
 package com.zyx.mapper;
 
 import com.zyx.model.Activity;
-import com.zyx.parm.QueryActivityParm;
+import com.zyx.parm.activity.QueryActivityParm;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
