@@ -43,7 +43,7 @@ public class ActivityController {
     private ActivityService activityService;
 
     @RequestMapping(value = "/release", method = RequestMethod.POST)
-    @ApiOperation(value = "活动接口", notes = "活动发布")
+    @ApiOperation(value = "活动发布", notes = "活动发布")
     public ModelAndView release(@RequestParam(name = "id", required = true) Integer id,
                                 @RequestParam(name = "userId", required = true) Integer userId,
                                 @RequestParam(name = "title", required = true) String title,
@@ -70,7 +70,7 @@ public class ActivityController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    @ApiOperation(value = "活动接口", notes = "活动修改")
+    @ApiOperation(value = "活动修改", notes = "活动修改")
     public ModelAndView update(@RequestParam(name = "id", required = true) Integer id,
                                @RequestParam(name = "userId", required = true) Integer userId,
                                @RequestParam(name = "title", required = false) String title,
@@ -132,7 +132,7 @@ public class ActivityController {
     }
 
     @RequestMapping(value = "/queryActivity", method = RequestMethod.GET)
-    @ApiOperation(value = "活动接口", notes = "活动查询")
+    @ApiOperation(value = "活动查询", notes = "活动查询")
     public ModelAndView queryActivity(@RequestParam(name = "pageDataNum", required = true) Integer pageDataNum,
                                       @RequestParam(name = "pageNum", required = true) Integer pageNum,
                                       @RequestParam(name = "search", required = false) String search) {
@@ -145,7 +145,7 @@ public class ActivityController {
     }
 
     @RequestMapping(value = "/queryActivityById", method = RequestMethod.POST)
-    @ApiOperation(value = "活动接口", notes = "通过id查询活动")
+    @ApiOperation(value = "通过id查询活动", notes = "通过id查询活动")
     public ModelAndView queryActivityById(@RequestParam(name = "activityId", required = true) Integer activityId) {
 
         AbstractView jsonView = new MappingJackson2JsonView();
@@ -156,7 +156,7 @@ public class ActivityController {
     }
 
     @RequestMapping(value = "/maskActivity", method = RequestMethod.POST)
-    @ApiOperation(value = "活动接口", notes = "活动屏蔽")
+    @ApiOperation(value = "活动屏蔽", notes = "活动屏蔽")
     public ModelAndView maskActivity(@RequestParam(name = "id", required = true) Integer id,
                                      @RequestParam(name = "maskType", required = true) Integer maskType) {
 
@@ -168,7 +168,7 @@ public class ActivityController {
     }
 
     @RequestMapping(value = "/delActivity", method = RequestMethod.POST)
-    @ApiOperation(value = "活动接口", notes = "删除活动")
+    @ApiOperation(value = "删除活动", notes = "删除活动")
     public ModelAndView delActivity(@RequestParam(name = "id", required = true) Integer id,
                                     @RequestParam(name = "delType", required = true) Integer delType) {
 

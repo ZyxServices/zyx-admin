@@ -2,7 +2,6 @@ package com.zyx.service.activity;
 
 
 import com.zyx.model.Activity;
-import com.zyx.parm.QueryActivityParm;
 
 import java.util.Map;
 

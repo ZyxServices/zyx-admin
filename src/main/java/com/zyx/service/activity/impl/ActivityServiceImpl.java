@@ -3,13 +3,12 @@ package com.zyx.service.activity.impl;
 import com.zyx.constants.Constants;
 import com.zyx.mapper.ActivityMapper;
 import com.zyx.model.Activity;
-import com.zyx.parm.QueryActivityParm;
+import com.zyx.parm.activity.QueryActivityParm;
 import com.zyx.service.activity.ActivityService;
 import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
