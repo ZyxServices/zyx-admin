@@ -57,5 +57,5 @@
       //调用其方法
       dialogs.init();dialogs.saveEvents();
       //调用弹窗
-      $("#activity-shield"+globalID+"").modal('toggle');
+      $("#activity-shield"+globalID+"").modal('show');
   }

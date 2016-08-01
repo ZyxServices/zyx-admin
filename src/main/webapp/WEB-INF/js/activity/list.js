@@ -146,202 +146,174 @@ $(function () {
         pickerPosition: "bottom-left",
         showMeridian: false
     });
-
-    $('#devaForm').ajaxForm({
-        url: '/v1/deva/queryActivity',
-        type: 'post',
-        dataType: 'json',
-        beforeSubmit: function () {
-            var devaId = $("#devaForm").find('input[name="devaId"]').val();
-            var checked = true;
-            if (devaId == undefined || devaId == "") {
-                alert('未知错误，请刷新页面重试');
-                checked = false;
-            }
-            return checked;
-        },
-        success: function (result) {
-            if (result.state && result.state == 200) {
-                alert(result.successmsg)
-            } else if (result.state && result.state == 303) {
-                alert(result.errmsg)
-            }
-        }
-    });
-
-
-    $('#updateFrom').ajaxForm({
-        url: '/v1/activity/update',
-        type: 'post',
-        dataType: 'json',
-        beforeSubmit: function () {
-            var title = $('input[name="title"]').val();
-            var summernote = $('#activity-summernote').summernote('code');
-            var checked = true;
-            if (title == undefined || title == "") {
-                alert('标题不能为空');
-                checked = false;
-            }
-            if (summernote == undefined || summernote == "") {
-                alert('内容不能为空');
-                checked = false;
-            } else {
-                $("#desc").val(summernote);
-            }
-
-            if ($("#examine").val() == 1) {
-                var desc = "";
-                $("#template").find("input:checked").each(function (item) {
-                    if (item == 0) {
-                        desc += $(this).val()
-                    } else {
-                        desc += ("," + $(this).val());
-                    }
-                });
-                $("#memberTemplate").val(desc);
-            }
-            return checked;
-        },
-        success: function (result) {
-            if (result.state && result.state == 200) {
-                alert(result.successmsg)
-            } else if (result.state && result.state == 303) {
-                alert(result.errmsg)
-            }
-        }
-    });
-
-    $('#updateFromRel').ajaxForm({
-        url: '/v1/activity/release',
-        type: 'post',
-        dataType: 'json',
-        beforeSubmit: function () {
-            var title = $('input[name="titleRel"]').val();
-            var file = $('input[name="image"]').val();
-            var summernote = $('#activity-summernote').summernote('code');
-            var activityStartTime = $("#activityStartTimeRel").val();
-            var activityEndTime = $("#activityEndTimeRel").val();
-            var address = $("#addressRel").val();
-            var signEndTime = $("#signEndTimeRel").val();
-            var maxPeople = $("#maxPeopleRel").val();
-            var phone = $("#phoneRel").val();
-            var checked = true;
-            if (title == undefined || title == "") {
-                alert('标题不能为空');
-                checked = false;
-            }
-            if(file == undefined || $.trim(file)==''){
-                alert('请上传活动封面');
-                checked = false;
-            }
-            if (summernote == undefined || summernote == "") {
-                alert('内容不能为空');
-                checked = false;
-            } else {
-                $("#desc").val(summernote);
-            }
-            if(activityStartTime == undefined || $.trim(activityStartTime)==''){
-                alert('请选择活动开始时间');
-                checked = false;
-            }
-            if(activityEndTime == undefined || $.trim(activityEndTime)==''){
-                alert('请选择活动结束时间');
-                checked = false;
-            }
-            if(address == undefined || $.trim(address)==''){
-                alert('请填写地址');
-                checked = false;
-            }
-            if(signEndTime == undefined || $.trim(signEndTime)==''){
-                alert('请选择活动报名截至时间');
-                checked = false;
-            }
-            if(maxPeople == undefined || $.trim(maxPeople)==''){
-                alert('请填写参加活动最大人数');
-                checked = false;
-            }
-            if(phone == undefined || $.trim(phone)==''){
-                alert('请填写你的联系电话');
-                checked = false;
-            }
-
-            if ($("#examineRel").val() == 1) {
-                var desc = "";
-                $("#templateRel").find("input:checked").each(function (item) {
-                    if (item == 0) {
-                        desc += $(this).val()
-                    } else {
-                        desc += ("," + $(this).val());
-                    }
-                });
-                $("#memberTemplateRel").val(desc);
-            }
-            return checked;
-        },
-        success: function (result) {
-            if (result.state && result.state == 200) {
-                alert(result.successmsg)
-            } else if (result.state && result.state == 303) {
-                alert(result.errmsg)
-            }
-        }
-    });
-
-
-    $("#maskSuccess").click(function () {
-        var id = $("#maskSuccess").attr("activityId");
-        var maskType = $("#maskSuccess").attr("maskType");
-        $.ajax({
-            url: "/v1/activity/maskActivity",
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                id: id,
-                maskType: maskType
-            },
-            success: function (result) {
-                if(result.state == 200){
-                    if(maskType == 1){
-                        alert("屏蔽成功");
-                    }else{
-                        alert("解除屏蔽成功");
-                    }
-                    window.location.reload();
-                }else{
-                    alert("删除失败")
-                }
-            }
-        });
-    });
-
-
-    $("#delSuccess").click(function () {
-        var id = $("#delSuccess").attr("activityId");
-        var delType = $("#delSuccess").attr("delType");
-        $.ajax({
-            url: "/v1/activity/delActivity",
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                id: id,
-                delType: delType
-            },
-            success: function (result) {
-                if(result.state == 200){
-                    if(delType == 1){
-                        alert("删除成功");
-                    }else{
-                        alert("恢复删除成功");
-                    }
-                    window.location.reload();
-                }else{
-                    alert("删除失败")
-                }
-            }
-        });
-    });
 });
 
+$('#devaForm').ajaxForm({
+    url: '/v1/deva/queryActivity',
+    type: 'post',
+    dataType: 'json',
+    beforeSubmit: function () {
+        var devaId = $("#devaForm").find('input[name="devaId"]').val();
+        var checked = true;
+        if (devaId == undefined || devaId == "") {
+            $.Popup({
+                confirm:false,
+                template:'未知错误，请刷新页面重试'
+            })
+            checked = false;
+        }
+        return checked;
+    },
+    success: function (result) {
+        if (result.state && result.state == 200) {
+            $.Popup({
+                confirm:false,
+                template:result.successmsg
+            })
+        } else if (result.state && result.state == 303) {
+            $.Popup({
+                confirm:false,
+                template:result.errmsg
+            })
+        }
+    }
+});
+
+
+$('#updateFrom').ajaxForm({
+    url: '/v1/activity/update',
+    type: 'post',
+    dataType: 'json',
+    beforeSubmit: function () {
+        /*var title = $('input[name="title"]').val();
+        var summernote = $('#activity-summernote').summernote('code');
+        var checked = true;
+        if (title == undefined || title == "") {
+            alert('标题不能为空');
+            checked = false;
+        }
+        if (summernote == undefined || summernote == "") {
+            alert('内容不能为空');
+            checked = false;
+        } else {
+            $("#desc").val(summernote);
+        }*/
+        return $("#updateFrom").data('bootstrapValidator').isValid();
+        if ($("#examine").val() == 1) {
+            var desc = "";
+            $("#template").find("input:checked").each(function (item) {
+                if (item == 0) {
+                    desc += $(this).val()
+                } else {
+                    desc += ("," + $(this).val());
+                }
+            });
+            $("#memberTemplate").val(desc);
+        }
+        // return checked;
+    },
+    success: function (result) {
+        if (result.state && result.state == 200) {
+            $.Popup({
+                confirm:false,
+                template:result.successmsg
+            });
+            $("#activityList").show();
+            $("#activityCreate").hide();
+            $('#activity-list-table').bootstrapTable('refresh');
+        } else if (result.state && result.state == 303) {
+            $.Popup({
+                confirm:false,
+                template:result.errmsg
+            })
+        }
+    }
+});
+
+$('#updateFromRel').ajaxForm({
+    url: '/v1/activity/release',
+    type: 'post',
+    dataType: 'json',
+    beforeSubmit: function () {
+        /*var title = $('input[name="titleRel"]').val();
+        var file = $('input[name="image"]').val();
+        var summernote = $('#activity-summernote').summernote('code');
+        var activityStartTime = $("#activityStartTimeRel").val();
+        var activityEndTime = $("#activityEndTimeRel").val();
+        var address = $("#addressRel").val();
+        var signEndTime = $("#signEndTimeRel").val();
+        var maxPeople = $("#maxPeopleRel").val();
+        var phone = $("#phoneRel").val();
+        var checked = true;
+        if (title == undefined || title == "") {
+            alert('标题不能为空');
+            checked = false;
+        }
+        if(file == undefined || $.trim(file)==''){
+            alert('请上传活动封面');
+            checked = false;
+        }
+        if (summernote == undefined || summernote == "") {
+            alert('内容不能为空');
+            checked = false;
+        } else {
+            $("#desc").val(summernote);
+        }
+        if(activityStartTime == undefined || $.trim(activityStartTime)==''){
+            alert('请选择活动开始时间');
+            checked = false;
+        }
+        if(activityEndTime == undefined || $.trim(activityEndTime)==''){
+            alert('请选择活动结束时间');
+            checked = false;
+        }
+        if(address == undefined || $.trim(address)==''){
+            alert('请填写地址');
+            checked = false;
+        }
+        if(signEndTime == undefined || $.trim(signEndTime)==''){
+            alert('请选择活动报名截至时间');
+            checked = false;
+        }
+        if(maxPeople == undefined || $.trim(maxPeople)==''){
+            alert('请填写参加活动最大人数');
+            checked = false;
+        }
+        if(phone == undefined || $.trim(phone)==''){
+            alert('请填写你的联系电话');
+            checked = false;
+        }*/
+        return $("#updateFromRel").data('bootstrapValidator').isValid();
+        if ($("#examineRel").val() == 1) {
+            var desc = "";
+            $("#templateRel").find("input:checked").each(function (item) {
+                if (item == 0) {
+                    desc += $(this).val()
+                } else {
+                    desc += ("," + $(this).val());
+                }
+            });
+            $("#memberTemplateRel").val(desc);
+        }
+        // return checked;
+    },
+    success: function (result) {
+        if (result.state && result.state == 200) {
+            $.Popup({
+                confirm:false,
+                template:result.successmsg
+            });
+            $("#activityList").show();
+            $("#activityCreate").hide();
+            $('#activity-list-table').bootstrapTable('refresh');
+        } else if (result.state && result.state == 303) {
+            $.Popup({
+                confirm:false,
+                template:result.errmsg
+            })
+        }
+    }
+});
 
 function operate(value, row, index) {
     var dataArray = new Array();
@@ -411,7 +383,10 @@ function previewActivity(id) {
                     $("#template").append(html)
                 }
             } else {
-                alert(result.successmsg)
+                $.Popup({
+                    confirm:false,
+                    template:result.successmsg
+                })
             }
         }
     });
@@ -433,7 +408,10 @@ function recommend(id, name) {
                 $("#activityId").val(datas.id);
                 $("#activityImage").attr("src", "http://image.tiyujia.com/" + datas.imgUrls)
             } else {
-                alert(result.successmsg)
+                $.Popup({
+                    confirm:false,
+                    template:result.successmsg
+                })
             }
         }
     });
@@ -443,7 +421,12 @@ function recommend(id, name) {
 /*编辑*/
 function modify(id) {
     $("#listType").html("编辑");
-    $('#activity-summernote').summernote({
+    $('#activity-summernote').on('summernote.change',function (content, $editable) {
+        $("#desc").val($editable);
+        $('#updateFrom').data('bootstrapValidator')
+            .updateStatus('desc', 'NOT_VALIDATED',null)
+            .validateField('desc');
+    }).summernote({
         lang: 'zh-CN',
         height: 200
     });
@@ -459,6 +442,7 @@ function modify(id) {
                 $("#userId").val(datas.userId);
                 $("#title").val(datas.title)
                 $("#images").attr("src", "http://image.tiyujia.com/" + datas.imgUrls);
+                $("#editeFile").val("src", "http://image.tiyujia.com/" + datas.imgUrls);
                 $('#activity-summernote').summernote('code', datas.descContent);
                 $("#activityStartTime").val(new Date(datas.startTime).format("yyyy-mm-dd HH:MM:ss"));
                 $("#activityEndTime").val(new Date(datas.endTime).format("yyyy-mm-dd HH:MM:ss"));
@@ -480,7 +464,10 @@ function modify(id) {
                     $("#template").append(html)
                 }
             } else {
-                alert(result.successmsg)
+                $.Popup({
+                    confirm:false,
+                    template:result.successmsg
+                })
             }
         }
     });
@@ -489,27 +476,88 @@ function modify(id) {
 }
 /*屏蔽*/
 function shield(id, type) {
-    $("#listType").html("屏蔽");
-    $("#maskSuccess").attr("activityId", id);
-    $("#maskSuccess").attr("maskType", type);
-    $("#activity-shield").modal('toggle');
+    $.Popup({
+        title:'屏蔽',
+        template: '屏蔽之后，该活动将不在首页活动和活动列表页展示，“我的关注”和“我的”中活动保留，仍可以被浏览',
+        saveEvent: function () {
+            $.ajax({
+                url: "/v1/activity/maskActivity",
+                async: false,
+                type: "post",
+                data: {id: id, maskType: type},
+                dateType: "json",
+                success: function (result) {
+                    if(result.state == 200){
+                        if(type == 1){
+                            $.Popup({
+                                confirm:false,
+                                template:'屏蔽成功'
+                            })
+                        }else{
+                            $.Popup({
+                                confirm:false,
+                                template:'解除屏蔽成功'
+                            })
+                        }
+                        $('#activity-list-table').bootstrapTable('refresh');
+                    }else{
+                        $.Popup({
+                            confirm:false,
+                            template:'删除失败'
+                        })
+                    }
+                }
+            });
+        }
+    })
 }
 /*删除*/
 function del(id, type) {
-    $("#listType").html("删除");
-    $("#delSuccess").attr("activityId", id);
-    $("#delSuccess").attr("delType", type);
-    $("#activity-del").modal('toggle');
+    $.Popup({
+        title:'删除',
+        template: '该活动的所有数据将被完全删除，不能再被浏览',
+        saveEvent: function () {
+            $.ajax({
+                url: "/v1/activity/delActivity",
+                async: false,
+                type: "post",
+                data: {id: id, delType: type},
+                dateType: "json",
+                success: function (result) {
+                    if(result.state == 200){
+                        if(type == 1){
+                            $.Popup({
+                                confirm:false,
+                                template:'删除成功'
+                            })
+                        }else{
+                            $.Popup({
+                                confirm:false,
+                                template:'恢复删除成功'
+                            })
+                        }
+                        $('#activity-list-table').bootstrapTable('refresh');
+                    }else{
+                        $.Popup({
+                            confirm:false,
+                            template:'删除失败'
+                        })
+                    }
+                }
+            });
+        }
+    })
 }
 
 function createActivity() {
-    $('#activity-summernoteRel').summernote({
+    $('#activity-summernoteRel').on('summernote.change',function (content, $editable) {
+        $("#descRel").val($editable);
+        $('#updateFromRel').data('bootstrapValidator')
+            .updateStatus('desc', 'NOT_VALIDATED',null)
+            .validateField('desc');
+    }).summernote({
         lang: 'zh-CN',
-        height: 200,
-        onChange:function (content, $editable) {
-            console.log(content);
-            console.log($editable)
-        }
+        height: 200
     });
     $("#userIdRel").val();
     $("#activityCreate").show();
@@ -555,8 +603,18 @@ function createRequiredRel() {
     $("#addChoiceRel").toggle(500);
 }
 
+/*创建中type=file的样式处理*/
+$('input[id=lefile]').change(function() {
+    $('#photoCover').html($(this).val());
+    $("#lefile").html($(this).val());
+});
+/*编辑中type=file的样式处理*/
+$('input[id=editeFile]').change(function() {
+    $('#editeFileCover').html($(this).val());
+    $("#editeFile").html($(this).val());
+});
 /*表单验证*/
-var returnRromRel = $("#updateFromRel").bootstrapValidator({
+$("#updateFromRel,#updateFrom").bootstrapValidator({
     message: '数据无效',
     feedbackIcons: {
         validating: 'glyphicon glyphicon-refresh'
@@ -566,6 +624,18 @@ var returnRromRel = $("#updateFromRel").bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: '组合名称不能为空'
+                }
+            }
+        },'image': {
+            validators: {
+                notEmpty: {
+                    message: '请上传图片'
+                }
+            }
+        },'desc': {
+            validators: {
+                notEmpty: {
+                    message: '请输入内容'
                 }
             }
         },'startTime': {
@@ -584,6 +654,12 @@ var returnRromRel = $("#updateFromRel").bootstrapValidator({
             validators: {
                 notEmpty: {
                     message: '请填写正确的地址'
+                }
+            }
+        },'priceRel': {
+            validators: {
+                notEmpty: {
+                    message: '请填写价格'
                 }
             }
         }
