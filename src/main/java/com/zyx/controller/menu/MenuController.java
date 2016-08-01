@@ -40,18 +40,6 @@ public class MenuController {
     public ModelAndView redirectOfficialAppUser() {
         return new ModelAndView("/appUser/officialAppUserList");
     }
-
-
-    @RequestMapping(value = "/circle/circlelist", method = RequestMethod.GET)
-    public ModelAndView redirectCircleList() {
-        return new ModelAndView("/circle/circlelist");
-    }
-
-    @RequestMapping(value = "/circle/circlepost", method = RequestMethod.GET)
-    public ModelAndView redirectCirclePost() {
-        return new ModelAndView("/circle/circlepost");
-    }
-
     @RequestMapping(value = "/dynamic/dynamicIndex", method = RequestMethod.GET)
     public ModelAndView redirectDynamicIndex() {
         return new ModelAndView("/dynamic/dynamicIndex");
@@ -108,5 +96,25 @@ public class MenuController {
     }
 
     @RequestMapping(value = "/message/messageIndex", method = RequestMethod.GET)
-    public ModelAndView messageIndex() {return new ModelAndView("/message/messageIndex"); }
+    public ModelAndView messageIndex() {
+        return new ModelAndView("/message/messageIndex");
+    }
+
+    //圈子分类
+    @RequestMapping(value = "/circle/circleclassify", method = RequestMethod.GET)
+    public ModelAndView cirCleclassify() {
+        return new ModelAndView("/circle/circleclassify");
+    }
+
+    //圈子列表
+    @RequestMapping(value = "/circle/circlelist", method = RequestMethod.GET)
+    public ModelAndView redirectCircleList() {
+        return new ModelAndView("/circle/circlelist");
+    }
+
+    //圈子创建
+    @RequestMapping(value = "/circle/circlepost", method = RequestMethod.GET)
+    public ModelAndView redirectCirclePost() {
+        return new ModelAndView("/circle/circlepost");
+    }
 }

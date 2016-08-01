@@ -83,14 +83,14 @@
                         size="1">
                     <div class="row-fluid margin-bottom-10">
                         <div class="span6">
-                            <a class="btn btn-default" href="javaScript:void(0)" onclick="circleCreate()">创建圈子</a>
+                            <a class="btn btn-default" href="javaScript:void(0)" onclick="circleCreate()">创建圈子类别</a>
                         </div>
                     </div>
 
                     <!-- END PAGE TITLE & BREADCRUMB-->
                     <h3 class="page-title">
 
-                        圈子管理
+                        圈子类别管理
                         <small>statistics and more</small>
 
                     </h3>
@@ -298,7 +298,6 @@
 <jsp:include page="../public/common-js.jsp"/>
 <script src="../../js/app.js" type="text/javascript"></script>
 <script src="../../js/index.js" type="text/javascript"></script>
-<script type="text/javascript" src="../../js/circle/circlelist.js"></script>
 <script type="text/javascript">
 
 

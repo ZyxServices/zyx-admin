@@ -71,6 +71,9 @@
                 <span class="selected hide"></span>
             </a>
             <ul class="sub-menu">
+                <li class="circlepost postcreat">
+                    <a href="<%=request.getContextPath()%>/menu/circle/circleclassify">圈子分类</a>
+                </li>
                 <li class="circlelist circlecreat">
                     <a href="<%=request.getContextPath()%>/menu/circle/circlelist">圈子列表<span
                             class="selected"></span></a>
@@ -78,6 +81,7 @@
                 <li class="circlepost postcreat">
                     <a href="<%=request.getContextPath()%>/menu/circle/circlepost">帖子列表</a>
                 </li>
+
             </ul>
         </li>
         <%--商城--%>
