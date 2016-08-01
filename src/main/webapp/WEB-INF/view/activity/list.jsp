@@ -42,34 +42,6 @@
   <div class="page-content">
 
     <!-- BEGIN PAGE CONTAINER-->
-    <%--modal删除--%>
-    <div id="activity-del" class="modal fade">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button"></button>
-        <h3>活动删除</h3>
-      </div>
-      <div class="modal-body">
-        该活动的所有数据将被完全删除，不能再被浏览
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-default" id="delSuccess">确定</button>
-        <button class="btn btn-default" data-dismiss="modal">取消</button>
-      </div>
-    </div>
-    <%--modal屏蔽--%>
-    <div id="activity-shield" class="modal fade">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button"></button>
-        <h3>活动屏蔽</h3>
-      </div>
-      <div class="modal-body">
-        屏蔽之后，该活动将不在首页活动和活动列表页展示，“我的关注”和“我的”中活动保留，仍可以被浏览
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-default" id="maskSuccess">确定</button>
-        <button class="btn btn-default" data-dismiss="modal">取消</button>
-      </div>
-    </div>
     <%--活动列表--%>
     <div class="container-fluid" id="activityList">
 
@@ -205,7 +177,7 @@
               </div>
             </div>
 
-            <div class="control-group form-group">
+            <%--<div class="control-group form-group">
               <label class="control-label">封面</label>
               <div class="controls">
                 <input type="file" name="image" class="file">
@@ -213,12 +185,21 @@
               <div>
                 <img id="imagesRel" style="margin-left:20px" src="">
               </div>
+            </div>--%>
+<%--给上传图片的样式--%>
+            <div class="control-group form-group">
+              <label class="control-label">封面</label>
+              <div class="controls col-xs-5">
+                <input id="lefile" type="file" class="hideInput" name="image">
+                <a class="btn btn-default" href="javascript:void (0)" id="photoCover" onclick="$('input[id=lefile]').click();">选择文件</a>
+                <span class="help-inline required">*</span>
+              </div>
             </div>
 
-            <div class="control-group">
+            <div class="control-group form-group">
               <label class="control-label">内容</label>
               <div class="controls summernote">
-                <div class="span6">
+                <div class="span6 col-xs-5">
                   <div id="activity-summernoteRel"></div>
                   <input id="descRel" type="text" class="hideInput" name="desc" value="">
                 </div>
@@ -229,7 +210,7 @@
             <div class="control-group form-group">
               <label class="control-label">开始时间</label>
               <div class="controls">
-                <div class="span6 col-xs-5"><input type="text" class="span12 m-wrap" id="activityStartTimeRel" name="startTime" placeholder="活动开始时间"/></div>
+                <div class="span6 col-xs-5"><input type="text" class="span12" id="activityStartTimeRel" name="startTime" placeholder="活动开始时间"/></div>
                 <span class="help-inline required">*</span>
               </div>
             </div>
@@ -237,7 +218,7 @@
             <div class="control-group form-group">
               <label class="control-label">结束时间</label>
               <div class="controls">
-                <div class="span6 col-xs-5"><input type="text" class="span12 m-wrap" id="activityEndTimeRel" name="endTime" placeholder="活动结束时间"/></div>
+                <div class="span6 col-xs-5"><input type="text" class="span12" id="activityEndTimeRel" name="endTime" placeholder="活动结束时间"/></div>
                 <span class="help-inline required">*</span>
               </div>
             </div>
@@ -255,7 +236,6 @@
               <div class="controls col-xs-5">
                 <label class="radio"><input type="radio" name="onlineActivity" checked>线下活动</label>
                 <label class="radio"><input type="radio" name="onlineActivity">线上活动</label>
-                <span class="help-inline required">*</span>
               </div>
             </div>
 
@@ -274,30 +254,28 @@
             <div class="control-group">
               <label class="control-label">时间</label>
               <div class="controls">
-                <%--          <div class="span3"><input type="text" class="span12 m-wrap" id="signStartTime" placeholder="开始报名时间"/></div>--%>
-
-                <div class="span3"><input type="text" class="span12 m-wrap" id="signEndTimeRel" name="lastTime" placeholder="报名截止时间"/></div>
+                <div class="span3"><input type="text" class="span12" id="signEndTimeRel" name="lastTime" placeholder="报名截止时间"/></div>
               </div>
             </div>
 
             <div class="control-group">
               <label class="control-label">人数限制</label>
               <div class="controls">
-                <input type="text" id="maxPeopleRel" name="maxPeople" class="span6 m-wrap" />
+                <input type="text" id="maxPeopleRel" name="maxPeople" class="span6" />
               </div>
             </div>
 
             <div class="control-group">
               <label class="control-label">咨询电话</label>
               <div class="controls">
-                <input type="text" id="phoneRel" name="phone" class="span6 m-wrap" />
+                <input type="text" id="phoneRel" name="phone" class="span6" />
               </div>
             </div>
 
             <div class="control-group">
               <label class="control-label">可见范围</label>
               <div class="controls">
-                <select id="visibleRel" name="visible" class="span6 m-wrap">
+                <select id="visibleRel" name="visible" class="span6">
                   <option value="0">所有人</option>
                   <option value="1">我的粉丝</option>
                   <option value="2">我的关注</option>
@@ -308,7 +286,7 @@
             <div class="control-group">
               <label class="control-label">是否需要审核申请者</label>
               <div class="controls">
-                <select class="span6 m-wrap" id="examineRel" name="examine" onchange="isReviewedRel(this)">
+                <select class="span6" id="examineRel" name="examine" onchange="isReviewedRel(this)">
                   <option value="0">否</option>
                   <option value="1">是</option>
                 </select>
@@ -332,7 +310,7 @@
             <div class="control-group hide" id="addChoiceRel">
               <label class="control-label"></label>
               <div class="controls">
-                <input type="text" class="span3 m-wrap" id="requiredValRel"><a href="javascript:void(0)" class="btn btn-default" onclick="createRequiredRel()">确定</a>
+                <input type="text" class="span3" id="requiredValRel"><a href="javascript:void(0)" class="btn btn-default" onclick="createRequiredRel()">确定</a>
               </div>
             </div>
 
@@ -405,12 +383,12 @@
             <div class="control-group form-group">
               <label class="control-label">标题</label>
               <div class="controls col-xs-5">
-                <input type="text" id="title" name="title" class="span6 m-wrap" />
+                <input type="text" id="title" name="title" class="span6" />
                 <span class="help-inline required">*</span>
               </div>
             </div>
 
-            <div class="control-group">
+            <%--<div class="control-group">
               <label class="control-label">封面</label>
               <div class="controls">
                 <input type="file" name="image" class="file">
@@ -418,14 +396,26 @@
               <div>
                 <img id="images" style="margin-left:20px" src="">
               </div>
+            </div>--%>
+
+            <div class="control-group form-group">
+              <label class="control-label">封面</label>
+              <div class="controls col-xs-5">
+                <input id="editeFile" type="file" class="hideInput" name="image">
+                <a class="btn btn-default" href="javascript:void (0)" id="editeFileCover" onclick="$('input[id=editeFile]').click();">选择文件</a>
+                <span class="help-inline required">*</span>
+                <div style="margin-top: 10px">
+                  <img id="images" src="">
+                </div>
+              </div>
             </div>
 
-            <div class="control-group">
+            <div class="control-group form-group">
               <label class="control-label">内容</label>
               <div class="controls summernote">
-                <div class="span6">
+                <div class="span6 col-xs-5">
                   <div id="activity-summernote"></div>
-                  <input id="desc" type="hidden" name="desc" value="">
+                  <input id="desc" type="text" class="hideInput" name="desc" value="">
                 </div>
               </div>
             </div>
@@ -433,7 +423,7 @@
             <div class="control-group form-group">
               <label class="control-label">开始时间</label>
               <div class="controls">
-                <div class="span6 col-xs-5"><input type="text" class="span12 m-wrap" id="activityStartTime" name="startTime" placeholder="活动开始时间"/></div>
+                <div class="span6 col-xs-5"><input type="text" class="span12" id="activityStartTime" name="startTime" placeholder="活动开始时间"/></div>
                 <span class="help-inline required">*</span>
               </div>
             </div>
@@ -441,7 +431,7 @@
             <div class="control-group form-group">
               <label class="control-label">结束时间</label>
               <div class="controls">
-                <div class="span6 col-xs-5"><input type="text" class="span12 m-wrap" id="activityEndTime" name="endTime" placeholder="活动结束时间"/></div>
+                <div class="span6 col-xs-5"><input type="text" class="span12" id="activityEndTime" name="endTime" placeholder="活动结束时间"/></div>
                 <span class="help-inline required">*</span>
               </div>
             </div>
@@ -449,7 +439,7 @@
             <div class="control-group form-group">
               <label class="control-label">地点</label>
               <div class="controls col-xs-5">
-                <input type="text" id="address" name="address" class="span6 m-wrap" />
+                <input type="text" id="address" name="address" class="span6" />
                 <span class="help-inline required">*</span>
               </div>
             </div>
@@ -477,30 +467,30 @@
             <div class="control-group">
               <label class="control-label">时间</label>
               <div class="controls">
-                <%--          <div class="span3"><input type="text" class="span12 m-wrap" id="signStartTime" placeholder="开始报名时间"/></div>--%>
+                <%--          <div class="span3"><input type="text" class="span12" id="signStartTime" placeholder="开始报名时间"/></div>--%>
 
-                <div class="span3"><input type="text" class="span12 m-wrap" id="signEndTime" name="lastTime" placeholder="报名截止时间"/></div>
+                <div class="span3"><input type="text" class="span12" id="signEndTime" name="lastTime" placeholder="报名截止时间"/></div>
               </div>
             </div>
 
             <div class="control-group">
               <label class="control-label">人数限制</label>
               <div class="controls">
-                <input type="text" id="maxPeople" name="maxPeople" class="span6 m-wrap" />
+                <input type="text" id="maxPeople" name="maxPeople" class="span6" />
               </div>
             </div>
 
             <div class="control-group">
               <label class="control-label">咨询电话</label>
               <div class="controls">
-                <input type="text" id="phone" name="phone" class="span6 m-wrap" />
+                <input type="text" id="phone" name="phone" class="span6" />
               </div>
             </div>
 
             <div class="control-group">
               <label class="control-label">可见范围</label>
               <div class="controls">
-                <select id="visible" name="visible" class="span6 m-wrap">
+                <select id="visible" name="visible" class="span6">
                   <option value="0">所有人</option>
                   <option value="1">我的粉丝</option>
                   <option value="2">我的关注</option>
@@ -511,7 +501,7 @@
             <div class="control-group">
               <label class="control-label">是否需要审核申请者</label>
               <div class="controls">
-                <select class="span6 m-wrap" id="examine" name="examine" onchange="isReviewed(this)">
+                <select class="span6" id="examine" name="examine" onchange="isReviewed(this)">
                   <option value="0">否</option>
                   <option value="1">是</option>
                 </select>
@@ -535,7 +525,7 @@
             <div class="control-group hide" id="addChoice">
               <label class="control-label"></label>
               <div class="controls">
-                <input type="text" class="span3 m-wrap" id="requiredVal"><a href="javascript:void(0)" class="btn btn-default" onclick="createRequired()">确定</a>
+                <input type="text" class="span3" id="requiredVal"><a href="javascript:void(0)" class="btn btn-default" onclick="createRequired()">确定</a>
               </div>
             </div>
 
@@ -623,7 +613,7 @@
             <div class="control-group">
               <label class="control-label">banner排序</label>
               <div class="controls">
-                <select class="span6 m-wrap" id="sequence" name="sequence">
+                <select class="span6" id="sequence" name="sequence">
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>

@@ -160,11 +160,11 @@
         <!-- BEGIN DASHBOARD STATS -->
         <div class="row-fluid">
 
-          <form class="form-horizontal" role="form" id="group-form">
+          <form class="form-horizontal" role="form" id="group-form" enctype="multipart/form-data">
             <div class="control-group form-group">
               <label class="control-label">组合名称</label>
                 <div class="controls col-xs-5">
-                  <input type="text" class="span6" name="groupname"/>
+                  <input type="text" class="span6" name="name"/>
                   <span class="help-inline required">*</span>
                 </div>
             </div>
@@ -172,7 +172,7 @@
             <div class="control-group form-group">
               <label class="control-label">封面</label>
               <div class="controls col-xs-5">
-                <input id="lefile" type="file" class="hideInput" name="cover">
+                <input id="lefile" type="file" class="hideInput" name="image">
                 <a class="btn btn-default" href="javascript:void (0)" id="photoCover" onclick="$('input[id=lefile]').click();">选择文件</a>
                 <span class="help-inline required">*</span>
               </div>
@@ -202,9 +202,16 @@
               </div>
             </div>
 
+            <div class="control-group form-group">
+              <label class="control-label"></label>
+              <div class="controls col-xs-5">
+                <input type="text" class="hideInput" name="activityIds" id="activityIds"/>
+              </div>
+            </div>
+
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-default">确定</button>
+                <button class="btn btn-default" onclick="addGroup()">确定</button>
                 <a href="javascript:void(0)" class="btn btn-default" onclick="window.location.reload();">返回</a>
               </div>
             </div>

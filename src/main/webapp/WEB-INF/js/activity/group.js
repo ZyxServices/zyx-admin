@@ -3,8 +3,9 @@
  */
 $(function () {
     $("#activity-group-table").bootstrapTable({
-        striped: true,           //是否显示行间隔色
+        url: "/v1/combination/queryCombination",
         toolbar: '#toolbar',        //工具按钮用哪个容器
+        striped: true,           //是否显示行间隔色
         cache: true,            //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
         pagination: true,          //是否显示分页（*）
         paginationPreText: "上一页",
@@ -19,7 +20,12 @@ $(function () {
         height: 500,            //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
         uniqueId: "id",           //每一行的唯一标识，一般为主键列
         search: true,
-        smartDisplay: false
+        smartDisplay: false,
+        sidePagination: "server",
+        method: "post",
+        queryParamsType: "limit",
+        queryParams: queryParams,
+        responseHandler: groupFromData
     })
 
 })
@@ -27,11 +33,43 @@ $(function () {
 /*activity-group-table列表请求的数据*/
 function queryParams(params) {
     return {
-        pageDataNum: params.limit,
+        pageDataNum: Number(params.limit),
         pageNum: (params.offset + 1),
         search: params.search
     };
 }
+/*获取组合列表*/
+function groupFromData(res) {
+    console.log(res);
+    /*if (res.state == 480) {
+        $("#content-wrapper").html("<section class='content'>无权限</section>");
+        return false;
+    }
+    if (res.state == 200) {
+        var dataArray = [];
+        var datas = res.data;
+        datas.forEach(function (item, a) {
+            var dataObj = {};
+            dataObj.id = item.id;
+            dataObj.name = item.title;
+            dataObj.releaseTime = item.createTime;
+            dataObj.time = item.startTime;
+            dataObj.createMan = item.userId;
+            dataObj.address = item.address;
+            dataObj.pv = 0;
+            dataArray.push(dataObj)
+        });
+        if (datas.length == 0) {
+            var dataObj = {};
+            dataArray.push(dataObj);
+        }
+        return {
+            rows: dataArray,
+            total: res.dataCount
+        }
+    }*/
+}
+
 /*choice-group-table的数据处理*/
 function choiceFromData(res) {
     if (res.state == 480) {
@@ -120,7 +158,8 @@ function del(id,obj) {
         }
     })*/
 }
-
+/*activityIds的值*/
+var activityIds = [];
 function createGroupActivity() {
     $("#activityGroupCreate").show();
     $("#activityGroupList").hide();
@@ -147,9 +186,46 @@ function createGroupActivity() {
         method: "get",
         queryParamsType: "limit",
         queryParams: queryParams,
-        responseHandler: choiceFromData
+        responseHandler: choiceFromData,
+        onCheck:function (row) {
+            activityIds.push(row.id);
+            $("#activityIds").val(activityIds);
+        },
+        onUncheck:function (row) {
+            activityIds.splice($.inArray(row.id,activityIds),1);
+            $("#activityIds").val(activityIds);
+        },
+        onCheckAll:function (rows) {
+            for(var i = 0;i < rows.length; i++){
+                activityIds.push(rows[i].id);
+            }
+            $("#activityIds").val(activityIds);
+        },
+        onUncheckAll:function (row) {
+            activityIds = [];
+            $("#activityIds").val('');
+        }
     })
 
+}
+/*创建活动组合*/
+$('#group-form').ajaxForm({
+    url: '/v1/combination/createCombination',
+    type: 'post',
+    dataType: 'json',
+    beforeSubmit: function () {
+        return $("#group-form").data('bootstrapValidator').isValid();
+    },
+    success: function (result) {
+        if (result.state && result.state == 200) {
+            location.reload();
+        } else if (result.state && result.state == 303) {
+            alert(result.errmsg)
+        }
+    }
+});
+function addGroup() {
+    $('#group-form').submit();
 }
 /*发布时间的转化*/
 function timeFormat(data) {
@@ -168,17 +244,24 @@ $("#group-form").bootstrapValidator({
         validating: 'glyphicon glyphicon-refresh'
     },
     fields:{
-        'groupname': {
+        'name': {
             validators: {
                 notEmpty: {
                     message: '组合名称不能为空'
                 }
             }
         },
-        'cover': {
+        'image': {
             validators: {
                 notEmpty: {
                     message: '必须上传图片'
+                }
+            }
+        },
+        'activityIds': {
+            validators: {
+                notEmpty: {
+                    message: '必须选择活动'
                 }
             }
         }
