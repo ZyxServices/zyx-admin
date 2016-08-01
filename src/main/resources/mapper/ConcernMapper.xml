@@ -49,4 +49,8 @@
     <update id="setState">
         UPDATE concern SET state=#{state} WHERE id=#{id}
     </update>
+
+    <update id="edit">
+        UPDATE concern SET topic_content=#{content},img_url=#{img_url} WHERE id=#{id}
+    </update>
 </mapper>

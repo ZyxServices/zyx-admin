@@ -38,4 +38,14 @@ public interface ConcernMapper extends Mapper<Concern> {
      * @return
      */
     Integer setState(@Param(value = "state") Integer state, @Param(value = "id") Integer id);
+
+    /**
+     * 编辑动态
+     *
+     * @param topicContent
+     * @param imgUrl
+     * @return
+     */
+    Integer edit(@Param(value = "topic_content") String topicContent, @Param(value = "img_url") String imgUrl, @Param(value = "id") Integer id);
+
 }

@@ -10,10 +10,7 @@ import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author XiaoWei
@@ -63,5 +60,60 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_38000, PgConstants.PG_ERROR_CODE_38000_MSG, null);
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
+    }
+
+    @Override
+    public Map<String, Object> edit(String topicContent, String imgUrl, Integer id) {
+        if (id == null) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30021, PgConstants.PG_ERROR_CODE_30021_MSG);
+        }
+        Concern concernFind = concernMapper.findById(id);
+        if (id != null) {
+            if (topicContent == null) {
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30022, PgConstants.PG_ERROR_CODE_30022_MSG);
+            }
+            Optional.ofNullable(topicContent).ifPresent(concernFind::setTopicContent);
+            if (imgUrl == null || Objects.equals(topicContent, "")) {
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30013, PgConstants.PG_ERROR_CODE_30013_MSG);
+            }
+            Optional.ofNullable(imgUrl).ifPresent(concernFind::setImgUrl);
+            Integer result = concernMapper.edit(topicContent, imgUrl, id);
+            if (result > 0) {
+                return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_36000, PgConstants.PG_ERROR_CODE_36000_MSG, null);
+            }
+        }
+        return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
+    }
+
+    @Override
+    public Map<String, Object> createConcern(String content, Integer createId, Integer type, Integer topVisible, String dbImgPath) {
+        if (Objects.equals(content, null) || Objects.equals(content, "")) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30010, PgConstants.PG_ERROR_CODE_30010_MSG);
+        }
+        if (Objects.equals(createId, null)) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30005, PgConstants.PG_ERROR_CODE_30005_MSG);
+        }
+        if (Objects.equals(type, null)) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30017, PgConstants.PG_ERROR_CODE_30017_MSG);
+        }
+        if (Objects.equals(topVisible, null)) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30023, PgConstants.PG_ERROR_CODE_30023_MSG);
+        }
+        if (Objects.equals(dbImgPath, null) || Objects.equals(dbImgPath, "")) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30013, PgConstants.PG_ERROR_CODE_30013_MSG);
+        }
+        Concern concern = new Concern();
+        concern.setCreateTime(new Date().getTime());
+        concern.setTopicContent(content);
+        concern.setTopicVisible(topVisible);
+        concern.setType(type);
+        concern.setUserId(createId);
+        concern.setState(0);//默认正常
+        concern.setImgUrl(dbImgPath);
+        Integer result = concernMapper.insert(concern);
+        if (result > 0) {
+            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_33000, PgConstants.PG_ERROR_CODE_33000_MSG, null);
+        }
+        return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG, null);
     }
 }

@@ -38,6 +38,8 @@ public class Circle {
 
     private String details;//简介
 
+    private Integer tag;//标签
+
     /**
      * @return id
      */
@@ -200,4 +202,14 @@ public class Circle {
     public void setAdminIds(String adminIds) {
         this.adminIds = adminIds;
     }
+
+    public Integer getTag() {
+        return tag;
+    }
+
+    public void setTag(Integer tag) {
+        this.tag = tag;
+    }
+
+
 }

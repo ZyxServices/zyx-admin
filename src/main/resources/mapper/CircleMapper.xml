@@ -17,6 +17,7 @@
         <result column="top" property="top" jdbcType="INTEGER"/>
         <result column="hot" property="hot" jdbcType="INTEGER"/>
         <result column="details" property="details" jdbcType="LONGVARCHAR"/>
+        <result column="tag" property="tag" jdbcType="INTEGER"/>
     </resultMap>
 
     <resultMap id="circleVo" type="com.zyx.model.vo.CircleVo" extends="circleMap">

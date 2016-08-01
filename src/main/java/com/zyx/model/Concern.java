@@ -23,7 +23,7 @@ public class Concern {
     private String topicTitle;
 
     @Column(name = "topic_visible")
-    private Integer topicVisible;
+    private Integer topicVisible;//0所有可见，1好友可见
 
     @Column(name = "img_url")
     private String imgUrl;
@@ -35,7 +35,7 @@ public class Concern {
     private Long createTime;
 
     @Column
-    private Integer state;//动态状态，-2未屏蔽，-1为删除
+    private Integer state;//动态状态，-2未屏蔽，-1为删除,0为正常
 
 
     /**
