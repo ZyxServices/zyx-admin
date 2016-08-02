@@ -50,6 +50,58 @@
       }
 
   }
+
+  //ajax 预览，屏蔽， 推荐，删除，封装
+   var ajaxPlugins={
+       preview:function(){
+
+       },
+       edit:function(){
+
+       },
+       recommend:function(){
+
+       },
+       Shield:function(){
+
+       },
+       remove:function(url,tableid,type){
+           $.Popup({
+               template: '确认删除吗?',
+               saveEvent: function () {
+                   $.ajax({
+                       url: url,
+                       async: false,
+                       type: type,
+                       success: function (result) {
+                           if (result.state == 200 || result.successmsg=="删除成功") {
+                               //console.log(typeof url.split("?id=")[1],typeof row.id.type)
+                               $('#'+tableid+'').bootstrapTable('remove', {
+                                   field: 'id',
+                                   values: [parseInt(url.split("?id=")[1])]
+                               });
+                           } else {
+                               alert(result.successmsg)
+                           }
+                       }
+                   });
+               }
+           })
+       }
+
+
+   }
+  //时间戳初始化
+  function timeFormat(data) {
+      return new Date(data).format("yyyy-mm-dd HH:MM:ss")
+  }
+
+  //获取所有行id
+  function getIdSelections() {
+      return $.map($table.bootstrapTable('getSelections'), function (row) {
+          return row.id
+      });
+  }
   //在插件中使用弹窗对象
   $.Popup = function(options) {
       //创建弹窗的实体

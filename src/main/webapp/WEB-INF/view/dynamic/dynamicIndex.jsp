@@ -51,10 +51,10 @@
                 <h5 style="margin: 0;display: inline-block">图文动态 </h5>
                 <h5 style="margin: 0;display: inline-block">语音动态 </h5>
                 <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
-                <input style="width: 40%; height: 20%" type="text"/>
-                <input style="display: block" type="file"/>
+                <input id="dynamicContent" style="width: 40%; height: 20%" type="text"/>
+                <input id="dynamicImgFile" style="display: block" type="file"/>
                 <button class="btn btn-danger">
-                    <发布></发布>
+                   发布
                 </button>
                 <button onclick="window.location.reload();" class="btn btn-danger">返回</button>
             </div>

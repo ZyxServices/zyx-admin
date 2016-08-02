@@ -27,6 +27,7 @@ function initTable() {
         url: "/v1/appUser/list/all",
         queryParamsType: "undefined",
         queryParams: function queryParams(params) {   //设置查询参数
+            console.log(params)
             var param = {
                 pageNumber: params.pageNumber,
                 pageSize: params.pageSize,

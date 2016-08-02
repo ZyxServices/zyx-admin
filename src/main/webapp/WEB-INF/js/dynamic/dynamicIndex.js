@@ -5,7 +5,7 @@ var $table = $('#live_table'),
     $remove = $('#remove');
 function initTable() {
     $('#dynamic_table').bootstrapTable({
-        url: ("/concern/concernList?page=1&pageSize=5"),
+        url: ("/concern/concernList"),
         method: 'get',
         toolbar: '#toolbar',        //工具按钮用哪个容器
         striped: true,           //是否显示行间隔色
@@ -19,18 +19,39 @@ function initTable() {
         checkboxHeader: "true",
         sortable: true,           //是否启用排序
         sortOrder: "asc",          //排序方式
-        pageList: [25, 50, 100],    //可供选择的每页的行数（*）
-        strictSearch: true,
+        pageList: [10, 25, 50, 100],    //可供选择的每页的行数（*）
         smartDisplay: false,
         height: 460,            //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
         uniqueId: "id",           //每一行的唯一标识，一般为主键列
         search: true,
+        sidePagination: "server",
         strictSearch: false,        //是否启用模糊收索
-        columns: [{field: 'state', checkbox: true, align: 'center', valign: 'middle'},
+        queryParamsType: "undefined",
+        dataField: "data",
+        queryParams: function queryParams(params) {   //设置查询参数
+            console.log(params)
+            var param = {
+                start: params.pageNumber-1,
+                pageSize: params.pageSize,
+                searchText: params.searchText,
+                sortName: params.sortName
+                //sortOrder: params.sortOrder
+            };
+            return param;
+        },
+        onLoadSuccess: function (result) {  //加载成功时执行
+
+        },
+        onLoadError: function () {  //加载失败时执行
+            // alert("加载数据失败");·
+            // layer.msg("加载数据失败", {time : 1500, icon : 2});
+        },
+        columns: [
+            {field: '', checkbox: true, align: 'center', valign: 'middle'},
             {field: 'id', title: 'id', align: 'center', valign: 'middle'},
-            {field: 'userId', title: '发布者'},
-            {field: 'name', title: '发布者是否认证', sortable: true},
-            {field: 'createTime', title: '发布时间', formatter: dateTimeFormatter},
+            {field: 'userName', title: '发布者'},
+            {field: 'authenticate', title: '发布者是否认证', sortable: true},
+            {field: 'createTime', title: '发布时间', formatter: timeFormat},
             {field: 'type', title: '动态类型', sortable: true, formatter: typeFormatter},
             {field: 'price', title: '点赞量', sortable: true},
             {field: 'startTime', title: '评论量', sortable: true},
@@ -72,11 +93,7 @@ function initTable() {
         $remove.prop('disabled', true);
     });
 }
-//时间戳转化
-function dateTimeFormatter(data) {
-    return [new Date(data).format("yyyy-mm-dd HH:MM:ss")].join('');
-}
-//类型
+//动态类型
 function typeFormatter(data) {
     switch (data) {
         case 0:
@@ -91,22 +108,26 @@ function typeFormatter(data) {
             return '圈子动态';
     }
 }
-function getIdSelections() {
-    return $.map($table.bootstrapTable('getSelections'), function (row) {
-        return row.id
-    });
+//动态状态按钮初始化
+function btnState(row) {
+    switch (row.state) {
+        case -2:
+            return '取消屏蔽'
+        case 0:
+            return '屏蔽'
+        case -1:
+            return '撤销删除'
+    }
 }
 
-function getHeight() {
-    return $(window).height() - $('h1').outerHeight(true);
-}
+
 //操作
 function operateFormatter(value, row, index) {
     return [
         '<a class="preview p5"   href="javascript:void(0)" title="preview">预览</a>',
         '<a class="edit p5"   href="javascript:void(0)" title="edit">编辑</a>',
         '<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>',
-        '<a class="Shield p5" href="javascript:void(0)" title="Shield">屏蔽</a>',
+        '<a class="Shield p5" href="javascript:void(0)" title="Shield">'+btnState(row)+'</a>',
         '<a class="remove p5" href="javascript:void(0)" title="remove">删除</a>'
     ].join('');
 }
@@ -125,16 +146,54 @@ var operateEventssssss = {
         alert('You click like action, row: ' + JSON.stringify(row));
     },
     'click .recommend': function (e, value, row, index) {
-
+        //$.ajax({
+        //    url:'/concern/concernList?start=0&pageSize=50',
+        //    method:'get',
+        //    success: function (result) {
+        //        console.log(result)
+        //    }
+        //})
     },
     'click .Shield': function (e, value, row, index) {
+        var state, btnval, btn;
+        var btnclick = this
+        switch (this.innerHTML){
+            case '屏蔽':
+                state=-2,  btnval = '取消屏蔽';
+                break;
+            case '取消屏蔽':
+               state=0,  btnval = '屏蔽';
+                break;
+            case '恢复删除':
+                state=-1,  btnval = '屏蔽';
+                break;
+        }
+        $.Popup({
+            template: '确认屏蔽吗?',
+            saveEvent: function () {
+                $.ajax({
+                    url: "/concern/setState?id=" + row.id + "&state=" + state + "",
+                    async: false,
+                    type: "delete",
+                    dateType: "json",
+                    success: function (result) {
+                        if (result.state == 39000) {
+                            btnclick
+                            btn = btnval
+                        } else {
+                            alert(result.successmsg)
+                        }
+                    }
+                })
+                btnclick.innerHTML = btn;
+                //$(btnclick).parent().prevAll()[6].innerHTML = statetext;
+            }
+        })
 
     },
     'click .remove': function (e, value, row, index) {
-        $('#live_table').bootstrapTable('remove', {
-            field: 'id',
-            values: [row.id]
-        });
+        var delUrl = '/concern/deleteOne?id=' + row.id;
+       ajaxPlugins.remove(delUrl,'dynamic_table','DELETE')
     }
 };
 //查看Url事件
