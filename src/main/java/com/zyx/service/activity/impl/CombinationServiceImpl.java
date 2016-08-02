@@ -87,6 +87,45 @@ public class CombinationServiceImpl implements CombinationService {
     }
 
     @Override
+    public Map<String, Object> updateCombination(Combination combination, Integer[] activityIds) {
+
+        if (combination.getId() != null && combination.getId() > 0) {
+            int updateCombination = combinationMapper.updateCombination(combination);
+            if (updateCombination > 0) {
+                if (activityIds != null && activityIds.length > 0) {
+                    int combinationActivity = combinedDataMapper.delCombinationActivity(combination.getId());
+                    if (combinationActivity > 0) {
+                        List<CombinedData> datas = new ArrayList<>();
+                        for (Integer activityId : activityIds) {
+                            CombinedData combinedData = new CombinedData();
+                            combinedData.setDataid(activityId);
+                            combinedData.setCombinedid(combination.getId());
+                            combinedData.setCreateTime(new Date().getTime());
+                            combinedData.setDel(0);
+                            combinedData.setMask(0);
+                            datas.add(combinedData);
+                        }
+                        int insertList = combinedDataMapper.insertList(datas);
+                        if (insertList > 0) {
+                            return MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", "");
+                        } else {
+                            return MapUtils.buildErrorMap(Constants.DATA_UPDATE_FAILED, "组合下的活动更新失败");
+                        }
+                    } else {
+                        return MapUtils.buildErrorMap(Constants.DATA_UPDATE_FAILED, "组合下的活动更新失败");
+                    }
+                } else {
+                    return MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", "");
+                }
+            } else {
+                return MapUtils.buildErrorMap(Constants.DATA_UPDATE_FAILED, "数据更新失败");
+            }
+        } else {
+            return MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失");
+        }
+    }
+
+    @Override
     public Map<String, Object> queryCombination(int pageDataNumber, int pageNumber, String name) {
         QueryCombinationParm parm = new QueryCombinationParm();
 
@@ -111,6 +150,37 @@ public class CombinationServiceImpl implements CombinationService {
             return map;
         } else {
             return MapUtils.buildErrorMap(Constants.NO_DATA, "差无数据");
+        }
+    }
+
+    @Override
+    public Map<String, Object> queryCombinationById(Integer combinationId) {
+        if (combinationId != null && combinationId > 0) {
+            Combination combination = combinationMapper.selectByPrimaryKey(combinationId);
+            if (combination != null) {
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", combination);
+            } else {
+                return MapUtils.buildErrorMap(Constants.NO_DATA, "差无数据");
+            }
+        } else {
+            return MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失");
+        }
+    }
+
+    @Override
+    public Map<String, Object> queryCombinationIdByActivity(Integer combinationId) {
+        if (combinationId != null && combinationId > 0) {
+            CombinedData combinedData = new CombinedData();
+            combinedData.setCombinedid(combinationId);
+            List<CombinedData> combinedDatas = combinedDataMapper.select(combinedData);
+            if (combinedDatas != null && combinedDatas.size() > 0) {
+                List<Integer> integerList = combinedDatas.stream().map(CombinedData::getDataid).collect(Collectors.toList());
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", integerList);
+            }else{
+                return MapUtils.buildErrorMap(Constants.NO_DATA, "差无数据");
+            }
+        } else {
+            return MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失");
         }
     }
 
@@ -146,7 +216,7 @@ public class CombinationServiceImpl implements CombinationService {
             Map<String, Object> map = MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", activities);
             map.put("dataCount", dataCount);
             return map;
-        }else{
+        } else {
             return MapUtils.buildErrorMap(Constants.NO_DATA, "差无数据");
         }
     }

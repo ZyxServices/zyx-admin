@@ -28,7 +28,9 @@
     </if>
   </select>
 
-
+  <delete id="delCombinationActivity" parameterType="java.lang.Integer">
+      delete from combined_data where combinedId = #{combinationId}
+  </delete>
 
 
 </mapper>

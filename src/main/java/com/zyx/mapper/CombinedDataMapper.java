@@ -17,6 +17,12 @@ public interface CombinedDataMapper extends BaseMapper<CombinedData> {
      * @return
      */
     List<CombinedData> queryCombinationActivity(QueryCombinationParm parm);
-
+    /**
+     * 通过组合名称删除具体组合下的活动
+     *
+     * @param combinationId
+     * @return
+     */
+    int delCombinationActivity(Integer combinationId);
 
 }

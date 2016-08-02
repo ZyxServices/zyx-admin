@@ -1,5 +1,6 @@
 package com.zyx.controller.activity;
 
+import com.zyx.model.Combination;
 import com.zyx.service.activity.CombinationService;
 import com.zyx.utils.FileUploadUtils;
 import com.zyx.utils.ImagesVerifyUtils;
@@ -57,6 +58,32 @@ public class CombinationController {
         }
     }
 
+    @RequestMapping(value = "/updateCombination", method = RequestMethod.POST)
+    @ApiOperation(value = "修改组合", notes = "修改组合")
+    public ModelAndView updateCombination(@RequestParam(name = "id", required = true) Integer id,
+                                          @RequestParam(name = "name", required = false) String name,
+                                          @RequestPart(name = "image", required = false) MultipartFile images,
+                                          @RequestParam(name = "activityIds", required = false) Integer[] activityIds) {
+
+        AbstractView jsonView = new MappingJackson2JsonView();
+        String uploadFile = null;
+        if (images != null && !images.isEmpty()) {
+            uploadFile = FileUploadUtils.uploadFile(images);
+            Map<String, Object> stringObjectMap = ImagesVerifyUtils.verify(uploadFile);
+            if (stringObjectMap != null && !stringObjectMap.equals("")) {
+                jsonView.setAttributesMap(stringObjectMap);
+                return new ModelAndView(jsonView);
+            }
+        }
+        Combination combination = new Combination();
+        combination.setId(id);
+        combination.setName(name);
+        combination.setImage(uploadFile);
+        Map<String, Object> map = combinationService.updateCombination(combination, activityIds);
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
 
     @RequestMapping(value = "/queryCombination", method = RequestMethod.POST)
     @ApiOperation(value = "组合查询", notes = "组合查询")
@@ -77,13 +104,65 @@ public class CombinationController {
     @RequestMapping(value = "/queryCombinationActivity", method = RequestMethod.POST)
     @ApiOperation(value = "组合对应活动查询", notes = "组合对应活动查询")
     public ModelAndView queryCombinationActivity(@RequestParam(name = "pageDataNum", required = true) Integer pageDataNum,
-                                      @RequestParam(name = "pageNum", required = true) Integer pageNum,
-                                      @RequestParam(name = "combinationId", required = true) Integer combinationId) {
+                                                 @RequestParam(name = "pageNum", required = true) Integer pageNum,
+                                                 @RequestParam(name = "combinationId", required = true) Integer combinationId) {
 
         AbstractView jsonView = new MappingJackson2JsonView();
 
 
         Map<String, Object> map = combinationService.queryCombinationActivity(pageDataNum, pageNum, combinationId);
+
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "/queryCombinationById", method = RequestMethod.POST)
+    @ApiOperation(value = "通过id查询组合", notes = "通过id查询组合")
+    public ModelAndView queryCombinationById(@RequestParam(name = "combinationId", required = true) Integer id) {
+
+        AbstractView jsonView = new MappingJackson2JsonView();
+        Map<String, Object> map = combinationService.queryCombinationById(id);
+
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "/queryCombinationIdByActivity", method = RequestMethod.POST)
+    @ApiOperation(value = "通过组合id查询组合下的活动", notes = "通过组合id查询组合下的活动")
+    public ModelAndView queryCombinationIdByActivity(@RequestParam(name = "combinationId", required = true) Integer id) {
+
+        AbstractView jsonView = new MappingJackson2JsonView();
+        Map<String, Object> map = combinationService.queryCombinationIdByActivity(id);
+
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "/delCombination", method = RequestMethod.POST)
+    @ApiOperation(value = "删除活动", notes = "删除活动")
+    public ModelAndView delCombination(@RequestParam(name = "combinationId", required = true) Integer id,
+                                       @RequestParam(name = "del", required = true) int del) {
+
+        AbstractView jsonView = new MappingJackson2JsonView();
+        Combination combination = new Combination();
+        combination.setId(id);
+        combination.setDel(del);
+        Map<String, Object> map = combinationService.updateCombination(combination, null);
+
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "/maskCombination", method = RequestMethod.POST)
+    @ApiOperation(value = "屏幕活动", notes = "屏幕活动")
+    public ModelAndView maskCombination(@RequestParam(name = "combinationId", required = true) Integer id,
+                                        @RequestParam(name = "mask", required = true) int mask) {
+
+        AbstractView jsonView = new MappingJackson2JsonView();
+        Combination combination = new Combination();
+        combination.setId(id);
+        combination.setMask(mask);
+        Map<String, Object> map = combinationService.updateCombination(combination, null);
 
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);

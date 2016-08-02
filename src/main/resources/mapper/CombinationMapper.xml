@@ -15,13 +15,14 @@
 
     <insert id="insertCombination" parameterType="com.zyx.model.Combination" useGeneratedKeys="true">
         insert INTO combination(name, image, create_time, del, mask)
-            VALUE (#{name}, #{image}, #{createTime}, #{del}, #{mask})
+        VALUE (#{name}, #{image}, #{createTime}, #{del}, #{mask})
         <selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
             select LAST_INSERT_ID() AS id
         </selectKey>
     </insert>
 
-    <select id="queryCombination" parameterType="com.zyx.parm.activity.QueryCombinationParm" resultType="com.zyx.model.Combination">
+    <select id="queryCombination" parameterType="com.zyx.parm.activity.QueryCombinationParm"
+            resultType="com.zyx.model.Combination">
         SELECT * FROM combination WHERE 1=1
         <if test="id != null">
             AND id = #{id}
@@ -37,4 +38,23 @@
             limit #{pageNumber}, #{page}
         </if>
     </select>
+
+    <update id="updateCombination" parameterType="com.zyx.model.Combination">
+        UPDATE combination
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="image != null and image != ''">
+                image = #{image},
+            </if>
+            <if test="del != null">
+                del = #{del},
+            </if>
+            <if test="mask != null">
+                mask = #{mask}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
 </mapper>
