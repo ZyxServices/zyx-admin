@@ -219,7 +219,7 @@ $('#updateFrom').ajaxForm({
                 template:result.successmsg
             });
             $("#activityList").show();
-            $("#activityCreate").hide();
+            $("#activityModify").hide();
             $('#activity-list-table').bootstrapTable('refresh');
         } else if (result.state && result.state == 303) {
             $.Popup({
@@ -450,6 +450,7 @@ function modify(id) {
                 $("#signEndTime").val(new Date(datas.lastTime).format("yyyy-mm-dd HH:MM:ss"));
                 $("#maxPeople").val(datas.maxPeople);
                 $("#phone").val(datas.phone);
+                $("#price").val(datas.price);
                 $("#visible").val(datas.visible);
                 $("#examine").val(datas.examine);
                 if (datas.examine == 1) {
