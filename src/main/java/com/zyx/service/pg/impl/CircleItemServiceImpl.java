@@ -100,8 +100,8 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
     }
 
     @Override
-    public Map<String, Object> setVisible(Integer id) {
-        Integer result = circleItemMapper.setVisible(-2, id);
+    public Map<String, Object> setVisible(Integer id, Integer state) {
+        Integer result = circleItemMapper.setVisible(state, id);
         if (result > 0) {
             return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_38000, PgConstants.PG_ERROR_CODE_38000_MSG, null);
         }

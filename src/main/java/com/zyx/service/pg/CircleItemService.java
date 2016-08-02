@@ -16,6 +16,6 @@ public interface CircleItemService extends BaseService<CircleItem> {
     Map<String,Object> addCircleItem(Integer circle_id,Integer create_id,String title,String content);
     Map<String,Object> findOne(Integer id);
     Map<String,Object> deleteOne(Integer id);
-    Map<String,Object> setVisible(Integer id);
+    Map<String,Object> setVisible(Integer id,Integer state);
 
 }
