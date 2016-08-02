@@ -19,7 +19,7 @@ public interface ConcernService extends BaseService<Concern> {
 
     Map<String, Object> deleteOne(Integer id);
 
-    Map<String, Object> setVisible(Integer id);
+    Map<String, Object> setVisible(Integer id,Integer state);
 
     Map<String, Object> edit(String topicContent, String imgUrl, Integer id);
 
