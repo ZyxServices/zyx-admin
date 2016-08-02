@@ -13,7 +13,7 @@
         <result column="mask" jdbcType="INTEGER" property="mask"/>
     </resultMap>
 
-    <insert id="insertCombination" parameterType="com.zyx.model.Combination">
+    <insert id="insertCombination" parameterType="com.zyx.model.Combination" useGeneratedKeys="true">
         insert INTO combination(name, image, create_time, del, mask)
             VALUE (#{name}, #{image}, #{createTime}, #{del}, #{mask})
         <selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">

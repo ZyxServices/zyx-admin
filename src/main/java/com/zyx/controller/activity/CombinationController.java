@@ -2,6 +2,7 @@ package com.zyx.controller.activity;
 
 import com.zyx.service.activity.CombinationService;
 import com.zyx.utils.FileUploadUtils;
+import com.zyx.utils.ImagesVerifyUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,9 +45,16 @@ public class CombinationController {
 
         String uploadFile = FileUploadUtils.uploadFile(image);
 
-        Map<String, Object> map = combinationService.createCombination(name, uploadFile, activityIds);
-        jsonView.setAttributesMap(map);
-        return new ModelAndView(jsonView);
+        Map<String, Object> verify = ImagesVerifyUtils.verify(uploadFile);
+
+        if (verify != null) {
+            jsonView.setAttributesMap(verify);
+            return new ModelAndView(jsonView);
+        } else {
+            Map<String, Object> map = combinationService.createCombination(name, uploadFile, activityIds);
+            jsonView.setAttributesMap(map);
+            return new ModelAndView(jsonView);
+        }
     }
 
 
@@ -65,4 +73,19 @@ public class CombinationController {
         return new ModelAndView(jsonView);
     }
 
+
+    @RequestMapping(value = "/queryCombinationActivity", method = RequestMethod.POST)
+    @ApiOperation(value = "组合对应活动查询", notes = "组合对应活动查询")
+    public ModelAndView queryCombinationActivity(@RequestParam(name = "pageDataNum", required = true) Integer pageDataNum,
+                                      @RequestParam(name = "pageNum", required = true) Integer pageNum,
+                                      @RequestParam(name = "combinationId", required = true) Integer combinationId) {
+
+        AbstractView jsonView = new MappingJackson2JsonView();
+
+
+        Map<String, Object> map = combinationService.queryCombinationActivity(pageDataNum, pageNum, combinationId);
+
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
 }

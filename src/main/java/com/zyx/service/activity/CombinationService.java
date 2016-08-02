@@ -31,4 +31,13 @@ public interface CombinationService {
      * @return
      */
     Map<String, Object> queryCombination(int pageDataNumber, int pageNumber,String searchText);
+
+    /**
+     * 查询对应活动组合
+     * @param pageDataNumber
+     * @param pageNumber
+     * @param combinationId
+     * @return
+     */
+    Map<String, Object> queryCombinationActivity(int pageDataNumber, int pageNumber,Integer combinationId);
 }

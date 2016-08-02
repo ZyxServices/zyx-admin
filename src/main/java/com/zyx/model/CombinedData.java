@@ -15,7 +15,7 @@ public class CombinedData {
     private Integer combinedid;
 
     /**
-     * 数据id（具体模块下的数据）
+     * 数据id（活动id）
      */
     @Column(name = "dataId")
     private Integer dataid;

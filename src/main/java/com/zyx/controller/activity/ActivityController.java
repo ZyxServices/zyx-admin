@@ -4,6 +4,7 @@ import com.zyx.model.Activity;
 import com.zyx.service.activity.ActivityService;
 import com.zyx.service.devaluation.DevaluationService;
 import com.zyx.utils.FileUploadUtils;
+import com.zyx.utils.ImagesVerifyUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -88,6 +89,8 @@ public class ActivityController {
                                @RequestParam(name = "examine", required = false) Integer examine,
                                @RequestParam(name = "memberTemplate", required = false) String memberTemplate) {
 
+        AbstractView jsonView = new MappingJackson2JsonView();
+
         long newStartTime = 0;
         long newEndTime = 0;
         long newLastTime = 0;
@@ -103,6 +106,11 @@ public class ActivityController {
 
         if (image != null && !image.isEmpty()) {
             newImage = FileUploadUtils.uploadFile(image);
+            Map<String, Object> verify = ImagesVerifyUtils.verify(newImage);
+            if(verify != null){
+                jsonView.setAttributesMap(verify);
+                return new ModelAndView(jsonView);
+            }
         }
 
         Activity activity = new Activity();
@@ -122,8 +130,6 @@ public class ActivityController {
         activity.setAddress(address);
         activity.setExamine(examine);
         activity.setMemberTemplate(memberTemplate);
-
-        AbstractView jsonView = new MappingJackson2JsonView();
 
         Map<String, Object> map = activityService.updateActivity(activity);
 

@@ -2,6 +2,7 @@ package com.zyx.mapper;
 
 import com.zyx.model.Activity;
 import com.zyx.parm.activity.QueryActivityParm;
+import io.swagger.models.auth.In;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -26,4 +27,12 @@ public interface ActivityMapper extends Mapper<Activity> {
      */
     int updateActivity(Activity activity);
 
+
+    /**
+     * 多ID查询活动
+     *
+     * @param ids
+     * @return
+     */
+    List<Activity> queryActivityIn(List<Integer> ids);
 }
