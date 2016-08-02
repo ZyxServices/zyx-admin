@@ -1,5 +1,6 @@
 package com.zyx.service.activity.impl;
 
+import com.zyx.constants.ActivityConstants;
 import com.zyx.constants.Constants;
 import com.zyx.mapper.ActivityMapper;
 import com.zyx.model.Activity;
@@ -9,6 +10,7 @@ import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +29,28 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Resource
     private ActivityMapper activityMapper;
+
+    @Override
+    public Map<String, Object> insertActivity(Activity activity) {
+        if (activity.getUserId() != null && activity.getTitle() != null
+                && activity.getDescContent() != null && activity.getImgUrls() != null
+                && activity.getStartTime() > 0 && activity.getEndTime() > 0
+                && activity.getAddress() != null && activity.getPrice() != null
+                && activity.getType() != null) {
+            activity.setDel(0);
+            activity.setMask(0);
+            activity.setCreateTime(new Date().getTime());
+            activity.setTargetUrl(null);
+            int insert = activityMapper.insert(activity);
+            if (insert > 0) {
+                return MapUtils.buildSuccessMap(Constants.SUCCESS, "发布成功", null);
+            }else{
+                return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10000, "活动发布失败");
+            }
+        } else {
+            return MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失");
+        }
+    }
 
     @Override
     public Map<String, Object> queryActivity(int pageDataNumber, int pageNumber, String searchText) {

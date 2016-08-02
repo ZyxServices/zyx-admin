@@ -176,7 +176,12 @@
 		<!--<table tableName="combined_data" domainObjectName="CombinedData">
 			<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
 		</table>-->
-
+        <!--<table tableName="tag" domainObjectName="Tag">-->
+            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
+        <!--<table tableName="circleType" domainObjectName="CircleType">-->
+            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
 
 	</context>
 </generatorConfiguration>

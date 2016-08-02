@@ -81,10 +81,10 @@ public class ConcernController {
         return new ModelAndView(jsonView);
     }
 
-    @RequestMapping(value = "setVisible", method = RequestMethod.DELETE)
-    @ApiOperation(value = "屏蔽动态", notes = "逻辑屏蔽")
-    public ModelAndView setVisible(@RequestParam(value = "id") Integer id) {
-        Map<String, Object> map = concernService.setVisible(id);
+    @RequestMapping(value = "setState", method = RequestMethod.DELETE)
+    @ApiOperation(value = "状态设置", notes = "可以作为删除，屏蔽，取消屏蔽的接口，state:0为正常，-1位删除，-2位屏蔽")
+    public ModelAndView setVisible(@RequestParam(value = "id") Integer id, @RequestParam(value = "state") Integer state) {
+        Map<String, Object> map = concernService.setVisible(id, state);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);

@@ -15,6 +15,12 @@ import java.util.Map;
  */
 public interface ActivityService {
 
+    /**
+     * 添加活动
+     * @param activity
+     * @return
+     */
+    Map<String, Object> insertActivity(Activity activity);
 
     /**
      * 多条条件查询活动

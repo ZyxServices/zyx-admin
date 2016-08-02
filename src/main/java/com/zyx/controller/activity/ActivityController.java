@@ -1,9 +1,12 @@
 package com.zyx.controller.activity;
 
+import com.zyx.constants.Constants;
 import com.zyx.model.Activity;
 import com.zyx.service.activity.ActivityService;
 import com.zyx.service.devaluation.DevaluationService;
 import com.zyx.utils.FileUploadUtils;
+import com.zyx.utils.ImagesVerifyUtils;
+import com.zyx.utils.MapUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +21,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import javax.annotation.Resource;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -37,15 +41,11 @@ import java.util.Objects;
 public class ActivityController {
 
     @Resource
-    private DevaluationService devaluationService;
-
-    @Resource
     private ActivityService activityService;
 
     @RequestMapping(value = "/release", method = RequestMethod.POST)
     @ApiOperation(value = "活动发布", notes = "活动发布")
-    public ModelAndView release(@RequestParam(name = "id", required = true) Integer id,
-                                @RequestParam(name = "userId", required = true) Integer userId,
+    public ModelAndView release(@RequestParam(name = "userId", required = true) Integer userId,
                                 @RequestParam(name = "title", required = true) String title,
                                 @RequestParam(name = "desc", required = true) String desc,
                                 @RequestPart(name = "image", required = true) MultipartFile image,
@@ -56,15 +56,46 @@ public class ActivityController {
                                 @RequestParam(name = "visible", required = false) Integer visible,
                                 @RequestParam(name = "phone", required = false) String phone,
                                 @RequestParam(name = "price", required = false) Double price,
-                                @RequestParam(name = "type", required = false) Integer type,
-                                @RequestParam(name = "address", required = false) String address,
+                                @RequestParam(name = "type", required = true) Integer type,
+                                @RequestParam(name = "address", required = true) String address,
                                 @RequestParam(name = "examine", required = false) Integer examine,
                                 @RequestParam(name = "memberTemplate", required = false) String memberTemplate) {
 
         AbstractView jsonView = new MappingJackson2JsonView();
 
+        String uploadFile;
+        if (!image.isEmpty()) {
+            uploadFile = FileUploadUtils.uploadFile(image);
+            Map<String, Object> stringObjectMap = ImagesVerifyUtils.verify(uploadFile);
+            if (stringObjectMap != null) {
+                jsonView.setAttributesMap(stringObjectMap);
+                return new ModelAndView(jsonView);
+            }
+        } else {
+            jsonView.setAttributesMap(MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失"));
+            return new ModelAndView(jsonView);
+        }
 
-        Map<String, Object> map = new HashMap<>();
+        Activity activity = new Activity();
+        activity.setUserId(userId);
+        activity.setTitle(title);
+        activity.setDescContent(desc);
+
+        activity.setImgUrls(uploadFile);
+        activity.setStartTime(getDateTime(startTime));
+        activity.setEndTime(getDateTime(endTime));
+        activity.setLastTime(getDateTime(lastTime));
+        activity.setMaxPeople(maxPeople != null ? maxPeople : 20);
+        activity.setVisible(visible != null ? visible : 0);
+        activity.setPhone(phone);
+        activity.setPrice(price != null ? price : 0);
+        activity.setType(type);
+        activity.setAddress(address);
+        activity.setExamine(examine == null ? 0 : examine);
+        activity.setMemberTemplate(memberTemplate);
+
+        Map<String, Object> map = activityService.insertActivity(activity);
+
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
@@ -88,21 +119,18 @@ public class ActivityController {
                                @RequestParam(name = "examine", required = false) Integer examine,
                                @RequestParam(name = "memberTemplate", required = false) String memberTemplate) {
 
-        long newStartTime = 0;
-        long newEndTime = 0;
-        long newLastTime = 0;
+        AbstractView jsonView = new MappingJackson2JsonView();
+
+
         String newImage = null;
-        try {
-            DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG);
-            newStartTime = dateFormat.parse(startTime != null && !Objects.equals(startTime, "") ? startTime : "0").getTime();
-            newEndTime = dateFormat.parse(endTime != null && !Objects.equals(endTime, "") ? endTime : "0").getTime();
-            newLastTime = dateFormat.parse(lastTime != null && !Objects.equals(lastTime, "") ? lastTime : "0").getTime();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         if (image != null && !image.isEmpty()) {
             newImage = FileUploadUtils.uploadFile(image);
+            Map<String, Object> verify = ImagesVerifyUtils.verify(newImage);
+            if (verify != null) {
+                jsonView.setAttributesMap(verify);
+                return new ModelAndView(jsonView);
+            }
         }
 
         Activity activity = new Activity();
@@ -111,9 +139,9 @@ public class ActivityController {
         activity.setTitle(title);
         activity.setDescContent(desc);
         activity.setImgUrls(newImage);
-        activity.setStartTime(newStartTime);
-        activity.setEndTime(newEndTime);
-        activity.setLastTime(newLastTime);
+        activity.setStartTime(getDateTime(startTime));
+        activity.setEndTime(getDateTime(endTime));
+        activity.setLastTime(getDateTime(lastTime));
         activity.setMaxPeople(maxPeople);
         activity.setVisible(visible);
         activity.setPhone(phone);
@@ -122,8 +150,6 @@ public class ActivityController {
         activity.setAddress(address);
         activity.setExamine(examine);
         activity.setMemberTemplate(memberTemplate);
-
-        AbstractView jsonView = new MappingJackson2JsonView();
 
         Map<String, Object> map = activityService.updateActivity(activity);
 
@@ -162,7 +188,7 @@ public class ActivityController {
 
         AbstractView jsonView = new MappingJackson2JsonView();
 
-        Map<String, Object> map = activityService.maskActivity(id,maskType);
+        Map<String, Object> map = activityService.maskActivity(id, maskType);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
@@ -174,8 +200,25 @@ public class ActivityController {
 
         AbstractView jsonView = new MappingJackson2JsonView();
 
-        Map<String, Object> map = activityService.delActivity(id,delType);
+        Map<String, Object> map = activityService.delActivity(id, delType);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
+    }
+
+
+    private Long getDateTime(String time) {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            return formatter.parse(time != null && !Objects.equals(time, "") ? time : "0").getTime();
+        } catch (ParseException e) {
+            try {
+                SimpleDateFormat formatters = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                return formatters.parse(time != null && !Objects.equals(time, "") ? time : "0").getTime();
+            } catch (ParseException e1) {
+                e1.printStackTrace();
+                return 0L;
+
+            }
+        }
     }
 }

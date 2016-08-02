@@ -2,7 +2,7 @@ package com.zyx.model;
 
 import javax.persistence.*;
 
-@Table(name = "circleItem")
+@Table(name = "circle_item")
 public class CircleItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

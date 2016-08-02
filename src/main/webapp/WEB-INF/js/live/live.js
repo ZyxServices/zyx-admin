@@ -20,7 +20,7 @@ function initTable() {
         checkboxHeader: "true",
         sortable: true,           //是否启用排序
         sortOrder: "asc",          //排序方式
-        pageList: [10,25, 50, 100],    //可供选择的每页的行数（*）
+        pageList: [10, 25, 50, 100],    //可供选择的每页的行数（*）
         smartDisplay: false,
         height: 460,            //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
         uniqueId: "id",           //每一行的唯一标识，一般为主键列
@@ -44,7 +44,7 @@ function initTable() {
 
         },
         onLoadError: function () {  //加载失败时执行
-            // alert("加载数据失败");
+            // alert("加载数据失败");·
             // layer.msg("加载数据失败", {time : 1500, icon : 2});
         },
         columns: [{field: '', checkbox: true, align: 'center', valign: 'middle'},
@@ -107,11 +107,12 @@ function initTable() {
     //批量删除
     $remove.click(function () {
         var ids = getIdSelections();
-        ids.forEach(function (e) {
-            var delUrl = '/v1/live/delete?id=' + e;
-            $.Popup({
-                template: '确认批量删除吗?',
-                saveEvent: function () {
+        $.Popup({
+            template: '确认批量删除吗?',
+            saveEvent: function () {
+                ids.forEach(function (e) {
+                    var delUrl = '/v1/live/delete?id=' + e;
+
                     $.ajax({
                         url: delUrl,
                         async: false,
@@ -119,68 +120,63 @@ function initTable() {
                         success: function (meg) {
                             console.log(meg)
                             if (meg.state == 200) {
-                                $table.bootstrapTable('remove', {
-                                    field: 'id',
-                                    field: 'id',
-                                    values: ids
-                                });
-                                $remove.prop('disabled', true);
+                                    $table.bootstrapTable('remove', {
+                                        field: 'id',
+                                        field: 'id',
+                                        values: ids
+                                    });
+                                    $remove.prop('disabled', true);
                             }
                         }
-                    });
-                }
-            })
-        })
 
+                    })
+                });
+            }
+        })
     });
 }
 
 
-//时间戳初始化
-function timeFormat(data) {
-    return new Date(data).format("yyyy-mm-dd HH:MM:ss")
-}
 
 //直播状态初始化
 function operateFormatterssssss(value, row, index) {
     switch (row.state) {
-        case 0: return '已屏蔽'
-        case 1: return '正常'
+        case 1:
+            return '已屏蔽'
+        case 0:
+            return '正常'
     }
 }
 //直播状态按钮初始化
-function btnState(row){
+function btnState(row) {
     switch (row.state) {
-        case 0: return '取消屏蔽'
-        case 1: return  '屏蔽'
+        case 1:
+            return '取消屏蔽'
+        case 0:
+            return '屏蔽'
     }
 }
-//获取所有行id
-function getIdSelections() {
-    return $.map($table.bootstrapTable('getSelections'), function (row) {
-        return row.id
-    });
-}
-function shieldBtn(obj){
-    //var state, btnval, btn, stateText, statetext;
-    if (obj.innerHTML == '屏蔽') {
-        //return new btnstate{
-            state = 0,
-            btnval='取消屏蔽',
-        stateText ='已屏蔽'
 
-    } else {
-        state = 1;
-        btnval = '屏蔽';
-        stateText = '正常'
-    }
-}
+//function shieldBtn(obj) {
+//    //var state, btnval, btn, stateText, statetext;
+//    if (obj.innerHTML == '屏蔽') {
+//        //return new btnstate{
+//        state = 0,
+//            btnval = '取消屏蔽',
+//            stateText = '已屏蔽'
+//
+//    } else {
+//        state = 1;
+//        btnval = '屏蔽';
+//        stateText = '正常'
+//    }
+//}
 //直播操作按钮初始化
 function operateFormatter(value, row, index) {
     return [
         '<a class="preview p5"   href="javascript:void(0)" >预览</a>',
         '<a class="recommend p5" href="javascript:void(0)" >推荐</a>',
-        '<a class="Shield p5" href="javascript:void(0)" >' +  btnState(row)+ '</a>',
+        '<a class="Shield p5" href="javascript:void(0)" >' + btnState(row) + '</a>',
         '<a class="remove p5" href="javascript:void(0)">删除</a>'
     ].join('');
 }
@@ -213,15 +209,15 @@ var operateEventssssss = {
     //屏蔽
     'click .Shield': function (e, value, row, index, obj) {
         var state, btnval, btn, stateText, statetext;
-        var btnclick=this
+        var btnclick = this
         if (this.innerHTML == '屏蔽') {
             //return new btnstate{
-            state = 0,
-                btnval='取消屏蔽',
-                stateText ='已屏蔽'
+            state = 1,
+                btnval = '取消屏蔽',
+                stateText = '已屏蔽'
 
         } else {
-            state = 1;
+            state = 0;
             btnval = '屏蔽';
             stateText = '正常'
         }
@@ -253,26 +249,7 @@ var operateEventssssss = {
     //删除
     'click .remove': function (e, value, row, index) {
         var delUrl = '/v1/live/delete?id=' + row.id;
-        $.Popup({
-            template: '确认删除吗?',
-            saveEvent: function () {
-                $.ajax({
-                    url: delUrl,
-                    async: false,
-                    type: "post",
-                    success: function (result) {
-                        if (result.state == 200) {
-                            $('#live_table').bootstrapTable('remove', {
-                                field: 'id',
-                                values: [row.id]
-                            });
-                        } else {
-                            alert(result.successmsg)
-                        }
-                    }
-                });
-            }
-        })
+        ajaxPlugins.remove(delUrl,'live_table','post');
     }
 };
 
@@ -281,7 +258,7 @@ function operateFormatterclass(value, row, index) {
     return [
         '<a class="edit p5"   href="javascript:void(0)" title="preview">编辑</a>',
         '<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>',
-        '<a class="Shield p5" href="javascript:void(0)" title="Shield">' + btnState(row)+ '</a>',
+        '<a class="Shield p5" href="javascript:void(0)" title="Shield">' + btnState(row) + '</a>',
         '<a class="remove p5" href="javascript:void(0)" title="remove">删除</a>'
     ].join('');
 }
@@ -324,24 +301,7 @@ var operateEventclass = {
     },
     'click .remove': function (e, value, row, index) {
         var delUrl = '/v1/live/lab/delete?id=' + row.id;
-        $.Popup({
-            template: '确认删除吗?',
-            saveEvent: function () {
-                $.ajax({
-                    url: delUrl,
-                    async: false,
-                    type: "post",
-                    success: function (data) {
-                        $('#editLive').bootstrapTable('remove', {
-                            field: 'id',
-                            values: [row.id]
-                        });
-                    }
-                });
-
-
-            }
-        })
+        ajaxPlugins.remove(delUrl,'editLive','post')
     },
     creatLive: function () {
         var labvalue = $('#lab').val()

@@ -44,6 +44,13 @@
         </if>
     </select>
 
+    <select id="queryActivityIn" parameterType="java.util.List" resultType="com.zyx.model.Activity">
+        select * from activity where ID IN
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
     <update id="updateActivity" parameterType="com.zyx.model.Activity">
         UPDATE activity
         <set>

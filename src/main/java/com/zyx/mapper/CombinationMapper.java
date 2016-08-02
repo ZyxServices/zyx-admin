@@ -26,4 +26,12 @@ public interface CombinationMapper extends BaseMapper<Combination> {
      */
     List<Activity> queryCombination(QueryCombinationParm parm);
 
+    /**
+     * 修改组合
+     *
+     * @param combination
+     * @return
+     */
+    int updateCombination(Combination combination);
+
 }

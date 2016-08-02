@@ -22,5 +22,5 @@ public interface CircleService extends BaseService<Circle> {
 
     Map<String, Object> deleteOne(Integer id);
 
-    Map<String, Object> setVisible(Integer id);
+    Map<String, Object> setVisible(Integer id,Integer state);
 }

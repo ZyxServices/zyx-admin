@@ -22,6 +22,7 @@ $(function () {
         search: true,
         smartDisplay: false,
         sidePagination: "server",
+        contentType: "application/x-www-form-urlencoded",
         method: "post",
         queryParamsType: "limit",
         queryParams: queryParams,
@@ -33,15 +34,14 @@ $(function () {
 /*activity-group-table列表请求的数据*/
 function queryParams(params) {
     return {
-        pageDataNum: Number(params.limit),
-        pageNum: (params.offset + 1),
+        pageDataNum: params.limit,
+        pageNum: params.offset + 1,
         search: params.search
     };
 }
 /*获取组合列表*/
 function groupFromData(res) {
-    console.log(res);
-    /*if (res.state == 480) {
+    if (res.state == 480) {
         $("#content-wrapper").html("<section class='content'>无权限</section>");
         return false;
     }
@@ -51,12 +51,9 @@ function groupFromData(res) {
         datas.forEach(function (item, a) {
             var dataObj = {};
             dataObj.id = item.id;
-            dataObj.name = item.title;
-            dataObj.releaseTime = item.createTime;
-            dataObj.time = item.startTime;
-            dataObj.createMan = item.userId;
-            dataObj.address = item.address;
-            dataObj.pv = 0;
+            dataObj.name = item.name;
+            dataObj.createTime = item.createTime;
+            // dataObj.visible = 0;
             dataArray.push(dataObj)
         });
         if (datas.length == 0) {
@@ -67,7 +64,7 @@ function groupFromData(res) {
             rows: dataArray,
             total: res.dataCount
         }
-    }*/
+    }
 }
 
 /*choice-group-table的数据处理*/
@@ -103,13 +100,21 @@ function choiceFromData(res) {
 
 
 function operate(value, row, index) {
-    return [
-        '<a class="preview p5"   href="javascript:void(0)" title="preview" onclick="previewActivity(\'' + row.id + '\')">预览</a>',
-        '<a class="recommend p5" href="javascript:void(0)" title="recommend" onclick="recommend(\'' + row.id + '\')">推荐</a>',
-        '<a class="recommend p5" href="javascript:void(0)" title="recommend" onclick="modify(\'' + row.id + '\')">编辑</a>',
-        '<a class="Shield p5" href="javascript:void(0)" title="Shield" onclick="shield(\'' + row.id + '\')">屏蔽</a>',
-        '<a class="remove p5" href="javascript:void(0)" title="remove" onclick="del(\'' + row.id+ '\',this)">删除</a>'
-    ].join('');
+    var dataArray = new Array();
+    dataArray.push('<a class="preview p5"   href="javascript:void(0)" title="preview" onclick="previewActivity(\'' + row.id + '\')">预览</a>');
+    dataArray.push('<a class="recommend p5" href="javascript:void(0)" title="recommend" onclick="recommend(\'' + row.id + '\',\'' + row.name + '\')">推荐</a>')
+    dataArray.push('<a class="recommend p5" href="javascript:void(0)" title="modify" onclick="modify(\'' + row.id + '\')">编辑</a>')
+    if (row.mask == 0) {
+        dataArray.push('<a class="Shield p5" href="javascript:void(0)" title="Shield" onclick="shield(\'' + row.id + '\', 1)">屏蔽</a>')
+    } else {
+        dataArray.push('<a class="Shield p5" href="javascript:void(0)" title="Shield" onclick="shield(\'' + row.id + '\', 0)">解除屏蔽</a>')
+    }
+    if (row.del == 0) {
+        dataArray.push('<a class="remove p5" href="javascript:void(0)" title="remove" onclick="del(\'' + row.id + '\', 1)">删除</a>')
+    } else {
+        dataArray.push('<a class="remove p5" href="javascript:void(0)" title="remove" onclick="del(\'' + row.id + '\', 0)">恢复删除</a>')
+    }
+    return dataArray.join('');
 }
 /*预览*/
 function previewActivity(id) {
@@ -130,39 +135,67 @@ function shield(id) {
     $("#activity-group-shield").modal('toggle');
 }
 /*删除*/
-function del(id,obj) {
+function del(id,type) {
     // $("#activity-group-del").modal('toggle');
     var delType;
-    if($(obj).html() == '删除'){
+    if(type == 1){
         delType = 1;
     }else{
         delType = 0;
     }
-    /*$.Popup({
+    $.Popup({
+        title:'删除',
         template: '该活动组合将被删除，不能再被浏览。独立活动列表中，仍可找到该活动组合中的活动 ?',
         saveEvent: function () {
             $.ajax({
-                url: "/v1/activity/delActivity",
+                // url: "/v1/activity/delActivity",
                 async: false,
                 type: "post",
-                data:{id:id,delType:delType},
+                data:{id:id,delType:type},
                 dateType: "json",
                 success: function (result) {
-                    if(delType == 1){
-                        $(obj).html('取消删除');
+                    if(result.state == 200){
+                        if(type == 1){
+                            $.Popup({
+                                confirm:false,
+                                template:'删除成功'
+                            })
+                        }else{
+                            $.Popup({
+                                confirm:false,
+                                template:'恢复删除成功'
+                            })
+                        }
+                        $('#activity-list-table').bootstrapTable('refresh');
                     }else{
-                        $(obj).html('删除');
+                        $.Popup({
+                            confirm:false,
+                            template:'删除失败'
+                        })
                     }
                 }
             });
         }
-    })*/
+    })
+}
+/*编辑时table的操作*/
+function editeOperate(value, row, index) {
+    $("#choice-activity-table").hide();
+    $("#edite-choice-table").hide();
+    var dataArray = new Array();
+    dataArray.push('<a class="preview p5"   href="javascript:void(0)" title="preview" onclick="exitGroup(\'' + row.id + '\')">退出活动组合</a>');
+    return dataArray.join('');
+}
+/*退出活动组合*/
+function exitGroup(id) {
+    console.log(id)
 }
 /*activityIds的值*/
 var activityIds = [];
 function createGroupActivity() {
     $("#activityGroupCreate").show();
     $("#activityGroupList").hide();
+    $("#choice-activity-table").show();
     $("#choice-activity-table").bootstrapTable({
         url: "/v1/activity/queryActivity",
         striped: true,           //是否显示行间隔色
