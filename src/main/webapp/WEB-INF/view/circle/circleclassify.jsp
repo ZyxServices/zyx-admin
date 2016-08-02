@@ -83,22 +83,15 @@
                         size="1">
                     <div class="row-fluid margin-bottom-10">
                         <div class="span6">
-                            <a class="btn btn-default" href="javaScript:void(0)" onclick="circleCreate()">创建圈子类别</a>
+                            <a class="btn btn-default" href="javaScript:void(0)" onclick="CrateClass()">创建圈子类别</a>
                         </div>
                     </div>
 
                     <!-- END PAGE TITLE & BREADCRUMB-->
                     <h3 class="page-title">
-
                         圈子类别管理
                         <small>statistics and more</small>
-
                     </h3>
-
-                    <div class="row-fluid margin-bottom-10">
-                        <a class="btn btn-default" href="javaScript:void(0)">自动/手动排序优先</a>
-                        <a class="btn btn-default" href="javaScript:void(0)"> 批量删除 </a>
-                    </div>
                 </div>
 
 
@@ -111,7 +104,7 @@
 
                 <div class="row-fluid">
                     <div class="span12 responsive">
-                        <table id="circle-list-table"></table>
+                        <table id="circle-classify-table"></table>
                     </div>
 
                 </div>
@@ -121,61 +114,10 @@
 
         </div>
 
-        <%--创建圈子--%>
+        <%--创建分类--%>
         <div class="container-fluid hide" id="circleCreate">
 
             <!-- BEGIN PAGE HEADER-->
-
-            <div class="row-fluid">
-
-                <div class="span12">
-
-                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-
-                    <h3 class="page-title">
-
-                        圈子
-                        <small>statistics and more</small>
-
-                    </h3>
-
-                    <ul class="breadcrumb">
-
-                        <li>
-
-                            <i class="icon-home"></i>
-
-                            <a href="javascript:void(0)">圈子</a>
-
-                            <i class="icon-angle-right"></i>
-
-                        </li>
-
-                        <li><a href="#">创建</a></li>
-
-                        <li class="pull-right no-text-shadow">
-
-                            <div class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive"
-                                 data-tablet="" data-desktop="tooltips" data-placement="top"
-                                 data-original-title="Change dashboard date range">
-
-                                <i class="icon-calendar"></i>
-
-                                <span></span>
-
-                                <i class="icon-angle-down"></i>
-
-                            </div>
-
-                        </li>
-
-                    </ul>
-
-                    <!-- END PAGE TITLE & BREADCRUMB-->
-
-                </div>
-
-            </div>
 
             <!-- END PAGE HEADER-->
 
@@ -257,38 +199,6 @@
     <!-- END PAGE -->
 
 </div>
-<!-- 推荐圈子弹窗-->
-<div class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel" id="circleModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="gridSystemModalLabel">圈子推荐</h4>
-            </div>
-            <div class="modal-body" style="padding:10px 20px ;">
-                <div class="container-fluid">
-                    <div class="row">
-                        <span class="col-xs-6 col-md-4">
-                        精选圈子排序
-                        </span>
-                        <span class="col-xs-6 col-md-4">
-                            <select id="circleSelect">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" id="circleSure">确认</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 
 <!-- END CONTAINER -->
 
@@ -298,6 +208,7 @@
 <jsp:include page="../public/common-js.jsp"/>
 <script src="../../js/app.js" type="text/javascript"></script>
 <script src="../../js/index.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../js/circle/circleclassify.js"></script>
 <script type="text/javascript">
 
 

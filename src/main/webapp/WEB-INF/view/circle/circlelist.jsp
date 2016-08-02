@@ -111,7 +111,7 @@
 
                 <div class="row-fluid">
                     <div class="span12 responsive">
-                        <table id="circle-list-table"></table>
+                        <table id="circle-list-table" ></table>
                     </div>
 
                 </div>
@@ -183,8 +183,11 @@
 
                 <!-- BEGIN DASHBOARD STATS -->
                 <div class="row-fluid">
-                    <form class="form-horizontal" role="form" id="circleCreates" action="../../circle/createCircle"
+                    <form class="form-horizontal" role="form"  id="circleCreates" action="../../circle/createCircle"
                           enctype="multipart/form-data" method="post">
+                        <input name="token" type="hidden" value="10"/>
+                        <input name="createId" type="hidden" value="-1"/>
+                <%--        <input name="state" type="hidden" value="-2">--%>
                         <div class="control-group form-group">
                             <label class="control-label">名称</label>
                             <div class="controls col-xs-6">
@@ -220,8 +223,6 @@
                             <label class="control-label">圈主</label>
                             <div class="controls  col-xs-6">
                                 <input type="text" class="span6" name="masterId"/>
-                                <input name="token" type="hidden" value="10"/>
-                                <input name="createId" type="hidden" value="-1"/>
                                 <span class="help-inline">*</span>
                             </div>
                         </div>

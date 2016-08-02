@@ -227,7 +227,7 @@ var operateEvent = {
         }
     }
 };
-function circleCreate() {
+function CrateClass() {
     $("#circleList").hide();
     $("#circleCreate").show();
 }
