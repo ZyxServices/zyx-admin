@@ -53,24 +53,25 @@ public class CircleController {
      */
     @RequestMapping(value = "createCircle", method = RequestMethod.POST)
     @ApiOperation(value = "添加圈子", notes = "添加圈子")
-    public ModelAndView addCircle(@RequestParam("token") String token,
+    public ModelAndView addCircle(
                                   @RequestParam("title") String title,
                                   @RequestParam(value = "createId") Integer createId,
                                   @RequestParam(value = "state", required = false) Integer state,
                                   @RequestParam(value = "masterId") Integer masterId,
                                   @RequestParam(value = "adminIds", required = false) String adminIds,
                                   @RequestParam("type") Integer type,
-                                  @RequestParam("details") String details,
-                                  @RequestPart("headImgUrl") MultipartFile headImgUrl) {
+                                  @RequestParam("details") String details
+                                  ) {
+//        @RequestPart(value = "headImgUrl",required = false) MultipartFile headImgUrl
         AbstractView jsonView = new MappingJackson2JsonView();
 
-        String imgDbUrl = FileUploadUtils.uploadFile(headImgUrl);
+//        String imgDbUrl = FileUploadUtils.uploadFile(headImgUrl);
 //        Map<String, Object> returnResult = ImagesVerifyUtils.verify(imgDbUrl);
 //        if (returnResult != null) {
 //            jsonView.setAttributesMap(returnResult);
 //            return new ModelAndView(jsonView);
 //        }
-        Map<String, Object> map = circleService.insertCircle(title, createId, state, type, details, imgDbUrl, masterId, adminIds);
+        Map<String, Object> map = circleService.insertCircle(title, createId, state, type, details, "", masterId, adminIds);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }

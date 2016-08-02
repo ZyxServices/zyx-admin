@@ -185,7 +185,6 @@
                 <div class="row-fluid">
                     <form class="form-horizontal" role="form"  id="circleCreates" action="../../circle/createCircle"
                           enctype="multipart/form-data" method="post">
-                        <input name="token" type="hidden" value="10"/>
                         <input name="createId" type="hidden" value="-1"/>
                 <%--        <input name="state" type="hidden" value="-2">--%>
                         <div class="control-group form-group">
@@ -199,8 +198,8 @@
                         <div class="control-group form-group">
                             <label class="control-label">头像</label>
                             <div class="controls  col-xs-6">
-                                <input type="file" name="headImgUrl" role="button" value="上传图片">
-                                <span class="help-inline">只能上传一张图片</span>
+                                <input type="file" name="headImgUrl"  value="上传图片">
+                                <%--<span class="help-inline">只能上传一张图片</span>--%>
                             </div>
                         </div>
                         <div class="control-group form-group">
