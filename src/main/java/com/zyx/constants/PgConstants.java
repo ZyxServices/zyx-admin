@@ -28,7 +28,7 @@ public interface PgConstants extends Constants {
     String PG_ERROR_CODE_38000_MSG = "屏蔽成功";
 
     int PG_ERROR_CODE_39000 = 39000;
-    String PG_ERROR_CODE_39000_MSG = "操作";
+    String PG_ERROR_CODE_39000_MSG = "操作成功";
 
     int PG_ERROR_CODE_30000 = 30000;
     String PG_ERROR_CODE_30000_MSG = "用户token已经失效，请重新登录";
@@ -103,6 +103,17 @@ public interface PgConstants extends Constants {
     int PG_ERROR_CODE_30023 = 30023;
     String PG_ERROR_CODE_30023_MSG = "可见范围设置不能为空";
 
+    int PG_ERROR_CODE_30024 = 30024;
+    String PG_ERROR_CODE_30024_MSG = "圈子类型名称不能为空";
+
+    int PG_ERROR_CODE_30025 = 30025;
+    String PG_ERROR_CODE_30025_MSG = "圈子类型id不能为空";
+
+    int PG_ERROR_CODE_30026 = 30026;
+    String PG_ERROR_CODE_30026_MSG = "标签名称不能为空";
+
+    int PG_ERROR_CODE_30027 = 30027;
+    String PG_ERROR_CODE_30027_MSG = "标签id不能为空";
 
     String PG_RESULT = "result";
 }

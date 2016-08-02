@@ -26,7 +26,7 @@
     </resultMap>
 
     <select id="findByPager" resultMap="circleVo">
-SELECT
+    SELECT
 	`circle`.`id` AS `id`,
 	`circle`.`title` AS `title`,
 	`circle`.`create_id` AS `create_id`,
