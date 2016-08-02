@@ -2,6 +2,7 @@
  * Created by guochunyan on 2016/7/14.
  */
 $(function () {
+
     //创建圈子
     $("#circleCreates").bootstrapValidator({
         fields: {
@@ -59,12 +60,9 @@ $(function () {
             data: $form.serialize(),
             success: function () {
                 //表格重新加载
-                $table.bootstrapTable('refresh', {url: '../../circle/circleList'});
+                $("#circle-list-table").bootstrapTable('refresh', {url: '../../circle/circleList'});
                 $("#circleList").show();
                 $("#circleCreate").hide();
-            },
-            error: function () {
-                console.log(2222)
             }
         });
     });
@@ -101,12 +99,10 @@ $(function () {
             console.log(data)
         },
         columns: [
-            {field: 'state', title: '状态',},
-            // {field: 'state', checkbox: true, align: 'center', valign: 'middle'},
             {field: 'id', title: 'id', align: 'center', valign: 'middle'},
             {field: 'title', title: '圈子名称'},
             {field: 'createTime', title: '创建时间', formatter: getLocalTime},
-            {field: 'createId', title: '创建人'},
+            {field: 'userName', title: '创建人'},
             {field: 'circleMaster', title: '圈主', sortable: true},
             {field: 'masterId', title: '管理员', sortable: true},
             {field: '', title: '帖子数量', sortable: true},
@@ -115,10 +111,10 @@ $(function () {
             {field: 'operation', title: '操作', align: 'center', events: operateEvent, formatter: circleFormatter}
         ]
     })
-})
+});
+//时间转换
 function getLocalTime(value) {
-    return new Date(parseInt(value) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
-    console.log(value);
+    return (new Date(value).format("yyyy-mm-dd HH:MM:ss"));
 }
 
 
@@ -204,8 +200,10 @@ var operateEvent = {
                     success: function (data) {
                         if (this.innerHTML == '屏蔽') {
                             console.log(11111);
+                            this.innerHTML = "取消屏蔽"
                         }
                         else {
+                            this.innerHTML = "屏蔽"
                             console.log(22222);
                         }
                     }
@@ -227,6 +225,7 @@ var operateEvent = {
                             field: 'id',
                             values: [row.id]
                         });
+                        alert("删除成功")
                     }
                 });
             }
