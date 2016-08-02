@@ -136,9 +136,11 @@ public class LiveController {
         LiveInfoParm param = new LiveInfoParm();
         param.setPageNumber(pageNumber);
         param.setPageSize(pageSize);
+        int count = liveInfoService.selectCount(new LiveInfo());
         List<LiveInfo> liveInfos = liveInfoService.getLiveInfos(param);
         result.put(LiveConstants.STATE, LiveConstants.SUCCESS);
         result.put(LiveConstants.DATA, liveInfos);
+        result.put("total",count);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(result);
         return new ModelAndView(jsonView);
