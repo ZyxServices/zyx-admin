@@ -58,12 +58,10 @@ $(function () {
             type: 'POST',
             data: $form.serialize(),
             success: function () {
-                //表格重新加载
-                $table.bootstrapTable('refresh', {url: '../../circle/circleList'});
-                $("#circleList").show();
-                $("#circleCreate").hide();
+                //emailSure
+                console.log(111111)
             },
-            error: function () {
+            error:function(){
                 console.log(2222)
             }
         });
@@ -101,8 +99,7 @@ $(function () {
             console.log(data)
         },
         columns: [
-            {field: 'state', title: '状态',},
-            // {field: 'state', checkbox: true, align: 'center', valign: 'middle'},
+            {field: 'state', checkbox: true, align: 'center', valign: 'middle'},
             {field: 'id', title: 'id', align: 'center', valign: 'middle'},
             {field: 'title', title: '圈子名称'},
             {field: 'createTime', title: '创建时间', formatter: getLocalTime},
@@ -185,7 +182,7 @@ var operateEvent = {
                 url: "../../circle/setTop?circleId=" + row.id + "&topSize=" + selectValue,
                 async: false,
                 success: function (result) {
-                    alert("推荐成功");
+                      alert("推荐成功");
                     $("#circleModal").modal("hide");
                 }
             })
@@ -215,26 +212,22 @@ var operateEvent = {
     },
     //圈子删除
     'click .remove': function (e, value, row, index) {
-        $.Popup({
-            template: '确认删除吗?',
-            saveEvent: function () {
-                $.ajax({
-                    url: "../../circle/deleteOne?id=" + row.id,
-                    async: false,
-                    type: "delete",
-                    success: function (data) {
-                        $('#editLive').bootstrapTable('remove', {
-                            field: 'id',
-                            values: [row.id]
-                        });
-                    }
-                });
-            }
-        });
-
+        if (confirm('确认删除吗？')) {
+            $.ajax({
+                url: "../../circle/deleteOne?id=" + row.id,
+                async: false,
+                type: "delete",
+                success: function (data) {
+                    $('#editLive').bootstrapTable('remove', {
+                        field: 'id',
+                        values: [row.id]
+                    });
+                }
+            });
+        }
     }
 };
-function circleCreate() {
+function CrateClass() {
     $("#circleList").hide();
     $("#circleCreate").show();
 }
