@@ -97,7 +97,7 @@
               <tr>
                 <th data-checkbox="true"></th>
                 <th data-field="id">id</th>
-                <th data-field="title">活动组合名称</th>
+                <th data-field="name">活动组合名称</th>
                 <th data-field="createTime" data-formatter="timeFormat">组合发布时间</th>
                 <th data-field="visible">浏览量</th>
                 <th data-formatter="operate">操作</th>
@@ -184,6 +184,7 @@
             <div id="choice-activity">
               <div class="row-fluid">
                 <div class="span12 responsive">
+                  <%--添加的table--%>
                   <table class="table table-hover" id="choice-activity-table">
                     <thead>
                     <tr>
@@ -195,6 +196,22 @@
                       <th data-field="createMan">创建人</th>
                       <th data-field="address">活动地点</th>
                       <th data-field="pv">浏览量</th>
+                    </tr>
+                    </thead>
+                  </table>
+                  <%--编辑选择活动table--%>
+                  <table class="table table-hover hide" id="edite-choice-table">
+                    <thead>
+                    <tr>
+                      <th data-checkbox="true"></th>
+                      <th data-field="id">id</th>
+                      <th data-field="releaseTime" data-formatter="timeFormat">活动发布时间</th>
+                      <th data-field="name">活动名称</th>
+                      <th data-field="time" data-formatter="timeFormat">活动时间</th>
+                      <th data-field="createMan">创建人</th>
+                      <th data-field="address">活动地点</th>
+                      <th data-field="pv">浏览量</th>
+                      <th data-formatter="editeOperate">操作</th>
                     </tr>
                     </thead>
                   </table>
