@@ -119,62 +119,72 @@
 
             <!-- BEGIN PAGE HEADER-->
 
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                    <h3 class="page-title">
+
+                        圈子
+                        <small>statistics and more</small>
+
+                    </h3>
+
+                    <ul class="breadcrumb">
+
+                        <li>
+
+                            <i class="icon-home"></i>
+
+                            <a href="javascript:void(0)">圈子</a>
+
+                            <i class="icon-angle-right"></i>
+
+                        </li>
+
+                        <li><a href="#">分类创建</a></li>
+
+                        <li class="pull-right no-text-shadow">
+
+                            <div class="dashboard-date-range tooltips no-tooltip-on-touch-device responsive"
+                                 data-tablet="" data-desktop="tooltips" data-placement="top"
+                                 data-original-title="Change dashboard date range">
+
+                                <i class="icon-calendar"></i>
+
+                                <span></span>
+
+                                <i class="icon-angle-down"></i>
+
+                            </div>
+
+                        </li>
+
+                    </ul>
+
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+
+                </div>
+
+            </div>
+
             <!-- END PAGE HEADER-->
 
             <div id="activity-create">
 
                 <!-- BEGIN DASHBOARD STATS -->
                 <div class="row-fluid">
-                    <form class="form-horizontal" role="form" id="circleCreates" action="../../circle/createCircle"
+                    <form class="form-horizontal" role="form"  id="circleClassify" action="../../circleType/createCircleType"
                           enctype="multipart/form-data" method="post">
                         <div class="control-group form-group">
-                            <label class="control-label">名称</label>
+                            <label class="control-label">圈子分类名称</label>
                             <div class="controls col-xs-6">
-                                <input type="text" name="title" class="span6"/>
+                                <input type="text" name="typeName" class="span6"/>
                                 <span class="help-inline">*</span>
                             </div>
                         </div>
-
-                        <div class="control-group form-group">
-                            <label class="control-label">头像</label>
-                            <div class="controls  col-xs-6">
-                                <input type="file" name="headImgUrl" role="button" value="上传图片">
-                                <span class="help-inline">只能上传一张图片</span>
-                            </div>
-                        </div>
-                        <div class="control-group form-group">
-                            <label class="control-label">类别</label>
-                            <div class="controls  col-xs-6">
-                                <input type="text" class="span6" name="type"/>
-                                <span class="help-inline">*</span>
-                            </div>
-                        </div>
-
-                        <div class="control-group form-group">
-                            <label class="control-label">简介</label>
-                            <div class="controls  col-xs-6">
-                                <input type="text" class="span6" name="details"/>
-                                <span class="help-inline">*</span>
-                            </div>
-                        </div>
-
-                        <div class="control-group form-group">
-                            <label class="control-label">圈主</label>
-                            <div class="controls  col-xs-6">
-                                <input type="text" class="span6" name="masterId"/>
-                                <input name="token" type="hidden" value="10"/>
-                                <input name="createId" type="hidden" value="-1"/>
-                                <span class="help-inline">*</span>
-                            </div>
-                        </div>
-                        <div class="control-group form-group">
-                            <label class="control-label">管理员</label>
-                            <div class="controls  col-xs-6">
-                                <input type="text" class="span6" name="adminIds"/>
-                                <span class="help-inline">*</span>
-                            </div>
-                        </div>
-
                         <div class="control-group form-group">
                             <label class="control-label"></label>
                             <div class="col-sm-offset-2 col-sm-10">

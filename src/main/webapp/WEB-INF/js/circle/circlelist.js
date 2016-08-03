@@ -60,6 +60,7 @@ $(function () {
             data: $form.serialize(),
             success: function () {
                 //表格重新加载
+                alert("创建成功");
                 $("#circle-list-table").bootstrapTable('refresh', {url: '../../circle/circleList'});
                 $("#circleList").show();
                 $("#circleCreate").hide();
@@ -81,8 +82,8 @@ $(function () {
         pagination: true,          //是否显示分页（*）
         paginationPreText: "上一页",
         paginationNextText: "下一页",
-        pageNumber: 25,            //初始化加载第一页，默认第一页
-        //每页的记录行数（*）
+        pageNumber:1,            //初始化加载第一页，默认第一页
+        // 每页的记录行数（*）
         checkbox: true,
         checkboxHeader: "true",
         sortable: true,           //是否启用排序
@@ -99,6 +100,7 @@ $(function () {
             console.log(data)
         },
         columns: [
+            {field: '', checkbox: true, align: 'center', valign: 'middle'},
             {field: 'id', title: 'id', align: 'center', valign: 'middle'},
             {field: 'title', title: '圈子名称'},
             {field: 'createTime', title: '创建时间', formatter: getLocalTime},
@@ -200,10 +202,10 @@ var operateEvent = {
                     success: function (data) {
                         if (this.innerHTML == '屏蔽') {
                             console.log(11111);
-                            this.innerHTML = "取消屏蔽"
+                            this.innerHTML = "取消屏蔽";
                         }
                         else {
-                            this.innerHTML = "屏蔽"
+                            this.innerHTML = "屏蔽";
                             console.log(22222);
                         }
                     }

@@ -205,7 +205,13 @@
                         <div class="control-group form-group">
                             <label class="control-label">类别</label>
                             <div class="controls  col-xs-6">
-                                <input type="text" class="span6" name="type"/>
+                                <select class="form-control" name="type">
+                                    <option value="0">0</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select
+
                                 <span class="help-inline">*</span>
                             </div>
                         </div>
