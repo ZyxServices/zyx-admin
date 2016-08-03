@@ -141,7 +141,7 @@ public class CombinationController {
     @RequestMapping(value = "/delCombination", method = RequestMethod.POST)
     @ApiOperation(value = "删除活动", notes = "删除活动")
     public ModelAndView delCombination(@RequestParam(name = "combinationId", required = true) Integer id,
-                                       @RequestParam(name = "del", required = true) int del) {
+                                       @RequestParam(name = "delType", required = true) int del) {
 
         AbstractView jsonView = new MappingJackson2JsonView();
         Combination combination = new Combination();
