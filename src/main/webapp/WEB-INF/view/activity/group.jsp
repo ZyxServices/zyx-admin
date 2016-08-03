@@ -184,7 +184,6 @@
             <div id="choice-activity">
               <div class="row-fluid">
                 <div class="span12 responsive">
-                  <%--添加的table--%>
                   <table class="table table-hover" id="choice-activity-table">
                     <thead>
                     <tr>
@@ -196,22 +195,6 @@
                       <th data-field="createMan">创建人</th>
                       <th data-field="address">活动地点</th>
                       <th data-field="pv">浏览量</th>
-                    </tr>
-                    </thead>
-                  </table>
-                  <%--编辑选择活动table--%>
-                  <table class="table table-hover hide" id="edite-choice-table">
-                    <thead>
-                    <tr>
-                      <th data-checkbox="true"></th>
-                      <th data-field="id">id</th>
-                      <th data-field="releaseTime" data-formatter="timeFormat">活动发布时间</th>
-                      <th data-field="name">活动名称</th>
-                      <th data-field="time" data-formatter="timeFormat">活动时间</th>
-                      <th data-field="createMan">创建人</th>
-                      <th data-field="address">活动地点</th>
-                      <th data-field="pv">浏览量</th>
-                      <th data-formatter="editeOperate">操作</th>
                     </tr>
                     </thead>
                   </table>
@@ -229,6 +212,122 @@
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                 <button class="btn btn-default" onclick="addGroup()">确定</button>
+                <a href="javascript:void(0)" class="btn btn-default" onclick="window.location.reload();">返回</a>
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+        <!-- END DASHBOARD STATS -->
+
+      </div>
+
+    </div>
+    <%--编辑==修改--%>
+    <div class="container-fluid hide" id="activityGroupEdit">
+
+      <!-- BEGIN PAGE HEADER-->
+
+      <div class="row-fluid">
+
+        <div class="span12">
+
+          <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+          <h3 class="page-title">
+
+            活动组合编辑<small>statistics and more</small>
+
+          </h3>
+
+          <ul class="breadcrumb">
+
+            <li>
+
+              <i class="icon-home"></i>
+
+              <a href="javascript:void(0)">活动组合</a>
+
+              <i class="icon-angle-right"></i>
+
+            </li>
+
+            <li><a href="#">编辑</a></li>
+
+          </ul>
+
+          <!-- END PAGE TITLE & BREADCRUMB-->
+
+        </div>
+
+      </div>
+
+      <!-- END PAGE HEADER-->
+
+      <div id="activity-edit">
+
+        <!-- BEGIN DASHBOARD STATS -->
+        <div class="row-fluid">
+
+          <form class="form-horizontal" role="form" id="group-edit-form" enctype="multipart/form-data">
+            <div class="control-group form-group">
+              <label class="control-label">组合名称</label>
+              <div class="controls col-xs-5">
+                <input type="text" class="span6" name="name" id="name"/>
+                <span class="help-inline required">*</span>
+              </div>
+            </div>
+
+            <div class="control-group form-group">
+              <label class="control-label">封面</label>
+              <div class="controls col-xs-5">
+                <input id="lefile-edit" type="file" class="hideInput" name="image">
+                <a class="btn btn-default" href="javascript:void (0)" id="photoCover-edit" onclick="$('input[id=lefile-edit]').click();">选择文件</a>
+                <span class="help-inline required">*</span>
+                <div class="clearfix"></div>
+                <div style="margin-top: 10px">
+                  <img id="images" src="">
+                </div>
+              </div>
+            </div>
+            <hr>
+
+            <h4>选择活动</h4>
+
+            <div id="edit-choice-activity">
+              <div class="row-fluid">
+                <div class="span12 responsive">
+                  <input type="hidden" id="combinationId" name="id"><%--点击编辑的时候的组合活动id--%>
+                  <table class="table table-hover" id="edit-choice-table">
+                    <thead>
+                    <tr>
+                      <th data-checkbox="true"></th>
+                      <th data-field="id">id</th>
+                      <th data-field="releaseTime" data-formatter="timeFormat">活动发布时间</th>
+                      <th data-field="name">活动名称</th>
+                      <th data-field="time" data-formatter="timeFormat">活动时间</th>
+                      <th data-field="createMan">创建人</th>
+                      <th data-field="address">活动地点</th>
+                      <th data-field="pv">浏览量</th>
+                      <th data-formatter="editOperate">操作</th>
+                    </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="control-group form-group">
+              <label class="control-label"></label>
+              <div class="controls col-xs-5">
+                <input type="text" class="hideInput" name="activityIds" id="activityIds-edit"/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-default" type="button" onclick="confirmUpdate()">确定</button>
                 <a href="javascript:void(0)" class="btn btn-default" onclick="window.location.reload();">返回</a>
               </div>
             </div>
