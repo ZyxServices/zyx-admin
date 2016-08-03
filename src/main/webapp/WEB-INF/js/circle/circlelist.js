@@ -34,14 +34,14 @@ $(function () {
                     }
                 }
             },
-            "masterId": {
+            "circleMaster": {
                 validators: {
                     notEmpty: {
                         message: '请选择圈主'
                     }
                 }
             },
-            "adminIds": {
+            "masterId": {
                 validators: {
                     notEmpty: {
                         message: '请设置管理员'
@@ -82,7 +82,7 @@ $(function () {
         pagination: true,          //是否显示分页（*）
         paginationPreText: "上一页",
         paginationNextText: "下一页",
-        pageNumber:1,            //初始化加载第一页，默认第一页
+        pageNumber: 1,            //初始化加载第一页，默认第一页
         // 每页的记录行数（*）
         checkbox: true,
         checkboxHeader: "true",
@@ -151,6 +151,11 @@ var operateEvent = {
             type: "get",
             dateType: "json",
             success: function () {
+                $("input[name=title]").val(row.title).attr("disabled", "disabled");
+                $("input[name=state]").val(row.state).attr("disabled", "disabled");
+                $("input[name=details]").val(row.details).attr("disabled", "disabled");
+                $("input[name=circleMaster]").val(row.circleMaster).attr("disabled", "disabled");
+                $("input[name=masterId]").val(row.masterId).attr("disabled", "disabled");
                 circleCreate();
             }
         })
@@ -165,8 +170,12 @@ var operateEvent = {
             dateType: "json",
             url: "../../circle/getCircle?id=" + row.id,
             async: false,
-            success: function (result) {
-
+            success: function () {
+                $("input[name=title]").val(row.title);
+                $("input[name=state]").val(row.state);
+                $("input[name=details]").val(row.details);
+                $("input[name=circleMaster]").val(row.circleMaster);
+                $("input[name=masterId]").val(row.masterId);
             }
         })
     },
@@ -227,7 +236,8 @@ var operateEvent = {
                             field: 'id',
                             values: [row.id]
                         });
-                        alert("删除成功")
+                        alert("删除成功");
+                        $("#circle-list-table").bootstrapTable('refresh', {url: '../../circle/circleList'});
                     }
                 });
             }
