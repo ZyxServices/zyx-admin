@@ -31,7 +31,7 @@ function initTable() {
         queryParams: function queryParams(params) {   //设置查询参数
             console.log(params)
             var param = {
-                start: params.pageNumber-1,
+                start: params.pageNumber - 1,
                 pageSize: params.pageSize,
                 searchText: params.searchText,
                 sortName: params.sortName
@@ -95,29 +95,11 @@ function initTable() {
 }
 //动态类型
 function typeFormatter(data) {
-    switch (data) {
-        case 0:
-            return '测试';
-        case 1:
-            return '个人动态';
-        case 2:
-            return '活动动态';
-        case 3:
-            return '明星动态';
-        case 4:
-            return '圈子动态';
-    }
+    return data == 0 ? "测试" : data == 1 ? "个人动态" : data == 2 ? "活动动态" : data == 3 ? "明星动态" : "圈子动态";
 }
 //动态状态按钮初始化
 function btnState(row) {
-    switch (row.state) {
-        case -2:
-            return '取消屏蔽'
-        case 0:
-            return '屏蔽'
-        case -1:
-            return '撤销删除'
-    }
+    return row.state == 0 ? "屏蔽" : row.state == -1 ? "撤销删除" : "取消屏蔽";
 }
 
 
@@ -127,7 +109,7 @@ function operateFormatter(value, row, index) {
         '<a class="preview p5"   href="javascript:void(0)" title="preview">预览</a>',
         '<a class="edit p5"   href="javascript:void(0)" title="edit">编辑</a>',
         '<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>',
-        '<a class="Shield p5" href="javascript:void(0)" title="Shield">'+btnState(row)+'</a>',
+        '<a class="Shield p5" href="javascript:void(0)" title="Shield">' + btnState(row) + '</a>',
         '<a class="remove p5" href="javascript:void(0)" title="remove">删除</a>'
     ].join('');
 }
@@ -157,15 +139,15 @@ var operateEventssssss = {
     'click .Shield': function (e, value, row, index) {
         var state, btnval, btn;
         var btnclick = this
-        switch (this.innerHTML){
+        switch (this.innerHTML) {
             case '屏蔽':
-                state=-2,  btnval = '取消屏蔽';
+                state = -2, btnval = '取消屏蔽';
                 break;
             case '取消屏蔽':
-               state=0,  btnval = '屏蔽';
+                state = 0, btnval = '屏蔽';
                 break;
             case '恢复删除':
-                state=-1,  btnval = '屏蔽';
+                state = -1, btnval = '屏蔽';
                 break;
         }
         $.Popup({
@@ -193,7 +175,24 @@ var operateEventssssss = {
     },
     'click .remove': function (e, value, row, index) {
         var delUrl = '/concern/deleteOne?id=' + row.id;
-       ajaxPlugins.remove(delUrl,'dynamic_table','DELETE')
+        ajaxPlugins.remove(delUrl, 'dynamic_table', 'DELETE')
+    },
+    createDynamic: function () {
+        $("#createDynamicForm").ajaxForm({
+            url: '/concern/createConcern',
+            type: 'post',
+            dataType: 'json',
+            success: function (result) {
+                console.log(result)
+                if (result.state == 33000) {
+                    window.location.reload()
+                } else {
+                    if (result.state == 5001) {
+                        alert("账号已存在");
+                    }
+                }
+            }
+        })
     }
 };
 //查看Url事件

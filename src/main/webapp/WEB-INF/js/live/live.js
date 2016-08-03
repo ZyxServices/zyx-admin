@@ -136,25 +136,13 @@ function initTable() {
     });
 }
 
-
-
 //直播状态初始化
 function operateFormatterssssss(value, row, index) {
-    switch (row.state) {
-        case 1:
-            return '已屏蔽'
-        case 0:
-            return '正常'
-    }
+    return row.state == 0 ? "正常" : "已屏蔽";
 }
 //直播状态按钮初始化
 function btnState(row) {
-    switch (row.state) {
-        case 1:
-            return '取消屏蔽'
-        case 0:
-            return '屏蔽'
-    }
+    return row.state==1? "取消屏蔽" : "屏蔽";
 }
 
 //function shieldBtn(obj) {
