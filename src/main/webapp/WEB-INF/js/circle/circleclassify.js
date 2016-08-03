@@ -21,19 +21,24 @@ $(function () {
         e.preventDefault();
         var $form = $(e.target);
         $form.serialize();
-        $.ajax({
-            url: $form.attr('action'),
-            type: 'POST',
-            data: $form.serialize(),
-            beforeSend: function () {
-            },
-            success: function () {
-                //表格重新加载
-                alert("创建成功");
-                $("#circleList").show();
-                $("#circleCreate").hide();
+        $.Popup({
+            template: '创建以后不能修改哦?',
+            saveEvent: function () {
+                $.ajax({
+                    url: $form.attr('action'),
+                    type: 'POST',
+                    data: $form.serialize(),
+                    beforeSend: function () {
+                    },
+                    success: function () {
+                        //表格重新加载
+                        $("#circleList").show();
+                        $("#circleCreate").hide();
+                    }
+                });
             }
-        });
+        })
+
     });
     //圈子分类列表
     $("#circle-classify-table").bootstrapTable({
@@ -68,8 +73,7 @@ $(function () {
             console.log(data)
         },
         columns: [
-            {field: '', checkbox: true, align: 'center', valign: 'middle'},
-            {field: 'id', title: 'id', align: 'center', valign: 'middle'},
+            {field: 'id', title: 'id', align: 'center', valign: 'middle', width: '20'},
             {field: 'typeName', title: '圈子类别名称'}
         ]
     })
