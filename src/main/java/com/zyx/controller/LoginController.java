@@ -54,7 +54,7 @@ public class LoginController {
     @RequestMapping("/out")
     public ModelAndView out() {
         SecurityUtils.getSubject().logout();
-        return new ModelAndView("/login");
+        return new ModelAndView("redirect:/");
     }
 
     @RequestMapping("/unauth")
