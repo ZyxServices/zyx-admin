@@ -70,6 +70,7 @@
                 /sysmenu/list=authc
                 /login = authc
                 /menu/**=ll,authc
+                /v1/**=ll
                 <!--/v1/**=ll,authc-->
             </value>
         </property>
