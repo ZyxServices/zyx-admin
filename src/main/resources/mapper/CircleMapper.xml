@@ -69,4 +69,7 @@
     <update id="setState">
         UPDATE circle SET state=#{state} WHERE id=#{id}
     </update>
+    <select id="existCircle" resultMap="circleMap">
+        SELECT * FROM circle WHERE  title=#{title}
+    </select>
 </mapper>

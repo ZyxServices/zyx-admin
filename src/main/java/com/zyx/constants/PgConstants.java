@@ -115,5 +115,8 @@ public interface PgConstants extends Constants {
     int PG_ERROR_CODE_30027 = 30027;
     String PG_ERROR_CODE_30027_MSG = "标签id不能为空";
 
+    int PG_ERROR_CODE_30028 = 30028;
+    String PG_ERROR_CODE_30028_MSG = "数据已存在";
+
     String PG_RESULT = "result";
 }

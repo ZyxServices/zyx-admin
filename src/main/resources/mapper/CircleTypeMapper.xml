@@ -15,4 +15,7 @@
     <update id="setState">
         UPDATE circle_type SET state=#{state} WHERE id=#{id}
     </update>
+    <select id="findByTypeName" resultMap="CircleTypeResultMap">
+        SELECT * FROM circle_type WHERE type_name=#{typeName}
+    </select>
 </mapper>

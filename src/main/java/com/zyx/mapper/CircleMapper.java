@@ -15,4 +15,6 @@ public interface CircleMapper extends Mapper<Circle> {
 
     Integer setState(@Param(value = "state") Integer state, @Param(value = "id") Integer id);
 
+    Circle existCircle(@Param(value = "title") String title);
+
 }

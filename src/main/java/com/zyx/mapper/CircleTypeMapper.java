@@ -16,4 +16,6 @@ public interface CircleTypeMapper extends Mapper<CircleType> {
     List<CircleType> findAll();
 
     Integer setState(@Param(value = "id") Integer id, @Param(value = "state") Integer state);
+
+    CircleType findByTypeName(@Param(value = "typeName") String typeName);
 }

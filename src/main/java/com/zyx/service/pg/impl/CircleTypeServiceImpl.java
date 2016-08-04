@@ -27,9 +27,14 @@ public class CircleTypeServiceImpl extends BaseServiceImpl<CircleType> implement
 
     @Override
     public Map<String, Object> createCircleType(String typeName) {
-        if (Objects.equals(typeName, null)) {
+        if (Objects.equals(typeName, null) || Objects.equals(typeName, "")) {
             return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30024, PgConstants.PG_ERROR_CODE_30024_MSG);
         }
+        CircleType circleTypeFind=circleTypeMapper.findByTypeName(typeName);
+        if(circleTypeFind!=null){
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30028, PgConstants.PG_ERROR_CODE_30028_MSG);
+        }
+
         CircleType circleType = new CircleType();
         circleType.setState(0);
         circleType.setTypeName(typeName);

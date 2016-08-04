@@ -43,6 +43,10 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
             if (title == null || Objects.equals(title, "")) {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30006, PgConstants.PG_ERROR_CODE_30006_MSG);
             }
+            Circle circleFind = circleMapper.existCircle(title);
+            if (circleFind != null) {
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30028, PgConstants.PG_ERROR_CODE_30028_MSG);
+            }
             Optional.ofNullable(title).ifPresent(insertCircle::setTitle);
             if (createId == null || Objects.equals(createId, "")) {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30005, PgConstants.PG_ERROR_CODE_30005_MSG);
