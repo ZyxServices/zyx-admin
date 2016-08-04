@@ -39,11 +39,13 @@
         user.authenticate
         FROM
         concern
-        INNER JOIN user ON concern.user_id = user.id WHERE state !=-1 ORDER BY create_time DESC  LIMIT #{start},#{end}
+        INNER JOIN user ON concern.user_id = user.id  ORDER BY create_time DESC  LIMIT #{start},#{end}
+--         WHERE state !=-1
   </select>
     <!--SELECT * FROM concern WHERE state >=0 ORDER BY create_time DESC  LIMIT #{start},#{end}-->
     <select id="findById" resultMap="concernMap">
-            SELECT * FROM concern  WHERE id=#{id} AND state != -1
+            SELECT * FROM concern  WHERE id=#{id}
+--             AND state != -1
     </select>
 
     <update id="setState">
