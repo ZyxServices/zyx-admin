@@ -104,10 +104,10 @@
                                 <th data-checkbox="true"></th>
                                 <th data-field="id">id</th>
                                 <th data-field="name">名称</th>
-                                <th data-field="jurisdiction">权限</th>
-                                <th data-field="remark">备注</th>
-                                <th data-field="operationLog">操作日志</th>
-                                <th data-formatter="operate">操作</th>
+                                <th data-field="systemRoleListDto.role_name">权限</th>
+                                <th data-field="bz">备注</th>
+                                <th data-events="operateEvent" data-formatter="operateLog">操作日志</th>
+                                <th data-events="operateEvent" data-formatter="operateFormatter">操作</th>
                             </tr>
                             </thead>
                         </table>
@@ -124,6 +124,114 @@
         <%--管理员创建--%>
         <div class="container-fluid hide" id="administratorsCreate">
 
+        <!-- BEGIN PAGE HEADER-->
+
+        <div class="row-fluid">
+
+            <div class="span12">
+
+                <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                <h3 class="page-title">
+
+                    管理员创建
+                    <small>statistics and more</small>
+
+                </h3>
+
+                <ul class="breadcrumb">
+
+                    <li>
+
+                        <i class="icon-home"></i>
+
+                        <a href="javascript:void(0)">管理员</a>
+
+                        <i class="icon-angle-right"></i>
+
+                    </li>
+
+                    <li><a href="#">创建</a></li>
+
+                </ul>
+
+                <!-- END PAGE TITLE & BREADCRUMB-->
+
+            </div>
+
+        </div>
+
+        <!-- END PAGE HEADER-->
+
+        <div id="activity-create">
+
+            <!-- BEGIN DASHBOARD STATS -->
+            <div class="row-fluid">
+
+                <form action="/v1/sysuser/" id="sysUserCreateForm" method="post" enctype="multipart/form-data"
+                      class="form-horizontal" novalidate="novalidate" role="form">
+
+                    <div class="control-group">
+                        <label class="control-label">账号</label>
+                        <div class="controls">
+                            <input type="text" id="username" name="username" class="span6 form-control"/>
+                            <span class="help-inline">*</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">密码</label>
+                        <div class="controls">
+                            <input type="text" id="pass" name="pass" class="span6 form-control"/>
+                            <span class="help-inline">*</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">管理员名称</label>
+                        <div class="controls">
+                            <input type="text" id="name" name="name" class="span6 form-control"/>
+                            <span class="help-inline">*</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">权限等级</label>
+                        <div class="controls">
+                            <select class="span6 form-control" id="role_select" name="roleId">
+
+                            </select>
+                            <span class="help-inline">*</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">备注</label>
+                        <div class="controls">
+                            <input type="text" id="remark" name="remark" class="span6 form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" class="btn btn-default" id="createButton" onclick="beginCreateSysUser()">确定</button>
+                            <a href="javascript:void(0)" class="btn btn-default"
+                               onclick="window.location.reload();">返回</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+            <!-- END DASHBOARD STATS -->
+
+        </div>
+
+    </div>
+
+        <%--权限更改--%>
+        <div class="container-fluid hide" id="administratorsRoleEdit">
+
             <!-- BEGIN PAGE HEADER-->
 
             <div class="row-fluid">
@@ -134,7 +242,7 @@
 
                     <h3 class="page-title">
 
-                        管理员创建
+                        管理员权限更改
                         <small>statistics and more</small>
 
                     </h3>
@@ -151,7 +259,7 @@
 
                         </li>
 
-                        <li><a href="#">创建</a></li>
+                        <li><a href="#">权限更改</a></li>
 
                     </ul>
 
@@ -163,27 +271,19 @@
 
             <!-- END PAGE HEADER-->
 
-            <div id="activity-create">
+            <div id="sysuser_role_edit">
 
                 <!-- BEGIN DASHBOARD STATS -->
                 <div class="row-fluid">
 
-                    <form class="form-horizontal" role="form">
-                        <div class="control-group">
-                            <label class="control-label">管理员名称</label>
-                            <div class="controls">
-                                <input type="text" class="span6 form-control"/>
-                                <span class="help-inline">*</span>
-                            </div>
-                        </div>
-
+                    <form action="/v1/sysuser/" id="sysUserEditForm" method="post" enctype="multipart/form-data"
+                          class="form-horizontal" novalidate="novalidate" role="form">
+                        <input type="hidden" id="editUserId" name="id">
                         <div class="control-group">
                             <label class="control-label">权限等级</label>
                             <div class="controls">
-                                <select class="span6 form-control">
-                                    <option>一级</option>
-                                    <option>二级</option>
-                                    <option>三级</option>
+                                <select class="span6 form-control" id="edit_role_select" name="roleId">
+
                                 </select>
                                 <span class="help-inline">*</span>
                             </div>
@@ -191,7 +291,7 @@
 
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button class="btn btn-default">确定</button>
+                                <button type="button" class="btn btn-default" id="editButton" onclick="beginEditSysUser()">确定</button>
                                 <a href="javascript:void(0)" class="btn btn-default"
                                    onclick="window.location.reload();">返回</a>
                             </div>

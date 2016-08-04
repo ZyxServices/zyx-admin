@@ -8,7 +8,11 @@
 
     <!-- Realm实现 -->
     <bean id="statelessRealm" class="com.zyx.secure.realm.StatelessRealm">
-        <property name="cachingEnabled" value="false"/>
+        <property name="cachingEnabled" value="true" />
+        <property name="authenticationCachingEnabled" value="true"/>
+        <property name="authenticationCacheName" value="authenticationCache"/>
+        <property name="authorizationCachingEnabled" value="true"/>
+        <property name="authorizationCacheName" value="authorizationCache"/>
     </bean>
 
     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
@@ -65,7 +69,8 @@
                 /sysmenu/goAdd=noSessionCreation,rest
                 /sysmenu/list=authc
                 /login = authc
-                /menu/**=ll
+                /menu/**=ll,authc
+                <!--/v1/**=ll,authc-->
             </value>
         </property>
     </bean>

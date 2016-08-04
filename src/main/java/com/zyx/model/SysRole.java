@@ -36,6 +36,12 @@ public class SysRole {
     @Column(name = "QX_ID")
     private String qxId;
 
+    @Column(name = "ROLE_DESC")
+    private String roleDesc;
+
+    @Column(name = "MENU_PERM")
+    private String menuPerm;
+
     /**
      * @return ID
      */
@@ -174,5 +180,27 @@ public class SysRole {
      */
     public void setQxId(String qxId) {
         this.qxId = qxId;
+    }
+
+    /**
+     * @return ROLE_DESC
+     */
+    public String getRoleDesc() {
+        return roleDesc;
+    }
+
+    /**
+     * @param roleDesc
+     */
+    public void setRoleDesc(String roleDesc) {
+        this.roleDesc = roleDesc;
+    }
+
+    public String getMenuPerm() {
+        return menuPerm;
+    }
+
+    public void setMenuPerm(String menuPerm) {
+        this.menuPerm = menuPerm;
     }
 }

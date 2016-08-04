@@ -90,9 +90,9 @@ public class MenuController {
         return new ModelAndView("/sys/admin");
     }
 
-    @RequestMapping(value = "/sys/jurisdiction", method = RequestMethod.GET)
-    public ModelAndView redirectJurisdiction() {
-        return new ModelAndView("/sys/jurisdiction");
+    @RequestMapping(value = "/sys/roleList", method = RequestMethod.GET)
+    public ModelAndView redirectRoleList() {
+        return new ModelAndView("/sys/roleList");
     }
 
     @RequestMapping(value = "/message/messageIndex", method = RequestMethod.GET)

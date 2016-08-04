@@ -30,5 +30,4 @@ public interface AppUserMapper extends Mapper<AppUser> {
 
     List<OfficialUserListDto> queryOfficialAccountList();
 
-
 }
