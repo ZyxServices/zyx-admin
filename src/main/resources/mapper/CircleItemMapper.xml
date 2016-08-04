@@ -22,27 +22,27 @@
 
     <select id="findByPager" resultMap="circleItemVoMap">
     SELECT
-    circleItem.id,
-    circleItem.circle_id,
-    circleItem.create_id,
-    circleItem.title,
-    circleItem.content,
-    circleItem.hot,
-    circleItem.create_time,
-    circleItem.top,
-    circleItem.state,
+    circle_item.id,
+    circle_item.circle_id,
+    circle_item.create_id,
+    circle_item.title,
+    circle_item.content,
+    circle_item.hot,
+    circle_item.create_time,
+    circle_item.top,
+    circle_item.state,
     `user`.`name` AS createUser,
     circle.title AS circleTitle
     FROM
-    circleItem
-    INNER JOIN `user` ON circleItem.create_id = `user`.id
-    INNER JOIN circle ON circleItem.circle_id = circle.id WHERE circleItem.state != -1 ORDER BY create_time DESC  LIMIT #{start},#{end}
+    circle_item
+    INNER JOIN `user` ON circle_item.create_id = `user`.id
+    INNER JOIN circle ON circle_item.circle_id = circle.id WHERE circle_item.state != -1 ORDER BY create_time DESC  LIMIT #{start},#{end}
   </select>
     <select id="findOne" resultMap="circleItemMap">
-    SELECT * FROM circleItem WHERE id=#{id} AND state != -1
+    SELECT * FROM circle_item WHERE id=#{id} AND state != -1
   </select>
     <update id="setVisible">
-        UPDATE circleItem SET state=#{state} WHERE id=#{id}
+        UPDATE circle_item SET state=#{state} WHERE id=#{id}
     </update>
 
 </mapper>

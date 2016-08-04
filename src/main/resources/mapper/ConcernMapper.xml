@@ -19,8 +19,8 @@
         <result column="userName" property="userName" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="count">
-        SELECT count("id") as count FROM concern
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count("id") as counts FROM concern
     </select>
 
     <select id="findByPager" resultMap="concernVoMap">

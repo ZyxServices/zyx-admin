@@ -29,4 +29,13 @@ public final class MapUtils {
         map.put(Constants.ERROR_MSG, msg);
         return map;
     }
+
+    public static Map<String, Object> buildSuccessMap(int state, String msg, Object data, Map<String, Object> customParams) {
+        Map<String, Object> map = new HashMap<>();
+        map.put(Constants.STATE, state);
+        map.put(Constants.SUCCESS_MSG, msg);
+        map.put(Constants.DATA, data);
+        map.putAll(customParams);
+        return map;
+    }
 }

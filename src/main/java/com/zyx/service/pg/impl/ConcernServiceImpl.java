@@ -29,7 +29,12 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
         Optional.ofNullable(start).orElse(0);
         Optional.ofNullable(pageSize).orElse(0);
         List<Concern> concerns = concernMapper.findByPager(start * pageSize, pageSize);
-        Map<String, Object> map = MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", concerns);
+        Integer count = concernMapper.count();
+//        Map<String, Object> totalMap = new HashMap<>();
+//        totalMap.put("total", count);
+        Map<String, Object> map = MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", concerns, new HashMap() {{
+            put("total", count);
+        }});
         return map;
     }
 
