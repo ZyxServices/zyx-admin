@@ -70,9 +70,20 @@ public class CircleItemController {
 
 
     @RequestMapping(value = "setState", method = RequestMethod.DELETE)
-    @ApiOperation(value = "屏蔽某一条帖子", notes = "可以作为删除，屏蔽，取消屏蔽的接口，state:0为正常，-1位删除，-2位屏蔽")
-    public ModelAndView setVisible(@RequestParam(value = "id") Integer id,@RequestParam(value = "state") Integer state) {
-        Map<String, Object> map = circleItemService.setVisible(id,state);
+    @ApiOperation(value = "帖子状态设置", notes = "可以作为删除，屏蔽，取消屏蔽的接口，state:0为正常，-1位删除，-2位屏蔽")
+    public ModelAndView setVisible(@RequestParam(value = "id") Integer id, @RequestParam(value = "state") Integer state) {
+        Map<String, Object> map = circleItemService.setVisible(id, state);
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "search", method = RequestMethod.POST)
+    @ApiOperation(value = "模糊查询帖子", notes = "根据帖子标题，发布人搜索帖子")
+    ModelAndView search(@RequestParam(value = "start") Integer start,
+                        @RequestParam(value = "pageSize") Integer pageSize,
+                        @RequestParam(value = "searchText") String searchText) {
+        Map<String, Object> map = circleItemService.search(start, pageSize, searchText);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);

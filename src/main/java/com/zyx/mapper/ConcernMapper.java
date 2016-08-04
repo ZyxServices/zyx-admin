@@ -48,4 +48,6 @@ public interface ConcernMapper extends Mapper<Concern> {
      */
     Integer edit(@Param(value = "topic_content") String topicContent, @Param(value = "img_url") String imgUrl, @Param(value = "id") Integer id);
 
+    List<Concern> search(@Param(value = "userName") String userName, @Param(value = "start") Integer start, @Param(value = "end") Integer pageSize);
+
 }

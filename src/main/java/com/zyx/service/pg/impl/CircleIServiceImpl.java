@@ -142,4 +142,13 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
     }
+
+    @Override
+    public Map<String, Object> search(Integer start, Integer pageSize, String title) {
+        if (Objects.equals(title, null) || Objects.equals(title, "")) {
+            return MapUtils.buildErrorMap(Constants.PARAM_MISS, Constants.MSG_PARAM_MISS);
+        }
+        List<Circle> circles = circleMapper.search(title, start * pageSize, pageSize);
+        return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, circles);
+    }
 }

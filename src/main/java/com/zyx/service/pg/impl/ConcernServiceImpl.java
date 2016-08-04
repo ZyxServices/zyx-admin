@@ -121,4 +121,13 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
         }
         return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG, null);
     }
+
+    @Override
+    public Map<String, Object> search(Integer start, Integer pageSize, String userName) {
+        if (Objects.equals(userName, null) || Objects.equals(userName, "")) {
+            return MapUtils.buildErrorMap(Constants.PARAM_MISS, Constants.MSG_PARAM_MISS);
+        }
+        List<Concern> concerns = concernMapper.search(userName, start * pageSize, pageSize);
+        return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, concerns);
+    }
 }

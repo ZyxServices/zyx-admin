@@ -14,4 +14,7 @@ public interface CircleItemMapper extends Mapper<CircleItem> {
     CircleItem findOne(@Param(value = "id") Integer id);
 
     Integer setVisible(@Param(value = "state") Integer state, @Param(value = "id") Integer id);
+
+    List<CircleItem> search(@Param(value = "searchText") String searchText, @Param(value = "start") Integer start, @Param(value = "end") Integer end);
+
 }

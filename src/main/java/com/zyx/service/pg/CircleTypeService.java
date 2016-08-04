@@ -13,6 +13,7 @@ import java.util.Map;
  */
 public interface CircleTypeService extends BaseService<CircleType> {
     Map<String, Object> createCircleType(String typeName);
-    Map<String,Object> circleList();
+    Map<String,Object> circleTypeList();
     Map<String,Object> setState(Integer id,Integer state);
+
 }

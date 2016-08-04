@@ -10,10 +10,7 @@ import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author XiaoWei
@@ -107,5 +104,14 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
 
+    }
+
+    @Override
+    public Map<String, Object> search(Integer start, Integer pageSize, String searchText) {
+        if (Objects.equals(searchText, null) || Objects.equals(searchText, "")) {
+            return MapUtils.buildErrorMap(Constants.PARAM_MISS, Constants.MSG_PARAM_MISS);
+        }
+        List<CircleItem> circleItems = circleItemMapper.search(searchText, start * pageSize, pageSize);
+        return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, circleItems);
     }
 }

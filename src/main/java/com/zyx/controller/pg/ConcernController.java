@@ -1,7 +1,6 @@
 package com.zyx.controller.pg;
 
 import com.zyx.constants.Constants;
-import com.zyx.model.Concern;
 import com.zyx.service.pg.ConcernService;
 import com.zyx.utils.FileUploadUtils;
 import com.zyx.utils.MapUtils;
@@ -96,6 +95,17 @@ public class ConcernController {
                              @RequestParam(value = "topic_content") String topicContent,
                              @RequestParam(value = "img_url") String imgUrl) {
         Map<String, Object> map = concernService.edit(topicContent, imgUrl, id);
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "search", method = RequestMethod.POST)
+    @ApiOperation(value = "动态模糊查询", notes = "动态模糊查询")
+    ModelAndView search(@RequestParam(value = "start") Integer start,
+                        @RequestParam(value = "pageSize") Integer pageSize,
+                        @RequestParam(value = "searchText") String searchText) {
+        Map<String, Object> map = concernService.search(start, pageSize, searchText);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);

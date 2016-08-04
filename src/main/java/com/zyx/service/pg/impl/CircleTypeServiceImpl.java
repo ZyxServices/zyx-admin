@@ -46,7 +46,7 @@ public class CircleTypeServiceImpl extends BaseServiceImpl<CircleType> implement
     }
 
     @Override
-    public Map<String, Object> circleList() {
+    public Map<String, Object> circleTypeList() {
         List<CircleType> circleTypes = circleTypeMapper.findAll();
         return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, circleTypes);
     }

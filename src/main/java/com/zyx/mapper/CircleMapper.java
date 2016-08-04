@@ -17,4 +17,6 @@ public interface CircleMapper extends Mapper<Circle> {
 
     Circle existCircle(@Param(value = "title") String title);
 
+    List<Circle> search(@Param(value = "title") String title, @Param(value = "start") Integer start, @Param(value = "end") Integer end);
+
 }

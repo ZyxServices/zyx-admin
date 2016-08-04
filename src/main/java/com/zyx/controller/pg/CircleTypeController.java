@@ -38,7 +38,7 @@ public class CircleTypeController {
     @RequestMapping(value = "/circleTypeList", method = RequestMethod.GET)
     @ApiOperation(value = "圈子类型列表", notes = "查询state不等于0的数据")
     public ModelAndView circleTypeList() {
-        Map<String, Object> map = circleTypeService.circleList();
+        Map<String, Object> map = circleTypeService.circleTypeList();
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);

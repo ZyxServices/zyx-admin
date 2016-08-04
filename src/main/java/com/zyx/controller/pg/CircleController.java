@@ -54,14 +54,14 @@ public class CircleController {
     @RequestMapping(value = "createCircle", method = RequestMethod.POST)
     @ApiOperation(value = "添加圈子", notes = "添加圈子")
     public ModelAndView addCircle(
-                                  @RequestParam("title") String title,
-                                  @RequestParam(value = "createId") Integer createId,
-                                  @RequestParam(value = "state", required = false) Integer state,
-                                  @RequestParam(value = "masterId") Integer masterId,
-                                  @RequestParam(value = "adminIds", required = false) String adminIds,
-                                  @RequestParam("type") Integer type,
-                                  @RequestParam("details") String details
-                                  ) {
+            @RequestParam("title") String title,
+            @RequestParam(value = "createId") Integer createId,
+            @RequestParam(value = "state", required = false) Integer state,
+            @RequestParam(value = "masterId") Integer masterId,
+            @RequestParam(value = "adminIds", required = false) String adminIds,
+            @RequestParam("type") Integer type,
+            @RequestParam("details") String details
+    ) {
 //        @RequestPart(value = "headImgUrl",required = false) MultipartFile headImgUrl
         AbstractView jsonView = new MappingJackson2JsonView();
 
@@ -97,7 +97,7 @@ public class CircleController {
     @RequestMapping(value = "setState", method = RequestMethod.DELETE)
     @ApiOperation(value = "状态设置", notes = "可以作为删除，屏蔽，取消屏蔽的接口，state:0为正常，-1位删除，-2位屏蔽")
     public ModelAndView setVisible(@RequestParam(value = "id") Integer id, @RequestParam(value = "state") Integer state) {
-        Map<String, Object> map = circleService.setVisible(id,state);
+        Map<String, Object> map = circleService.setVisible(id, state);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
@@ -108,6 +108,15 @@ public class CircleController {
     @ApiOperation(value = "精选圈子推荐", notes = "精选圈子推荐")
     public ModelAndView tuiJian(@RequestParam(value = "circleId") Integer circleId, @RequestParam(value = "topSize") Integer topSize) {
         Map<String, Object> map = circleService.tuiJian(circleId, topSize);
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "search", method = RequestMethod.POST)
+    @ApiOperation(value = "精选圈子推荐", notes = "精选圈子推荐")
+    public ModelAndView search(@RequestParam(value = "start") Integer start, @RequestParam(value = "pageSize") Integer pageSize, @RequestParam(value = "searchText") String searchText) {
+        Map<String, Object> map = circleService.search(start, pageSize, searchText);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);

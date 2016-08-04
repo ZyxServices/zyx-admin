@@ -55,4 +55,23 @@
     <update id="edit">
         UPDATE concern SET topic_content=#{content},img_url=#{img_url} WHERE id=#{id}
     </update>
+    <select id="search" resultMap="concernVoMap">
+        SELECT
+        concern.id,
+        concern.user_id,
+        concern.type,
+        concern.topic_content,
+        concern.topic_title,
+        concern.topic_visible,
+        concern.img_url,
+        concern.video_url,
+        concern.create_time,
+        concern.state,
+        user.name as userName,
+        user.authenticate
+        FROM
+        concern
+        INNER JOIN user ON concern.user_id = user.id WHERE user.name LIKE CONCAT('%','${userName}','%' )  ORDER BY create_time DESC  LIMIT #{start},#{end}
+
+    </select>
 </mapper>

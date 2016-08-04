@@ -14,7 +14,7 @@ import java.util.Map;
 public interface CircleService extends BaseService<Circle> {
     Map<String, Object> findByPager(Integer start, Integer pageSize);
 
-    Map<String, Object> insertCircle(String title, Integer createId, Integer state, Integer type, String details, String headImgUrl,Integer masterId,String adminIds);
+    Map<String, Object> insertCircle(String title, Integer createId, Integer state, Integer type, String details, String headImgUrl, Integer masterId, String adminIds);
 
     Map<String, Object> findById(Integer id);
 
@@ -22,5 +22,7 @@ public interface CircleService extends BaseService<Circle> {
 
     Map<String, Object> deleteOne(Integer id);
 
-    Map<String, Object> setVisible(Integer id,Integer state);
+    Map<String, Object> setVisible(Integer id, Integer state);
+
+    Map<String, Object> search(Integer start, Integer pageSize, String title);
 }

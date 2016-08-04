@@ -44,5 +44,23 @@
     <update id="setVisible">
         UPDATE circle_item SET state=#{state} WHERE id=#{id}
     </update>
+    <select id="search" resultMap="circleItemVoMap">
+        SELECT
+        circle_item.id,
+        circle_item.circle_id,
+        circle_item.create_id,
+        circle_item.title,
+        circle_item.content,
+        circle_item.hot,
+        circle_item.create_time,
+        circle_item.top,
+        circle_item.state,
+        `user`.`name` AS createUser,
+        circle.title AS circleTitle
+        FROM
+        circle_item
+        INNER JOIN `user` ON circle_item.create_id = `user`.id
+        INNER JOIN circle ON circle_item.circle_id = circle.id WHERE (circle_item.title LIKE CONCAT('%','${searchText}','%') OR `user`.`name` LIKE CONCAT('%','${searchText}','%')) AND circle_item.state != -1 ORDER BY create_time DESC  LIMIT #{start},#{end}
+    </select>
 
 </mapper>
