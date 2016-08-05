@@ -53,7 +53,7 @@
 
           <h3 class="page-title">
 
-            活动列表<small>statistics and more</small>
+            活动管理<small>statistics and more</small>
 
           </h3>
 
@@ -132,7 +132,7 @@
 
           <h3 class="page-title" id="pageTitle">
 
-            活动创建<small>statistics and more</small>
+            活动管理<small>statistics and more</small>
 
           </h3>
 

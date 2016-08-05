@@ -220,7 +220,6 @@ $('#devaForm').ajaxForm({
 });
 
 $("#czS").click(function () {
-    console.log($("#avtivityId").val())
     if($("#avtivityId").val() == ''){
         /*创建*/
         $('#updateCreateFrom').ajaxSubmit({
@@ -540,11 +539,17 @@ function del(id, type) {
 }
 
 function createActivity() {
+    $("#listType").html("创建");
     $("#createModify").show();
     $("#activityList").hide();
     $("#imagesWrap").hide();
+    $("#avtivityId").val('');
     $('#activity-summernote').summernote('code', '');
-    $('#updateCreateFrom').data('bootstrapValidator').resetForm(true);
+    var html = '<label class="checkbox"><input type="checkbox" value="手机号码">手机号码</label><label class="checkbox"><input type="checkbox" value="姓名">姓名</label> <label class="checkbox"><input type="checkbox" value="身份证号码">身份证号码</label> <label class="checkbox"><input type="checkbox" value="性别">性别</label> <label class="checkbox"><input type="checkbox" value="年龄">年龄</label> <label class="checkbox"><input type="checkbox" value="地址">地址</label> <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>'
+    $("#template").html(html);
+    $("#userRequired").hide();
+    $('#updateCreateFrom')[0].reset();
+    $('#updateCreateFrom').data('bootstrapValidator').resetForm(true);/*仅仅清空验证的表单*/
     $('#updateCreateFrom').bootstrapValidator('addField', 'image',{
         validators: {
             notEmpty: {
