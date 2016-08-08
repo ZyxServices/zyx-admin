@@ -19,7 +19,7 @@
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <jsp:include page="../public/common-styles.jsp"/>
 
-    <link rel="stylesheet" href="../../css/self-style/style.css" />
+    <link rel="stylesheet" href="../../css/tiyujia/style.css" />
 </head>
 <body class="page-header-fixed">
 <jsp:include page="../public/header.jsp"/>

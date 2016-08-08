@@ -21,6 +21,14 @@
 .create_liveType.on {
     display: block ;
 }
-.dynamicEdit.on{
+.dynamicEdit.on {
     display: inline-block;
+}
+.create_liveType.on{
+    display: block;
+}
+
+/*bootstraptable中btn样式*/
+.bootstrap-table button.btn, input[name="refresh"].btn{
+    padding: 10px 14px;
 }

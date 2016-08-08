@@ -20,7 +20,7 @@
   <jsp:include page="../public/common-styles.jsp"/>
   <link rel="stylesheet" href="../../css/summernote.css" />
   <link rel="stylesheet" href="../../css/datetimepicker.css" />
-  <link rel="stylesheet" href="../../css/self-style/style.css" />
+  <link rel="stylesheet" href="../../css/tiyujia/style.css" />
 </head>
 <body class="page-header-fixed">
 <jsp:include page="../public/header.jsp"/>
@@ -106,7 +106,7 @@
                 <th data-field="pv">浏览量</th>
                 <th data-field="report">举报状态</th>
                 <th data-field="url">查看url</th>
-                <th data-formatter="operate">操作</th>
+                <th data-formatter="operate" data-events="operateEvents">操作</th>
               </tr>
               </thead>
             </table>

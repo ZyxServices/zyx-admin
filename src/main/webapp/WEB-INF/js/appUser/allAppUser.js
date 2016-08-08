@@ -27,7 +27,6 @@ function initTable() {
         url: "/v1/appUser/list/all",
         queryParamsType: "undefined",
         queryParams: function queryParams(params) {   //设置查询参数
-            console.log(params)
             var param = {
                 pageNumber: params.pageNumber,
                 pageSize: params.pageSize,
@@ -86,8 +85,9 @@ function operateFormatter(value, row, index) {
 
 $(function () {
     $(".create_live").click(function () {
-        $(".create_liveType").addClass('on')
-        $(".live_index").addClass('hide')
+        $("#listType").html("创建用户");
+        $(".create_liveType").addClass('on');
+        $(".live_index").addClass('hide');
         $("#createButton").attr("disabled", false);
     });
 
@@ -146,21 +146,6 @@ $("#createAppUserForm").ajaxForm({
     dataType: 'json',
 
     beforeSubmit: function () {
-        // $("#createButton").attr("disabled", true);
-        // var phone = $("#createAppUserForm").find('#phone').val();
-        // var password = $("#createAppUserForm").find('#password').val();
-        // var checked = true;
-        // if (phone.replace(/\s+/g, "") == '') {
-        //     alert("请输入账号");
-        //     checked = false;
-        // }
-        //
-        // if (password.replace(/\s+/g, "") == '') {
-        //     alert("请输入密码");
-        //     checked = false;
-        // }
-        //
-        // return checked;
         return $('#createAppUserForm').data('bootstrapValidator').isValid();
     },
     success: function (result) {
@@ -168,7 +153,10 @@ $("#createAppUserForm").ajaxForm({
             backToUsers();
         } else {
             if (result.state == 5001) {
-                alert("账号已存在");
+                $.Popup({
+                    confirm:false,
+                    template:'账号已存在'
+                });
             }
         }
     },
@@ -186,9 +174,15 @@ function beginDeva() {
 }
 
 function backToUsers() {
-    $(".create_liveType").addClass('hide');
-    $(".create_liveType").removeClass('on');
-    $(".live_index").addClass('on');
-    $(".live_index").removeClass('hide');
+    $(".create_liveType").hide();
+    $(".live_index").show();
     $('#app_user_table').bootstrapTable('refresh');
 }
+$('input[id=avatar]').change(function() {
+    $('#photoCover').html($(this).val());
+    $("#avatar").html($(this).val());
+});
+$('input[id=authFile]').change(function() {
+    $('#photoCover').html($(this).val());
+    $("#authFileCover").html($(this).val());
+});

@@ -20,19 +20,24 @@
 <div class="page-container">
     <jsp:include page="../public/nav.jsp"/>
     <div class="page-content">
-        <div id="portlet-config" class="modal hide">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"></button>
-                <h3>Widget Settings</h3>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <h3 class="page-title">
+                        用户管理<small>statistics and more</small>
+                    </h3>
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home"></i>
+                            <a href="javascript:void(0)">已认证用户管理</a>
+                            <i class="icon-angle-right"></i>
+                        </li>
+                        <li><a href="#" id="listType">用户列表</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="modal-body">
-            </div>
-        </div>
-        <div class="container-fluid" style="padding-top: 20px ">
             <div class="live_index">
                 <div class="live_manage">
-                    <h3 style="margin: 0;display: inline-block">用户管理 - 已认证用户列表</h3>
-                    <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
                     <table id="app_user_table" class="table table-hover"
                            data-pagination="true"
                            data-show-refresh="true"
@@ -42,88 +47,6 @@
                            data-detail-formatter="detailFormatter">
                     </table>
                 </div>
-            </div>
-            <div class="create_liveType">
-                <h3 style="margin: 0;display: inline-block">创建用户 </h3>
-                <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
-                <form class="form-horizontal" role="form">
-                    <div class="control-group">
-                        <label class="control-label">账号</label>
-
-                        <div class="controls">
-                            <input type="text" class="span6 m-wrap"/>
-                            <span class="help-inline">*</span>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">密码</label>
-
-                        <div class="controls">
-                            <input type="text" class="span6 m-wrap"/>
-                            <span class="help-inline">*</span>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">头像</label>
-
-                        <div class="controls">
-                            <input type="file">
-                            <span class="help-inline">只能上传一张图片</span>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">性别</label>
-
-                        <div class="controls">
-                            <select class="span6 m-wrap">
-                                <option>男</option>
-                                <option>女</option>
-                            </select>
-                            <span class="help-inline">*</span>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">年龄</label>
-
-                        <div class="controls">
-                            <input type="text" class="span6 m-wrap"/>
-                            <span class="help-inline">*</span>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">所在地</label>
-
-                        <div class="controls">
-                            <input type="text" class="span6 m-wrap"/>
-                            <span class="help-inline">*</span>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">认证信息</label>
-
-                        <div class="controls">
-                            <input type="text" class="span6 m-wrap"/>
-                            <span class="help-inline">*</span>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">认证资料</label>
-
-                        <div class="controls">
-                            <input type="file">
-                            <span class="help-inline">上传图片</span>
-                        </div>
-                    </div>
-                    <button class="btn">确认创建</button>
-                </form>
-
             </div>
         </div>
     </div>

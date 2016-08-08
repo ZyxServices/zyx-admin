@@ -17,6 +17,7 @@ function initTable() {
         pageSize: 10,            //每页的记录行数（*）
         pageList: [10, 15, 20, 25],  //记录数可选列表
         checkbox: true,
+        height: 500,
         checkboxHeader: "true",
         sortable: true,           //是否启用排序
         sortOrder: "asc",          //排序方式
