@@ -12,4 +12,11 @@ import java.util.List;
 public interface LiveInfoService extends BaseService<LiveInfo>{
     public void addLiveInfo(LiveInfo liveInfo);
     public List<LiveInfo> getLiveInfos(LiveInfoParm parm);
+
+    /**
+     * 获取视频直播地址
+     * @param liveId
+     * @return
+     */
+    public String getLiveUrl(Integer liveId);
 }

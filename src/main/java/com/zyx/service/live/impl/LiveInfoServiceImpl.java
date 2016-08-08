@@ -38,4 +38,9 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
             return liveInfoMapper.selectByExample(example);
         }
     }
+    @Override
+    public String getLiveUrl(Integer liveId) {
+        LiveInfo record = liveInfoMapper.selectByPrimaryKey(liveId);
+        return record.getVedioUrl();
+    }
 }
