@@ -199,6 +199,7 @@
 
                                         <option value="menu:dynamic:dynamicIndex" data-section="动态">动态</option>
 
+                                        <option value="menu:circle:circleclassify" data-section="圈子">圈子类别</option>
                                         <option value="menu:circle:circlelist" data-section="圈子">圈子列表</option>
                                         <option value="menu:circle:circlepost" data-section="圈子">帖子列表</option>
 
@@ -319,6 +320,7 @@
 
                                         <option value="menu:dynamic:dynamicIndex" data-section="动态" data-index="4">动态</option>
 
+                                        <option value="menu:circle:circleclassify" data-section="圈子">圈子类别</option>
                                         <option value="menu:circle:circlelist" data-section="圈子" data-index="5">圈子列表</option>
                                         <option value="menu:circle:circlepost" data-section="圈子" data-index="6">帖子列表</option>
 
