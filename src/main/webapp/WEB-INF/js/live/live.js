@@ -53,7 +53,7 @@ function initTable() {
             {field: 'title', title: '直播名称'},
             {field: 'userId', title: '直播发起人'},
             {field: 'lab', title: '直播类型', sortable: true},
-            {field: '', title: '直播状态', sortable: true, formatter: operateFormatterssssss},
+            {field: 'dynamic', title: '直播状态', sortable: true, formatter: operateFormatterssssss},
             {field: 'start', title: '直播开始时间', sortable: true, formatter: timeFormat},
             {field: 'end', title: '直播结束时间', sortable: true, formatter: timeFormat},
             {field: 'online', title: '在线人数', sortable: true},
@@ -112,7 +112,6 @@ function initTable() {
             saveEvent: function () {
                 ids.forEach(function (e) {
                     var delUrl = '/v1/live/delete?id=' + e;
-
                     $.ajax({
                         url: delUrl,
                         async: false,
@@ -120,12 +119,7 @@ function initTable() {
                         success: function (meg) {
                             console.log(meg)
                             if (meg.state == 200) {
-                                    $table.bootstrapTable('remove', {
-                                        field: 'id',
-                                        field: 'id',
-                                        values: ids
-                                    });
-                                    $remove.prop('disabled', true);
+                                $table.bootstrapTable("refresh");
                             }
                         }
 
@@ -140,25 +134,12 @@ function initTable() {
 function operateFormatterssssss(value, row, index) {
     return row.state == 0 ? "正常" : "已屏蔽";
 }
+
 //直播状态按钮初始化
 function btnState(row) {
     return row.state==1? "取消屏蔽" : "屏蔽";
 }
 
-//function shieldBtn(obj) {
-//    //var state, btnval, btn, stateText, statetext;
-//    if (obj.innerHTML == '屏蔽') {
-//        //return new btnstate{
-//        state = 0,
-//            btnval = '取消屏蔽',
-//            stateText = '已屏蔽'
-//
-//    } else {
-//        state = 1;
-//        btnval = '屏蔽';
-//        stateText = '正常'
-//    }
-//}
 //直播操作按钮初始化
 function operateFormatter(value, row, index) {
     return [

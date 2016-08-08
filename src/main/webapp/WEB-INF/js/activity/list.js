@@ -387,7 +387,7 @@ function previewActivity(id) {
 function recommend(id, name) {
     $("#listType").html("推荐");
     $.ajax({
-        url: "/v1/activity/queryActivityById",
+            url: "/v1/activity/queryActivityById",
         type: 'POST',
         dataType: 'json',
         data: {activityId: id},

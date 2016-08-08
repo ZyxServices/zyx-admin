@@ -52,13 +52,17 @@
                 <h5 style="margin: 0;display: inline-block">语音动态 </h5>
                 <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
                 <form class="form-horizontal" role="form"  id="createDynamicForm" enctype="multipart/form-data">
-                    <input id="dynamicContent" style="width: 40%; height: 20%" name="content" type="text"/>
+                    <input id="dynamicContent" style="width: 40%; height: 20%;margin-bottom: 15px" name="content" type="text"/>
                     <input type="text" name="type" value="1" style="display: none;"/>
                     <input type="text" name="createId" value="12" style="display: none;"/>
                     <input name="imgFile" style="display: block" type="file"/>
                     <input type="text" name="visible" value="1" style="display: none;"/>
-                    <button onclick="operateEventssssss.createDynamic()" class="btn btn-danger">
+
+                    <button onclick="operateEventssssss.createDynamic()" class="release btn btn-danger">
                         发布
+                    </button>
+                    <button  onclick="" class="dynamicEdit btn btn-danger">
+                        确认修改
                     </button>
                     <button onclick="window.location.reload();" class="btn btn-danger">返回</button>
                 </form>

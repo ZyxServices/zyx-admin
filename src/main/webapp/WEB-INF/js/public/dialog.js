@@ -76,10 +76,27 @@
                        success: function (result) {
                            if (result.state == 200 || result.successmsg=="删除成功") {
                                //console.log(typeof url.split("?id=")[1],typeof row.id.type)
-                               $('#'+tableid+'').bootstrapTable('remove', {
-                                   field: 'id',
-                                   values: [parseInt(url.split("?id=")[1])]
-                               });
+                               $('#'+tableid+'').bootstrapTable("refresh");
+                           } else {
+                               alert(result.successmsg)
+                           }
+                       }
+                   });
+               }
+           })
+       },
+       unRemove:function(url,tableid,type){
+           $.Popup({
+               template: '确认撤销删除吗?',
+               saveEvent: function () {
+                   $.ajax({
+                       url: url,
+                       async: false,
+                       type: type,
+                       success: function (result) {
+                           if (result.state == 200 || result.successmsg=="操作成功") {
+                               //console.log(typeof url.split("?id=")[1],typeof row.id.type)
+                               $('#'+tableid+'').bootstrapTable("refresh");
                            } else {
                                alert(result.successmsg)
                            }
