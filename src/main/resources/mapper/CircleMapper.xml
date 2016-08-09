@@ -106,6 +106,10 @@
 			)
 		)
 	)
-    WHERE state != -1 AND 	`circle`.`title` LIKE  CONCAT('%','${title}','%')  ORDER BY create_time DESC  LIMIT #{start},#{end}
+    WHERE state != -1 AND  (`circle`.`title` LIKE  CONCAT('%','${title}','%') OR `baseUser`.`name` LIKE CONCAT('%','${title}','%'))  ORDER BY create_time DESC  LIMIT #{start},#{end}
     </select>
+
+    <select id="searchCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) as acounts FROM circle
+	</select>
 </mapper>

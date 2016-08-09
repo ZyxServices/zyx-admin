@@ -33,11 +33,14 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
         Optional.ofNullable(start).orElse(0);
         Optional.ofNullable(pageSize).orElse(0);
         List<Circle> circles = circleMapper.findByPager(start * pageSize, pageSize);
-        return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", circles);
+        Integer count = circleMapper.searchCount();
+        Map<String, Object> countHas = new HashMap<>();
+        countHas.put("total", count);
+        return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", circles, countHas);
     }
 
     @Override
-    public Map<String, Object> insertCircle(String title, Integer createId, Integer state, Integer type, String details, String headImgUrl, Integer masterId, String adminIds) {
+    public Map<String, Object> insertCircle(String title, Integer createId, Integer state, Integer circleType, String details, String headImgUrl, Integer masterId, String adminIds) {
         try {
             Circle insertCircle = new Circle();
             if (title == null || Objects.equals(title, "")) {
@@ -61,13 +64,13 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
                 return map;
             }*/
             Optional.ofNullable(state).ifPresent(insertCircle::setState);
-            if (type == null) {
+            if (circleType == null) {
                 return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30012, PgConstants.PG_ERROR_CODE_30012_MSG);
 
             }
-            Optional.ofNullable(type).ifPresent(insertCircle::setType);
+            Optional.ofNullable(circleType).ifPresent(insertCircle::setCircleType);
             if (details == null || Objects.equals(details, "")) {
-                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30010, PgConstants.PG_ERROR_CODE_30010_MSG);
+                return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30025, PgConstants.PG_ERROR_CODE_30025_MSG);
             }
             Optional.ofNullable(details).ifPresent(insertCircle::setDetails);
 //            if (headImgUrl == null || Objects.equals(headImgUrl, "")) {
@@ -80,6 +83,7 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
             Optional.ofNullable(masterId).ifPresent(insertCircle::setCircleMasterId);
             Optional.ofNullable(adminIds).ifPresent(insertCircle::setAdminIds);
             insertCircle.setCreateTime(new Date().getTime());
+            insertCircle.setType(0);
             insertCircle.setState(0);
             mapper.insert(insertCircle);
 //            map.put(Constants.STATE, PgConstants.SUCCESS);

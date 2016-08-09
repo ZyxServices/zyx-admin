@@ -29,7 +29,9 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
         Optional.ofNullable(start).orElse(0);
         Optional.ofNullable(pageSize).orElse(0);
         List<CircleItem> circleItems = circleItemMapper.findByPager(start * pageSize, pageSize);
-        Map<String, Object> map = MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, circleItems);
+        Map<String, Object> mapCount = new HashMap<>();
+        mapCount.put("total", circleItemMapper.searchCount());
+        Map<String, Object> map = MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, circleItems, mapCount);
         return map;
     }
 

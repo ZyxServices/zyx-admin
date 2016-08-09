@@ -40,6 +40,8 @@ public class Circle {
 
     private Integer tag;//标签
 
+    private Integer circleType;//圈子类别
+
     /**
      * @return id
      */
@@ -211,5 +213,11 @@ public class Circle {
         this.tag = tag;
     }
 
+    public Integer getCircleType() {
+        return circleType;
+    }
 
+    public void setCircleType(Integer circleType) {
+        this.circleType = circleType;
+    }
 }

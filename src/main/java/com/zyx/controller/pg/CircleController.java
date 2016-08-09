@@ -59,7 +59,7 @@ public class CircleController {
             @RequestParam(value = "state", required = false) Integer state,
             @RequestParam(value = "masterId") Integer masterId,
             @RequestParam(value = "adminIds", required = false) String adminIds,
-            @RequestParam("type") Integer type,
+            @RequestParam("circleType") Integer circleType,
             @RequestParam("details") String details
     ) {
 //        @RequestPart(value = "headImgUrl",required = false) MultipartFile headImgUrl
@@ -71,7 +71,7 @@ public class CircleController {
 //            jsonView.setAttributesMap(returnResult);
 //            return new ModelAndView(jsonView);
 //        }
-        Map<String, Object> map = circleService.insertCircle(title, createId, state, type, details, "", masterId, adminIds);
+        Map<String, Object> map = circleService.insertCircle(title, createId, state, circleType, details, "", masterId, adminIds);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
