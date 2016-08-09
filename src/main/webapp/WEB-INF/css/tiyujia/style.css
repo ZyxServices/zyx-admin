@@ -22,11 +22,6 @@
     border: 1px solid #ccc;
 }
 
-/*bootstrap中table自适应*/
-/*.fixed-table-body {
-    height: auto;
-}*/
-
 div.checker span.checked {
     background-position: -76px -260px;
 }

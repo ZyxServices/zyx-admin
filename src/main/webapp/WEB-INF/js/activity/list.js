@@ -300,43 +300,154 @@ $("#czS").click(function () {
 
 function operate(value, row, index) {
     var dataArray = new Array();
-    dataArray.push('<a class="preview p5"   href="javascript:void(0)" title="preview" onclick="previewActivity(\'' + row.id + '\')">预览</a>');
-    dataArray.push('<a class="recommend p5" href="javascript:void(0)" title="recommend" onclick="recommend(\'' + row.id + '\',\'' + row.name + '\')">推荐</a>')
-    dataArray.push('<a class="recommend p5" href="javascript:void(0)" title="modify" onclick="modify(\'' + row.id + '\')">编辑</a>')
+    dataArray.push('<a class="preview p5"   href="javascript:void(0)" title="preview">预览</a>');
+    dataArray.push('<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>');
+    dataArray.push('<a class="edit p5" href="javascript:void(0)" title="edit">编辑</a>');
     if (row.mask == 0) {
-        dataArray.push('<a class="Shield p5" href="javascript:void(0)" title="Shield" onclick="shield(\'' + row.id + '\', 1)">屏蔽</a>')
+        dataArray.push('<a class="Shield p5" href="javascript:void(0)" title="Shield">屏蔽</a>')
     } else {
-        dataArray.push('<a class="Shield p5" href="javascript:void(0)" title="Shield" onclick="shield(\'' + row.id + '\', 0)">解除屏蔽</a>')
+        dataArray.push('<a class="Shield p5" href="javascript:void(0)" title="Shield">解除屏蔽</a>')
     }
     if (row.del == 0) {
-        dataArray.push('<a class="remove p5" href="javascript:void(0)" title="remove" onclick="del(\'' + row.id + '\', 1)">删除</a>')
+        dataArray.push('<a class="remove p5" href="javascript:void(0)" title="remove">删除</a>')
     } else {
-        dataArray.push('<a class="remove p5" href="javascript:void(0)" title="remove" onclick="del(\'' + row.id + '\', 0)">恢复删除</a>')
+        dataArray.push('<a class="remove p5" href="javascript:void(0)" title="remove">恢复删除</a>')
     }
     return dataArray.join('');
 }
-function timeFormat(data) {
-    return new Date(data).format("yyyy-mm-dd HH:MM:ss")
+
+var operateEvents = {
+    'click .edit': function (e, value, row, index) {
+        $("#listType").html("编辑");
+        queryActivityById(row.id,0);
+        $("#imagesWrap").show();
+        $("#createModify").show();
+        $("#activityList").hide();
+    },
+    'click .preview':function (e, value, row, index) {
+        $("#listType").html("预览");
+        $("#choiceUser").attr("disabled","disabled");
+        $("#title").attr("disabled","disabled");
+        $("#imgWrap").hide();
+        $("#imagesWrap").show();
+        $('#activity-summernote').summernote('destroy');
+        $('#activity-summernote').summernote({toolbar: false,airMode: true});
+        $("#activityStartTime").attr("disabled","disabled");
+        $("#activityEndTime").attr("disabled","disabled");
+        $("#address").attr("disabled","disabled");
+        $("#price").attr("disabled","disabled");
+        $("#signEndTime").attr("disabled","disabled");
+        $("#maxPeople").attr("disabled","disabled");
+        $("#phone").attr("disabled","disabled");
+        $("#visible").attr("disabled","disabled");
+        $("#examine").attr("disabled","disabled");
+        $("#czS").remove();
+        queryActivityById(row.id,1);
+        $("#createModify").show();
+        $("#activityList").hide();
+        $("#addBtn").hide();
+    },
+    'click .recommend':function (e, value, row, index) {
+        $("#listType").html("推荐");
+        $.ajax({
+            url: "/v1/activity/queryActivityById",
+            type: 'POST',
+            dataType: 'json',
+            data: {activityId: row.id},
+            success: function (result) {
+                if (result.state == 200) {
+                    var datas = result.data;
+                    $("#activityName").html(datas.title);
+                    $("#activityId").val(datas.id);
+                    $("#activityImage").attr("src", "http://image.tiyujia.com/" + datas.imgUrls)
+                } else {
+                    $.Popup({
+                        confirm:false,
+                        template:result.successmsg
+                    })
+                }
+            }
+        });
+        $("#activityRecommend").show();
+        $("#activityList").hide();
+    },
+    'click .Shield':function (e, value, row, index) {
+        var type = row.mask == 0 ? 1 : 0;
+        $.Popup({
+            title:'屏蔽',
+            template: '屏蔽之后，该活动将不在首页活动和活动列表页展示，“我的关注”和“我的”中活动保留，仍可以被浏览',
+            saveEvent: function () {
+                $.ajax({
+                    url: "/v1/activity/maskActivity",
+                    async: false,
+                    type: "post",
+                    data: {id: row.id, maskType: type},
+                    dateType: "json",
+                    success: function (result) {
+                        if(result.state == 200){
+                            if(type == 1){
+                                $.Popup({
+                                    confirm:false,
+                                    template:'屏蔽成功'
+                                })
+                            }else{
+                                $.Popup({
+                                    confirm:false,
+                                    template:'解除屏蔽成功'
+                                })
+                            }
+                            $('#activity-list-table').bootstrapTable('refresh');
+                        }else{
+                            $.Popup({
+                                confirm:false,
+                                template:'删除失败'
+                            })
+                        }
+                    }
+                });
+            }
+        })
+    },
+    'click .remove':function (e, value, row, index) {
+        var type = row.del == 0 ? 1 : 0;
+        $.Popup({
+            title:'删除',
+            template: '该活动的所有数据将被完全删除，不能再被浏览',
+            saveEvent: function () {
+                $.ajax({
+                    url: "/v1/activity/delActivity",
+                    async: false,
+                    type: "post",
+                    data: {id: row.id, delType: type},
+                    dateType: "json",
+                    success: function (result) {
+                        if(result.state == 200){
+                            if(type == 1){
+                                $.Popup({
+                                    confirm:false,
+                                    template:'删除成功'
+                                })
+                            }else{
+                                $.Popup({
+                                    confirm:false,
+                                    template:'恢复删除成功'
+                                })
+                            }
+                            $('#activity-list-table').bootstrapTable('refresh');
+                        }else{
+                            $.Popup({
+                                confirm:false,
+                                template:'删除失败'
+                            })
+                        }
+                    }
+                });
+            }
+        })
+    }
 }
-/*预览*/
-function previewActivity(id) {
-    $("#listType").html("预览");
-    $("#choiceUser").attr("disabled","disabled");
-    $("#title").attr("disabled","disabled");
-    $("#imgWrap").hide();
-    $("#imagesWrap").show();
-    $('#activity-summernote').summernote('destroy');
-    $('#activity-summernote').summernote({toolbar: false,airMode: true});
-    $("#activityStartTime").attr("disabled","disabled");
-    $("#activityEndTime").attr("disabled","disabled");
-    $("#address").attr("disabled","disabled");
-    $("#price").attr("disabled","disabled");
-    $("#signEndTime").attr("disabled","disabled");
-    $("#maxPeople").attr("disabled","disabled");
-    $("#phone").attr("disabled","disabled");
-    $("#visible").attr("disabled","disabled");
-    $("#examine").attr("disabled","disabled");
-    $("#czS").remove();
+/*根据id获取活动详情*/
+function queryActivityById(id,type) {
     $.ajax({
         url: "/v1/activity/queryActivityById",
         type: 'POST',
@@ -353,104 +464,30 @@ function previewActivity(id) {
                 $("#activityStartTime").val(new Date(datas.startTime).format("yyyy-mm-dd HH:MM:ss"));
                 $("#activityEndTime").val(new Date(datas.endTime).format("yyyy-mm-dd HH:MM:ss"));
                 $("#address").val(datas.address);
-                $('input[name=type]').eq(!datas.type).attr({"checked":"checked","disabled":"disabled"});
-                $('input[name=type]').eq(datas.type).attr({"disabled":"disabled"});
-                $("#price").val(datas.price);
-                $("#signEndTime").val(new Date(datas.lastTime).format("yyyy-mm-dd HH:MM:ss"));
-                $("#maxPeople").val(datas.maxPeople);
-                $("#phone").val(datas.phone);
-                $("#visible").val(datas.visible);
-                $("#examine").val(datas.examine);
-                if (datas.examine == 1) {
-                    isReviewed();
-                    var template = (datas.memberTemplate).split(",");
-                    var html = "";
-                    template.forEach(function (item, i) {
-                        html += "<label class='checkbox'><input type='checkbox' value='" + item + "' checked disabled>" + item + "</label>";
-                    })
-                    // html += "<a href='javascript:void (0)' onclick='choiceMore()' id='addBtn'>+</a>";
-                    $("#template").empty();
-                    $("#template").append(html)
-                }
-            } else {
-                $.Popup({
-                    confirm:false,
-                    template:result.successmsg
-                })
-            }
-        }
-    });
-    $("#createModify").show();
-    $("#activityList").hide();
-}
-/*推荐*/
-function recommend(id, name) {
-    $("#listType").html("推荐");
-    $.ajax({
-        url: "/v1/activity/queryActivityById",
-        type: 'POST',
-        dataType: 'json',
-        data: {activityId: id},
-        success: function (result) {
-            if (result.state == 200) {
-                var datas = result.data;
-                $("#activityName").html(datas.title);
-                $("#activityId").val(datas.id);
-                $("#activityImage").attr("src", "http://image.tiyujia.com/" + datas.imgUrls)
-            } else {
-                $.Popup({
-                    confirm:false,
-                    template:result.successmsg
-                })
-            }
-        }
-    });
-    $("#activityRecommend").show();
-    $("#activityList").hide();
-}
-/*编辑*/
-function modify(id) {
-    $("#listType").html("编辑");
-    $.ajax({
-        url: "/v1/activity/queryActivityById",
-        type: 'POST',
-        dataType: 'json',
-        data: {activityId: id},
-        success: function (result) {
-            if (result.state == 200) {
-                var datas = result.data;
-                $("#avtivityId").val(datas.id);
-                $("#userId").val(datas.userId);
-                $("#title").val(datas.title);
-                $("#images").attr("src", "http://image.tiyujia.com/" + datas.imgUrls);
-                $('#activity-summernote').summernote('code', datas.descContent);
-                $("#activityStartTime").val(new Date(datas.startTime).format("yyyy-mm-dd HH:MM:ss"));
-                $("#activityEndTime").val(new Date(datas.endTime).format("yyyy-mm-dd HH:MM:ss"));
-                $("#address").val(datas.address);
                 $('input[name=type]').eq(!datas.type).attr({"checked":"checked"});
+                $("#price").val(datas.price);
                 $("#signEndTime").val(new Date(datas.lastTime).format("yyyy-mm-dd HH:MM:ss"));
                 $("#maxPeople").val(datas.maxPeople);
                 $("#phone").val(datas.phone);
-                $("#price").val(datas.price);
                 $("#visible").val(datas.visible);
                 $("#examine").val(datas.examine);
-
                 if (datas.examine == 1) {
                     isReviewed();
                     var template = (datas.memberTemplate).split(",");
                     var html = "";
-                    template.forEach(function (item, i) {
-                        html += "<label class='checkbox'><input type='checkbox' value='" + item + "' checked>" + item + "</label>";
-                    })
+                    if(type == 1){
+                        template.forEach(function (item, i) {
+                            html += "<label class='checkbox'><input type='checkbox' value='" + item + "' checked disabled>" + item + "</label>";
+                        });
+                    }else{
+                        template.forEach(function (item, i) {
+                            html += "<label class='checkbox'><input type='checkbox' value='" + item + "' checked>" + item + "</label>";
+                        });
+                    }
                     html += "<a href='javascript:void (0)' onclick='choiceMore()' id='addBtn'>+</a>";
                     $("#template").empty();
                     $("#template").append(html)
                 }
-                $('#updateCreateFrom')
-                // Remove field
-                .bootstrapValidator('removeField', 'image')
-                .data('bootstrapValidator').validate();
-
             } else {
                 $.Popup({
                     confirm:false,
@@ -459,85 +496,10 @@ function modify(id) {
             }
         }
     });
-    $("#imagesWrap").show();
-    $("#createModify").show();
-    $("#activityList").hide();
 }
-/*屏蔽*/
-function shield(id, type) {
-    $.Popup({
-        title:'屏蔽',
-        template: '屏蔽之后，该活动将不在首页活动和活动列表页展示，“我的关注”和“我的”中活动保留，仍可以被浏览',
-        saveEvent: function () {
-            $.ajax({
-                url: "/v1/activity/maskActivity",
-                async: false,
-                type: "post",
-                data: {id: id, maskType: type},
-                dateType: "json",
-                success: function (result) {
-                    if(result.state == 200){
-                        if(type == 1){
-                            $.Popup({
-                                confirm:false,
-                                template:'屏蔽成功'
-                            })
-                        }else{
-                            $.Popup({
-                                confirm:false,
-                                template:'解除屏蔽成功'
-                            })
-                        }
-                        $('#activity-list-table').bootstrapTable('refresh');
-                    }else{
-                        $.Popup({
-                            confirm:false,
-                            template:'删除失败'
-                        })
-                    }
-                }
-            });
-        }
-    })
+function timeFormat(data) {
+    return new Date(data).format("yyyy-mm-dd HH:MM:ss")
 }
-/*删除*/
-function del(id, type) {
-    $.Popup({
-        title:'删除',
-        template: '该活动的所有数据将被完全删除，不能再被浏览',
-        saveEvent: function () {
-            $.ajax({
-                url: "/v1/activity/delActivity",
-                async: false,
-                type: "post",
-                data: {id: id, delType: type},
-                dateType: "json",
-                success: function (result) {
-                    if(result.state == 200){
-                        if(type == 1){
-                            $.Popup({
-                                confirm:false,
-                                template:'删除成功'
-                            })
-                        }else{
-                            $.Popup({
-                                confirm:false,
-                                template:'恢复删除成功'
-                            })
-                        }
-                        $('#activity-list-table').bootstrapTable('refresh');
-                    }else{
-                        $.Popup({
-                            confirm:false,
-                            template:'删除失败'
-                        })
-                    }
-                }
-            });
-        }
-    })
-}
-
 function createActivity() {
     $("#listType").html("创建");
     $("#createModify").show();
@@ -567,7 +529,6 @@ function isReviewed(obj) {
         $("#userRequired").hide(500);
     }
 }
-
 /*修改活动选择更多*/
 function choiceMore() {
     $("#addChoice").toggle(500);

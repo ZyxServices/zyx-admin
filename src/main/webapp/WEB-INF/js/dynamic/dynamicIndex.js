@@ -1,7 +1,7 @@
 /**
  * Created by 文楷 on 2016/7/15.
  */
-var $table = $('#live_table'),
+var $table = $('#dynamic_table'),
     $remove = $('#remove');
 function initTable() {
     $('#dynamic_table').bootstrapTable({
@@ -18,16 +18,17 @@ function initTable() {
         checkbox: true,
         checkboxHeader: "true",
         sortable: true,           //是否启用排序
-        sortOrder: "asc",          //排序方式
+        sortOrder: "desc",          //排序方式
         pageList: [10, 25, 50, 100],    //可供选择的每页的行数（*）
         smartDisplay: false,
         height: 460,            //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
         uniqueId: "id",           //每一行的唯一标识，一般为主键列
         search: true,
         sidePagination: "server",
-        strictSearch: false,        //是否启用模糊收索
+        strictSearch: true,        //是否启用模糊收索
         queryParamsType: "undefined",
         dataField: "data",
+        silentSort:false,
         queryParams: function queryParams(params) {   //设置查询参数
             console.log(params)
             var param = {
@@ -50,7 +51,7 @@ function initTable() {
             {field: '', checkbox: true, align: 'center', valign: 'middle'},
             {field: 'id', title: 'id', align: 'center', valign: 'middle'},
             {field: 'userName', title: '发布者'},
-            {field: 'authenticate', title: '发布者是否认证', sortable: true},
+            {field: 'authenticate', title: '发布者是否认证', sortable: true,formatter: authFormatter,sortName:'md'},
             {field: 'createTime', title: '发布时间', formatter: timeFormat},
             {field: 'type', title: '动态类型', sortable: true, formatter: typeFormatter},
             {field: 'price', title: '点赞量', sortable: true},
@@ -61,37 +62,37 @@ function initTable() {
             {field: 'operation', title: '操作', align: 'center', events: operateEventssssss, formatter: operateFormatter},
             {field: 'Report', title: '举报'}]
     });
-    // sometimes footer render error.
-    setTimeout(function () {
-        $table.bootstrapTable('resetView');
-    }, 200);
     $table.on('check.bs.table uncheck.bs.table ' +
     'check-all.bs.table uncheck-all.bs.table', function () {
         $remove.prop('disabled', !$table.bootstrapTable('getSelections').length);
-        // save your data, here just save the current page
         selections = getIdSelections();
-        // push or splice the selections if you want to save all data selections
     });
-    $table.on('expand-row.bs.table', function (e, index, row, $detail) {
-        if (index % 2 == 1) {
-            $detail.html('Loading from ajax request...');
-            $.get('LICENSE', function (res) {
-                $detail.html(res.replace(/\n/g, '<br>'));
-            });
-        }
-    });
-    //$table.on('all.bs.table', function (e, name, args) {
-    //    //console.log(name, args);
-    //});
     $remove.click(function () {
         var ids = getIdSelections();
-        $table.bootstrapTable('remove', {
-            field: 'id',
-            field: 'id',
-            values: ids
-        });
-        $remove.prop('disabled', true);
+        $.Popup({
+            template: '确认批量删除吗?',
+            saveEvent: function () {
+                ids.forEach(function (e) {
+                    var delUrl = '/concern/deleteOne?id=' + e;
+                    $.ajax({
+                        url: delUrl,
+                        async: false,
+                        type: "delete",
+                        success: function (meg) {
+                            if (meg.state == 37000) {
+                                $table.bootstrapTable("refresh");
+                            }
+                        }
+
+                    })
+                });
+            }
+        })
     });
+}
+// 认证状态格式化
+function authFormatter(value) {
+    return value == 2 ? "已认证" : value == 1 ? "待审核" : value == 3 ? "认证失败" : "未认证";
 }
 //动态类型
 function typeFormatter(data) {
@@ -105,13 +106,13 @@ function btnState(row) {
 
 //操作
 function operateFormatter(value, row, index) {
-    return [
-        '<a class="preview p5"   href="javascript:void(0)" title="preview">预览</a>',
+    return row.state == -1 ? [
+        '<a class="unRemove p5" href="javascript:void(0)" title="unRemove">撤销删除</a>',
+    ].join('') : ['<a class="preview p5"   href="javascript:void(0)" title="preview">预览</a>',
         '<a class="edit p5"   href="javascript:void(0)" title="edit">编辑</a>',
         '<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>',
         '<a class="Shield p5" href="javascript:void(0)" title="Shield">' + btnState(row) + '</a>',
-        '<a class="remove p5" href="javascript:void(0)" title="remove">删除</a>'
-    ].join('');
+        '<a class="remove p5" href="javascript:void(0)" title="remove">删除</a>'].join('');
 }
 //查看Url
 function seeUrlFormatter(value, row, index) {
@@ -125,7 +126,15 @@ var operateEventssssss = {
         alert('You click like action, row: ' + JSON.stringify(row));
     },
     'click .edit': function (e, value, row, index) {
-        alert('You click like action, row: ' + JSON.stringify(row));
+        //alert('You click like action, row: ' + JSON.stringify(row));
+        $(".create_liveType").addClass('on')
+        $(".live_index").addClass('hide')
+        $('.create_liveType h3').html('编辑动态')
+        $('#dynamicContent').val(row.topicContent)
+        $(".dynamicEdit").addClass('on')
+        $(".release").addClass('hide')
+        //$("input[name='imgFile']")
+
     },
     'click .recommend': function (e, value, row, index) {
         //$.ajax({
@@ -176,6 +185,10 @@ var operateEventssssss = {
     'click .remove': function (e, value, row, index) {
         var delUrl = '/concern/deleteOne?id=' + row.id;
         ajaxPlugins.remove(delUrl, 'dynamic_table', 'DELETE')
+    },
+    'click .unRemove': function (e, value, row, index) {
+        var delUrl = "/concern/setState?id=" + row.id + "&state=0";
+        ajaxPlugins.unRemove(delUrl, 'dynamic_table', 'DELETE')
     },
     createDynamic: function () {
         $("#createDynamicForm").ajaxForm({

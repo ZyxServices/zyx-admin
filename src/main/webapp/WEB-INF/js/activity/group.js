@@ -3,6 +3,7 @@
  */
 /*activityIds的值*/
 var activityIds = [];
+var checkedId = [];
 $(function () {
     /*表单验证*/
     $("#group-form").bootstrapValidator({
@@ -193,57 +194,155 @@ function choiceFromData(res) {
 }
 function operate(value, row, index) {
     var dataArray = new Array();
-    dataArray.push('<a class="preview p5"   href="javascript:void(0)" title="preview" onclick="previewActivity(\'' + row.id + '\')">预览</a>');
-    dataArray.push('<a class="recommend p5" href="javascript:void(0)" title="modify" onclick="modify(\'' + row.id + '\')">编辑</a>')
+    dataArray.push('<a class="preview p5"   href="javascript:void(0)" title="preview">预览</a>');
+    dataArray.push('<a class="edit p5" href="javascript:void(0)" title="modify">编辑</a>');
     if (row.mask == 0) {
-        dataArray.push('<a class="Shield p5" href="javascript:void(0)" title="Shield" onclick="shield(\'' + row.id + '\', 1)">屏蔽</a>')
+        dataArray.push('<a class="Shield p5" href="javascript:void(0)" title="Shield">屏蔽</a>')
     } else {
-        dataArray.push('<a class="Shield p5" href="javascript:void(0)" title="Shield" onclick="shield(\'' + row.id + '\', 0)">解除屏蔽</a>')
+        dataArray.push('<a class="Shield p5" href="javascript:void(0)" title="Shield">解除屏蔽</a>')
     }
     if (row.del == 0) {
-        dataArray.push('<a class="remove p5" href="javascript:void(0)" title="remove" onclick="del(\'' + row.id + '\', 1)">删除</a>')
+        dataArray.push('<a class="remove p5" href="javascript:void(0)" title="remove">删除</a>')
     } else {
-        dataArray.push('<a class="remove p5" href="javascript:void(0)" title="remove" onclick="del(\'' + row.id + '\', 0)">恢复删除</a>')
+        dataArray.push('<a class="remove p5" href="javascript:void(0)" title="remove">恢复删除</a>')
     }
     return dataArray.join('');
 }
-/*预览*/
-function previewActivity(id) {
-    $("#listType").html('预览');
-    $("#activityGroupCreate").show();
-    $("#imgWrap").show();
-    $("#activityGroupList").hide();
-    $("#combinationId").val(id);
-    $("#name").attr("disabled","disabled");
-    $("#addImgWrap").hide();
-    $("#createModify").remove();
-    getGroupActivityDetail(id);
-    $("#choice-activity-table").bootstrapTable('destroy');
-    $("#choice-activity-table").bootstrapTable({
-        url: "/v1/combination/queryCombinationActivity",
-        striped: true,           //是否显示行间隔色
-        toolbar: '#toolbar',        //工具按钮用哪个容器
-        cache: true,            //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-        pagination: true,          //是否显示分页（*）
-        paginationPreText: "上一页",
-        paginationNextText: "下一页",
-        pageNumber: 1,            //初始化加载第一页，默认第一页
-        pageSize: 10,            //每页的记录行数（*）
-        pageList: [10, 20, 25],  //记录数可选列表
-        checkboxHeader: "true",
-        sortable: true,           //是否启用排序
-        strictSearch: true,
-        height: 500,            //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
-        uniqueId: "id",           //每一行的唯一标识，一般为主键列
-        search: true,
-        smartDisplay: false,
-        contentType: "application/x-www-form-urlencoded",
-        sidePagination: "server",
-        method: "post",
-        queryParamsType: "limit",
-        queryParams: queryChoiceParams,
-        responseHandler: choicedFromData
-    })
+var operateEvents = {
+    'click .preview':function (e, value, row, index) {
+        $("#listType").html('预览');
+        $("#activityGroupCreate").show();
+        $("#imgWrap").show();
+        $("#activityGroupList").hide();
+        $("#combinationId").val(row.id);
+        $("#name").attr("disabled","disabled");
+        $("#addImgWrap").hide();
+        $("#createModify").remove();
+        getGroupActivityDetail(row.id);
+        $("#choice-activity-table").bootstrapTable('destroy');
+        $("#choice-activity-table").bootstrapTable({
+            url: "/v1/combination/queryCombinationActivity",
+            striped: true,           //是否显示行间隔色
+            toolbar: '#toolbar',        //工具按钮用哪个容器
+            cache: true,            //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: true,          //是否显示分页（*）
+            paginationPreText: "上一页",
+            paginationNextText: "下一页",
+            pageNumber: 1,            //初始化加载第一页，默认第一页
+            pageSize: 10,            //每页的记录行数（*）
+            pageList: [10, 20, 25],  //记录数可选列表
+            checkboxHeader: "true",
+            sortable: true,           //是否启用排序
+            strictSearch: true,
+            height: 500,            //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "id",           //每一行的唯一标识，一般为主键列
+            search: true,
+            smartDisplay: false,
+            contentType: "application/x-www-form-urlencoded",
+            sidePagination: "server",
+            method: "post",
+            queryParamsType: "limit",
+            queryParams: queryChoiceParams,
+            responseHandler: choicedFromData
+        })
+    },
+    'click .edit':function (e, value, row, index) {
+        $("#listType").html('编辑');
+        $("#combinationId").val(row.id);
+        $("#imgWrap").show();
+        $("#activityGroupList").hide();
+        $("#activityGroupCreate").show();
+        getGroupActivityDetail(row.id);
+        $.ajax({
+            url: "/v1/combination/queryCombinationIdByActivity",
+            async: true,
+            type: "post",
+            data: {combinationId: row.id},
+            dateType: "json",
+            success: function (result) {
+                checkedId = result.data;
+                $("#activityIds").val(checkedId);
+                $("#choice-activity-table").bootstrapTable("checkBy", {field:"id", values:checkedId});
+                $('#group-form')
+                    .bootstrapValidator('removeField', 'image')
+                    .data('bootstrapValidator').validate();
+            }
+        });
+    },
+    'click .Shield':function (e, value, row, index) {
+        var type = row.del == 0 ? 1 : 0;
+        $.Popup({
+            title:'屏蔽',
+            template: '该活动组合将被删除，不能再被浏览。 独立活动列表中，仍可找到该活动组合中的活动。',
+            saveEvent: function () {
+                $.ajax({
+                    url: "/v1/combination/maskCombination",
+                    async: false,
+                    type: "post",
+                    data: {combinationId: row.id, mask: type},
+                    dateType: "json",
+                    success: function (result) {
+                        if(result.state == 200){
+                            if(type == 1){
+                                $.Popup({
+                                    confirm:false,
+                                    template:'屏蔽成功'
+                                })
+                            }else{
+                                $.Popup({
+                                    confirm:false,
+                                    template:'解除屏蔽成功'
+                                })
+                            }
+                            $('#activity-group-table').bootstrapTable('refresh');
+                        }else{
+                            $.Popup({
+                                confirm:false,
+                                template:'删除失败'
+                            })
+                        }
+                    }
+                });
+            }
+        })
+    },
+    'click .remove':function (e, value, row, index) {
+        var type = row.del == 0 ? 1 : 0;
+        $.Popup({
+            title:'删除',
+            template: '该活动组合将被删除，不能再被浏览。独立活动列表中，仍可找到该活动组合中的活动 ?',
+            saveEvent: function () {
+                $.ajax({
+                    url: "/v1/combination/delCombination",
+                    async: false,
+                    type: "post",
+                    data:{combinationId:row.id,delType:type},
+                    dateType: "json",
+                    success: function (result) {
+                        if(result.state == 200){
+                            if(type == 1){
+                                $.Popup({
+                                    confirm:false,
+                                    template:'删除成功'
+                                })
+                            }else{
+                                $.Popup({
+                                    confirm:false,
+                                    template:'恢复删除成功'
+                                })
+                            }
+                            $('#activity-group-table').bootstrapTable('refresh');
+                        }else{
+                            $.Popup({
+                                confirm:false,
+                                template:'删除失败'
+                            })
+                        }
+                    }
+                });
+            }
+        })
+    }
 }
 function queryChoiceParams(params) {
     return {
@@ -303,105 +402,6 @@ function getGroupActivityDetail(id) {
             }
         }
     });
-}
-/*编辑*/
-var checkedId = [];
-function modify(id) {
-    $("#listType").html('编辑');
-    $("#combinationId").val(id);
-    $("#imgWrap").show();
-    $("#activityGroupList").hide();
-    $("#activityGroupCreate").show();
-    getGroupActivityDetail(id);
-    $.ajax({
-        url: "/v1/combination/queryCombinationIdByActivity",
-        async: true,
-        type: "post",
-        data: {combinationId: id},
-        dateType: "json",
-        success: function (result) {
-            checkedId = result.data;
-            $("#activityIds").val(checkedId);
-            $("#choice-activity-table").bootstrapTable("checkBy", {field:"id", values:checkedId});
-            $('#group-form')
-                .bootstrapValidator('removeField', 'image')
-                .data('bootstrapValidator').validate();
-        }
-    });
-}
-/*屏蔽*/
-function shield(id,type) {
-    $.Popup({
-        title:'屏蔽',
-        template: '该活动组合将被删除，不能再被浏览。 独立活动列表中，仍可找到该活动组合中的活动。',
-        saveEvent: function () {
-            $.ajax({
-                url: "/v1/combination/maskCombination",
-                async: false,
-                type: "post",
-                data: {combinationId: id, mask: type},
-                dateType: "json",
-                success: function (result) {
-                    if(result.state == 200){
-                        if(type == 1){
-                            $.Popup({
-                                confirm:false,
-                                template:'屏蔽成功'
-                            })
-                        }else{
-                            $.Popup({
-                                confirm:false,
-                                template:'解除屏蔽成功'
-                            })
-                        }
-                        $('#activity-group-table').bootstrapTable('refresh');
-                    }else{
-                        $.Popup({
-                            confirm:false,
-                            template:'删除失败'
-                        })
-                    }
-                }
-            });
-        }
-    })
-}
-/*删除*/
-function del(id,type) {
-    $.Popup({
-        title:'删除',
-        template: '该活动组合将被删除，不能再被浏览。独立活动列表中，仍可找到该活动组合中的活动 ?',
-        saveEvent: function () {
-            $.ajax({
-                url: "/v1/combination/delCombination",
-                async: false,
-                type: "post",
-                data:{combinationId:id,delType:type},
-                dateType: "json",
-                success: function (result) {
-                    if(result.state == 200){
-                        if(type == 1){
-                            $.Popup({
-                                confirm:false,
-                                template:'删除成功'
-                            })
-                        }else{
-                            $.Popup({
-                                confirm:false,
-                                template:'恢复删除成功'
-                            })
-                        }
-                        $('#activity-group-table').bootstrapTable('refresh');
-                    }else{
-                        $.Popup({
-                            confirm:false,
-                            template:'删除失败'
-                        })
-                    }
-                }
-            });
-        }
-    })
 }
 function createGroupActivity() {
     activityIds = [];

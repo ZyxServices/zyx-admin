@@ -115,8 +115,6 @@ function beginCreate() {
 }
 
 function backToUsers() {
-    $(".create_liveType").addClass('hide')
-    $(".create_liveType").removeClass('on')
-    $(".live_index").addClass('on')
-    $(".live_index").removeClass('hide')
+    $(".create_liveType").hide();
+    $(".live_index").show('on');
 }

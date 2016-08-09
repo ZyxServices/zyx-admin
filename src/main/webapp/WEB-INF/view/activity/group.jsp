@@ -20,7 +20,7 @@
   <jsp:include page="../public/common-styles.jsp"/>
   <link rel="stylesheet" href="../../css/summernote.css" />
   <link rel="stylesheet" href="../../css/datetimepicker.css" />
-  <link rel="stylesheet" href="../../css/self-style/style.css" />
+  <link rel="stylesheet" href="../../css/tiyujia/style.css" />
 </head>
 <body class="page-header-fixed">
 <jsp:include page="../public/header.jsp"/>
@@ -100,7 +100,7 @@
                 <th data-field="name">活动组合名称</th>
                 <th data-field="createTime" data-formatter="timeFormat">组合发布时间</th>
                 <th data-field="visible">浏览量</th>
-                <th data-formatter="operate">操作</th>
+                <th data-formatter="operate" data-events="operateEvents">操作</th>
               </tr>
               </thead>
             </table>

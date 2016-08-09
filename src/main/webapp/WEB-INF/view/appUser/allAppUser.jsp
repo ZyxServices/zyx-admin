@@ -14,31 +14,32 @@
     <meta content="体育家-用户操作" name="description"/>
     <meta content="" name="author"/>
     <jsp:include page="../public/common-styles.jsp"/>
-    <link rel="stylesheet" href="../../css/self-style/style.css" />
+    <link rel="stylesheet" href="../../css/tiyujia/style.css" />
 </head>
 <body class="page-header-fixed">
 <jsp:include page="../public/header.jsp"/>
 <div class="page-container">
     <jsp:include page="../public/nav.jsp"/>
     <div class="page-content">
-        <div id="portlet-config" class="modal hide">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"></button>
-                <h3>Widget Settings</h3>
-            </div>
-            <div class="modal-body">
-            </div>
-        </div>
-        <div class="container-fluid" style="padding-top: 20px ">
-            <div class="live_index">
-                <div class="live_operate">
-                    <h3 style="margin: 0;display: inline-block">用户操作 </h3>
-                    <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
-                    <button class="create_live btn btn-default btn-lg ">创建用户</button>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <h3 class="page-title">
+                        用户管理<small>statistics and more</small>
+                    </h3>
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home"></i>
+                            <a href="javascript:void(0)">普通用户管理</a>
+                            <i class="icon-angle-right"></i>
+                        </li>
+                        <li><a href="#" id="listType">用户列表</a></li>
+                    </ul>
                 </div>
+            </div>
+            <div class="live_index">
+                <button class="create_live btn btn-default btn-lg ">创建用户</button>
                 <div class="live_manage">
-                    <h3 style="margin: 0;display: inline-block">用户管理 - 用户列表</h3>
-                    <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
                     <button class="fl btn btn-default ">自动/手动排序优先</button>
                     <table id="app_user_table" class="table table-hover"
                            data-pagination="true"
@@ -51,8 +52,6 @@
                 </div>
             </div>
             <div class="create_liveType">
-                <h3 style="margin: 0;display: inline-block">创建用户 </h3>
-                <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
                 <form class="form-horizontal" role="form" id="createAppUserForm" enctype="multipart/form-data">
                     <div class="control-group form-group">
                         <label class="control-label">账号</label>
@@ -76,8 +75,11 @@
                         <label class="control-label">头像</label>
 
                         <div class="controls">
-                            <input type="file" name="avatar" id="avatar">
-                            <span class="help-inline required">只能上传一张图片</span>
+                            <%--<input type="file" name="avatar">
+                            <span class="help-inline required">只能上传一张图片</span>--%>
+
+                            <input type="file" class="hideInput" name="avatar" id="avatar">
+                            <a class="btn btn-default" href="javascript:void (0)" id="photoCover" onclick="$('input[id=avatar]').click();">选择文件</a>
                         </div>
                     </div>
 
@@ -89,7 +91,6 @@
                                 <option value="1">男</option>
                                 <option value="0">女</option>
                             </select>
-                            <%--<span class="help-inline">*</span>--%>
                         </div>
                     </div>
 
@@ -101,7 +102,6 @@
                                 <option value="1">是</option>
                                 <option value="0" selected>否</option>
                             </select>
-                            <%--<span class="help-inline">*</span>--%>
                         </div>
                     </div>
 
@@ -110,7 +110,6 @@
 
                         <div class="controls">
                             <input type="text" class="span6" name="address" id="address"/>
-                            <%--<span class="help-inline">*</span>--%>
                         </div>
                     </div>
 
@@ -119,7 +118,6 @@
 
                         <div class="controls">
                             <input type="text" class="span6" name="authInfo" id="authInfo"/>
-                            <%--<span class="help-inline">*</span>--%>
                         </div>
                     </div>
 
@@ -127,14 +125,17 @@
                         <label class="control-label">认证资料</label>
 
                         <div class="controls">
-                            <input type="file" name="authFile">
-                            <span class="help-inline">上传图片</span>
+                            <%--<input type="file" name="authFile">
+                            <span class="help-inline">上传图片</span>--%>
+
+                            <input type="file" class="hideInput" name="authFile" id="authFile">
+                            <a class="btn btn-default" href="javascript:void (0)" id="authFileCover" onclick="$('input[id=authFile]').click();">上传资料</a>
                         </div>
 
                     </div>
                     <button type="button" id="createButton" class="btn" onclick="beginCreate()">确认创建
                     </button>
-                    <button type="button" class="btn" onclick="backToUsers()">返回</button>
+                    <button type="button" class="btn" onclick="window.location.reload();">返回</button>
                 </form>
 
             </div>
@@ -144,68 +145,46 @@
 
 <!-- 用户推荐开始 -->
 <!-- 模态框（Modal） -->
-<div class="modal fade" id="appUserRecommend" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true">
 
-        <div class="modal-dialog">
-            <form action="/v1/deva/queryActivity" id="devaForm" method="post" enctype="multipart/form-data"
-                  class="form-horizontal" novalidate="novalidate" role="form">
-            <div class="modal-content">
-                <input id="types" name="types" value="5" type="hidden">
-                <input id="devaId" name="devaId" type="hidden">
-                <input id="activation" name="activation" value="1" type="hidden">
-                <div class="modal-header">
-                    <button type="button" class="close"
-                            data-dismiss="modal" aria-hidden="true">
-                        &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        用户推荐
-                    </h4>
+<div class="modal fade" id="appUserRecommend" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button"></button>
+        <h3>用户推荐</h3></div>
+    <div class="modal-body">
+        <form class="form-horizontal" id="devaForm" enctype="multipart/form-data">
+            <input name="devaId" type="hidden" value="6">
+            <input id="types" name="types" value="5" type="hidden">
+            <input id="activation" name="activation" value="1" type="hidden">
+            <div class="control-group"><label class="control-label">用户昵称</label>
+                <div class="controls"><span class="help-inline" id="devaUserNickname"></span></div>
+            </div>
+            <div class="control-group"><label class="control-label">用户头像</label>
+                <div class="controls"><img id="devaUserAvatar"src="http://image.tiyujia.com/group1/M00/00/00/052YyFeIeIqASfONAAAJDB3enOc610.jpg">
                 </div>
-                <div class="modal-body">
-                    <div class="control-group">
-                        <label class="control-label">用户昵称</label>
-                        <div class="controls" id="devaUserNickname"></div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">用户头像</label>
-                        <div class="controls">
-                            <img id="devaUserAvatar" src="">
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">首页更多用户推荐</label>
-                        <div class="controls">
-                            <select class="span6 m-wrap" id="sequence" name="sequence">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-                                <option>11</option>
-                                <option>12</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default"
-                            data-dismiss="modal">关闭
-                    </button>
-                    <button id="devaButton" type="button" class="btn btn-primary" onclick="beginDeva()">
-                        提交更改
-                    </button>
-                </div>
-            </div><!-- /.modal-content -->
-            </form>
-        </div><!-- /.modal -->
-
+            </div>
+            <div class="control-group"><label class="control-label">首页更多用户推荐</label>
+                <div class="controls"><select class="span6 m-wrap" id="sequence" name="sequence">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                </select></div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" id="devaButton" onclick="beginDeva()">确定</button>
+        <button class="btn btn-default" data-dismiss="modal">关闭</button>
+    </div>
 </div>
 <!-- 用户推荐结束 -->
 <jsp:include page="../public/common-footer.jsp"/>

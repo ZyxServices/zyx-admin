@@ -15,9 +15,20 @@
 .live_manage{
     margin-top: 20px;
 }
-.create_liveType{
+.dynamicEdit, .create_liveType{
     display: none;
+}
+.create_liveType.on {
+    display: block ;
+}
+.dynamicEdit.on {
+    display: inline-block;
 }
 .create_liveType.on{
     display: block;
+}
+
+/*bootstraptable中btn样式*/
+.bootstrap-table button.btn, input[name="refresh"].btn{
+    padding: 10px 14px;
 }
