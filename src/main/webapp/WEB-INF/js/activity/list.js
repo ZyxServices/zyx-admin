@@ -32,12 +32,80 @@ $(function () {
                 validators: {
                     notEmpty: {
                         message: '请选择开始时间'
+                    },
+                    callback: {
+                        message: '开始日期不能大于结束日期或者开始时间不能小于截止时间',
+                        callback:function(value, validator,$field){
+                            var endValue = $('#activityEndTime').val();
+                            var lastValue = $('#signEndTime').val();
+                            var endTime = new Date(endValue.replace("-", "/").replace("-", "/"));
+                            var startTime = new Date(value.replace("-", "/").replace("-", "/"));
+                            var lastTime = new Date(lastValue.replace("-", "/").replace("-", "/"));
+                            if(endValue == '' && lastValue == ''){
+                                return true;
+                            }else if(endValue == '' && lastValue != ''){
+                                validator.updateStatus('lastTime', 'VALID');
+                                return lastTime <= startTime;
+                            }else if(endValue != '' && lastValue == ''){
+                                validator.updateStatus('endTime', 'VALID');
+                                return startTime <= endTime;
+                            }else if(endValue != '' && lastValue != ''){
+                                validator.updateStatus('endTime', 'VALID');
+                                validator.updateStatus('lastTime', 'VALID');
+                                return startTime <= endTime && lastTime <= startTime;
+                            }
+                        }
                     }
                 }
             },'endTime': {
                 validators: {
                     notEmpty: {
                         message: '请选择结束时间'
+                    },
+                    callback: {
+                        message: '结束日期不能小于开始日期',
+                        callback:function(value, validator,$field){
+                            var startValue = $('#activityStartTime').val();
+                            var endTime = new Date(value.replace("-", "/").replace("-", "/"));
+                            var startTime = new Date(startValue.replace("-", "/").replace("-", "/"));
+                            validator.updateStatus('startTime', 'VALID');
+                            return endTime >= startTime;
+                        }
+                    }
+                }
+            },'lastTime': {
+                validators: {
+                    notEmpty: {
+                        message: '请选择活动截止时间'
+                    },
+                    callback: {
+                        message: '活动截止时间不能大于开始日期',
+                        callback:function(value, validator,$field){
+                            var startValue = $('#activityStartTime').val();
+                            var lastTime = new Date(value.replace("-", "/").replace("-", "/"));
+                            var startTime = new Date(startValue.replace("-", "/").replace("-", "/"));
+                            validator.updateStatus('startTime', 'VALID');
+                            return lastTime <= startTime;
+                        }
+                    }
+                }
+            },'maxPeople': {
+                validators: {
+                    notEmpty: {
+                        message: '请填写人数限制'
+                    },
+                    integer:{
+                        message: '请填写人数整数'
+                    }
+                }
+            },'phone': {
+                validators: {
+                    notEmpty: {
+                        message: '请填写咨询电话'
+                    },
+                    regexp: {
+                        regexp: /^1[3|4|5|7|8]\d{9}$/,
+                        message: '请输入有效电话号码'
                     }
                 }
             },'address': {
@@ -115,6 +183,8 @@ $(function () {
         $('#updateCreateFrom').data('bootstrapValidator')
             .updateStatus('startTime', 'NOT_VALIDATED',null)
             .validateField('startTime');
+        $("#activityEndTime").attr({'disabled':false})
+        $("#signEndTime").attr({'disabled':false})
     });
     $('#activityEndTime').datetimepicker({
         language: 'zh-CN',
@@ -143,6 +213,10 @@ $(function () {
         forceParse: true,
         pickerPosition: "bottom-left",
         showMeridian: false
+    }).on('hide',function(e) {
+        $('#updateCreateFrom').data('bootstrapValidator')
+            .updateStatus('lastTime', 'NOT_VALIDATED',null)
+            .validateField('lastTime');
     });
 });
 
@@ -534,9 +608,15 @@ function choiceMore() {
     $("#addChoice").toggle(500);
     $("#addBtn").hide();
 }
-/*修改活动增加用户必填的字段*/
+/*活动增加用户必填的字段*/
 function createRequired() {
     var requiredVal = $("#requiredVal").val();
+    if(requiredVal == ''){
+        $("#userRequiredInput").html("必填字段不能为空");
+        return;
+    }else{
+        $("#userRequiredInput").html("*");
+    }
     var val = '<label class="checkbox"><input type="checkbox" checked value=' + requiredVal.trim() + '>' + requiredVal.trim() + '</label>';
     $("#addBtn").before(val);
     $("#requiredVal").val('');
@@ -547,15 +627,6 @@ function createRequired() {
 function choiceMoreRel() {
     $("#addChoiceRel").toggle(500);
     $("#addBtnRel").hide();
-}
-/*创建活动增加用户必填的字段*/
-function createRequiredRel() {
-    var requiredVal = $("#requiredValRel").val();
-    var val = '<label class="checkbox"><input type="checkbox" checked value=' + requiredVal.trim() + '>' + requiredVal.trim() + '</label>';
-    $("#addBtnRel").before(val);
-    $("#requiredValRel").val('');
-    $("#addBtnRel").show();
-    $("#addChoiceRel").toggle(500);
 }
 
 /*创建中type=file的样式处理*/

@@ -50,4 +50,12 @@ public interface BaseService<T> {
     
     int selectCount(T record);
     //TODO 其他...
+
+    /**
+     * 简单 单字段 模糊查询
+     * @param property
+     * @param value
+     * @return
+     */
+    List<T> search(String property,Object value);
 }

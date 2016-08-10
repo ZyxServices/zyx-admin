@@ -83,7 +83,7 @@
                         size="1">
                     <div class="row-fluid margin-bottom-10">
                         <div class="span6">
-                            <a class="btn btn-default" href="javaScript:void(0)" onclick="circleCreate()">创建圈子</a>
+                            <a class="btn btn-default" href="javaScript:void(0)" onclick="circleCreate()" id="Create">创建圈子</a>
                         </div>
                     </div>
 
@@ -111,7 +111,7 @@
 
                 <div class="row-fluid">
                     <div class="span12 responsive">
-                        <table id="circle-list-table" ></table>
+                        <table id="circle-list-table"></table>
                     </div>
 
                 </div>
@@ -183,10 +183,12 @@
 
                 <!-- BEGIN DASHBOARD STATS -->
                 <div class="row-fluid">
-                    <form class="form-horizontal" role="form"  id="circleCreates"
+                    //圈子创建
+                    <form class="form-horizontal" role="form" id="circleCreates"
                           enctype="multipart/form-data" method="post">
                         <input name="createId" type="hidden" value="10"/>
-                <%--        <input name="state" type="hidden" value="-2">--%>
+                        <input name="circleId" type="hidden">
+                        <%--        <input name="state" type="hidden" value="-2">--%>
                         <div class="control-group form-group">
                             <label class="control-label">名称</label>
                             <div class="controls col-xs-6">
@@ -198,8 +200,8 @@
                         <div class="control-group form-group">
                             <label class="control-label">头像</label>
                             <div class="controls  col-xs-6">
-                                <div id="headImgShow"> </div>
-                                <input type="file" name="headImgUrl"  value="上传图片">
+                                <div id="headImgShow"></div>
+                                <input type="file" name="headImgUrl" value="上传图片">
 
                                 <%--<span class="help-inline">只能上传一张图片</span>--%>
                             </div>
@@ -217,7 +219,7 @@
                         <div class="control-group form-group">
                             <label class="control-label">简介</label>
                             <div class="controls  col-xs-6">
-                                <input type="text" class="span6" name="details"/>
+                                <textarea type="text" class="span6" name="details"></textarea>
                                 <span class="help-inline">*</span>
                             </div>
                         </div>
@@ -225,14 +227,19 @@
                         <div class="control-group form-group">
                             <label class="control-label">圈主</label>
                             <div class="controls  col-xs-6">
-                                <input type="text" class="span6" name="masterId"/>
+                                <select name="masterName" data-placeholder="请设置圈主哦" id="masterName"
+                                        style="width:350px;" class="chzn-select" tabindex="7">
+
+                                </select>
                                 <span class="help-inline">*</span>
                             </div>
                         </div>
                         <div class="control-group form-group">
                             <label class="control-label">管理员</label>
                             <div class="controls  col-xs-6">
-                                <input type="text" class="span6" name="adminIds"/>
+                                <select data-placeholder="请设置管理员" style="width:350px;" multiple class="chzn-select"
+                                        tabindex="8" name="adminIds" id="adminIds">
+                                </select>
                                 <span class="help-inline">*</span>
                             </div>
                         </div>
@@ -293,7 +300,6 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
 <!-- END CONTAINER -->
 
 <!-- BEGIN FOOTER -->
@@ -304,14 +310,10 @@
 <script src="../../js/index.js" type="text/javascript"></script>
 <script type="text/javascript" src="../../js/circle/circlelist.js"></script>
 <script type="text/javascript">
-
-
     jQuery(document).ready(function () {
-
         App.init(); // initlayout and core plugins
-
+        $(".chzn-select").chosen();
     });
-
 </script>
 </body>
 </html>

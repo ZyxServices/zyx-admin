@@ -88,5 +88,8 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
     //TODO 其他...
 
-
+    @Override
+    public List<T> search(String property, Object value) {
+        return null;
+    }
 }

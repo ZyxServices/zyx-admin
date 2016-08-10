@@ -179,7 +179,7 @@
             <div class="control-group form-group">
               <label class="control-label">标题</label>
               <div class="controls col-xs-5">
-                <input type="text" id="title" name="title" class="span6" />
+                <input type="text" id="title" name="title" class="span6" placeholder="请输入活动标题"/>
                 <span class="help-inline required">*</span>
               </div>
             </div>
@@ -210,16 +210,40 @@
 
             <div class="control-group form-group">
               <label class="control-label">开始时间</label>
-              <div class="controls">
-                <div class="span6 col-xs-5"><input type="text" class="span12" id="activityStartTime" name="startTime" placeholder="活动开始时间"/></div>
+              <div class="controls col-xs-5">
+                <input type="text" class="span6" id="activityStartTime" name="startTime" placeholder="活动开始时间"/>
                 <span class="help-inline required">*</span>
               </div>
             </div>
 
             <div class="control-group form-group">
               <label class="control-label">结束时间</label>
-              <div class="controls">
-                <div class="span6 col-xs-5"><input type="text" class="span12" id="activityEndTime" name="endTime" placeholder="活动结束时间"/></div>
+              <div class="controls col-xs-5">
+                <input type="text" class="span6" disabled id="activityEndTime" name="endTime" placeholder="活动结束时间"/>
+                <span class="help-inline required">*</span>
+              </div>
+            </div>
+
+            <div class="control-group form-group">
+              <label class="control-label">报名截止时间</label>
+              <div class="controls col-xs-5">
+                <input type="text" class="span6" id="signEndTime" disabled name="lastTime" placeholder="报名截止时间"/>
+                <span class="help-inline required">*</span>
+              </div>
+            </div>
+
+            <div class="control-group form-group">
+              <label class="control-label">人数限制</label>
+              <div class="controls col-xs-5">
+                <input type="text" id="maxPeople" name="maxPeople" class="span6" placeholder="请输入最大人数"/>
+                <span class="help-inline required">*</span>
+              </div>
+            </div>
+
+            <div class="control-group form-group">
+              <label class="control-label">咨询电话</label>
+              <div class="controls col-xs-5">
+                <input type="text" id="phone" name="phone" class="span6" placeholder="请输入正确的手机号码"/>
                 <span class="help-inline required">*</span>
               </div>
             </div>
@@ -227,7 +251,7 @@
             <div class="control-group form-group">
               <label class="control-label">地点</label>
               <div class="controls col-xs-5">
-                <input type="text" id="address" name="address" class="span6" />
+                <input type="text" id="address" name="address" class="span6" placeholder="请输入详细地址"/>
                 <span class="help-inline required">*</span>
               </div>
             </div>
@@ -249,27 +273,6 @@
             <hr>
 
             <h4>高级选项</h4>
-
-            <div class="control-group">
-              <label class="control-label">时间</label>
-              <div class="controls">
-                <div class="span3"><input type="text" class="span12" id="signEndTime" name="lastTime" placeholder="报名截止时间"/></div>
-              </div>
-            </div>
-
-            <div class="control-group">
-              <label class="control-label">人数限制</label>
-              <div class="controls">
-                <input type="text" id="maxPeople" name="maxPeople" class="span6" />
-              </div>
-            </div>
-
-            <div class="control-group">
-              <label class="control-label">咨询电话</label>
-              <div class="controls">
-                <input type="text" id="phone" name="phone" class="span6" />
-              </div>
-            </div>
 
             <div class="control-group">
               <label class="control-label">可见范围</label>
@@ -310,6 +313,7 @@
               <label class="control-label"></label>
               <div class="controls">
                 <input type="text" class="span3" id="requiredVal"><a href="javascript:void(0)" class="btn btn-default" onclick="createRequired()">确定</a>
+                <span class="help-inline required" id="userRequiredInput">*</span>
               </div>
             </div>
 
