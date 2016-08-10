@@ -25,4 +25,7 @@ public interface CircleService extends BaseService<Circle> {
     Map<String, Object> setVisible(Integer id, Integer state);
 
     Map<String, Object> search(Integer start, Integer pageSize, String title);
+
+    Map<String, Object> editCircle(Integer circleId, String title, String headImg, Integer circleType, String details, Integer masterId, String adminIds);
+
 }

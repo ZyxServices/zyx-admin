@@ -155,4 +155,20 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
         List<Circle> circles = circleMapper.search(title, start * pageSize, pageSize);
         return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, circles);
     }
+
+    @Override
+    public Map<String, Object> editCircle(Integer circleId, String title, String headImg, Integer circleType, String details, Integer masterId, String adminIds) {
+        Circle circleFind = circleMapper.findById(circleId);
+        if (circleFind != null) {
+            circleFind.setTitle(title);
+            circleFind.setHeadImgUrl(headImg);
+            circleFind.setCircleType(circleType);
+            circleFind.setDetails(details);
+            circleFind.setCircleMasterId(masterId);
+            circleFind.setAdminIds(adminIds);
+            circleMapper.updateByExample(circleFind, circleId);
+            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_36000, PgConstants.PG_ERROR_CODE_36000_MSG, null);
+        }
+        return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
+    }
 }

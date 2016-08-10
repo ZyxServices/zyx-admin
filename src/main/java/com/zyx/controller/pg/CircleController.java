@@ -121,4 +121,20 @@ public class CircleController {
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
+
+    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    @ApiOperation(value = "编辑圈子信息", notes = "编辑圈子")
+    public ModelAndView editCircle(@RequestParam(value = "circleId") Integer circleId,
+                                   @RequestParam(value = "title", required = false) String title,
+                                   @RequestPart(value = "imgFile", required = false) MultipartFile file,
+                                   @RequestParam(value = "circleType", required = false) Integer circleType,
+                                   @RequestParam(value = "details", required = false) String details,
+                                   @RequestParam(value = "masterId", required = false) Integer masterId,
+                                   @RequestParam(value = "adminIds", required = false) String adminIds) {
+        String headImg = "";
+        Map<String, Object> resultMap = circleService.editCircle(circleId, title, headImg, circleType, details, masterId, adminIds);
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(resultMap);
+        return new ModelAndView(jsonView);
+    }
 }
