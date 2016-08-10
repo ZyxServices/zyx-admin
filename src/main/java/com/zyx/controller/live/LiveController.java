@@ -7,6 +7,7 @@ import com.zyx.model.LiveLab;
 import com.zyx.parm.live.LiveInfoParm;
 import com.zyx.service.live.LiveInfoService;
 import com.zyx.service.live.LiveLabService;
+import com.zyx.vo.live.LiveInfoVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.models.auth.In;
@@ -141,6 +142,21 @@ public class LiveController {
         result.put(LiveConstants.STATE, LiveConstants.SUCCESS);
         result.put(LiveConstants.DATA, liveInfos);
         result.put("total",count);
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(result);
+        return new ModelAndView(jsonView);
+    }
+    @RequestMapping(path = "/search", method = {RequestMethod.GET})
+    @ApiOperation(value = "搜索直播", notes = "直播-搜索直播")
+    public ModelAndView searchLiveInfos(@RequestParam(name = "keyword", required = false) String keyword) {
+        Map<String, Object> result = new HashMap<>();
+        try{
+            List<LiveInfoVo> liveInfos =liveInfoService.search(keyword);
+            result.put(LiveConstants.STATE, LiveConstants.SUCCESS);
+            result.put(LiveConstants.DATA, liveInfos);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(result);
         return new ModelAndView(jsonView);
