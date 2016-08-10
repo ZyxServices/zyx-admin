@@ -8,8 +8,11 @@ import com.zyx.model.Circle;
 import com.zyx.model.Devaluation;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.CircleService;
+import com.zyx.utils.FileUploadUtils;
+import com.zyx.utils.ImagesVerifyUtils;
 import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -161,13 +164,17 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
         Circle circleFind = circleMapper.findById(circleId);
         if (circleFind != null) {
             circleFind.setTitle(title);
-            circleFind.setHeadImgUrl(headImg);
+            if (!Objects.equals(headImg, "")) {
+                circleFind.setHeadImgUrl(headImg);
+            }
             circleFind.setCircleType(circleType);
             circleFind.setDetails(details);
             circleFind.setCircleMasterId(masterId);
             circleFind.setAdminIds(adminIds);
-            circleMapper.updateByExample(circleFind, circleId);
-            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_36000, PgConstants.PG_ERROR_CODE_36000_MSG, null);
+            Integer result = circleMapper.editCircle(circleFind);
+            if (result > 0) {
+                return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_36000, PgConstants.PG_ERROR_CODE_36000_MSG, null);
+            }
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
     }

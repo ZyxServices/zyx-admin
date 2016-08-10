@@ -21,6 +21,5 @@ public interface CircleMapper extends Mapper<Circle> {
 
     Integer searchCount();
 
-//    Integer editCircle(@Param("title") String title,@Param("headImg")String headImg,@Param("circleType")Integer circleType,@Param("details")String details,@Param("masterId")Integer masterId,@Param("adminIds")String adminIds);
-
+    Integer editCircle(Circle circle);
 }

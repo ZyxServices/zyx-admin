@@ -2,6 +2,7 @@ package com.zyx.service.pg;
 
 import com.zyx.model.Circle;
 import com.zyx.service.BaseService;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
@@ -26,6 +27,6 @@ public interface CircleService extends BaseService<Circle> {
 
     Map<String, Object> search(Integer start, Integer pageSize, String title);
 
-    Map<String, Object> editCircle(Integer circleId, String title, String headImg, Integer circleType, String details, Integer masterId, String adminIds);
+    Map<String, Object> editCircle(Integer circleId, String title, String file, Integer circleType, String details, Integer masterId, String adminIds);
 
 }

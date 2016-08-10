@@ -32,7 +32,7 @@
 	`circle`.`create_id` AS `create_id`,
 	`circle`.`create_time` AS `create_time`,
 	`circle`.`state` AS `state`,
-	`circle`.`adminIds` AS `adminIds`,
+	`circle`.`admin_ids`,
 	`circle`.`type` AS `type`,
 	`circle`.`circle_master_id` AS `circle_master_id`,
 	`circle`.`details` AS `details`,
@@ -80,7 +80,7 @@
 	`circle`.`create_id` AS `create_id`,
 	`circle`.`create_time` AS `create_time`,
 	`circle`.`state` AS `state`,
-	`circle`.`adminIds` AS `adminIds`,
+	`circle`.`admin_ids`,
 	`circle`.`type` AS `type`,
 	`circle`.`circle_master_id` AS `circle_master_id`,
 	`circle`.`details` AS `details`,
@@ -112,4 +112,29 @@
     <select id="searchCount" resultType="java.lang.Integer">
 		SELECT COUNT(*) as acounts FROM circle
 	</select>
+
+    <update id="editCircle" parameterType="com.zyx.model.Circle">
+        UPDATE circle
+        <set>
+            <if test="title !=null and title!=''">
+                title=#{title},
+            </if>
+            <if test="headImgUrl !=null and title!=''">
+                head_img_url=#{headImgUrl},
+            </if>
+            <if test="circleType != null">
+                circle_type=#{circleType},
+            </if>
+            <if test="details!=null and details!=''">
+                details=#{details},
+            </if>
+            <if test="circleMasterId!=null">
+                circle_master_id=#{circleMasterId},
+            </if>
+            <if test="adminIds!=null and adminIds!=''">
+                admin_ids=#{adminIds},
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
 </mapper>

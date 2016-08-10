@@ -61,7 +61,7 @@ public class CircleController {
             @RequestParam(value = "masterId") Integer masterId,
             @RequestParam(value = "adminIds", required = false) String adminIds,
             @RequestParam("circleType") Integer circleType,
-            @RequestPart(value = "headImgUrl",required = false) MultipartFile headImgUrl,
+            @RequestPart(value = "headImgUrl", required = false) MultipartFile headImgUrl,
             @RequestParam("details") String details
     ) {
 //
@@ -73,7 +73,7 @@ public class CircleController {
             jsonView.setAttributesMap(returnResult);
             return new ModelAndView(jsonView);
         }
-        Map<String, Object> map = circleService.insertCircle(title, createId, state,circleType, details, imgDbUrl, masterId, adminIds);
+        Map<String, Object> map = circleService.insertCircle(title, createId, state, circleType, details, imgDbUrl, masterId, adminIds);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
@@ -128,14 +128,22 @@ public class CircleController {
     @ApiOperation(value = "编辑圈子信息", notes = "编辑圈子")
     public ModelAndView editCircle(@RequestParam(value = "circleId") Integer circleId,
                                    @RequestParam(value = "title", required = false) String title,
-                                   @RequestPart(value = "imgFile", required = false) MultipartFile file,
-                                   @RequestParam(value = "circleType", required = false) Integer circleType,
+                                   @RequestPart(value = "imgFile", required = false) MultipartFile imgFile,
+                                   @RequestParam(value = "circleType") Integer circleType,
                                    @RequestParam(value = "details", required = false) String details,
                                    @RequestParam(value = "masterId", required = false) Integer masterId,
                                    @RequestParam(value = "adminIds", required = false) String adminIds) {
-        String headImg = "";
-        Map<String, Object> resultMap = circleService.editCircle(circleId, title, headImg, circleType, details, masterId, adminIds);
         AbstractView jsonView = new MappingJackson2JsonView();
+        String headImg = "";
+        if (imgFile != null) {
+            String imgDbUrl = FileUploadUtils.uploadFile(imgFile);
+            Map<String, Object> returnResult = ImagesVerifyUtils.verify(imgDbUrl);
+            if (returnResult != null) {
+                jsonView.setAttributesMap(returnResult);
+                return new ModelAndView(jsonView);
+            }
+        }
+        Map<String, Object> resultMap = circleService.editCircle(circleId, title, headImg, circleType, details, masterId, adminIds);
         jsonView.setAttributesMap(resultMap);
         return new ModelAndView(jsonView);
     }
