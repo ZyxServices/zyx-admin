@@ -51,7 +51,7 @@
                     </table>
                 </div>
             </div>
-            <div class="create_liveType">
+            <div class="create_liveType row-fluid">
                 <form class="form-horizontal" role="form" id="createAppUserForm" enctype="multipart/form-data">
                     <div class="control-group form-group">
                         <label class="control-label">账号</label>
