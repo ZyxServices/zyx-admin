@@ -16,6 +16,7 @@
         <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
         <result column="top" property="top" jdbcType="INTEGER"/>
         <result column="hot" property="hot" jdbcType="INTEGER"/>
+        <result column="circle_type" property="circleType" jdbcType="INTEGER"/>
         <result column="details" property="details" jdbcType="LONGVARCHAR"/>
         <result column="tag" property="tag" jdbcType="INTEGER"/>
     </resultMap>

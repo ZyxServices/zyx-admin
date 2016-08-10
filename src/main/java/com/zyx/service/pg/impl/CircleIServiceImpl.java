@@ -105,7 +105,7 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
         Optional.ofNullable(id).orElse(0);
         Circle circle = circleMapper.findById(id);
         if (circle != null) {
-            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, null);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, circle);
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_34000_MSG);
     }
