@@ -183,9 +183,9 @@
 
                 <!-- BEGIN DASHBOARD STATS -->
                 <div class="row-fluid">
-                    <form class="form-horizontal" role="form"  id="circleCreates" action="../../circle/createCircle"
+                    <form class="form-horizontal" role="form"  id="circleCreates"
                           enctype="multipart/form-data" method="post">
-                        <input name="createId" type="hidden" value="-1"/>
+                        <input name="createId" type="hidden" value="10"/>
                 <%--        <input name="state" type="hidden" value="-2">--%>
                         <div class="control-group form-group">
                             <label class="control-label">名称</label>
@@ -198,18 +198,16 @@
                         <div class="control-group form-group">
                             <label class="control-label">头像</label>
                             <div class="controls  col-xs-6">
+                                <div id="headImgShow"> </div>
                                 <input type="file" name="headImgUrl"  value="上传图片">
+
                                 <%--<span class="help-inline">只能上传一张图片</span>--%>
                             </div>
                         </div>
                         <div class="control-group form-group">
                             <label class="control-label">类别</label>
                             <div class="controls  col-xs-6">
-                                <select class="form-control" name="type">
-                                    <option value="0">0</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
+                                <select class="form-control" name="circleType" id="category">
                                 </select>
 
                                 <span class="help-inline">*</span>
@@ -242,7 +240,7 @@
                         <div class="control-group form-group">
                             <label class="control-label"></label>
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button class="btn btn-default" type="submit" id="circleBtnSure">确定</button>
+                                <button class="btn btn-default" id="circleBtnSure">确定</button>
                                 <a href="javascript:void(0)" onclick="window.location.reload();"
                                    class="btn btn-default">返回</a>
                             </div>

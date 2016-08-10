@@ -2,6 +2,7 @@ package com.zyx.controller.pg;
 
 import com.zyx.service.pg.CircleService;
 import com.zyx.utils.FileUploadUtils;
+import com.zyx.utils.ImagesVerifyUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,18 +61,19 @@ public class CircleController {
             @RequestParam(value = "masterId") Integer masterId,
             @RequestParam(value = "adminIds", required = false) String adminIds,
             @RequestParam("circleType") Integer circleType,
+            @RequestPart(value = "headImgUrl",required = false) MultipartFile headImgUrl,
             @RequestParam("details") String details
     ) {
-//        @RequestPart(value = "headImgUrl",required = false) MultipartFile headImgUrl
+//
         AbstractView jsonView = new MappingJackson2JsonView();
 
-//        String imgDbUrl = FileUploadUtils.uploadFile(headImgUrl);
-//        Map<String, Object> returnResult = ImagesVerifyUtils.verify(imgDbUrl);
-//        if (returnResult != null) {
-//            jsonView.setAttributesMap(returnResult);
-//            return new ModelAndView(jsonView);
-//        }
-        Map<String, Object> map = circleService.insertCircle(title, createId, state, circleType, details, "", masterId, adminIds);
+        String imgDbUrl = FileUploadUtils.uploadFile(headImgUrl);
+        Map<String, Object> returnResult = ImagesVerifyUtils.verify(imgDbUrl);
+        if (returnResult != null) {
+            jsonView.setAttributesMap(returnResult);
+            return new ModelAndView(jsonView);
+        }
+        Map<String, Object> map = circleService.insertCircle(title, createId, state,circleType, details, imgDbUrl, masterId, adminIds);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
