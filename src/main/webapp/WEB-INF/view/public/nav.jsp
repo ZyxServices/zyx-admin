@@ -32,7 +32,7 @@
         <shiro:hasPermission name="menu:activity:list or menu:activity:group">
             <li class="activity">
                 <a href="javascript:;">
-                    <i class="icon-bookmark-empty"></i>
+                    <i class="icon-tags"></i>
                     <span class="title">活动</span>
                     <span class="arrow"></span>
                     <span class="selected hide"></span>
@@ -56,7 +56,7 @@
         <shiro:hasPermission name="menu:live:living">
             <li class="live">
                 <a href="<%=request.getContextPath()%>/menu/live/living">
-                    <i class="icon-table"></i>
+                    <i class="icon-play-circle"></i>
                     <span class="title">直播</span>
                     <span class="selected hide"></span>
                 </a>
@@ -66,7 +66,7 @@
         <shiro:hasPermission name="menu:dynamic:dynamicIndex">
             <li class="dynamic">
                 <a href="<%=request.getContextPath()%>/menu/dynamic/dynamicIndex">
-                    <i class="icon-table"></i>
+                    <i class="icon-heart"></i>
                     <span class="title">动态</span>
                     <span class="selected hide"></span>
                 </a>
@@ -76,7 +76,7 @@
         <shiro:hasPermission name="menu:circle:circlelist or menu:circle:circlepost or menu:circle:circleclassify" >
             <li class="circle">
                 <a href="javascript:;">
-                    <i class="icon-briefcase"></i>
+                    <i class="icon-globe"></i>
                     <span class="title">圈子</span>
                     <span class="arrow"></span>
                     <span class="selected hide"></span>
@@ -130,7 +130,7 @@
                 name="menu:appUser:allAppUser or menu:appUser:yrzAppUser or menu:appUser:dshAppUser or menu:appUser:officialAppUser">
             <li class="appUser">
                 <a href="javascript:void(0)">
-                    <i class="icon-cogs"></i>
+                    <i class="icon-user"></i>
                     <span class="title">用户管理</span>
                     <span class="arrow"></span>
                     <span class="selected hide"></span>
@@ -163,7 +163,7 @@
         <shiro:hasPermission name="menu:message:messageIndex">
             <li class="message">
                 <a href="<%=request.getContextPath()%>/menu/message/messageIndex">
-                    <i class="icon-gift"></i>
+                    <i class="icon-comment"></i>
                     <span class="title">消息</span>
                     <span class="selected hide"></span>
                 </a>
@@ -174,7 +174,7 @@
                 name="menu:banner:activitybanner or menu:banner:livebanner or menu:banner:circlebanner or menu:banner:packagebanner or menu:banner:dynamicbanner">
             <li class="banner">
                 <a href="javascript:;">
-                    <i class="icon-cogs"></i>
+                    <i class="icon-star-empty"></i>
                     <span class="title">banner推荐</span>
                     <span class="arrow "></span>
                     <span class="selected hide"></span>
@@ -212,7 +212,7 @@
         <shiro:hasPermission name="menu:sys:admin or menu:sys:roleList">
             <li class="sys">
                 <a href="javascript:;">
-                    <i class="icon-folder-open"></i>
+                    <i class="icon-tasks"></i>
                     <span class="title">管理员管理</span>
                     <span class="arrow "></span>
                     <span class="selected hide"></span>
