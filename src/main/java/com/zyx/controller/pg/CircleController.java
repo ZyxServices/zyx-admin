@@ -134,16 +134,16 @@ public class CircleController {
                                    @RequestParam(value = "masterId", required = false) Integer masterId,
                                    @RequestParam(value = "adminIds", required = false) String adminIds) {
         AbstractView jsonView = new MappingJackson2JsonView();
-        String headImg = "";
+        String imgDbUrl = "";
         if (imgFile != null) {
-            String imgDbUrl = FileUploadUtils.uploadFile(imgFile);
+             imgDbUrl = FileUploadUtils.uploadFile(imgFile);
             Map<String, Object> returnResult = ImagesVerifyUtils.verify(imgDbUrl);
             if (returnResult != null) {
                 jsonView.setAttributesMap(returnResult);
                 return new ModelAndView(jsonView);
             }
         }
-        Map<String, Object> resultMap = circleService.editCircle(circleId, title, headImg, circleType, details, masterId, adminIds);
+        Map<String, Object> resultMap = circleService.editCircle(circleId, title, imgDbUrl, circleType, details, masterId, adminIds);
         jsonView.setAttributesMap(resultMap);
         return new ModelAndView(jsonView);
     }
