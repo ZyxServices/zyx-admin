@@ -214,7 +214,7 @@ dependencies {
 
     compile 'javax.servlet:jstl:1.2'
     compile 'taglibs:standard:1.1.2'
-
+    compile 'org.bouncycastle:bcprov-jdk16:1.46'
 
     compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.7.3'
 
