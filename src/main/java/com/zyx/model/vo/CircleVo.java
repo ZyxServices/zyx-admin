@@ -12,7 +12,8 @@ public class CircleVo extends Circle {
 
     private String userName;
     private String masterName;
-
+    private Integer circleItemCount;
+    private Integer concernCount;
     public String getUserName() {
         return userName;
     }
@@ -27,5 +28,21 @@ public class CircleVo extends Circle {
 
     public void setMasterName(String masterName) {
         this.masterName = masterName;
+    }
+
+    public Integer getCircleItemCount() {
+        return circleItemCount;
+    }
+
+    public void setCircleItemCount(Integer circleItemCount) {
+        this.circleItemCount = circleItemCount;
+    }
+
+    public Integer getConcernCount() {
+        return concernCount;
+    }
+
+    public void setConcernCount(Integer concernCount) {
+        this.concernCount = concernCount;
     }
 }

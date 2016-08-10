@@ -24,6 +24,8 @@
     <resultMap id="circleVo" type="com.zyx.model.vo.CircleVo" extends="circleMap">
         <result column="userName" property="userName" jdbcType="VARCHAR"/>
         <result column="masterName" property="masterName" jdbcType="VARCHAR"/>
+        <result column="circleItem_count" property="circleItemCount" jdbcType="INTEGER"/>
+        <result column="concern_count" property="concernCount" jdbcType="INTEGER"/>
     </resultMap>
 
     <select id="findByPager" resultMap="circleVo">
@@ -42,7 +44,24 @@
 	`circle`.`hot` AS `hot`,
 	`circle`.`admin_ids` AS `admin_ids`,
 	`baseUser`.`name` AS `userName`,
-	`user`.`name` AS `masterName`
+	`user`.`name` AS `masterName`,
+	(
+		SELECT
+			count(*)
+		FROM
+			circle_item
+		WHERE
+			circle_id = `circle`.id
+	) AS circleItem_count,
+	(
+		SELECT
+			count(*)
+		FROM
+			myconcern
+		WHERE
+			concern_id = `circle`.id
+		AND concern_type = 4
+	) AS concern_count
     FROM
 	(
 		(
