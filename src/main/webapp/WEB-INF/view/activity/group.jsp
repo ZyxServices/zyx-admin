@@ -166,7 +166,7 @@
             <div class="control-group form-group">
               <label class="control-label">组合名称</label>
                 <div class="controls col-xs-5">
-                  <input type="text" class="span6" name="name" id="name"/>
+                  <input type="text" class="span6" name="name" id="name" placeholder="请输入活动组合名称"/>
                   <span class="help-inline required">*</span>
                 </div>
             </div>
