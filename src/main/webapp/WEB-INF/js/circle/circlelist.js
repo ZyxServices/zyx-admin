@@ -1,11 +1,32 @@
 /**
  * Created by guochunyan on 2016/7/14.
  */
+
+//用户列表
+var userList = $.ajax({
+    url: "/v1/appUser/list/all",
+    async: false,
+    type: "get",
+    dateType: "json",
+    data: {
+        pageNumber: 1,
+        pageSize: 100
+    },
+    success: function (rows) {
+        console.log(rows);
+        var html = "";
+        html = html
+        for (var i = 0; i < rows.rows.length; i++) {
+            html = html + "<option value='" + rows.rows[i].id + "'>" + rows.rows[i].nickname + "</option>"
+        }
+        $("select[name=masterName]").append(html);
+        $("select[name=adminIds]").append(html);
+    }
+});
 //创建圈子
 function circleCreate() {
     $("#circleList").hide();
     $("#circleCreate").show();
-    //圈子创建
     $("#circleBtnSure").click(function (e) {
         $("#circleCreates").ajaxSubmit({
             url: '../../circle/createCircle',
@@ -16,7 +37,7 @@ function circleCreate() {
                     e.preventDefault();
                     var $form = $(e.target);
                     $form.serialize();
-                    $("#circle-list-table").bootstrapTable('refresh', {url: '../../circle/circleList'});
+                    $("#circle-list-table").bootstrapTable('refresh');
                     $("#circleList").show();
                     $("#circleCreate").hide();
                 }
@@ -29,6 +50,7 @@ function circleCreate() {
             }
         })
     });
+    userList;
 
 }
 
@@ -93,7 +115,8 @@ $(function () {
             }
             $("#category").append(html)
         }
-    })
+    });
+
 
 //圈子表格数据
     $("#circle-list-table").bootstrapTable({
@@ -170,10 +193,11 @@ var operateEvent = {
         $("#circleCreate").show();
         $("input[name=title]").val(row.title).attr("disabled", "disabled");
         $("input[name=state]").val(row.state).attr("disabled", "disabled");
-        $("input[name=details]").val(row.details).attr("disabled", "disabled");
+        $("textarea[name=details]").val(row.details).attr("disabled", "disabled");
         $("input[name=circleMaster]").val(row.circleMaster).attr("disabled", "disabled");
         $("input[name=masterId]").val(row.masterId).attr("disabled", "disabled");
-        $("input[name=adminIds]").val(row.adminIds).attr("disabled", "disabled");
+        $("#adminIds").val(row.adminIds).attr("disabled", "disabled");
+        $("#masterName").val(row.masterName).attr("disabled", "disabled");
         $("#category").attr("disabled", "disabled");
         $("input[name=headImgUrl]").hide();
         console.log(row.circleType);
@@ -195,13 +219,13 @@ var operateEvent = {
     'click .edit': function (e, value, row, index) {
         $("#circleList").hide();
         $("#circleCreate").show();
-        $("input[name=circleId]").val(row.id);
         $("input[name=title]").val(row.title);
         $("input[name=state]").val(row.state);
-        $("input[name=details]").val(row.details);
+        $("textarea[name=details]").val(row.details);
         $("input[name=circleMaster]").val(row.circleMaster);
         $("input[name=masterId]").val(row.masterId);
-        $("input[name=adminIds]").val(row.adminIds);
+        $("select[name=adminIds]").val(row.adminIds);
+        $("select[name=masterName]").val(row.masterName);
         $("#category").find("option[value='" + row.circleType + "']").attr("selected", true);
         // 获取图片
         if (row.headImgUrl == "") {
@@ -225,7 +249,7 @@ var operateEvent = {
                         confirm: false,
                         title: "修改成功"
                     });
-                    $("#circle-list-table").bootstrapTable('refresh', {url: '../../circle/circleList'});
+                    $("#circle-list-table").bootstrapTable('refresh');
                 }
             })
         })
@@ -286,7 +310,7 @@ var operateEvent = {
                             });
 
                         }
-                        $("#circle-list-table").bootstrapTable('refresh', {url: '../../circle/circleList'});
+                        $("#circle-list-table").bootstrapTable('refresh');
                     }
                 })
             }
@@ -310,7 +334,7 @@ var operateEvent = {
                             confirm: false,
                             title: "删除成功"
                         });
-                        $("#circle-list-table").bootstrapTable('refresh', {url: '../../circle/circleList'});
+                        $("#circle-list-table").bootstrapTable('refresh');
                     }
                 });
             }
