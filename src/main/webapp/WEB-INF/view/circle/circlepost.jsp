@@ -117,26 +117,7 @@
                 </div>
                 <div class="row-fluid">
                     <div class="span12 responsive">
-                        <table id="post-list-table">
-                            <thead>
-                            <tr>
-                                <th data-checkbox="true"></th>
-                                <th>id</th>
-                                <th> 帖子标题</th>
-                                <th>发布人</th>
-                                <th>发布时间</th>
-                                <th>所属圈子</th>
-                                <th>点赞量</th>
-                                <th>评论量</th>
-                                <th>分享量</th>
-                                <th>收藏量</th>
-                                <th>浏览量</th>
-                                <th>操作</th>
-                                <th>举报状态</th>
-                                <th>查看url</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <table id="post-list-table"></table>
                     </div>
                 </div>
                 <!-- END DASHBOARD STATS -->

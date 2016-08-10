@@ -73,7 +73,7 @@
             </li>
         </shiro:hasPermission>
         <%--圈子--%>
-        <shiro:hasPermission name="menu:circle:circlelist or menu:circle:circlepost">
+        <shiro:hasPermission name="menu:circle:circlelist or menu:circle:circlepost or menu:circle:circleclassify" >
             <li class="circle">
                 <a href="javascript:;">
                     <i class="icon-briefcase"></i>
@@ -82,6 +82,12 @@
                     <span class="selected hide"></span>
                 </a>
                 <ul class="sub-menu">
+                    <shiro:hasPermission name="menu:circle:circleclassify">
+                        <li class="circleclassify ">
+                            <a href="<%=request.getContextPath()%>/menu/circle/circleclassify">圈子类别<span
+                                    class=""></span></a>
+                        </li>
+                    </shiro:hasPermission>
                     <shiro:hasPermission name="menu:circle:circlelist">
                         <li class="circlelist circlecreat">
                             <a href="<%=request.getContextPath()%>/menu/circle/circlelist">圈子列表<span

@@ -9,37 +9,44 @@ $(function () {
                 validators: {
                     notEmpty: {
                         message: '请输入名称'
+                    },
+                    callback: {
+                        message: "改类别已使用，请重新填写"
                     }
-                    /*   remote: {
-                     message: 'The username is not available',
-                     url: '../../circleType/circleTypeList'
-                     }*/
+
                 }
             }
         }
-    }).on('success.form.bv', function (e) {
-        e.preventDefault();
-        var $form = $(e.target);
-        $form.serialize();
-        $.Popup({
-            template: '创建以后不能修改哦?',
-            saveEvent: function () {
-                $.ajax({
-                    url: $form.attr('action'),
-                    type: 'POST',
-                    data: $form.serialize(),
-                    beforeSend: function () {
-                    },
-                    success: function () {
-                        //表格重新加载
-                        $("#circleList").show();
-                        $("#circleCreate").hide();
-                    }
-                });
-            }
-        })
-
     });
+    $("#circleBtnSure").click(function (e) {
+        $("#circleClassify").ajaxSubmit({
+            url: '../../circleType/createCircleType',
+            type: 'post',
+            dataType: 'json',
+            success: function (result) {
+                if (result.state == 33000) {
+                    e.preventDefault();
+                    var $form = $(e.target);
+                    $form.serialize();
+                    $.Popup({
+                        template: '创建以后不能修改哦?',
+                        saveEvent: function () {
+                            $("#circle-classify-table").bootstrapTable('refresh', {url: '../../circleType/circleTypeList'});
+                            $("#circleList").show();
+                            $("#circleCreate").hide();
+                        }
+                    })
+                }
+                else {
+                    alert("改类别已存在，请重新输入")
+                }
+
+            }
+
+        });
+    });
+
+
     //圈子分类列表
     $("#circle-classify-table").bootstrapTable({
         type: 'get',
@@ -55,7 +62,7 @@ $(function () {
         pagination: true,          //是否显示分页（*）
         paginationPreText: "上一页",
         paginationNextText: "下一页",
-        pageNumber: 1,            //初始化加载第一页，默认第一页
+        pageNumber: 1,               //初始化加载第一页，默认第一页
         // 每页的记录行数（*）
         checkbox: true,
         checkboxHeader: "true",
@@ -78,7 +85,40 @@ $(function () {
         ]
     })
 });
+
 function CrateClass() {
     $("#circleList").hide();
     $("#circleCreate").show();
+    $("input[name=typeName]").attr("value", "");
 }
+/*
+ var circleMod={
+ circleTypeSubmit:function(){
+ formUtils.formSubmit("circleClassify","../../circleType/createCircleType",function(res){
+ if(res.state==33000){
+ $.Popup({
+ template: '创建以后不能修改哦?',
+ saveEvent: function () {
+ $.ajax({
+ url: $form.attr('action'),
+ type: 'POST',
+ data: $form.serialize(),
+ success: function () {
+ //表格重新加载
+ $("#circle-classify-table").bootstrapTable('refresh', {url: '../../circleType/circleTypeList'});
+ $("#circleList").show();
+ $("#circleCreate").hide();
+
+
+ }
+ });
+ }
+ })
+ }else{
+ console.log(res.errmsg);
+ }
+
+ });
+ }
+ }
+ */

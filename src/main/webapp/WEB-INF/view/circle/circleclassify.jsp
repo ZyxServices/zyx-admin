@@ -176,8 +176,7 @@
 
                 <!-- BEGIN DASHBOARD STATS -->
                 <div class="row-fluid">
-                    <form class="form-horizontal" role="form"  id="circleClassify" action="../../circleType/createCircleType"
-                          enctype="multipart/form-data" method="post">
+                    <form class="form-horizontal" role="form"  id="circleClassify"  enctype="multipart/form-data"  >
                         <div class="control-group form-group">
                             <label class="control-label">圈子分类名称</label>
                             <div class="controls col-xs-6">
@@ -188,7 +187,7 @@
                         <div class="control-group form-group">
                             <label class="control-label"></label>
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button class="btn btn-default" type="submit" id="circleBtnSure">确定</button>
+                                <button class="btn btn-default" type="button" <%--onclick="circleMod.circleTypeSubmit()"--%> id="circleBtnSure">确定</button>
                                 <a href="javascript:void(0)" onclick="window.location.reload();"
                                    class="btn btn-default">返回</a>
                             </div>
@@ -219,6 +218,7 @@
 <script src="../../js/app.js" type="text/javascript"></script>
 <script src="../../js/index.js" type="text/javascript"></script>
 <script type="text/javascript" src="../../js/circle/circleclassify.js"></script>
+<script type="text/javascript" src="../../js/public/utils.js"></script>
 <script type="text/javascript">
 
 
