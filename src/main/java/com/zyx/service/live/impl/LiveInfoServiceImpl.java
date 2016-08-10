@@ -5,6 +5,7 @@ import com.zyx.model.LiveInfo;
 import com.zyx.parm.live.LiveInfoParm;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.live.LiveInfoService;
+import com.zyx.vo.live.LiveInfoVo;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,10 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
     public String getLiveUrl(Integer liveId) {
         LiveInfo record = liveInfoMapper.selectByPrimaryKey(liveId);
         return record.getVedioUrl();
+    }
+
+    @Override
+    public List<LiveInfoVo> search(String keyword) {
+        return liveInfoMapper.search("%"+keyword+"%");
     }
 }

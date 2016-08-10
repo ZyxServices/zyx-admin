@@ -3,6 +3,7 @@ package com.zyx.service.live;
 import com.zyx.model.LiveInfo;
 import com.zyx.parm.live.LiveInfoParm;
 import com.zyx.service.BaseService;
+import com.zyx.vo.live.LiveInfoVo;
 
 import java.util.List;
 
@@ -19,4 +20,7 @@ public interface LiveInfoService extends BaseService<LiveInfo>{
      * @return
      */
     public String getLiveUrl(Integer liveId);
+
+
+    public List<LiveInfoVo> search(String keyword);
 }

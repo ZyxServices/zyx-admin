@@ -32,12 +32,15 @@
         <result column="state" jdbcType="INTEGER" property="state"/>
     </resultMap>
 
-   <!-- <select id="selectVos">
-      SELECT id,create_time,auth,type,start,end,user_id,title,lab,bgm_url,vedio_url,state
-      FROM t_live
-      WHERE
-      1=1
-
-
-    </select>-->
+    <select id="search" parameterType="java.lang.String" resultType="com.zyx.vo.live.LiveInfoVo">
+        SELECT id,create_time,auth,type,start,end,user_id,title,lab,bgm_url,vedio_url,state
+        FROM t_live AS tl
+        WHERE tl.title LIKE #{keyword}
+        OR
+        tl.user_id IN(
+          SELECT id
+          FROM user
+          WHERE name LIKE #{keyword}
+        )
+    </select>
 </mapper>
