@@ -186,7 +186,7 @@
                     //圈子创建
                     <form class="form-horizontal" role="form" id="circleCreates"
                           enctype="multipart/form-data" method="post">
-                        <input name="createId" type="hidden"/>
+                        <input name="createId" type="hidden" value="10"/>
                         <input name="circleId" type="hidden"/>
                         <%--        <input name="state" type="hidden" value="-2">--%>
                         <div class="control-group form-group">
@@ -200,7 +200,7 @@
                         <div class="control-group form-group">
                             <label class="control-label">头像</label>
                             <div class="controls  col-xs-6">
-                                <div id="headImgShow"></div>
+                                <img id="headImgShow" src="" style="height: 200px !important; margin-bottom:10px;"><br>
                                 <input type="file" name="headImgUrl" value="上传图片">
                                 <%--<span class="help-inline">只能上传一张图片</span>--%>
                             </div>
@@ -253,18 +253,12 @@
                     </form>
 
                 </div>
-
                 <!-- END DASHBOARD STATS -->
-
             </div>
-
         </div>
         <!-- END PAGE CONTAINER-->
-
     </div>
-
     <!-- END PAGE -->
-
 </div>
 <!-- 推荐圈子弹窗-->
 <div class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel" id="circleModal">
