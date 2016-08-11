@@ -32,6 +32,9 @@
 <script src="../../js/dataformat.js" type="text/javascript"></script>
 <script src="../../js/public/dialog.js" type="text/javascript"></script>
 
+<!-- 工具 -->
+<script src="../../js/utils/resolveUtils.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 
     $(function () {

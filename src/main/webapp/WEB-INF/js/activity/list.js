@@ -294,13 +294,14 @@ $('#devaForm').ajaxForm({
 });
 
 $("#czS").click(function () {
-    if($("#avtivityId").val() == ''){
+    if ($("#avtivityId").val() == '') {
         /*创建*/
         $('#updateCreateFrom').ajaxSubmit({
             url: '/v1/activity/release',
             type: 'post',
             dataType: 'json',
             beforeSubmit: function () {
+                var examinefalg = true;
                 if ($("#examine").val() == 1) {
                     var desc = "";
                     $("#template").find("input:checked").each(function (item) {
@@ -311,33 +312,37 @@ $("#czS").click(function () {
                         }
                     });
                     $("#memberTemplate").val(desc);
+                    if ($("#memberTemplate").val() != "") {
+                        examinefalg = false;
+                    }
                 }
-                return $("#updateCreateFrom").data('bootstrapValidator').isValid();
+                return $("#updateCreateFrom").data('bootstrapValidator').isValid() && examinefalg;
             },
             success: function (result) {
                 if (result.state && result.state == 200) {
                     $.Popup({
-                        confirm:false,
-                        template:result.successmsg
+                        confirm: false,
+                        template: result.successmsg
                     });
                     $("#activityList").show();
                     $("#createModify").hide();
                     $('#activity-list-table').bootstrapTable('refresh');
                 } else if (result.state && result.state == 303) {
                     $.Popup({
-                        confirm:false,
-                        template:result.errmsg
+                        confirm: false,
+                        template: result.errmsg
                     })
                 }
             }
         });
-    }else{
+    } else {
         /*修改*/
         $('#updateCreateFrom').ajaxSubmit({
             url: '/v1/activity/update',
             type: 'post',
             dataType: 'json',
             beforeSubmit: function () {
+                var examinefalg = true;
                 var isValid = $("#updateCreateFrom").data('bootstrapValidator').isValid();
                 if ($("#examine").val() == 1) {
                     var desc = "";
@@ -349,22 +354,25 @@ $("#czS").click(function () {
                         }
                     });
                     $("#memberTemplate").val(desc);
+                    if ($("#memberTemplate").val() != "") {
+                        examinefalg = false;
+                    }
                 }
-                return isValid;
+                return isValid && examinefalg;
             },
             success: function (result) {
                 if (result.state && result.state == 200) {
                     $.Popup({
-                        confirm:false,
-                        template:result.successmsg
+                        confirm: false,
+                        template: result.successmsg
                     });
                     $("#activityList").show();
                     $("#createModify").hide();
                     $('#activity-list-table').bootstrapTable('refresh');
                 } else if (result.state && result.state == 303) {
                     $.Popup({
-                        confirm:false,
-                        template:result.errmsg
+                        confirm: false,
+                        template: result.errmsg
                     })
                 }
             }

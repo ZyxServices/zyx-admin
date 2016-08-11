@@ -51,10 +51,10 @@ public class ActivityController {
                                 @RequestPart(name = "image", required = true) MultipartFile image,
                                 @RequestParam(name = "startTime", required = true) String startTime,//转时间戳
                                 @RequestParam(name = "endTime", required = true) String endTime,//转时间戳
-                                @RequestParam(name = "lastTime", required = false) String lastTime,//转时间戳
-                                @RequestParam(name = "maxPeople", required = false) Integer maxPeople,
+                                @RequestParam(name = "lastTime", required = true) String lastTime,//转时间戳
+                                @RequestParam(name = "maxPeople", required = true) Integer maxPeople,
                                 @RequestParam(name = "visible", required = false) Integer visible,
-                                @RequestParam(name = "phone", required = false) String phone,
+                                @RequestParam(name = "phone", required = true) String phone,
                                 @RequestParam(name = "price", required = false) Double price,
                                 @RequestParam(name = "type", required = true) Integer type,
                                 @RequestParam(name = "address", required = true) String address,
