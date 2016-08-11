@@ -39,7 +39,7 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
         Integer count = circleMapper.searchCount();
         Map<String, Object> countHas = new HashMap<>();
         countHas.put("total", count);
-        return MapUtils.buildSuccessMap(Constants.SUCCESS, "查询成功", circles, countHas);
+        return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, circles, countHas);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
 //            map.put(Constants.STATE, PgConstants.SUCCESS);
 //            map.put(Constants.SUCCESS_MSG, PgConstants.MSG_SUCCESS);
 //            return map;
-            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
+            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_33000, PgConstants.PG_ERROR_CODE_33000_MSG, null);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -105,7 +105,7 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
         Optional.ofNullable(id).orElse(0);
         Circle circle = circleMapper.findById(id);
         if (circle != null) {
-            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, circle);
+            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, circle);
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_34000_MSG);
     }
