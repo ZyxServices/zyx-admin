@@ -186,8 +186,8 @@
                     //圈子创建
                     <form class="form-horizontal" role="form" id="circleCreates"
                           enctype="multipart/form-data" method="post">
-                        <input name="createId" type="hidden" value="10"/>
-                        <input name="circleId" type="hidden">
+                        <input name="createId" type="hidden"/>
+                        <input name="circleId" type="hidden"/>
                         <%--        <input name="state" type="hidden" value="-2">--%>
                         <div class="control-group form-group">
                             <label class="control-label">名称</label>
@@ -202,7 +202,6 @@
                             <div class="controls  col-xs-6">
                                 <div id="headImgShow"></div>
                                 <input type="file" name="headImgUrl" value="上传图片">
-
                                 <%--<span class="help-inline">只能上传一张图片</span>--%>
                             </div>
                         </div>
@@ -211,7 +210,6 @@
                             <div class="controls  col-xs-6">
                                 <select class="form-control" name="circleType" id="category">
                                 </select>
-
                                 <span class="help-inline">*</span>
                             </div>
                         </div>
@@ -223,11 +221,10 @@
                                 <span class="help-inline">*</span>
                             </div>
                         </div>
-
                         <div class="control-group form-group">
                             <label class="control-label">圈主</label>
                             <div class="controls  col-xs-6">
-                                <select name="masterName" data-placeholder="请设置圈主哦" id="masterName"
+                                <select name="masterId" data-placeholder="请设置圈主哦" id="masterId" data-rel="chosen"
                                         style="width:350px;" class="chzn-select" tabindex="7">
 
                                 </select>
@@ -238,6 +235,7 @@
                             <label class="control-label">管理员</label>
                             <div class="controls  col-xs-6">
                                 <select data-placeholder="请设置管理员" style="width:350px;" multiple class="chzn-select"
+                                        data-rel="chosen"
                                         tabindex="8" name="adminIds" id="adminIds">
                                 </select>
                                 <span class="help-inline">*</span>
@@ -312,7 +310,6 @@
 <script type="text/javascript">
     jQuery(document).ready(function () {
         App.init(); // initlayout and core plugins
-        $(".chzn-select").chosen();
     });
 </script>
 </body>
