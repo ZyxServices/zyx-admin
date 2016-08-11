@@ -11,6 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/menu")
 public class MenuController {
+    @RequestMapping(value = "/activity/test", method = RequestMethod.GET)
+    public ModelAndView test() {
+        return new ModelAndView("/activity/test");
+    }
+
     @RequestMapping(value = "/activity/list", method = RequestMethod.GET)
     public ModelAndView redirectActivity() {
         return new ModelAndView("/activity/list");
