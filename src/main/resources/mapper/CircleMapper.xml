@@ -43,8 +43,8 @@
 	`circle`.`top` AS `top`,
 	`circle`.`hot` AS `hot`,
 	`circle`.`admin_ids` AS `admin_ids`,
-	`baseUser`.`name` AS `userName`,
-	`user`.`name` AS `masterName`,
+	`baseUser`.`nickname` AS `userName`,
+	`user`.`nickname` AS `masterName`,
 	(
 		SELECT
 			count(*)
@@ -108,8 +108,8 @@
 	`circle`.`top` AS `top`,
 	`circle`.`hot` AS `hot`,
 	`circle`.`admin_ids` AS `admin_ids`,
-	`baseUser`.`name` AS `userName`,
-	`user`.`name` AS `masterName`
+	`baseUser`.`nickname` AS `userName`,
+	`user`.`nickname` AS `masterName`
     FROM
 	(
 		(

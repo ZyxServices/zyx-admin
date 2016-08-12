@@ -28,7 +28,7 @@ public class TagServiceImpl extends BaseServiceImpl<Tag> implements TagService {
     @Override
     public Map<String, Object> findAll() {
         List<Tag> tags = tagMapper.findAll();
-        return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, tags);
+        return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, tags);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class TagServiceImpl extends BaseServiceImpl<Tag> implements TagService {
         t.setTagName(tagName);
         Integer result = tagMapper.insert(t);
         if (result > 0) {
-            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_33000, PgConstants.PG_ERROR_CODE_33000_MSG);
+            return MapUtils.buildErrorMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG);
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
     }
@@ -54,7 +54,7 @@ public class TagServiceImpl extends BaseServiceImpl<Tag> implements TagService {
         if (!Objects.equals(id, null)) {
             Integer result = tagMapper.setState(id, state);
             if (result > 0) {
-                return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_39000, PgConstants.PG_ERROR_CODE_39000_MSG, null);
+                return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_39000_MSG, null);
             }
         } else {
             return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30027, PgConstants.PG_ERROR_CODE_30027_MSG);

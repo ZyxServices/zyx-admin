@@ -44,7 +44,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
 //        concernM
         Concern concern = concernMapper.findById(id);
         if (concern != null) {
-            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, concern);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, concern);
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
     }
@@ -53,7 +53,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
     public Map<String, Object> deleteOne(Integer id) {
         Integer result = concernMapper.setState(-1, id);
         if (result > 0) {
-            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_37000, PgConstants.PG_ERROR_CODE_37000_MSG, null);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_37000_MSG, null);
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
     }
@@ -62,7 +62,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
     public Map<String, Object> setVisible(Integer id, Integer state) {
         Integer result = concernMapper.setState(state, id);
         if (result > 0) {
-            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_39000, PgConstants.PG_ERROR_CODE_39000_MSG, null);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_39000_MSG, null);
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
     }
@@ -84,7 +84,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             Optional.ofNullable(imgUrl).ifPresent(concernFind::setImgUrl);
             Integer result = concernMapper.edit(topicContent, imgUrl, id);
             if (result > 0) {
-                return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_36000, PgConstants.PG_ERROR_CODE_36000_MSG, null);
+                return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_36000_MSG, null);
             }
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
@@ -117,7 +117,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
         concern.setImgUrl(dbImgPath);
         Integer result = concernMapper.insert(concern);
         if (result > 0) {
-            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_33000, PgConstants.PG_ERROR_CODE_33000_MSG, null);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
         }
         return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG, null);
     }
@@ -128,6 +128,6 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
             return MapUtils.buildErrorMap(Constants.PARAM_MISS, Constants.MSG_PARAM_MISS);
         }
         List<Concern> concerns = concernMapper.search(userName, start * pageSize, pageSize);
-        return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, concerns);
+        return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, concerns);
     }
 }

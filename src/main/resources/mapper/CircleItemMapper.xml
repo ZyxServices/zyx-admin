@@ -31,7 +31,7 @@
     circle_item.create_time,
     circle_item.top,
     circle_item.state,
-    `user`.`name` AS createUser,
+    `user`.`nickname` AS createUser,
     circle.title AS circleTitle
     FROM
     circle_item
@@ -55,7 +55,7 @@
         circle_item.create_time,
         circle_item.top,
         circle_item.state,
-        `user`.`name` AS createUser,
+        `user`.`nickname` AS createUser,
         circle.title AS circleTitle
         FROM
         circle_item

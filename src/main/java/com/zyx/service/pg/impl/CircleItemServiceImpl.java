@@ -82,7 +82,7 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
     public Map<String, Object> findOne(Integer id) {
         CircleItem circleItem = circleItemMapper.findOne(id);
         if (circleItem != null) {
-            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, circleItem);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, circleItem);
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
 
@@ -92,7 +92,7 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
     public Map<String, Object> deleteOne(Integer id) {
         Integer result = circleItemMapper.setVisible(-1, id);
         if (result > 0) {
-            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_37000, PgConstants.PG_ERROR_CODE_37000_MSG, null);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_37000_MSG, null);
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
 
@@ -102,7 +102,7 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
     public Map<String, Object> setVisible(Integer id, Integer state) {
         Integer result = circleItemMapper.setVisible(state, id);
         if (result > 0) {
-            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_38000, PgConstants.PG_ERROR_CODE_38000_MSG, null);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_38000_MSG, null);
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
 
@@ -114,6 +114,6 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
             return MapUtils.buildErrorMap(Constants.PARAM_MISS, Constants.MSG_PARAM_MISS);
         }
         List<CircleItem> circleItems = circleItemMapper.search(searchText, start * pageSize, pageSize);
-        return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, circleItems);
+        return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, circleItems);
     }
 }

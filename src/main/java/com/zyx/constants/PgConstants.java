@@ -118,5 +118,17 @@ public interface PgConstants extends Constants {
     int PG_ERROR_CODE_30028 = 30028;
     String PG_ERROR_CODE_30028_MSG = "数据已存在";
 
+    int PG_ERROR_CODE_30029 = 30029;
+    String PG_ERROR_CODE_30029_MSG = "该用户没有权限";
+
+    int PG_ERROR_CODE_30031 = 30031;
+    String PG_ERROR_CODE_30031_MSG = "数据不存在";
+
+    int PG_ERROR_CODE_30032 = 30032;
+    String PG_ERROR_CODE_30032_MSG = "置顶排序不能为空";
+
+    int PG_ERROR_CODE_30033= 30033;
+    String PG_ERROR_CODE_30033_MSG = "帖子id不能为空";
+
     String PG_RESULT = "result";
 }

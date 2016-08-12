@@ -40,7 +40,7 @@ public class CircleTypeServiceImpl extends BaseServiceImpl<CircleType> implement
         circleType.setTypeName(typeName);
         Integer result = circleTypeMapper.insert(circleType);
         if (result > 0) {
-            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_33000, PgConstants.PG_ERROR_CODE_33000_MSG, null);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
     }
@@ -48,7 +48,7 @@ public class CircleTypeServiceImpl extends BaseServiceImpl<CircleType> implement
     @Override
     public Map<String, Object> circleTypeList() {
         List<CircleType> circleTypes = circleTypeMapper.findAll();
-        return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, circleTypes);
+        return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, circleTypes);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class CircleTypeServiceImpl extends BaseServiceImpl<CircleType> implement
         if (!Objects.equals(id, null) || !Objects.equals(id, "")) {
             Integer result = circleTypeMapper.setState(id, state);
             if (result > 0) {
-                return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_39000, PgConstants.PG_ERROR_CODE_39000_MSG, null);
+                return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_39000_MSG, null);
             }
         } else {
             return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30025, PgConstants.PG_ERROR_CODE_30025_MSG);

@@ -35,7 +35,7 @@
         concern.video_url,
         concern.create_time,
         concern.state,
-        user.name as userName,
+        user.nickname as userName,
         user.authenticate
         FROM
         concern

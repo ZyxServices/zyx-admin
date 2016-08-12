@@ -39,7 +39,7 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
         Integer count = circleMapper.searchCount();
         Map<String, Object> countHas = new HashMap<>();
         countHas.put("total", count);
-        return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, circles, countHas);
+        return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, circles, countHas);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
 //            map.put(Constants.STATE, PgConstants.SUCCESS);
 //            map.put(Constants.SUCCESS_MSG, PgConstants.MSG_SUCCESS);
 //            return map;
-            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_33000, PgConstants.PG_ERROR_CODE_33000_MSG, null);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_33000_MSG, null);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -105,7 +105,7 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
         Optional.ofNullable(id).orElse(0);
         Circle circle = circleMapper.findById(id);
         if (circle != null) {
-            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, circle);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, circle);
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_34000_MSG);
     }
@@ -127,7 +127,7 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
             devaluation.setSequence(topSize);
             devaluation.setTypes(3);
             devaluationMapper.insert(devaluation);
-            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_36000, PgConstants.PG_ERROR_CODE_36000_MSG, null);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_36000_MSG, null);
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
     }
@@ -136,7 +136,7 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
     public Map<String, Object> deleteOne(Integer id) {
         Integer result = circleMapper.setState(-1, id);
         if (result > 0) {
-            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_37000, PgConstants.PG_ERROR_CODE_37000_MSG, null);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_37000_MSG, null);
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
     }
@@ -145,7 +145,7 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
     public Map<String, Object> setVisible(Integer id, Integer state) {
         Integer result = circleMapper.setState(state, id);
         if (result > 0) {
-            return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_39000, PgConstants.PG_ERROR_CODE_39000_MSG, null);
+            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_39000_MSG, null);
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
     }
@@ -156,7 +156,7 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
             return MapUtils.buildErrorMap(Constants.PARAM_MISS, Constants.MSG_PARAM_MISS);
         }
         List<Circle> circles = circleMapper.search(title, start * pageSize, pageSize);
-        return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_34000, PgConstants.PG_ERROR_CODE_34000_MSG, circles);
+        return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, circles);
     }
 
     @Override
@@ -173,7 +173,7 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
             circleFind.setAdminIds(adminIds);
             Integer result = circleMapper.editCircle(circleFind);
             if (result > 0) {
-                return MapUtils.buildSuccessMap(PgConstants.PG_ERROR_CODE_36000, PgConstants.PG_ERROR_CODE_36000_MSG, null);
+                return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_36000_MSG, null);
             }
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
