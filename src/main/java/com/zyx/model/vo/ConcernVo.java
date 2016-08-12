@@ -11,6 +11,8 @@ import com.zyx.model.Concern;
 public class ConcernVo extends Concern {
     private String userName;
     private Integer authenticate;
+    private Integer zanCounts;
+    private Integer commentCounts;
 
     public String getUserName() {
         return userName;
@@ -26,5 +28,21 @@ public class ConcernVo extends Concern {
 
     public void setAuthenticate(Integer authenticate) {
         this.authenticate = authenticate;
+    }
+
+    public Integer getZanCounts() {
+        return zanCounts;
+    }
+
+    public void setZanCounts(Integer zanCounts) {
+        this.zanCounts = zanCounts;
+    }
+
+    public Integer getCommentCounts() {
+        return commentCounts;
+    }
+
+    public void setCommentCounts(Integer commentCounts) {
+        this.commentCounts = commentCounts;
     }
 }

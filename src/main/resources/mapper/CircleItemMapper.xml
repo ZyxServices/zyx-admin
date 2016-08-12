@@ -18,6 +18,9 @@
     <resultMap id="circleItemVoMap" type="com.zyx.model.vo.CircleItemVo" extends="circleItemMap">
         <result column="createUser" property="createUser" jdbcType="VARCHAR"/>
         <result column="circleTitle" property="circleTitle" jdbcType="VARCHAR"/>
+        <result column="type_name" property="circleTypeName" jdbcType="VARCHAR"/>
+        <result column="zan_Counts" property="zanCounts" jdbcType="INTEGER"/>
+        <result column="comment_Counts" property="commentCounts" jdbcType="INTEGER"/>
     </resultMap>
 
     <select id="findByPager" resultMap="circleItemVoMap">
@@ -31,12 +34,19 @@
     circle_item.create_time,
     circle_item.top,
     circle_item.state,
-    `user`.`nickname` AS createUser,
-    circle.title AS circleTitle
+    `user`.nickname AS createUser,
+    circle.title AS circleTitle,
+    circle_type.type_name,
+    (SELECT COUNT(*) FROM zan WHERE zan.body_type=5) AS zan_Counts,
+    (SELECT COUNT(*) FROM reply WHERE reply.reply_type=1 AND reply.reply_id!=-1 AND reply_id=circle.id) AS comment_Counts
     FROM
     circle_item
     INNER JOIN `user` ON circle_item.create_id = `user`.id
-    INNER JOIN circle ON circle_item.circle_id = circle.id WHERE circle_item.state != -1 ORDER BY create_time DESC  LIMIT #{start},#{end}
+    INNER JOIN circle ON circle_item.circle_id = circle.id
+    INNER JOIN circle_type ON circle.circle_type = circle_type.id
+    WHERE circle_item.state != -1
+    ORDER BY create_time DESC
+    LIMIT #{start},#{end}
   </select>
     <select id="findOne" resultMap="circleItemMap">
     SELECT * FROM circle_item WHERE id=#{id} AND state != -1
@@ -45,7 +55,7 @@
         UPDATE circle_item SET state=#{state} WHERE id=#{id}
     </update>
     <select id="search" resultMap="circleItemVoMap">
-        SELECT
+     SELECT
         circle_item.id,
         circle_item.circle_id,
         circle_item.create_id,
@@ -55,12 +65,17 @@
         circle_item.create_time,
         circle_item.top,
         circle_item.state,
-        `user`.`nickname` AS createUser,
-        circle.title AS circleTitle
+        `user`.nickname AS createUser,
+        circle.title AS circleTitle,
+        circle_type.type_name,
+        (SELECT COUNT(*) FROM zan WHERE zan.body_type=5) AS zan_Counts,
+        (SELECT COUNT(*) FROM reply WHERE reply.reply_type=1 AND reply.reply_id!=-1 AND reply_id=circle.id) AS comment_Counts
         FROM
         circle_item
         INNER JOIN `user` ON circle_item.create_id = `user`.id
-        INNER JOIN circle ON circle_item.circle_id = circle.id WHERE (circle_item.title LIKE CONCAT('%','${searchText}','%') OR `user`.`name` LIKE CONCAT('%','${searchText}','%')) AND circle_item.state != -1 ORDER BY create_time DESC  LIMIT #{start},#{end}
+        INNER JOIN circle ON circle_item.circle_id = circle.id
+        INNER JOIN circle_type ON circle.circle_type = circle_type.id
+        WHERE (circle_item.title LIKE CONCAT('%','${searchText}','%') OR `user`.`name` LIKE CONCAT('%','${searchText}','%')) AND circle_item.state != -1 ORDER BY create_time DESC  LIMIT #{start},#{end}
     </select>
 
     <select id="searchCount" resultType="java.lang.Integer">

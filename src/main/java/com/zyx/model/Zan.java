@@ -12,7 +12,7 @@ public class Zan {
     private Integer bodyId;
 
     @Column(name = "body_type")
-    private Integer bodyType;
+    private Integer bodyType;//1：圈子，2：动态，3：活动，4直播，5帖子
 
     @Column(name = "account_id")
     private Integer accountId;

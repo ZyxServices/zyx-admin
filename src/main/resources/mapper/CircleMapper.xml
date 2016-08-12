@@ -24,61 +24,68 @@
     <resultMap id="circleVo" type="com.zyx.model.vo.CircleVo" extends="circleMap">
         <result column="userName" property="userName" jdbcType="VARCHAR"/>
         <result column="masterName" property="masterName" jdbcType="VARCHAR"/>
+        <result column="type_name" property="circleTypeName" jdbcType="VARCHAR"/>
         <result column="circleItem_count" property="circleItemCount" jdbcType="INTEGER"/>
         <result column="concern_count" property="concernCount" jdbcType="INTEGER"/>
     </resultMap>
 
     <select id="findByPager" resultMap="circleVo">
     SELECT
-	`circle`.`id` AS `id`,
-	`circle`.`title` AS `title`,
-	`circle`.`create_id` AS `create_id`,
-	`circle`.`create_time` AS `create_time`,
-	`circle`.`state` AS `state`,
-	`circle`.`admin_ids`,
-	`circle`.`type` AS `type`,
-	`circle`.`circle_master_id` AS `circle_master_id`,
-	`circle`.`details` AS `details`,
-	`circle`.`head_img_url` AS `head_img_url`,
-	`circle`.`top` AS `top`,
-	`circle`.`hot` AS `hot`,
-	`circle`.`admin_ids` AS `admin_ids`,
-	`baseUser`.`nickname` AS `userName`,
-	`user`.`nickname` AS `masterName`,
-	(
-		SELECT
-			count(*)
-		FROM
-			circle_item
-		WHERE
-			circle_id = `circle`.id
-	) AS circleItem_count,
-	(
-		SELECT
-			count(*)
-		FROM
-			myconcern
-		WHERE
-			concern_id = `circle`.id
-		AND concern_type = 4
-	) AS concern_count
+    circle.id AS id,
+    circle.title AS title,
+    circle.create_id AS create_id,
+    circle.create_time AS create_time,
+    circle.state AS state,
+    circle.admin_ids,
+    circle.type AS type,
+    circle.circle_master_id AS circle_master_id,
+    circle.details AS details,
+    circle.head_img_url AS head_img_url,
+    circle.top AS top,
+    circle.hot AS hot,
+    circle.circle_type,
+    circle.admin_ids AS admin_ids,
+    baseUser.nickname AS userName,
+    `user`.nickname AS masterName,
+    circle_type.type_name,
+    circle.tag,
+    (
+            SELECT
+                count(*)
+            FROM
+                circle_item
+            WHERE
+                circle_id = `circle`.id
+        ) AS circleItem_count,
+    (
+            SELECT
+                count(*)
+            FROM
+                myconcern
+            WHERE
+                concern_id = `circle`.id
+            AND concern_type = 4
+        ) AS concern_count
     FROM
-	(
-		(
-			`circle`
-			JOIN `user` `baseUser` ON (
-				(
-					`circle`.`create_id` = `baseUser`.`id`
-				)
-			)
-		)
-		JOIN `user` ON (
-			(
-				`circle`.`circle_master_id` = `user`.`id`
-			)
-		)
-	)
-    WHERE state != -1 ORDER BY create_time DESC  LIMIT #{start},#{end}
+        (
+            (
+                circle
+                JOIN `user` AS baseUser ON (
+                    (
+                        circle.create_id = baseUser.id
+                    )
+                )
+            )
+            JOIN `user` ON (
+                (
+                    circle.circle_master_id = `user`.id
+                )
+            )
+        )
+    INNER JOIN circle_type ON circle.circle_type = circle_type.id
+    WHERE `circle`.state != -1
+    ORDER BY create_time DESC
+     LIMIT #{start},#{end}
     </select>
     <select id="findById" resultMap="circleMap">
         SELECT * FROM circle WHERE id=#{id} AND state != -1
@@ -94,39 +101,60 @@
     </select>
 
     <select id="search" resultMap="circleVo">
-         SELECT
-	`circle`.`id` AS `id`,
-	`circle`.`title` AS `title`,
-	`circle`.`create_id` AS `create_id`,
-	`circle`.`create_time` AS `create_time`,
-	`circle`.`state` AS `state`,
-	`circle`.`admin_ids`,
-	`circle`.`type` AS `type`,
-	`circle`.`circle_master_id` AS `circle_master_id`,
-	`circle`.`details` AS `details`,
-	`circle`.`head_img_url` AS `head_img_url`,
-	`circle`.`top` AS `top`,
-	`circle`.`hot` AS `hot`,
-	`circle`.`admin_ids` AS `admin_ids`,
-	`baseUser`.`nickname` AS `userName`,
-	`user`.`nickname` AS `masterName`
+    SELECT
+    circle.id AS id,
+    circle.title AS title,
+    circle.create_id AS create_id,
+    circle.create_time AS create_time,
+    circle.state AS state,
+    circle.admin_ids,
+    circle.type AS type,
+    circle.circle_master_id AS circle_master_id,
+    circle.details AS details,
+    circle.head_img_url AS head_img_url,
+    circle.top AS top,
+    circle.hot AS hot,
+    circle.circle_type,
+    circle.admin_ids AS admin_ids,
+    baseUser.nickname AS userName,
+    `user`.nickname AS masterName,
+    circle_type.type_name,
+    circle.tag
+    (
+            SELECT
+                count(*)
+            FROM
+                circle_item
+            WHERE
+                circle_id = `circle`.id
+        ) AS circleItem_count,
+    (
+            SELECT
+                count(*)
+            FROM
+                myconcern
+            WHERE
+                concern_id = `circle`.id
+            AND concern_type = 4
+        ) AS concern_count
     FROM
-	(
-		(
-			`circle`
-			JOIN `user` `baseUser` ON (
-				(
-					`circle`.`create_id` = `baseUser`.`id`
-				)
-			)
-		)
-		JOIN `user` ON (
-			(
-				`circle`.`circle_master_id` = `user`.`id`
-			)
-		)
-	)
-    WHERE state != -1 AND  (`circle`.`title` LIKE  CONCAT('%','${title}','%') OR `baseUser`.`name` LIKE CONCAT('%','${title}','%'))  ORDER BY create_time DESC  LIMIT #{start},#{end}
+        (
+            (
+                circle
+                JOIN `user` AS baseUser ON (
+                    (
+                        circle.create_id = baseUser.id
+                    )
+                )
+            )
+            JOIN `user` ON (
+                (
+                    circle.circle_master_id = `user`.id
+                )
+            )
+        )
+    INNER JOIN circle_type ON circle.circle_type = circle_type.id
+    WHERE `circle`.state != -1 AND  (`circle`.`title` LIKE  CONCAT('%','${title}','%') OR `baseUser`.`name` LIKE CONCAT('%','${title}','%'))  ORDER BY create_time DESC  LIMIT #{start},#{end}
     </select>
 
     <select id="searchCount" resultType="java.lang.Integer">

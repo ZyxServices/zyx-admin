@@ -11,6 +11,9 @@ import com.zyx.model.CircleItem;
 public class CircleItemVo extends CircleItem {
     private String createUser;
     private String circleTitle;
+    private String circleTypeName;
+    private Integer zanCounts;
+    private Integer commentCounts;
 
     public String getCreateUser() {
         return createUser;
@@ -26,5 +29,29 @@ public class CircleItemVo extends CircleItem {
 
     public void setCircleTitle(String circleTitle) {
         this.circleTitle = circleTitle;
+    }
+
+    public String getCircleTypeName() {
+        return circleTypeName;
+    }
+
+    public void setCircleTypeName(String circleTypeName) {
+        this.circleTypeName = circleTypeName;
+    }
+
+    public Integer getZanCounts() {
+        return zanCounts;
+    }
+
+    public void setZanCounts(Integer zanCounts) {
+        this.zanCounts = zanCounts;
+    }
+
+    public Integer getCommentCounts() {
+        return commentCounts;
+    }
+
+    public void setCommentCounts(Integer commentCounts) {
+        this.commentCounts = commentCounts;
     }
 }

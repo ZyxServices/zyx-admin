@@ -17,6 +17,8 @@
     </resultMap>
     <resultMap id="concernVoMap" type="com.zyx.model.vo.ConcernVo" extends="concernMap">
         <result column="userName" property="userName" jdbcType="VARCHAR"/>
+        <result column="zan_Counts" property="zanCounts" jdbcType="INTEGER"/>
+        <result column="comment_Counts" property="commentCounts" jdbcType="INTEGER"/>
     </resultMap>
 
     <select id="count" resultType="java.lang.Integer">
@@ -24,7 +26,7 @@
     </select>
 
     <select id="findByPager" resultMap="concernVoMap">
-        SELECT
+     SELECT
         concern.id,
         concern.user_id,
         concern.type,
@@ -35,11 +37,33 @@
         concern.video_url,
         concern.create_time,
         concern.state,
-        user.nickname as userName,
-        user.authenticate
-        FROM
+        `user`.nickname AS userName,
+        `user`.authenticate,
+        (
+            SELECT
+                COUNT(*)
+            FROM
+                zan
+            WHERE
+                zan.body_type = 2
+            AND body_id = concern.id
+        ) AS zan_Counts,
+        (
+            SELECT
+                COUNT(*)
+            FROM
+                reply
+            WHERE
+                reply.reply_type = 3
+            AND reply.reply_id !=- 1
+            AND reply_id = concern.id
+        ) AS comment_Counts
+    FROM
         concern
-        INNER JOIN user ON concern.user_id = user.id  ORDER BY create_time DESC  LIMIT #{start},#{end}
+    INNER JOIN `user` ON concern.user_id = `user`.id
+    ORDER BY
+    create_time DESC
+    LIMIT #{start},#{end}
 --         WHERE state !=-1
   </select>
     <!--SELECT * FROM concern WHERE state >=0 ORDER BY create_time DESC  LIMIT #{start},#{end}-->
@@ -56,7 +80,7 @@
         UPDATE concern SET topic_content=#{topic_content},img_url=#{img_url} WHERE id=#{id}
     </update>
     <select id="search" resultMap="concernVoMap">
-        SELECT
+    SELECT
         concern.id,
         concern.user_id,
         concern.type,
@@ -67,11 +91,31 @@
         concern.video_url,
         concern.create_time,
         concern.state,
-        user.name as userName,
-        user.authenticate
-        FROM
+        `user`.nickname AS userName,
+        `user`.authenticate,
+        (
+            SELECT
+                COUNT(*)
+            FROM
+                zan
+            WHERE
+                zan.body_type = 2
+            AND body_id = concern.id
+        ) AS zan_Counts,
+        (
+            SELECT
+                COUNT(*)
+            FROM
+                reply
+            WHERE
+                reply.reply_type = 3
+            AND reply.reply_id !=- 1
+            AND reply_id = concern.id
+        ) AS comment_Counts
+    FROM
         concern
-        INNER JOIN user ON concern.user_id = user.id WHERE user.name LIKE CONCAT('%','${userName}','%' )  ORDER BY create_time DESC  LIMIT #{start},#{end}
+    INNER JOIN `user` ON concern.user_id = `user`.id
+    WHERE `user`.name LIKE CONCAT('%','${userName}','%' )  ORDER BY create_time DESC  LIMIT #{start},#{end}
 
     </select>
 </mapper>
