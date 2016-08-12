@@ -2,6 +2,49 @@
  * Created by WMS on 2016/8/2.
  */
 $(function () {
+    /*验证*/
+    $("#roleCreateForm").bootstrapValidator({
+        message: '数据无效',
+        feedbackIcons: {
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            'roleName': {
+                validators: {
+                    notEmpty: {
+                        message: '请输入名称'
+                    }
+                }
+            }, 'roleDesc': {
+                validators: {
+                    notEmpty: {
+                        message: '请输入描述'
+                    }
+                }
+            }
+        }
+    });
+    $("#roleEditForm").bootstrapValidator({
+        message: '数据无效',
+        feedbackIcons: {
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            'roleName': {
+                validators: {
+                    notEmpty: {
+                        message: '请输入名称'
+                    }
+                }
+            }, 'roleDesc': {
+                validators: {
+                    notEmpty: {
+                        message: '请输入描述'
+                    }
+                }
+            }
+        }
+    });
     //先销毁表格
     $('#role-list-table').bootstrapTable('destroy');
 
@@ -17,6 +60,7 @@ $(function () {
         pageList: [5, 10, 15, 20, 25],  //记录数可选列表
         checkbox: true,
         checkboxHeader: "true",
+        height: 500,
         sortable: true,           //是否启用排序
         sortOrder: "asc",          //排序方式
         strictSearch: true,
@@ -70,7 +114,8 @@ $(function () {
         type: 'post',
         dataType: 'json',
         beforeSubmit: function () {
-            $("#createButton").attr("disabled", true);
+            return $("#roleCreateForm").data('bootstrapValidator').isValid();
+            /*$("#createButton").attr("disabled", true);
             var phone = $("#roleCreateForm").find('#roleCreateName').val();
             var password = $("#roleCreateForm").find('#roleCreateDesc').val();
             var checked = true;
@@ -88,7 +133,7 @@ $(function () {
                 return checked;
             }
 
-            return checked;
+            return checked;*/
         },
         success: function (result) {
             if (result.state == 200) {
@@ -96,7 +141,10 @@ $(function () {
             } else {
                 if (result.state == 9001) {
                     $("#createButton").attr("disabled", false);
-                    alert("角色已存在");
+                    $.Popup({
+                        confirm: false,
+                        template: '角色已存在'
+                    });
                 }
             }
         },
@@ -110,7 +158,8 @@ $(function () {
         type: 'post',
         dataType: 'json',
         beforeSubmit: function () {
-            $("#editButton").attr("disabled", true);
+            return $("#roleEditForm").data('bootstrapValidator').isValid();
+            /*$("#editButton").attr("disabled", true);
             var phone = $("#roleEditForm").find('#roleEditName').val();
             var password = $("#roleEditForm").find('#roleEditDesc').val();
             var checked = true;
@@ -128,7 +177,7 @@ $(function () {
                 return checked;
             }
 
-            return checked;
+            return checked;*/
         },
         success: function (result) {
             $("#editButton").attr("disabled", false);
@@ -136,7 +185,10 @@ $(function () {
                 backToRoles();
             } else {
                 if (result.state == 9001) {
-                    alert("角色已存在");
+                    $.Popup({
+                        confirm: false,
+                        template: '角色已存在'
+                    });
                 }
             }
         },

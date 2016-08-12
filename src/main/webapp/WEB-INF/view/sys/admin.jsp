@@ -171,44 +171,45 @@
                 <form action="/v1/sysuser/" id="sysUserCreateForm" method="post" enctype="multipart/form-data"
                       class="form-horizontal" novalidate="novalidate" role="form">
 
-                    <div class="control-group">
+                    <div class="control-group form-group">
                         <label class="control-label">账号</label>
-                        <div class="controls">
-                            <input type="text" id="username" name="username" class="span6 form-control"/>
-                            <span class="help-inline">*</span>
+                        <div class="controls col-xs-5">
+                            <input type="text" id="username" name="username" class="span6"/>
+                            <span class="help-inline required">*</span>
                         </div>
                     </div>
 
-                    <div class="control-group">
+                    <div class="control-group form-group">
                         <label class="control-label">密码</label>
-                        <div class="controls">
-                            <input type="text" id="pass" name="pass" class="span6 form-control"/>
-                            <span class="help-inline">*</span>
+                        <div class="controls col-xs-5">
+                            <input type="password" id="pass" name="pass" class="span6"/>
+                            <span class="help-inline required">*</span>
                         </div>
                     </div>
 
-                    <div class="control-group">
+                    <div class="control-group form-group">
                         <label class="control-label">管理员名称</label>
-                        <div class="controls">
-                            <input type="text" id="name" name="name" class="span6 form-control"/>
-                            <span class="help-inline">*</span>
+                        <div class="controls col-xs-5">
+                            <input type="text" id="name" name="name" class="span6"/>
+                            <span class="help-inline required">*</span>
                         </div>
                     </div>
 
-                    <div class="control-group">
+                    <div class="control-group form-group">
                         <label class="control-label">权限等级</label>
-                        <div class="controls">
-                            <select class="span6 form-control" id="role_select" name="roleId">
+                        <div class="controls col-xs-5">
+                            <select class="span6" id="role_select" name="roleId">
 
                             </select>
-                            <span class="help-inline">*</span>
+                            <span class="help-inline required">*</span>
                         </div>
                     </div>
 
-                    <div class="control-group">
+                    <div class="control-group form-group">
                         <label class="control-label">备注</label>
-                        <div class="controls">
-                            <input type="text" id="remark" name="remark" class="span6 form-control"/>
+                        <div class="controls col-xs-5">
+                            <input type="text" id="remark" name="remark" class="span6"/>
+                            <span class="help-inline required">*</span>
                         </div>
                     </div>
 
@@ -279,13 +280,13 @@
                     <form action="/v1/sysuser/" id="sysUserEditForm" method="post" enctype="multipart/form-data"
                           class="form-horizontal" novalidate="novalidate" role="form">
                         <input type="hidden" id="editUserId" name="id">
-                        <div class="control-group">
+                        <div class="control-group form-group">
                             <label class="control-label">权限等级</label>
-                            <div class="controls">
+                            <div class="controls col-xs-5">
                                 <select class="span6 form-control" id="edit_role_select" name="roleId">
 
                                 </select>
-                                <span class="help-inline">*</span>
+                                <span class="help-inline required">*</span>
                             </div>
                         </div>
 

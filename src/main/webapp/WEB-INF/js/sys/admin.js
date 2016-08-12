@@ -2,6 +2,47 @@
  * Created by ZYX on 2016/7/20.
  */
 $(function () {
+/*创建的验证*/
+    $("#sysUserCreateForm").bootstrapValidator({
+        message: '数据无效',
+        feedbackIcons: {
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            'username': {
+                validators: {
+                    notEmpty: {
+                        message: '用户名称不能为空'
+                    }
+                }
+            }, 'pass': {
+                validators: {
+                    notEmpty: {
+                        message: '密码不能为空'
+                    }
+                }
+            }, 'name': {
+                validators: {
+                    notEmpty: {
+                        message: '管理员名称不能为空'
+                    }
+                }
+            }, 'roleId': {
+                validators: {
+                    notEmpty: {
+                        message: '请选择权限等级'
+                    }
+                }
+            }, 'remark': {
+                validators: {
+                    notEmpty: {
+                        message: '请输入备注'
+                    }
+                }
+            }
+        }
+    });
+
     $("#administrators-list-table").bootstrapTable({
         toolbar: '#toolbar',        //工具按钮用哪个容器
         striped: true,           //是否显示行间隔色
@@ -13,6 +54,7 @@ $(function () {
         pageSize: 10,            //每页的记录行数（*）
         pageList: [10, 15, 20, 25],  //记录数可选列表
         checkbox: true,
+        height: 500,
         checkboxHeader: "true",
         sortable: true,           //是否启用排序
         sortOrder: "asc",          //排序方式
@@ -48,7 +90,8 @@ $(function () {
         type: 'post',
         dataType: 'json',
         beforeSubmit: function () {
-            $("#createButton").attr("disabled", true);
+            return $("#sysUserCreateForm").data('bootstrapValidator').isValid();
+            /*$("#createButton").attr("disabled", true);
             var username = $("#sysUserCreateForm").find('#username').val();
             var pass = $("#sysUserCreateForm").find('#pass').val();
             var name = $("#sysUserCreateForm").find('#name').val();
@@ -91,16 +134,22 @@ $(function () {
                 return checked;
             }
 
-            return checked;
+            return checked;*/
         },
         success: function (result) {
             if (result.state == 200) {
                 backToSysUsers();
             } else {
                 if (result.state == 9004) {
-                    alert("用户已存在");
+                    $.Popup({
+                        confirm: false,
+                        template: '用户已存在'
+                    });
                 } else {
-                    alert("用户新建失败");
+                    $.Popup({
+                        confirm: false,
+                        template: '用户新建失败'
+                    });
                 }
                 $("#createButton").attr("disabled", false);
             }
@@ -115,7 +164,8 @@ $(function () {
         type: 'post',
         dataType: 'json',
         beforeSubmit: function () {
-            $("#editButton").attr("disabled", true);
+            return $("#sysUserEditForm").data('bootstrapValidator').isValid();
+           /* $("#editButton").attr("disabled", true);
             var roleId = $("#edit_role_select option:selected").val();
 
             var checked = true;
@@ -127,13 +177,16 @@ $(function () {
                 return checked;
             }
 
-            return checked;
+            return checked;*/
         },
         success: function (result) {
             if (result.state == 200) {
                 backToSysUsers();
             } else {
-                alert("修改权限等级失败");
+                $.Popup({
+                    confirm: false,
+                    template: '修改权限等级失败'
+                });
                 $("#editButton").attr("disabled", false);
             }
         },
@@ -146,24 +199,24 @@ $(function () {
 // 日志列操作
 function operateLog(value, row, index) {
     var _html = [];
-    _html.push('<a class="p5 a" href="javascript:void(0)" title="查看">查看</a>');
+    _html.push('<a class="p5 look" href="javascript:void(0)" title="查看">查看</a>');
     return _html.join('');
 }
 
 // 操作列
 function operateFormatter(value, row, index) {
     var _html = [];
-    _html.push('<a class="p5 b" href="javascript:void(0)" title="权限设置">权限设置</a>');
-    _html.push('<a class="p5 c" href="javascript:void(0)" title="删除">删除</a>');
+    _html.push('<a class="p5 setJurisdiction" href="javascript:void(0)" title="权限设置">权限设置</a>');
+    _html.push('<a class="p5 move" href="javascript:void(0)" title="删除">删除</a>');
     return _html.join('');
 }
 
 // 操作事件edit
 var operateEvent = {
-    'click .a': function (e, value, row) {
+    'click .look': function (e, value, row) {
         alert('You click like action, row: ' + JSON.stringify(row));
     },
-    'click .b': function (e, value, row) {
+    'click .setJurisdiction': function (e, value, row) {
         $("#administratorsList").hide();
         $("#administratorsCreate").hide();
         $("#administratorsRoleEdit").show();
@@ -186,7 +239,7 @@ var operateEvent = {
             }
         });
     },
-    'click .c': function (e, value, row) {
+    'click .move': function (e, value, row) {
         alert('You click like action, row: ' + JSON.stringify(row));
     }
 };

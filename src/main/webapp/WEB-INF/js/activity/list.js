@@ -9,47 +9,51 @@ $(function () {
         feedbackIcons: {
             validating: 'glyphicon glyphicon-refresh'
         },
-        fields:{
+        fields: {
             'title': {
                 validators: {
                     notEmpty: {
                         message: '组合名称不能为空'
                     }
                 }
-            },'image': {
+            }, 'image': {
                 validators: {
                     notEmpty: {
                         message: '请上传图片'
                     }
                 }
-            },'desc': {
+            }, 'desc': {
                 validators: {
                     notEmpty: {
                         message: '请输入内容'
                     }
                 }
-            },'startTime': {
+            }, 'startTime': {
                 validators: {
                     notEmpty: {
                         message: '请选择开始时间'
                     },
+                    /*date: {
+                        message: '请输入正确的日期格式,如:2016-01-01 00:00',
+                        format: 'YYYY-MM-DD h:m'
+                    },*/
                     callback: {
                         message: '开始日期不能大于结束日期或者开始时间不能小于截止时间',
-                        callback:function(value, validator,$field){
+                        callback: function (value, validator, $field) {
                             var endValue = $('#activityEndTime').val();
                             var lastValue = $('#signEndTime').val();
                             var endTime = new Date(endValue.replace("-", "/").replace("-", "/"));
                             var startTime = new Date(value.replace("-", "/").replace("-", "/"));
                             var lastTime = new Date(lastValue.replace("-", "/").replace("-", "/"));
-                            if(endValue == '' && lastValue == ''){
+                            if (endValue == '' && lastValue == '') {
                                 return true;
-                            }else if(endValue == '' && lastValue != ''){
+                            } else if (endValue == '' && lastValue != '') {
                                 validator.updateStatus('lastTime', 'VALID');
                                 return lastTime <= startTime;
-                            }else if(endValue != '' && lastValue == ''){
+                            } else if (endValue != '' && lastValue == '') {
                                 validator.updateStatus('endTime', 'VALID');
                                 return startTime <= endTime;
-                            }else if(endValue != '' && lastValue != ''){
+                            } else if (endValue != '' && lastValue != '') {
                                 validator.updateStatus('endTime', 'VALID');
                                 validator.updateStatus('lastTime', 'VALID');
                                 return startTime <= endTime && lastTime <= startTime;
@@ -57,14 +61,14 @@ $(function () {
                         }
                     }
                 }
-            },'endTime': {
+            }, 'endTime': {
                 validators: {
                     notEmpty: {
                         message: '请选择结束时间'
                     },
                     callback: {
                         message: '结束日期不能小于开始日期',
-                        callback:function(value, validator,$field){
+                        callback: function (value, validator, $field) {
                             var startValue = $('#activityStartTime').val();
                             var endTime = new Date(value.replace("-", "/").replace("-", "/"));
                             var startTime = new Date(startValue.replace("-", "/").replace("-", "/"));
@@ -73,14 +77,14 @@ $(function () {
                         }
                     }
                 }
-            },'lastTime': {
+            }, 'lastTime': {
                 validators: {
                     notEmpty: {
                         message: '请选择活动截止时间'
                     },
                     callback: {
                         message: '活动截止时间不能大于开始日期',
-                        callback:function(value, validator,$field){
+                        callback: function (value, validator, $field) {
                             var startValue = $('#activityStartTime').val();
                             var lastTime = new Date(value.replace("-", "/").replace("-", "/"));
                             var startTime = new Date(startValue.replace("-", "/").replace("-", "/"));
@@ -89,16 +93,16 @@ $(function () {
                         }
                     }
                 }
-            },'maxPeople': {
+            }, 'maxPeople': {
                 validators: {
                     notEmpty: {
                         message: '请填写人数限制'
                     },
-                    integer:{
+                    integer: {
                         message: '请填写人数整数'
                     }
                 }
-            },'phone': {
+            }, 'phone': {
                 validators: {
                     notEmpty: {
                         message: '请填写咨询电话'
@@ -108,7 +112,7 @@ $(function () {
                         message: '请输入有效电话号码'
                     }
                 }
-            },'address': {
+            }, 'address': {
                 validators: {
                     notEmpty: {
                         message: '请填写正确的地址'
@@ -118,10 +122,10 @@ $(function () {
         }
     });
 
-    $('#activity-summernote').on('summernote.change',function (content, $editable) {
+    $('#activity-summernote').on('summernote.change', function (content, $editable) {
         $("#desc").val($editable);
         $('#updateCreateFrom').data('bootstrapValidator')
-            .updateStatus('desc', 'NOT_VALIDATED',null)
+            .updateStatus('desc', 'NOT_VALIDATED', null)
             .validateField('desc');
     }).summernote({
         lang: 'zh-CN',
@@ -136,7 +140,7 @@ $(function () {
         success: function (result) {
             var user = '';
             result.rows.forEach(function (item, i) {
-                user += '<option value='+item.id+'>'+item.nickname+'</option>'
+                user += '<option value=' + item.id + '>' + item.nickname + '</option>'
             })
             $("#choiceUser").append(user)
         }
@@ -160,7 +164,7 @@ $(function () {
         height: 500,            //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
         uniqueId: "id",           //每一行的唯一标识，一般为主键列
         search: true,
-        smartDisplay: false,
+        // smartDisplay: false, 超过1页才显示页数
         sidePagination: "server",
         method: "get",
         queryParamsType: "limit",
@@ -179,12 +183,12 @@ $(function () {
         forceParse: true,
         pickerPosition: "bottom-left",
         showMeridian: false
-    }).on('hide',function(e) {
+    }).on('hide', function (e) {
         $('#updateCreateFrom').data('bootstrapValidator')
-            .updateStatus('startTime', 'NOT_VALIDATED',null)
+            .updateStatus('startTime', 'NOT_VALIDATED', null)
             .validateField('startTime');
-        $("#activityEndTime").attr({'disabled':false})
-        $("#signEndTime").attr({'disabled':false})
+        $("#activityEndTime").attr({'disabled': false})
+        $("#signEndTime").attr({'disabled': false})
     });
     $('#activityEndTime').datetimepicker({
         language: 'zh-CN',
@@ -197,9 +201,9 @@ $(function () {
         forceParse: true,
         pickerPosition: "bottom-left",
         showMeridian: false
-    }).on('hide',function(e) {
+    }).on('hide', function (e) {
         $('#updateCreateFrom').data('bootstrapValidator')
-            .updateStatus('endTime', 'NOT_VALIDATED',null)
+            .updateStatus('endTime', 'NOT_VALIDATED', null)
             .validateField('endTime');
     });
     $('#signEndTime').datetimepicker({
@@ -213,14 +217,18 @@ $(function () {
         forceParse: true,
         pickerPosition: "bottom-left",
         showMeridian: false
-    }).on('hide',function(e) {
+    }).on('hide', function (e) {
         $('#updateCreateFrom').data('bootstrapValidator')
-            .updateStatus('lastTime', 'NOT_VALIDATED',null)
+            .updateStatus('lastTime', 'NOT_VALIDATED', null)
             .validateField('lastTime');
     });
 });
 
-function queryParams(params) {
+ $("#activityStartTime,#activityEndTime,#signEndTime").focus(function(){
+         $(this).blur();
+     });
+
+    function queryParams(params) {
     return {
         pageDataNum: params.limit,
         pageNum: (params.offset + 1),
@@ -271,8 +279,8 @@ $('#devaForm').ajaxForm({
         var checked = true;
         if (devaId == undefined || devaId == "") {
             $.Popup({
-                confirm:false,
-                template:'未知错误，请刷新页面重试'
+                confirm: false,
+                template: '未知错误，请刷新页面重试'
             })
             checked = false;
         }
@@ -281,13 +289,13 @@ $('#devaForm').ajaxForm({
     success: function (result) {
         if (result.state && result.state == 200) {
             $.Popup({
-                confirm:false,
-                template:result.successmsg
+                confirm: false,
+                template: result.successmsg
             })
         } else if (result.state && result.state == 303) {
             $.Popup({
-                confirm:false,
-                template:result.errmsg
+                confirm: false,
+                template: result.errmsg
             })
         }
     }
@@ -401,35 +409,35 @@ function operate(value, row, index) {
 var operateEvents = {
     'click .edit': function (e, value, row, index) {
         $("#listType").html("编辑");
-        queryActivityById(row.id,0);
+        queryActivityById(row.id, 0);
         $("#imagesWrap").show();
         $("#createModify").show();
         $("#activityList").hide();
     },
-    'click .preview':function (e, value, row, index) {
+    'click .preview': function (e, value, row, index) {
         $("#listType").html("预览");
-        $("#choiceUser").attr("disabled","disabled");
-        $("#title").attr("disabled","disabled");
+        $("#choiceUser").attr("disabled", "disabled");
+        $("#title").attr("disabled", "disabled");
         $("#imgWrap").hide();
         $("#imagesWrap").show();
         $('#activity-summernote').summernote('destroy');
-        $('#activity-summernote').summernote({toolbar: false,airMode: true});
-        $("#activityStartTime").attr("disabled","disabled");
-        $("#activityEndTime").attr("disabled","disabled");
-        $("#address").attr("disabled","disabled");
-        $("#price").attr("disabled","disabled");
-        $("#signEndTime").attr("disabled","disabled");
-        $("#maxPeople").attr("disabled","disabled");
-        $("#phone").attr("disabled","disabled");
-        $("#visible").attr("disabled","disabled");
-        $("#examine").attr("disabled","disabled");
+        $('#activity-summernote').summernote({toolbar: false, airMode: true});
+        $("#activityStartTime").attr("disabled", "disabled");
+        $("#activityEndTime").attr("disabled", "disabled");
+        $("#address").attr("disabled", "disabled");
+        $("#price").attr("disabled", "disabled");
+        $("#signEndTime").attr("disabled", "disabled");
+        $("#maxPeople").attr("disabled", "disabled");
+        $("#phone").attr("disabled", "disabled");
+        $("#visible").attr("disabled", "disabled");
+        $("#examine").attr("disabled", "disabled");
         $("#czS").remove();
-        queryActivityById(row.id,1);
+        queryActivityById(row.id, 1);
         $("#createModify").show();
         $("#activityList").hide();
         $("#addBtn").hide();
     },
-    'click .recommend':function (e, value, row, index) {
+    'click .recommend': function (e, value, row, index) {
         $("#listType").html("推荐");
         $.ajax({
             url: "/v1/activity/queryActivityById",
@@ -444,8 +452,8 @@ var operateEvents = {
                     $("#activityImage").attr("src", "http://image.tiyujia.com/" + datas.imgUrls)
                 } else {
                     $.Popup({
-                        confirm:false,
-                        template:result.successmsg
+                        confirm: false,
+                        template: result.successmsg
                     })
                 }
             }
@@ -453,10 +461,10 @@ var operateEvents = {
         $("#activityRecommend").show();
         $("#activityList").hide();
     },
-    'click .Shield':function (e, value, row, index) {
+    'click .Shield': function (e, value, row, index) {
         var type = row.mask == 0 ? 1 : 0;
         $.Popup({
-            title:'屏蔽',
+            title: '屏蔽',
             template: '屏蔽之后，该活动将不在首页活动和活动列表页展示，“我的关注”和“我的”中活动保留，仍可以被浏览',
             saveEvent: function () {
                 $.ajax({
@@ -466,23 +474,23 @@ var operateEvents = {
                     data: {id: row.id, maskType: type},
                     dateType: "json",
                     success: function (result) {
-                        if(result.state == 200){
-                            if(type == 1){
+                        if (result.state == 200) {
+                            if (type == 1) {
                                 $.Popup({
-                                    confirm:false,
-                                    template:'屏蔽成功'
+                                    confirm: false,
+                                    template: '屏蔽成功'
                                 })
-                            }else{
+                            } else {
                                 $.Popup({
-                                    confirm:false,
-                                    template:'解除屏蔽成功'
+                                    confirm: false,
+                                    template: '解除屏蔽成功'
                                 })
                             }
                             $('#activity-list-table').bootstrapTable('refresh');
-                        }else{
+                        } else {
                             $.Popup({
-                                confirm:false,
-                                template:'删除失败'
+                                confirm: false,
+                                template: '删除失败'
                             })
                         }
                     }
@@ -490,10 +498,10 @@ var operateEvents = {
             }
         })
     },
-    'click .remove':function (e, value, row, index) {
+    'click .remove': function (e, value, row, index) {
         var type = row.del == 0 ? 1 : 0;
         $.Popup({
-            title:'删除',
+            title: '删除',
             template: '该活动的所有数据将被完全删除，不能再被浏览',
             saveEvent: function () {
                 $.ajax({
@@ -503,23 +511,23 @@ var operateEvents = {
                     data: {id: row.id, delType: type},
                     dateType: "json",
                     success: function (result) {
-                        if(result.state == 200){
-                            if(type == 1){
+                        if (result.state == 200) {
+                            if (type == 1) {
                                 $.Popup({
-                                    confirm:false,
-                                    template:'删除成功'
+                                    confirm: false,
+                                    template: '删除成功'
                                 })
-                            }else{
+                            } else {
                                 $.Popup({
-                                    confirm:false,
-                                    template:'恢复删除成功'
+                                    confirm: false,
+                                    template: '恢复删除成功'
                                 })
                             }
                             $('#activity-list-table').bootstrapTable('refresh');
-                        }else{
+                        } else {
                             $.Popup({
-                                confirm:false,
-                                template:'删除失败'
+                                confirm: false,
+                                template: '删除失败'
                             })
                         }
                     }
@@ -529,7 +537,7 @@ var operateEvents = {
     }
 }
 /*根据id获取活动详情*/
-function queryActivityById(id,type) {
+function queryActivityById(id, type) {
     $.ajax({
         url: "/v1/activity/queryActivityById",
         type: 'POST',
@@ -546,7 +554,7 @@ function queryActivityById(id,type) {
                 $("#activityStartTime").val(new Date(datas.startTime).format("yyyy-mm-dd HH:MM:ss"));
                 $("#activityEndTime").val(new Date(datas.endTime).format("yyyy-mm-dd HH:MM:ss"));
                 $("#address").val(datas.address);
-                $('input[name=type]').eq(!datas.type).attr({"checked":"checked"});
+                $('input[name=type]').eq(!datas.type).attr({"checked": "checked"});
                 $("#price").val(datas.price);
                 $("#signEndTime").val(new Date(datas.lastTime).format("yyyy-mm-dd HH:MM:ss"));
                 $("#maxPeople").val(datas.maxPeople);
@@ -557,11 +565,11 @@ function queryActivityById(id,type) {
                     isReviewed();
                     var template = (datas.memberTemplate).split(",");
                     var html = "";
-                    if(type == 1){
+                    if (type == 1) {
                         template.forEach(function (item, i) {
                             html += "<label class='checkbox'><input type='checkbox' value='" + item + "' checked disabled>" + item + "</label>";
                         });
-                    }else{
+                    } else {
                         template.forEach(function (item, i) {
                             html += "<label class='checkbox'><input type='checkbox' value='" + item + "' checked>" + item + "</label>";
                         });
@@ -572,8 +580,8 @@ function queryActivityById(id,type) {
                 }
             } else {
                 $.Popup({
-                    confirm:false,
-                    template:result.successmsg
+                    confirm: false,
+                    template: result.successmsg
                 })
             }
         }
@@ -593,8 +601,9 @@ function createActivity() {
     $("#template").html(html);
     $("#userRequired").hide();
     $('#updateCreateFrom')[0].reset();
-    $('#updateCreateFrom').data('bootstrapValidator').resetForm(true);/*仅仅清空验证的表单*/
-    $('#updateCreateFrom').bootstrapValidator('addField', 'image',{
+    $('#updateCreateFrom').data('bootstrapValidator').resetForm(true);
+    /*仅仅清空验证的表单*/
+    $('#updateCreateFrom').bootstrapValidator('addField', 'image', {
         validators: {
             notEmpty: {
                 message: '请上传图片'
@@ -605,9 +614,9 @@ function createActivity() {
 /*是否需要审核*/
 function isReviewed(obj) {
     var val = $("#examine").val();
-    if(val == 1){
+    if (val == 1) {
         $("#userRequired").show(500);
-    }else{
+    } else {
         $("#userRequired").hide(500);
     }
 }
@@ -619,10 +628,10 @@ function choiceMore() {
 /*活动增加用户必填的字段*/
 function createRequired() {
     var requiredVal = $("#requiredVal").val();
-    if(requiredVal == ''){
+    if (requiredVal == '') {
         $("#userRequiredInput").html("必填字段不能为空");
         return;
-    }else{
+    } else {
         $("#userRequiredInput").html("*");
     }
     var val = '<label class="checkbox"><input type="checkbox" checked value=' + requiredVal.trim() + '>' + requiredVal.trim() + '</label>';
@@ -638,7 +647,7 @@ function choiceMoreRel() {
 }
 
 /*创建中type=file的样式处理*/
-$('input[id=lefile]').change(function() {
+$('input[id=lefile]').change(function () {
     $('#photoCover').html($(this).val());
     $("#lefile").html($(this).val());
 });

@@ -20,7 +20,7 @@ function initTable() {
         checkboxHeader: "true",
         sortable: true,           //是否启用排序
         sortOrder: "asc",          //排序方式
-        smartDisplay: false,
+        // smartDisplay: false,
         height: 500,
         strictSearch: true,
         uniqueId: "id",           //每一行的唯一标识，一般为主键列

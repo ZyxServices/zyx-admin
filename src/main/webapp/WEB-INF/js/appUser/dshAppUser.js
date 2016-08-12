@@ -21,7 +21,7 @@ function initTable() {
         sortable: true,           //是否启用排序
         sortOrder: "asc",          //排序方式
         strictSearch: true,
-        smartDisplay: false,
+        // smartDisplay: false,
         height: 500,
         uniqueId: "id",           //每一行的唯一标识，一般为主键列
         search: true,
