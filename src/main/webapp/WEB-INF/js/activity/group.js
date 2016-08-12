@@ -237,7 +237,7 @@ var operateEvents = {
             height: 500,            //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
             uniqueId: "id",           //每一行的唯一标识，一般为主键列
             search: true,
-            smartDisplay: false,
+            // smartDisplay: false,
             contentType: "application/x-www-form-urlencoded",
             sidePagination: "server",
             method: "post",

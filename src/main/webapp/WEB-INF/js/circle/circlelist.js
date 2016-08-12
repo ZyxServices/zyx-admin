@@ -1,7 +1,6 @@
 /**
  * Created by guochunyan on 2016/7/14.
  */
-
 //用户列表
 var userList = $.ajax({
     url: "/v1/appUser/list/all",
@@ -19,42 +18,23 @@ var userList = $.ajax({
         for (var i = 0; i < rows.rows.length; i++) {
             html = html + "<option value='" + rows.rows[i].id + "'>" + rows.rows[i].nickname + "</option>"
         }
-        $("select[name=masterName]").append(html);
-        $("select[name=adminIds]").append(html);
+        $("#masterId").append(html);
+        $("#adminIds").append(html);
     }
 });
 //创建圈子
 function circleCreate() {
     $("#circleList").hide();
     $("#circleCreate").show();
-    $("#circleBtnSure").click(function (e) {
-        $("#circleCreates").ajaxSubmit({
-            url: '../../circle/createCircle',
-            type: 'post',
-            dataType: 'json',
-            success: function (result) {
-                if (result.state == 200) {
-                    e.preventDefault();
-                    var $form = $(e.target);
-                    $form.serialize();
-                    $("#circle-list-table").bootstrapTable('refresh');
-                    $("#circleList").show();
-                    $("#circleCreate").hide();
-                }
-                else {
-                    $.Popup({
-                        confirm: false,
-                        title: "该圈子已存在，请重新输入圈子名称"
-                    });
-                }
-            }
-        })
-    });
+    $("#masterId").chosen();
+    $("#adminIds").chosen();
+    $("input").val('');
+    circleEidtor("#circleBtnSure", "#circleCreates", '../../circle/createCircle', 33000, "创建圈子成功");
     userList;
-
 }
 
 $(function () {
+    $("#headImgShow").hide();
     $("#circleCreates").bootstrapValidator({
         fields: {
             "title": {
@@ -92,7 +72,7 @@ $(function () {
                     }
                 }
             },
-            "masterId": {
+            "adminIds": {
                 validators: {
                     notEmpty: {
                         message: '请设置管理员'
@@ -147,6 +127,9 @@ $(function () {
         //  clickToSelect: true,        //是否启用点击选中行
         //showColumns: true,
         //showHeader: true,
+        onLoadSuccess: function (data) {  //加载成功时执行
+            console.log(data)
+        },
         columns: [
             {field: '', checkbox: true, align: 'center', valign: 'middle'},
             {field: 'id', title: 'id', align: 'center', valign: 'middle'},
@@ -184,34 +167,31 @@ function circleFormatter(value, row, index) {
         '<a class="remove p5" href="javascript:void(0)" title="remove">删除</a>'
     ].join('');
 }
-
 //操作分类事件
 var operateEvent = {
     //预览圈子
     'click .preview': function (e, value, row, index) {
         $("#circleList").hide();
         $("#circleCreate").show();
+        $("#circleBtnSure").hide();
         $("input[name=title]").val(row.title).attr("disabled", "disabled");
         $("input[name=state]").val(row.state).attr("disabled", "disabled");
         $("textarea[name=details]").val(row.details).attr("disabled", "disabled");
         $("input[name=circleMaster]").val(row.circleMaster).attr("disabled", "disabled");
-        $("input[name=masterId]").val(row.masterId).attr("disabled", "disabled");
-        $("#adminIds").val(row.adminIds).attr("disabled", "disabled");
         $("#masterName").val(row.masterName).attr("disabled", "disabled");
+        $("#masterId").attr("disabled", "disabled");
+        $("#adminIds").attr("disabled", "disabled");
         $("#category").attr("disabled", "disabled");
         $("input[name=headImgUrl]").hide();
-        console.log(row.circleType);
+        $("#masterId option[value='" + row.circleMasterId + "']").attr("selected", true);
+        //多个管理员
+        adminSelect("#adminIds", row.adminIds);
+        $("#adminIds").trigger("liszt:updated");
+        $("#masterId").chosen();
+        $("#adminIds").chosen();
         $("#category").find("option[value='" + row.circleType + "']").attr("selected", true);
         // 获取图片
-        if (row.headImgUrl == "") {
-            $("#headImgShow").html("您未上传圈子头像哦！！")
-        }
-        else {
-            var img = document.createElement('img');
-            img.width = "300";
-            img.src = "http://image.tiyujia.com/" + row.headImgUrl;
-            document.getElementById('headImgShow').appendChild(img);
-        }
+        $("#headImgShow").show().attr("src", "http://image.tiyujia.com/" + row.headImgUrl);
         $("#circleList").hide();
         $("#circleCreate").show();
     },
@@ -219,41 +199,21 @@ var operateEvent = {
     'click .edit': function (e, value, row, index) {
         $("#circleList").hide();
         $("#circleCreate").show();
+        $("input[name=circleId]").val(row.id);
         $("input[name=title]").val(row.title);
+        $("input[name=createId]").val(row.createId);
         $("input[name=state]").val(row.state);
         $("textarea[name=details]").val(row.details);
         $("input[name=circleMaster]").val(row.circleMaster);
-        $("input[name=masterId]").val(row.masterId);
-        $("select[name=adminIds]").val(row.adminIds);
-        $("select[name=masterName]").val(row.masterName);
+        $("#masterId option[value='" + row.circleMasterId + "']").attr("selected", true);
+        //多个管理员
+        adminSelect("#adminIds", row.adminIds);
+        $("#adminIds").trigger("liszt:updated");
+        $("#masterId").chosen();
+        $("#adminIds").chosen();
         $("#category").find("option[value='" + row.circleType + "']").attr("selected", true);
-        // 获取图片
-        if (row.headImgUrl == "") {
-            $("#headImgShow").html("您未上传圈子头像哦！！")
-        }
-        else {
-            var img = document.createElement('img');
-            img.width = "300";
-            img.src = "http://image.tiyujia.com/" + row.headImgUrl;
-            document.getElementById('headImgShow').appendChild(img);
-        }
-        $("#circleBtnSure").click(function (e) {
-            $("#circleCreates").ajaxSubmit({
-                url: '../../circle/edit',
-                type: 'post',
-                dataType: 'json',
-                success: function (result) {
-                    $("#circleList").show();
-                    $("#circleCreate").hide();
-                    $.Popup({
-                        confirm: false,
-                        title: "修改成功"
-                    });
-                    $("#circle-list-table").bootstrapTable('refresh');
-                }
-            })
-        })
-
+        $("#headImgShow").show().attr("src", "http://image.tiyujia.com/" + row.headImgUrl);
+        circleEidtor("#circleBtnSure", "#circleCreates", '../../circle/edit', 36000, "修改成功");
     },
     //圈子推荐
     'click .recommend': function (e, value, row, index) {
@@ -342,3 +302,45 @@ var operateEvent = {
 
     }
 };
+
+//多选select 公用方法
+function adminSelect(select, values) {
+    var arr = values.split(',');
+    var length = arr.length;
+    var value = '';
+    for (i = 0; i < length; i++) {
+        value = arr[i];
+        $(select + " [value='" + value + "']").attr('selected', 'selected');
+    }
+    $(select).trigger("liszt:updated");
+}
+//创建、编辑圈子公用方法
+function circleEidtor(id, button, url, state, text) {
+    $(id).click(function (e) {
+        $(button).ajaxSubmit({
+            url: url,
+            type: 'post',
+            dataType: 'json',
+            success: function (result) {
+                if (result.state == state) {
+                    e.preventDefault();
+                    var $form = $(e.target);
+                    $form.serialize();
+                    $.Popup({
+                        confirm: false,
+                        title: text
+                    });
+                    $("#circle-list-table").bootstrapTable('refresh');
+                    $("#circleList").show();
+                    $("#circleCreate").hide();
+                }
+                else {
+                    $.Popup({
+                        confirm: false,
+                        title: result.errmsg
+                    });
+                }
+            }
+        })
+    });
+}

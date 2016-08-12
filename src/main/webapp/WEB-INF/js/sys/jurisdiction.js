@@ -2,6 +2,27 @@
  * Created by ZYX on 2016/7/20.
  */
 $(function () {
+    $("#roleForm").bootstrapValidator({
+        message: '数据无效',
+        feedbackIcons: {
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            'roleName': {
+                validators: {
+                    notEmpty: {
+                        message: '请输入名称'
+                    }
+                }
+            }, 'roleDesc': {
+                validators: {
+                    notEmpty: {
+                        message: '请输入描述'
+                    }
+                }
+            }
+        }
+    });
     $("#jurisdiction-list-table").bootstrapTable({
         cache: false,
         striped: true,
@@ -51,7 +72,8 @@ $(function () {
         type: 'post',
         dataType: 'json',
         beforeSubmit: function () {
-            $("#createButton").attr("disabled", true);
+            return $("#roleForm").data('bootstrapValidator').isValid();
+           /* $("#createButton").attr("disabled", true);
             var phone = $("#roleForm").find('#roleName').val();
             var password = $("#roleForm").find('#roleDesc').val();
             var checked = true;
@@ -65,7 +87,7 @@ $(function () {
                 checked = false;
             }
 
-            return checked;
+            return checked;*/
         },
         success: function (result) {
             if (result.state == 200) {

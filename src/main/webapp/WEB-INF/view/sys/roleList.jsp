@@ -170,19 +170,19 @@
 
                     <form action="/v1/role/" id="roleCreateForm" method="post" enctype="multipart/form-data"
                           class="form-horizontal" novalidate="novalidate" role="form">
-                        <div class="control-group">
+                        <div class="control-group form-group">
                             <label class="control-label">角色名称</label>
-                            <div class="controls">
-                                <input type="text" id="roleCreateName" name="roleName"/>
-                                <span class="help-inline">*</span>
+                            <div class="controls col-xs-5">
+                                <input type="text" id="roleCreateName" name="roleName" class="span6"/>
+                                <span class="help-inline required">*</span>
                             </div>
                         </div>
 
-                        <div class="control-group">
+                        <div class="control-group form-group">
                             <label class="control-label">角色描述</label>
-                            <div class="controls">
-                                <input type="text" id="roleCreateDesc" name="roleDesc"/>
-                                <span class="help-inline">*</span>
+                            <div class="controls col-xs-5">
+                                <input type="text" id="roleCreateDesc" name="roleDesc" class="span6"/>
+                                <span class="help-inline required">*</span>
                             </div>
                         </div>
 
@@ -291,19 +291,19 @@
                     <form action="/v1/role/" id="roleEditForm" method="post" enctype="multipart/form-data"
                           class="form-horizontal" novalidate="novalidate" role="form">
                         <input type="hidden" id="editRoleId" name="editRoleId">
-                        <div class="control-group">
+                        <div class="control-group form-group">
                             <label class="control-label">角色名称</label>
-                            <div class="controls">
-                                <input type="text" id="roleEditName" name="roleName" disabled/>
-                                <span class="help-inline">*</span>
+                            <div class="controls col-xs-5">
+                                <input type="text" id="roleEditName" name="roleName" disabled class="span6"/>
+                                <span class="help-inline required">*</span>
                             </div>
                         </div>
 
-                        <div class="control-group">
+                        <div class="control-group form-group">
                             <label class="control-label">角色描述</label>
-                            <div class="controls">
-                                <input type="text" id="roleEditDesc" name="roleDesc"/>
-                                <span class="help-inline">*</span>
+                            <div class="controls col-xs-5">
+                                <input type="text" id="roleEditDesc" name="roleDesc" class="span6"/>
+                                <span class="help-inline required">*</span>
                             </div>
                         </div>
 

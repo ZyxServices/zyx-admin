@@ -176,24 +176,24 @@
 
                     <form action="/v1/role/" id="roleForm" method="post" enctype="multipart/form-data"
                           class="form-horizontal" novalidate="novalidate" role="form">
-                        <div class="control-group">
-                            <label class="control-label">角色名称</label>
+                        <div class="control-group form-group">
+                            <label class="control-label col-xs-5">角色名称</label>
                             <div class="controls">
                                 <%--<select class="span6 form-control">--%>
                                 <%--<option>一级</option>--%>
                                 <%--<option>二级</option>--%>
                                 <%--<option>三级</option>--%>
                                 <%--</select>--%>
-                                <input type="text" id="roleName" name="roleName"/>
-                                <span class="help-inline">*</span>
+                                <input type="text" id="roleName" name="roleName" class="span6"/>
+                                <span class="help-inline required">*</span>
                             </div>
                         </div>
 
-                        <div class="control-group">
+                        <div class="control-group form-group">
                             <label class="control-label">角色描述</label>
-                            <div class="controls">
-                                <input type="text" id="roleDesc" name="roleDesc"/>
-                                <span class="help-inline">*</span>
+                            <div class="controls col-xs-5">
+                                <input type="text" id="roleDesc" name="roleDesc" class="span6"/>
+                                <span class="help-inline required">*</span>
                             </div>
                         </div>
 

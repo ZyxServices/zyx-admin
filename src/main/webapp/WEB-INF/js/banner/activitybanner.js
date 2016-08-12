@@ -12,7 +12,7 @@ $(function(){
         }],
         locale: 'zh-US',
         pagination: true,
-        smartDisplay: false,
+        // smartDisplay: false,
         cache: false,
         search: true,
         strictSearch: true,
