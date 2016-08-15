@@ -1,21 +1,23 @@
 /*summernote中样式修改*/
-.summernote .note-editor .modal{
+.summernote .note-editor .modal {
     display: none;
 }
-.summernote .note-editor .close span{
+
+.summernote .note-editor .close span {
     display: none;
 }
+
 .summernote .note-popover .popover-content, .panel-heading.note-toolbar {
     padding: 0 0 5px 5px;
     margin: 0;
     background: #f5f5f5;
 }
 
-.summernote .btn-group>.btn, .btn-group>.dropdown-menu, .btn-group>.popover{
+.summernote .btn-group > .btn, .btn-group > .dropdown-menu, .btn-group > .popover {
     font-size: 12px;
 }
 
-.summernote .btn{
+.summernote .btn {
     background: #fff;
     padding: 5px 10px;
     height: 30px;
@@ -25,21 +27,42 @@
 div.checker span.checked {
     background-position: -76px -260px;
 }
-.controls input[type="checkbox"]{
+
+.controls input[type="checkbox"] {
     margin-left: 0;
 }
 
-.controls input[type="radio"]{
+.controls input[type="radio"] {
     margin: 4px 0 0 0;
 }
+
 /*不是none和hidden的隐藏input的方法*/
-.hideInput{
+.hideInput {
     width: 1px;
     height: 1px;
     position: absolute;
     top: 0;
 }
+
 /*必填的颜色*/
-.help-inline.required{
+.help-inline.required {
     color: red;
+}
+
+.circleModals .control-label {
+    display: inline-block;
+    margin-right: 10px;
+
+}
+
+.radio_box {
+    display: none;
+}
+
+.radio_box label {
+    width: 60px;
+}
+
+.circleModals input[type="radio"], .circleModals input[type="checkbox"] {
+    margin: 0 2px 0 0;
 }
