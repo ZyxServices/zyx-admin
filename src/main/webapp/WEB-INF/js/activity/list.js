@@ -292,7 +292,10 @@ $('#devaForm').ajaxForm({
                 confirm: false,
                 template: result.successmsg
             })
-        } else if (result.state && result.state == 303) {
+            $("#activityList").show();
+            $("#activityRecommend").hide();
+            $('#activity-list-table').bootstrapTable('refresh');
+        } else{
             $.Popup({
                 confirm: false,
                 template: result.errmsg
@@ -650,4 +653,10 @@ function choiceMoreRel() {
 $('input[id=lefile]').change(function () {
     $('#photoCover').html($(this).val());
     $("#lefile").html($(this).val());
+});
+
+/*推荐中type=file的样式处理*/
+$('input[id=recommendFile]').change(function () {
+    $('#recommendPhotoCover').html($(this).val());
+    $("#recommendFile").html($(this).val());
 });

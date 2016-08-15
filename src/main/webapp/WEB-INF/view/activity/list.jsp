@@ -416,8 +416,8 @@
             <div class="control-group">
               <label class="control-label">图片</label>
               <div class="controls">
-                <input type="file" name="image">
-                <button class="btn btn-default">上传图片</button>
+                <input id="recommendFile" type="file" class="hideInput" name="image">
+                <a class="btn btn-default" href="javascript:void (0)" id="recommendPhotoCover" onclick="$('input[id=recommendFile]').click();">选择文件</a>
               </div>
             </div>
 

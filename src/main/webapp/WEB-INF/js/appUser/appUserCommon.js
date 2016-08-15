@@ -4,16 +4,15 @@ function authFormatter(value) {
 }
 // 状态格式化
 function statusFormatter(value, row, index) {
-    if (row.del && row.mask) {
+    /*if (row.del && row.mask) {
         return "已删除-已屏蔽";
     }
     if (row.del && !row.mask) {
         return "已删除";
-    }
-    if (!row.del && row.mask) {
+    }*/
+    if (row.mask) {
         return "已屏蔽";
-    }
-    if (!row.del && !row.mask) {
+    }else if (!row.mask) {
         return "正常";
     }
 }
@@ -129,53 +128,80 @@ var operateEvent = {
         });
     },
     'click .mask': function (e, value, row, index) {
-        if (confirm('这是屏蔽是否的对话框?')) {
-            $.ajax({
-                url: "/v1/appUser/mask",
-                data: {id: row.id},
-                type: "GET",
-                dataType: 'json',
-                success: function () {
-                    $('#app_user_table').bootstrapTable("refresh");
-                },
-                error: function (er) {
-                    alert("操作失败");
-                }
-            });
-        }
+        $.Popup({
+            title: '屏蔽',
+            template: '这是屏蔽是否的对话框',
+            saveEvent: function () {
+                $.ajax({
+                    url: "/v1/appUser/mask",
+                    async: false,
+                    type: "get",
+                    data: {id: row.id},
+                    dateType: "json",
+                    success: function (result) {
+                        if (result.state == 200) {
+                            $('#app_user_table').bootstrapTable("refresh");
+                        } else {
+                            $.Popup({
+                                confirm: false,
+                                template: '操作失败'
+                            })
+                        }
+                    }
+                });
+            }
+        })
     },
     'click .unMask': function (e, value, row, index) {
-        if (confirm('这是恢复屏蔽是否的对话框?')) {
-            $.ajax({
-                url: "/v1/appUser/unMask",
-                data: {id: row.id},
-                type: "GET",
-                dataType: 'json',
-                success: function () {
-                    $('#app_user_table').bootstrapTable("refresh");
-                },
-                error: function (er) {
-                    alert("操作失败");
-                }
-            });
-        }
+        $.Popup({
+            title: '恢复屏蔽',
+            template: '这是恢复屏蔽是否的对话框',
+            saveEvent: function () {
+                $.ajax({
+                    url: "/v1/appUser/unMask",
+                    async: false,
+                    type: "get",
+                    data: {id: row.id},
+                    dateType: "json",
+                    success: function (result) {
+                        if (result.state == 200) {
+                            $('#app_user_table').bootstrapTable("refresh");
+                        } else {
+                            $.Popup({
+                                confirm: false,
+                                template: '操作失败'
+                            })
+                        }
+                    }
+                });
+            }
+        })
     },
     'click .del': function (e, value, row, index) {
-        if (confirm('这是删除是否的对话框?')) {
-            $.ajax({
-                url: "/v1/appUser/del",
-                data: {id: row.id},
-                type: "GET",
-                dataType: 'json',
-                success: function () {
-                    $('#app_user_table').bootstrapTable("refresh");
-                },
-                error: function (er) {
-                    alert("操作失败");
-                }
-            });
-        }
-    },
+        $.Popup({
+            title: '删除',
+            template: '该活动的所有数据将被完全删除，不能再被浏览',
+            saveEvent: function () {
+                $.ajax({
+                    url: "/v1/appUser/del",
+                    async: false,
+                    type: "get",
+                    data: {id: row.id},
+                    dateType: "json",
+                    success: function (result) {
+                        if (result.state == 200) {
+                            $('#app_user_table').bootstrapTable("refresh");
+                        } else {
+                            $.Popup({
+                                confirm: false,
+                                template: '删除失败'
+                            })
+                        }
+                    }
+                });
+            }
+        })
+    }/*,
     'click .unDel': function (e, value, row, index) {
         if (confirm('这是恢复删除是否的对话框?')) {
             $.ajax({
@@ -191,5 +217,5 @@ var operateEvent = {
                 }
             });
         }
-    }
+    }*/
 };

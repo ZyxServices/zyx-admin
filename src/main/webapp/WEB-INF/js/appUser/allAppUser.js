@@ -63,23 +63,23 @@ function initTable() {
 function operateFormatter(value, row, index) {
     var _html = [];
 
-    if (row.del) {
+    /*if (row.del) {
         _html.push('<a class="unDel p5" href="javascript:void(0)" title="unDel">取消删除</a>');
     } else {
-        // _html.push('<a class="preview p5" href="javascript:void(0)" title="preview">预览</a>');
-        _html.push('<a class="edit p5" href="javascript:void(0)" title="edit">编辑</a>');
-        _html.push('<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>');
-        if (row.mask) {
-            _html.push('<a class="unMask p5" href="javascript:void(0)" title="unMask">取消屏蔽</a>');
-        } else {
-            _html.push('<a class="mask p5" href="javascript:void(0)" title="mask">屏蔽</a>');
-        }
-        if (row["authenticate"] == 1) {// 待审核
-            // _html.push('<a class="auth p5" href="javascript:void(0)" title="auth">审核</a>');
-        }
-        _html.push('<a class="del p5" href="javascript:void(0)" title="del">删除</a>');
-    }
 
+    }*/
+// _html.push('<a class="preview p5" href="javascript:void(0)" title="preview">预览</a>');
+//     _html.push('<a class="edit p5" href="javascript:void(0)" title="edit">编辑</a>');
+    _html.push('<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>');
+    if (row.mask) {
+        _html.push('<a class="unMask p5" href="javascript:void(0)" title="unMask">取消屏蔽</a>');
+    } else {
+        _html.push('<a class="mask p5" href="javascript:void(0)" title="mask">屏蔽</a>');
+    }
+   /* if (row["authenticate"] == 1) {// 待审核
+        _html.push('<a class="auth p5" href="javascript:void(0)" title="auth">审核</a>');
+    }*/
+    // _html.push('<a class="del p5" href="javascript:void(0)" title="del">删除</a>');
     return _html.join('');
 }
 

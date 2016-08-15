@@ -57,13 +57,23 @@ function initTable() {
             {field: 'price', title: '粉丝人数', sortable: true},
             {field: 'startTime', title: '动态数量', sortable: true},
             {field: 'overTime', title: '金币数量', sortable: true},
-            {field: 'createTime', title: '注册时间', sortable: true, formatter: dateFormatter}]
-        // {field: 'lastlogintime', title: '最后登录时间', sortable: true, formatter: dateFormatter},
-        // {field: 'sex', title: '性别'},
-        // {field: 'birthday', title: '生日', formatter: dateFormatter},
-        // {field: 'address', title: '所在地'},
-        // {field: 'operation', title: '操作', align: 'center', events: operateEvent, formatter: operateFormatter}]
+            {field: 'createTime', title: '注册时间', sortable: true, formatter: dateFormatter},
+            {field: 'operation', title: '操作', align: 'center', events: operateEvent, formatter: operateFormatter}
+        ]
     });
+}
+//操作
+function operateFormatter(value, row, index) {
+    var _html = [];
+    _html.push('<a class="edit p5" href="javascript:void(0)" title="edit">编辑</a>');
+    _html.push('<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>');
+    if (row.mask) {
+        _html.push('<a class="unMask p5" href="javascript:void(0)" title="unMask">取消屏蔽</a>');
+    } else {
+        _html.push('<a class="mask p5" href="javascript:void(0)" title="mask">屏蔽</a>');
+    }
+    _html.push('<a class="del p5" href="javascript:void(0)" title="del">删除</a>');
+    return _html.join('');
 }
 $(function () {
     initTable();

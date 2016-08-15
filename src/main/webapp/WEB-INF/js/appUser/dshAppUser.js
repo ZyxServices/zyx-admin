@@ -70,12 +70,13 @@ function initTable() {
 function operateFormatter(value, row, index) {
     var _html = [];
 
-    if (row.del) {
+    /*if (row.del) {
         _html.push('<a class="unDel p5" href="javascript:void(0)" title="unDel">取消删除</a>');
     } else {
-        _html.push('<a class="authPass p5" href="javascript:void(0)" title="审核通过">审核通过</a>');
-        _html.push('<a class="authFail p5" href="javascript:void(0)" title="审核不通过">审核不通过</a>');
-    }
+
+    }*/
+    _html.push('<a class="authPass p5" href="javascript:void(0)" title="审核通过">审核通过</a>');
+    _html.push('<a class="authFail p5" href="javascript:void(0)" title="审核不通过">审核不通过</a>');
 
     return _html.join('');
 }
