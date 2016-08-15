@@ -192,7 +192,7 @@
                   <a class="btn btn-default" href="javascript:void (0)" id="photoCover" onclick="$('input[id=lefile]').click();">选择文件</a>
                   <span class="help-inline required">*</span>
                 </div>
-                <div style="margin-top: 10px" class="hide" id="imagesWrap">
+                <div style="margin-top: 10px" id="imagesWrap">
                   <img id="images" src="">
                 </div>
               </div>
@@ -205,6 +205,7 @@
                   <div id="activity-summernote"></div>
                   <input id="desc" type="text" class="hideInput" name="desc" value="">
                 </div>
+                <span class="help-inline required">*</span>
               </div>
             </div>
 
@@ -295,19 +296,18 @@
               </div>
             </div>
 
-            <div class="control-group hide" id="userRequired">
+            <div class="control-group hide form-group" id="userRequired">
               <label class="control-label">用户报名必填</label>
-              <div class="controls" id="template">
-                <label class="checkbox"><input type="checkbox" value="手机号码">手机号码</label>
-                <label class="checkbox"><input type="checkbox" value="姓名">姓名</label>
-                <label class="checkbox"><input type="checkbox" value="身份证号码">身份证号码</label>
-                <label class="checkbox"><input type="checkbox" value="性别">性别</label>
-                <label class="checkbox"><input type="checkbox" value="年龄">年龄</label>
-                <label class="checkbox"><input type="checkbox" value="地址">地址</label>
-                <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>
+              <div  class="controls col-xs-5" id="template">
+                  <label class="checkbox"><input type="checkbox" value="手机号码">手机号码</label>
+                  <label class="checkbox"><input type="checkbox" value="姓名">姓名</label>
+                  <label class="checkbox"><input type="checkbox" value="身份证号码">身份证号码</label>
+                  <label class="checkbox"><input type="checkbox" value="性别">性别</label>
+                  <label class="checkbox"><input type="checkbox" value="年龄">年龄</label>
+                  <label class="checkbox"><input type="checkbox" value="地址">地址</label>
+                  <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>
               </div>
             </div>
-            <input type="hidden" id="memberTemplate" name="memberTemplate" value="">
 
             <div class="control-group hide" id="addChoice">
               <label class="control-label"></label>
@@ -418,6 +418,9 @@
               <div class="controls">
                 <input id="recommendFile" type="file" class="hideInput" name="image">
                 <a class="btn btn-default" href="javascript:void (0)" id="recommendPhotoCover" onclick="$('input[id=recommendFile]').click();">选择文件</a>
+                <div style="margin-top: 10px" id="recommendImgWrap">
+                  <img id="recommendImg" src="">
+                </div>
               </div>
             </div>
 

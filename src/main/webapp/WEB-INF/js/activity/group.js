@@ -212,7 +212,7 @@ var operateEvents = {
     'click .preview':function (e, value, row, index) {
         $("#listType").html('预览');
         $("#activityGroupCreate").show();
-        $("#imgWrap").show();
+        // $("#imgWrap").show();
         $("#activityGroupList").hide();
         $("#combinationId").val(row.id);
         $("#name").attr("disabled","disabled");
@@ -249,7 +249,7 @@ var operateEvents = {
     'click .edit':function (e, value, row, index) {
         $("#listType").html('编辑');
         $("#combinationId").val(row.id);
-        $("#imgWrap").show();
+        // $("#imgWrap").show();
         $("#activityGroupList").hide();
         $("#activityGroupCreate").show();
         getGroupActivityDetail(row.id);
@@ -408,7 +408,7 @@ function createGroupActivity() {
     $("#listType").html('创建');
     $("#activityGroupCreate").show();
     $("#activityGroupList").hide();
-    $("#imgWrap").hide();
+    // $("#imgWrap").hide();
     $("#combinationId").val('');
     $('#choice-activity-table').bootstrapTable('refresh');
     $('#group-form').bootstrapValidator('resetForm', true);   /*将表格清空*/
@@ -457,8 +457,27 @@ $("#createModify").click(function () {
 function timeFormat(data) {
     return new Date(data).format("yyyy-mm-dd HH:MM:ss")
 }
-/*type=file的样式处理*/
+/*type=file的样式处理---图片预览*/
 $('input[id=lefile]').change(function() {
-    $('#photoCover').html($(this).val());
-    $("#lefile").html($(this).val());
+    var _val = $(this).val();
+    if($(this).val()){
+        $('#photoCover').html(_val);
+        $("#lefile").html(_val);
+        var objUrl = getImgURL(this.files[0]) ;
+        if (objUrl) {
+            $("#images").attr("src", objUrl) ;
+        }
+    }
 });
+//建立一個可存取到該file的url
+function getImgURL(file) {
+    var url = null ;
+    if (window.createObjectURL != undefined) { // basic
+        url = window.createObjectURL(file) ;
+    } else if (window.URL != undefined) { // mozilla(firefox)
+        url = window.URL.createObjectURL(file) ;
+    } else if (window.webkitURL!=undefined) { // webkit or chrome
+        url = window.webkitURL.createObjectURL(file) ;
+    }
+    return url ;
+}
