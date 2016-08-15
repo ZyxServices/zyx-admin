@@ -35,19 +35,30 @@
                     <button id="remove" class="btn btn-danger" style="margin-left: 10px" disabled>
                         <i class="glyphicon glyphicon-remove"></i> 批量删除
                     </button>
-                    <table id="live_table"  class="table table-hover" >
+                    <table id="live_table" class="table table-hover">
 
 
                     </table>
                 </div>
             </div>
-            <div class="create_liveType">
+            <div class="create_liveType row-fluid form-horizontal bv-form">
                 <h3 style="margin: 0;display: inline-block">创建直播分类 </h3>
                 <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
-                <span>创建名称</span>
-                <input id="lab" type="text"/>
-                <span>备注</span>
-                <input id="desc" type="text"/>
+
+                <div class="control-group form-group">
+                    <label class="control-label " style="width: 58px;margin-right: 10px;text-align: left">创建名称</label>
+                    <div class=" col-xs-5">
+                        <input  id="lab" type="text"/>
+                    </div>
+                </div>
+
+                <div class="control-group form-group">
+                    <label class="control-label" style="width: 58px;margin-right: 10px;text-align: left">备注</label>
+                    <div class=" col-xs-5">
+                       <input id="desc" type="text"/>
+                    </div>
+                </div>
+
                 <button onclick="operateEventclass.creatLive()" class="btn btn-danger">确定</button>
                 <button onclick="window.location.reload();" class="btn btn-danger">返回</button>
                 <h3 style="margin: 0;display: block">编辑直播分类 </h3>
@@ -60,5 +71,5 @@
 <jsp:include page="../public/common-footer.jsp"/>
 <script type="text/javascript" src="../../js/public/dialog.js"></script>
 <script type="text/javascript" src="../../js/live/live.js"></script>
- </body>
+</body>
 </html>
