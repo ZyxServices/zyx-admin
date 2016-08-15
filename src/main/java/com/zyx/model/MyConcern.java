@@ -9,10 +9,10 @@ public class MyConcern {
     private Integer id;
 
     @Column(name = "concern_id")
-    private Integer concernId;
+    private Integer concernId;//关注类型id
 
     @Column(name = "concern_type")
-    private Integer concernType;
+    private Integer concernType;//关注类型，0为动态，1为明星，2为个人，3为球队,4为圈子，5为活动，6位直播
 
     @Column(name = "account_id")
     private Integer accountId;

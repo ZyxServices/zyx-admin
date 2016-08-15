@@ -24,4 +24,8 @@ public interface CircleItemService extends BaseService<CircleItem> {
 
     Map<String, Object> search(Integer start, Integer pageSize, String searchText);
 
+    Map<String,Object> editCircleItem(Integer circleItemId,String title,String content);
+
+
+
 }

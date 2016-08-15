@@ -2,6 +2,7 @@ package com.zyx.controller.pg;
 
 import com.zyx.constants.Constants;
 import com.zyx.service.pg.ConcernService;
+import com.zyx.utils.CharUtil;
 import com.zyx.utils.FileUploadUtils;
 import com.zyx.utils.MapUtils;
 import io.swagger.annotations.ApiOperation;
@@ -41,14 +42,19 @@ public class ConcernController {
             @RequestParam(value = "visible") Integer visible,
             @RequestParam(value = "type") Integer type,
             @RequestParam(value = "createId") Integer createId,
-            @RequestPart(value = "imgFile") MultipartFile imgFile) {
+            @RequestPart(value = "imgFile") MultipartFile[] imgFile) {
         AbstractView jsonView = new MappingJackson2JsonView();
         if (Objects.equals(imgFile, null)) {
             jsonView.setAttributesMap(MapUtils.buildErrorMap(Constants.AUTH_ERROR_903, "文件未找到"));
             return new ModelAndView(jsonView);
         }
-        String dbFilePath = FileUploadUtils.uploadFile(imgFile);
-        Map<String, Object> map = concernService.createConcern(content, createId, type, visible, dbFilePath);
+        String dbFilePaths = null;
+        Map<String, Object> dbFilePath = FileUploadUtils.uploadFile(imgFile);
+        if (dbFilePath.containsKey("dbFilePath")) {
+            List<String> list = (List<String>) dbFilePath.get("dbFilePath");
+            dbFilePaths = CharUtil.listToString(list);
+        }
+        Map<String, Object> map = concernService.createConcern(content, createId, type, visible, dbFilePaths);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }

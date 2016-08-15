@@ -89,4 +89,15 @@ public class CircleItemController {
         return new ModelAndView(jsonView);
     }
 
+    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    @ApiOperation(value = "编辑帖子", notes = "编辑帖子")
+    ModelAndView edit(@RequestParam(value = "circleItemId") Integer circleItemId,
+                      @RequestParam(value = "title", required = false) String title,
+                      @RequestParam(value = "content", required = false) String content) {
+        Map<String, Object> map = circleItemService.editCircleItem(circleItemId, title, content);
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
 }

@@ -19,4 +19,6 @@ public interface CircleItemMapper extends Mapper<CircleItem> {
 
     Integer searchCount();
 
+    Integer editCircleItem(@Param("id")Integer id,@Param("title")String title,@Param("content")String content);
+
 }

@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.*;
 
 /**
  * Created by SubDong on 2016/3/16.
@@ -58,6 +58,47 @@ public class FileUploadUtils {
             e.printStackTrace();
             return Constants.ERROR + "";
         }
+    }
+
+    public static Map<String, Object> uploadFile(MultipartFile[] file) {
+        Map<String, Object> resultMap = new HashMap<>();
+        List<String> resultDbPath = new ArrayList<>();
+        for (MultipartFile f : file) {
+            String allFileName = f.getOriginalFilename();
+
+
+            String fileName = getFileExtension(allFileName);
+
+            fileName = fileName.toLowerCase();
+            //"gif", "jpeg", "jpg", "bmp", "png"
+            String[] strings = new String[]{"png", "gif", "jpeg", "jpg", "bmp"};
+            try {
+                if (Arrays.binarySearch(strings, fileName) != -1) {
+
+
+                    byte[] tempFile = f.getBytes();
+                    String[] images = new String[]{"png", "gif", "jpeg", "jpeg", "jpg", "bmp"};
+                    if (Arrays.binarySearch(images, fileName) != -1 && tempFile.length > IMAGES_MAX_BYTE) {
+                        return MapUtils.buildErrorMap(Constants.AUTH_ERROR_901, Constants.AUTH_ERROR_901_MSG);
+
+                    }
+
+                    String uploadFile = FastDFSClient.uploadFiles(tempFile, allFileName);
+                    if (uploadFile != null) {
+                        resultDbPath.add(uploadFile);
+                    } else {
+                        return MapUtils.buildErrorMap(Constants.AUTH_ERROR_902, Constants.AUTH_ERROR_902_MSG);
+                    }
+                } else {
+                    return MapUtils.buildErrorMap(Constants.AUTH_ERROR_903, Constants.AUTH_ERROR_903_MSG);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return Constants.MAP_500;
+            }
+        }
+        resultMap.put("dbFilePath", resultDbPath);
+        return resultMap;
     }
 
     public static String getFileExtension(String fullName) {

@@ -116,4 +116,27 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
         List<CircleItem> circleItems = circleItemMapper.search(searchText, start * pageSize, pageSize);
         return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, circleItems);
     }
+
+    @Override
+    public Map<String, Object> editCircleItem(Integer circleItemId, String title, String content) {
+        if (Objects.equals(circleItemId, null)) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30033, PgConstants.PG_ERROR_CODE_30033_MSG);
+        }
+        if (Objects.equals(title, null) || Objects.equals(title, "")) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30006, PgConstants.PG_ERROR_CODE_30006_MSG);
+        }
+        if (Objects.equals(content, null) || Objects.equals(content, "")) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30007, PgConstants.PG_ERROR_CODE_30007_MSG);
+        }
+        try {
+            Integer result = circleItemMapper.editCircleItem(circleItemId, title, content);
+            if (result > 0) {
+                return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_36000_MSG, null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return PgConstants.MAP_500;
+        }
+        return PgConstants.MAP_500;
+    }
 }

@@ -128,6 +128,7 @@ public interface Constants {
      * 图片上传文件大于5MB
      */
     int AUTH_ERROR_901 = 901;
+    String AUTH_ERROR_901_MSG = "图片上传文件不能大于5MB";
     /**
      * 服务器错误
      */
@@ -136,10 +137,12 @@ public interface Constants {
      * 文件上传失败
      */
     int AUTH_ERROR_902 = 902;
+    String AUTH_ERROR_902_MSG = "文件上传失败";
     /**
      * 文件格式错误
      */
     int AUTH_ERROR_903 = 903;
+    String AUTH_ERROR_903_MSG = "文件格式错误";
     /**
      * 删除失败
      */

@@ -13,6 +13,7 @@ public class ConcernVo extends Concern {
     private Integer authenticate;
     private Integer zanCounts;
     private Integer commentCounts;
+    private Integer official;
 
     public String getUserName() {
         return userName;
@@ -44,5 +45,13 @@ public class ConcernVo extends Concern {
 
     public void setCommentCounts(Integer commentCounts) {
         this.commentCounts = commentCounts;
+    }
+
+    public Integer getOfficial() {
+        return official;
+    }
+
+    public void setOfficial(Integer official) {
+        this.official = official;
     }
 }

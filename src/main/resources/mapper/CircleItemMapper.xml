@@ -82,4 +82,8 @@
         SELECT COUNT(*) as counts FROM circle_item
     </select>
 
+    <update id="editCircleItem">
+        UPDATE circle_item SET title=#{title},content=#{content} WHERE id=#{id}
+    </update>
+
 </mapper>

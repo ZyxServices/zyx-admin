@@ -19,6 +19,7 @@
         <result column="userName" property="userName" jdbcType="VARCHAR"/>
         <result column="zan_Counts" property="zanCounts" jdbcType="INTEGER"/>
         <result column="comment_Counts" property="commentCounts" jdbcType="INTEGER"/>
+        <result column="official" property="official" jdbcType="INTEGER"/>
     </resultMap>
 
     <select id="count" resultType="java.lang.Integer">
@@ -39,6 +40,7 @@
         concern.state,
         `user`.nickname AS userName,
         `user`.authenticate,
+        `user`.official,
         (
             SELECT
                 COUNT(*)
@@ -80,41 +82,42 @@
         UPDATE concern SET topic_content=#{topic_content},img_url=#{img_url} WHERE id=#{id}
     </update>
     <select id="search" resultMap="concernVoMap">
-    SELECT
-        concern.id,
-        concern.user_id,
-        concern.type,
-        concern.topic_content,
-        concern.topic_title,
-        concern.topic_visible,
-        concern.img_url,
-        concern.video_url,
-        concern.create_time,
-        concern.state,
-        `user`.nickname AS userName,
-        `user`.authenticate,
-        (
-            SELECT
-                COUNT(*)
-            FROM
-                zan
-            WHERE
-                zan.body_type = 2
-            AND body_id = concern.id
-        ) AS zan_Counts,
-        (
-            SELECT
-                COUNT(*)
-            FROM
-                reply
-            WHERE
-                reply.reply_type = 3
-            AND reply.reply_id !=- 1
-            AND reply_id = concern.id
-        ) AS comment_Counts
-    FROM
-        concern
-    INNER JOIN `user` ON concern.user_id = `user`.id
+SELECT
+	concern.id,
+	concern.user_id,
+	concern.type,
+	concern.topic_content,
+	concern.topic_title,
+	concern.topic_visible,
+	concern.img_url,
+	concern.video_url,
+	concern.create_time,
+	concern.state,
+	`user`.nickname AS userName,
+	`user`.authenticate,
+	`user`.official,
+	(
+		SELECT
+			COUNT(*)
+		FROM
+			zan
+		WHERE
+			zan.body_type = 2
+		AND body_id = concern.id
+	) AS zan_Counts,
+	(
+		SELECT
+			COUNT(*)
+		FROM
+			reply
+		WHERE
+			reply.reply_type = 3
+		AND reply.reply_id !=- 1
+		AND reply_id = concern.id
+	) AS comment_Counts
+FROM
+	concern
+INNER JOIN `user` ON concern.user_id = `user`.id
     WHERE `user`.name LIKE CONCAT('%','${userName}','%' )  ORDER BY create_time DESC  LIMIT #{start},#{end}
 
     </select>
