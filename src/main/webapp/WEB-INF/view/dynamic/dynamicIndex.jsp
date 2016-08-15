@@ -51,21 +51,42 @@
                 <h5 style="margin: 0;display: inline-block">图文动态 </h5>
                 <h5 style="margin: 0;display: inline-block">语音动态 </h5>
                 <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
-                <form class="form-horizontal" role="form"  id="createDynamicForm" enctype="multipart/form-data">
-                    <input id="dynamicContent" style="width: 40%; height: 20%;margin-bottom: 15px" name="content" type="text"/>
-                    <input type="text" name="type" value="1" style="display: none;"/>
-                    <input type="text" name="createId" value="12" style="display: none;"/>
-                    <input name="imgFile" style="display: block" type="file"/>
-                    <input type="text" name="visible" value="1" style="display: none;"/>
 
-                    <button onclick="operateEventssssss.createDynamic()" class="release btn btn-danger">
+                <form class="form-horizontal" role="form"  id="createDynamicForm" enctype="multipart/form-data">
+
+                    <div class="control-group form-group">
+                        <label class="control-label " style="width: 100px;margin-right: 10px;text-align: left">选择官方账户户</label>
+                        <div class="">
+                            <select id="choiceUser"  name="createId" class="span3">
+                            </select>
+                        </div>
+                    </div>
+                    <%--<input  style="width: 40%; height: 20%; margin-bottom: 15px" name="content" type="text"/>--%>
+                    <textarea id="dynamicContent" style="resize: none; width: 400px;height: 150px;max-width: 400px;max-height: 150px;margin-bottom: 10px" name="content" rows="5" cols="1000"></textarea>
+                    <input type="text" name="type" value="1" style="display: none;"/>
+                    <input type="text" name="visible" value="1" style="display: none;"/>
+                    <%--<input type="text" name="createId" value="12" style="display: none;"/>--%>
+                    <input name="imgFile" style="display: block" type="file"/>
+                    <button onclick="operateEventssssss.createDynamic(this)" class="release btn btn-danger">
                         发布
                     </button>
-                    <button  onclick="" class="dynamicEdit btn btn-danger">
+                    <button  onclick="operateEventssssss.createDynamic(this)" class="dynamicEdit btn btn-danger">
                         确认修改
                     </button>
                     <button onclick="window.location.reload();" class="btn btn-danger">返回</button>
                 </form>
+            </div>
+            <div class="dynamicPreview">
+                <%--<h3 style="margin: 0;display: inline-block">动态预览</h3>--%>
+                <%--<HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>--%>
+                <h3 style="margin: 0;display: inline-block">动态发起人</h3>
+                <HR style="border:1 dashed #987cb9;margin: 5px 0" width="20%" color=rgb(51, 51, 51) SIZE=1>
+                <div class="username"></div>
+                <h3 style="margin: 0;display: inline-block">动态内容</h3>
+                <HR style="border:1 dashed #987cb9;margin: 5px 0" width="20%" color=rgb(51, 51, 51) SIZE=1>
+                <div class="topicContent"></div>
+                <div class="dynamicPic"><img style="max-width: 13%" src="" alt=""/></div>
+                <button onclick="window.location.reload();" class="btn btn-danger" >返回</button>
             </div>
         </div>
     </div>

@@ -15,10 +15,13 @@
 .live_manage{
     margin-top: 20px;
 }
-.dynamicEdit, .create_liveType{
+.dynamicEdit, .create_liveType ,.dynamicPreview{
     display: none;
 }
 .create_liveType.on {
+    display: block ;
+}
+.dynamicPreview.on {
     display: block ;
 }
 .dynamicEdit.on {
@@ -28,6 +31,9 @@
     display: block;
 }
 
+.dynamicPic{
+    margin-bottom: 15px;
+}
 /*bootstraptable中btn样式*/
 .bootstrap-table button.btn, input[name="refresh"].btn{
     padding: 10px 14px;
