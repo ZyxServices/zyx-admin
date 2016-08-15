@@ -178,11 +178,37 @@ function backToUsers() {
     $(".live_index").show();
     $('#app_user_table').bootstrapTable('refresh');
 }
+/*图片上传*/
 $('input[id=avatar]').change(function() {
-    $('#photoCover').html($(this).val());
-    $("#avatar").html($(this).val());
+    if($(this).val()){
+        $('#photoCover').html($(this).val());
+        $("#avatar").html($(this).val());
+        var objUrl = getImgURL(this.files[0]) ;
+        if (objUrl) {
+            $("#avatarImg").attr("src", objUrl) ;
+        }
+    }
 });
 $('input[id=authFile]').change(function() {
-    $('#photoCover').html($(this).val());
-    $("#authFileCover").html($(this).val());
+    if($(this).val()){
+        $('#authFile').html($(this).val());
+        $("#authFileCover").html($(this).val());
+        var objUrl = getImgURL(this.files[0]) ;
+        if (objUrl) {
+            $("#authImg").attr("src", objUrl) ;
+        }
+    }
 });
+//图片预览
+//建立一個可存取到該file的url
+function getImgURL(file) {
+    var url = null ;
+    if (window.createObjectURL != undefined) { // basic
+        url = window.createObjectURL(file) ;
+    } else if (window.URL != undefined) { // mozilla(firefox)
+        url = window.URL.createObjectURL(file) ;
+    } else if (window.webkitURL!=undefined) { // webkit or chrome
+        url = window.webkitURL.createObjectURL(file) ;
+    }
+    return url ;
+}

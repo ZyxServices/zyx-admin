@@ -118,6 +118,12 @@ $(function () {
                         message: '请填写正确的地址'
                     }
                 }
+            }, 'memberTemplate': {
+                validators: {
+                    notEmpty: {
+                        message: '必须选中一项'
+                    }
+                }
             }
         }
     });
@@ -187,7 +193,7 @@ $(function () {
         $('#updateCreateFrom').data('bootstrapValidator')
             .updateStatus('startTime', 'NOT_VALIDATED', null)
             .validateField('startTime');
-        $("#activityEndTime").attr({'disabled': false})
+        $("#activityEndTime").attr({'disabled': false});
         $("#signEndTime").attr({'disabled': false})
     });
     $('#activityEndTime').datetimepicker({
@@ -365,7 +371,7 @@ $("#czS").click(function () {
                         }
                     });
                     $("#memberTemplate").val(desc);
-                    if ($("#memberTemplate").val() != "") {
+                    if ($("#memberTemplate").val() == "") {
                         examinefalg = false;
                     }
                 }
@@ -411,18 +417,19 @@ function operate(value, row, index) {
 
 var operateEvents = {
     'click .edit': function (e, value, row, index) {
+        $("#activityEndTime").attr({'disabled': false});
+        $("#signEndTime").attr({'disabled': false})
         $("#listType").html("编辑");
         queryActivityById(row.id, 0);
-        $("#imagesWrap").show();
         $("#createModify").show();
         $("#activityList").hide();
+
     },
     'click .preview': function (e, value, row, index) {
         $("#listType").html("预览");
         $("#choiceUser").attr("disabled", "disabled");
         $("#title").attr("disabled", "disabled");
         $("#imgWrap").hide();
-        $("#imagesWrap").show();
         $('#activity-summernote').summernote('destroy');
         $('#activity-summernote').summernote({toolbar: false, airMode: true});
         $("#activityStartTime").attr("disabled", "disabled");
@@ -581,6 +588,11 @@ function queryActivityById(id, type) {
                     $("#template").empty();
                     $("#template").append(html)
                 }
+                if(type == 0){/*0代表编辑，1代表预览*/
+                    $('#updateCreateFrom')
+                        .bootstrapValidator('removeField', 'image')
+                        .data('bootstrapValidator').validate();
+                }
             } else {
                 $.Popup({
                     confirm: false,
@@ -597,7 +609,7 @@ function createActivity() {
     $("#listType").html("创建");
     $("#createModify").show();
     $("#activityList").hide();
-    $("#imagesWrap").hide();
+    // $("#imagesWrap").hide();
     $("#avtivityId").val('');
     $('#activity-summernote').summernote('code', '');
     var html = '<label class="checkbox"><input type="checkbox" value="手机号码">手机号码</label><label class="checkbox"><input type="checkbox" value="姓名">姓名</label> <label class="checkbox"><input type="checkbox" value="身份证号码">身份证号码</label> <label class="checkbox"><input type="checkbox" value="性别">性别</label> <label class="checkbox"><input type="checkbox" value="年龄">年龄</label> <label class="checkbox"><input type="checkbox" value="地址">地址</label> <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>'
@@ -651,12 +663,37 @@ function choiceMoreRel() {
 
 /*创建中type=file的样式处理*/
 $('input[id=lefile]').change(function () {
-    $('#photoCover').html($(this).val());
-    $("#lefile").html($(this).val());
+    if($(this).val()){
+        $('#photoCover').html($(this).val());
+        $("#lefile").html($(this).val());
+        var objUrl = getImgURL(this.files[0]) ;
+        if (objUrl) {
+            $("#images").attr("src", objUrl) ;
+        }
+    }
 });
 
 /*推荐中type=file的样式处理*/
 $('input[id=recommendFile]').change(function () {
-    $('#recommendPhotoCover').html($(this).val());
-    $("#recommendFile").html($(this).val());
+    if($(this).val()){
+        $('#recommendPhotoCover').html($(this).val());
+        $("#recommendFile").html($(this).val());
+        var objUrl = getImgURL(this.files[0]) ;
+        if (objUrl) {
+            $("#recommendImg").attr("src", objUrl) ;
+        }
+    }
 });
+/*图片预览*/
+//建立一個可存取到該file的url
+function getImgURL(file) {
+    var url = null ;
+    if (window.createObjectURL != undefined) { // basic
+        url = window.createObjectURL(file) ;
+    } else if (window.URL != undefined) { // mozilla(firefox)
+        url = window.URL.createObjectURL(file) ;
+    } else if (window.webkitURL!=undefined) { // webkit or chrome
+        url = window.webkitURL.createObjectURL(file) ;
+    }
+    return url ;
+}

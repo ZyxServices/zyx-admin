@@ -12,7 +12,6 @@ var userList = $.ajax({
         pageSize: 100
     },
     success: function (rows) {
-        console.log(rows);
         var html = "";
         html = html
         for (var i = 0; i < rows.rows.length; i++) {
@@ -28,11 +27,11 @@ function circleCreate() {
     $("#circleCreate").show();
     $("#masterId").chosen();
     $("#adminIds").chosen();
-    $("input").val('');
+    $("input[name=title]").val("");
+    $("textarea[name=details]").val("");
     circleEidtor("#circleBtnSure", "#circleCreates", '../../circle/createCircle', 33000, "创建圈子成功");
     userList;
 }
-
 $(function () {
     $("#headImgShow").hide();
     $("#circleCreates").bootstrapValidator({
@@ -139,8 +138,8 @@ $(function () {
             {field: 'userName', title: '创建人'},
             {field: 'masterName', title: '圈主', sortable: true},
             {field: 'adminIds', title: '管理员', sortable: true},
-            {field: '', title: '帖子数量', sortable: true},
-            {field: '', title: '关注人数', sortable: true},
+            {field: 'circleItemCount', title: '帖子数量', sortable: true},
+            {field: 'concernCount', title: '关注人数', sortable: true},
             {field: '', title: '浏览量（主页）', sortable: true},
             {field: 'operation', title: '操作', align: 'center', events: operateEvent, formatter: circleFormatter}
         ]
@@ -153,7 +152,6 @@ function getLocalTime(value) {
 //分类操作
 function circleFormatter(value, row, index) {
     var btnText;
-    console.log(row.state);
     if (row.state == 0) {
         btnText = "屏蔽"
     } else if (row.state == -2) {
@@ -219,9 +217,7 @@ var operateEvent = {
     'click .recommend': function (e, value, row, index) {
         $("#circleModal").modal("show");
         $("#circleSure").click(function () {
-            console.log(row.id);
             var selectValue = $("#circleSelect").val();
-            console.log(selectValue);
             $.ajax({
                 type: "get",
                 dateType: "json",

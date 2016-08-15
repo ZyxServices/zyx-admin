@@ -75,11 +75,11 @@
                         <label class="control-label">头像</label>
 
                         <div class="controls">
-                            <%--<input type="file" name="avatar">
-                            <span class="help-inline required">只能上传一张图片</span>--%>
-
                             <input type="file" class="hideInput" name="avatar" id="avatar">
                             <a class="btn btn-default" href="javascript:void (0)" id="photoCover" onclick="$('input[id=avatar]').click();">选择文件</a>
+                            <div style="margin-top: 10px" id="imagesWrap">
+                                <img id="avatarImg" src="">
+                            </div>
                         </div>
                     </div>
 
@@ -96,7 +96,6 @@
 
                     <div class="control-group">
                         <label class="control-label">官方账号</label>
-
                         <div class="controls">
                             <select class="span6" name="official" id="official">
                                 <option value="1">是</option>
@@ -107,7 +106,6 @@
 
                     <div class="control-group">
                         <label class="control-label">所在地</label>
-
                         <div class="controls">
                             <input type="text" class="span6" name="address" id="address"/>
                         </div>
@@ -115,7 +113,6 @@
 
                     <div class="control-group">
                         <label class="control-label">认证信息</label>
-
                         <div class="controls">
                             <input type="text" class="span6" name="authInfo" id="authInfo"/>
                         </div>
@@ -130,6 +127,10 @@
 
                             <input type="file" class="hideInput" name="authFile" id="authFile">
                             <a class="btn btn-default" href="javascript:void (0)" id="authFileCover" onclick="$('input[id=authFile]').click();">上传资料</a>
+                            <span class="help-inline">最多上传3张照片</span>
+                            <div style="margin-top: 10px" id="authImgWrap">
+                                <img id="authImg" src="">
+                            </div>
                         </div>
 
                     </div>

@@ -120,6 +120,7 @@
                         <table id="post-list-table"></table>
                     </div>
                 </div>
+
                 <!-- END DASHBOARD STATS -->
             </div>
         </div>
@@ -137,7 +138,8 @@
 
                     <h3 class="page-title">
 
-                        帖子发布<small>statistics and more</small>
+                        帖子发布
+                        <small>statistics and more</small>
 
                     </h3>
 
@@ -169,41 +171,45 @@
 
                 <!-- BEGIN DASHBOARD STATS -->
                 <div class="row-fluid">
-
-                    <form class="form-horizontal" role="form">
-                        <div class="control-group">
+                    <form class="form-horizontal" role="form" enctype="multipart/form-data" method="post"
+                          id="CirclePost">
+                        <%--  <input type="hidden" name="circle_id" value="75">--%>
+                        <input type="hidden" name="create_id" value="10">
+                        <div class="control-group form-group">
                             <label class="control-label">标题</label>
                             <div class="controls">
-                                <input type="text" class="span6 form-control" />
+                                <input type="text" name="title" class="span6 form-control"/>
                                 <span class="help-inline">*</span>
                             </div>
                         </div>
 
-                        <div class="control-group">
+                        <div class="control-group form-group">
                             <label class="control-label">内容</label>
                             <div class="controls summernote">
                                 <div class="span6 form-control">
                                     <div id="post-summernote"></div>
+                                    <input type="hidden" name="content">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="control-group">
+                        <div class="control-group form-group">
                             <label class="control-label">所属圈子</label>
                             <div class="controls">
-                                <select class="span6 form-control">
-                                    <option>123</option>
-                                    <option>123321</option>
+                                <select class="span6 form-control chzn-select" name="circle_id"
+                                        data-placeholder="请选择圈子哦" id="circleList" data-rel="chosen"
+                                        style="width:350px;" tabindex="7">
                                 </select>
                                 <span class="help-inline">*</span>
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group form-group">
                             <label class="control-label"></label>
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button class="btn btn-default">确定</button>
-                                <a href="javascript:void(0)" class="btn btn-default" onclick="window.location.reload();">返回</a>
+                                <button class="btn btn-default" type="button" id="postSure">确定</button>
+                                <a href="javascript:void(0)" class="btn btn-default"
+                                   onclick="window.location.reload();">返回</a>
                             </div>
                         </div>
                     </form>
@@ -221,7 +227,66 @@
     <!-- END PAGE -->
 
 </div>
+<!-- 推荐动态弹窗-->
+<div class="modal fade circleModals" role="dialog" aria-labelledby="gridSystemModalLabel" id="circleModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel">圈子推荐</h4>
+            </div>
+            <div class="modal-body" style="padding:10px 20px ;">
+                <div class="container-fluid">
+                    <div class="row">
+                        <label class="control-label ">帖子名称:</label><span id="cricleTitle"></span>
+                    </div>
+                    <div class="row">
+                        <label class="col-xs-6 control-label ">推荐模块:</label>
+                        <span class="col-xs-6 col-md-4" id="radio_checked">
+                            <label class="control-label "><input type="radio" name="quanzi"> 首页热门圈子讨论</label>
+                            <label class="control-label "><input type="radio" name="quanzi"> 精选圈子轮播</label>
+                        </span>
+                        <div class="radio_box">
+                            <div>
+                                <label class="col-xs-6 control-label "> </label>
+                                <select id="hotSelect">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+                            </div>
+                            <div>
+                                <p><label class="col-xs-6  control-label "></label>
+                                    <select id="chosenSelect">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select></p>
 
+                                <label class="col-xs-6  control-label ">图片:</label>
+                                <input type="file">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-xs-6 control-label ">推荐状态:</label>
+                        <span class="col-xs-6 col-md-4">
+                            <label class="control-label "><input type="radio" name="quanzi"> 激活</label>
+                            <label class="control-label "><input type="radio" name="quanzi"> 未激活</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="circleSure">确认</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <!-- END CONTAINER -->
 
 <!-- BEGIN FOOTER -->
@@ -232,13 +297,10 @@
 <script src="../../js/index.js" type="text/javascript"></script>
 <script type="text/javascript" src="../../js/circle/circlepost.js"></script>
 <script>
-
     jQuery(document).ready(function () {
-
         App.init(); // initlayout and core plugins
 
     });
-
 </script>
 </body>
 </html>

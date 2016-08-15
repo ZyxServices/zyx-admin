@@ -30,7 +30,6 @@ function initTable() {
         dataField: "data",
         silentSort:false,
         queryParams: function queryParams(params) {   //设置查询参数
-            console.log(params)
             var param = {
                 start: params.pageNumber - 1,
                 pageSize: params.pageSize,
@@ -54,8 +53,8 @@ function initTable() {
             {field: 'authenticate', title: '发布者是否认证', sortable: true,formatter: authFormatter,sortName:'md'},
             {field: 'createTime', title: '发布时间', formatter: timeFormat},
             {field: 'type', title: '动态类型', sortable: true, formatter: typeFormatter},
-            {field: 'price', title: '点赞量', sortable: true},
-            {field: 'startTime', title: '评论量', sortable: true},
+            {field: 'zanCounts', title: '点赞量', sortable: true},
+            {field: 'commentCounts', title: '评论量', sortable: true},
             {field: 'overTime', title: '分享量', sortable: true},
             {field: 'online', title: '收藏量', sortable: true},
             {field: 'comment', title: '浏览量'},
@@ -88,6 +87,19 @@ function initTable() {
                 });
             }
         })
+    });
+    /*查询创建活动时需要选择的用户*/
+    $.ajax({
+        url: "/v1/appUser/list/official/all",
+        type: 'get',
+        dataType: 'json',
+        success: function (result) {
+            var user = '';
+            result.rows.forEach(function (item, i) {
+                user += '<option value='+item.id+' >'+item.nickname+'</option>'
+            })
+            $("#choiceUser").append(user)
+        }
     });
 }
 // 认证状态格式化
@@ -123,7 +135,14 @@ function seeUrlFormatter(value, row, index) {
 //操作事件eidt
 var operateEventssssss = {
     'click .preview': function (e, value, row, index) {
-        alert('You click like action, row: ' + JSON.stringify(row));
+        $(".dynamicPreview").addClass('on')
+        $(".live_index").addClass('hide')
+        $('.topicContent').html(row.topicContent)
+        $('.username').html(row.userName)
+        //$('.dynamicPic img')[0].src('http://image.tiyujia.com/'+row.topicContent)
+        $('.dynamicPic img').attr('src','http://image.tiyujia.com/'+row.imgUrl+'');
+        console.log(row)
+
     },
     'click .edit': function (e, value, row, index) {
         //alert('You click like action, row: ' + JSON.stringify(row));
@@ -134,6 +153,7 @@ var operateEventssssss = {
         $(".dynamicEdit").addClass('on')
         $(".release").addClass('hide')
         //$("input[name='imgFile']")
+        var createId=$("#choiceUser option:selected").val()
 
     },
     'click .recommend': function (e, value, row, index) {
@@ -168,7 +188,7 @@ var operateEventssssss = {
                     type: "delete",
                     dateType: "json",
                     success: function (result) {
-                        if (result.state == 39000) {
+                        if (result.state == 200) {
                             btnclick
                             btn = btnval
                         } else {
@@ -190,14 +210,15 @@ var operateEventssssss = {
         var delUrl = "/concern/setState?id=" + row.id + "&state=0";
         ajaxPlugins.unRemove(delUrl, 'dynamic_table', 'DELETE')
     },
-    createDynamic: function () {
+    createDynamic: function (obj) {
+        var createId=$("#choiceUser option:selected").val()
         $("#createDynamicForm").ajaxForm({
             url: '/concern/createConcern',
             type: 'post',
             dataType: 'json',
             success: function (result) {
                 console.log(result)
-                if (result.state == 33000) {
+                if (result.state == 200) {
                     window.location.reload()
                 } else {
                     if (result.state == 5001) {

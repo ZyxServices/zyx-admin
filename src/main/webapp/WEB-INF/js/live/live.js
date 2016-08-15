@@ -30,12 +30,11 @@ function initTable() {
         queryParamsType: "undefined",
         dataField: "data",
         queryParams: function queryParams(params) {   //设置查询参数
-            console.log(params)
             var param = {
-                pageNumber: params.pageNumber,
-                pageSize: params.pageSize,
-                searchText: params.searchText,
-                sortName: params.sortName
+                //pageNumber: params.pageNumber,
+                //pageSize: params.pageSize,
+                keyword: params.searchText
+                //sortName: params.sortName
                 //sortOrder: params.sortOrder
             };
             return param;
@@ -275,13 +274,25 @@ var operateEventclass = {
     creatLive: function () {
         var labvalue = $('#lab').val()
         var descvalue = $('#desc').val()
-        var creatLiveUrl = '/v1/live/lab/create?lab=' + labvalue + '&labvalue&desc=' + descvalue + '';
+        var creatLiveUrl = '/v1/live/lab/create?lab=' + labvalue + '&desc=' + descvalue + '';
         $.ajax({
             url: creatLiveUrl,
             async: false,
             type: "post",
             success: function (data) {
-                $('#editLive').bootstrapTable('refresh');
+                if(data.state==23002){
+                    $.Popup({
+                        confirm:false,
+                        template:'这个类别已经存在,请重新填写'
+                    })
+                }else{
+                    $('#editLive').bootstrapTable('refresh');
+                    $.Popup({
+                        confirm:false,
+                        template:'添加成功'
+                    })
+                }
+
             }
         })
     }

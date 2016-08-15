@@ -1,9 +1,93 @@
 /**
  * Created by guochunyan on 2016/7/14.
- */
-$(function(){
-    $('#post-summernote').summernote({
-        height:200
+ **/
+//帖子创建
+$('#post-summernote').summernote({
+    height: 200
+});
+//帖子内容
+var save = function () {
+    var makrup = $('#post-summernote').summernote('code');
+    $("input[name=content]").val(makrup);
+};
+//获取圈子列表
+var circleList = function () {
+    $.ajax({
+        type: "get",
+        dateType: "json",
+        url: "../../circle/circleList",
+        data: {
+            start: 0,
+            pageSize: 20
+
+        },
+        async: false,
+        success: function (data) {
+            var html = "";
+            html = html
+            for (var i = 0; i < data.data.length; i++) {
+                html = html + "<option value='" + data.data[i].id + "'>" + data.data[i].title + "</option>"
+            }
+            $("#circleList").append(html);
+        }
+    });
+};
+function createPost() {
+    $("#postList").hide();
+    $("#postCreate").show();
+    $("#postSure").click(function () {
+        save();
+    });
+    circleList();
+    $("#circleList").chosen();
+    circleEidtor("#postSure", "#CirclePost", '../../circleItem/createCircleItem', 200, "发布成功");
+}
+$(function () {
+    $("#CirclePost").bootstrapValidator({
+        fields: {
+            "title": {
+                validators: {
+                    notEmpty: {
+                        message: '请输入标题'
+                    }
+                }
+            },
+            "headImgUrl": {
+                validators: {
+                    notEmpty: {
+                        message: '请上传头像'
+                    }
+                }
+            },
+            "circleType": {
+                validators: {
+                    notEmpty: {
+                        message: '请选择分类'
+                    }
+                }
+            },
+            "details": {
+                validators: {
+                    notEmpty: {
+                        message: '请输入简介'
+                    }
+                }
+            },
+            "circleMaster": {
+                validators: {
+                    notEmpty: {
+                        message: '请选择圈主'
+                    }
+                }
+            },
+            "adminIds": {
+                validators: {
+                    notEmpty: {
+                        message: '请设置管理员'
+                    }
+                }
+            }
+        }
     });
     $("#post-list-table").bootstrapTable({
         type: 'get',
@@ -38,17 +122,17 @@ $(function(){
         },
         columns: [
             {field: 'id', title: 'id', align: 'center', valign: 'middle', width: '20'},
-            {field: 'circleTitle', title: '圈子类别名称'},
-            {field: 'circleTitle', title: '帖子标题'},
+            {field: 'circleTypeName', title: '圈子类别'},
+            {field: 'title', title: '帖子标题'},
             {field: 'createUser', title: '发布人'},
-            {field: 'createTime', title: '发布时间',formatter: getLocalTime},
-            {field: 'typeName', title: '所属圈子'},
-            {field: 'typeName', title: '点赞量'},
-            {field: 'typeName', title: '评论量'},
+            {field: 'createTime', title: '发布时间', formatter: getLocalTime},
+            {field: 'circleTitle', title: '所属圈子'},
+            {field: 'zanCounts', title: '点赞量'},
+            {field: 'commentCounts', title: '评论量'},
             {field: 'typeName', title: '分享量'},
             {field: 'typeName', title: '收藏量'},
             {field: 'typeName', title: '浏览量'},
-            {field: 'typeName', title: '操作',events: operateEvent, formatter: circlePostFormatter},
+            {field: 'operation', title: '操作', events: operateEvents, formatter: circlePostFormatter},
             {field: 'typeName', title: '举报状态'}
         ]
     })
@@ -56,7 +140,6 @@ $(function(){
 //分类操作
 function circlePostFormatter(value, row, index) {
     var btnText;
-    console.log(row.state);
     if (row.state == 0) {
         btnText = "屏蔽"
     } else if (row.state == -2) {
@@ -71,45 +154,24 @@ function circlePostFormatter(value, row, index) {
     ].join('');
 }
 //操作分类事件
-var operateEvent = {
-    //预览圈子
+var operateEvents = {
+    //预览帖子
     'click .preview': function (e, value, row, index) {
-        console.log(111111);
-        createPost() ;
-        $.ajax({
-            url: "../../circleItem/findOne?id=" + row.id,
-            async: false,
-            type: "get",
-            dateType: "json",
-            success: function () {
-                $("input[name=title]").val(row.title).attr("disabled", "disabled");
-                $("input[name=state]").val(row.state).attr("disabled", "disabled");
-                $("input[name=details]").val(row.details).attr("disabled", "disabled");
-                $("input[name=circleMaster]").val(row.circleMaster).attr("disabled", "disabled");
-                $("input[name=masterId]").val(row.masterId).attr("disabled", "disabled");
-                $("input[name=adminIds]").val(row.adminIds).attr("disabled", "disabled");
-                $("#category").attr("disabled", "disabled");
-                $("input[name=headImgUrl]").hide();
-                // 获取图片
-                if (row.headImgUrl == "") {
-                    $("#headImgShow").html("您未上传圈子头像哦！！")
-                }
-                else {
-                    var img = document.createElement('img');
-                    img.width = "300";
-                    img.src = "http://image.tiyujia.com/" + row.headImgUrl;
-                    document.getElementById('headImgShow').appendChild(img);
-                }
-                $("#circleList").hide();
-                $("#circleCreate").show();
-            }
-        })
+        createPost();
+        $("input[name=title]").val(row.title).attr("disabled", "disabled");
+        $("#postSure").hide();
+        if (row.content == "<p><br></p>") {
+            $('#post-summernote').summernote('code', "您没有填写帖子内容哦！！");
+            $('#post-summernote').summernote('destroy');
+        } else {
+            $('#post-summernote').summernote('code', row.content);
+            $('#post-summernote').summernote('destroy');
+        }
+        $("#category").attr("disabled", "disabled");
+
     },
-    //编辑圈子
+    //编辑帖子
     'click .edit': function (e, value, row, index) {
-        console.log(JSON.stringify(row));
-        console.log(row.id);
-        circleCreate();
         $.ajax({
             type: "get",
             dateType: "json",
@@ -121,26 +183,23 @@ var operateEvent = {
                 $("input[name=details]").val(row.details);
                 $("input[name=circleMaster]").val(row.circleMaster);
                 $("input[name=masterId]").val(row.masterId);
-                // 获取图片
-                if (row.headImgUrl == "") {
-                    $("#headImgShow").html("您未上传圈子头像哦！！")
-                }
-                else {
-                    var img = document.createElement('img');
-                    img.width = "300";
-                    img.src = "http://image.tiyujia.com/" + row.headImgUrl;
-                    document.getElementById('headImgShow').appendChild(img);
-                }
             }
         })
     },
-    //圈子推荐
+    //帖子推荐
     'click .recommend': function (e, value, row, index) {
         $("#circleModal").modal("show");
+        $("#cricleTitle").html(row.title);
+        $(".radio_box").hide();
+        var $checked = $('#radio_checked label');
+        $checked.click(function () {
+            $(".radio_box").show();
+            $(this).addClass('current').siblings().removeClass('current');
+            var index = $checked.index(this);
+            $('div.radio_box> div').eq(index).show().siblings().hide();
+        })
         $("#circleSure").click(function () {
-            console.log(row.id);
             var selectValue = $("#circleSelect").val();
-            console.log(selectValue);
             $.ajax({
                 type: "get",
                 dateType: "json",
@@ -156,24 +215,35 @@ var operateEvent = {
     },
     //圈子屏蔽
     'click .Shield': function (e, value, row, index) {
+        //屏蔽状态
+        var state;
+        if (row.state == 0) {
+            state = -2;
+        }
+        else if (row.state == -2) {
+            state = 0;
+        }
         $.Popup({
             template: '屏蔽之后，该圈子将不在“首页”和“精选圈子”中展示，“我的关注”和“我的”中动态保留，仍可以被浏览。 ?',
             saveEvent: function () {
                 $.ajax({
                     async: false,
                     type: "delete",
-                    url: "../../circle/setState?id=" + row.id + "&state=" + StateNumber,
-                    success: function (data) {
-                        console.log(row.state);
-                        var StateNumber;
-                        if (row.state == 0) {
-                            StateNumber =-2;
+                    url: "../../circleItem/setState?id=" + row.id + "&state=" + state,
+                    success: function () {
+                        if (row.state == -2) {
+                            $.Popup({
+                                confirm: false,
+                                title: "屏蔽成功"
+                            });
                         }
-                        else if (row.state = -2) {
-                            StateNumber =-0;
-
+                        else if (row.state = 0) {
+                            $.Popup({
+                                confirm: false,
+                                title: "取消屏蔽成功"
+                            });
                         }
-                        $("#circle-list-table").bootstrapTable('refresh', {url: '../../circle/circleList'});
+                        $("#post-list-table").bootstrapTable('refresh');
                     }
                 })
             }
@@ -185,7 +255,7 @@ var operateEvent = {
             template: '确认删除吗?',
             saveEvent: function () {
                 $.ajax({
-                    url: "../../circle/deleteOne?id=" + row.id,
+                    url: "../../circleItem/deleteOne?id=" + row.id,
                     async: false,
                     type: "delete",
                     success: function (data) {
@@ -193,8 +263,11 @@ var operateEvent = {
                             field: 'id',
                             values: [row.id]
                         });
-                        alert("删除成功");
-                        $("#circle-list-table").bootstrapTable('refresh', {url: '../../circle/circleList'});
+                        $.Popup({
+                            confirm: false,
+                            title: "删除成功"
+                        });
+                        $("#post-list-table").bootstrapTable('refresh');
                     }
                 });
             }
@@ -206,7 +279,34 @@ var operateEvent = {
 function getLocalTime(value) {
     return (new Date(value).format("yyyy-mm-dd HH:MM:ss"));
 }
-function createPost() {
-    $("#postList").hide();
-    $("#postCreate").show();
+//创建、编辑圈子公用方法
+function circleEidtor(id, button, url, state, text) {
+    $(id).click(function (e) {
+        $(button).ajaxSubmit({
+            url: url,
+            type: 'post',
+            dataType: 'json',
+            success: function (result) {
+                if (result.state == state) {
+                    e.preventDefault();
+                    var $form = $(e.target);
+                    $form.serialize();
+                    $.Popup({
+                        confirm: false,
+                        title: text
+                    });
+                    $("#post-list-table").bootstrapTable('refresh');
+                    $("#postList").show();
+                    $("#postCreate").hide();
+
+                }
+                else {
+                    $.Popup({
+                        confirm: false,
+                        title: result.errmsg
+                    });
+                }
+            }
+        })
+    });
 }
