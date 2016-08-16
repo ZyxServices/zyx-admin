@@ -42,19 +42,9 @@ public class ConcernController {
             @RequestParam(value = "visible") Integer visible,
             @RequestParam(value = "type") Integer type,
             @RequestParam(value = "createId") Integer createId,
-            @RequestPart(value = "imgFile") MultipartFile[] imgFile) {
+            @RequestParam(value = "imgFileUrl") String imgFileUrl) {
         AbstractView jsonView = new MappingJackson2JsonView();
-        if (Objects.equals(imgFile, null)) {
-            jsonView.setAttributesMap(MapUtils.buildErrorMap(Constants.AUTH_ERROR_903, "文件未找到"));
-            return new ModelAndView(jsonView);
-        }
-        String dbFilePaths = null;
-        Map<String, Object> dbFilePath = FileUploadUtils.uploadFile(imgFile);
-        if (dbFilePath.containsKey("dbFilePath")) {
-            List<String> list = (List<String>) dbFilePath.get("dbFilePath");
-            dbFilePaths = CharUtil.listToString(list);
-        }
-        Map<String, Object> map = concernService.createConcern(content, createId, type, visible, dbFilePaths);
+        Map<String, Object> map = concernService.createConcern(content, createId, type, visible, imgFileUrl);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
