@@ -20,6 +20,7 @@ public class AppUserCreateParam implements Serializable {
     private String address;
     private String authInfo;
     private String authFile;
+    private String nickname;
     private Integer official;
 
     public Integer getAppUserId() {
@@ -84,6 +85,14 @@ public class AppUserCreateParam implements Serializable {
 
     public void setAuthFile(String authFile) {
         this.authFile = authFile;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public Integer getOfficial() {

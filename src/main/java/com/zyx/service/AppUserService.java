@@ -16,7 +16,6 @@ import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * Created by wms on 2016/7/15.
@@ -141,13 +140,13 @@ public class AppUserService {
         appUser.setPassword(param.getPassword());
         appUser.setAvatar(param.getAvatar());
         appUser.setCreateTime(System.currentTimeMillis());
-        appUser.setNickname("tiyujia" + new Random().nextLong());
+        appUser.setNickname(param.getNickname());
         appUser.setAddress(param.getAddress());
         appUser.setSex(param.getSex());
         appUser.setOfficial(param.getOfficial());
         appUser.setMask(false);
         appUser.setDel(false);
-        appUser.setAuthenticate(2);
+        appUser.setAuthenticate(1);
         try {
             int result = appUserMapper.insert(appUser);
             if (result >= 1) {
