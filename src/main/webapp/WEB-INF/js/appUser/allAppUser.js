@@ -100,7 +100,7 @@ $(function () {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields:{
-            'phone': {
+            'nickname': {
                 validators: {
                     notEmpty: {
                         message: '账号不能为空'

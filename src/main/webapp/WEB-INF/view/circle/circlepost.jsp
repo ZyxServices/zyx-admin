@@ -196,9 +196,9 @@
                         <div class="control-group form-group">
                             <label class="control-label">所属圈子</label>
                             <div class="controls">
-                                <select class="span6 form-control chzn-select" name="circle_id"
-                                        data-placeholder="请选择圈子哦" id="circleList" data-rel="chosen"
-                                        style="width:350px;" tabindex="7">
+                                <select  name="circle_id"
+                                        data-placeholder="请选择圈子哦" id="circleList" data-rel="chosen" class="chzn-select"
+                                        style="width:350px;" tabindex="8">
                                 </select>
                                 <span class="help-inline">*</span>
                             </div>

@@ -10,7 +10,7 @@ var save = function () {
     var makrup = $('#post-summernote').summernote('code');
     $("input[name=content]").val(makrup);
 };
-//获取圈子列表
+//获取帖子列表
 var circleList = function () {
     $.ajax({
         type: "get",
@@ -52,38 +52,17 @@ $(function () {
                     }
                 }
             },
-            "headImgUrl": {
+            "content": {
                 validators: {
                     notEmpty: {
-                        message: '请上传头像'
+                        message: '内容不能为空'
                     }
                 }
             },
-            "circleType": {
+            "circle_id": {
                 validators: {
                     notEmpty: {
-                        message: '请选择分类'
-                    }
-                }
-            },
-            "details": {
-                validators: {
-                    notEmpty: {
-                        message: '请输入简介'
-                    }
-                }
-            },
-            "circleMaster": {
-                validators: {
-                    notEmpty: {
-                        message: '请选择圈主'
-                    }
-                }
-            },
-            "adminIds": {
-                validators: {
-                    notEmpty: {
-                        message: '请设置管理员'
+                        message: '圈子不能为空'
                     }
                 }
             }
@@ -157,8 +136,12 @@ function circlePostFormatter(value, row, index) {
 var operateEvents = {
     //预览帖子
     'click .preview': function (e, value, row, index) {
-        createPost();
+        $("#postList").hide();
+        $("#postCreate").show();
         $("input[name=title]").val(row.title).attr("disabled", "disabled");
+        circleList();
+        $("#circleList option[value='" + row.circleId + "']").attr("selected", true);
+        $("#circleList").chosen();
         $("#postSure").hide();
         if (row.content == "<p><br></p>") {
             $('#post-summernote').summernote('code', "您没有填写帖子内容哦！！");
@@ -167,24 +150,24 @@ var operateEvents = {
             $('#post-summernote').summernote('code', row.content);
             $('#post-summernote').summernote('destroy');
         }
+        /*        $("#circleList").trigger("liszt:updated");
+         $("#circleList option[value='" + row.circleId + "']").attr("selected", true);*/
+
         $("#category").attr("disabled", "disabled");
 
     },
     //编辑帖子
     'click .edit': function (e, value, row, index) {
-        $.ajax({
-            type: "get",
-            dateType: "json",
-            url: "../../circle/getCircle?id=" + row.id,
-            async: false,
-            success: function () {
-                $("input[name=title]").val(row.title);
-                $("input[name=state]").val(row.state);
-                $("input[name=details]").val(row.details);
-                $("input[name=circleMaster]").val(row.circleMaster);
-                $("input[name=masterId]").val(row.masterId);
-            }
-        })
+        $("#postList").hide();
+        $("#postCreate").show();
+        $("input[name=title]").val(row.title);
+        $("input[name=content]").val(row.content);
+        $("#postSure").show();
+        circleList();
+        $("#circleList option[value='" + row.circleId + "']").attr("selected", true);
+        $("#circleList").chosen();
+        $('#post-summernote').summernote('code', row.content);
+        circleEidtor("#postSure", "#CirclePost", "../../circleItem/edit/?circleItemId= " + row.id, 200, "编辑成功");
     },
     //帖子推荐
     'click .recommend': function (e, value, row, index) {

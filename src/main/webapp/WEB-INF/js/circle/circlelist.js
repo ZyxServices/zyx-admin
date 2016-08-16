@@ -29,7 +29,7 @@ function circleCreate() {
     $("#adminIds").chosen();
     $("input[name=title]").val("");
     $("textarea[name=details]").val("");
-    circleEidtor("#circleBtnSure", "#circleCreates", '../../circle/createCircle', 33000, "创建圈子成功");
+    circleEidtor("#circleBtnSure", "#circleCreates", '../../circle/createCircle', 200, "创建圈子成功");
     userList;
 }
 $(function () {
@@ -133,7 +133,7 @@ $(function () {
             {field: '', checkbox: true, align: 'center', valign: 'middle'},
             {field: 'id', title: 'id', align: 'center', valign: 'middle'},
             {field: 'title', title: '圈子名称'},
-            {field: 'circleType', title: '圈子类别'},
+            {field: 'circleTypeName', title: '圈子类别'},
             {field: 'createTime', title: '创建时间', formatter: getLocalTime},
             {field: 'userName', title: '创建人'},
             {field: 'masterName', title: '圈主', sortable: true},
@@ -211,7 +211,7 @@ var operateEvent = {
         $("#adminIds").chosen();
         $("#category").find("option[value='" + row.circleType + "']").attr("selected", true);
         $("#headImgShow").show().attr("src", "http://image.tiyujia.com/" + row.headImgUrl);
-        circleEidtor("#circleBtnSure", "#circleCreates", '../../circle/edit', 36000, "修改成功");
+        circleEidtor("#circleBtnSure", "#circleCreates", '../../circle/edit', 200, "修改成功");
     },
     //圈子推荐
     'click .recommend': function (e, value, row, index) {
