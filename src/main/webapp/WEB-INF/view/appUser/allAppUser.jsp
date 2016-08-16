@@ -54,7 +54,16 @@
             <div class="create_liveType row-fluid">
                 <form class="form-horizontal" role="form" id="createAppUserForm" enctype="multipart/form-data">
                     <div class="control-group form-group">
-                        <label class="control-label">账号</label>
+                        <label class="control-label">昵称</label>
+
+                        <div class="controls col-xs-5">
+                            <input type="text" class="span6" name="nickname" id="nickname"/>
+                            <span class="help-inline required">*</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <label class="control-label">电话</label>
 
                         <div class="controls col-xs-5">
                             <input type="text" class="span6" name="phone" id="phone"/>

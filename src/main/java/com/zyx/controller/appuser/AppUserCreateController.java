@@ -38,7 +38,7 @@ public class AppUserCreateController {
     AppUserService appUserService;
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public ModelAndView insert(@RequestParam String phone, @RequestParam String password, @RequestParam(required = false) MultipartFile avatar, @RequestParam String sex, @RequestParam String official, @RequestParam String address, @RequestParam String authInfo, @RequestParam MultipartFile[] authFile) {
+    public ModelAndView insert(@RequestParam String phone, @RequestParam String password, @RequestParam(required = false) MultipartFile avatar, @RequestParam String nickname, @RequestParam String sex, @RequestParam String official, @RequestParam String address, @RequestParam String authInfo, @RequestParam MultipartFile[] authFile) {
         AbstractView jsonView = new MappingJackson2JsonView();
         Map<String, Object> map;
         AppUser appUser = appUserService.selectByPhone(phone);
@@ -50,6 +50,7 @@ public class AppUserCreateController {
             param.setPhone(phone);
             param.setAddress(address);
             param.setSex(Integer.parseInt(sex));
+            param.setNickname(nickname);
             param.setOfficial(Integer.parseInt(official));
             param.setPassword(CipherUtil.generatePassword(password));
             if (!avatar.isEmpty()) {

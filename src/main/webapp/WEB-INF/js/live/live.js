@@ -141,6 +141,7 @@ function btnState(row) {
 
 //直播操作按钮初始化
 function operateFormatter(value, row, index) {
+    console.log(row)
     return [
         '<a class="preview p5"   href="javascript:void(0)" >预览</a>',
         '<a class="recommend p5" href="javascript:void(0)" >推荐</a>',

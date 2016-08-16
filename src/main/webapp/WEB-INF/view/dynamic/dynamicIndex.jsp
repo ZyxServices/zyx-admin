@@ -66,7 +66,8 @@
                     <input type="text" name="type" value="1" style="display: none;"/>
                     <input type="text" name="visible" value="1" style="display: none;"/>
                     <%--<input type="text" name="createId" value="12" style="display: none;"/>--%>
-                    <input name="imgFile" style="display: block" type="file"/>
+                    <%--<input name="imgFile" style="display: block" type="file"/>--%>
+                    <input name="imgFile" style="display: block" type="file" multiple="multiple"/>
                     <button onclick="operateEventssssss.createDynamic(this)" class="release btn btn-danger">
                         发布
                     </button>
