@@ -24,7 +24,7 @@ $(function () {
             type: 'post',
             dataType: 'json',
             success: function (result) {
-                if (result.state == 33000) {
+                if (result.state == 200) {
                     e.preventDefault();
                     var $form = $(e.target);
                     $form.serialize();
