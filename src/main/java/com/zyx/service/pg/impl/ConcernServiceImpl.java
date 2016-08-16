@@ -4,6 +4,7 @@ import com.zyx.constants.Constants;
 import com.zyx.constants.PgConstants;
 import com.zyx.mapper.ConcernMapper;
 import com.zyx.model.Concern;
+import com.zyx.model.vo.ConcernVo;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.ConcernService;
 import com.zyx.utils.MapUtils;
@@ -28,7 +29,7 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
 
         Optional.ofNullable(start).orElse(0);
         Optional.ofNullable(pageSize).orElse(0);
-        List<Concern> concerns = concernMapper.findByPager(start * pageSize, pageSize);
+        List<ConcernVo> concerns = concernMapper.findByPager(start * pageSize, pageSize);
         Integer count = concernMapper.count();
 //        Map<String, Object> totalMap = new HashMap<>();
 //        totalMap.put("total", count);

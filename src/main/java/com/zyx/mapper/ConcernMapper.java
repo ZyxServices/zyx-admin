@@ -1,6 +1,7 @@
 package com.zyx.mapper;
 
 import com.zyx.model.Concern;
+import com.zyx.model.vo.ConcernVo;
 import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -21,7 +22,7 @@ public interface ConcernMapper extends Mapper<Concern> {
      * @param end
      * @return
      */
-    List<Concern> findByPager(@Param(value = "start") int start, @Param(value = "end") int end);
+    List<ConcernVo> findByPager(@Param(value = "start") int start, @Param(value = "end") int end);
 
     /**
      * 查询某一条数据

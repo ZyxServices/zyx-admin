@@ -58,7 +58,7 @@ public class CircleController {
             @RequestParam("title") String title,
             @RequestParam(value = "createId") Integer createId,
             @RequestParam(value = "state", required = false) Integer state,
-            @RequestParam(value = "masterId") Integer masterId,
+            @RequestParam(value = "masterId",required = false) Integer masterId,
             @RequestParam(value = "adminIds", required = false) String adminIds,
             @RequestParam("circleType") Integer circleType,
             @RequestPart(value = "headImgUrl", required = false) MultipartFile headImgUrl,

@@ -1,5 +1,6 @@
 package com.zyx.model.vo;
 
+import com.zyx.dto.AppUserAuthDto;
 import com.zyx.model.Concern;
 
 /**
@@ -9,27 +10,12 @@ import com.zyx.model.Concern;
  * Create by XiaoWei on 2016/7/28
  */
 public class ConcernVo extends Concern {
-    private String userName;
-    private Integer authenticate;
     private Integer zanCounts;
     private Integer commentCounts;
-    private Integer official;
+    private UserVo userVo;
 
-    public String getUserName() {
-        return userName;
-    }
+    AppUserAuthDto appUserAuthDto;
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public Integer getAuthenticate() {
-        return authenticate;
-    }
-
-    public void setAuthenticate(Integer authenticate) {
-        this.authenticate = authenticate;
-    }
 
     public Integer getZanCounts() {
         return zanCounts;
@@ -47,11 +33,20 @@ public class ConcernVo extends Concern {
         this.commentCounts = commentCounts;
     }
 
-    public Integer getOfficial() {
-        return official;
+
+    public AppUserAuthDto getAppUserAuthDto() {
+        return appUserAuthDto;
     }
 
-    public void setOfficial(Integer official) {
-        this.official = official;
+    public void setAppUserAuthDto(AppUserAuthDto appUserAuthDto) {
+        this.appUserAuthDto = appUserAuthDto;
+    }
+
+    public UserVo getUserVo() {
+        return userVo;
+    }
+
+    public void setUserVo(UserVo userVo) {
+        this.userVo = userVo;
     }
 }
