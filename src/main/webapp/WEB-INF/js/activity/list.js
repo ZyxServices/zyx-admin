@@ -108,7 +108,7 @@ $(function () {
                         message: '请填写咨询电话'
                     },
                     regexp: {
-                        regexp: /^1[3|4|5|7|8]\d{9}$/,
+                        regexp: /^((0\d{2,3}-\d{7,8})|(1[3|4|5|7|8]\d{9}))$/,/*/^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/*/
                         message: '请输入有效电话号码'
                     }
                 }
@@ -445,7 +445,6 @@ var operateEvents = {
         queryActivityById(row.id, 1);
         $("#createModify").show();
         $("#activityList").hide();
-        $("#addBtn").hide();
     },
     'click .recommend': function (e, value, row, index) {
         $("#listType").html("推荐");
@@ -583,8 +582,8 @@ function queryActivityById(id, type) {
                         template.forEach(function (item, i) {
                             html += "<label class='checkbox'><input type='checkbox' value='" + item + "' checked>" + item + "</label>";
                         });
+                        html += "<a href='javascript:void (0)' onclick='choiceMore()' id='addBtn'>+</a>";
                     }
-                    html += "<a href='javascript:void (0)' onclick='choiceMore()' id='addBtn'>+</a>";
                     $("#template").empty();
                     $("#template").append(html)
                 }
@@ -609,9 +608,9 @@ function createActivity() {
     $("#listType").html("创建");
     $("#createModify").show();
     $("#activityList").hide();
-    // $("#imagesWrap").hide();
+    $("#images").attr({'src':''});
     $("#avtivityId").val('');
-    $('#activity-summernote').summernote('code', '');
+    $('#activity-summernote').summernote('reset');
     var html = '<label class="checkbox"><input type="checkbox" value="手机号码">手机号码</label><label class="checkbox"><input type="checkbox" value="姓名">姓名</label> <label class="checkbox"><input type="checkbox" value="身份证号码">身份证号码</label> <label class="checkbox"><input type="checkbox" value="性别">性别</label> <label class="checkbox"><input type="checkbox" value="年龄">年龄</label> <label class="checkbox"><input type="checkbox" value="地址">地址</label> <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>'
     $("#template").html(html);
     $("#userRequired").hide();

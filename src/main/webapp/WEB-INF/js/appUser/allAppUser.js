@@ -106,6 +106,16 @@ $(function () {
                         message: '账号不能为空'
                     }
                 }
+            },'phone': {
+                validators: {
+                    notEmpty: {
+                        message: '电话号码必填'
+                    },
+                    regexp: {
+                        regexp: /^(1[3|4|5|7|8]\d{9})$/,/*只支持手机电话*/
+                        message: '请输入有效电话号码'
+                    }
+                }
             },'password': {
                 validators: {
                     notEmpty: {
