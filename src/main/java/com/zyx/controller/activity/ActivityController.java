@@ -3,7 +3,6 @@ package com.zyx.controller.activity;
 import com.zyx.constants.Constants;
 import com.zyx.model.Activity;
 import com.zyx.service.activity.ActivityService;
-import com.zyx.service.devaluation.DevaluationService;
 import com.zyx.utils.FileUploadUtils;
 import com.zyx.utils.ImagesVerifyUtils;
 import com.zyx.utils.MapUtils;
@@ -19,10 +18,8 @@ import org.springframework.web.servlet.view.AbstractView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.annotation.Resource;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 

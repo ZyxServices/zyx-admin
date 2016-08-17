@@ -36,7 +36,7 @@ public class Devaluationcontroller {
     private DevaluationService devaluationService;
 
     @RequestMapping(value = "/queryActivity", method = RequestMethod.POST)
-    @ApiOperation(value = "活动接口", notes = "活动发布")
+    @ApiOperation(value = "活动接口-活动推荐", notes = "活动接口-活动推荐")
     public ModelAndView queryActivity(@RequestParam(name = "types") Integer types,
                                       @RequestParam(name = "devaId") Integer devaluationId,
                                       @RequestParam(name = "image", required = false) MultipartFile image,
