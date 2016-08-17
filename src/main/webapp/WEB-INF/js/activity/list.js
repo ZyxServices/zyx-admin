@@ -250,7 +250,7 @@ function fromData(res) {
             dataObj.name = item.title;
             dataObj.time = item.createTime;
             dataObj.startTime = item.startTime;
-            dataObj.createPerson = item.userId;
+            dataObj.createPerson = item.userName;
             dataObj.address = item.address;
             dataObj.pv = 0;
             dataObj.report = 0;

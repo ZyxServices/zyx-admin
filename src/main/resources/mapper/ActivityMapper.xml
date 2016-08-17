@@ -27,9 +27,33 @@
         <result column="mask" jdbcType="INTEGER" property="mask"/>
         <result column="desc_content" jdbcType="LONGVARCHAR" property="descContent"/>
     </resultMap>
+    <resultMap id="activitydto" type="com.zyx.dto.ActivityDto">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="img_urls" jdbcType="VARCHAR" property="imgUrls"/>
+        <result column="start_time" jdbcType="BIGINT" property="startTime"/>
+        <result column="end_time" jdbcType="BIGINT" property="endTime"/>
+        <result column="last_time" jdbcType="BIGINT" property="lastTime"/>
+        <result column="max_people" jdbcType="INTEGER" property="maxPeople"/>
+        <result column="visible" jdbcType="INTEGER" property="visible"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="target_url" jdbcType="VARCHAR" property="targetUrl"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="activity_type" jdbcType="INTEGER" property="activityType"/>
+        <result column="examine" jdbcType="INTEGER" property="examine"/>
+        <result column="member_template" jdbcType="VARCHAR" property="memberTemplate"/>
+        <result column="create_time" jdbcType="BIGINT" property="createTime"/>
+        <result column="del" jdbcType="INTEGER" property="del"/>
+        <result column="mask" jdbcType="INTEGER" property="mask"/>
+        <result column="desc_content" jdbcType="LONGVARCHAR" property="descContent"/>
+        <association property="userName" column="user_id" select="com.zyx.mapper.AppUserMapper.selectAppUserGetName"></association>
+    </resultMap>
 
 
-    <select id="queryActivity" parameterType="com.zyx.parm.activity.QueryActivityParm" resultMap="activity">
+    <select id="queryActivity" parameterType="com.zyx.parm.activity.QueryActivityParm" resultMap="activitydto">
         select * from activity where 1=1
         <if test="groupName != null and groupName != ''">
             and (title LIKE CONCAT('%','${groupName}','%' ) or address LIKE CONCAT('%','${groupName}','%' ))
@@ -38,6 +62,7 @@
             and create_time &gt;= #{startTime}
             and end_time &lt;= #{endTime}
         </if>
+        AND del != 1
         ORDER BY create_time desc
         <if test="pageNumber != null and page != null">
             limit #{pageNumber}, #{page}
@@ -49,6 +74,7 @@
         <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
             #{item}
         </foreach>
+        AND del != 1
     </select>
 
     <update id="updateActivity" parameterType="com.zyx.model.Activity">

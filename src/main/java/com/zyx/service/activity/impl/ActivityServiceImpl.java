@@ -2,6 +2,7 @@ package com.zyx.service.activity.impl;
 
 import com.zyx.constants.ActivityConstants;
 import com.zyx.constants.Constants;
+import com.zyx.dto.ActivityDto;
 import com.zyx.mapper.ActivityMapper;
 import com.zyx.model.Activity;
 import com.zyx.parm.activity.QueryActivityParm;
@@ -70,7 +71,7 @@ public class ActivityServiceImpl implements ActivityService {
             }
         }
         parm.setGroupName(searchText);
-        List<Activity> activities = activityMapper.queryActivity(parm);
+        List<ActivityDto> activities = activityMapper.queryActivity(parm);
 
         int i = activityMapper.selectCount(null);
         if (activities != null && activities.size() > 0) {
