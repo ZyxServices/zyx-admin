@@ -245,9 +245,9 @@
 
             <h4>高级选项</h4>
 
-            <div class="control-group">
+            <div class="control-group form-group">
               <label class="control-label">人数限制</label>
-              <div class="controls">
+              <div class="controls col-xs-5">
                 <input type="text" id="maxPeople" name="maxPeople" class="span6" placeholder="请输入最大人数"/>
               </div>
             </div>
@@ -297,14 +297,15 @@
             <div class="control-group hide form-group" id="userRequired">
               <label class="control-label">用户报名必填</label>
               <div  class="controls col-xs-5" id="template">
-                  <label class="checkbox"><input type="checkbox" value="手机号码">手机号码</label>
-                  <label class="checkbox"><input type="checkbox" value="姓名">姓名</label>
-                  <label class="checkbox"><input type="checkbox" value="身份证号码">身份证号码</label>
-                  <label class="checkbox"><input type="checkbox" value="性别">性别</label>
-                  <label class="checkbox"><input type="checkbox" value="年龄">年龄</label>
-                  <label class="checkbox"><input type="checkbox" value="地址">地址</label>
+                  <label class="checkbox"><input type="checkbox" name="memberString" value="手机号码">手机号码</label>
+                  <label class="checkbox"><input type="checkbox" name="memberString" value="姓名">姓名</label>
+                  <label class="checkbox"><input type="checkbox" name="memberString" value="身份证号码">身份证号码</label>
+                  <label class="checkbox"><input type="checkbox" name="memberString" value="性别">性别</label>
+                  <label class="checkbox"><input type="checkbox" name="memberString" value="年龄">年龄</label>
+                  <label class="checkbox"><input type="checkbox" name="memberString" value="地址">地址</label>
                   <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>
               </div>
+              <input type="hidden" id="memberTemplate" name="memberTemplate"/>
             </div>
 
             <div class="control-group hide" id="addChoice">

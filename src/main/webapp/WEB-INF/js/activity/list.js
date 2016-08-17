@@ -93,6 +93,18 @@ $(function () {
                         }
                     }
                 }
+            }, 'memberString': {
+                validators: {
+                    notEmpty: {
+                        message: '必须填一个'
+                    }
+                }
+            }, 'maxPeople': {
+                validators: {
+                    integer: {
+                        message: '请输入整数'
+                    }
+                }
             }
         }
     });
@@ -323,7 +335,7 @@ $("#czS").click(function () {
                         }
                     });
                     $("#memberTemplate").val(desc);
-                    if ($("#memberTemplate").val() != "") {
+                    if ($("#memberTemplate").val() == "") {
                         examinefalg = false;
                     }
                 }
@@ -605,7 +617,7 @@ function createActivity() {
     $("#images").attr({'src': ''});
     $("#avtivityId").val('');
     $('#activity-summernote').summernote('reset');
-    var html = '<label class="checkbox"><input type="checkbox" value="手机号码">手机号码</label><label class="checkbox"><input type="checkbox" value="姓名">姓名</label> <label class="checkbox"><input type="checkbox" value="身份证号码">身份证号码</label> <label class="checkbox"><input type="checkbox" value="性别">性别</label> <label class="checkbox"><input type="checkbox" value="年龄">年龄</label> <label class="checkbox"><input type="checkbox" value="地址">地址</label> <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>'
+    var html = '<label class="checkbox"><input type="checkbox" name="memberString" value="手机号码">手机号码</label><label class="checkbox"><input type="checkbox" name="memberString" value="姓名">姓名</label> <label class="checkbox"><input type="checkbox" name="memberString" value="身份证号码">身份证号码</label> <label class="checkbox"><input name="memberString" type="checkbox" value="性别">性别</label> <label class="checkbox"><input name="memberString" type="checkbox" value="年龄">年龄</label> <label class="checkbox"><input name="memberString" type="checkbox" value="地址">地址</label> <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>'
     $("#template").html(html);
     $("#userRequired").hide();
     $('#updateCreateFrom')[0].reset();
@@ -624,8 +636,16 @@ function isReviewed(obj) {
     var val = $("#examine").val();
     if (val == 1) {
         $("#userRequired").show(500);
+        $('#updateCreateFrom').bootstrapValidator('addField', 'memberString', {
+            validators: {
+                notEmpty: {
+                    message: '请至少选择一个比填项'
+                }
+            }
+        });
     } else {
         $("#userRequired").hide(500);
+        $('#updateCreateFrom').bootstrapValidator('removeField', 'memberString')
     }
 }
 /*修改活动选择更多*/
