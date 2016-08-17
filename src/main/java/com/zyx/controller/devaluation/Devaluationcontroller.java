@@ -35,7 +35,7 @@ public class Devaluationcontroller {
     @Resource
     private DevaluationService devaluationService;
 
-    @RequestMapping(value = "/queryActivity", method = RequestMethod.POST)
+    @RequestMapping(value = "/insertActivityDeva", method = RequestMethod.POST)
     @ApiOperation(value = "活动接口-活动推荐", notes = "活动接口-活动推荐")
     public ModelAndView queryActivity(@RequestParam(name = "types") Integer types,
                                       @RequestParam(name = "devaId") Integer devaluationId,
@@ -46,9 +46,9 @@ public class Devaluationcontroller {
         AbstractView jsonView = new MappingJackson2JsonView();
 
         Devaluation devaluation = new Devaluation();
-        devaluation.setTypes(types);
+        devaluation.setModel(types);
         devaluation.setDevaluationId(devaluationId);
-        if (image != null) {
+        if (image != null && image.getSize() > 0) {
             String uploadFile = FileUploadUtils.uploadFile(image);
             devaluation.setImage(uploadFile);
         }
@@ -64,14 +64,14 @@ public class Devaluationcontroller {
 
     @RequestMapping(value = "/appUser", method = RequestMethod.POST)
     public ModelAndView appUserDeva(@RequestParam(name = "types") Integer types,
-                                      @RequestParam(name = "devaId") Integer devaluationId,
-                                      @RequestParam(name = "sequence") Integer sequence,
-                                      @RequestParam(name = "activation") Integer activation) {
+                                    @RequestParam(name = "devaId") Integer devaluationId,
+                                    @RequestParam(name = "sequence") Integer sequence,
+                                    @RequestParam(name = "activation") Integer activation) {
 
         AbstractView jsonView = new MappingJackson2JsonView();
 
         Devaluation devaluation = new Devaluation();
-        devaluation.setTypes(types);
+        devaluation.setModel(types);
         devaluation.setDevaluationId(devaluationId);
 
         devaluation.setSequence(sequence);

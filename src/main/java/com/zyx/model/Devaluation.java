@@ -12,12 +12,12 @@ public class Devaluation {
      * 模块类型（1、活动.........）
      * //  对面模块类型 1、活动，2,直播，3,圈子，4动态，5用户，6帖子
      */
-    private Integer types;
+    private Integer model;
 
     /**
      * 对应模块首推数据ID
      */
-    @Column(name = "devaluation_id")
+    @Column(name = "model_id")
     private Integer devaluationId;
 
     @Column(name = "create_time")
@@ -26,6 +26,7 @@ public class Devaluation {
     /**
      * 图片地址
      */
+    @Column(name = "image_url")
     private String image;
 
     /**
@@ -33,8 +34,10 @@ public class Devaluation {
      */
     private Integer sequence;
 
+    @Column(name = "state")
     private Integer activation;//激活0，未激活1
 
+    private Integer area;
     /**
      * @return id
      */
@@ -54,17 +57,17 @@ public class Devaluation {
      *
      * @return types - 模块类型（1、活动.........）
      */
-    public Integer getTypes() {
-        return types;
+    public Integer getModel() {
+        return model;
     }
 
     /**
      * 设置模块类型（1、活动.........）
      *
-     * @param types 模块类型（1、活动.........）
+     * @param model 模块类型（1、活动.........）
      */
-    public void setTypes(Integer types) {
-        this.types = types;
+    public void setModel(Integer model) {
+        this.model = model;
     }
 
     /**
@@ -147,5 +150,13 @@ public class Devaluation {
      */
     public void setActivation(Integer activation) {
         this.activation = activation;
+    }
+
+    public Integer getArea() {
+        return area;
+    }
+
+    public void setArea(Integer area) {
+        this.area = area;
     }
 }

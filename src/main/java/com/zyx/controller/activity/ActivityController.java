@@ -49,12 +49,12 @@ public class ActivityController {
                                 @RequestParam(name = "startTime", required = true) String startTime,//转时间戳
                                 @RequestParam(name = "endTime", required = true) String endTime,//转时间戳
                                 @RequestParam(name = "lastTime", required = true) String lastTime,//转时间戳
-                                @RequestParam(name = "maxPeople", required = true) Integer maxPeople,
+                                @RequestParam(name = "maxPeople", required = false) Integer maxPeople,
                                 @RequestParam(name = "visible", required = false) Integer visible,
-                                @RequestParam(name = "phone", required = true) String phone,
+                                @RequestParam(name = "phone", required = false) String phone,
                                 @RequestParam(name = "price", required = false) Double price,
                                 @RequestParam(name = "type", required = true) Integer type,
-                                @RequestParam(name = "address", required = true) String address,
+                                @RequestParam(name = "address", required = false) String address,
                                 @RequestParam(name = "examine", required = false) Integer examine,
                                 @RequestParam(name = "memberTemplate", required = false) String memberTemplate) {
 
@@ -82,7 +82,7 @@ public class ActivityController {
         activity.setStartTime(getDateTime(startTime));
         activity.setEndTime(getDateTime(endTime));
         activity.setLastTime(getDateTime(lastTime));
-        activity.setMaxPeople(maxPeople != null ? maxPeople : 20);
+        activity.setMaxPeople(maxPeople != null ? maxPeople : 9999);
         activity.setVisible(visible != null ? visible : 0);
         activity.setPhone(phone);
         activity.setPrice(price != null ? price : 0);

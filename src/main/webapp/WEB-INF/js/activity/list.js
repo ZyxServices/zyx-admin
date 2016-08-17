@@ -271,7 +271,7 @@ function fromData(res) {
 }
 
 $('#devaForm').ajaxForm({
-    url: '/v1/deva/queryActivity',
+    url: '/v1/deva/insertActivityDeva',
     type: 'post',
     dataType: 'json',
     beforeSubmit: function () {
