@@ -93,37 +93,6 @@ $(function () {
                         }
                     }
                 }
-            }, 'maxPeople': {
-                validators: {
-                    notEmpty: {
-                        message: '请填写人数限制'
-                    },
-                    integer: {
-                        message: '请填写人数整数'
-                    }
-                }
-            }, 'phone': {
-                validators: {
-                    notEmpty: {
-                        message: '请填写咨询电话'
-                    },
-                    regexp: {
-                        regexp: /^((0\d{2,3}-\d{7,8})|(1[3|4|5|7|8]\d{9}))$/,/*/^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/*/
-                        message: '请输入有效电话号码'
-                    }
-                }
-            }, 'address': {
-                validators: {
-                    notEmpty: {
-                        message: '请填写正确的地址'
-                    }
-                }
-            }, 'memberTemplate': {
-                validators: {
-                    notEmpty: {
-                        message: '必须选中一项'
-                    }
-                }
             }
         }
     });

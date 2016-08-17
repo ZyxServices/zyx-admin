@@ -234,30 +234,6 @@
             </div>
 
             <div class="control-group form-group">
-              <label class="control-label">人数限制</label>
-              <div class="controls col-xs-5">
-                <input type="text" id="maxPeople" name="maxPeople" class="span6" placeholder="请输入最大人数"/>
-                <span class="help-inline required">*</span>
-              </div>
-            </div>
-
-            <div class="control-group form-group">
-              <label class="control-label">咨询电话</label>
-              <div class="controls col-xs-5">
-                <input type="text" id="phone" name="phone" class="span6" placeholder="请输入正确的手机号码"/>
-                <span class="help-inline required">*</span>
-              </div>
-            </div>
-
-            <div class="control-group form-group">
-              <label class="control-label">地点</label>
-              <div class="controls col-xs-5">
-                <input type="text" id="address" name="address" class="span6" placeholder="请输入详细地址"/>
-                <span class="help-inline required">*</span>
-              </div>
-            </div>
-
-            <div class="control-group form-group">
               <label class="control-label">类型</label>
               <div class="controls col-xs-5">
                 <label class="radio"><input type="radio" name="type" checked value="1">线下活动</label>
@@ -265,15 +241,37 @@
               </div>
             </div>
 
-            <div class="control-group">
-              <label class="control-label">价格</label>
-              <div class="controls">
-                <input type="text" id="price" name="price" class="span6" />
-              </div>
-            </div>
             <hr>
 
             <h4>高级选项</h4>
+
+            <div class="control-group">
+              <label class="control-label">人数限制</label>
+              <div class="controls">
+                <input type="text" id="maxPeople" name="maxPeople" class="span6" placeholder="请输入最大人数"/>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">咨询电话</label>
+              <div class="controls">
+                <input type="text" id="phone" name="phone" class="span6" placeholder="请输入正确的手机号码"/>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">地点</label>
+              <div class="controls">
+                <input type="text" id="address" name="address" class="span6" placeholder="请输入详细地址"/>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label">价格</label>
+              <div class="controls">
+                <input type="text" id="price" name="price" class="span6" placeholder="默认免费"/>
+              </div>
+            </div>
 
             <div class="control-group">
               <label class="control-label">可见范围</label>
