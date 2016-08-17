@@ -34,9 +34,9 @@ $(function () {
                         message: '请选择开始时间'
                     },
                     /*date: {
-                        message: '请输入正确的日期格式,如:2016-01-01 00:00',
-                        format: 'YYYY-MM-DD h:m'
-                    },*/
+                     message: '请输入正确的日期格式,如:2016-01-01 00:00',
+                     format: 'YYYY-MM-DD h:m'
+                     },*/
                     callback: {
                         message: '开始日期不能大于结束日期或者开始时间不能小于截止时间',
                         callback: function (value, validator, $field) {
@@ -103,6 +103,31 @@ $(function () {
             .updateStatus('desc', 'NOT_VALIDATED', null)
             .validateField('desc');
     }).summernote({
+        callbacks: {
+            onImageUpload: function (files) {
+                //上传图片到服务器，使用了formData对象，至于兼容性...据说对低版本IE不太友好
+                var formData = new FormData();
+                formData.append('imgFile', files[0]);
+                $.ajax({
+                    url: '/v1/upload/file',//后台文件上传接口
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (result) {
+                        console.log(result)
+                        if(result.state == 200){
+                            $('#activity-summernote').summernote('insertImage', "http://image.tiyujia.com/" + result.data, 'img');
+                        }else{
+                            $.Popup({
+                                confirm: false,
+                                template: result.successmsg
+                            })
+                        }
+                    }
+                });
+            }
+        },
         lang: 'zh-CN',
         height: 200
     });
@@ -199,11 +224,11 @@ $(function () {
     });
 });
 
- $("#activityStartTime,#activityEndTime,#signEndTime").focus(function(){
-         $(this).blur();
-     });
+$("#activityStartTime,#activityEndTime,#signEndTime").focus(function () {
+    $(this).blur();
+});
 
-    function queryParams(params) {
+function queryParams(params) {
     return {
         pageDataNum: params.limit,
         pageNum: (params.offset + 1),
@@ -270,7 +295,7 @@ $('#devaForm').ajaxForm({
             $("#activityList").show();
             $("#activityRecommend").hide();
             $('#activity-list-table').bootstrapTable('refresh');
-        } else{
+        } else {
             $.Popup({
                 confirm: false,
                 template: result.errmsg
@@ -556,7 +581,7 @@ function queryActivityById(id, type) {
                     $("#template").empty();
                     $("#template").append(html)
                 }
-                if(type == 0){/*0代表编辑，1代表预览*/
+                if (type == 0) {/*0代表编辑，1代表预览*/
                     $('#updateCreateFrom')
                         .bootstrapValidator('removeField', 'image')
                         .data('bootstrapValidator').validate();
@@ -577,7 +602,7 @@ function createActivity() {
     $("#listType").html("创建");
     $("#createModify").show();
     $("#activityList").hide();
-    $("#images").attr({'src':''});
+    $("#images").attr({'src': ''});
     $("#avtivityId").val('');
     $('#activity-summernote').summernote('reset');
     var html = '<label class="checkbox"><input type="checkbox" value="手机号码">手机号码</label><label class="checkbox"><input type="checkbox" value="姓名">姓名</label> <label class="checkbox"><input type="checkbox" value="身份证号码">身份证号码</label> <label class="checkbox"><input type="checkbox" value="性别">性别</label> <label class="checkbox"><input type="checkbox" value="年龄">年龄</label> <label class="checkbox"><input type="checkbox" value="地址">地址</label> <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>'
@@ -631,37 +656,37 @@ function choiceMoreRel() {
 
 /*创建中type=file的样式处理*/
 $('input[id=lefile]').change(function () {
-    if($(this).val()){
+    if ($(this).val()) {
         $('#photoCover').html($(this).val());
         $("#lefile").html($(this).val());
-        var objUrl = getImgURL(this.files[0]) ;
+        var objUrl = getImgURL(this.files[0]);
         if (objUrl) {
-            $("#images").attr("src", objUrl) ;
+            $("#images").attr("src", objUrl);
         }
     }
 });
 
 /*推荐中type=file的样式处理*/
 $('input[id=recommendFile]').change(function () {
-    if($(this).val()){
+    if ($(this).val()) {
         $('#recommendPhotoCover').html($(this).val());
         $("#recommendFile").html($(this).val());
-        var objUrl = getImgURL(this.files[0]) ;
+        var objUrl = getImgURL(this.files[0]);
         if (objUrl) {
-            $("#recommendImg").attr("src", objUrl) ;
+            $("#recommendImg").attr("src", objUrl);
         }
     }
 });
 /*图片预览*/
 //建立一個可存取到該file的url
 function getImgURL(file) {
-    var url = null ;
+    var url = null;
     if (window.createObjectURL != undefined) { // basic
-        url = window.createObjectURL(file) ;
+        url = window.createObjectURL(file);
     } else if (window.URL != undefined) { // mozilla(firefox)
-        url = window.URL.createObjectURL(file) ;
-    } else if (window.webkitURL!=undefined) { // webkit or chrome
-        url = window.webkitURL.createObjectURL(file) ;
+        url = window.URL.createObjectURL(file);
+    } else if (window.webkitURL != undefined) { // webkit or chrome
+        url = window.webkitURL.createObjectURL(file);
     }
-    return url ;
+    return url;
 }

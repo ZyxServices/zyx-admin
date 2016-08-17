@@ -36,7 +36,7 @@ public class UploadController {
 
         String temp_url = FileUploadUtils.uploadFile(file);
 
-        Map<String, Object> map = MapUtils.buildSuccessMap(Constants.SUCCESS, "文件上传成功", "http://image.tiyujia.com/" + temp_url);
+        Map<String, Object> map = MapUtils.buildSuccessMap(Constants.SUCCESS, "文件上传成功", temp_url);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
