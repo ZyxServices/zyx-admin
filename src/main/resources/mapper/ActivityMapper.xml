@@ -54,6 +54,9 @@
     <update id="updateActivity" parameterType="com.zyx.model.Activity">
         UPDATE activity
         <set>
+            <if test="userId != null and userId != ''">
+                user_id = #{userId},
+            </if>
             <if test="title != null and title != ''">
                 title = #{title},
             </if>
