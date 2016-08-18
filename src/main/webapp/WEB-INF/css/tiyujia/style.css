@@ -46,7 +46,7 @@ div.checker span.checked {
 
 /*必填的颜色*/
 .help-inline.required {
-    color: red;
+    color: #b94a48;
 }
 
 .circleModals .control-label {

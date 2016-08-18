@@ -28,7 +28,7 @@ function initTable() {
         strictSearch: true,        //是否启用模糊收索
         queryParamsType: "undefined",
         dataField: "data",
-        silentSort:false,
+        silentSort: false,
         queryParams: function queryParams(params) {   //设置查询参数
             var param = {
                 start: params.pageNumber - 1,
@@ -49,10 +49,11 @@ function initTable() {
         columns: [
             {field: '', checkbox: true, align: 'center', valign: 'middle'},
             {field: 'id', title: 'id', align: 'center', valign: 'middle'},
-            {field: 'userName', title: '发布者'},
-            {field: 'authenticate', title: '发布者是否认证', sortable: true,formatter: authFormatter,sortName:'md'},
+            {field: 'userVo.nickName', title: '发布者'},
+            {field: 'userVo.authenticate', title: '发布者是否认证', sortable: true, formatter: authFormatter, sortName: 'md'},
             {field: 'createTime', title: '发布时间', formatter: timeFormat},
-            {field: 'type', title: '动态类型', sortable: true, formatter: typeFormatter},
+            //{field: 'type', title: '动态类型', sortable: true, formatter: typeFormatter},
+            {field: 'appUserAuthDto.authInfo', title: '认证标签', sortable: true},
             {field: 'zanCounts', title: '点赞量', sortable: true},
             {field: 'commentCounts', title: '评论量', sortable: true},
             {field: 'overTime', title: '分享量', sortable: true},
@@ -96,7 +97,7 @@ function initTable() {
         success: function (result) {
             var user = '';
             result.rows.forEach(function (item, i) {
-                user += '<option value='+item.id+' >'+item.nickname+'</option>'
+                user += '<option value=' + item.id + ' >' + item.nickname + '</option>'
             })
             $("#choiceUser").append(user)
         }
@@ -138,9 +139,14 @@ var operateEventssssss = {
         $(".dynamicPreview").addClass('on')
         $(".live_index").addClass('hide')
         $('.topicContent').html(row.topicContent)
-        $('.username').html(row.userName)
-        //$('.dynamicPic img')[0].src('http://image.tiyujia.com/'+row.topicContent)
-        $('.dynamicPic img').attr('src','http://image.tiyujia.com/'+row.imgUrl+'');
+        $('.username').html(row.userVo.nickName)
+        var strArry = row.imgUrl.split(',');
+        for (var i in strArry){
+            $('.dynamicPic').append('<img style="max-width: 13%"  src='+'http://image.tiyujia.com/'+strArry[i]+'>')
+            //$('.dynamicPic img').attr('src', 'http://image.tiyujia.com/' + row.imgUrl + '');
+        }
+
+
         console.log(row)
 
     },
@@ -153,7 +159,7 @@ var operateEventssssss = {
         $(".dynamicEdit").addClass('on')
         $(".release").addClass('hide')
         //$("input[name='imgFile']")
-        var createId=$("#choiceUser option:selected").val()
+        var createId = $("#choiceUser option:selected").val()
 
     },
     'click .recommend': function (e, value, row, index) {
@@ -211,7 +217,7 @@ var operateEventssssss = {
         ajaxPlugins.unRemove(delUrl, 'dynamic_table', 'DELETE')
     },
     createDynamic: function (obj) {
-        var createId=$("#choiceUser option:selected").val()
+        console.log(222)
         $("#createDynamicForm").ajaxForm({
             url: '/concern/createConcern',
             type: 'post',
@@ -220,15 +226,18 @@ var operateEventssssss = {
                 console.log(result)
                 if (result.state == 200) {
                     window.location.reload()
-                } else {
-                    if (result.state == 5001) {
-                        alert("账号已存在");
-                    }
+                } else  {
+                    $.Popup({
+                        confirm:false,
+                        template:result.errmsg
+                    })
                 }
             }
         })
+
     }
 };
+
 //查看Url事件
 var seeUrl = {
     'click .seeUrl': function (e, value, row, index) {
@@ -240,5 +249,86 @@ $(function () {
         $(".create_liveType").addClass('on')
         $(".live_index").addClass('hide')
     })
+    ///*创建中type=file的样式处理*/
+    //$('input[id=imgFile]').change(function () {
+    //    if (this.files.length <= 9 && this.files.length > 0) {
+    //        $("#imgFile").html($(this).val());
+    //        $.each(this.files, function (k, v) {
+    //            var objUrl = getImgURL(v);
+    //            if (objUrl) {
+    //                $("#imagesWrap").append("<img id='images' style='max-width:10%;padding:10px' src='" + objUrl + "'>");
+    //            }
+    //        });
+    //    } else if (this.files.length > 9) {
+    //        $.Popup({
+    //            confirm: false,
+    //            template: '最多不能超过9张图片'
+    //        })
+    //        this.value = "";
+    //    }
+    //});
+    ///*图片预览*/
+    ////建立一個可存取到該file的url
+    //function getImgURL(file) {
+    //    var url = null;
+    //    if (window.createObjectURL != undefined) { // basic
+    //        url = window.createObjectURL(file);
+    //    } else if (window.URL != undefined) { // mozilla(firefox)
+    //        url = window.URL.createObjectURL(file);
+    //    } else if (window.webkitURL != undefined) { // webkit or chrome
+    //        url = window.webkitURL.createObjectURL(file);
+    //    }
+    //    return url;
+    //}
+    $("#demo").zyUpload({
+        width            :   "400px",                 // 宽度
+        height           :   "400px",                 // 宽度
+        itemWidth        :   "100px",                 // 文件项的宽度
+        itemHeight       :   "100px",                 // 文件项的高度
+        url              :   "/v1/upload/file",  // 上传文件的路径
+        fileType         :   ["jpg","png","jpeg","bmp","gif"],// 上传文件的类型
+        fileSize         :   51200000,                // 上传文件的大小
+        tailor           :   false,                    // 是否可以裁剪图片
+        multiple         :   true,                    // 是否可以多个文件上传
+        dragDrop         :   true,                    // 是否可以拖动上传文件
+        del              :   true,                    // 是否可以删除文件
+        finishDel        :   false,  				  // 是否在上传文件完成后删除预览
+        /* 外部获得的回调接口 */
+        onSelect: function(files, allFiles){                    // 选择文件的回调方法
+            //console.info("当前选择了以下文件：");
+            //console.info(files);
+            //console.info("之前没上传的文件：");
+            //console.info(allFiles);
+        },
+        onDelete: function(file, surplusFiles){                     // 删除一个文件的回调方法
+            console.info("当前删除了此文件：");
+            console.info(file);
+            console.info("当前剩余的文件：");
+            console.info(surplusFiles);
+        },
+        onSuccess: function(file,response){                    // 文件上传成功的回调方法
+
+            if(JSON.parse(response).state==902){
+                    console.log(file)
+                alert(JSON.parse(response).errmsg)
+            }else{
+                $('#imgFileUrl').val($('#imgFileUrl').val()+JSON.parse(response).data+',')
+            }
+            //$('#uploadInf').append(JSON.parse(response).data)
+        },
+        onFailure: function(file){                    // 文件上传失败的回调方法
+            console.info("此文件上传失败：");
+            console.info(file);
+        },
+        onComplete: function(responseInfo){           // 上传完成的回调方法
+            console.log(111)
+            $('#DynamicSubmit').click();
+            //operateEventssssss.createDynamic()
+            $('#imgFileUrl').val($('#imgFileUrl').val().substr(0,$('#imgFileUrl').val().length-1))
+        }
+    });
+    $(window).resize(function () {
+        $('#dynamic_table').bootstrapTable('resetView');
+    });
     initTable();
 })
