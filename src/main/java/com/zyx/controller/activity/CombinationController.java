@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.AbstractView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
@@ -38,7 +37,7 @@ public class CombinationController {
     @RequestMapping(value = "/createCombination", method = RequestMethod.POST)
     @ApiOperation(value = "添加组合", notes = "添加组合")
     public ModelAndView createCombination(@RequestParam(name = "name", required = true) String name,
-                                          @RequestPart(name = "image", required = true) String image,
+                                          @RequestParam(name = "image", required = true) String image,
                                           @RequestParam(name = "activityIds", required = false) Integer[] activityIds) {
 
         AbstractView jsonView = new MappingJackson2JsonView();
@@ -61,7 +60,7 @@ public class CombinationController {
     @ApiOperation(value = "修改组合", notes = "修改组合")
     public ModelAndView updateCombination(@RequestParam(name = "id", required = true) Integer id,
                                           @RequestParam(name = "name", required = false) String name,
-                                          @RequestPart(name = "image", required = false) String images,
+                                          @RequestParam(name = "image", required = false) String images,
                                           @RequestParam(name = "activityIds", required = false) Integer[] activityIds) {
 
         AbstractView jsonView = new MappingJackson2JsonView();
