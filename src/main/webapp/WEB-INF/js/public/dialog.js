@@ -27,7 +27,7 @@
               var dialogHtml= "<div id='activity-shield"+ globalID+"' class='modal fade'><div class='modal-header'>"+
                   "<button data-dismiss='modal' class='close' type='button'></button><h3>"+this.options.title+"</h3></div>"+
                   "<div class='modal-body'>"+this.options.template+"</div><div class='modal-footer'>"+
-                  Successbtn+"<button class='btn btn-default' id='maskCancel' data-dismiss='modal'>关闭</button></div></div>"
+                  Successbtn+"<button class='btn btn-default' id='maskCancel' >关闭</button></div></div>"
               $('body').append(dialogHtml)
           }
           return globalID;
@@ -42,11 +42,14 @@
           $('#maskCancel').click(function(){
               $('#activity-shield'+globalID+'').modal('hide')
               $('#activity-shield'+globalID+'').remove()
+              //if($.isFunction(sav.options.cancelEvent)){
+                  sav.options.cancelEvent()
+              //}
+
           })
       },
       cancelEvent:function(){
-          $('#activity-shield'+globalID+'').modal('hide')
-          $('#activity-shield'+globalID+'').remove()
+
       }
 
   }
@@ -124,7 +127,7 @@
       //创建弹窗的实体
       var dialogs = new dialog(this, options);
       //调用其方法
-      dialogs.init();dialogs.saveEvents();
+      dialogs.init();dialogs.saveEvents();dialogs.cancelEvent();
       //调用弹窗
       $("#activity-shield"+globalID+"").modal('show');
   }
