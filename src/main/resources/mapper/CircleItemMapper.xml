@@ -19,10 +19,19 @@
         <result column="createUser" property="createUser" jdbcType="VARCHAR"/>
         <result column="circleTitle" property="circleTitle" jdbcType="VARCHAR"/>
         <result column="type_name" property="circleTypeName" jdbcType="VARCHAR"/>
-        <result column="zan_Counts" property="zanCounts" jdbcType="INTEGER"/>
-        <result column="comment_Counts" property="commentCounts" jdbcType="INTEGER"/>
+
+        <!--<result column="zan_Counts" property="zanCounts" jdbcType="INTEGER"/>-->
+        <!--<result column="comment_Counts" property="commentCounts" jdbcType="INTEGER"/>-->
+        <association property="zanCounts" column="id"  select="zanSelect"/>
+        <association property="commentCounts" column="id" select="commentSelect"/>
     </resultMap>
 
+    <select id="zanSelect"  resultType="int">
+        SELECT COUNT(id) FROM zan WHERE zan.body_type=5
+    </select>
+    <select id="commentSelect" parameterType="int" resultType="int">
+        SELECT COUNT(id) FROM reply WHERE reply.reply_type=1 AND reply.reply_id!=-1 AND reply_id=#{circleId}
+    </select>
     <select id="findByPager" resultMap="circleItemVoMap">
     SELECT
     circle_item.id,
@@ -36,9 +45,7 @@
     circle_item.state,
     `user`.nickname AS createUser,
     circle.title AS circleTitle,
-    circle_type.type_name,
-    (SELECT COUNT(*) FROM zan WHERE zan.body_type=5) AS zan_Counts,
-    (SELECT COUNT(*) FROM reply WHERE reply.reply_type=1 AND reply.reply_id!=-1 AND reply_id=circle.id) AS comment_Counts
+    circle_type.type_name
     FROM
     circle_item
     INNER JOIN `user` ON circle_item.create_id = `user`.id
@@ -67,9 +74,7 @@
         circle_item.state,
         `user`.nickname AS createUser,
         circle.title AS circleTitle,
-        circle_type.type_name,
-        (SELECT COUNT(*) FROM zan WHERE zan.body_type=5) AS zan_Counts,
-        (SELECT COUNT(*) FROM reply WHERE reply.reply_type=1 AND reply.reply_id!=-1 AND reply_id=circle.id) AS comment_Counts
+        circle_type.type_name
         FROM
         circle_item
         INNER JOIN `user` ON circle_item.create_id = `user`.id
