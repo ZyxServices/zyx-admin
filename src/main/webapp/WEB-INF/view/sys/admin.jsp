@@ -58,7 +58,7 @@
 
                     <h3 class="page-title">
 
-                        管理员列表
+                        管理员管理
                         <small>statistics and more</small>
 
                     </h3>
@@ -91,7 +91,7 @@
 
                 <!-- BEGIN DASHBOARD STATS -->
 
-                <div class="row-fluid margin-bottom-10">
+                <div class="row-fluid">
                     <div class="span6">
                         <a class="btn btn-default" href="javascript:void(0)" onclick="createAdministrators()">创建管理员</a>
                     </div>
@@ -307,6 +307,72 @@
 
         </div>
 
+        <%--操作日志--%>
+        <div class="container-fluid hide" id="administratorsLog">
+
+            <!-- BEGIN PAGE HEADER-->
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <h3 class="page-title">
+
+                        管理员管理
+                        <small>statistics and more</small>
+
+                    </h3>
+
+                    <ul class="breadcrumb">
+
+                        <li>
+
+                            <i class="icon-home"></i>
+
+                            <a href="javascript:void(0)">管理员</a>
+
+                            <i class="icon-angle-right"></i>
+
+                        </li>
+
+                        <li><a href="#">操作日志</a></li>
+
+                    </ul>
+
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+
+                </div>
+
+            </div>
+
+            <!-- END PAGE HEADER-->
+
+            <div id="administrators-log">
+
+                <!-- BEGIN DASHBOARD STATS -->
+
+                <div class="row-fluid">
+                    <div class="span12 responsive">
+                        <table id="administrators-log-table">
+                            <thead>
+                            <tr>
+                                <th data-field="id">id</th>
+                                <th data-field="name">管理员</th>
+                                <th data-field="systemRoleListDto.role_name">权限</th>
+                                <th data-field="bz">操作</th>
+                                <th data-field="operateTime">操作时间</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                </div>
+
+                <!-- END DASHBOARD STATS -->
+
+            </div>
+
+        </div>
         <!-- END PAGE CONTAINER-->
 
     </div>

@@ -2,6 +2,7 @@ package com.zyx.controller.jsoup;
 
 import com.zyx.constants.Constants;
 import com.zyx.utils.FileUploadUtils;
+import com.zyx.utils.ImagesVerifyUtils;
 import com.zyx.utils.MapUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.AbstractView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -35,9 +37,15 @@ public class UploadController {
         AbstractView jsonView = new MappingJackson2JsonView();
 
         String temp_url = FileUploadUtils.uploadFile(file);
+        Map<String, Object> map1 = ImagesVerifyUtils.verify(temp_url);
 
-        Map<String, Object> map = MapUtils.buildSuccessMap(Constants.SUCCESS, "文件上传成功", "http://image.tiyujia.com/" + temp_url);
-        jsonView.setAttributesMap(map);
+
+        if (map1 != null) {
+            jsonView.setAttributesMap(map1);
+        } else {
+            Map<String, Object> map = MapUtils.buildSuccessMap(Constants.SUCCESS, "文件上传成功", temp_url);
+            jsonView.setAttributesMap(map);
+        }
         return new ModelAndView(jsonView);
     }
 }

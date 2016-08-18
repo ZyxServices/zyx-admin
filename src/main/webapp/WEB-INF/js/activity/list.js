@@ -34,9 +34,9 @@ $(function () {
                         message: '请选择开始时间'
                     },
                     /*date: {
-                        message: '请输入正确的日期格式,如:2016-01-01 00:00',
-                        format: 'YYYY-MM-DD h:m'
-                    },*/
+                     message: '请输入正确的日期格式,如:2016-01-01 00:00',
+                     format: 'YYYY-MM-DD h:m'
+                     },*/
                     callback: {
                         message: '开始日期不能大于结束日期或者开始时间不能小于截止时间',
                         callback: function (value, validator, $field) {
@@ -93,35 +93,16 @@ $(function () {
                         }
                     }
                 }
+            }, 'memberString': {
+                validators: {
+                    notEmpty: {
+                        message: '必须填一个'
+                    }
+                }
             }, 'maxPeople': {
                 validators: {
-                    notEmpty: {
-                        message: '请填写人数限制'
-                    },
                     integer: {
-                        message: '请填写人数整数'
-                    }
-                }
-            }, 'phone': {
-                validators: {
-                    notEmpty: {
-                        message: '请填写咨询电话'
-                    },
-                    regexp: {
-                        regexp: /^1[3|4|5|7|8]\d{9}$/,
-                        message: '请输入有效电话号码'
-                    }
-                }
-            }, 'address': {
-                validators: {
-                    notEmpty: {
-                        message: '请填写正确的地址'
-                    }
-                }
-            }, 'memberTemplate': {
-                validators: {
-                    notEmpty: {
-                        message: '必须选中一项'
+                        message: '请输入整数'
                     }
                 }
             }
@@ -134,6 +115,31 @@ $(function () {
             .updateStatus('desc', 'NOT_VALIDATED', null)
             .validateField('desc');
     }).summernote({
+        callbacks: {
+            onImageUpload: function (files) {
+                //上传图片到服务器，使用了formData对象，至于兼容性...据说对低版本IE不太友好
+                var formData = new FormData();
+                formData.append('imgFile', files[0]);
+                $.ajax({
+                    url: '/v1/upload/file',//后台文件上传接口
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (result) {
+                        console.log(result)
+                        if(result.state == 200){
+                            $('#activity-summernote').summernote('insertImage', "http://image.tiyujia.com/" + result.data, 'img');
+                        }else{
+                            $.Popup({
+                                confirm: false,
+                                template: result.successmsg
+                            })
+                        }
+                    }
+                });
+            }
+        },
         lang: 'zh-CN',
         height: 200
     });
@@ -230,11 +236,11 @@ $(function () {
     });
 });
 
- $("#activityStartTime,#activityEndTime,#signEndTime").focus(function(){
-         $(this).blur();
-     });
+$("#activityStartTime,#activityEndTime,#signEndTime").focus(function () {
+    $(this).blur();
+});
 
-    function queryParams(params) {
+function queryParams(params) {
     return {
         pageDataNum: params.limit,
         pageNum: (params.offset + 1),
@@ -256,7 +262,7 @@ function fromData(res) {
             dataObj.name = item.title;
             dataObj.time = item.createTime;
             dataObj.startTime = item.startTime;
-            dataObj.createPerson = item.userId;
+            dataObj.createPerson = item.userName;
             dataObj.address = item.address;
             dataObj.pv = 0;
             dataObj.report = 0;
@@ -277,7 +283,7 @@ function fromData(res) {
 }
 
 $('#devaForm').ajaxForm({
-    url: '/v1/deva/queryActivity',
+    url: '/v1/deva/insertActivityDeva',
     type: 'post',
     dataType: 'json',
     beforeSubmit: function () {
@@ -301,7 +307,7 @@ $('#devaForm').ajaxForm({
             $("#activityList").show();
             $("#activityRecommend").hide();
             $('#activity-list-table').bootstrapTable('refresh');
-        } else{
+        } else {
             $.Popup({
                 confirm: false,
                 template: result.errmsg
@@ -329,7 +335,7 @@ $("#czS").click(function () {
                         }
                     });
                     $("#memberTemplate").val(desc);
-                    if ($("#memberTemplate").val() != "") {
+                    if ($("#memberTemplate").val() == "") {
                         examinefalg = false;
                     }
                 }
@@ -445,7 +451,6 @@ var operateEvents = {
         queryActivityById(row.id, 1);
         $("#createModify").show();
         $("#activityList").hide();
-        $("#addBtn").hide();
     },
     'click .recommend': function (e, value, row, index) {
         $("#listType").html("推荐");
@@ -583,12 +588,12 @@ function queryActivityById(id, type) {
                         template.forEach(function (item, i) {
                             html += "<label class='checkbox'><input type='checkbox' value='" + item + "' checked>" + item + "</label>";
                         });
+                        html += "<a href='javascript:void (0)' onclick='choiceMore()' id='addBtn'>+</a>";
                     }
-                    html += "<a href='javascript:void (0)' onclick='choiceMore()' id='addBtn'>+</a>";
                     $("#template").empty();
                     $("#template").append(html)
                 }
-                if(type == 0){/*0代表编辑，1代表预览*/
+                if (type == 0) {/*0代表编辑，1代表预览*/
                     $('#updateCreateFrom')
                         .bootstrapValidator('removeField', 'image')
                         .data('bootstrapValidator').validate();
@@ -609,10 +614,10 @@ function createActivity() {
     $("#listType").html("创建");
     $("#createModify").show();
     $("#activityList").hide();
-    // $("#imagesWrap").hide();
+    $("#images").attr({'src': ''});
     $("#avtivityId").val('');
-    $('#activity-summernote').summernote('code', '');
-    var html = '<label class="checkbox"><input type="checkbox" value="手机号码">手机号码</label><label class="checkbox"><input type="checkbox" value="姓名">姓名</label> <label class="checkbox"><input type="checkbox" value="身份证号码">身份证号码</label> <label class="checkbox"><input type="checkbox" value="性别">性别</label> <label class="checkbox"><input type="checkbox" value="年龄">年龄</label> <label class="checkbox"><input type="checkbox" value="地址">地址</label> <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>'
+    $('#activity-summernote').summernote('reset');
+    var html = '<label class="checkbox"><input type="checkbox" name="memberString" value="手机号码">手机号码</label><label class="checkbox"><input type="checkbox" name="memberString" value="姓名">姓名</label> <label class="checkbox"><input type="checkbox" name="memberString" value="身份证号码">身份证号码</label> <label class="checkbox"><input name="memberString" type="checkbox" value="性别">性别</label> <label class="checkbox"><input name="memberString" type="checkbox" value="年龄">年龄</label> <label class="checkbox"><input name="memberString" type="checkbox" value="地址">地址</label> <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>'
     $("#template").html(html);
     $("#userRequired").hide();
     $('#updateCreateFrom')[0].reset();
@@ -631,8 +636,16 @@ function isReviewed(obj) {
     var val = $("#examine").val();
     if (val == 1) {
         $("#userRequired").show(500);
+        $('#updateCreateFrom').bootstrapValidator('addField', 'memberString', {
+            validators: {
+                notEmpty: {
+                    message: '请至少选择一个比填项'
+                }
+            }
+        });
     } else {
         $("#userRequired").hide(500);
+        $('#updateCreateFrom').bootstrapValidator('removeField', 'memberString')
     }
 }
 /*修改活动选择更多*/
@@ -663,37 +676,37 @@ function choiceMoreRel() {
 
 /*创建中type=file的样式处理*/
 $('input[id=lefile]').change(function () {
-    if($(this).val()){
+    if ($(this).val()) {
         $('#photoCover').html($(this).val());
         $("#lefile").html($(this).val());
-        var objUrl = getImgURL(this.files[0]) ;
+        var objUrl = getImgURL(this.files[0]);
         if (objUrl) {
-            $("#images").attr("src", objUrl) ;
+            $("#images").attr("src", objUrl);
         }
     }
 });
 
 /*推荐中type=file的样式处理*/
 $('input[id=recommendFile]').change(function () {
-    if($(this).val()){
+    if ($(this).val()) {
         $('#recommendPhotoCover').html($(this).val());
         $("#recommendFile").html($(this).val());
-        var objUrl = getImgURL(this.files[0]) ;
+        var objUrl = getImgURL(this.files[0]);
         if (objUrl) {
-            $("#recommendImg").attr("src", objUrl) ;
+            $("#recommendImg").attr("src", objUrl);
         }
     }
 });
 /*图片预览*/
 //建立一個可存取到該file的url
 function getImgURL(file) {
-    var url = null ;
+    var url = null;
     if (window.createObjectURL != undefined) { // basic
-        url = window.createObjectURL(file) ;
+        url = window.createObjectURL(file);
     } else if (window.URL != undefined) { // mozilla(firefox)
-        url = window.URL.createObjectURL(file) ;
-    } else if (window.webkitURL!=undefined) { // webkit or chrome
-        url = window.webkitURL.createObjectURL(file) ;
+        url = window.URL.createObjectURL(file);
+    } else if (window.webkitURL != undefined) { // webkit or chrome
+        url = window.webkitURL.createObjectURL(file);
     }
-    return url ;
+    return url;
 }

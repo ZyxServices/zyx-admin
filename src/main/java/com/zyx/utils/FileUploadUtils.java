@@ -34,14 +34,14 @@ public class FileUploadUtils {
         System.out.println("fileName : " + fileName);
         fileName = fileName.toLowerCase();
         //"gif", "jpeg", "jpg", "bmp", "png"
-        String[] strings = new String[]{"png", "gif", "jpeg", "jpg", "bmp"};
+        String[] strings = new String[]{"png", "gif", "jpeg", "jpg", "bmp"};//所有文件格式
+        List<String> list = Arrays.asList(strings);
         try {
-            if (Arrays.binarySearch(strings, fileName) != -1) {
-
-
+            if (list.contains(fileName)) {
                 byte[] tempFile = file.getBytes();
-                String[] images = new String[]{"png", "gif", "jpeg", "jpeg", "jpg", "bmp"};
-                if (Arrays.binarySearch(images, fileName) != -1 && tempFile.length > IMAGES_MAX_BYTE) {
+                String[] images = new String[]{"png", "gif", "jpeg", "jpg", "bmp"};//可上传图片格式
+                List<String> imagesList = Arrays.asList(images);
+                if (imagesList.contains(fileName) && tempFile.length > IMAGES_MAX_BYTE) {
                     return Constants.AUTH_ERROR_901 + "";
                 }
 

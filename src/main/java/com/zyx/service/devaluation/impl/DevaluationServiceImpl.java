@@ -34,11 +34,11 @@ public class DevaluationServiceImpl implements DevaluationService {
     @Override
     public Map<String, Object> insertActivityDeva(Devaluation devaluation) {
 
-        if (devaluation.getTypes() != null && devaluation.getDevaluationId() != null && devaluation.getSequence() != null) {
+        if (devaluation.getModel() != null && devaluation.getDevaluationId() != null && devaluation.getSequence() != null) {
             devaluation.setCreateTime(new Date().getTime());
 
             Devaluation devaQuery = new Devaluation();
-            devaQuery.setTypes(devaluation.getTypes());
+            devaQuery.setModel(devaluation.getModel());
             devaQuery.setDevaluationId(devaluation.getDevaluationId());
 
             List<Devaluation> devaluations = devaluationMapper.select(devaQuery);
@@ -47,7 +47,7 @@ public class DevaluationServiceImpl implements DevaluationService {
             }
 
             Devaluation devaQuerySeq = new Devaluation();
-            devaQuerySeq.setTypes(devaluation.getTypes());
+            devaQuerySeq.setModel(devaluation.getModel());
             devaQuerySeq.setSequence(devaluation.getSequence());
             List<Devaluation> selectSeq = devaluationMapper.select(devaQuerySeq);
             if (selectSeq.size() > 0) {
@@ -67,11 +67,11 @@ public class DevaluationServiceImpl implements DevaluationService {
 
     @Override
     public Map<String, Object> insertAppUserDeva(Devaluation devaluation) {
-        if (devaluation.getTypes() != null && devaluation.getDevaluationId() != null && devaluation.getSequence() != null) {
+        if (devaluation.getModel() != null && devaluation.getDevaluationId() != null && devaluation.getSequence() != null) {
             devaluation.setCreateTime(new Date().getTime());
 
             Devaluation devaQuery = new Devaluation();
-            devaQuery.setTypes(devaluation.getTypes());
+            devaQuery.setModel(devaluation.getModel());
             devaQuery.setDevaluationId(devaluation.getDevaluationId());
 
             List<Devaluation> devaluations = devaluationMapper.select(devaQuery);
@@ -80,7 +80,7 @@ public class DevaluationServiceImpl implements DevaluationService {
             }
 
             Devaluation devaQuerySeq = new Devaluation();
-            devaQuerySeq.setTypes(devaluation.getTypes());
+            devaQuerySeq.setModel(devaluation.getModel());
             devaQuerySeq.setSequence(devaluation.getSequence());
             List<Devaluation> selectSeq = devaluationMapper.select(devaQuerySeq);
             if (selectSeq.size() > 0) {

@@ -68,7 +68,7 @@
                 <div class="controls"><span class="help-inline" id="devaUserNickname"></span></div>
             </div>
             <div class="control-group"><label class="control-label">用户头像</label>
-                <div class="controls"><img id="devaUserAvatar"src="http://image.tiyujia.com/group1/M00/00/00/052YyFeIeIqASfONAAAJDB3enOc610.jpg">
+                <div class="controls"><img id="devaUserAvatar" src="http://image.tiyujia.com/group1/M00/00/00/052YyFeIeIqASfONAAAJDB3enOc610.jpg">
                 </div>
             </div>
             <div class="control-group"><label class="control-label">首页更多用户推荐</label>

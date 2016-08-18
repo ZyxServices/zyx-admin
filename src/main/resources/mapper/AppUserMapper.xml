@@ -76,6 +76,10 @@
         SELECT * FROM user_auth where user_id = #{appUserId}
     </select>
 
+    <select id="selectAppUserGetName" parameterType="int" resultType="java.lang.String">
+        SELECT nickname FROM user where id = #{userId}
+    </select>
+
     <select id="queryAppUserList" parameterType="com.zyx.parm.QueryAppUserParam" resultMap="AppUserListDto">
         SELECT * FROM user where (nickname LIKE CONCAT('%','${searchText}','%' ) or phone LIKE
         CONCAT('%','${searchText}','%' ))

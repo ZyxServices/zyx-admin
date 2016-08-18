@@ -93,3 +93,6 @@ function operateFormatter(value, row, index) {
 $(function () {
     initTable();
 });
+function beginDeva() {
+    $("#devaForm").submit();
+}
