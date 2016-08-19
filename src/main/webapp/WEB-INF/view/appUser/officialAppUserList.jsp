@@ -14,6 +14,7 @@
     <meta content="体育家-用户操作" name="description"/>
     <meta content="" name="author"/>
     <jsp:include page="../public/common-styles.jsp"/>
+    <link rel="stylesheet" href="../../css/tiyujia/style.css" />
 </head>
 <body class="page-header-fixed">
 <jsp:include page="../public/header.jsp"/>
@@ -47,6 +48,99 @@
                            data-detail-formatter="detailFormatter">
                     </table>
                 </div>
+            </div>
+            <%--官方用户编辑--%>
+            <div class="create_liveType row-fluid">
+                <form class="form-horizontal" role="form" id="editUserForm" enctype="multipart/form-data">
+                    <div class="control-group form-group">
+                        <label class="control-label">昵称</label>
+
+                        <div class="controls col-xs-5">
+                            <input type="text" class="span6" name="nickname" id="nickname" placeholder="输入昵称"/>
+                            <span class="help-inline required">*</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <label class="control-label">电话</label>
+
+                        <div class="controls col-xs-5">
+                            <input type="text" class="span6" name="phone" id="phone" placeholder="输入电话号码"/>
+                            <span class="help-inline required">*</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <label class="control-label">密码</label>
+
+                        <div class="controls col-xs-5">
+                            <input type="text" class="span6" name="password" id="password" placeholder="输入密码"/>
+                            <span class="help-inline required">*</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">头像</label>
+
+                        <div class="controls">
+                            <input type="file" class="hideInput" name="avatar" id="avatar">
+                            <a class="btn btn-default" href="javascript:void (0)" id="photoCover" onclick="$('input[id=avatar]').click();">选择文件</a>
+                            <div style="margin-top: 10px" id="imagesWrap">
+                                <img id="avatarImg" src="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">性别</label>
+
+                        <div class="controls">
+                            <select class="span6" name="sex" id="sex">
+                                <option value="1">男</option>
+                                <option value="0">女</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">官方账号</label>
+                        <div class="controls">
+                            <select class="span6" name="official" id="official">
+                                <option value="1">是</option>
+                                <option value="0" selected>否</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">所在地</label>
+                        <div class="controls">
+                            <input type="text" class="span6" name="address" id="address" placeholder="请输入地址"/>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">认证信息</label>
+                        <div class="controls">
+                            <input type="text" class="span6" name="authInfo" id="authInfo" placeholder="请输入你的认证信息"/>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">认证资料</label>
+                        <div class="controls">
+                            <input type="file" class="hideInput" name="authFile" id="authFile">
+                            <a class="btn btn-default" href="javascript:void (0)" id="authFileCover" onclick="$('input[id=authFile]').click();">上传资料</a>
+                            <span class="help-inline">最多上传3张照片</span>
+                            <div style="margin-top: 10px" id="authImgWrap">
+                                <img id="authImg" src="">
+                            </div>
+                        </div>
+
+                    </div>
+                    <button type="button" id="createButton" class="btn">确认创建</button>
+                    <button type="button" class="btn" onclick="window.location.reload();">返回</button>
+                </form>
             </div>
         </div>
     </div>

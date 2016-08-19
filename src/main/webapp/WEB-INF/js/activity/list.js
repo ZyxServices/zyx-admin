@@ -708,7 +708,7 @@ $('input[id=lefile]').change(function () {
 
 /*推荐中type=file的样式处理*/
 $('input[id=recommendFile]').change(function () {
-    if ($(this).val() != undefined && $(this).val() != "") {
+    if ($(this).val()) {
         $('#recommendPhotoCover').html($(this).val());
         var objUrl = getImgURL(this.files[0]);
         if (objUrl) {
