@@ -72,7 +72,7 @@ function operateFormatter(value, row, index) {
     } else {
         _html.push('<a class="mask p5" href="javascript:void(0)" title="mask">屏蔽</a>');
     }
-    _html.push('<a class="del p5" href="javascript:void(0)" title="del">删除</a>');
+    // _html.push('<a class="del p5" href="javascript:void(0)" title="del">删除</a>');
     return _html.join('');
 }
 $(function () {

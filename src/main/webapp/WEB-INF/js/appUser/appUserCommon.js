@@ -130,7 +130,7 @@ var operateEvent = {
     'click .mask': function (e, value, row, index) {
         $.Popup({
             title: '屏蔽',
-            template: '这是屏蔽是否的对话框',
+            template: '屏蔽之后该用户将不能再启用',
             saveEvent: function () {
                 $.ajax({
                     url: "/v1/appUser/mask",

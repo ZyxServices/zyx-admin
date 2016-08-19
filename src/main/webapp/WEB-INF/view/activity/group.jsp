@@ -160,7 +160,7 @@
         <!-- BEGIN DASHBOARD STATS -->
         <div class="row-fluid">
 
-          <form class="form-horizontal" role="form" id="group-form" enctype="multipart/form-data">
+          <form class="form-horizontal" role="form" id="group-form">
 
             <input type="hidden" id="combinationId" name="id">
             <div class="control-group form-group">
@@ -175,7 +175,8 @@
               <label class="control-label">封面</label>
               <div class="controls col-xs-5">
                 <div id="addImgWrap">
-                  <input id="lefile" type="file" class="hideInput" name="image">
+                  <input type="hidden" name="image" id="imgUrl">
+                  <input id="lefile" type="file" class="hideInput" name="imageR">
                   <a class="btn btn-default" href="javascript:void (0)" id="photoCover" onclick="$('input[id=lefile]').click();">选择文件</a>
                   <span class="help-inline required">*</span>
                 </div>

@@ -1,6 +1,8 @@
 /**
  * Created by ZYX on 2016/7/12.
  */
+
+var ISCHANGEIMG = '';
 $(function () {
 
     /*表单验证*/
@@ -16,7 +18,7 @@ $(function () {
                         message: '组合名称不能为空'
                     }
                 }
-            }, 'image': {
+            }, 'imageR': {
                 validators: {
                     notEmpty: {
                         message: '请上传图片'
@@ -128,9 +130,9 @@ $(function () {
                     contentType: false,
                     success: function (result) {
                         console.log(result)
-                        if(result.state == 200){
+                        if (result.state == 200) {
                             $('#activity-summernote').summernote('insertImage', "http://image.tiyujia.com/" + result.data, 'img');
-                        }else{
+                        } else {
                             $.Popup({
                                 confirm: false,
                                 template: result.successmsg
@@ -317,14 +319,18 @@ $('#devaForm').ajaxForm({
 });
 
 $("#czS").click(function () {
-    if ($("#avtivityId").val() == '') {
+    var formData = new FormData();
+    formData.append('imgFile', $("#lefile")[0].files[0]);
+    if ($("#listType").html() == "创建") {
         /*创建*/
-        $('#updateCreateFrom').ajaxSubmit({
-            url: '/v1/activity/release',
+        $.ajax({
+            url: '/v1/upload/file',
             type: 'post',
-            dataType: 'json',
-            beforeSubmit: function () {
-                var examinefalg = true;
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function () {
+                /*传图片之前做验证*/
                 if ($("#examine").val() == 1) {
                     var desc = "";
                     $("#template").find("input:checked").each(function (item) {
@@ -335,73 +341,82 @@ $("#czS").click(function () {
                         }
                     });
                     $("#memberTemplate").val(desc);
-                    if ($("#memberTemplate").val() == "") {
-                        examinefalg = false;
-                    }
                 }
-                return $("#updateCreateFrom").data('bootstrapValidator').isValid() && examinefalg;
+                return $("#updateCreateFrom").data('bootstrapValidator').isValid();
             },
             success: function (result) {
-                if (result.state && result.state == 200) {
-                    $.Popup({
-                        confirm: false,
-                        template: result.successmsg
-                    });
-                    $("#activityList").show();
-                    $("#createModify").hide();
-                    $('#activity-list-table').bootstrapTable('refresh');
-                } else if (result.state && result.state == 303) {
-                    $.Popup({
-                        confirm: false,
-                        template: result.errmsg
-                    })
+                if (result.state == 200) {
+                    $("#image").val(result.data);
+                    updateCreateFrom('/v1/activity/release');
                 }
+            },
+            error:function (result) {
+                alert(result)
             }
-        });
+        })
     } else {
         /*修改*/
-        $('#updateCreateFrom').ajaxSubmit({
-            url: '/v1/activity/update',
-            type: 'post',
-            dataType: 'json',
-            beforeSubmit: function () {
-                var examinefalg = true;
-                var isValid = $("#updateCreateFrom").data('bootstrapValidator').isValid();
-                if ($("#examine").val() == 1) {
-                    var desc = "";
-                    $("#template").find("input:checked").each(function (item) {
-                        if (item == 0) {
-                            desc += $(this).val()
-                        } else {
-                            desc += ("," + $(this).val());
-                        }
-                    });
-                    $("#memberTemplate").val(desc);
-                    if ($("#memberTemplate").val() == "") {
-                        examinefalg = false;
+        var isChange = $("#image").val();
+        if(ISCHANGEIMG != isChange){/*不相等代表换了图片*/
+            $.ajax({
+                url: '/v1/upload/file',
+                type: 'post',
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function () {
+                    /*传图片之前做验证*/
+                    if ($("#examine").val() == 1) {
+                        var desc = "";
+                        $("#template").find("input:checked").each(function (item) {
+                            if (item == 0) {
+                                desc += $(this).val()
+                            } else {
+                                desc += ("," + $(this).val());
+                            }
+                        });
+                        $("#memberTemplate").val(desc);
+                    }
+                    return $("#updateCreateFrom").data('bootstrapValidator').isValid();
+                },
+                success:function (result) {
+                    if(result.state == 200){
+                        $("#image").val(result.data);
+                        updateCreateFrom('/v1/activity/update');
                     }
                 }
-                return isValid && examinefalg;
-            },
-            success: function (result) {
-                if (result.state && result.state == 200) {
-                    $.Popup({
-                        confirm: false,
-                        template: result.successmsg
-                    });
-                    $("#activityList").show();
-                    $("#createModify").hide();
-                    $('#activity-list-table').bootstrapTable('refresh');
-                } else if (result.state && result.state == 303) {
-                    $.Popup({
-                        confirm: false,
-                        template: result.errmsg
-                    })
-                }
+            })
+        }else{
+            if($("#updateCreateFrom").data('bootstrapValidator').isValid()){
+                updateCreateFrom('/v1/activity/update');
             }
-        });
+        }
     }
 })
+
+function updateCreateFrom(url) {
+    $('#updateCreateFrom').ajaxSubmit({
+        url: url,
+        type: 'post',
+        dataType: 'json',
+        success: function (result) {
+            if (result.state && result.state == 200) {
+                $.Popup({
+                    confirm: false,
+                    template: result.successmsg
+                });
+                $("#activityList").show();
+                $("#createModify").hide();
+                $('#activity-list-table').bootstrapTable('refresh');
+            } else if (result.state && result.state == 303) {
+                $.Popup({
+                    confirm: false,
+                    template: result.errmsg
+                })
+            }
+        }
+    });
+}
 
 function operate(value, row, index) {
     var dataArray = new Array();
@@ -565,6 +580,8 @@ function queryActivityById(id, type) {
                 $("#choiceUser").val(datas.userId);
                 $("#title").val(datas.title);
                 $("#images").attr("src", "http://image.tiyujia.com/" + datas.imgUrls);
+                $("#image").val(datas.imgUrls);
+                ISCHANGEIMG = datas.imgUrls;
                 $('#activity-summernote').summernote('code', datas.descContent);
                 $("#activityStartTime").val(new Date(datas.startTime).format("yyyy-mm-dd HH:MM:ss"));
                 $("#activityEndTime").val(new Date(datas.endTime).format("yyyy-mm-dd HH:MM:ss"));
@@ -595,7 +612,7 @@ function queryActivityById(id, type) {
                 }
                 if (type == 0) {/*0代表编辑，1代表预览*/
                     $('#updateCreateFrom')
-                        .bootstrapValidator('removeField', 'image')
+                        .bootstrapValidator('removeField', 'imageR')
                         .data('bootstrapValidator').validate();
                 }
             } else {
@@ -619,17 +636,10 @@ function createActivity() {
     $('#activity-summernote').summernote('reset');
     var html = '<label class="checkbox"><input type="checkbox" name="memberString" value="手机号码">手机号码</label><label class="checkbox"><input type="checkbox" name="memberString" value="姓名">姓名</label> <label class="checkbox"><input type="checkbox" name="memberString" value="身份证号码">身份证号码</label> <label class="checkbox"><input name="memberString" type="checkbox" value="性别">性别</label> <label class="checkbox"><input name="memberString" type="checkbox" value="年龄">年龄</label> <label class="checkbox"><input name="memberString" type="checkbox" value="地址">地址</label> <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>'
     $("#template").html(html);
+    $("#photoCover").html('');
     $("#userRequired").hide();
     $('#updateCreateFrom')[0].reset();
     $('#updateCreateFrom').data('bootstrapValidator').resetForm(true);
-    /*仅仅清空验证的表单*/
-    $('#updateCreateFrom').bootstrapValidator('addField', 'image', {
-        validators: {
-            notEmpty: {
-                message: '请上传图片'
-            }
-        }
-    });
 }
 /*是否需要审核*/
 function isReviewed(obj) {
@@ -676,25 +686,37 @@ function choiceMoreRel() {
 
 /*创建中type=file的样式处理*/
 $('input[id=lefile]').change(function () {
+    $('#updateCreateFrom').bootstrapValidator('addField', 'imageR', {
+        validators: {
+            notEmpty: {
+                message: '请上传图片'
+            }
+        }
+    });
+    $("#image").val($(this).val());
     if ($(this).val()) {
         $('#photoCover').html($(this).val());
-        $("#lefile").html($(this).val());
         var objUrl = getImgURL(this.files[0]);
         if (objUrl) {
             $("#images").attr("src", objUrl);
         }
+    }else {
+        $("#photoCover").html("选择文件");
+        $("#images").attr("src", "");
     }
 });
 
 /*推荐中type=file的样式处理*/
 $('input[id=recommendFile]').change(function () {
-    if ($(this).val()) {
+    if ($(this).val() != undefined && $(this).val() != "") {
         $('#recommendPhotoCover').html($(this).val());
-        $("#recommendFile").html($(this).val());
         var objUrl = getImgURL(this.files[0]);
         if (objUrl) {
             $("#recommendImg").attr("src", objUrl);
         }
+    }else{
+        $("#recommendPhotoCover").html("选择文件");
+        $("#recommendImg").attr("src", "");
     }
 });
 /*图片预览*/
