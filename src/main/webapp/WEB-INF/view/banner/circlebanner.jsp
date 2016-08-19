@@ -23,94 +23,25 @@
 </head>
 <body class="page-header-fixed">
 <jsp:include page="../public/header.jsp"/>
-
-<!-- END HEADER -->
-
-<!-- BEGIN CONTAINER -->
-
 <div class="page-container">
-
-    <!-- BEGIN SIDEBAR -->
-
     <jsp:include page="../public/nav.jsp"/>
-
-    <!-- END SIDEBAR -->
-
-    <!-- BEGIN PAGE -->
-
     <div class="page-content">
-        <%--删除圈子--%>
-        <div class="modal hide" id="delCircleBanner">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"></button>
-                <h3>删除banner</h3>
-            </div>
-            <div class="modal-body">
-                该banner的所有数据将被完全删除，不能再被浏览。
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-default">确定</button>
-                <button class="btn btn-default" data-dismiss="modal">取消</button>
-            </div>
-        </div>
-        <%--删除帖子--%>
-        <div class="modal hide" id="delPostBanner">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"></button>
-                <h3>删除banner</h3>
-            </div>
-            <div class="modal-body">
-                该banner的所有数据将被完全删除，不能再被浏览。
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-default">确定</button>
-                <button class="btn btn-default" data-dismiss="modal">取消</button>
-            </div>
-        </div>
-
-        <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
-        <!-- BEGIN PAGE CONTAINER-->
-
         <div class="container-fluid" id="circleBannerList">
-
-            <!-- BEGIN PAGE HEADER-->
-
             <div class="row-fluid">
-
                 <div class="span12">
-
-                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-
                     <h3 class="page-title">
-
                         精选圈子banner<small>statistics and more</small>
-
                     </h3>
-
                     <ul class="breadcrumb">
-
                         <li>
-
                             <i class="icon-home"></i>
-
                             <a href="javascript:void(0)">精选圈子banner</a>
-
                             <i class="icon-angle-right"></i>
-
                         </li>
-
                         <li><a href="#">列表</a></li>
                     </ul>
-
-                    <!-- END PAGE TITLE & BREADCRUMB-->
-
                 </div>
-
             </div>
-
-            <!-- END PAGE HEADER-->
-
             <div id="banner-circle-list">
                 <div class="row-fluid margin-bottom-10">
                     <div class="span6">
@@ -131,7 +62,7 @@
                                 <th data-field="image">图片</th>
                                 <th data-field="order">排序</th>
                                 <th data-field="activation">是否激活</th>
-                                <th data-formatter="operate">操作</th>
+                                <th data-formatter="operate" data-event="">操作</th>
                             </tr>
                             </thead>
                         </table>
@@ -167,49 +98,23 @@
         </div>
         <%--创建banner--%>
         <div class="container-fluid hide" id="circleBannerCreate">
-
-            <!-- BEGIN PAGE HEADER-->
-
             <div class="row-fluid">
-
                 <div class="span12">
-
-                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-
                     <h3 class="page-title">
-
                         上传banner<small>statistics and more</small>
-
                     </h3>
-
                     <ul class="breadcrumb">
-
                         <li>
-
                             <i class="icon-home"></i>
-
                             <a href="javascript:void(0)">圈子banner</a>
-
                             <i class="icon-angle-right"></i>
-
                         </li>
-
                         <li><a href="#">创建</a></li>
                     </ul>
-
-                    <!-- END PAGE TITLE & BREADCRUMB-->
-
                 </div>
-
             </div>
-
-            <!-- END PAGE HEADER-->
-
             <div id="activity-create">
-
-                <!-- BEGIN DASHBOARD STATS -->
                 <div class="row-fluid">
-
                     <form class="form-horizontal" role="form">
                         <div class="control-group">
                             <label class="control-label">直播名称</label>

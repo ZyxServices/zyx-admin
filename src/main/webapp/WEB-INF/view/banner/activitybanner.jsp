@@ -23,90 +23,29 @@
 </head>
 <body class="page-header-fixed">
 <jsp:include page="../public/header.jsp"/>
-
-<!-- END HEADER -->
-
-<!-- BEGIN CONTAINER -->
-
 <div class="page-container">
-
-    <!-- BEGIN SIDEBAR -->
-
     <jsp:include page="../public/nav.jsp"/>
-
-    <!-- END SIDEBAR -->
-
-    <!-- BEGIN PAGE -->
-
     <div class="page-content">
-
-        <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
-        <div class="modal hide" id="delActivityBanner">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"></button>
-                <h3>删除banner</h3>
-            </div>
-            <div class="modal-body">
-                该banner的所有数据将被完全删除，不能再被浏览。
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-default">确定</button>
-                <button class="btn btn-default" data-dismiss="modal">取消</button>
-            </div>
-        </div>
-
-        <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
-        <!-- BEGIN PAGE CONTAINER-->
-
         <div class="container-fluid" id="bannerList">
-
-            <!-- BEGIN PAGE HEADER-->
-
             <div class="row-fluid">
-
                 <div class="span12">
-
-                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-
                     <h3 class="page-title">
-
-                        首页banner<small>statistics and more</small>
-
+                        首页banner管理<small>statistics and more</small>
                     </h3>
-
                     <ul class="breadcrumb">
-
                         <li>
-
                             <i class="icon-home"></i>
-
                             <a href="javascript:void(0)">首页banner</a>
-
                             <i class="icon-angle-right"></i>
-
                         </li>
-
                         <li><a href="#">列表</a></li>
                     </ul>
-
-                    <!-- END PAGE TITLE & BREADCRUMB-->
-
                 </div>
-
             </div>
-
-            <!-- END PAGE HEADER-->
-
             <div id="banner-list">
-
-                <!-- BEGIN DASHBOARD STATS -->
-
                 <div class="row-fluid margin-bottom-10">
                     <div class="span6">
                         <a class="btn btn-default" href="javascript:void(0)" onclick="createBanner()">上传banner</a>
-                        <%--<a class="btn btn-default" href="<%=request.getContextPath()%>/homepage/create">上传banner</a>--%>
                     </div>
                 </div>
                 <div class="row-fluid">
@@ -120,62 +59,33 @@
                                 <th data-field="image">图片</th>
                                 <th data-field="order">排序</th>
                                 <th data-field="activation">是否激活</th>
-                                <th data-formatter="operate">操作</th>
+                                <th data-formatter="operate" data-event="operateEvents">操作</th>
                             </tr>
                             </thead>
                         </table>
                     </div>
-
                 </div>
-
-                <!-- END DASHBOARD STATS -->
-
             </div>
 
         </div>
         <%--创建banner--%>
         <div class="container-fluid hide" id="bannerCreate">
-
-            <!-- BEGIN PAGE HEADER-->
-
             <div class="row-fluid">
-
                 <div class="span12">
-
-                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-
                     <h3 class="page-title">
-
-                        上传banner<small>statistics and more</small>
-
+                        首页banner管理<small>statistics and more</small>
                     </h3>
-
                     <ul class="breadcrumb">
-
                         <li>
-
                             <i class="icon-home"></i>
-
                             <a href="javascript:void(0)">首页banner</a>
-
                             <i class="icon-angle-right"></i>
-
                         </li>
-
-                        <li><a href="#">创建</a></li>
+                        <li><a href="#">上传banner</a></li>
                     </ul>
-
-                    <!-- END PAGE TITLE & BREADCRUMB-->
-
                 </div>
-
             </div>
-
-            <!-- END PAGE HEADER-->
-
             <div id="activity-create">
-
-                <!-- BEGIN DASHBOARD STATS -->
                 <div class="row-fluid">
 
                     <form class="form-horizontal" role="form">
@@ -198,7 +108,7 @@
                         <div class="control-group">
                             <label class="control-label">banner状态</label>
                             <div class="controls">
-                                <label class="radio"><input type="radio" name="bannerState">激活</label>
+                                <label class="radio"><input type="radio" name="bannerState" checked>激活</label>
                                 <label class="radio"><input type="radio" name="bannerState">未激活</label>
                             </div>
                         </div>
@@ -206,8 +116,11 @@
                         <div class="control-group">
                             <label class="control-label">封面</label>
                             <div class="controls">
-                                <button class="btn btn-default">上传图片</button>
-                                <span class="help-inline">只能上传一张图片</span>
+                                <input id="lefile" type="file" class="hideInput" name="image">
+                                <a class="btn btn-default" href="javascript:void (0)" id="photoCover" onclick="$('input[id=lefile]').click();">选择图片</a>
+                                <div style="margin-top: 10px" id="imagesWrap">
+                                    <img id="images" src="">
+                                </div>
                             </div>
                         </div>
 
