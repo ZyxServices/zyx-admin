@@ -26,4 +26,12 @@ public interface ConcernService extends BaseService<Concern> {
     Map<String, Object> createConcern(String content, Integer createId, Integer type, Integer topVisible, String dbImgPath);
 
     Map<String, Object> search(Integer start, Integer pageSize, String userName);
+    /**
+     *
+     * @param fromId
+     * @param fromType 目前3个模块用到，1：直播，2活动，3帖子
+     * @param formObj
+     * @return
+     */
+    Integer fromConcern(Integer fromId, Integer fromType,Object formObj);
 }

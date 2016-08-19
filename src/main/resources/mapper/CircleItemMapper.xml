@@ -13,6 +13,7 @@
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="top" property="top" jdbcType="INTEGER"/>
         <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
     </resultMap>
 
     <resultMap id="circleItemVoMap" type="com.zyx.model.vo.CircleItemVo" extends="circleItemMap">
@@ -35,6 +36,7 @@
     <select id="findByPager" resultMap="circleItemVoMap">
     SELECT
     circle_item.id,
+    circle_tiem.img_url,
     circle_item.circle_id,
     circle_item.create_id,
     circle_item.title,
@@ -65,6 +67,7 @@
      SELECT
         circle_item.id,
         circle_item.circle_id,
+        circle_tiem.img_url,
         circle_item.create_id,
         circle_item.title,
         circle_item.content,
