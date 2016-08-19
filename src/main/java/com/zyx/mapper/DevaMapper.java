@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
 @Repository("devaluationMapper")
-public interface DevaluationMapper extends Mapper<Devaluation> {
+public interface DevaMapper extends Mapper<Devaluation> {
 }

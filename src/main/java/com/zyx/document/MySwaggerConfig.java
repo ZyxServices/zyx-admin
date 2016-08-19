@@ -96,7 +96,7 @@ public class MySwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("deva-api")
                 .select()  // 选择那些路径和api会生成document
-                .apis(RequestHandlerSelectors.basePackage("com.zyx.controller.devaluation"))
+                .apis(RequestHandlerSelectors.basePackage("com.zyx.controller.deva"))
                 .paths(PathSelectors.any()) // 对所有路径进行监控
                 .build()
                 .apiInfo(devaApiInfo());

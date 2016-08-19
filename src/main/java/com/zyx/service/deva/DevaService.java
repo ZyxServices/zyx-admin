@@ -1,7 +1,8 @@
-package com.zyx.service.devaluation;
+package com.zyx.service.deva;
 
 import com.zyx.model.Devaluation;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,21 +14,20 @@ import java.util.Map;
  * @title DevaluationService
  * @update 16-7-12 上午10:30
  */
-public interface DevaluationService {
+public interface DevaService {
 
     /**
-     * 首推设置
-     *
-     * @param devaluation
+     * 获取首推
+     * @param model
      * @return
      */
-    Map<String, Object> insertActivityDeva(Devaluation devaluation);
+    List<Devaluation> getDevas(Integer model);
 
     /**
-     * 用户首推设置
      *
-     * @param devaluation
+     * @param model
+     * @param area
      * @return
      */
-    Map<String, Object> insertAppUserDeva(Devaluation devaluation);
+    List<Devaluation> getDevas(Integer model, Integer area);
 }

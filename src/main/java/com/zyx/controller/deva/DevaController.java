@@ -1,14 +1,14 @@
-package com.zyx.controller.devaluation;
+package com.zyx.controller.deva;
 
+import com.zyx.constants.Constants;
+import com.zyx.constants.LiveConstants;
 import com.zyx.model.Devaluation;
-import com.zyx.service.devaluation.DevaluationService;
-import com.zyx.utils.FileUploadUtils;
+import com.zyx.service.deva.DevaService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.AbstractView;
@@ -16,6 +16,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,12 +31,12 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/v1/deva")
-public class Devaluationcontroller {
+public class DevaController {
 
     @Resource
-    private DevaluationService devaluationService;
+    private DevaService devaService;
 
-    @RequestMapping(value = "/insertActivityDeva", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ApiOperation(value = "活动接口-活动推荐", notes = "活动接口-活动推荐")
     public ModelAndView queryActivity(@RequestParam(name = "types") Integer types,
                                       @RequestParam(name = "devaId") Integer devaluationId,
@@ -45,41 +46,27 @@ public class Devaluationcontroller {
 
         AbstractView jsonView = new MappingJackson2JsonView();
 
-        Devaluation devaluation = new Devaluation();
-        devaluation.setModel(types);
-        devaluation.setDevaluationId(devaluationId);
-        if (image != null && image.getSize() > 0) {
-            String uploadFile = FileUploadUtils.uploadFile(image);
-            devaluation.setImage(uploadFile);
-        }
-
-        devaluation.setSequence(sequence);
-        devaluation.setActivation(activation);
-
-        Map<String, Object> map = devaluationService.insertActivityDeva(devaluation);
-
-        jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
 
-    @RequestMapping(value = "/appUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ModelAndView appUserDeva(@RequestParam(name = "types") Integer types,
                                     @RequestParam(name = "devaId") Integer devaluationId,
                                     @RequestParam(name = "sequence") Integer sequence,
                                     @RequestParam(name = "activation") Integer activation) {
 
         AbstractView jsonView = new MappingJackson2JsonView();
+        return new ModelAndView(jsonView);
+    }
 
-        Devaluation devaluation = new Devaluation();
-        devaluation.setModel(types);
-        devaluation.setDevaluationId(devaluationId);
-
-        devaluation.setSequence(sequence);
-        devaluation.setActivation(activation);
-
-        Map<String, Object> map = devaluationService.insertAppUserDeva(devaluation);
-
-        jsonView.setAttributesMap(map);
+    @RequestMapping(value = "/list/model", method = RequestMethod.POST)
+    public ModelAndView getDevasByModel(@RequestParam(name = "model",required = true) Integer model ,@RequestParam(name = "area") Integer area ) {
+        Map<String, Object> result = new HashMap<>();
+        List<Devaluation> list = devaService.getDevas(model, area);
+        result.put(Constants.DATA,list);
+        result.put(Constants.STATE, LiveConstants.SUCCESS);
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(result);
         return new ModelAndView(jsonView);
     }
 }
