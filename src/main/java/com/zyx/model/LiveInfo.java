@@ -38,7 +38,7 @@ public class LiveInfo {
      * 直播创建用户ID
      */
     @Column(name = "user_id")
-    private Long userId;
+    private Integer userId;
 
     /**
      * 直播标题
@@ -178,7 +178,7 @@ public class LiveInfo {
      *
      * @return user_id - 直播创建用户ID
      */
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
@@ -187,7 +187,7 @@ public class LiveInfo {
      *
      * @param userId 直播创建用户ID
      */
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

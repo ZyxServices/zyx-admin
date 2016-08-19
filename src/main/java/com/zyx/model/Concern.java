@@ -37,6 +37,12 @@ public class Concern {
     @Column
     private Integer state;//动态状态，-2未屏蔽，-1为删除,0为正常
 
+    @Column(name = "from_id")
+    private Integer fromId;//跟fromType对应
+
+    @Column(name = "from_type")
+    private Integer fromType;//1:直播，2活动，3帖子，该字段只用于我的关注模块中自动生成的动态查询
+
 
     /**
      * @return id
@@ -171,5 +177,22 @@ public class Concern {
     public void setState(Integer state) {
         this.state = state;
     }
+
+    public Integer getFromId() {
+        return fromId;
+    }
+
+    public void setFromId(Integer fromId) {
+        this.fromId = fromId;
+    }
+
+    public Integer getFromType() {
+        return fromType;
+    }
+
+    public void setFromType(Integer fromType) {
+        this.fromType = fromType;
+    }
+
 
 }
