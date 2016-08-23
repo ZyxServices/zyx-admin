@@ -232,7 +232,12 @@ var operateEvent = {
         $("#adminIds").chosen();
         $("#category").find("option[value='" + row.circleType + "']").attr("selected", true);
         // 获取图片
-        $("#headImgShow").show().attr("src", "http://image.tiyujia.com/" + row.headImgUrl);
+        if(row.headImgUrl !==""){
+            $("#headImgShow").show().attr("src", "http://image.tiyujia.com/" + row.headImgUrl);
+        }
+        else{
+            $("#imgWrap").append("暂未上传圈子头像！")
+        }
         $("#circleList").hide();
         $("#circleCreate").show();
     },
@@ -254,7 +259,10 @@ var operateEvent = {
         $("#masterId").chosen();
         $("#adminIds").chosen();
         $("#category").find("option[value='" + row.circleType + "']").attr("selected", true);
-        $("#headImgShow").show().attr("src", "http://image.tiyujia.com/" + row.headImgUrl)
+        // 获取图片
+        if(row.headImgUrl !==""){
+            $("#headImgShow").show().attr("src", "http://image.tiyujia.com/" + row.headImgUrl);
+        }
         $('input[id=lefile]').change(function () {
             $("#circleBtnSure").click(function (e) {
                 var formData = new FormData();
