@@ -43,11 +43,9 @@
                 </div>
             </div>
             <div id="banner-circle-list">
-                <div class="row-fluid margin-bottom-10">
+                <div class="row-fluid">
                     <div class="span6">
                         <h3>首页热门圈子讨论管理</h3>
-                    </div>
-                    <div class="span6 text-right">
                         <a class="btn btn-default" href="javascript:void(0)" onclick="createCircleBanner()">上传banner</a>
                     </div>
                 </div>
@@ -62,7 +60,7 @@
                                 <th data-field="image">图片</th>
                                 <th data-field="order">排序</th>
                                 <th data-field="activation">是否激活</th>
-                                <th data-formatter="operate" data-event="">操作</th>
+                                <th data-formatter="operate" data-events="operateEvents">操作</th>
                             </tr>
                             </thead>
                         </table>
@@ -88,7 +86,7 @@
                                 <th data-field="image">图片</th>
                                 <th data-field="order">排序</th>
                                 <th data-field="activation">是否激活</th>
-                                <th data-formatter="postOperate">操作</th>
+                                <th data-formatter="postOperate" data-events="operateEvents">操作</th>
                             </tr>
                             </thead>
                         </table>

@@ -40,27 +40,6 @@
 
     <div class="page-content">
 
-        <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
-        <div class="modal hide" id="delPackageBanner">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"></button>
-                <h3>删除banner</h3>
-            </div>
-
-            <div class="modal-body">
-                该banner的所有数据将被完全删除，不能再被浏览？
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-default">确定</button>
-                <button class="btn btn-default" data-dismiss="modal">取消</button>
-            </div>
-        </div>
-
-        <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
-        <!-- BEGIN PAGE CONTAINER-->
-
         <div class="container-fluid" id="bannerPackageList">
 
             <!-- BEGIN PAGE HEADER-->
@@ -118,9 +97,9 @@
                                 <th data-field="id">ID</th>
                                 <th data-field="shopname">商品名称</th>
                                 <th data-field="image">图片</th>
-                                <th data-field="order">排序</th>
+                                <th data-field="sequence">排序</th>
                                 <th data-field="activation">是否激活</th>
-                                <th data-formatter="operate">操作</th>
+                                <th data-formatter="operate" data-events="operateEvents">操作</th>
                             </tr>
                             </thead>
                         </table>

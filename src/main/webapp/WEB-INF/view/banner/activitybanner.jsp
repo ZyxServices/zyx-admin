@@ -57,9 +57,9 @@
                                 <th data-field="id">ID</th>
                                 <th data-field="url">跳转url</th>
                                 <th data-field="image">图片</th>
-                                <th data-field="order">排序</th>
+                                <th data-field="sequence">排序</th>
                                 <th data-field="activation">是否激活</th>
-                                <th data-formatter="operate" data-event="operateEvents">操作</th>
+                                <th data-formatter="operate" data-events="operateEvents">操作</th>
                             </tr>
                             </thead>
                         </table>

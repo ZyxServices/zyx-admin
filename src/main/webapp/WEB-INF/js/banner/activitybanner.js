@@ -3,30 +3,60 @@
  */
 $(function(){
     $("#homepage-list-table").bootstrapTable({
-        data: [{
-            id: 1,
-            url: 'baidu.com',
-            image: 'Item 1',
-            order: '1',
-            activation: '是'
-        }],
+        url: "/v1/deva/list/model",
+        method:'post',
         locale: 'zh-US',
         pagination: true,
-        // smartDisplay: false,
         cache: false,
         search: true,
         strictSearch: true,
         uniqueId: "id",
         height:500,
         pageSize: 20,
+        contentType: "application/x-www-form-urlencoded",
         pageList: new Array(20, 50, 100),
         paginationPreText: "上一页",
         paginationNextText: "下一页",
         sidePagination: 'server',
         queryParams: function (params) {
-        }
+            return {
+                area: 1,
+                model: 1,
+                pageDataNum: params.limit,
+                pageNum: (params.offset + 1),
+                search: params.search
+            }
+        },
+        responseHandler:groupFromData
     })
 })
+
+function groupFromData(res) {
+    if (res.state == 200) {
+        var dataArray = [];
+        var datas = res.data;
+        datas.forEach(function (item, a) {
+            var dataObj = {};
+            dataObj.id = item.id;
+            dataObj.model = "活动banner";
+            dataObj.createTime = item.createTime;
+            // dataObj.image = '<img src="http://image.tiyujia.com/"'+item.image+'>';
+            dataObj.image = '<img src="http://image.tiyujia.com/group1/M00/00/05/052YyFe0A9iAWI5kAAA75RxRQgw234.png">';
+            dataObj.sequence = item.sequence;
+            dataObj.activation = item.activation == 1? "是":"否";
+            dataArray.push(dataObj)
+        });
+        if (datas.length == 0) {
+            var dataObj = {};
+            dataArray.push(dataObj);
+        }
+        return {
+            rows: dataArray,
+            // total: 20
+            total: res.data.length
+        }
+    }
+}
 
 function operate(value, row, index) {
     var dataArray = new Array();
