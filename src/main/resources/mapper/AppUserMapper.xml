@@ -77,7 +77,7 @@
     </select>
 
     <select id="selectAppUserGetName" parameterType="int" resultType="java.lang.String">
-        SELECT nickname FROM user where id = #{userId}
+        SELECT nickname FROM user where id = #{userId} where del != 1
     </select>
 
     <select id="queryAppUserList" parameterType="com.zyx.parm.QueryAppUserParam" resultMap="AppUserListDto">
@@ -86,13 +86,16 @@
         <if test="authenticate != null and authenticate != ''">
             and authenticate = #{authenticate}
         </if>
+        <if test="official != null">
             and official = #{official}
+        </if>
         <if test="sortName != null and sortName != ''">
             ORDER BY #{sortName} #{sortOrder}
         </if>
         <if test="pageNumber != null and pageSize != null">
             limit #{pageNumber}, #{pageSize}
         </if>
+        where del != 1
     </select>
 
     <select id="selectAppUserListCount" parameterType="com.zyx.parm.QueryAppUserParam" resultType="int">
@@ -102,6 +105,7 @@
             and authenticate = #{authenticate}
         </if>
             and official = #{official}
+        where del != 1
     </select>
 
     <select id="queryOfficialAccountList" resultMap="OfficialUserListDto">
@@ -117,6 +121,7 @@
         <if test="pageNumber != null and pageSize != null">
             limit #{pageNumber}, #{pageSize}
         </if>
+        where del != 1
     </select>
 
 </mapper>
