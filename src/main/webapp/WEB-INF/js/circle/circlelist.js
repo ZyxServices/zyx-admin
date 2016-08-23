@@ -1,7 +1,6 @@
 /**
  * Created by guochunyan on 2016/7/14.
  */
-var ImgChange = '';
 //用户列表
 var userList = $.ajax({
     url: "/v1/appUser/list/all",
@@ -70,7 +69,7 @@ function circleCreate() {
             processData: false,
             contentType: false,
             beforeSend: function () {
-                $("#circleCreates").data('bootstrapValidator').isValid();
+                return $("#circleCreates").data('bootstrapValidator').isValid();
             },
             success: function (data) {
                 $("input[name=headImgUrl]").val(data.data);
@@ -79,6 +78,7 @@ function circleCreate() {
 
         })
     })
+
 }
 $(function () {
     $("#headImgShow").hide();
@@ -111,7 +111,15 @@ $(function () {
                         message: '请输入简介'
                     }
                 }
+            },
+            "file": {
+                validators: {
+                    notEmpty: {
+                        message: '图片不能为空'
+                    }
+                }
             }
+
         }
     });
     //圈子类别数据
@@ -258,7 +266,7 @@ var operateEvent = {
                     processData: false,
                     contentType: false,
                     beforeSend: function () {
-                        $("#circleCreates").data('bootstrapValidator').isValid();
+                        return $("#circleCreates").data('bootstrapValidator').isValid();
                     },
                     success: function (data) {
                         $("input[name=imgFile]").val(data.data);
@@ -272,23 +280,8 @@ var operateEvent = {
     //圈子推荐
     'click .recommend': function (e, value, row, index) {
         $("#circleModal").modal("show");
-        $("#circleSure").click(function () {
-            var selectValue = $("#circleSelect").val();
-            $.ajax({
-                type: "get",
-                dateType: "json",
-                url: "../../circle/setTop?circleId=" + row.id + "&topSize=" + selectValue,
-                async: false,
-                success: function (result) {
-                    $.Popup({
-                        confirm: false,
-                        title: "推荐成功"
-                    });
-                    $("#circleModal").modal("hide");
-                }
-            })
-
-        })
+        $("#circleSelect").val("");
+        $(".row").val(row.id)
     },
     //圈子屏蔽
     'click .Shield': function (e, value, row, index) {
@@ -357,7 +350,6 @@ var operateEvent = {
 
 //多选select 公用方法
 function adminSelect(select, values) {
-    console.log(values);
     if (values != "" && values != null) {
         var arr = values.split(',');
         var length = arr.length;
@@ -410,3 +402,23 @@ function getImgURL(file) {
     }
     return url;
 }
+//圈子推荐
+$("#circleSure").click(function () {
+    var selectValue = $("#circleSelect").val();
+    var RowId = $(".row").val();
+    $.ajax({
+        type: "get",
+        dateType: "json",
+        url: "../../circle/setTop?circleId=" + RowId + "&topSize=" + selectValue,
+        async: false,
+        success: function (result) {
+            $.Popup({
+                confirm: false,
+                title: "推荐成功"
+            });
+            $("#circleModal").modal("hide");
+        }
+    })
+})
+
+
