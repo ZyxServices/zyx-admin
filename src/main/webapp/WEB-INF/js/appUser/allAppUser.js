@@ -16,7 +16,7 @@ function initTable() {
         pageList: [10, 15, 20, 25],  //记录数可选列表
         checkbox: true,
         checkboxHeader: "true",
-        height: 500,
+        min_height: 500,
         sortable: true,           //是否启用排序
         sortOrder: "asc",          //排序方式
         strictSearch: true,
