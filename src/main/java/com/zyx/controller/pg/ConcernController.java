@@ -89,7 +89,7 @@ public class ConcernController {
     @ApiOperation(value = "编辑动态", notes = "编辑动态")
     public ModelAndView edit(@RequestParam(value = "id") Integer id,
                              @RequestParam(value = "topic_content") String topicContent,
-                             @RequestParam(value = "img_url") String imgUrl) {
+                             @RequestParam(value = "img_url", required = false) String imgUrl) {
         Map<String, Object> map = concernService.edit(topicContent, imgUrl, id);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);

@@ -121,21 +121,21 @@ public class CircleController {
     @ApiOperation(value = "编辑圈子信息", notes = "编辑圈子")
     public ModelAndView editCircle(@RequestParam(value = "circleId") Integer circleId,
                                    @RequestParam(value = "title", required = false) String title,
-                                   @RequestPart(value = "imgFile", required = false) MultipartFile imgFile,
+                                   @RequestParam(value = "imgFile", required = false) String imgDbUrl,
                                    @RequestParam(value = "circleType") Integer circleType,
                                    @RequestParam(value = "details", required = false) String details,
                                    @RequestParam(value = "masterId", required = false) Integer masterId,
                                    @RequestParam(value = "adminIds", required = false) String adminIds) {
         AbstractView jsonView = new MappingJackson2JsonView();
-        String imgDbUrl = "";
-        if (imgFile != null) {
-             imgDbUrl = FileUploadUtils.uploadFile(imgFile);
-            Map<String, Object> returnResult = ImagesVerifyUtils.verify(imgDbUrl);
-            if (returnResult != null) {
-                jsonView.setAttributesMap(returnResult);
-                return new ModelAndView(jsonView);
-            }
-        }
+//        String imgDbUrl = "";
+//        if (imgFile != null) {
+//             imgDbUrl = FileUploadUtils.uploadFile(imgFile);
+//            Map<String, Object> returnResult = ImagesVerifyUtils.verify(imgDbUrl);
+//            if (returnResult != null) {
+//                jsonView.setAttributesMap(returnResult);
+//                return new ModelAndView(jsonView);
+//            }
+//        }
         Map<String, Object> resultMap = circleService.editCircle(circleId, title, imgDbUrl, circleType, details, masterId, adminIds);
         jsonView.setAttributesMap(resultMap);
         return new ModelAndView(jsonView);

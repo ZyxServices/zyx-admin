@@ -24,7 +24,7 @@ import java.util.*;
  * Create by XiaoWei on 2016/7/25
  */
 @Service
-public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements CircleService {
+public class CircleServiceImpl extends BaseServiceImpl<Circle> implements CircleService {
     @Resource
     private CircleMapper circleMapper;
 
@@ -166,6 +166,8 @@ public class CircleIServiceImpl extends BaseServiceImpl<Circle> implements Circl
             circleFind.setTitle(title);
             if (!Objects.equals(headImg, "")) {
                 circleFind.setHeadImgUrl(headImg);
+            }else{
+                circleFind.setHeadImgUrl("");
             }
             circleFind.setCircleType(circleType);
             circleFind.setDetails(details);
