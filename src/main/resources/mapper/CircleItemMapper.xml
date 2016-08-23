@@ -36,7 +36,7 @@
     <select id="findByPager" resultMap="circleItemVoMap">
     SELECT
     circle_item.id,
-    circle_tiem.img_url,
+    circle_item.img_url,
     circle_item.circle_id,
     circle_item.create_id,
     circle_item.title,
@@ -67,7 +67,7 @@
      SELECT
         circle_item.id,
         circle_item.circle_id,
-        circle_tiem.img_url,
+        circle_item.img_url,
         circle_item.create_id,
         circle_item.title,
         circle_item.content,
