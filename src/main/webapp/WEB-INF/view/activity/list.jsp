@@ -188,7 +188,8 @@
               <label class="control-label">封面</label>
               <div class="controls col-xs-5">
                 <div id="imgWrap">
-                  <input id="lefile" type="file" class="hideInput" name="image">
+                  <input id="image" type="text" class="hideInput" name="image">
+                  <input id="lefile" type="file" class="hideInput" name="imageR">
                   <a class="btn btn-default" href="javascript:void (0)" id="photoCover" onclick="$('input[id=lefile]').click();">选择文件</a>
                   <span class="help-inline required">*</span>
                 </div>
@@ -415,7 +416,8 @@
             <div class="control-group">
               <label class="control-label">图片</label>
               <div class="controls">
-                <input id="recommendFile" type="file" class="hideInput" name="image">
+                <input type="hidden" name="image" id="showImg">
+                <input id="recommendFile" type="file" class="hideInput">
                 <a class="btn btn-default" href="javascript:void (0)" id="recommendPhotoCover" onclick="$('input[id=recommendFile]').click();">选择文件</a>
                 <div style="margin-top: 10px" id="recommendImgWrap">
                   <img id="recommendImg" src="">

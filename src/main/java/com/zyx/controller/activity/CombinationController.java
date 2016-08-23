@@ -1,16 +1,14 @@
 package com.zyx.controller.activity;
 
+import com.zyx.constants.Constants;
 import com.zyx.model.Combination;
 import com.zyx.service.activity.CombinationService;
-import com.zyx.utils.FileUploadUtils;
-import com.zyx.utils.ImagesVerifyUtils;
+import com.zyx.utils.MapUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.AbstractView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
@@ -39,46 +37,50 @@ public class CombinationController {
     @RequestMapping(value = "/createCombination", method = RequestMethod.POST)
     @ApiOperation(value = "添加组合", notes = "添加组合")
     public ModelAndView createCombination(@RequestParam(name = "name", required = true) String name,
-                                          @RequestPart(name = "image", required = true) MultipartFile image,
+                                          @RequestParam(name = "image", required = true) String image,
                                           @RequestParam(name = "activityIds", required = false) Integer[] activityIds) {
 
         AbstractView jsonView = new MappingJackson2JsonView();
 
-        String uploadFile = FileUploadUtils.uploadFile(image);
+        /*String uploadFile = FileUploadUtils.uploadFile(image);
 
-        Map<String, Object> verify = ImagesVerifyUtils.verify(uploadFile);
+        Map<String, Object> verify = ImagesVerifyUtils.verify(uploadFile);*/
 
-        if (verify != null) {
-            jsonView.setAttributesMap(verify);
-            return new ModelAndView(jsonView);
-        } else {
-            Map<String, Object> map = combinationService.createCombination(name, uploadFile, activityIds);
-            jsonView.setAttributesMap(map);
+        if (image == null || image.equals("")) {
+            jsonView.setAttributesMap(MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失"));
             return new ModelAndView(jsonView);
         }
+        Map<String, Object> map = combinationService.createCombination(name, image, activityIds);
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+
     }
 
     @RequestMapping(value = "/updateCombination", method = RequestMethod.POST)
     @ApiOperation(value = "修改组合", notes = "修改组合")
     public ModelAndView updateCombination(@RequestParam(name = "id", required = true) Integer id,
                                           @RequestParam(name = "name", required = false) String name,
-                                          @RequestPart(name = "image", required = false) MultipartFile images,
+                                          @RequestParam(name = "image", required = false) String images,
                                           @RequestParam(name = "activityIds", required = false) Integer[] activityIds) {
 
         AbstractView jsonView = new MappingJackson2JsonView();
-        String uploadFile = null;
-        if (images != null && !images.isEmpty()) {
-            uploadFile = FileUploadUtils.uploadFile(images);
+        /*String uploadFile;
+        if (!image.isEmpty()) {
+            uploadFile = FileUploadUtils.uploadFile(image);
             Map<String, Object> stringObjectMap = ImagesVerifyUtils.verify(uploadFile);
-            if (stringObjectMap != null && !stringObjectMap.equals("")) {
+            if (stringObjectMap != null) {
                 jsonView.setAttributesMap(stringObjectMap);
                 return new ModelAndView(jsonView);
             }
+        } else*/
+        if (images == null || images.equals("")) {
+            jsonView.setAttributesMap(MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失"));
+            return new ModelAndView(jsonView);
         }
         Combination combination = new Combination();
         combination.setId(id);
         combination.setName(name);
-        combination.setImage(uploadFile);
+        combination.setImage(images);
         Map<String, Object> map = combinationService.updateCombination(combination, activityIds);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);

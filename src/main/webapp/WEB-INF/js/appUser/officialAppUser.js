@@ -72,12 +72,66 @@ function operateFormatter(value, row, index) {
     } else {
         _html.push('<a class="mask p5" href="javascript:void(0)" title="mask">屏蔽</a>');
     }
-    _html.push('<a class="del p5" href="javascript:void(0)" title="del">删除</a>');
+    // _html.push('<a class="del p5" href="javascript:void(0)" title="del">删除</a>');
     return _html.join('');
 }
 $(function () {
     initTable();
+    $("#editUserForm").bootstrapValidator({
+        message: '数据无效',
+        feedbackIcons: {
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields:{
+            'nickname': {
+                validators: {
+                    notEmpty: {
+                        message: '账号不能为空'
+                    }
+                }
+            },'phone': {
+                validators: {
+                    notEmpty: {
+                        message: '电话号码必填'
+                    },
+                    regexp: {
+                        regexp: /^(1[3|4|5|7|8]\d{9})$/,/*只支持手机电话*/
+                        message: '请输入正确手机号码'
+                    }
+                }
+            },'password': {
+                validators: {
+                    notEmpty: {
+                        message: '密码必填'
+                    }
+                }
+            }
+        }
+    });
 });
 function beginDeva() {
     $("#devaForm").submit();
+}
+$('input[id=avatar]').change(function () {
+    if ($(this).val()) {
+        $('#photoCover').html($(this).val());
+        var objUrl = getImgURL(this.files[0]);
+        if (objUrl) {
+            $("#avatarImg").attr("src", objUrl);
+        }
+    }else{
+        $("#photoCover").html("选择文件");
+        $("#avatarImg").attr("src", "");
+    }
+});
+function getImgURL(file) {
+    var url = null;
+    if (window.createObjectURL != undefined) { // basic
+        url = window.createObjectURL(file);
+    } else if (window.URL != undefined) { // mozilla(firefox)
+        url = window.URL.createObjectURL(file);
+    } else if (window.webkitURL != undefined) { // webkit or chrome
+        url = window.webkitURL.createObjectURL(file);
+    }
+    return url;
 }

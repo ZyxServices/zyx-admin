@@ -87,7 +87,18 @@ var operateEvent = {
         alert('You click like action, row: ' + JSON.stringify(row));
     },
     'click .edit': function (e, value, row, index) {
-        alert('You click like action, row: ' + JSON.stringify(row));
+        console.log('You click like action, row: ' + JSON.stringify(row));
+        console.log(row);
+        $(".live_index").hide();
+        $(".create_liveType").show();
+        $("#nickname").val(row.nickname);
+        $("#phone").val(row.phone);
+        $("#password").val(row.nickname);
+        $("#sex").val(row.sex);
+        $("#avatarImg").attr("src","http://image.tiyujia.com/" + row.avatar);
+        $("#address").val(row.address);
+        $("#authInfo").val(row.appUserAuthDto.authInfo);
+        $('#editUserForm').data('bootstrapValidator').validate();
     },
     'click .recommend': function (e, value, row, index) {
         $("#devaUserNickname").html(row.nickname);
@@ -130,7 +141,7 @@ var operateEvent = {
     'click .mask': function (e, value, row, index) {
         $.Popup({
             title: '屏蔽',
-            template: '这是屏蔽是否的对话框',
+            template: '屏蔽之后该用户将不能再启用',
             saveEvent: function () {
                 $.ajax({
                     url: "/v1/appUser/mask",

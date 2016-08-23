@@ -29,18 +29,46 @@ $(function(){
 })
 
 function operate(value, row, index) {
-    var e = '<a href="#" onclick="modify(\''+ row.id + '\')">修改</a> ';
-    var d = '<a href="#" onclick="del(\''+ row.id +'\')">删除</a> ';
-    return e + d;
+    var dataArray = new Array();
+    dataArray.push('<a class="remove p5" href="javascript:void(0)" title="remove">删除</a>');
+    dataArray.push('<a class="edit p5" href="javascript:void(0)" title="edit">编辑</a>');
+    return dataArray.join('');
 }
-function modify(id) {
-    console.log(id)
-}
-function del(id) {
-    $("#delActivityBanner").modal('toggle');
+var operateEvents = {
+    'click .remove':function (e, value, row, index) {
+        alert("删除")
+    },
+    'click .edit':function (e, value, row, index) {
+        alert("编辑")
+    }
 }
 
 function createBanner() {
     $("#bannerList").hide();
     $("#bannerCreate").show();
+}
+
+$('input[id=lefile]').change(function () {
+    if ($(this).val()) {
+        $('#photoCover').html($(this).val());
+        var objUrl = getImgURL(this.files[0]);
+        if (objUrl) {
+            $("#images").attr("src", objUrl);
+        }
+    }else{
+        $("#photoCover").html("选择图片");
+        $("#images").attr("src", "");
+    }
+});
+
+function getImgURL(file) {
+    var url = null;
+    if (window.createObjectURL != undefined) { // basic
+        url = window.createObjectURL(file);
+    } else if (window.URL != undefined) { // mozilla(firefox)
+        url = window.URL.createObjectURL(file);
+    } else if (window.webkitURL != undefined) { // webkit or chrome
+        url = window.webkitURL.createObjectURL(file);
+    }
+    return url;
 }

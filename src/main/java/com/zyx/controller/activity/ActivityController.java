@@ -3,16 +3,12 @@ package com.zyx.controller.activity;
 import com.zyx.constants.Constants;
 import com.zyx.model.Activity;
 import com.zyx.service.activity.ActivityService;
-import com.zyx.utils.FileUploadUtils;
-import com.zyx.utils.ImagesVerifyUtils;
 import com.zyx.utils.MapUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.AbstractView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
@@ -45,7 +41,7 @@ public class ActivityController {
     public ModelAndView release(@RequestParam(name = "userId", required = true) Integer userId,
                                 @RequestParam(name = "title", required = true) String title,
                                 @RequestParam(name = "desc", required = true) String desc,
-                                @RequestPart(name = "image", required = true) MultipartFile image,
+                                @RequestParam(name = "image", required = true) String image,
                                 @RequestParam(name = "startTime", required = true) String startTime,//转时间戳
                                 @RequestParam(name = "endTime", required = true) String endTime,//转时间戳
                                 @RequestParam(name = "lastTime", required = true) String lastTime,//转时间戳
@@ -60,7 +56,7 @@ public class ActivityController {
 
         AbstractView jsonView = new MappingJackson2JsonView();
 
-        String uploadFile;
+        /*String uploadFile;
         if (!image.isEmpty()) {
             uploadFile = FileUploadUtils.uploadFile(image);
             Map<String, Object> stringObjectMap = ImagesVerifyUtils.verify(uploadFile);
@@ -68,7 +64,8 @@ public class ActivityController {
                 jsonView.setAttributesMap(stringObjectMap);
                 return new ModelAndView(jsonView);
             }
-        } else {
+        } else*/
+        if(image == null || image.equals("")){
             jsonView.setAttributesMap(MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失"));
             return new ModelAndView(jsonView);
         }
@@ -78,7 +75,7 @@ public class ActivityController {
         activity.setTitle(title);
         activity.setDescContent(desc);
 
-        activity.setImgUrls(uploadFile);
+        activity.setImgUrls(image);
         activity.setStartTime(getDateTime(startTime));
         activity.setEndTime(getDateTime(endTime));
         activity.setLastTime(getDateTime(lastTime));
@@ -103,7 +100,7 @@ public class ActivityController {
                                @RequestParam(name = "userId", required = true) Integer userId,
                                @RequestParam(name = "title", required = false) String title,
                                @RequestParam(name = "desc", required = false) String desc,
-                               @RequestPart(name = "image", required = false) MultipartFile image,
+                               @RequestParam(name = "image", required = false) String image,
                                @RequestParam(name = "startTime", required = false) String startTime,//转时间戳
                                @RequestParam(name = "endTime", required = false) String endTime,//转时间戳
                                @RequestParam(name = "lastTime", required = false) String lastTime,//转时间戳
@@ -119,15 +116,18 @@ public class ActivityController {
         AbstractView jsonView = new MappingJackson2JsonView();
 
 
-        String newImage = null;
-
-        if (image != null && !image.isEmpty()) {
-            newImage = FileUploadUtils.uploadFile(image);
-            Map<String, Object> verify = ImagesVerifyUtils.verify(newImage);
-            if (verify != null) {
-                jsonView.setAttributesMap(verify);
+        /*String uploadFile;
+        if (!image.isEmpty()) {
+            uploadFile = FileUploadUtils.uploadFile(image);
+            Map<String, Object> stringObjectMap = ImagesVerifyUtils.verify(uploadFile);
+            if (stringObjectMap != null) {
+                jsonView.setAttributesMap(stringObjectMap);
                 return new ModelAndView(jsonView);
             }
+        } else*/
+        if(image == null || image.equals("")){
+            jsonView.setAttributesMap(MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失"));
+            return new ModelAndView(jsonView);
         }
 
         Activity activity = new Activity();
@@ -135,7 +135,7 @@ public class ActivityController {
         activity.setUserId(userId);
         activity.setTitle(title);
         activity.setDescContent(desc);
-        activity.setImgUrls(newImage);
+        activity.setImgUrls(image);
         activity.setStartTime(getDateTime(startTime));
         activity.setEndTime(getDateTime(endTime));
         activity.setLastTime(getDateTime(lastTime));

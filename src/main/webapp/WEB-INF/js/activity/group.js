@@ -19,7 +19,7 @@ $(function () {
                     }
                 }
             },
-            'image': {
+            'imageR': {
                 validators: {
                     notEmpty: {
                         message: '必须上传图片'
@@ -247,7 +247,6 @@ var operateEvents = {
     'click .edit':function (e, value, row, index) {
         $("#listType").html('编辑');
         $("#combinationId").val(row.id);
-        // $("#imgWrap").show();
         $("#activityGroupList").hide();
         $("#activityGroupCreate").show();
         getGroupActivityDetail(row.id);
@@ -262,7 +261,7 @@ var operateEvents = {
                 $("#activityIds").val(checkedId);
                 $("#choice-activity-table").bootstrapTable("checkBy", {field:"id", values:checkedId});
                 $('#group-form')
-                    .bootstrapValidator('removeField', 'image')
+                    .bootstrapValidator('removeField', 'imageR')
                     .data('bootstrapValidator').validate();
             }
         });
@@ -392,6 +391,8 @@ function getGroupActivityDetail(id) {
             if(result.state == 200){
                 $("#name").val(result.data.name);
                 $("#images").attr("src", "http://image.tiyujia.com/" + result.data.image);
+                ISCHANGEIMG = result.data.image;
+                $("#imgUrl").val(result.data.image)
             }else{
                 $.Popup({
                     confirm:false,
@@ -407,10 +408,10 @@ function createGroupActivity() {
     $("#activityGroupCreate").show();
     $("#activityGroupList").hide();
     // $("#imgWrap").hide();
-    $("#combinationId").val('');
+    $("#combinationId").val("");
     $('#choice-activity-table').bootstrapTable('refresh');
     $('#group-form').bootstrapValidator('resetForm', true);   /*将表格清空*/
-    $('#group-form').bootstrapValidator('addField', 'image',{
+    $('#group-form').bootstrapValidator('addField', 'imageR',{
         validators: {
             notEmpty: {
                 message: '请上传图片'
@@ -419,20 +420,57 @@ function createGroupActivity() {
     });
 }
 /*创建活动组合*/
+var ISCHANGEIMG = '';
 $("#createModify").click(function () {
-    var url = '';
-    if($("#combinationId").val() != '' && $("#combinationId").val() != undefined){/*修改*/
-        url = '/v1/combination/updateCombination';
-    }else{/*创建*/
-        url = '/v1/combination/createCombination';
+    var formData = new FormData();
+    formData.append('imgFile', $("#lefile")[0].files[0]);
+    if($("#combinationId").val() ==  ""){/*创建*/
+        $.ajax({
+            url: '/v1/upload/file',
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function (){
+                return $("#group-form").data('bootstrapValidator').isValid();
+            },
+            success:function (result) {
+                if(result.state == 200){
+                    $("#imgUrl").val(result.data);
+                    createModify('/v1/combination/createCombination');
+                }
+            }
+        })
+    }else{/*编辑*/
+        if(ISCHANGEIMG != $("#imgUrl").val()){/*图片发生了改变*/
+            $.ajax({
+                url: '/v1/upload/file',
+                type: 'post',
+                data: formData,
+                processData: false,
+                contentType: false,
+                beforeSend: function (){
+                    return $("#group-form").data('bootstrapValidator').isValid();
+                },
+                success:function (result) {
+                    if(result.state == 200){
+                        $("#imgUrl").val(result.data);
+                        createModify('/v1/combination/updateCombination');
+                    }
+                }
+            })
+        }else{
+            if($("#group-form").data('bootstrapValidator').isValid()){
+                createModify('/v1/combination/updateCombination');
+            }
+        }
     }
+})
+function createModify(url) {
     $('#group-form').ajaxSubmit({
         url: url,
         type: 'post',
         dataType: 'json',
-        beforeSubmit: function () {
-            return $("#group-form").data('bootstrapValidator').isValid();
-        },
         success: function (result) {
             if (result.state && result.state == 200) {
                 $.Popup({
@@ -450,14 +488,22 @@ $("#createModify").click(function () {
             }
         }
     });
-})
+}
 /*发布时间的转化*/
 function timeFormat(data) {
     return new Date(data).format("yyyy-mm-dd HH:MM:ss")
 }
 /*type=file的样式处理---图片预览*/
 $('input[id=lefile]').change(function() {
+    $('#group-form').bootstrapValidator('addField', 'imageR', {
+        validators: {
+            notEmpty: {
+                message: '请上传图片'
+            }
+        }
+    });
     var _val = $(this).val();
+    $("#imgUrl").val(_val);
     if($(this).val()){
         $('#photoCover').html(_val);
         $("#lefile").html(_val);
@@ -465,6 +511,9 @@ $('input[id=lefile]').change(function() {
         if (objUrl) {
             $("#images").attr("src", objUrl) ;
         }
+    }else {
+        $("#photoCover").html("选择文件");
+        $("#images").attr("src", "");
     }
 });
 //建立一個可存取到該file的url

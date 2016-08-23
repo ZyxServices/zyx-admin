@@ -3,16 +3,13 @@ package com.zyx.service.pg.impl;
 import com.zyx.constants.Constants;
 import com.zyx.constants.PgConstants;
 import com.zyx.mapper.CircleMapper;
-import com.zyx.mapper.DevaluationMapper;
+import com.zyx.mapper.DevaMapper;
 import com.zyx.model.Circle;
 import com.zyx.model.Devaluation;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.CircleService;
-import com.zyx.utils.FileUploadUtils;
-import com.zyx.utils.ImagesVerifyUtils;
 import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -29,7 +26,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
     private CircleMapper circleMapper;
 
     @Resource
-    private DevaluationMapper devaluationMapper;
+    private DevaMapper devaMapper;
 
     @Override
     public Map<String, Object> findByPager(Integer start, Integer pageSize) {
@@ -126,7 +123,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
             devaluation.setDevaluationId(circel_id);
             devaluation.setSequence(topSize);
             devaluation.setModel(3);
-            devaluationMapper.insert(devaluation);
+            devaMapper.insert(devaluation);
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_36000_MSG, null);
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
