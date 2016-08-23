@@ -131,8 +131,3 @@ var operateEvents = {
         alert("编辑")
     }
 }
-
-function liveCreateBanner() {
-    $("#liveBannerList").hide();
-    $("#liveBannerCreate").show();
-}

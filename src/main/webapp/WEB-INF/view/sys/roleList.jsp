@@ -168,8 +168,7 @@
                 <!-- BEGIN DASHBOARD STATS -->
                 <div class="row-fluid">
 
-                    <form action="/v1/role/" id="roleCreateForm" method="post" enctype="multipart/form-data"
-                          class="form-horizontal" novalidate="novalidate" role="form">
+                    <form action="/v1/role/" id="roleCreateForm" method="post" class="form-horizontal" role="form">
                         <div class="control-group form-group">
                             <label class="control-label">角色名称</label>
                             <div class="controls col-xs-5">
@@ -186,10 +185,10 @@
                             </div>
                         </div>
 
-                        <div class="control-group">
+                        <div class="control-group form-group">
                             <label class="control-label">角色权限选择</label>
-                            <input type="hidden" id="menuCreatePerm" name="menuPerm">
-                            <div class="controls">
+
+                            <div class="controls col-xs-5">
                                 <div class="span6">
                                     <select id="menu-create-select" multiple="multiple">
                                         <option value="menu:activity:list" data-section="活动">活动列表</option>
@@ -221,12 +220,15 @@
 
                                     </select>
                                 </div>
+                                <span class="help-inline required">*</span>
+                                <div style="clear: both"></div>
+                                <input type="text" class="hideInput" id="menuCreatePerm" name="menuPerm">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="button" id="createButton" class="btn" onclick="beginCreate()">确认创建
+                                <button id="createButton" class="btn" onclick="beginCreate()">确认创建
                                 </button>
                                 <a href="javascript:void(0)" class="btn btn-default" onclick="window.location.reload();">返回</a>
                             </div>
@@ -307,10 +309,10 @@
                             </div>
                         </div>
 
-                        <div class="control-group">
+                        <div class="control-group form-group">
                             <label class="control-label">角色权限选择</label>
-                            <input type="hidden" id="menuEditPerm" name="menuPerm">
-                            <div class="controls">
+
+                            <div class="controls col-xs-5">
                                 <div class="span6">
                                     <select id="menu-edit-select" multiple="multiple">
                                         <option value="menu:activity:list" data-section="活动" data-index="1">活动列表</option>
@@ -341,6 +343,9 @@
                                         <option value="menu:banner:dynamicbanner" data-section="banner推荐">动态banner推荐</option>
                                     </select>
                                 </div>
+                                <span class="help-inline required">*</span>
+                                <div style="clear: both"></div>
+                                <input type="text" class="hideInput"  id="menuEditPerm" name="menuPerm">
                             </div>
                         </div>
 

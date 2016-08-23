@@ -43,11 +43,6 @@
                 </div>
             </div>
             <div id="banner-list">
-                <div class="row-fluid margin-bottom-10">
-                    <div class="span6">
-                        <a class="btn btn-default" href="javascript:void(0)" onclick="createBanner()">上传banner</a>
-                    </div>
-                </div>
                 <div class="row-fluid">
                     <div class="span12 responsive">
                         <table id="homepage-list-table">

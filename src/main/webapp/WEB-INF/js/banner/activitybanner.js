@@ -73,11 +73,6 @@ var operateEvents = {
     }
 }
 
-function createBanner() {
-    $("#bannerList").hide();
-    $("#bannerCreate").show();
-}
-
 $('input[id=lefile]').change(function () {
     if ($(this).val()) {
         $('#photoCover').html($(this).val());
