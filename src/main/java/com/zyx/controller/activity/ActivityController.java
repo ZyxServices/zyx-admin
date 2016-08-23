@@ -56,15 +56,6 @@ public class ActivityController {
 
         AbstractView jsonView = new MappingJackson2JsonView();
 
-        /*String uploadFile;
-        if (!image.isEmpty()) {
-            uploadFile = FileUploadUtils.uploadFile(image);
-            Map<String, Object> stringObjectMap = ImagesVerifyUtils.verify(uploadFile);
-            if (stringObjectMap != null) {
-                jsonView.setAttributesMap(stringObjectMap);
-                return new ModelAndView(jsonView);
-            }
-        } else*/
         if(image == null || image.equals("")){
             jsonView.setAttributesMap(MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失"));
             return new ModelAndView(jsonView);
@@ -115,16 +106,6 @@ public class ActivityController {
 
         AbstractView jsonView = new MappingJackson2JsonView();
 
-
-        /*String uploadFile;
-        if (!image.isEmpty()) {
-            uploadFile = FileUploadUtils.uploadFile(image);
-            Map<String, Object> stringObjectMap = ImagesVerifyUtils.verify(uploadFile);
-            if (stringObjectMap != null) {
-                jsonView.setAttributesMap(stringObjectMap);
-                return new ModelAndView(jsonView);
-            }
-        } else*/
         if(image == null || image.equals("")){
             jsonView.setAttributesMap(MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失"));
             return new ModelAndView(jsonView);

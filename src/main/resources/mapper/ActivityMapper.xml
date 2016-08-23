@@ -65,7 +65,7 @@
         AND del != 1
         ORDER BY create_time desc
         <if test="pageNumber != null and page != null">
-            limit #{pageNumber}, #{page}
+            limit #{page}, #{pageNumber}
         </if>
     </select>
 
