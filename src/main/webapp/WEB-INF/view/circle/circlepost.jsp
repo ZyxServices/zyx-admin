@@ -174,7 +174,17 @@
                     <form class="form-horizontal" role="form" enctype="multipart/form-data" method="post"
                           id="CirclePost">
                         <%--  <input type="hidden" name="circle_id" value="75">--%>
-                        <input type="hidden" name="create_id" value="10">
+                     <%--   <input type="hidden" name="create_id" >--%>
+                            <div class="control-group form-group">
+                                <label class="control-label">请选择发布账号</label>
+                                <div class="controls  col-xs-6">
+                                    <select name="create_id" data-placeholder="请选择发布账号" id="createId" data-rel="chosen"
+                                            style="width:350px;" class="chzn-select" tabindex="7">
+
+                                    </select>
+                                    <span class="help-inline">*</span>
+                                </div>
+                            </div>
                         <div class="control-group form-group">
                             <label class="control-label">标题</label>
                             <div class="controls">
@@ -188,7 +198,7 @@
                             <div class="controls summernote">
                                 <div class="span6 form-control">
                                     <div id="post-summernote"></div>
-                                    <input type="hidden" name="content">
+                                    <input id="desc" type="text" class="hideInput" name="content" value="">
                                 </div>
                             </div>
                         </div>
