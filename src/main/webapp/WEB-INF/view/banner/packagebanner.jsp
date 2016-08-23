@@ -80,14 +80,6 @@
             <!-- END PAGE HEADER-->
 
             <div id="banner-list">
-
-                <!-- BEGIN DASHBOARD STATS -->
-
-                <div class="row-fluid margin-bottom-10">
-                    <div class="span6">
-                        <a class="btn btn-default" href="javascript:void(0)" onclick="createPackageBanner()">上传banner</a>
-                    </div>
-                </div>
                 <div class="row-fluid">
                     <div class="span12 responsive">
                         <table id="package-list-table">

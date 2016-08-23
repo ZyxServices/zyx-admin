@@ -82,7 +82,6 @@
                 <div class="row-fluid">
                     <div class="span6">
                         <h3>首页微直播banner管理</h3>
-                        <a class="btn btn-default" href="javascript:void(0)" onclick="liveCreateBanner()">上传banner</a>
                     </div>
                 </div>
                 <div class="row-fluid">

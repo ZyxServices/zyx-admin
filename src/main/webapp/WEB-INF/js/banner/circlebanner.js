@@ -130,8 +130,3 @@ var operateEvents = {
         console.log(row)
     }
 }
-
-function createCircleBanner() {
-    $("#circleBannerList").hide();
-    $("#circleBannerCreate").show();
-}

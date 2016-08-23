@@ -22,7 +22,7 @@ function initTable() {
         sortOrder: "asc",          //排序方式
         strictSearch: true,
         // smartDisplay: false,
-        height: 500,
+        min_height: 500,
         uniqueId: "id",           //每一行的唯一标识，一般为主键列
         search: true,
         sidePagination: "server",
