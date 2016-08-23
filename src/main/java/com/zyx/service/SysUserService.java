@@ -69,10 +69,10 @@ public class SysUserService {
     }
 
     public SysUser getUserByNamePass(String username, String password) {
-        SysUser paer = new SysUser();
-        paer.setUsername(username);
-        paer.setPassword(password);
-        return sysUserMapper.selectOne(paer);
+        SysUser sysUser = new SysUser();
+        sysUser.setUsername(username);
+        sysUser.setPassword(password);
+        return sysUserMapper.selectOne(sysUser);
     }
 
 

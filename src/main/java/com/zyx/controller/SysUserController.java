@@ -11,6 +11,7 @@ import com.zyx.model.SysUser;
 import com.zyx.parm.sys.CreateSystemRoleParam;
 import com.zyx.parm.sys.CreateSystemUserParam;
 import com.zyx.parm.sys.QuerySystemUserParam;
+import com.zyx.utils.CipherUtil;
 import com.zyx.utils.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -62,7 +63,7 @@ public class SysUserController {
     public ModelAndView sysRoleInsert(@RequestParam String username, @RequestParam String pass, @RequestParam String name, @RequestParam String roleId, @RequestParam(required = false) String remark) {
         AbstractView jsonView = new MappingJackson2JsonView();
         Map<String, Object> map;
-        SysUser sysUser = sysUserService.getUserByNamePass(username, pass);
+        SysUser sysUser = sysUserService.getUserByNamePass(username, CipherUtil.generatePassword(pass));
 
         if (sysUser != null) {
             map = MapUtils.buildErrorMap(SysConstants.ERROR_9004, SysConstants.ERROR_9004_MSG);
@@ -71,7 +72,7 @@ public class SysUserController {
             param.setRoleId(roleId);
             param.setName(name);
             param.setUserName(username);
-            param.setPassword(pass);
+            param.setPassword(CipherUtil.generatePassword(pass));
             param.setRemark(remark);
             map = sysUserService.insertSysUser(param);
         }
