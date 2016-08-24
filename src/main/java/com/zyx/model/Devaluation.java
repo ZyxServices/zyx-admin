@@ -12,13 +12,14 @@ public class Devaluation {
      * 模块类型（1、活动.........）
      * //  对面模块类型 1、活动，2,直播，3,圈子，4动态，5用户，6帖子
      */
+    @Column(name = "model")
     private Integer model;
 
     /**
      * 对应模块首推数据ID
      */
     @Column(name = "model_id")
-    private Integer devaluationId;
+    private Integer modelId;
 
     @Column(name = "create_time")
     private Long createTime;
@@ -27,16 +28,17 @@ public class Devaluation {
      * 图片地址
      */
     @Column(name = "image_url")
-    private String image;
-
+    private String imageUrl;
     /**
      * 首推排序
      */
+    @Column(name = "sequence")
     private Integer sequence;
 
     @Column(name = "state")
-    private Integer activation;//激活0，未激活1
+    private Integer state;//激活0，未激活1
 
+    @Column(name = "area")
     private Integer area;
     /**
      * @return id
@@ -75,17 +77,17 @@ public class Devaluation {
      *
      * @return devaluation_id - 对应模块首推数据ID
      */
-    public Integer getDevaluationId() {
-        return devaluationId;
+    public Integer getModelId() {
+        return modelId;
     }
 
     /**
      * 设置对应模块首推数据ID
      *
-     * @param devaluationId 对应模块首推数据ID
+     * @param modelId 对应模块首推数据ID
      */
-    public void setDevaluationId(Integer devaluationId) {
-        this.devaluationId = devaluationId;
+    public void setModelId(Integer modelId) {
+        this.modelId = modelId;
     }
 
     /**
@@ -105,19 +107,19 @@ public class Devaluation {
     /**
      * 获取图片地址
      *
-     * @return image - 图片地址
+     * @return imageUrl - 图片地址
      */
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     /**
      * 设置图片地址
      *
-     * @param image 图片地址
+     * @param imageUrl 图片地址
      */
-    public void setImage(String image) {
-        this.image = image;
+    public void setImage(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     /**
@@ -139,17 +141,17 @@ public class Devaluation {
     }
 
     /**
-     * @return activation
+     * @return state
      */
-    public Integer getActivation() {
-        return activation;
+    public Integer getState() {
+        return state;
     }
 
     /**
-     * @param activation
+     * @param state
      */
-    public void setActivation(Integer activation) {
-        this.activation = activation;
+    public void setState(Integer state) {
+        this.state = state;
     }
 
     public Integer getArea() {

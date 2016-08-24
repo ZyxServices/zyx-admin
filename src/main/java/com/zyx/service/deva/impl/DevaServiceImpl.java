@@ -3,6 +3,7 @@ package com.zyx.service.deva.impl;
 import com.zyx.constants.Constants;
 import com.zyx.mapper.DevaMapper;
 import com.zyx.model.Devaluation;
+import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.deva.DevaService;
 import com.zyx.utils.MapUtils;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -23,7 +24,7 @@ import java.util.Map;
  * @update 16-7-12 上午10:30
  */
 @Service
-public class DevaServiceImpl implements DevaService {
+public class DevaServiceImpl extends BaseServiceImpl<Devaluation> implements DevaService {
 
     @Resource
     DevaMapper devaMapper;

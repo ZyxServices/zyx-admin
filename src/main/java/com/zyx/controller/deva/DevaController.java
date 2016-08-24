@@ -37,32 +37,70 @@ public class DevaController {
     private DevaService devaService;
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    @ApiOperation(value = "活动接口-活动推荐", notes = "活动接口-活动推荐")
-    public ModelAndView queryActivity(@RequestParam(name = "types") Integer types,
-                                      @RequestParam(name = "devaId") Integer devaluationId,
-                                      @RequestParam(name = "image", required = false) MultipartFile image,
-                                      @RequestParam(name = "sequence") Integer sequence,
-                                      @RequestParam(name = "activation") Integer activation) {
-
+    @ApiOperation(value = "首推接口-新增首推", notes = "首推接口-新增首推")
+    public ModelAndView queryActivity(@RequestParam(name = "model",required = true) Integer model,
+                                      @RequestParam(name = "modelId",required = true) Integer modelId,
+                                      @RequestParam(name = "area" ,required = true) Integer area,
+                                      @RequestParam(name = "imageUrl", required = false) String imageUrl,
+                                      @RequestParam(name = "state", required = true) Integer state,
+                                      @RequestParam(name = "sequence" ,required = true) Integer sequence
+                                     ) {
+        Map<String, Object> result = new HashMap<>();
+        Devaluation entity = new Devaluation();
+        entity.setModel(model);
+        entity.setModelId(modelId);
+        entity.setCreateTime(System.currentTimeMillis());
+        entity.setArea(area);
+        entity.setImage(imageUrl);
+        entity.setSequence(sequence);
+        entity.setState(state);
+        devaService.save(entity);
+        result.put(Constants.STATE, LiveConstants.SUCCESS);
         AbstractView jsonView = new MappingJackson2JsonView();
-
+        jsonView.setAttributesMap(result);
         return new ModelAndView(jsonView);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ModelAndView appUserDeva(@RequestParam(name = "types") Integer types,
-                                    @RequestParam(name = "devaId") Integer devaluationId,
-                                    @RequestParam(name = "sequence") Integer sequence,
-                                    @RequestParam(name = "activation") Integer activation) {
+    @ApiOperation(value = "首推接口-更新首推", notes = "首推接口-更新首推")
+    public ModelAndView updateDeva(@RequestParam(name = "id",required = true) Integer id,
+                                    @RequestParam(name = "area" ,required = false) Integer area,
+                                    @RequestParam(name = "imageUrl", required = false) String imageUrl,
+                                    @RequestParam(name = "state", required = false) Integer state,
+                                    @RequestParam(name = "sequence" ,required = false) Integer sequence) {
 
+        Map<String, Object> result = new HashMap<>();
+        Devaluation entity = new Devaluation();
+        entity.setId(id);
+        entity.setArea(area);
+        entity.setImage(imageUrl);
+        entity.setSequence(sequence);
+        entity.setState(state);
+        devaService.updateNotNull(entity);
+        result.put(Constants.STATE, LiveConstants.SUCCESS);
         AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(result);
         return new ModelAndView(jsonView);
     }
 
-    @RequestMapping(value = "/list/model", method = RequestMethod.POST)
-    public ModelAndView getDevasByModel(@RequestParam(name = "model",required = true) Integer model ,@RequestParam(name = "area") Integer area ) {
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @ApiOperation(value = "首推接口-删除首推", notes = "首推接口-删除首推")
+    public ModelAndView deleteDeva(@RequestParam(name = "id",required = true) Integer id
+                                    ) {
+        Map<String, Object> result = new HashMap<>();
+        devaService.delete(id);
+        result.put(Constants.STATE, LiveConstants.SUCCESS);
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(result);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "/list", method = {RequestMethod.POST,RequestMethod.GET})
+    @ApiOperation(value = "首推接口-获取首推", notes = "首推接口-获取首推")
+    public ModelAndView getDevasByModel(@RequestParam(name = "model",required = true) Integer model ,@RequestParam(name = "area",required = false) Integer area ) {
         Map<String, Object> result = new HashMap<>();
         List<Devaluation> list = devaService.getDevas(model, area);
+        System.out.println(list +"  "+ list.size());
         result.put(Constants.DATA,list);
         result.put(Constants.STATE, LiveConstants.SUCCESS);
         AbstractView jsonView = new MappingJackson2JsonView();

@@ -108,28 +108,6 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
     }
 
     @Override
-    public Map<String, Object> tuiJian(Integer circel_id, Integer topSize) {
-        if (circel_id == null) {
-            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30001, PgConstants.PG_ERROR_CODE_30001_MSG);
-        }
-        if (topSize == null) {
-            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30018, PgConstants.PG_ERROR_CODE_30018_MSG);
-        }
-        Integer result = circleMapper.tuiJian(circel_id, topSize);
-        if (result > 0) {
-            Devaluation devaluation = new Devaluation();
-            devaluation.setCreateTime(new Date().getTime());
-            devaluation.setActivation(0);
-            devaluation.setDevaluationId(circel_id);
-            devaluation.setSequence(topSize);
-            devaluation.setModel(3);
-            devaMapper.insert(devaluation);
-            return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_36000_MSG, null);
-        }
-        return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
-    }
-
-    @Override
     public Map<String, Object> deleteOne(Integer id) {
         Integer result = circleMapper.setState(-1, id);
         if (result > 0) {
