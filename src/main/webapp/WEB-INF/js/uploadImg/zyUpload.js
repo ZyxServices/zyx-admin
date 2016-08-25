@@ -1202,9 +1202,11 @@ var ZYFILE = {
         return this
     },
     funDeleteFile: function (delFileIndex, isCb) {
+
         var self = this;
         var tmpFile = [];
         var delFile = this.perUploadFile[delFileIndex];
+        console.log(delFile)
         $.each(this.uploadFile, function (k, v) {
             if (delFile != v) {
                 tmpFile.push(v)
@@ -1245,7 +1247,6 @@ var ZYFILE = {
         xhr.addEventListener("load", function (e) {
             self.funDeleteFile(file.index, false);
             self.onSuccess(file, xhr.responseText);
-            console.log(xhr.responseText)
             if (JSON.parse(xhr.responseText).state == 902) {
                 alert('上传失败')
             } else if (JSON.parse(xhr.responseText).state == 200) {
@@ -1318,6 +1319,8 @@ var ZYFILE = {
                 tailor: false,
                 del: true,
                 finishDel: false,
+                fileNumber: '',
+                btnS:true,
                 onSelect: function (selectFiles, allFiles) {
                 },
                 onDelete: function (file, files) {
@@ -1339,6 +1342,13 @@ var ZYFILE = {
                 para.multiple ? multiple = "multiple" : multiple = "";
                 var html = "";
                 if (para.dragDrop) {
+                    var  btn=''
+                    if(para.btnS==false){
+                        btn += '               <div class="btns" style="display: none" >';
+
+                    }else{
+                        btn += '               <div class="btns">';
+                    }
                     html += '<form id="uploadForm" action="' + para.url + '" method="post" enctype="multipart/form-data">';
                     html += '	<div class="upload_box">';
                     html += '		<div class="upload_main">';
@@ -1354,8 +1364,8 @@ var ZYFILE = {
                     html += '			<div id="preview" class="upload_preview"></div>';
                     html += '			<div class="status_bar">';
                     html += '				<div id="status_info" class="info">选中0张文件，共0B。</div>';
-                    html += '				<div class="btns">';
-                    html += '					<div class="webuploader_picks" onclick="window.location.reload();">返回上一页</div>';
+                    html +=    btn;
+                    html += '					<div class="webuploader_picks" onclick="window.location.reload()">返回上一页</div>';
                     html += '					<div class="upload_btn" disabled="disabled">开始上传</div>';
                     html += "				</div>";
                     html += "			</div>";
@@ -1414,12 +1424,6 @@ var ZYFILE = {
             };
             this.funFilterEligibleFile = function (files) {
                 var arrFiles = [];
-                if (files.length > 9) {
-                    $.Popup({
-                        confirm: false,
-                        template: '选择图片不能超过9个'
-                    })
-                } else {
                     for (var i = 0, file; file = files[i]; i++) {
                         var newStr = file.name.split("").reverse().join("");
 
@@ -1431,6 +1435,7 @@ var ZYFILE = {
                                     alert('您这个"' + file.name + '"文件大小过大')
                                 } else {
                                     arrFiles.push(file)
+
                                 }
                             } else {
                                 alert('您这个"' + file.name + '"上传类型不符合，请上传jpg,png,jpeg,bmp,gif类型')
@@ -1439,7 +1444,6 @@ var ZYFILE = {
                             alert('您这个"' + file.name + '"没有类型, 无法识别，上传类型不符合，请上传jpg,png,jpeg,bmp,gif类型')
                         }
                     }
-                }
                 return arrFiles
             };
             this.funDisposePreviewHtml = function (file, e) {
@@ -1568,57 +1572,64 @@ var ZYFILE = {
                         return self.funFilterEligibleFile(files)
                     },
                     onSelect: function (selectFiles, allFiles) {
-                        para.onSelect(selectFiles, allFiles);
-                        self.funSetStatusInfo(ZYFILE.funReturnNeedFiles());
-                        var html = "", i = 0;
-                        var funDealtPreviewHtml = function () {
-                            file = selectFiles[i];
-                            if (file) {
-                                var reader = new FileReader();
-                                reader.onload = function (e) {
-                                    html += self.funDisposePreviewHtml(file, e);
-                                    i++;
-                                    funDealtPreviewHtml()
-                                };
-                                reader.readAsDataURL(file)
-                            } else {
-                                funAppendPreviewHtml(html)
-                            }
-                        };
-                        var funAppendPreviewHtml = function (html) {
-                            if (para.dragDrop) {
-                                $("#preview").append(html)
-                            } else {
-                                $(".add_upload").before(html)
-                            }
-                            funBindDelEvent();
-                            funBindHoverEvent()
-                        };
-                        var funBindDelEvent = function () {
-                            if ($(".file_del").length > 0) {
-                                $(".file_del").click(function () {
-                                    ZYFILE.funDeleteFile(parseInt($(this).attr("data-index")), true);
-                                    return false
-                                })
-                            }
-                            if ($(".file_edit").length > 0) {
-                                $(".file_edit").click(function () {
-                                    var imgIndex = $(this).attr("data-index");
-                                    var imgName = $(this).prev(".file_name").attr("title");
-                                    var imgSrc = $("#uploadImage_" + imgIndex).attr("src");
-                                    self.createPopupPlug(imgSrc, imgIndex, imgName);
-                                    return false
-                                })
-                            }
-                        };
-                        var funBindHoverEvent = function () {
-                            $(".upload_append_list").hover(function (e) {
-                                $(this).find(".file_bar").addClass("file_hover")
-                            }, function (e) {
-                                $(this).find(".file_bar").removeClass("file_hover")
+                        if (allFiles.length > para.fileNumber) {
+                            $.Popup({
+                                confirm: false,
+                                template: '选择图片不能超过' + para.fileNumber + '个'
                             })
-                        };
-                        funDealtPreviewHtml()
+                        } else {
+                            para.onSelect(selectFiles, allFiles);
+                            self.funSetStatusInfo(ZYFILE.funReturnNeedFiles());
+                            var html = "", i = 0;
+                            var funDealtPreviewHtml = function () {
+                                file = selectFiles[i];
+                                if (file) {
+                                    var reader = new FileReader();
+                                    reader.onload = function (e) {
+                                        html += self.funDisposePreviewHtml(file, e);
+                                        i++;
+                                        funDealtPreviewHtml()
+                                    };
+                                    reader.readAsDataURL(file)
+                                } else {
+                                    funAppendPreviewHtml(html)
+                                }
+                            };
+                            var funAppendPreviewHtml = function (html) {
+                                if (para.dragDrop) {
+                                    $("#preview").append(html)
+                                } else {
+                                    $(".add_upload").before(html)
+                                }
+                                funBindDelEvent();
+                                funBindHoverEvent()
+                            };
+                            var funBindDelEvent = function () {
+                                if ($(".file_del").length > 0) {
+                                    $(".file_del").click(function () {
+                                        ZYFILE.funDeleteFile(parseInt($(this).attr("data-index")), true);
+                                        return false
+                                    })
+                                }
+                                if ($(".file_edit").length > 0) {
+                                    $(".file_edit").click(function () {
+                                        var imgIndex = $(this).attr("data-index");
+                                        var imgName = $(this).prev(".file_name").attr("title");
+                                        var imgSrc = $("#uploadImage_" + imgIndex).attr("src");
+                                        self.createPopupPlug(imgSrc, imgIndex, imgName);
+                                        return false
+                                    })
+                                }
+                            };
+                            var funBindHoverEvent = function () {
+                                $(".upload_append_list").hover(function (e) {
+                                    $(this).find(".file_bar").addClass("file_hover")
+                                }, function (e) {
+                                    $(this).find(".file_bar").removeClass("file_hover")
+                                })
+                            };
+                            funDealtPreviewHtml()
+                        }
                     },
                     onDelete: function (file, files) {
                         para.onDelete(file, files);
@@ -1657,7 +1668,6 @@ var ZYFILE = {
                     },
                     onComplete: function (response) {
                         para.onComplete(response);
-                        console.info(response)
                     },
                     onDragOver: function () {
                         $(this).addClass("upload_drag_hover")

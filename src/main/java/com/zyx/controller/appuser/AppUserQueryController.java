@@ -67,6 +67,7 @@ public class AppUserQueryController {
         param.setSortName(sortName);
         param.setSortOrder(sortOrder);
         param.setAuthenticate(1);// 待审核用户
+        param.setOfficial(null);
         Map<String, Object> map = appUserService.queryList(param);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);

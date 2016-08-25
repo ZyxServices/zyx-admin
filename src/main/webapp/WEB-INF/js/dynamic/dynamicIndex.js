@@ -145,10 +145,6 @@ var operateEventssssss = {
             $('.dynamicPic').append('<img style="max-width: 13%"  src='+'http://image.tiyujia.com/'+strArry[i]+'>')
             //$('.dynamicPic img').attr('src', 'http://image.tiyujia.com/' + row.imgUrl + '');
         }
-
-
-        console.log(row)
-
     },
     'click .edit': function (e, value, row, index) {
         //alert('You click like action, row: ' + JSON.stringify(row));
@@ -217,15 +213,13 @@ var operateEventssssss = {
         ajaxPlugins.unRemove(delUrl, 'dynamic_table', 'DELETE')
     },
     createDynamic: function (obj) {
-        console.log(222)
         $("#createDynamicForm").ajaxForm({
             url: '/concern/createConcern',
             type: 'post',
             dataType: 'json',
             success: function (result) {
-                console.log(result)
                 if (result.state == 200) {
-                    window.location.reload()
+                    window.location.reload();
                 } else  {
                     $.Popup({
                         confirm:false,
@@ -282,7 +276,7 @@ $(function () {
     //}
     $("#demo").zyUpload({
         width            :   "400px",                 // 宽度
-        height           :   "400px",                 // 宽度
+        height           :   "200px",                 // 宽度
         itemWidth        :   "100px",                 // 文件项的宽度
         itemHeight       :   "100px",                 // 文件项的高度
         url              :   "/v1/upload/file",  // 上传文件的路径
@@ -293,8 +287,16 @@ $(function () {
         dragDrop         :   true,                    // 是否可以拖动上传文件
         del              :   true,                    // 是否可以删除文件
         finishDel        :   false,  				  // 是否在上传文件完成后删除预览
+        fileNumber       :     9,
         /* 外部获得的回调接口 */
         onSelect: function(files, allFiles){                    // 选择文件的回调方法
+            //console.log(allFiles)
+            //if(allFiles.length>3){
+            //    $.Popup({
+            //        confirm:false,
+            //        template:'选择文件不能超过3个'
+            //    })
+            //}
             //console.info("当前选择了以下文件：");
             //console.info(files);
             //console.info("之前没上传的文件：");
@@ -321,7 +323,7 @@ $(function () {
             console.info(file);
         },
         onComplete: function(responseInfo){           // 上传完成的回调方法
-            console.log(111)
+
             $('#DynamicSubmit').click();
             //operateEventssssss.createDynamic()
             $('#imgFileUrl').val($('#imgFileUrl').val().substr(0,$('#imgFileUrl').val().length-1))

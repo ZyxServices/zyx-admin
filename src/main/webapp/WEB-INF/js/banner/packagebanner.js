@@ -65,8 +65,3 @@ var operateEvents = {
         console.log(row)
     }
 }
-
-function createPackageBanner() {
-    $("#bannerPackageList").hide();
-    $("#bannerPackageCreate").show();
-}
