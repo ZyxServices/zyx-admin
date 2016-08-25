@@ -36,4 +36,6 @@ public interface ActivityMapper extends Mapper<Activity> {
      * @return
      */
     List<Activity> queryActivityIn(List<Integer> ids);
+
+    int insertTestDesc(String desc);
 }

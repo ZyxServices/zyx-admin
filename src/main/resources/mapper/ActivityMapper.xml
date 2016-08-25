@@ -19,7 +19,6 @@
         <result column="type" jdbcType="INTEGER" property="type"/>
         <result column="target_url" jdbcType="VARCHAR" property="targetUrl"/>
         <result column="address" jdbcType="VARCHAR" property="address"/>
-        <result column="activity_type" jdbcType="INTEGER" property="activityType"/>
         <result column="examine" jdbcType="INTEGER" property="examine"/>
         <result column="member_template" jdbcType="VARCHAR" property="memberTemplate"/>
         <result column="create_time" jdbcType="BIGINT" property="createTime"/>
@@ -42,7 +41,6 @@
         <result column="type" jdbcType="INTEGER" property="type"/>
         <result column="target_url" jdbcType="VARCHAR" property="targetUrl"/>
         <result column="address" jdbcType="VARCHAR" property="address"/>
-        <result column="activity_type" jdbcType="INTEGER" property="activityType"/>
         <result column="examine" jdbcType="INTEGER" property="examine"/>
         <result column="member_template" jdbcType="VARCHAR" property="memberTemplate"/>
         <result column="create_time" jdbcType="BIGINT" property="createTime"/>
@@ -122,9 +120,6 @@
             <if test="address != null and address != ''">
                 address = #{address},
             </if>
-            <if test="activityType != null and activityType &gt; -1 and activityType &lt; 2">
-                activity_type = #{activityType},
-            </if>
             <if test="examine != null and examine &gt; -1 and examine &lt; 2">
                 examine = #{examine},
             </if>
@@ -141,4 +136,7 @@
         WHERE id=#{id}
     </update>
 
+    <insert id="insertTestDesc" parameterType="java.lang.String">
+        INSERT INTO testdesc(descs)VALUE (#{desc})
+    </insert>
 </mapper>
