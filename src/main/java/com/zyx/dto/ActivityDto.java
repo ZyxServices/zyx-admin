@@ -74,19 +74,14 @@ public class ActivityDto {
     private String targetUrl;
 
     /**
-     * 活动地址
-     */
-    private String address;
-
-    /**
-     * 活动启用状态（0  启用，  1禁用）
-     */
-    private Integer activityType;
-
-    /**
      * 活动是否需要审核（0 不需要审核，1 需要审核）
      */
     private Integer examine;
+
+    /**
+     * 活动地址
+     */
+    private String address;
 
     /**
      * 报名活动模版
@@ -224,14 +219,6 @@ public class ActivityDto {
         this.address = address;
     }
 
-    public Integer getActivityType() {
-        return activityType;
-    }
-
-    public void setActivityType(Integer activityType) {
-        this.activityType = activityType;
-    }
-
     public Integer getExamine() {
         return examine;
     }
@@ -298,7 +285,6 @@ public class ActivityDto {
                 ", type=" + type +
                 ", targetUrl='" + targetUrl + '\'' +
                 ", address='" + address + '\'' +
-                ", activityType=" + activityType +
                 ", examine=" + examine +
                 ", memberTemplate='" + memberTemplate + '\'' +
                 ", createTime=" + createTime +

@@ -50,7 +50,6 @@
                             <tr>
                                 <th data-checkbox="true"></th>
                                 <th data-field="id">ID</th>
-                                <th data-field="url">跳转url</th>
                                 <th data-field="image">图片</th>
                                 <th data-field="sequence">排序</th>
                                 <th data-field="activation">是否激活</th>
@@ -63,8 +62,8 @@
             </div>
 
         </div>
-        <%--创建banner--%>
-        <div class="container-fluid hide" id="bannerCreate">
+        <%--编辑banner--%>
+        <div class="container-fluid hide" id="bannerEdit">
             <div class="row-fluid">
                 <div class="span12">
                     <h3 class="page-title">
@@ -76,26 +75,33 @@
                             <a href="javascript:void(0)">首页banner</a>
                             <i class="icon-angle-right"></i>
                         </li>
-                        <li><a href="#">上传banner</a></li>
+                        <li><a href="#">编辑banner</a></li>
                     </ul>
                 </div>
             </div>
-            <div id="activity-create">
+            <div id="banner-edit">
                 <div class="row-fluid">
 
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" id="bannerForm">
+                        <input type="hidden" name="id" id="devaId">
                         <div class="control-group">
-                            <label class="control-label">url</label>
-                            <div class="controls">
-                                <input type="text" class="span6 m-wrap" />
-                                <span class="help-inline">*</span>
+                            <label class="control-label">活动原有封面图</label>
+                            <div class="controls" id="preImage">
+
                             </div>
                         </div>
 
                         <div class="control-group">
                             <label class="control-label">banner排序</label>
                             <div class="controls">
-                                <input type="text" class="span6 m-wrap" />
+                                <select class="span6" id="sequence" name="sequence">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                </select>
                                 <span class="help-inline">*</span>
                             </div>
                         </div>
@@ -103,15 +109,16 @@
                         <div class="control-group">
                             <label class="control-label">banner状态</label>
                             <div class="controls">
-                                <label class="radio"><input type="radio" name="bannerState" checked>激活</label>
-                                <label class="radio"><input type="radio" name="bannerState">未激活</label>
+                                <label class="radio"><input type="radio" name="state" value="0">激活</label>
+                                <label class="radio"><input type="radio" name="state" value="1">未激活</label>
                             </div>
                         </div>
 
                         <div class="control-group">
                             <label class="control-label">封面</label>
                             <div class="controls">
-                                <input id="lefile" type="file" class="hideInput" name="image">
+                                <input type="hidden" name="imageUrl" id="imageUrl">
+                                <input id="lefile" type="file" class="hideInput">
                                 <a class="btn btn-default" href="javascript:void (0)" id="photoCover" onclick="$('input[id=lefile]').click();">选择图片</a>
                                 <div style="margin-top: 10px" id="imagesWrap">
                                     <img id="images" src="">
@@ -121,7 +128,7 @@
 
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button class="btn btn-default">确定</button>
+                                <a href="javascript:(0)" id="confirmDeva" class="btn btn-default">确定</a>
                                 <a href="javascript:(0)" class="btn btn-default" onclick="window.location.reload();">返回</a>
                             </div>
                         </div>

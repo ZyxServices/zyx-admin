@@ -3,7 +3,7 @@
  */
 $(function(){
     $("#homepage-list-table").bootstrapTable({
-        url: "/v1/deva/list/model",
+        url: "/v1/deva/list",
         method:'post',
         locale: 'zh-US',
         pagination: true,
@@ -30,7 +30,7 @@ $(function(){
         responseHandler:homepageFormData
     })
     $("#stand-list-table").bootstrapTable({
-        url: "/v1/deva/list/model",
+        url: "/v1/deva/list",
         method:'post',
         locale: 'zh-US',
         pagination: true,

@@ -84,12 +84,6 @@ public class Activity {
     private String address;
 
     /**
-     * 活动启用状态（0  启用，  1禁用）
-     */
-    @Column(name = "activity_type")
-    private Integer activityType;
-
-    /**
      * 活动是否需要审核（0 不需要审核，1 需要审核）
      */
     private Integer examine;
@@ -363,24 +357,6 @@ public class Activity {
      */
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    /**
-     * 获取活动启用状态（0  启用，  1禁用）
-     *
-     * @return activity_type - 活动启用状态（0  启用，  1禁用）
-     */
-    public Integer getActivityType() {
-        return activityType;
-    }
-
-    /**
-     * 设置活动启用状态（0  启用，  1禁用）
-     *
-     * @param activityType 活动启用状态（0  启用，  1禁用）
-     */
-    public void setActivityType(Integer activityType) {
-        this.activityType = activityType;
     }
 
     /**

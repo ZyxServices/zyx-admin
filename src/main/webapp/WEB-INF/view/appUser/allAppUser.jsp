@@ -14,6 +14,7 @@
     <meta content="体育家-用户操作" name="description"/>
     <meta content="" name="author"/>
     <jsp:include page="../public/common-styles.jsp"/>
+    <link href="<%=request.getContextPath()%>/css/zyUpload.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../../css/tiyujia/style.css" />
 </head>
 <body class="page-header-fixed">
@@ -131,23 +132,17 @@
                         <label class="control-label">认证资料</label>
 
                         <div class="controls">
-                            <%--<input type="file" name="authFile">
-                            <span class="help-inline">上传图片</span>--%>
-
-                            <input type="file" class="hideInput" name="authFile" id="authFile">
-                            <a class="btn btn-default" href="javascript:void (0)" id="authFileCover" onclick="$('input[id=authFile]').click();">上传资料</a>
-                            <span class="help-inline">最多上传3张照片</span>
-                            <div style="margin-top: 10px" id="authImgWrap">
-                                <img id="authImg" src="">
-                            </div>
+                            <input type="hidden" name="authFile" id="authFile">
+                            <span class="help-inline required" id="imgNum">最多上传3张照片</span>
                         </div>
-
                     </div>
+                </form>
+                <div  id="imgInit" style="margin-left: 178px;"></div>
+                <div class="margin-bottom-25">
                     <button type="button" id="createButton" class="btn" onclick="beginCreate()">确认创建
                     </button>
                     <button type="button" class="btn" onclick="window.location.reload();">返回</button>
-                </form>
-
+                </div>
             </div>
         </div>
     </div>
@@ -199,5 +194,6 @@
 <!-- 用户推荐结束 -->
 <jsp:include page="../public/common-footer.jsp"/>
 </body>
+<script type="text/javascript" src="../../js/uploadImg/zyUpload.js"></script>
 <script type="text/javascript" src="../../js/appUser/appUserCommon.js"></script>
 <script type="text/javascript" src="../../js/appUser/allAppUser.js"></script>

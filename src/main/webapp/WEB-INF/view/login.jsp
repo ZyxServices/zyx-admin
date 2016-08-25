@@ -32,7 +32,7 @@
                 <a class="close" data-dismiss="alert" href="#">&times;</a> 体育家运营后台
             </div>
             <form id="login_form" method="post" action="<%=request.getContextPath()%>/login/in"
-                  class="bootstrap-admin-login-form">
+                  class="bootstrap-admin-login-form form-horizontal">
                 <h1>Login</h1>
                 <div class="form-group">
                     <input class="form-control" type="text" id="username" name="username"
@@ -46,7 +46,7 @@
                     <input class="form-control" type="hidden" id="prm" name="prm">
                 </div>
                 <div class="form-group">
-                    <label> <input type="checkbox" name="remember_me">
+                    <label class="checkbox"> <input type="checkbox" name="remember_me" style="margin-top: 6px;">
                         记住我
                     </label>
                 </div>
@@ -55,7 +55,12 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="loginLoad">
+    <div class="modal-body">
+        <p>登录中...</p>
+    </div>
+</div>
+<div class=""></div>
 <script type="text/javascript"
         src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 <script type="text/javascript" src="../js/security/JBase64.js"></script>
@@ -92,6 +97,12 @@
             $.ajax({
                 type: "get",
                 url: "login/in",
+                beforeSend:function () {
+                    $("#loginLoad").modal('show');
+                },
+                complete:function () {
+                    $("#loginLoad").modal('hide');
+                },
                 success: function (rd) {
                     console.log(rd);
 
