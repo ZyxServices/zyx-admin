@@ -99,6 +99,8 @@ public class ActivityDto {
      */
     private String descContent;
 
+    private boolean isDeva;
+
     public Integer getId() {
         return id;
     }
@@ -267,30 +269,11 @@ public class ActivityDto {
         this.descContent = descContent;
     }
 
-    @Override
-    public String toString() {
-        return "ActivityDto{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", title='" + title + '\'' +
-                ", imgUrls='" + imgUrls + '\'' +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
-                ", lastTime=" + lastTime +
-                ", maxPeople=" + maxPeople +
-                ", visible=" + visible +
-                ", phone='" + phone + '\'' +
-                ", price=" + price +
-                ", type=" + type +
-                ", targetUrl='" + targetUrl + '\'' +
-                ", address='" + address + '\'' +
-                ", examine=" + examine +
-                ", memberTemplate='" + memberTemplate + '\'' +
-                ", createTime=" + createTime +
-                ", del=" + del +
-                ", mask=" + mask +
-                ", descContent='" + descContent + '\'' +
-                '}';
+    public boolean getIsDeva() {
+        return isDeva;
+    }
+
+    public void setIsDeva(boolean isDeva) {
+        this.isDeva = isDeva;
     }
 }
