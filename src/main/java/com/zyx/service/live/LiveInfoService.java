@@ -22,5 +22,6 @@ public interface LiveInfoService extends BaseService<LiveInfo>{
     public String getLiveUrl(Integer liveId);
 
 
+    public int searchCount(String keyword);
     public List<LiveInfoVo> search(String keyword);
 }

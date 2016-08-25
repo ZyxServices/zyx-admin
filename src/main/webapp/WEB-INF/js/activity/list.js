@@ -178,7 +178,6 @@ $(function () {
         height: 500,            //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
         uniqueId: "id",           //每一行的唯一标识，一般为主键列
         search: true,
-        // smartDisplay: false, 超过1页才显示页数
         sidePagination: "server",
         method: "get",
         queryParamsType: "limit",
@@ -629,6 +628,7 @@ function timeFormat(data) {
 }
 function createActivity() {
     $("#listType").html("创建");
+    $("#photoCover").html("选择文件");
     $("#createModify").show();
     $("#activityList").hide();
     $("#images").attr({'src': ''});
@@ -636,7 +636,6 @@ function createActivity() {
     $('#activity-summernote').summernote('reset');
     var html = '<label class="checkbox"><input type="checkbox" name="memberString" value="手机号码">手机号码</label><label class="checkbox"><input type="checkbox" name="memberString" value="姓名">姓名</label> <label class="checkbox"><input type="checkbox" name="memberString" value="身份证号码">身份证号码</label> <label class="checkbox"><input name="memberString" type="checkbox" value="性别">性别</label> <label class="checkbox"><input name="memberString" type="checkbox" value="年龄">年龄</label> <label class="checkbox"><input name="memberString" type="checkbox" value="地址">地址</label> <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>'
     $("#template").html(html);
-    $("#photoCover").html('');
     $("#userRequired").hide();
     $('#updateCreateFrom')[0].reset();
     $('#updateCreateFrom').data('bootstrapValidator').resetForm(true);

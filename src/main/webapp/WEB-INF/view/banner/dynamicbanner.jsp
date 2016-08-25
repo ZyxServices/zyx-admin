@@ -53,28 +53,17 @@
                     <!-- BEGIN PAGE TITLE & BREADCRUMB-->
 
                     <h3 class="page-title">
-
-                        首页精彩动态banner<small>statistics and more</small>
-
+                        首页精彩动态banner管理<small>statistics and more</small>
                     </h3>
 
                     <ul class="breadcrumb">
-
                         <li>
-
                             <i class="icon-home"></i>
-
                             <a href="javascript:void(0)">首页精彩banner</a>
-
                             <i class="icon-angle-right"></i>
-
                         </li>
-
                         <li><a href="#">列表</a></li>
                     </ul>
-
-                    <!-- END PAGE TITLE & BREADCRUMB-->
-
                 </div>
 
             </div>
@@ -87,7 +76,6 @@
                         <table id="dynamic-list-table">
                             <thead>
                             <tr>
-                                <th data-checkbox="true"></th>
                                 <th data-field="id">ID</th>
                                 <th data-field="image">首图</th>
                                 <th data-field="publisher">发布者</th>

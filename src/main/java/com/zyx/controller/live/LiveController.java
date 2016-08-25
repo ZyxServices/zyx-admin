@@ -132,13 +132,16 @@ public class LiveController {
 
     @RequestMapping(path = "/list", method = {RequestMethod.GET})
     @ApiOperation(value = "获取直播", notes = "直播-获取直播")
-    public ModelAndView getLiveInfos(@RequestParam(name = "pageSize", required = false) Integer pageSize, @RequestParam(name = "pageNumber", required = false) Integer pageNumber) {
+    public ModelAndView getLiveInfos(@RequestParam(name = "pageSize", required = false) Integer pageSize,
+                                     @RequestParam(name = "pageNumber", required = false) Integer pageNumber,
+                                     @RequestParam(name = "searchText", required = false) String searchText) {
         Map<String, Object> result = new HashMap<>();
         LiveInfoParm param = new LiveInfoParm();
         param.setPageNumber(pageNumber);
         param.setPageSize(pageSize);
         int count = liveInfoService.selectCount(new LiveInfo());
         List<LiveInfo> liveInfos = liveInfoService.getLiveInfos(param);
+
         result.put(LiveConstants.STATE, LiveConstants.SUCCESS);
         result.put(LiveConstants.DATA, liveInfos);
         result.put("total",count);

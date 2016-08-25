@@ -145,10 +145,6 @@ var operateEventssssss = {
             $('.dynamicPic').append('<img style="max-width: 13%"  src='+'http://image.tiyujia.com/'+strArry[i]+'>')
             //$('.dynamicPic img').attr('src', 'http://image.tiyujia.com/' + row.imgUrl + '');
         }
-
-
-        console.log(row)
-
     },
     'click .edit': function (e, value, row, index) {
         //alert('You click like action, row: ' + JSON.stringify(row));
@@ -217,15 +213,13 @@ var operateEventssssss = {
         ajaxPlugins.unRemove(delUrl, 'dynamic_table', 'DELETE')
     },
     createDynamic: function (obj) {
-        console.log(222)
         $("#createDynamicForm").ajaxForm({
             url: '/concern/createConcern',
             type: 'post',
             dataType: 'json',
             success: function (result) {
-                console.log(result)
                 if (result.state == 200) {
-                    window.location.reload()
+                    window.location.reload();
                 } else  {
                     $.Popup({
                         confirm:false,
@@ -321,7 +315,7 @@ $(function () {
             console.info(file);
         },
         onComplete: function(responseInfo){           // 上传完成的回调方法
-            console.log(111)
+
             $('#DynamicSubmit').click();
             //operateEventssssss.createDynamic()
             $('#imgFileUrl').val($('#imgFileUrl').val().substr(0,$('#imgFileUrl').val().length-1))

@@ -39,42 +39,6 @@
     <!-- BEGIN PAGE -->
 
     <div class="page-content">
-
-        <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-<%--首页banner删除--%>
-        <div class="modal hide" id="delHomeBanner">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"></button>
-                <h3>删除banner</h3>
-            </div>
-
-            <div class="modal-body">
-                该banner的所有数据将被完全删除，不能再被浏览？
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-default">确定</button>
-                <button class="btn btn-default" data-dismiss="modal">取消</button>
-            </div>
-        </div>
-<%--看台banner删除--%>
-        <div class="modal hide" id="delStandBanner">
-            <div class="modal-header">
-                <button data-dismiss="modal" class="close" type="button"></button>
-                <h3>删除banner</h3>
-            </div>
-
-            <div class="modal-body">
-                该banner的所有数据将被完全删除，不能再被浏览？
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-default">确定</button>
-                <button class="btn btn-default" data-dismiss="modal">取消</button>
-            </div>
-        </div>
-        <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-
-        <!-- BEGIN PAGE CONTAINER-->
-
         <div class="container-fluid" id="liveBannerList">
 
             <!-- BEGIN PAGE HEADER-->
@@ -115,12 +79,9 @@
             <!-- END PAGE HEADER-->
 
             <div id="banner-list">
-                <div class="row-fluid margin-bottom-10">
+                <div class="row-fluid">
                     <div class="span6">
                         <h3>首页微直播banner管理</h3>
-                    </div>
-                    <div class="span6 text-right">
-                        <a class="btn btn-default" href="javascript:void(0)" onclick="liveCreateBanner()" style="margin-top: 13px;">上传banner</a>
                     </div>
                 </div>
                 <div class="row-fluid">
@@ -132,9 +93,9 @@
                                 <th data-field="id">ID</th>
                                 <th data-field="livename">直播名称</th>
                                 <th data-field="image">图片</th>
-                                <th data-field="order">排序</th>
+                                <th data-field="sequence">排序</th>
                                 <th data-field="activation">是否激活</th>
-                                <th data-formatter="operate">操作</th>
+                                <th data-formatter="operate" data-events="operateEvents">操作</th>
                             </tr>
                             </thead>
                         </table>
@@ -145,7 +106,7 @@
             <hr>
 <%--看台轮播--%>
             <div id="stand-banner-list">
-                <div class="row-fluid margin-bottom-10">
+                <div class="row-fluid">
                     <div class="span6">
                         <h3>看台轮播banner管理</h3>
                     </div>
@@ -159,9 +120,9 @@
                                 <th data-field="id">ID</th>
                                 <th data-field="livename">直播名称</th>
                                 <th data-field="image">图片</th>
-                                <th data-field="order">排序</th>
+                                <th data-field="sequence">排序</th>
                                 <th data-field="activation">是否激活</th>
-                                <th data-formatter="standoperate">操作</th>
+                                <th data-formatter="standOperate" data-events="operateEvents">操作</th>
                             </tr>
                             </thead>
                         </table>

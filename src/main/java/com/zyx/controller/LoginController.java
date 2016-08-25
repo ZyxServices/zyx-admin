@@ -9,6 +9,7 @@ import com.zyx.service.SysUserService;
 
 import javax.servlet.ServletRequest;
 
+import com.zyx.utils.CipherUtil;
 import com.zyx.utils.RSAUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -100,7 +101,7 @@ public class LoginController {
 
                 System.out.println(password_new);
 
-                token.setPassword(password_new);
+                token.setPassword(CipherUtil.generatePassword(password_new));
 
                 currentUser.login(token);
 

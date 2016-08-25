@@ -21,6 +21,12 @@ $(function () {
                         message: '请输入描述'
                     }
                 }
+            }, 'menuPerm': {
+                validators: {
+                    notEmpty: {
+                        message: '请选择角色权限'
+                    }
+                }
             }
         }
     });
@@ -42,6 +48,12 @@ $(function () {
                         message: '请输入描述'
                     }
                 }
+            }, 'menuPerm': {
+                validators: {
+                    notEmpty: {
+                        message: '请选择角色权限'
+                    }
+                }
             }
         }
     });
@@ -56,8 +68,8 @@ $(function () {
         paginationPreText: "上一页",
         paginationNextText: "下一页",
         pageNumber: 1,            //初始化加载第一页，默认第一页
-        pageSize: 5,            //每页的记录行数（*）
-        pageList: [5, 10, 15, 20, 25],  //记录数可选列表
+        pageSize: 10,            //每页的记录行数（*）
+        pageList: [10, 15, 20, 25],  //记录数可选列表
         checkbox: true,
         checkboxHeader: "true",
         height: 500,
@@ -106,94 +118,9 @@ $(function () {
             });
 
             $("#menuCreatePerm").val(_temp);
-        }
-    });
-
-    $("#roleCreateForm").ajaxForm({
-        url: '/v1/role/insert',
-        type: 'post',
-        dataType: 'json',
-        beforeSubmit: function () {
-            return $("#roleCreateForm").data('bootstrapValidator').isValid();
-            /*$("#createButton").attr("disabled", true);
-            var phone = $("#roleCreateForm").find('#roleCreateName').val();
-            var password = $("#roleCreateForm").find('#roleCreateDesc').val();
-            var checked = true;
-            if (phone.replace(/\s+/g, "") == '') {
-                alert("请输入名称");
-                checked = false;
-                $("#createButton").attr("disabled", false);
-                return checked;
-            }
-
-            if (password.replace(/\s+/g, "") == '') {
-                alert("请输入描述");
-                checked = false;
-                $("#createButton").attr("disabled", false);
-                return checked;
-            }
-
-            return checked;*/
-        },
-        success: function (result) {
-            if (result.state == 200) {
-                backToRoles();
-            } else {
-                if (result.state == 9001) {
-                    $("#createButton").attr("disabled", false);
-                    $.Popup({
-                        confirm: false,
-                        template: '角色已存在'
-                    });
-                }
-            }
-        },
-        error: function () {
-            $("#createButton").attr("disabled", false);
-        }
-    });
-
-    $("#roleEditForm").ajaxForm({
-        url: '/v1/role/edit',
-        type: 'post',
-        dataType: 'json',
-        beforeSubmit: function () {
-            return $("#roleEditForm").data('bootstrapValidator').isValid();
-            /*$("#editButton").attr("disabled", true);
-            var phone = $("#roleEditForm").find('#roleEditName').val();
-            var password = $("#roleEditForm").find('#roleEditDesc').val();
-            var checked = true;
-            if (phone.replace(/\s+/g, "") == '') {
-                alert("请输入名称");
-                checked = false;
-                $("#editButton").attr("disabled", false);
-                return checked;
-            }
-
-            if (password.replace(/\s+/g, "") == '') {
-                alert("请输入描述");
-                checked = false;
-                $("#editButton").attr("disabled", false);
-                return checked;
-            }
-
-            return checked;*/
-        },
-        success: function (result) {
-            $("#editButton").attr("disabled", false);
-            if (result.state == 200) {
-                backToRoles();
-            } else {
-                if (result.state == 9001) {
-                    $.Popup({
-                        confirm: false,
-                        template: '角色已存在'
-                    });
-                }
-            }
-        },
-        error: function () {
-            $("#editButton").attr("disabled", false);
+            $('#roleCreateForm').data('bootstrapValidator')
+                .updateStatus('menuPerm', 'NOT_VALIDATED', null)
+                .validateField('menuPerm');
         }
     });
 
@@ -235,17 +162,105 @@ function editJurisdiction(_row) {
             });
 
             $("#menuEditPerm").val(_temp);
+            $("#menuCreatePerm").val(_temp);
+            $('#roleEditForm').data('bootstrapValidator')
+                .updateStatus('menuPerm', 'NOT_VALIDATED', null)
+                .validateField('menuPerm');
         }
     });
 
 }
 
 function beginCreate() {
-    $("#roleCreateForm").submit();
+    $("#roleCreateForm").ajaxSubmit({
+        url: '/v1/role/insert',
+        type: 'post',
+        dataType: 'json',
+        beforeSubmit: function () {
+            return $("#roleCreateForm").data('bootstrapValidator').isValid();
+            /*$("#createButton").attr("disabled", true);
+             var phone = $("#roleCreateForm").find('#roleCreateName').val();
+             var password = $("#roleCreateForm").find('#roleCreateDesc').val();
+             var checked = true;
+             if (phone.replace(/\s+/g, "") == '') {
+             alert("请输入名称");
+             checked = false;
+             $("#createButton").attr("disabled", false);
+             return checked;
+             }
+
+             if (password.replace(/\s+/g, "") == '') {
+             alert("请输入描述");
+             checked = false;
+             $("#createButton").attr("disabled", false);
+             return checked;
+             }
+
+             return checked;*/
+        },
+        success: function (result) {
+            if (result.state == 200) {
+                backToRoles();
+            } else {
+                if (result.state == 9001) {
+                    $("#createButton").attr("disabled", false);
+                    $.Popup({
+                        confirm: false,
+                        template: '角色已存在'
+                    });
+                }
+            }
+        },
+        error: function () {
+            $("#createButton").attr("disabled", false);
+        }
+    });
 }
 
 function beginEdit() {
-    $("#roleEditForm").submit();
+    $("#roleEditForm").ajaxSubmit({
+        url: '/v1/role/edit',
+        type: 'post',
+        dataType: 'json',
+        beforeSubmit: function () {
+            return $("#roleEditForm").data('bootstrapValidator').isValid();
+            /*$("#editButton").attr("disabled", true);
+             var phone = $("#roleEditForm").find('#roleEditName').val();
+             var password = $("#roleEditForm").find('#roleEditDesc').val();
+             var checked = true;
+             if (phone.replace(/\s+/g, "") == '') {
+             alert("请输入名称");
+             checked = false;
+             $("#editButton").attr("disabled", false);
+             return checked;
+             }
+
+             if (password.replace(/\s+/g, "") == '') {
+             alert("请输入描述");
+             checked = false;
+             $("#editButton").attr("disabled", false);
+             return checked;
+             }
+
+             return checked;*/
+        },
+        success: function (result) {
+            $("#editButton").attr("disabled", false);
+            if (result.state == 200) {
+                backToRoles();
+            } else {
+                if (result.state == 9001) {
+                    $.Popup({
+                        confirm: false,
+                        template: '角色已存在'
+                    });
+                }
+            }
+        },
+        error: function () {
+            $("#editButton").attr("disabled", false);
+        }
+    });
 }
 
 function backToRoles() {

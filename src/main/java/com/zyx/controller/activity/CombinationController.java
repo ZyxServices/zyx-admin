@@ -64,15 +64,6 @@ public class CombinationController {
                                           @RequestParam(name = "activityIds", required = false) Integer[] activityIds) {
 
         AbstractView jsonView = new MappingJackson2JsonView();
-        /*String uploadFile;
-        if (!image.isEmpty()) {
-            uploadFile = FileUploadUtils.uploadFile(image);
-            Map<String, Object> stringObjectMap = ImagesVerifyUtils.verify(uploadFile);
-            if (stringObjectMap != null) {
-                jsonView.setAttributesMap(stringObjectMap);
-                return new ModelAndView(jsonView);
-            }
-        } else*/
         if (images == null || images.equals("")) {
             jsonView.setAttributesMap(MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失"));
             return new ModelAndView(jsonView);

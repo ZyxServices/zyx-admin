@@ -58,18 +58,8 @@ public class ActivityServiceImpl implements ActivityService {
 
         QueryActivityParm parm = new QueryActivityParm();
 
-        if (pageNumber == 0) pageNumber = 1;
-        if (pageNumber == 1) {
-            parm.setPageNumber(0);
-            parm.setPage(pageDataNumber - 1);
-        } else {
-            parm.setPageNumber(pageDataNumber);
-            if (pageDataNumber == 0) {
-                parm.setPage(0);
-            } else {
-                parm.setPage((pageDataNumber * pageNumber) - 1);
-            }
-        }
+        parm.setPageNumber(pageDataNumber);
+        parm.setPage(pageNumber-1);
         parm.setGroupName(searchText);
         List<ActivityDto> activities = activityMapper.queryActivity(parm);
 

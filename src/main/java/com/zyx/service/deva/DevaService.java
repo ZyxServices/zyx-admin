@@ -1,6 +1,7 @@
 package com.zyx.service.deva;
 
 import com.zyx.model.Devaluation;
+import com.zyx.service.BaseService;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,7 @@ import java.util.Map;
  * @title DevaluationService
  * @update 16-7-12 上午10:30
  */
-public interface DevaService {
+public interface DevaService extends BaseService<Devaluation>{
 
     /**
      * 获取首推

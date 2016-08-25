@@ -6,9 +6,11 @@
   var dialog = function(ele, opt) {
       this.$element = ele,
           this.defaults = {
-              confirm:true,
+              confirm:1,
               'title': '系统提示',
               'template':'',
+              'saveText':'确定',
+              'cancelText':'返回',
               'saveEvent':'',
               'cancelEvent':''
           },
@@ -20,31 +22,34 @@
           if($('#activity-shield')[0]==undefined){
               globalID +=1;
               if(this.options.confirm==true){
-                   var Successbtn="<button class='btn btn-default' id='maskSuccess'>确定</button>"
+                   var Successbtn="<button class='btn btn-default' id='maskSuccess"+globalID+"'>"+this.options.saveText+"</button>"
               }else{
                   var Successbtn=""
               }
               var dialogHtml= "<div id='activity-shield"+ globalID+"' class='modal fade'><div class='modal-header'>"+
                   "<button data-dismiss='modal' class='close' type='button'></button><h3>"+this.options.title+"</h3></div>"+
                   "<div class='modal-body'>"+this.options.template+"</div><div class='modal-footer'>"+
-                  Successbtn+"<button class='btn btn-default' id='maskCancel' >关闭</button></div></div>"
+                  Successbtn+"<button class='btn btn-default' id='maskCancel"+globalID+"' >"+this.options.cancelText+"</button></div></div>"
               $('body').append(dialogHtml)
           }
           return globalID;
       },
       saveEvents:function(){
           var sav=this
-          $('#maskSuccess').click(function(){
-              $('#activity-shield'+globalID+'').modal('hide')
-              $('#activity-shield'+globalID+'').remove()
+          var globalIDd=globalID;
+          $('#maskSuccess'+globalIDd+'').click(function(){
+              $('#activity-shield'+globalIDd+'').modal('hide')
               sav.options.saveEvent()
+              $('#activity-shield'+globalIDd+'').remove()
+
           })
-          $('#maskCancel').click(function(){
-              $('#activity-shield'+globalID+'').modal('hide')
-              $('#activity-shield'+globalID+'').remove()
-              //if($.isFunction(sav.options.cancelEvent)){
+          $('#maskCancel'+globalID+'').click(function(){
+              $('#activity-shield'+globalIDd+'').modal('hide')
+              $('#activity-shield'+globalIDd+'').remove()
+
+              if($.isFunction(sav.options.cancelEvent)){
                   sav.options.cancelEvent()
-              //}
+              }
 
           })
       },

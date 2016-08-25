@@ -43,11 +43,6 @@
                 </div>
             </div>
             <div id="banner-list">
-                <div class="row-fluid margin-bottom-10">
-                    <div class="span6">
-                        <a class="btn btn-default" href="javascript:void(0)" onclick="createBanner()">上传banner</a>
-                    </div>
-                </div>
                 <div class="row-fluid">
                     <div class="span12 responsive">
                         <table id="homepage-list-table">
@@ -57,9 +52,9 @@
                                 <th data-field="id">ID</th>
                                 <th data-field="url">跳转url</th>
                                 <th data-field="image">图片</th>
-                                <th data-field="order">排序</th>
+                                <th data-field="sequence">排序</th>
                                 <th data-field="activation">是否激活</th>
-                                <th data-formatter="operate" data-event="operateEvents">操作</th>
+                                <th data-formatter="operate" data-events="operateEvents">操作</th>
                             </tr>
                             </thead>
                         </table>

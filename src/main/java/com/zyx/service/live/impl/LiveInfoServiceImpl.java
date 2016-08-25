@@ -46,6 +46,11 @@ public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements Li
     }
 
     @Override
+    public int searchCount(String keyword) {
+        return 0;
+    }
+
+    @Override
     public List<LiveInfoVo> search(String keyword) {
         return liveInfoMapper.search("%"+keyword+"%");
     }

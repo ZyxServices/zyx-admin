@@ -183,12 +183,22 @@
 
                 <!-- BEGIN DASHBOARD STATS -->
                 <div class="row-fluid">
-                    //圈子创建
+                    <%--       圈子创建--%>
                     <form class="form-horizontal" role="form" id="circleCreates"
                           enctype="multipart/form-data" method="post">
-                        <input name="createId" type="hidden" value="20"/>
+                        <%--     <input name="createId" type="hidden" value="20"/>--%>
                         <input name="circleId" type="hidden"/>
                         <%--        <input name="state" type="hidden" value="-2">--%>
+                        <div class="control-group form-group">
+                            <label class="control-label">请选择发布账号</label>
+                            <div class="controls  col-xs-6">
+                                <select name="createId" data-placeholder="请选择发布账号" id="createId" data-rel="chosen"
+                                        style="width:350px;" class="chzn-select" tabindex="7">
+
+                                </select>
+                                <span class="help-inline">*</span>
+                            </div>
+                        </div>
                         <div class="control-group form-group">
                             <label class="control-label">名称</label>
                             <div class="controls col-xs-6">
@@ -200,9 +210,15 @@
                         <div class="control-group form-group">
                             <label class="control-label">头像</label>
                             <div class="controls  col-xs-6">
-                                <img id="headImgShow" src="" style="height: 200px !important; margin-bottom:10px;"><br>
-                                <input type="file" name="headImgUrl" value="上传图片">
-                                <%--<span class="help-inline">只能上传一张图片</span>--%>
+                                <div id="imgWrap">
+                                    <input type="hidden" name="imgFile">
+                                    <input type="hidden" id="imgFile" name="headImgUrl">
+                                    <input id="lefile" type="file" name="file" class="hideInput">
+                                    <a class="btn btn-default" href="javascript:void (0)" id="photoCover"
+                                       onclick="$('input[id=lefile]').click();">选择文件</a>
+                                    <span class="help-inline required">*</span>
+                                </div>
+                                <img id="headImgShow" src="" style="height: 200px !important; margin:10px 0;"><br>
                             </div>
                         </div>
                         <div class="control-group form-group">
@@ -287,7 +303,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" id="circleSure">确认</button>
+                <button type="button" class="btn btn-primary" id="circleSure" >确认</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

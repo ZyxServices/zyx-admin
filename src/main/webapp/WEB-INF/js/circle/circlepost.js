@@ -1,16 +1,45 @@
 /**
  * Created by guochunyan on 2016/7/14.
  **/
+//帖子内容
+/*var save = function () {
+ var makrup = $('#post-summernote').summernote('code');
+ $("input[name=content]").val(makrup);
+ };*/
 //帖子创建
-$('#post-summernote').summernote({
+$('#post-summernote').on('summernote.change', function (content, $editable) {
+    $("#desc").val($editable);
+    $('#CirclePost').data('bootstrapValidator');
+}).summernote({
+    callbacks: {
+        onImageUpload: function (files) {
+            //上传图片到服务器，使用了formData对象，至于兼容性...据说对低版本IE不太友好
+            var formData = new FormData();
+            formData.append('imgFile', files[0]);
+            $.ajax({
+                url: '/v1/upload/file',//后台文件上传接口
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (result) {
+                    console.log(result)
+                    if (result.state == 200) {
+                        $('#post-summernote').summernote('insertImage', "http://image.tiyujia.com/" + result.data, 'img');
+                    } else {
+                        $.Popup({
+                            confirm: false,
+                            template: result.successmsg
+                        })
+                    }
+                }
+            });
+        }
+    },
+    lang: 'zh-CN',
     height: 200
 });
-//帖子内容
-var save = function () {
-    var makrup = $('#post-summernote').summernote('code');
-    $("input[name=content]").val(makrup);
-};
-//获取帖子列表
+//获取圈子列表
 var circleList = function () {
     $.ajax({
         type: "get",
@@ -23,6 +52,7 @@ var circleList = function () {
         },
         async: false,
         success: function (data) {
+            console.log(data);
             var html = "";
             html = html
             for (var i = 0; i < data.data.length; i++) {
@@ -32,14 +62,30 @@ var circleList = function () {
         }
     });
 };
+/*查询圈子时需要选择的用户*/
+var officeUser = $.ajax({
+    url: "/v1/appUser/list/official/all",
+    type: 'get',
+    dataType: 'json',
+    success: function (rows) {
+        var html = "";
+        html = html
+        for (var i = 0; i < rows.rows.length; i++) {
+            html = html + "<option value='" + rows.rows[i].id + "'>" + rows.rows[i].nickname + "</option>"
+        }
+        $("#createId").append(html)
+    }
+});
 function createPost() {
     $("#postList").hide();
     $("#postCreate").show();
-    $("#postSure").click(function () {
-        save();
-    });
+    /*   $("#postSure").click(function () {
+     save();
+     });*/
     circleList();
+    officeUser;
     $("#circleList").chosen();
+    $("#createId").chosen();
     circleEidtor("#postSure", "#CirclePost", '../../circleItem/createCircleItem', 200, "发布成功");
 }
 $(function () {

@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface LiveInfoMapper extends BaseMapper<LiveInfo>{
     public List<LiveInfoVo> search(String  keyword);
+    public int searchCount(String  keyword);
 }

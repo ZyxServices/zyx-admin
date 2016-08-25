@@ -98,15 +98,15 @@ public class CircleController {
         return new ModelAndView(jsonView);
     }
 
-
-    @RequestMapping(value = "setTop", method = RequestMethod.GET)
-    @ApiOperation(value = "精选圈子推荐", notes = "精选圈子推荐")
-    public ModelAndView tuiJian(@RequestParam(value = "circleId") Integer circleId, @RequestParam(value = "topSize") Integer topSize) {
-        Map<String, Object> map = circleService.tuiJian(circleId, topSize);
-        AbstractView jsonView = new MappingJackson2JsonView();
-        jsonView.setAttributesMap(map);
-        return new ModelAndView(jsonView);
-    }
+//
+//    @RequestMapping(value = "setTop", method = RequestMethod.GET)
+//    @ApiOperation(value = "精选圈子推荐", notes = "精选圈子推荐")
+//    public ModelAndView tuiJian(@RequestParam(value = "circleId") Integer circleId, @RequestParam(value = "topSize") Integer topSize) {
+//        Map<String, Object> map = circleService.tuiJian(circleId, topSize);
+//        AbstractView jsonView = new MappingJackson2JsonView();
+//        jsonView.setAttributesMap(map);
+//        return new ModelAndView(jsonView);
+//    }
 
     @RequestMapping(value = "search", method = RequestMethod.POST)
     @ApiOperation(value = "精选圈子推荐", notes = "精选圈子推荐")

@@ -129,18 +129,8 @@ public class CombinationServiceImpl implements CombinationService {
     public Map<String, Object> queryCombination(int pageDataNumber, int pageNumber, String name) {
         QueryCombinationParm parm = new QueryCombinationParm();
 
-        if (pageNumber == 0) pageNumber = 1;
-        if (pageNumber == 1) {
-            parm.setPageNumber(0);
-            parm.setPage(pageDataNumber - 1);
-        } else {
-            parm.setPageNumber(pageDataNumber);
-            if (pageDataNumber == 0) {
-                parm.setPage(0);
-            } else {
-                parm.setPage((pageDataNumber * pageNumber) - 1);
-            }
-        }
+        parm.setPageNumber(pageNumber);
+        parm.setPage(pageNumber-1);
         parm.setName(name);
         List<Activity> activities = combinationMapper.queryCombination(parm);
         if (activities != null && activities.size() > 0) {
@@ -188,18 +178,8 @@ public class CombinationServiceImpl implements CombinationService {
     public Map<String, Object> queryCombinationActivity(int pageDataNumber, int pageNumber, Integer combinationId) {
         QueryCombinationParm parm = new QueryCombinationParm();
 
-        if (pageNumber == 0) pageNumber = 1;
-        if (pageNumber == 1) {
-            parm.setPageNumber(0);
-            parm.setPage(pageDataNumber - 1);
-        } else {
-            parm.setPageNumber(pageDataNumber);
-            if (pageDataNumber == 0) {
-                parm.setPage(0);
-            } else {
-                parm.setPage((pageDataNumber * pageNumber) - 1);
-            }
-        }
+        parm.setPageNumber(pageDataNumber);
+        parm.setPage(pageNumber-1);
         parm.setId(combinationId);
 
         List<CombinedData> combinedDatas = combinedDataMapper.queryCombinationActivity(parm);

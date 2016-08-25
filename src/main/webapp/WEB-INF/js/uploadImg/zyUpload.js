@@ -1245,7 +1245,6 @@ var ZYFILE = {
         xhr.addEventListener("load", function (e) {
             self.funDeleteFile(file.index, false);
             self.onSuccess(file, xhr.responseText);
-            console.log(xhr.responseText)
             if (JSON.parse(xhr.responseText).state == 902) {
                 alert('上传失败')
             } else if (JSON.parse(xhr.responseText).state == 200) {
@@ -1355,7 +1354,7 @@ var ZYFILE = {
                     html += '			<div class="status_bar">';
                     html += '				<div id="status_info" class="info">选中0张文件，共0B。</div>';
                     html += '				<div class="btns">';
-                    html += '					<div class="webuploader_picks" onclick="window.location.reload();">返回上一页</div>';
+                    html += '					<div class="webuploader_picks" onclick="window.location.reload()">返回上一页</div>';
                     html += '					<div class="upload_btn" disabled="disabled">开始上传</div>';
                     html += "				</div>";
                     html += "			</div>";
@@ -1657,7 +1656,6 @@ var ZYFILE = {
                     },
                     onComplete: function (response) {
                         para.onComplete(response);
-                        console.info(response)
                     },
                     onDragOver: function () {
                         $(this).addClass("upload_drag_hover")
