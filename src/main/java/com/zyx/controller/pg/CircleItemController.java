@@ -30,8 +30,10 @@ public class CircleItemController {
     @RequestMapping(value = "circleItemList", method = RequestMethod.GET)
     @ApiOperation(value = "帖子列表", notes = "帖子列表")
     public ModelAndView findByPager(@RequestParam(value = "start") Integer start,
-                                    @RequestParam(value = "pageSize") Integer pageSize) {
-        Map<String, Object> map = circleItemService.findByPager(start, pageSize);
+                                    @RequestParam(value = "pageSize") Integer pageSize,
+                                    @RequestParam(value = "circleId",required = false) Integer circleId) {
+
+        Map<String, Object> map = circleItemService.findByPager(start, pageSize,circleId);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);

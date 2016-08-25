@@ -1,6 +1,7 @@
 package com.zyx.model.vo;
 
 import com.zyx.model.Circle;
+import com.zyx.model.CircleType;
 
 /**
  * @author XiaoWei
@@ -10,26 +11,12 @@ import com.zyx.model.Circle;
  */
 public class CircleVo extends Circle {
 
-    private String userName;
-    private String masterName;
+    private UserVo userVo;
+    private UserVo masterVo;
+    private CircleType circleTypeVo;
     private Integer circleItemCount;
     private Integer concernCount;
-    private String circleTypeName;
-    public String getUserName() {
-        return userName;
-    }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getMasterName() {
-        return masterName;
-    }
-
-    public void setMasterName(String masterName) {
-        this.masterName = masterName;
-    }
 
     public Integer getCircleItemCount() {
         return circleItemCount;
@@ -47,11 +34,27 @@ public class CircleVo extends Circle {
         this.concernCount = concernCount;
     }
 
-    public String getCircleTypeName() {
-        return circleTypeName;
+    public UserVo getUserVo() {
+        return userVo;
     }
 
-    public void setCircleTypeName(String circleTypeName) {
-        this.circleTypeName = circleTypeName;
+    public void setUserVo(UserVo userVo) {
+        this.userVo = userVo;
+    }
+
+    public UserVo getMasterVo() {
+        return masterVo;
+    }
+
+    public void setMasterVo(UserVo masterVo) {
+        this.masterVo = masterVo;
+    }
+
+    public CircleType getCircleTypeVo() {
+        return circleTypeVo;
+    }
+
+    public void setCircleTypeVo(CircleType circleTypeVo) {
+        this.circleTypeVo = circleTypeVo;
     }
 }

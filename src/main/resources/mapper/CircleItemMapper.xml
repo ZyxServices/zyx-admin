@@ -23,43 +23,46 @@
 
         <!--<result column="zan_Counts" property="zanCounts" jdbcType="INTEGER"/>-->
         <!--<result column="comment_Counts" property="commentCounts" jdbcType="INTEGER"/>-->
-        <association property="zanCounts" column="id"  select="zanSelect"/>
+        <association property="zanCounts" column="id" select="zanSelect"/>
         <association property="commentCounts" column="id" select="commentSelect"/>
     </resultMap>
 
-    <select id="zanSelect"  resultType="int">
+    <select id="zanSelect" resultType="int">
         SELECT COUNT(id) FROM zan WHERE zan.body_type=5
     </select>
     <select id="commentSelect" parameterType="int" resultType="int">
         SELECT COUNT(id) FROM reply WHERE reply.reply_type=1 AND reply.reply_id!=-1 AND reply_id=#{circleId}
     </select>
     <select id="findByPager" resultMap="circleItemVoMap">
-    SELECT
-    circle_item.id,
-    circle_item.img_url,
-    circle_item.circle_id,
-    circle_item.create_id,
-    circle_item.title,
-    circle_item.content,
-    circle_item.hot,
-    circle_item.create_time,
-    circle_item.top,
-    circle_item.state,
-    `user`.nickname AS createUser,
-    circle.title AS circleTitle,
-    circle_type.type_name
-    FROM
-    circle_item
-    INNER JOIN `user` ON circle_item.create_id = `user`.id
-    INNER JOIN circle ON circle_item.circle_id = circle.id
-    INNER JOIN circle_type ON circle.circle_type = circle_type.id
-    WHERE circle_item.state != -1
-    ORDER BY create_time DESC
-    LIMIT #{start},#{end}
-  </select>
+        SELECT
+        circle_item.id,
+        circle_item.img_url,
+        circle_item.circle_id,
+        circle_item.create_id,
+        circle_item.title,
+        circle_item.content,
+        circle_item.hot,
+        circle_item.create_time,
+        circle_item.top,
+        circle_item.state,
+        `user`.nickname AS createUser,
+        circle.title AS circleTitle,
+        circle_type.type_name
+        FROM
+        circle_item
+        INNER JOIN `user` ON circle_item.create_id = `user`.id
+        INNER JOIN circle ON circle_item.circle_id = circle.id
+        INNER JOIN circle_type ON circle.circle_type = circle_type.id
+        WHERE circle_item.state != -1
+        <if test="circleId != null">
+            AND circle_id=#{circleId}
+        </if>
+        ORDER BY create_time DESC
+        LIMIT #{start},#{end}
+    </select>
     <select id="findOne" resultMap="circleItemMap">
-    SELECT * FROM circle_item WHERE id=#{id} AND state != -1
-  </select>
+        SELECT * FROM circle_item WHERE id=#{id} AND state != -1
+    </select>
     <update id="setVisible">
         UPDATE circle_item SET state=#{state} WHERE id=#{id}
     </update>
@@ -88,6 +91,9 @@
 
     <select id="searchCount" resultType="java.lang.Integer">
         SELECT COUNT(*) as counts FROM circle_item
+        <if test="circleId != null">
+            WHERE circle_id=#{circleId}
+        </if>
     </select>
 
     <update id="editCircleItem">

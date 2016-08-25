@@ -9,6 +9,7 @@ import java.io.Serializable;
  * Create by XiaoWei on 2016/8/16
  */
 public class UserVo implements Serializable {
+    private Integer id;
     private String nickName;
     private Integer official;
     private Integer authenticate;
@@ -35,5 +36,13 @@ public class UserVo implements Serializable {
 
     public void setAuthenticate(Integer authenticate) {
         this.authenticate = authenticate;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

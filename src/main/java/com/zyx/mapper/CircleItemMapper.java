@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CircleItemMapper extends Mapper<CircleItem> {
 
-    List<CircleItem> findByPager(@Param(value = "start") Integer start, @Param(value = "end") Integer end);
+    List<CircleItem> findByPager(@Param(value = "start") Integer start, @Param(value = "end") Integer end, @Param("circleId") Integer circleId);
 
     CircleItem findOne(@Param(value = "id") Integer id);
 
@@ -17,8 +17,8 @@ public interface CircleItemMapper extends Mapper<CircleItem> {
 
     List<CircleItem> search(@Param(value = "searchText") String searchText, @Param(value = "start") Integer start, @Param(value = "end") Integer end);
 
-    Integer searchCount();
+    Integer searchCount(@Param("circleId")Integer circleId);
 
-    Integer editCircleItem(@Param("id")Integer id,@Param("title")String title,@Param("content")String content);
+    Integer editCircleItem(@Param("id") Integer id, @Param("title") String title, @Param("content") String content);
 
 }
