@@ -3,7 +3,7 @@
  */
 $(function(){
     $("#circle-list-table").bootstrapTable({
-        url: "/v1/deva/list/model",
+        url: "/v1/deva/list",
         method:'post',
         locale: 'zh-US',
         pagination: true,
@@ -30,11 +30,10 @@ $(function(){
         responseHandler:circleFormData
     })
     $("#post-list-table").bootstrapTable({
-        url: "/v1/deva/list/model",
+        url: "/v1/deva/list",
         method:'post',
         locale: 'zh-US',
         pagination: true,
-        smartDisplay: false,
         cache: false,
         search: true,
         strictSearch: true,

@@ -3,7 +3,7 @@
  */
 $(function(){
     $("#dynamic-list-table").bootstrapTable({
-        url: "/v1/deva/list/model",
+        url: "/v1/deva/list",
         method:'post',
         locale: 'zh-US',
         pagination: true,

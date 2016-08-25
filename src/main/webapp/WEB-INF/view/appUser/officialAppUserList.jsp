@@ -14,6 +14,7 @@
     <meta content="体育家-用户操作" name="description"/>
     <meta content="" name="author"/>
     <jsp:include page="../public/common-styles.jsp"/>
+    <link href="<%=request.getContextPath()%>/css/zyUpload.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../../css/tiyujia/style.css" />
 </head>
 <body class="page-header-fixed">
@@ -51,7 +52,7 @@
             </div>
             <%--官方用户编辑--%>
             <div class="create_liveType row-fluid">
-                <form class="form-horizontal" role="form" id="editUserForm" enctype="multipart/form-data">
+                <form class="form-horizontal" role="form" id="editUserForm" enctype="multipart/form-data" method="post">
                     <div class="control-group form-group">
                         <label class="control-label">昵称</label>
 
@@ -106,8 +107,8 @@
                         <label class="control-label">官方账号</label>
                         <div class="controls">
                             <select class="span6" name="official" id="official">
-                                <option value="1">是</option>
-                                <option value="0" selected>否</option>
+                                <option value="1" selected>是</option>
+                                <option value="0">否</option>
                             </select>
                         </div>
                     </div>
@@ -129,18 +130,16 @@
                     <div class="control-group">
                         <label class="control-label">认证资料</label>
                         <div class="controls">
-                            <input type="file" class="hideInput" name="authFile" id="authFile">
-                            <a class="btn btn-default" href="javascript:void (0)" id="authFileCover" onclick="$('input[id=authFile]').click();">上传资料</a>
-                            <span class="help-inline">最多上传3张照片</span>
-                            <div style="margin-top: 10px" id="authImgWrap">
-                                <img id="authImg" src="">
-                            </div>
+                            <input type="hidden" name="authFile" id="authFile">
+                            <span class="help-inline required" id="imgNum">最多上传3张照片</span>
                         </div>
-
                     </div>
-                    <button type="button" id="createButton" class="btn">确认创建</button>
-                    <button type="button" class="btn" onclick="window.location.reload();">返回</button>
                 </form>
+                <div  id="imgInit" style="margin-left: 178px;"></div>
+                <div class="margin-bottom-25">
+                    <button type="button" id="createButton" class="btn">确认修改</button>
+                    <button type="button" class="btn" onclick="window.location.reload();">返回</button>
+                </div>
             </div>
         </div>
     </div>
@@ -191,5 +190,6 @@
 <!-- 用户推荐结束 -->
 <jsp:include page="../public/common-footer.jsp"/>
 </body>
+<script type="text/javascript" src="../../js/uploadImg/zyUpload.js"></script>
 <script type="text/javascript" src="../../js/appUser/appUserCommon.js"></script>
 <script type="text/javascript" src="../../js/appUser/officialAppUser.js"></script>

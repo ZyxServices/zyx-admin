@@ -46,7 +46,6 @@
                 <div class="row-fluid">
                     <div class="span6">
                         <h3>首页热门圈子讨论管理</h3>
-                        <a class="btn btn-default" href="javascript:void(0)" onclick="createCircleBanner()">上传banner</a>
                     </div>
                 </div>
                 <div class="row-fluid">
@@ -72,7 +71,7 @@
             <div id="post-list">
                 <div class="row-fluid">
                     <div class="span6">
-                        <h3>精选帖子banner管理</h3>
+                        <h3>精选圈子banner管理</h3>
                     </div>
                 </div>
                 <div class="row-fluid">

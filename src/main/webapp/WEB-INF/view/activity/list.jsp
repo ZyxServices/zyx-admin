@@ -385,13 +385,17 @@
         <!-- BEGIN DASHBOARD STATS -->
         <div class="row-fluid">
 
-          <form action="/v1/deva/queryActivity" id="devaForm" method="post"  enctype="multipart/form-data" class="form-horizontal" novalidate="novalidate" role="form">
+          <form id="devaForm" class="form-horizontal" role="form" enctype="multipart/form-data">
+
             <div class="control-group">
               <label class="control-label">活动标题</label>
               <div class="controls">
-                <sapn class="span6" id="activityName"></sapn>
+                <input class="span6" id="activityName" disabled type="text"/>
               </div>
             </div>
+
+            <input type="hidden" name="model" value="1"/>
+            <input type="hidden" name="area" value="1"/>
             <div class="control-group">
               <label class="control-label">活动原有封面图</label>
               <div class="controls">
@@ -411,12 +415,11 @@
                 </select>
               </div>
             </div>
-            <input type="hidden" name="devaId" id="activityId" value="">
-            <input type="hidden" name="types" value="1">
+            <input type="hidden" name="modelId" id="activityId">
             <div class="control-group">
               <label class="control-label">图片</label>
               <div class="controls">
-                <input type="hidden" name="image" id="showImg">
+                <input type="hidden" name="imageUrl" id="imageUrl">
                 <input id="recommendFile" type="file" class="hideInput">
                 <a class="btn btn-default" href="javascript:void (0)" id="recommendPhotoCover" onclick="$('input[id=recommendFile]').click();">选择文件</a>
                 <div style="margin-top: 10px" id="recommendImgWrap">
@@ -428,14 +431,14 @@
             <div class="control-group">
               <label class="control-label">推荐状态</label>
               <div class="controls">
-                <label class="radio"><input type="radio" checked value="1" name="activation">激活</label>
-                <label class="radio"><input type="radio" value="0" name="activation">未激活</label>
+                <label class="radio"><input type="radio" checked value="1" name="state">激活</label>
+                <label class="radio"><input type="radio" value="0" name="state">未激活</label>
               </div>
             </div>
 
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-default">确定</button>
+                <a href="javascript:void(0)" class="btn btn-default" id="confirmCmd">确定</a>
                 <a href="javascript:void(0)" class="btn btn-default" onclick="window.location.reload();">返回</a>
               </div>
             </div>

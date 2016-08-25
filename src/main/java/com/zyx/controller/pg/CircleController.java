@@ -109,7 +109,7 @@ public class CircleController {
 //    }
 
     @RequestMapping(value = "search", method = RequestMethod.POST)
-    @ApiOperation(value = "精选圈子推荐", notes = "精选圈子推荐")
+    @ApiOperation(value = "圈子列表搜索", notes = "圈子列表搜索")
     public ModelAndView search(@RequestParam(value = "start") Integer start, @RequestParam(value = "pageSize") Integer pageSize, @RequestParam(value = "searchText") String searchText) {
         Map<String, Object> map = circleService.search(start, pageSize, searchText);
         AbstractView jsonView = new MappingJackson2JsonView();

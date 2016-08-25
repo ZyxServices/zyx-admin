@@ -109,6 +109,9 @@ $(function () {
         }
     });
 });
+$("#createButton").click(function () {
+    $("#editUserForm").ajaxSubmit();
+})
 function beginDeva() {
     $("#devaForm").submit();
 }
@@ -135,3 +138,58 @@ function getImgURL(file) {
     }
     return url;
 }
+/*多图片上传*/
+$("#imgInit").zyUpload({
+    width            :   "600px",                 // 宽度
+    height           :   "",                 // 宽度
+    itemWidth        :   "100px",                 // 文件项的宽度
+    itemHeight       :   "100px",                 // 文件项的高度
+    url              :   "/v1/upload/file",  // 上传文件的路径
+    fileType         :   ["jpg","png","jpeg","bmp","gif"],// 上传文件的类型
+    fileSize         :   51200000,                // 上传文件的大小
+    tailor           :   false,                    // 是否可以裁剪图片
+    multiple         :   true,                    // 是否可以多个文件上传
+    dragDrop         :   true,                    // 是否可以拖动上传文件
+    del              :   true,                    // 是否可以删除文件
+    finishDel        :   false,  				  // 是否在上传文件完成后删除预览
+    /* 外部获得的回调接口 */
+    onSelect: function(files, allFiles){                    // 选择文件的回调方法
+       /* console.info("当前选择了以下文件：");
+        console.info(files);
+        console.info("之前没上传的文件：");
+        console.info(allFiles.length);*/
+        var html = '';
+        if(allFiles.length > 3){
+            html = '已选择3张图片不能再多传';
+            $("#imgNum").html(html);
+            return false;
+        }else{
+            html = '还需上传'+ (3 - allFiles.length)+'张图片';
+            $("#imgNum").html(html);
+        }
+    },
+    onDelete: function(file, surplusFiles){                     // 删除一个文件的回调方法
+        console.info("当前删除了此文件：");
+        console.info(file);
+        console.info("当前剩余的文件：");
+        console.info(surplusFiles);
+    },
+    onSuccess: function(file,response){                    // 文件上传成功的回调方法
+        console.log(response);
+        /*if(JSON.parse(response).state==902){
+            console.log(file)
+            alert(JSON.parse(response).errmsg)
+        }else{
+            $('#imgFileUrl').val($('#imgFileUrl').val()+JSON.parse(response).data+',')
+        }*/
+        //$('#uploadInf').append(JSON.parse(response).data)
+        $('#authFile').val($('#authFile').val()+JSON.parse(response).data+',');
+    },
+    onFailure: function(file){                    // 文件上传失败的回调方法
+        console.info("此文件上传失败：");
+        console.info(file);
+    },
+    onComplete: function(responseInfo){           // 上传完成的回调方法
+
+    }
+});

@@ -25,12 +25,12 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
     private CircleItemMapper circleItemMapper;
 
     @Override
-    public Map<String, Object> findByPager(Integer start, Integer pageSize) {
+    public Map<String, Object> findByPager(Integer start, Integer pageSize, Integer circleId) {
         Optional.ofNullable(start).orElse(0);
         Optional.ofNullable(pageSize).orElse(0);
-        List<CircleItem> circleItems = circleItemMapper.findByPager(start * pageSize, pageSize);
+        List<CircleItem> circleItems = circleItemMapper.findByPager(start * pageSize, pageSize, circleId);
         Map<String, Object> mapCount = new HashMap<>();
-        mapCount.put("total", circleItemMapper.searchCount());
+        mapCount.put("total", circleItemMapper.searchCount(circleId));
         Map<String, Object> map = MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, circleItems, mapCount);
         return map;
     }
