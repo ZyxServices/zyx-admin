@@ -3,9 +3,10 @@
  */
 $(function(){
     $("#homepage-list-table").bootstrapTable({
-        url: "/v1/deva/list/model",
+        url: "/v1/deva/list",
         method:'post',
         locale: 'zh-US',
+        striped: true,           //是否显示行间隔色
         pagination: true,
         cache: false,
         search: true,
@@ -41,18 +42,15 @@ function groupFromData(res) {
             dataObj.model = "活动banner";
             dataObj.createTime = item.createTime;
             // dataObj.image = '<img src="http://image.tiyujia.com/"'+item.image+'>';
-            dataObj.image = '<img src="http://image.tiyujia.com/group1/M00/00/05/052YyFe0A9iAWI5kAAA75RxRQgw234.png">';
+            if(item.imageUrl){
+                dataObj.image = '<img src="http://image.tiyujia.com/'+item.imageUrl+'">';
+            }
             dataObj.sequence = item.sequence;
-            dataObj.activation = item.activation == 1? "是":"否";
+            dataObj.activation = item.state == 0? "是":"否";
             dataArray.push(dataObj)
         });
-        if (datas.length == 0) {
-            var dataObj = {};
-            dataArray.push(dataObj);
-        }
         return {
             rows: dataArray,
-            // total: 20
             total: res.data.length
         }
     }
@@ -66,13 +64,92 @@ function operate(value, row, index) {
 }
 var operateEvents = {
     'click .remove':function (e, value, row, index) {
-        alert("删除")
+        $.Popup({
+            title: '删除',
+            template: '确定删除该banner？',
+            saveEvent: function () {
+                $.ajax({
+                    url: "/v1/deva/delete?id=" + row.id,
+                    async: false,
+                    type: "delete",
+                    success: function (result) {
+                        if (result.state == 200) {
+                            $.Popup({
+                                confirm: false,
+                                template: '删除成功'
+                            })
+                            $('#homepage-list-table').bootstrapTable('refresh');
+                        } else {
+                            $.Popup({
+                                confirm: false,
+                                template: '删除失败'
+                            })
+                        }
+                    }
+                });
+            }
+        })
     },
     'click .edit':function (e, value, row, index) {
-        alert("编辑")
+        $("#preImage").html(row.image);
+        $("#photoCover").html('选择图片');
+        $("#images").attr({"src":""});
+        $("#sequence").val(row.sequence);
+        $("#devaId").val(row.id);
+        if(row.activation == "是"){
+            $('input[name=state]').eq(0).attr({"checked":"checked"});
+        }else{
+            $('input[name=state]').eq(1).attr({"checked":"checked"});
+        }
+
+        $("#bannerList").hide();
+        $("#bannerEdit").show();
     }
 }
-
+$("#confirmDeva").click(function () {
+    if($("#lefile")[0].files[0]== undefined){
+        confirmDeva();
+    }else{
+        var formData = new FormData();
+        formData.append('imgFile', $("#lefile")[0].files[0]);
+        $.ajax({
+            url: '/v1/upload/file',
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success:function (result) {
+                if(result.state == 200){
+                    $("#imageUrl").val(result.data);
+                    confirmDeva();
+                }
+            }
+        })
+    }
+})
+function confirmDeva() {
+    $('#bannerForm').ajaxSubmit({
+        url: '/v1/deva/update',
+        type: 'post',
+        dataType: 'json',
+        success: function (result) {
+            if (result.state && result.state == 200) {
+                $.Popup({
+                    confirm: false,
+                    template: result.successmsg
+                });
+                $("#bannerList").show();
+                $("#bannerEdit").hide();
+                $('#homepage-list-table').bootstrapTable('refresh');
+            } else if (result.state && result.state == 303) {
+                $.Popup({
+                    confirm: false,
+                    template: result.errmsg
+                })
+            }
+        }
+    });
+}
 $('input[id=lefile]').change(function () {
     if ($(this).val()) {
         $('#photoCover').html($(this).val());

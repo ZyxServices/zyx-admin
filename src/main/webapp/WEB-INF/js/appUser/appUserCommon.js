@@ -95,7 +95,10 @@ var operateEvent = {
         $("#phone").val(row.phone);
         $("#password").val(row.nickname);
         $("#sex").val(row.sex);
-        $("#avatarImg").attr("src","http://image.tiyujia.com/" + row.avatar);
+        if(row.avatar){
+            $("#avatarImg").attr("src","http://image.tiyujia.com/" + row.avatar);
+        }
+        $("#official").val(1);
         $("#address").val(row.address);
         $("#authInfo").val(row.appUserAuthDto.authInfo);
         $('#editUserForm').data('bootstrapValidator').validate();

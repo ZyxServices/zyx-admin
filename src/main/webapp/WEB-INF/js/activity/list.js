@@ -283,8 +283,54 @@ function fromData(res) {
     }
 }
 
-$('#devaForm').ajaxForm({
-    url: '/v1/deva/insertActivityDeva',
+$("#confirmCmd").click(function () {
+    if($("#recommendFile")[0].files[0] == undefined){/*没选图片*/
+        activityRecommend();
+    }else{
+        var formData = new FormData();
+        formData.append('imgFile', $("#recommendFile")[0].files[0]);
+        $.ajax({
+            url: '/v1/upload/file',
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success:function (result) {
+                if(result.state == 200){
+                    $("#imageUrl").val(result.data);
+                    activityRecommend();
+                }
+            }
+        })
+    }
+})
+
+function activityRecommend() {
+    $('#devaForm').ajaxSubmit({
+        url: '/v1/deva/add',
+        type: 'post',
+        dataType: 'json',
+        success: function (result) {
+            if (result.state && result.state == 200) {
+                $.Popup({
+                    confirm: false,
+                    template: result.successmsg
+                })
+                $("#activityList").show();
+                $("#activityRecommend").hide();
+                $('#activity-list-table').bootstrapTable('refresh');
+            } else {
+                $.Popup({
+                    confirm: false,
+                    template: result.errmsg
+                })
+            }
+        }
+    })
+}
+
+/*$('#devaForm').ajaxForm({
+    url: '/v1/deva/add',
     type: 'post',
     dataType: 'json',
     beforeSubmit: function () {
@@ -315,7 +361,7 @@ $('#devaForm').ajaxForm({
             })
         }
     }
-});
+});*/
 
 $("#czS").click(function () {
     var formData = new FormData();
@@ -468,6 +514,7 @@ var operateEvents = {
     },
     'click .recommend': function (e, value, row, index) {
         $("#listType").html("推荐");
+        $("#imageUrl").val('');
         $.ajax({
             url: "/v1/activity/queryActivityById",
             type: 'POST',
@@ -476,9 +523,10 @@ var operateEvents = {
             success: function (result) {
                 if (result.state == 200) {
                     var datas = result.data;
-                    $("#activityName").html(datas.title);
+                    $("#activityName").val(datas.title);
                     $("#activityId").val(datas.id);
                     $("#activityImage").attr("src", "http://image.tiyujia.com/" + datas.imgUrls)
+                    $("#imageUrl").val(datas.imgUrls)
                 } else {
                     $.Popup({
                         confirm: false,

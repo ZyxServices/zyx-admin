@@ -141,6 +141,7 @@ function editJurisdiction(_row) {
     if (_row["menuPerm"]) {
         isCheckedData = _row["menuPerm"].split(",");
     }
+    $("#menuEditPerm").val(isCheckedData);
     var getObj = $("#menu-edit-select").find('option');
     for (var i = 0; i < isCheckedData.length; i++) {
         for (var j = 0; j < getObj.length; j++) {
@@ -162,12 +163,12 @@ function editJurisdiction(_row) {
             });
 
             $("#menuEditPerm").val(_temp);
-            $("#menuCreatePerm").val(_temp);
             $('#roleEditForm').data('bootstrapValidator')
                 .updateStatus('menuPerm', 'NOT_VALIDATED', null)
                 .validateField('menuPerm');
         }
     });
+    $('#roleEditForm').data('bootstrapValidator').validate();
 
 }
 
