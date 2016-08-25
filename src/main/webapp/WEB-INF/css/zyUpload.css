@@ -99,11 +99,11 @@ pre{font-family:'simsun';}
 	color:#666666;
 	display: inline-block;
 }
-.btns{
+.btns {
 	position: absolute;
-	right: 16px;
+	right: 0px;
 	line-height: 30px;
-    top: 6px;
+	top: 56px;
 }
 .webuploader_pick,.webuploader_picks{
 	-moz-user-select: none;
@@ -132,9 +132,9 @@ pre{font-family:'simsun';}
 	border: 1px solid #BBB;
 }
 .upload_btn{
-    background: none repeat scroll 0 0 rgb(224, 34, 34) ;
+    background: none repeat scroll 0 0  hsl(0, 0%, 90%) ;
     border-radius: 3px;
-    color: #fff;
+    color: hsl(0, 0%, 20%);
     cursor: pointer;
     display: inline-block;
     float: left;
@@ -150,7 +150,7 @@ pre{font-family:'simsun';}
 	-o-transition: background 0.2s;
 }
 .upload_btn:hover{
-	background: none repeat scroll 0 0 rgb(188, 30, 30);
+	background: none repeat scroll 0 0 rgb(199, 203, 209);
 }
 /* 每个图片上的操作bar */
 .file_bar{

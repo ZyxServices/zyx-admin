@@ -313,13 +313,13 @@ var operateEvent = {
                         if (row.state == -2) {
                             $.Popup({
                                 confirm: false,
-                                title: "屏蔽成功"
+                                template: "推荐成功"
                             });
                         }
                         else if (row.state = 0) {
                             $.Popup({
                                 confirm: false,
-                                title: "取消屏蔽成功"
+                                template: "推荐成功"
                             });
 
                         }
@@ -345,7 +345,7 @@ var operateEvent = {
                         });
                         $.Popup({
                             confirm: false,
-                            title: "删除成功"
+                            template: "推荐成功"
                         });
                         $("#circle-list-table").bootstrapTable('refresh');
                     }
@@ -379,7 +379,7 @@ function circleEidtor(button, url, state, text) {
             if (result.state == state) {
                 $.Popup({
                     confirm: false,
-                    title: text
+                    template: text
                 });
                 $("#circle-list-table").bootstrapTable('refresh');
                 $("#circleList").show();
@@ -388,7 +388,7 @@ function circleEidtor(button, url, state, text) {
             else {
                 $.Popup({
                     confirm: false,
-                    title: result.errmsg
+                    template: result.errmsg
                 });
 
             }
@@ -422,7 +422,7 @@ $("#circleSure").click(function () {
         success: function (result) {
             $.Popup({
                 confirm: false,
-                title: "推荐成功"
+                template: "推荐成功"
             });
             $("#circleModal").modal("hide");
         }
