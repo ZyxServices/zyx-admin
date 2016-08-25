@@ -123,6 +123,8 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
             devaluation.setDevaluationId(circel_id);
             devaluation.setSequence(topSize);
             devaluation.setModel(3);
+            devaluation.setActivation(1);
+            devaluation.setArea(1);
             devaMapper.insert(devaluation);
             return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_36000_MSG, null);
         }
