@@ -1,6 +1,7 @@
 package com.zyx.controller.deva;
 
 import com.zyx.constants.Constants;
+import com.zyx.constants.DevaContants;
 import com.zyx.constants.LiveConstants;
 import com.zyx.model.Devaluation;
 import com.zyx.service.deva.DevaService;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.view.AbstractView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,15 +48,26 @@ public class DevaController {
                                       @RequestParam(name = "sequence" ,required = true) Integer sequence
                                      ) {
         Map<String, Object> result = new HashMap<>();
+        //Redis判断目前条数是否满
         Devaluation entity = new Devaluation();
         entity.setModel(model);
+        entity.setArea(area);
+
+        int count =devaService.selectCount(entity);
+        if(count>=10){
+
+        }
+        //
         entity.setModelId(modelId);
         entity.setCreateTime(System.currentTimeMillis());
         entity.setArea(area);
         entity.setImage(imageUrl);
         entity.setSequence(sequence);
         entity.setState(state);
-        devaService.save(entity);
+        int n =devaService.save(entity);
+        if(n>0){
+
+        }
         result.put(Constants.STATE, LiveConstants.SUCCESS);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(result);
@@ -70,6 +83,7 @@ public class DevaController {
                                     @RequestParam(name = "sequence" ,required = false) Integer sequence) {
 
         Map<String, Object> result = new HashMap<>();
+        //判断目前条数是否满
         Devaluation entity = new Devaluation();
         entity.setId(id);
         entity.setArea(area);
@@ -100,11 +114,45 @@ public class DevaController {
     public ModelAndView getDevasByModel(@RequestParam(name = "model",required = true) Integer model ,@RequestParam(name = "area",required = false) Integer area ) {
         Map<String, Object> result = new HashMap<>();
         List<Devaluation> list = devaService.getDevas(model, area);
-        System.out.println(list +"  "+ list.size());
         result.put(Constants.DATA,list);
         result.put(Constants.STATE, LiveConstants.SUCCESS);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(result);
         return new ModelAndView(jsonView);
     }
+
+    @RequestMapping(value = "/sequence", method = {RequestMethod.POST,RequestMethod.GET})
+    @ApiOperation(value = "首推接口-获取未使用的顺序列表", notes = "首推接口-获取未使用的顺序列表")
+    public ModelAndView getUnusedSquen(@RequestParam(name = "model",required = true) Integer model ,
+                                       @RequestParam(name = "area",required = true) Integer area ) {
+        Map<String, Object> result = new HashMap<>();
+        Integer sSize = DevaContants.DEVA_AREA_MAX_ITEM.get(model+"_"+area);
+        if(sSize==null){
+            result.put(Constants.STATE, DevaContants.DEVA_NOT_EXIST_MODEL_AREA);
+            result.put(Constants.ERROR_MSG, DevaContants.DEVA_NOT_EXIST_MODEL_AREA);
+        }else{
+            List<Integer> list = devaService.getUsedSequence(model, area);
+            List<Integer> seqList = new ArrayList<>();
+            int i =1;
+            for(Integer temp :list){
+                for (;i<temp;i++){
+                    seqList.add(i);
+                }
+                i++;
+            }
+            for (;i<=sSize;i++){
+                seqList.add(i);
+            }
+            result.put(Constants.DATA,seqList);
+            result.put(Constants.STATE, LiveConstants.SUCCESS);
+        }
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(result);
+        return new ModelAndView(jsonView);
+    }
+
+    private void refreshDevaRedis(Integer model,Integer area){
+
+    }
+
 }

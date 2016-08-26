@@ -42,4 +42,9 @@ public class DevaServiceImpl extends BaseServiceImpl<Devaluation> implements Dev
         record.setArea(area);
         return devaMapper.select(record);
     }
+
+    @Override
+    public List<Integer> getUsedSequence(Integer model, Integer area) {
+        return devaMapper.selectUsedSequence(model,area);
+    }
 }

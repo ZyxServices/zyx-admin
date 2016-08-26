@@ -31,4 +31,6 @@ public interface DevaService extends BaseService<Devaluation>{
      * @return
      */
     List<Devaluation> getDevas(Integer model, Integer area);
+
+    List<Integer> getUsedSequence(Integer model, Integer area);
 }

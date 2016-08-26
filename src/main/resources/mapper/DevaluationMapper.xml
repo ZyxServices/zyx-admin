@@ -13,4 +13,14 @@
     <result column="sequence" jdbcType="INTEGER" property="sequence" />
     <result column="activation" jdbcType="INTEGER" property="activation" />
   </resultMap>
+  <select id="selectUsedSequence" resultType="java.lang.Integer">
+      SELECT sequence
+      FROM devaluation
+      WHERE
+      model = #{0}
+      AND
+      area = #{1}
+      ORDER BY
+      sequence
+  </select>
 </mapper>

@@ -1,9 +1,27 @@
 package com.zyx.constants;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by MrDeng on 2016/8/24.
  */
 public interface DevaContants extends Constants {
-    int DEVA_AREA_FIRST=1;
-    int DEVA_AREA_SECOND=2;
+    int DEVA_AREA_HOME_PAGE = 1;
+    int DEVA_AREA_SECOND = 2;
+
+
+    int DEVA_NOT_EXIST_MODEL_AREA = 73001;
+    String MSG_DEVA_NOT_EXIST_MODEL_AREA = "not exist modle or area ";
+    Map<String, Integer> DEVA_AREA_MAX_ITEM = new HashMap<String, Integer>() {
+        {
+            put("1_1", 5);
+            put("2_1",12);
+            put("3_1",3);
+            put("5_1",9);
+            put("6_1",10);
+            put("4_2",5);
+            put("3_2",3);
+        }
+    };
 }
