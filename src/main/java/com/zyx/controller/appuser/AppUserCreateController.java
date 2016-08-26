@@ -125,10 +125,10 @@ public class AppUserCreateController {
             param.setModifyTime(System.currentTimeMillis());
             param.setAuthInfo(authInfo);
             param.setAuthFile(authFile);
-            map = appUserService.updateAppUser(param);
+//            map = appUserService.updateAppUser(param);
         }
 
-        jsonView.setAttributesMap(map);
+//        jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
 }

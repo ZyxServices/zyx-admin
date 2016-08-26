@@ -2,6 +2,7 @@ package com.zyx.service.deva;
 
 import com.zyx.model.Devaluation;
 import com.zyx.service.BaseService;
+import com.zyx.vo.deva.DevaVo;
 
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,8 @@ public interface DevaService extends BaseService<Devaluation>{
      * @return
      */
     List<Devaluation> getDevas(Integer model, Integer area);
+
+    List<DevaVo> getDevaList(Integer model, Integer area);
 
     List<Integer> getUsedSequence(Integer model, Integer area);
 }

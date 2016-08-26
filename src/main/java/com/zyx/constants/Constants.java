@@ -1,5 +1,6 @@
 package com.zyx.constants;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -271,5 +272,14 @@ public interface Constants {
     Map<String, Object> MAP_UN_MASK_ERROR = new ConcurrentHashMap() {{
         put(Constants.STATE, ERROR_UN_MASK_1004);
         put(Constants.ERROR_MSG, ERROR_UN_MASK_1004_MSG);
+    }};
+
+    Map<Integer ,String> modelTable= new HashMap<Integer,String>(){{
+        put(1,"activity");
+        put(2,"");
+        put(3,"");
+        put(4,"");
+        put(5,"");
+        put(6,"user");
     }};
 }
