@@ -1,16 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyx.mapper.DevaMapper">
-  <resultMap id="BaseResultMap" type="com.zyx.model.Devaluation">
-    <!--
-      WARNING - @mbggenerated
-    -->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="types" jdbcType="INTEGER" property="types" />
-    <result column="devaluation_id" jdbcType="INTEGER" property="devaluationId" />
-    <result column="create_time" jdbcType="BIGINT" property="createTime" />
-    <result column="image" jdbcType="VARCHAR" property="image" />
-    <result column="sequence" jdbcType="INTEGER" property="sequence" />
-    <result column="activation" jdbcType="INTEGER" property="activation" />
-  </resultMap>
+    <resultMap id="FullDevaVo" type="com.zyx.vo.deva.DevaVo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="create_time" jdbcType="BIGINT" property="createTime"/>
+        <result column="model" jdbcType="INTEGER" property="model"/>
+        <result column="model_id" jdbcType="INTEGER" property="modelId"/>
+        <result column="image_url" jdbcType="VARCHAR" property="imageUrl"/>
+        <result column="sequence" jdbcType="INTEGER" property="sequence"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="area" jdbcType="INTEGER" property="area"/>
+        <discriminator javaType="java.lang.Integer" column="model">
+            <case value="1" resultMap="getActivityInfo"/>
+            <case value="2" resultMap="getLiveInfo"/>
+            <case value="3" resultMap="getCircle"/>
+            <case value="4" resultMap="getCircleItem"/>
+            <case value="5" resultMap="getConcern"/>
+            <case value="6" resultMap="getUser"/>
+        </discriminator>
+    </resultMap>
+
+    <resultMap id="getActivityInfo" type="com.zyx.vo.deva.DevaModelTitleVo" extends="FullDevaVo">
+        <association property="modelTitle" select="selectActivityTitle" column="model_id"/>
+    </resultMap>
+    <select id="selectActivityTitle" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT title  FROM activity  WHERE id=#{0}
+    </select>
+    <resultMap id="getLiveInfo" type="com.zyx.vo.deva.DevaModelTitleVo" extends="FullDevaVo">
+        <association property="modelTitle" select="selectLiveTitle" column="model_id"/>
+    </resultMap>
+    <select id="selectLiveTitle" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT title  FROM t_live  WHERE id=#{0}
+    </select>
+    <resultMap id="getCircle" type="com.zyx.vo.deva.DevaModelTitleVo" extends="FullDevaVo">
+        <association property="modelTitle" select="selectCircleTitle" column="model_id"/>
+    </resultMap>
+    <select id="selectCircleTitle" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT title  FROM circle  WHERE id=#{0}
+    </select>
+    <resultMap id="getCircleItem" type="com.zyx.vo.deva.DevaModelTitleVo" extends="FullDevaVo">
+        <association property="modelTitle" select="selectCircleItemTitle" column="model_id"/>
+    </resultMap>
+    <select id="selectCircleItemTitle" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT title  FROM circle_item  WHERE id=#{0}
+    </select>
+    <resultMap id="getConcern" type="com.zyx.vo.deva.DevaModelTitleVo" extends="FullDevaVo">
+        <association property="modelTitle" select="selectConcernTitle" column="model_id"/>
+    </resultMap>
+    <select id="selectConcernTitle" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT topic_title  FROM corcern  WHERE id=#{0}
+    </select>
+    <resultMap id="getUser" type="com.zyx.vo.deva.DevaModelTitleVo" extends="FullDevaVo">
+        <association property="modelTitle" select="selectUserNickname" column="model_id"/>
+    </resultMap>
+    <select id="selectUserNickname" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT nickname  FROM user  WHERE id=#{0}
+    </select>
+    <select id="selectDevaList" parameterType="com.zyx.parm.deva.DevaParam" resultMap="FullDevaVo">
+        SELECT *
+        FROM devaluation
+        WHERE
+        model = #{model}
+        AND
+        area = #{area}
+        ORDER BY
+        sequence
+    </select>
+
+    <select id="selectUsedSequence" resultType="java.lang.Integer">
+      SELECT sequence
+      FROM devaluation
+      WHERE
+      model = #{0}
+      AND
+      area = #{1}
+      ORDER BY
+      sequence
+  </select>
 </mapper>

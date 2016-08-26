@@ -30,4 +30,7 @@ public interface AppUserMapper extends Mapper<AppUser> {
 
     List<OfficialUserListDto> queryOfficialAccountList();
 
+    int updateAppUserByPrimaryKey(AppUserCreateParam param);
+
+    void updateAuthInfo(AppUserCreateParam param);
 }

@@ -21,4 +21,10 @@ public interface AppUserConstants extends Constants {
      */
     int ERROR_APP_USER_5002 = 5002;
     String ERROR_APP_USER_5002_MSG = "create app user failed";
+
+    /**
+     * 编辑用户失败
+     */
+    int ERROR_APP_USER_5003 = 5003;
+    String ERROR_APP_USER_5003_MSG = "update app user failed";
 }
