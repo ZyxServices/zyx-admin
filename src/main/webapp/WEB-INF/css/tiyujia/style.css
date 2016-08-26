@@ -70,3 +70,6 @@ div.checker span.checked {
 .circleModals input[type="radio"], .circleModals input[type="checkbox"] {
     margin: 0 2px 0 0;
 }
+.form_bottom{
+    margin:0px;
+}

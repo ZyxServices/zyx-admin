@@ -347,6 +347,22 @@ function circleEidtor(form, url, state, text) {
     });
 }
 //帖子推荐
+var RecommendNumber = function () {
+    $.ajax({
+        type: "get",
+        url: "/v1/deva/sequence",
+        dateType: "json",
+        async: false,
+        data: {
+            model: '3',
+            area: '2'
+        },
+        success: function (data) {
+            console.log(data)
+        }
+    });
+}
+RecommendNumber();
 $("#circleSure").click(function (e) {
     /*var selectValue = $("#circleSelect").val();*/
     var RowId = $(".row").val();
@@ -354,7 +370,6 @@ $("#circleSure").click(function (e) {
     $("input[name=modelId]").val(RowId);
     var inputValue = $("input[name=area]").val();
     if (inputValue == "1") {
-        console.log(111111);
         $("#PostRecommend").ajaxSubmit({
             type: "post",
             dateType: "json",
@@ -371,7 +386,6 @@ $("#circleSure").click(function (e) {
         })
 
     } else if (inputValue == 3) {
-        console.log(2222222222);
         formData.append('imgFile', $("#lefile")[0].files[0]);
         $.ajax({
             url: "/v1/upload/file",

@@ -241,11 +241,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
                 <h4 class="modal-title" id="gridSystemModalLabel">圈子推荐</h4>
             </div>
-            <form class="form-horizontal" role="form" id="PostRecommend"
+            <form class="form-horizontal form_bottom" role="form" id="PostRecommend"
                   enctype="multipart/form-data" method="post">
                 <div class="modal-body" style="padding:10px 20px ;">
                     <div class="container-fluid">
