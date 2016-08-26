@@ -135,8 +135,4 @@ public class ActivityServiceImpl implements ActivityService {
         }
     }
 
-    @Override
-    public void testdesc(String desc) {
-        activityMapper.insertTestDesc(desc);
-    }
 }

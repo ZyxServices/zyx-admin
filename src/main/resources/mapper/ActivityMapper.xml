@@ -140,8 +140,5 @@
         </set>
         WHERE id=#{id}
     </update>
-
-    <insert id="insertTestDesc" parameterType="java.lang.String">
-        INSERT INTO testdesc(descs)VALUE (#{desc})
-    </insert>
+    
 </mapper>
