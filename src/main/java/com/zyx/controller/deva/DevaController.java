@@ -5,7 +5,9 @@ import com.zyx.constants.DevaContants;
 import com.zyx.constants.LiveConstants;
 import com.zyx.model.Devaluation;
 import com.zyx.service.deva.DevaService;
+import com.zyx.vo.deva.DevaVo;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -79,7 +81,7 @@ public class DevaController {
     public ModelAndView updateDeva(@RequestParam(name = "id",required = true) Integer id,
                                     @RequestParam(name = "area" ,required = false) Integer area,
                                     @RequestParam(name = "imageUrl", required = false) String imageUrl,
-                                    @RequestParam(name = "state", required = false) Integer state,
+                                   @ApiParam(required = false, name = "state", value = "激活1，未激活0")@RequestParam(name = "state", required = false) Integer state,
                                     @RequestParam(name = "sequence" ,required = false) Integer sequence) {
 
         Map<String, Object> result = new HashMap<>();
@@ -113,7 +115,7 @@ public class DevaController {
     @ApiOperation(value = "首推接口-获取首推", notes = "首推接口-获取首推")
     public ModelAndView getDevasByModel(@RequestParam(name = "model",required = true) Integer model ,@RequestParam(name = "area",required = false) Integer area ) {
         Map<String, Object> result = new HashMap<>();
-        List<Devaluation> list = devaService.getDevas(model, area);
+        List<DevaVo> list = devaService.getDevaList(model, area);
         result.put(Constants.DATA,list);
         result.put(Constants.STATE, LiveConstants.SUCCESS);
         AbstractView jsonView = new MappingJackson2JsonView();

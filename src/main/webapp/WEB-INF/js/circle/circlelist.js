@@ -2,6 +2,7 @@
  * Created by guochunyan on 2016/7/14.
  */
 //用户列表
+var firstopction = "<option value=''></option>";
 var userList = $.ajax({
     url: "/v1/appUser/list/all",
     async: false,
@@ -17,8 +18,8 @@ var userList = $.ajax({
         for (var i = 0; i < rows.rows.length; i++) {
             html = html + "<option value='" + rows.rows[i].id + "'>" + rows.rows[i].nickname + "</option>"
         }
-        $("#masterId").append(html);
-        $("#adminIds").append(html);
+        $("#masterId").append(firstopction + html);
+        $("#adminIds").append(firstopction + html);
     }
 });
 /*查询圈子时需要选择的用户*/
@@ -32,7 +33,8 @@ var officeUser = $.ajax({
         for (var i = 0; i < rows.rows.length; i++) {
             html = html + "<option value='" + rows.rows[i].id + "'>" + rows.rows[i].nickname + "</option>"
         }
-        $("#createId").append(html)
+
+        $("#createId").append(firstopction + html)
     }
 });
 
@@ -118,6 +120,13 @@ $(function () {
                         message: '图片不能为空'
                     }
                 }
+            },
+            "createId": {
+                validators: {
+                    notEmpty: {
+                        message: '创建者不能为空哦！'
+                    }
+                }
             }
 
         }
@@ -178,7 +187,7 @@ $(function () {
             {field: 'circleTypeName', title: '圈子类别'},
             {field: 'createTime', title: '创建时间', formatter: getLocalTime},
             {field: 'userName', title: '创建人'},
-            {field: 'masterName', title: '圈主', sortable: true},
+            {field: 'masterName', title: '圈主', sortable: true,},
             {field: 'adminIds', title: '管理员', sortable: true},
             {field: 'circleItemCount', title: '帖子数量', sortable: true},
             {field: 'concernCount', title: '关注人数', sortable: true},
@@ -232,10 +241,10 @@ var operateEvent = {
         $("#adminIds").chosen();
         $("#category").find("option[value='" + row.circleType + "']").attr("selected", true);
         // 获取图片
-        if(row.headImgUrl !==""){
+        if (row.headImgUrl !== "") {
             $("#headImgShow").show().attr("src", "http://image.tiyujia.com/" + row.headImgUrl);
         }
-        else{
+        else {
             $("#imgWrap").append("暂未上传圈子头像！")
         }
         $("#circleList").hide();
@@ -260,7 +269,7 @@ var operateEvent = {
         $("#adminIds").chosen();
         $("#category").find("option[value='" + row.circleType + "']").attr("selected", true);
         // 获取图片
-        if(row.headImgUrl !==""){
+        if (row.headImgUrl !== "") {
             $("#headImgShow").show().attr("src", "http://image.tiyujia.com/" + row.headImgUrl);
         }
         $('input[id=lefile]').change(function () {
@@ -313,13 +322,13 @@ var operateEvent = {
                         if (row.state == -2) {
                             $.Popup({
                                 confirm: false,
-                                template: "推荐成功"
+                                template: "取消屏蔽成功"
                             });
                         }
                         else if (row.state = 0) {
                             $.Popup({
                                 confirm: false,
-                                template: "推荐成功"
+                                template: "屏蔽成功"
                             });
 
                         }
@@ -345,7 +354,7 @@ var operateEvent = {
                         });
                         $.Popup({
                             confirm: false,
-                            template: "推荐成功"
+                            template: "删除成功"
                         });
                         $("#circle-list-table").bootstrapTable('refresh');
                     }
@@ -411,22 +420,26 @@ function getImgURL(file) {
     return url;
 }
 //圈子推荐
-$("#circleSure").click(function () {
-    var selectValue = $("#circleSelect").val();
+$("#RdSures").click(function () {
+    /*  var selectValue = $("#circleSelect").val();*/
     var RowId = $(".row").val();
-    $.ajax({
-        type: "get",
+    $("input[name=modelId]").val(RowId);
+    $("#circleRecommend").ajaxSubmit({
+        type: "post",
         dateType: "json",
-        url: "../../circle/setTop?circleId=" + RowId + "&topSize=" + selectValue,
+        url: "/v1/deva/add",
         async: false,
         success: function (result) {
             $.Popup({
                 confirm: false,
-                template: "推荐成功"
+                title: "推荐成功"
             });
             $("#circleModal").modal("hide");
         }
+
     })
+
+
 })
 
 

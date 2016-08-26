@@ -134,5 +134,5 @@ public class ActivityServiceImpl implements ActivityService {
             return MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数有误");
         }
     }
-
+    
 }
