@@ -23,6 +23,8 @@ public class AppUserCreateParam implements Serializable {
     private String nickname;
     private Integer official;
 
+    private Long modifyTime;
+
     public Integer getAppUserId() {
         return appUserId;
     }
@@ -101,5 +103,13 @@ public class AppUserCreateParam implements Serializable {
 
     public void setOfficial(Integer official) {
         this.official = official;
+    }
+
+    public Long getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(Long modifyTime) {
+        this.modifyTime = modifyTime;
     }
 }

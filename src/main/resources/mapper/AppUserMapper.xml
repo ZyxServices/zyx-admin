@@ -72,6 +72,43 @@
         INSERT INTO user_auth (user_id, authinfo, authfile) VALUES (#{appUserId}, #{authInfo}, #{authFile})
     </insert>
 
+    <update id="updateAppUserByPrimaryKey" parameterType="com.zyx.parm.appUser.AppUserCreateParam">
+        update user set modify_time = #{modifyTime}
+        <if test="phone != null and phone != ''">
+            ,phone = #{phone}
+        </if>
+        <if test="address != null and address != ''">
+            ,address = #{address}
+        </if>
+        <if test="sex != null">
+            ,sex = #{sex}
+        </if>
+        <if test="password != null and password != ''">
+            ,password = #{password}
+        </if>
+        <if test="nickname != null and nickname != ''">
+            ,nickname = #{nickname}
+        </if>
+        <if test="avatar != null and avatar != ''">
+            ,avatar = #{avatar}
+        </if>
+        <if test="official != null">
+            ,official = #{official}
+        </if>
+        where id = #{appUserId}
+    </update>
+
+    <update id="updateAuthInfo" parameterType="com.zyx.parm.appUser.AppUserCreateParam">
+        update user_auth set modify_time = #{modifyTime}
+        <if test="authInfo != null and authInfo != ''">
+            ,authinfo = #{authInfo}
+        </if>
+        <if test="authFile != null and authFile != ''">
+            ,authfile = #{authFile}
+        </if>
+        where user_id = #{appUserId}
+    </update>
+
     <select id="selectAuthByAppUser" parameterType="int" resultType="com.zyx.dto.AppUserAuthDto">
         SELECT * FROM user_auth where user_id = #{appUserId}
     </select>
