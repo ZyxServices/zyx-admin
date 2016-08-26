@@ -54,6 +54,7 @@ public class MySwaggerConfig {
                 .build()
                 .apiInfo(liveApiInfo());
     }
+
     @Bean
     public Docket activityApi() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -64,6 +65,7 @@ public class MySwaggerConfig {
                 .build()
                 .apiInfo(activityApiInfo());
     }
+
     @Bean
     public Docket pgApi() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -74,6 +76,7 @@ public class MySwaggerConfig {
                 .build()
                 .apiInfo(pgApiInfo());
     }
+
     @Bean
     public Docket userApi() {
         Set<String> set = new HashSet<String>();
@@ -87,10 +90,10 @@ public class MySwaggerConfig {
                 .paths(userPaths())
                 .build().useDefaultResponseMessages(false)
                 .genericModelSubstitutes(BaseResponse.class)
-                .forCodeGeneration(true)
-                ;
+                .forCodeGeneration(true);
         return docket;
     }
+
     @Bean
     public Docket devaApi() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -102,6 +105,16 @@ public class MySwaggerConfig {
                 .apiInfo(devaApiInfo());
     }
 
+    @Bean
+    public Docket appUserApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("appuser-api")
+                .select()  // 选择那些路径和api会生成document
+                .apis(RequestHandlerSelectors.basePackage("com.zyx.controller.appuser"))
+                .paths(PathSelectors.any()) // 对所有路径进行监控
+                .build()
+                .apiInfo(appuserApiInfo());
+    }
 
 
     private ApiInfo liveApiInfo() {
@@ -116,6 +129,7 @@ public class MySwaggerConfig {
 
         return apiInfo;
     }
+
     private ApiInfo activityApiInfo() {
         ApiInfo apiInfo = new ApiInfo("活动接口API",//大标题
                 "活动操作",//小标题
@@ -128,6 +142,7 @@ public class MySwaggerConfig {
 
         return apiInfo;
     }
+
     private ApiInfo pgApiInfo() {
         ApiInfo apiInfo = new ApiInfo("操场Api",//大标题
                 "圈子，动态，帖子相关api",//小标题
@@ -147,6 +162,19 @@ public class MySwaggerConfig {
                 "0.1",//版本
                 "成都term",
                 "舒子栋",//作者
+                "智悠行",//链接显示文字
+                "http://112.74.112.143:8081/ui/Delta/index.html "//网站链接
+        );
+
+        return apiInfo;
+    }
+
+    private ApiInfo appuserApiInfo() {
+        ApiInfo apiInfo = new ApiInfo("APP用户接口API",//大标题
+                "用户操作",//小标题
+                "0.1",//版本
+                "成都term",
+                new Contact("魏民升", "http://112.74.112.143:8081/ui/Delta/index.html", "449598723@qq.com"),// 作者
                 "智悠行",//链接显示文字
                 "http://112.74.112.143:8081/ui/Delta/index.html "//网站链接
         );
