@@ -286,24 +286,39 @@
                 <h4 class="modal-title" id="gridSystemModalLabel">圈子推荐</h4>
             </div>
             <div class="modal-body" style="padding:10px 20px ;">
-                <div class="container-fluid">
-                    <div class="row">
+                <form class="form-horizontal" role="form" id="circleRecommend"
+                      enctype="multipart/form-data" method="post">
+                    <div class="container-fluid">
+
+                        <div class="control-group  row form-group">
                         <span class="col-xs-6 col-md-4">
                         精选圈子排序
                         </span>
                         <span class="col-xs-6 col-md-4">
-                            <select id="circleSelect">
+                            <select id="circleSelect" name="sequence">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
                             </select>
                         </span>
+                        </div>
+                        <div class="control-group form-group">
+                            <label class="control-label">推荐状态</label>
+                            <div class="controls">
+                                <label class="radio"><input type="radio" checked value="1" name="state">激活</label>
+                                <label class="radio"><input type="radio" value="0" name="state">未激活</label> <label class="radio"><input type="radio" checked value="1" name="state">激活</label>
+                                <label class="radio"><input type="radio" value="0" name="state">未激活</label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="model" value="3">
+                        <input type="hidden" name="modelId">
+                        <input type="hidden" name="area" value="2">
                     </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" id="circleSure" >确认</button>
+                    <div class="modal-footer">
+                        <a class="btn btn-default" data-dismiss="modal">取消</a>
+                        <a class="btn btn-primary" id="RdSures">确认</a>
+                    </div>
+                </form>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
