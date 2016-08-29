@@ -54,12 +54,6 @@ public class DevaController {
         Devaluation entity = new Devaluation();
         entity.setModel(model);
         entity.setArea(area);
-
-        int count =devaService.selectCount(entity);
-        if(count>=10){
-
-        }
-        //
         entity.setModelId(modelId);
         entity.setCreateTime(System.currentTimeMillis());
         entity.setArea(area);
@@ -67,9 +61,6 @@ public class DevaController {
         entity.setSequence(sequence);
         entity.setState(state);
         int n =devaService.save(entity);
-        if(n>0){
-
-        }
         result.put(Constants.STATE, LiveConstants.SUCCESS);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(result);
@@ -136,11 +127,15 @@ public class DevaController {
             List<Integer> list = devaService.getUsedSequence(model, area);
             List<Integer> seqList = new ArrayList<>();
             int i =1;
-            for(Integer temp :list){
-                for (;i<temp;i++){
-                    seqList.add(i);
+            if(list!=null&&!list.isEmpty()){
+                for(Integer temp :list){
+                    if(temp!=null){
+                        for (;i<temp;i++){
+                            seqList.add(i);
+                        }
+                        i++;
+                    }
                 }
-                i++;
             }
             for (;i<=sSize;i++){
                 seqList.add(i);
