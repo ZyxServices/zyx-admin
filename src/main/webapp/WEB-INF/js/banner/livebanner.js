@@ -8,8 +8,6 @@ $(function(){
         locale: 'zh-US',
         pagination: true,
         cache: false,
-        search: true,
-        strictSearch: true,
         uniqueId: "id",
         height:500,
         pageSize: 20,
@@ -35,8 +33,6 @@ $(function(){
         locale: 'zh-US',
         pagination: true,
         cache: false,
-        search: true,
-        strictSearch: true,
         uniqueId: "id",
         contentType: "application/x-www-form-urlencoded",
         height:500,
@@ -47,7 +43,7 @@ $(function(){
         sidePagination: 'server',
         queryParams: function (params) {
             return {
-                area: 1,
+                area: 4,
                 model: 2,
                 pageDataNum: params.limit,
                 pageNum: (params.offset + 1),
@@ -58,6 +54,17 @@ $(function(){
     }) 
 })
 
+function liveDevaChange(obj) {
+    var _val = $(obj).val();
+    if(_val == 1){
+        $("#banner-list").show();
+        $("#stand-banner-list").hide();
+    }else if(_val == 2){
+        $("#banner-list").hide();
+        $("#stand-banner-list").show();
+    }
+}
+
 function homepageFormData(res) {
     if (res.state == 200) {
         var dataArray = [];
@@ -65,16 +72,17 @@ function homepageFormData(res) {
         datas.forEach(function (item, a) {
             var dataObj = {};
             dataObj.id = item.id;
-            dataObj.livename = "活动banner";
-            dataObj.image = '<img src="http://image.tiyujia.com/group1/M00/00/05/052YyFe0A9iAWI5kAAA75RxRQgw234.png">';
+            dataObj.modelTitle = item.modelTitle;
+            if(item.imageUrl){
+                dataObj.image = '<img style="width: 30px" src="http://image.tiyujia.com/'+item.imageUrl+'">';
+            }
             dataObj.sequence = item.sequence;
             dataObj.activation = item.activation == 1? "是":"否";
             dataArray.push(dataObj)
         });
         return {
             rows: dataArray,
-            total: 20
-            // total: res.dataCount
+            total: res.data.length
         }
     }
 }
@@ -85,20 +93,17 @@ function standFormData(res) {
         datas.forEach(function (item, a) {
             var dataObj = {};
             dataObj.id = item.id;
-            dataObj.livename = "活动banner";
-            dataObj.image = '<img src="http://image.tiyujia.com/group1/M00/00/05/052YyFe0A9iAWI5kAAA75RxRQgw234.png">';
+            dataObj.modelTitle = item.modelTitle;
+            if(item.imageUrl){
+                dataObj.image = '<img style="width: 30px" src="http://image.tiyujia.com/'+item.imageUrl+'">';
+            }
             dataObj.sequence = item.sequence;
             dataObj.activation = item.activation == 1? "是":"否";
             dataArray.push(dataObj)
         });
-        /*if (datas.length == 0) {
-            var dataObj = {};
-            dataArray.push(dataObj);
-        }*/
         return {
             rows: dataArray,
-            total: 20
-            // total: res.dataCount
+            total: res.data.length
         }
     }
 }

@@ -71,7 +71,12 @@
                     </ul>
 
                     <!-- END PAGE TITLE & BREADCRUMB-->
-
+                    <div>
+                        <select class="form-control" onchange="liveDevaChange(this)">
+                            <option value="1">首页微直播banner管理</option>
+                            <option value="2">看台轮播banner管理</option>
+                        </select>
+                    </div>
                 </div>
 
             </div>
@@ -91,7 +96,7 @@
                             <tr>
                                 <th data-checkbox="true"></th>
                                 <th data-field="id">ID</th>
-                                <th data-field="livename">直播名称</th>
+                                <th data-field="modelTitle">直播名称</th>
                                 <th data-field="image">图片</th>
                                 <th data-field="sequence">排序</th>
                                 <th data-field="activation">是否激活</th>
@@ -103,9 +108,8 @@
 
                 </div>
             </div>
-            <hr>
 <%--看台轮播--%>
-            <div id="stand-banner-list">
+            <div id="stand-banner-list" class="hide">
                 <div class="row-fluid">
                     <div class="span6">
                         <h3>看台轮播banner管理</h3>
@@ -118,7 +122,7 @@
                             <tr>
                                 <th data-checkbox="true"></th>
                                 <th data-field="id">ID</th>
-                                <th data-field="livename">直播名称</th>
+                                <th data-field="modelTitle">直播名称</th>
                                 <th data-field="image">图片</th>
                                 <th data-field="sequence">排序</th>
                                 <th data-field="activation">是否激活</th>
