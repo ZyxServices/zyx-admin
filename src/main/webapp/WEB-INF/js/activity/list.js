@@ -110,6 +110,21 @@ $(function () {
             }
         }
     });
+    $("#devaForm").bootstrapValidator({
+        message: '数据无效',
+        feedbackIcons: {
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            'sequence': {
+                validators: {
+                    notEmpty: {
+                        message: 'banner序号不能为空'
+                    }
+                }
+            }
+        }
+    });
 
     $('#activity-summernote').on('summernote.change', function (content, $editable) {
         $("#desc").val($editable);
@@ -119,6 +134,7 @@ $(function () {
     }).summernote({
         callbacks: {
             onImageUpload: function (files) {
+                console.log(files)
                 //上传图片到服务器，使用了formData对象，至于兼容性...据说对低版本IE不太友好
                 var formData = new FormData();
                 formData.append('imgFile', files[0]);
@@ -270,6 +286,7 @@ function fromData(res) {
             dataObj.url = 0;
             dataObj.mask = item.mask;
             dataObj.del = item.del;
+            dataObj.isDeva = item.isDeva;
             dataArray.push(dataObj)
         });
         if (datas.length == 0) {
@@ -310,6 +327,9 @@ function activityRecommend() {
         url: '/v1/deva/add',
         type: 'post',
         dataType: 'json',
+        beforeSubmit:function () {
+            return $("#devaForm").data('bootstrapValidator').isValid();
+        },
         success: function (result) {
             if (result.state && result.state == 200) {
                 $.Popup({
@@ -328,40 +348,6 @@ function activityRecommend() {
         }
     })
 }
-
-/*$('#devaForm').ajaxForm({
-    url: '/v1/deva/add',
-    type: 'post',
-    dataType: 'json',
-    beforeSubmit: function () {
-        var devaId = $("#devaForm").find('input[name="devaId"]').val();
-        var checked = true;
-        if (devaId == undefined || devaId == "") {
-            $.Popup({
-                confirm: false,
-                template: '未知错误，请刷新页面重试'
-            })
-            checked = false;
-        }
-        return checked;
-    },
-    success: function (result) {
-        if (result.state && result.state == 200) {
-            $.Popup({
-                confirm: false,
-                template: result.successmsg
-            })
-            $("#activityList").show();
-            $("#activityRecommend").hide();
-            $('#activity-list-table').bootstrapTable('refresh');
-        } else {
-            $.Popup({
-                confirm: false,
-                template: result.errmsg
-            })
-        }
-    }
-});*/
 
 $("#czS").click(function () {
     var formData = new FormData();
@@ -466,7 +452,6 @@ function updateCreateFrom(url) {
 function operate(value, row, index) {
     var dataArray = new Array();
     dataArray.push('<a class="preview p5"   href="javascript:void(0)" title="preview">预览</a>');
-    dataArray.push('<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>');
     dataArray.push('<a class="edit p5" href="javascript:void(0)" title="edit">编辑</a>');
     if (row.mask == 0) {
         dataArray.push('<a class="Shield p5" href="javascript:void(0)" title="Shield">屏蔽</a>')
@@ -477,6 +462,11 @@ function operate(value, row, index) {
         dataArray.push('<a class="remove p5" href="javascript:void(0)" title="remove">删除</a>')
     } else {
         dataArray.push('<a class="remove p5" href="javascript:void(0)" title="remove">恢复删除</a>')
+    }
+    if(row.isDeva){
+        dataArray.push('<a class="p5" href="javascript:void(0)" disabled>已推荐</a>')
+    }else{
+        dataArray.push('<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>');
     }
     return dataArray.join('');
 }
@@ -513,6 +503,8 @@ var operateEvents = {
         $("#activityList").hide();
     },
     'click .recommend': function (e, value, row, index) {
+        $("#activityRecommend").show();
+        $("#activityList").hide();
         $("#listType").html("推荐");
         $("#imageUrl").val('');
         $.ajax({
@@ -525,7 +517,7 @@ var operateEvents = {
                     var datas = result.data;
                     $("#activityName").val(datas.title);
                     $("#activityId").val(datas.id);
-                    $("#activityImage").attr("src", "http://image.tiyujia.com/" + datas.imgUrls)
+                    $("#activityImage").attr("src", "http://image.tiyujia.com/" + datas.imgUrls);
                     $("#imageUrl").val(datas.imgUrls)
                 } else {
                     $.Popup({
@@ -535,8 +527,37 @@ var operateEvents = {
                 }
             }
         });
-        $("#activityRecommend").show();
-        $("#activityList").hide();
+        $.ajax({
+            url: "/v1/deva/sequence",
+            type: 'POST',
+            dataType: 'json',
+            async:false,
+            data: {model: 1,area:1},
+            success: function (result) {
+                var option = '';
+                if (result.state == 200) {
+                    if(result.data.length > 0){
+                        for(var i = 0;i < result.data.length; i++){
+                            option += '<option>'+result.data[i]+'</option>';
+                        }
+                        $("#sequence").html(option);
+                    }else{
+                        $.Popup({
+                            confirm: false,
+                            template: '活动banner序列号已满，请先删除其他序列号再推荐'
+                        });
+                        $("#sequence").html('<option value="">此处banner已满，请先删除</option>');
+                        $("#sequenceWarm").html('请先删除其他banner序列号');
+                    }
+                } else {
+                    $.Popup({
+                        confirm: false,
+                        template: '未获取到banner序号，请刷新页面'
+                    })
+                }
+            }
+        });
+        $('#devaForm').data('bootstrapValidator').validateField('sequence');
     },
     'click .Shield': function (e, value, row, index) {
         var type = row.mask == 0 ? 1 : 0;

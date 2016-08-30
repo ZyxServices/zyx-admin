@@ -183,13 +183,6 @@ public class ActivityController {
         return new ModelAndView(jsonView);
     }
 
-    @RequestMapping(value = "/testDesc")
-    @ApiOperation(value = "测试数据", notes = "测试数据")
-    public void delActivity(@RequestParam(name = "desc", required = true) String desc) {
-        activityService.testdesc(desc);
-    }
-
-
     private Long getDateTime(String time) {
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

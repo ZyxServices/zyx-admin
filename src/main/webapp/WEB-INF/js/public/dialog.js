@@ -12,7 +12,8 @@ var dialog = function (ele, opt) {
             'saveText': '确定',
             'cancelText': '关闭',
             'saveEvent': '',
-            'cancelEvent': ''
+            'cancelEvent': '',
+            'remove': true
         },
         this.options = $.extend({}, this.defaults, opt)
 }
@@ -21,15 +22,24 @@ dialog.prototype = {
     init: function () {
         if ($('#activity-shield')[0] == undefined) {
             globalID += 1;
+            var Successbtn;
+            //this.options.confirm == true ? "<button class='btn btn-default' id='maskSuccess" + globalID + "'>" + this.options.saveText + "</button>" : "";
             if (this.options.confirm == true) {
                 var Successbtn = "<button class='btn btn-default' id='maskSuccess" + globalID + "'>" + this.options.saveText + "</button>"
             } else {
                 var Successbtn = ""
             }
-            var dialogHtml = "<div id='activity-shield" + globalID + "' class='modal fade'><div class='modal-header'>" +
-                "<button data-dismiss='modal' class='close' type='button'></button><h3>" + this.options.title + "</h3></div>" +
-                "<div class='modal-body'>" + this.options.template + "</div><div class='modal-footer'>" +
-                Successbtn + "<button class='btn btn-default' id='maskCancel" + globalID + "' >" + this.options.cancelText + "</button></div></div>"
+            var dialogHtml=""
+                dialogHtml+=   "       <div id='activity-shield" + globalID + "' class='modal fade'>"
+                dialogHtml+=   "           <div class='modal-header'>"
+                dialogHtml+=   "               <button data-dismiss='modal' class='close' id='x" + globalID + "' type='button'></button>"
+                dialogHtml+=   "               <h3>" + this.options.title + "</h3>"
+                dialogHtml+=   "           </div>"
+                dialogHtml+=   "           <div class='modal-body'>" + this.options.template + "</div>"
+                dialogHtml+=   "           <div class='modal-footer'>" + Successbtn + ""
+                dialogHtml+=   "               <button class='btn btn-default' id='maskCancel" + globalID + "'>" + this.options.cancelText + "</button>"
+                dialogHtml+=   "           </div>"
+                dialogHtml+=   "       </div>"
             $('body').append(dialogHtml)
         }
         return globalID;
@@ -40,23 +50,26 @@ dialog.prototype = {
         $('#maskSuccess' + globalIDd + '').click(function () {
             $('#activity-shield' + globalIDd + '').modal('hide')
             sav.options.saveEvent()
-            $('#activity-shield' + globalIDd + '').remove()
-
+            if (sav.options.remove == true) {
+                $('#activity-shield' + globalIDd + '').remove()
+            }
+        })
+        $('#x' + globalID + '').click(function () {
+            console.log(this)
+            sav.closeEvents(globalIDd,sav)
         })
         $('#maskCancel' + globalID + '').click(function () {
-            $('#activity-shield' + globalIDd + '').modal('hide')
-            $('#activity-shield' + globalIDd + '').remove()
-
-            if ($.isFunction(sav.options.cancelEvent)) {
-                sav.options.cancelEvent()
-            }
-
+            sav.closeEvents(globalIDd,sav)
         })
     },
-    cancelEvent: function () {
+    closeEvents:function(globalIDd,sav){
+        $('#activity-shield' + globalIDd + '').modal('hide')
+        $('#activity-shield' + globalIDd + '').remove()
 
+        if ($.isFunction(sav.options.cancelEvent)) {
+            sav.options.cancelEvent()
+        }
     }
-
 }
 
 //ajax 预览，屏蔽， 推荐，删除，封装
@@ -127,14 +140,21 @@ function getIdSelections() {
         return row.id
     });
 }
-//在插件中使用弹窗对象
+
+
+function removeEvent(id) {
+    var sav = this
+    var globalIDd = globalID;
+    $("#"+id+"").modal('hide');
+    $('#activity-shield' + globalIDd + '').remove()
+}
+//在插件中使用 弹窗对象
 $.Popup = function (options) {
     //创建弹窗的实体
     var dialogs = new dialog(this, options);
     //调用其方法
     dialogs.init();
     dialogs.saveEvents();
-    dialogs.cancelEvent();
     //调用弹窗
     $("#activity-shield" + globalID + "").modal('show');
 }

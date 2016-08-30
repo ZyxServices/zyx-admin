@@ -7,9 +7,16 @@
     <meta content="体育家-直播操作" name="description"/>
     <meta content="" name="author"/>
     <jsp:include page="../public/common-styles.jsp"/>
+    <link rel="stylesheet" href="../../css/tiyujia/style.css"/>
 </head>
 <body class="page-header-fixed">
+
 <jsp:include page="../public/header.jsp"/>
+<div class="modal fade" id="upload"  aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-body">
+        <p>推荐上传中...</p>
+    </div>
+</div>
 <div class="page-container">
     <jsp:include page="../public/nav.jsp"/>
     <div class="page-content">

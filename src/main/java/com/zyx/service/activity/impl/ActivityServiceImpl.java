@@ -45,7 +45,7 @@ public class ActivityServiceImpl implements ActivityService {
             int insert = activityMapper.insert(activity);
             if (insert > 0) {
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "发布成功", null);
-            }else{
+            } else {
                 return MapUtils.buildErrorMap(ActivityConstants.AUTH_ERROR_10000, "活动发布失败");
             }
         } else {
@@ -59,7 +59,7 @@ public class ActivityServiceImpl implements ActivityService {
         QueryActivityParm parm = new QueryActivityParm();
 
         parm.setPageNumber(pageDataNumber);
-        parm.setPage(pageNumber-1);
+        parm.setPage((pageNumber - 1) * pageDataNumber);
         parm.setGroupName(searchText);
         List<ActivityDto> activities = activityMapper.queryActivity(parm);
 
@@ -134,9 +134,5 @@ public class ActivityServiceImpl implements ActivityService {
             return MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数有误");
         }
     }
-
-    @Override
-    public void testdesc(String desc) {
-        activityMapper.insertTestDesc(desc);
-    }
+    
 }

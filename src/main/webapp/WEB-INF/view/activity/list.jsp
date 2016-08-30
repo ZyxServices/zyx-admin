@@ -402,17 +402,12 @@
                 <img id="activityImage" src="">
               </div>
             </div>
-            <div class="control-group">
+            <div class="control-group form-group">
               <label class="control-label">banner排序</label>
-              <div class="controls">
+              <div class="controls col-xs-5">
                 <select class="span6" id="sequence" name="sequence">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
                 </select>
+                <span class="help-inline required" id="sequenceWarm">*</span>
               </div>
             </div>
             <input type="hidden" name="modelId" id="activityId">

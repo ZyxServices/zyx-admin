@@ -136,12 +136,11 @@ function operateFormatterssssss(value, row, index) {
 
 //直播状态按钮初始化
 function btnState(row) {
-    return row.state==1? "取消屏蔽" : "屏蔽";
+    return row.state == 1 ? "取消屏蔽" : "屏蔽";
 }
 
 //直播操作按钮初始化
 function operateFormatter(value, row, index) {
-    console.log(row)
     return [
         '<a class="preview p5"   href="javascript:void(0)" >预览</a>',
         '<a class="recommend p5" href="javascript:void(0)" >推荐</a>',
@@ -154,6 +153,7 @@ function operateFormatter(value, row, index) {
 var operateEventssssss = {
     //预览
     'click .preview': function (e, value, row, index) {
+
         $.ajax({
             url: "/v1/live/lab/update?id=7&lab=171&desc=11171&state=1",
             async: false,
@@ -165,15 +165,109 @@ var operateEventssssss = {
     },
     //推荐
     'click .recommend': function (e, value, row, index) {
-        $.ajax({
-            url: "/v1/live/lab/list",
-            async: false,
-            type: "post",
-            dateType: "json",
-            success: function (data) {
-                console.log(data)
+        var html = ''
+        html += '   <form class="form-horizontal" role="form" id="recommend" enctype="multipart/form-data">            '
+        html += '	<div class="container-fluid">';
+        html += '	    <div class="row">';
+        html += '	        <label class="control-label ">直播名称:</label><span >' + row.title + '</span>';
+        html += '	    </div>';
+        html += '	    <div class="row">';
+        html += '	        <label class="col-xs-6 control-label ">推荐模块:</label>';
+        html += '	        <span class="col-xs-6 col-md-4" id="radio_checked">';
+        html += '	            <label class="control-label "  style="width: 90px"><input type="radio" value="1" name="area"> 首页</label>';
+        //html += '	            <label class="control-label "  style="width: 90px"><input type="radio" value="4" name="area"> 看台</label>';
+        html += '	        </span>';
+        html += '	    </div>';
+        html += '	    <div class="row">';
+        html += '	            <div>';
+        html += '	                <input style="display: none" name="model" value="2">';
+        html += '	                <input style="display: none" name="modelId" value="' + row.id + '">';
+        html += '	                <label class="col-xs-6 control-label ">显示顺序: </label>';
+        html += '	                <select name="sequence" id="hotSelect">';
+        html += '	                </select>';
+        html += '	            </div>';
+        html += '	     </div>';
+        html += '	     <div class="row">';
+        html += '	         <label class="col-xs-6  control-label ">封面图:</label>';
+        html += '	         <label class="control-label "><input name="imageUrl"  id="Cover" type="file"></label>';
+        html += '	     </div>';
+        html += '	    <div class="row">';
+        html += '	        <label class="col-xs-6 control-label ">推荐状态:</label>';
+        html += '	        <span class="col-xs-6 col-md-4">';
+        html += '	            <label class="control-label " style="width: 90px"><input type="radio" value="1" name="state"> 激活</label>';
+        html += '	            <label class="control-label " style="width: 90px"><input type="radio" value="0" name="state"> 未激活</label>';
+        html += '	        </span>';
+        html += '	    </div>';
+        html += '	</div>';
+        html += '   </from>'
+        $.Popup({
+            title: '直播推荐',
+            template: html,
+            remove: false,
+            saveEvent: function () {
+                $("#upload").modal({backdrop: 'static', keyboard: false});
+                var formData = new FormData();
+                formData.append('imgFile', $('#Cover')[0].files[0]);
+                $.ajax({
+                    url: '/v1/upload/file',//后台文件上传接口
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (result) {
+                        if (result.state == 200) {
+                            $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="' + result.data + '" >');
+                            $.ajax({
+                                url: '/v1/deva/add',
+                                type: 'post',
+                                data: $('#recommend').serialize(),
+                                dataType: 'json',
+                                success: function (result) {
+                                    removeEvent('upload')
+                                    if (result.state == 200) {
+                                        $.Popup({
+                                            confirm: false,
+                                            template: '推荐成功'
+                                        })
+                                    }
+                                },
+                                error: function (res) {
+                                    removeEvent('upload')
+                                    $.Popup({
+                                        confirm: false,
+                                        template: '推荐上传失败（请检查内容是否填写完整！！！）'
+                                    })
+                                }
+                            })
+                        } else {
+                            removeEvent('upload')
+                            $.Popup({
+                                confirm: false,
+                                template: result.successmsg
+                            })
+                        }
+                    },
+                    error: function (res) {
+                        removeEvent('upload')
+                        $.Popup({
+                            confirm: false,
+                            template: '图片上传失败，图片不能为空'
+                        })
+                    }
+                });
             }
-        });
+        })
+        $.ajax({
+            type: "get",
+            dateType: "json",
+            url: "/v1/deva/sequence?model=2&area=1",
+            async: false,
+            success: function (res) {
+                res.data.forEach(function (e) {
+                    $('#hotSelect').append("<option value='" + e + "'>" + e + "</option>")
+                })
+            }
+        })
     },
     //屏蔽
     'click .Shield': function (e, value, row, index, obj) {
@@ -218,7 +312,7 @@ var operateEventssssss = {
     //删除
     'click .remove': function (e, value, row, index) {
         var delUrl = '/v1/live/delete?id=' + row.id;
-        ajaxPlugins.remove(delUrl,'live_table','post');
+        ajaxPlugins.remove(delUrl, 'live_table', 'post');
     }
 };
 
@@ -270,7 +364,7 @@ var operateEventclass = {
     },
     'click .remove': function (e, value, row, index) {
         var delUrl = '/v1/live/lab/delete?id=' + row.id;
-        ajaxPlugins.remove(delUrl,'editLive','post')
+        ajaxPlugins.remove(delUrl, 'editLive', 'post')
     },
     creatLive: function () {
         var labvalue = $('#lab').val()
@@ -281,16 +375,16 @@ var operateEventclass = {
             async: false,
             type: "post",
             success: function (data) {
-                if(data.state==23002){
+                if (data.state == 23002) {
                     $.Popup({
-                        confirm:false,
-                        template:'这个类别已经存在,请重新填写'
+                        confirm: false,
+                        template: '这个类别已经存在,请重新填写'
                     })
-                }else{
+                } else {
                     $('#editLive').bootstrapTable('refresh');
                     $.Popup({
-                        confirm:false,
-                        template:'添加成功'
+                        confirm: false,
+                        template: '添加成功'
                     })
                 }
 

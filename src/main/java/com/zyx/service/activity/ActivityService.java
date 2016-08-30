@@ -63,13 +63,4 @@ public interface ActivityService {
      */
     Map<String, Object> delActivity(int id,int delType);
 
-    /**
-     * 删除活动 （逻辑删除）
-     *
-     * @param desc
-     * @return
-     */
-    void testdesc(String desc);
-
-
 }

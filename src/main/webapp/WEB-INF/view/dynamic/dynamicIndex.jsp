@@ -15,6 +15,11 @@
 
 <body class="page-header-fixed">
 <jsp:include page="../public/header.jsp" />
+<div class="modal fade" id="upload"  aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-body">
+        <p>推荐上传中...</p>
+    </div>
+</div>
 <div class="page-container">
     <jsp:include page="../public/nav.jsp" />
     <div class="page-content">
@@ -56,7 +61,6 @@
                 <%--</button>--%>
                 <div id="demo" class="demo">
                     <form class="form-horizontal" role="form" id="createDynamicForm" enctype="multipart/form-data">
-
                         <div class="control-group form-group">
                             <label class="control-label " style="width: 100px;margin-right: 10px;text-align: left">选择官方账户户</label>
                             <div class="">
@@ -73,7 +77,7 @@
                         <%--<input name="imgFile" style="display: block" type="file" />--%>
                         <%--<input id="imgFile" name="imgFile" style="display: block" type="file" multiple="multiple" accept="image/*" />--%>
                         <input type="hidden" id="imgFileUrl" name="imgFileUrl" value="">
-                        <%--<input name="imgFile" style="display: block" type="file" multiple="multiple" accept="image/*" />--%>
+                        <%--<input name="imgFile" style="di splay: block" type="file" multiple="multiple" accept="image/*" />--%>
                         <div style="margin-top: 10px" id="imagesWrap">
                             <img id="images" src="">
                         </div>

@@ -49,10 +49,12 @@
                             <thead>
                             <tr>
                                 <th data-checkbox="true"></th>
+                                <th data-field="activityName">活动名称</th>
                                 <th data-field="id">ID</th>
                                 <th data-field="image">图片</th>
                                 <th data-field="sequence">排序</th>
                                 <th data-field="activation">是否激活</th>
+                                <th data-field="createTime" data-formatter="timeFormat">创建时间</th>
                                 <th data-formatter="operate" data-events="operateEvents">操作</th>
                             </tr>
                             </thead>
@@ -84,6 +86,13 @@
 
                     <form class="form-horizontal" role="form" id="bannerForm">
                         <input type="hidden" name="id" id="devaId">
+                        <div class="control-group form-group">
+                            <label class="control-label">活动名称</label>
+                            <div class="controls col-xs-5">
+                                <input type="text" id="title" class="span6" disabled/>
+                            </div>
+                        </div>
+
                         <div class="control-group">
                             <label class="control-label">活动原有封面图</label>
                             <div class="controls" id="preImage">
@@ -95,14 +104,8 @@
                             <label class="control-label">banner排序</label>
                             <div class="controls">
                                 <select class="span6" id="sequence" name="sequence">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
+
                                 </select>
-                                <span class="help-inline">*</span>
                             </div>
                         </div>
 

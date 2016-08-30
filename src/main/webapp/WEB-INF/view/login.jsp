@@ -100,12 +100,7 @@
                 beforeSend:function () {
                     $("#loginLoad").modal('show');
                 },
-                complete:function () {
-                    $("#loginLoad").modal('hide');
-                },
                 success: function (rd) {
-                    console.log(rd);
-
                     $("#prm").val(rd.m);
                     //通过模和公钥参数获取公钥
                     var key = RSAUtils.getKeyPair(rd.e, "", rd.m16);

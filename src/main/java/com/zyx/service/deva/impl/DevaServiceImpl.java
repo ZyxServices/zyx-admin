@@ -3,9 +3,11 @@ package com.zyx.service.deva.impl;
 import com.zyx.constants.Constants;
 import com.zyx.mapper.DevaMapper;
 import com.zyx.model.Devaluation;
+import com.zyx.parm.deva.DevaParam;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.deva.DevaService;
 import com.zyx.utils.MapUtils;
+import com.zyx.vo.deva.DevaVo;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +43,18 @@ public class DevaServiceImpl extends BaseServiceImpl<Devaluation> implements Dev
         record.setModel(model);
         record.setArea(area);
         return devaMapper.select(record);
+    }
+
+    @Override
+    public List<DevaVo> getDevaList(Integer model, Integer area) {
+        DevaParam devaParam =new DevaParam();
+        devaParam.setModel(model);
+        devaParam.setArea(area);
+        return devaMapper.selectDevaList(devaParam);
+    }
+
+    @Override
+    public List<Integer> getUsedSequence(Integer model, Integer area) {
+        return devaMapper.selectUsedSequence(model,area);
     }
 }

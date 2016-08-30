@@ -130,7 +130,7 @@ public class CombinationServiceImpl implements CombinationService {
         QueryCombinationParm parm = new QueryCombinationParm();
 
         parm.setPageNumber(pageNumber);
-        parm.setPage(pageNumber-1);
+        parm.setPage((pageNumber - 1) * pageDataNumber);
         parm.setName(name);
         List<Activity> activities = combinationMapper.queryCombination(parm);
         if (activities != null && activities.size() > 0) {
@@ -166,7 +166,7 @@ public class CombinationServiceImpl implements CombinationService {
             if (combinedDatas != null && combinedDatas.size() > 0) {
                 List<Integer> integerList = combinedDatas.stream().map(CombinedData::getDataid).collect(Collectors.toList());
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", integerList);
-            }else{
+            } else {
                 return MapUtils.buildErrorMap(Constants.NO_DATA, "差无数据");
             }
         } else {
@@ -179,7 +179,7 @@ public class CombinationServiceImpl implements CombinationService {
         QueryCombinationParm parm = new QueryCombinationParm();
 
         parm.setPageNumber(pageDataNumber);
-        parm.setPage(pageNumber-1);
+        parm.setPage((pageNumber - 1) * pageDataNumber);
         parm.setId(combinationId);
 
         List<CombinedData> combinedDatas = combinedDataMapper.queryCombinationActivity(parm);

@@ -48,6 +48,7 @@
         <result column="mask" jdbcType="INTEGER" property="mask"/>
         <result column="desc_content" jdbcType="LONGVARCHAR" property="descContent"/>
         <association property="userName" column="user_id" select="com.zyx.mapper.AppUserMapper.selectAppUserGetName"></association>
+        <association property="isDeva" column="id" select="queryIsDeva"></association>
     </resultMap>
 
 
@@ -65,6 +66,10 @@
         <if test="pageNumber != null and page != null">
             limit #{page}, #{pageNumber}
         </if>
+    </select>
+
+    <select id="queryIsDeva" parameterType="java.lang.Integer" resultType="boolean">
+        SELECT NOT ISNULL(id) as isDeva FROM devaluation WHERE model = 1 AND model_id = #{id}
     </select>
 
     <select id="queryActivityIn" parameterType="java.util.List" resultType="com.zyx.model.Activity">
@@ -136,7 +141,4 @@
         WHERE id=#{id}
     </update>
 
-    <insert id="insertTestDesc" parameterType="java.lang.String">
-        INSERT INTO testdesc(descs)VALUE (#{desc})
-    </insert>
 </mapper>

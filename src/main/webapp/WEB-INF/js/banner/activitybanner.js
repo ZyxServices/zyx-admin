@@ -39,11 +39,10 @@ function groupFromData(res) {
         datas.forEach(function (item, a) {
             var dataObj = {};
             dataObj.id = item.id;
-            dataObj.model = "活动banner";
+            dataObj.activityName = "活动banner";
             dataObj.createTime = item.createTime;
-            // dataObj.image = '<img src="http://image.tiyujia.com/"'+item.image+'>';
             if(item.imageUrl){
-                dataObj.image = '<img src="http://image.tiyujia.com/'+item.imageUrl+'">';
+                dataObj.image = '<img style="width: 30px" src="http://image.tiyujia.com/'+item.imageUrl+'">';
             }
             dataObj.sequence = item.sequence;
             dataObj.activation = item.state == 0? "是":"否";
@@ -54,6 +53,9 @@ function groupFromData(res) {
             total: res.data.length
         }
     }
+}
+function timeFormat(data) {
+    return new Date(data).format("yyyy-mm-dd HH:MM:ss")
 }
 
 function operate(value, row, index) {
@@ -91,7 +93,12 @@ var operateEvents = {
         })
     },
     'click .edit':function (e, value, row, index) {
-        $("#preImage").html(row.image);
+        $("#bannerList").hide();
+        $("#bannerEdit").show();
+        $("#title").val("活动banner");
+        var img = $(row.image).attr("src");
+        var imageObj = '<img src='+img+'>';
+        $("#preImage").html(imageObj);
         $("#photoCover").html('选择图片');
         $("#images").attr({"src":""});
         $("#sequence").val(row.sequence);
@@ -101,9 +108,27 @@ var operateEvents = {
         }else{
             $('input[name=state]').eq(1).attr({"checked":"checked"});
         }
-
-        $("#bannerList").hide();
-        $("#bannerEdit").show();
+        $.ajax({
+            url: "/v1/deva/sequence",
+            type: 'POST',
+            dataType: 'json',
+            async:false,
+            data: {model: 1,area:1},
+            success: function (result) {
+                var bannerNoArr = result.data;
+                var option = '';
+                bannerNoArr.push(row.sequence);
+                bannerNoArr = bannerNoArr.sort(function(a,b){/*排序*/
+                    return a - b
+                });
+                if(result.state == 200){
+                    for(var i = 0;i < result.data.length; i++){
+                        option += '<option>'+result.data[i]+'</option>';
+                    }
+                    $("#sequence").html(option);
+                }
+            }
+        });
     }
 }
 $("#confirmDeva").click(function () {

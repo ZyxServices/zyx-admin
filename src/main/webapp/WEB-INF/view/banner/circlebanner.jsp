@@ -41,12 +41,42 @@
                         <li><a href="#">列表</a></li>
                     </ul>
                 </div>
+                <div>
+                    <select class="form-control" onchange="circleDevaChange(this)">
+                        <option value="1">首页热门圈子讨论管理</option>
+                        <option value="2">精选圈子里圈子管理</option>
+                        <option value="3">精选圈子帖子banner管理</option>
+                    </select>
+                </div>
             </div>
-            <div id="banner-circle-list">
+            <div id="homepage-list">
                 <div class="row-fluid">
                     <div class="span6">
                         <h3>首页热门圈子讨论管理</h3>
-                        <a class="btn btn-default" href="javascript:void(0)" onclick="createCircleBanner()">上传banner</a>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12 responsive">
+                        <table id="homepage-list-table">
+                            <thead>
+                            <tr>
+                                <th data-checkbox="true"></th>
+                                <th data-field="id">ID</th>
+                                <th data-field="modelTitle">圈子名称</th>
+                                <th data-field="sequence">排序</th>
+                                <th data-field="activation">是否激活</th>
+                                <th data-formatter="homepageOperate" data-events="operateEvents">操作</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <%--热门圈子下的圈子推荐--%>
+            <div id="circle-list" class="hide">
+                <div class="row-fluid">
+                    <div class="span6">
+                        <h3>精选圈子里圈子管理</h3>
                     </div>
                 </div>
                 <div class="row-fluid">
@@ -56,23 +86,21 @@
                             <tr>
                                 <th data-checkbox="true"></th>
                                 <th data-field="id">ID</th>
-                                <th data-field="circlename">圈子名称</th>
-                                <th data-field="image">图片</th>
-                                <th data-field="order">排序</th>
+                                <th data-field="modelTitle">圈子名称</th>
+                                <th data-field="sequence">排序</th>
                                 <th data-field="activation">是否激活</th>
-                                <th data-formatter="operate" data-events="operateEvents">操作</th>
+                                <th data-formatter="circleOperate" data-events="operateEvents">操作</th>
                             </tr>
                             </thead>
                         </table>
                     </div>
                 </div>
             </div>
-            <hr>
             <%--帖子banner--%>
-            <div id="post-list">
+            <div id="post-list" class="hide">
                 <div class="row-fluid">
                     <div class="span6">
-                        <h3>精选帖子banner管理</h3>
+                        <h3>精选圈子帖子banner管理</h3>
                     </div>
                 </div>
                 <div class="row-fluid">
@@ -82,9 +110,9 @@
                             <tr>
                                 <th data-checkbox="true"></th>
                                 <th data-field="id">ID</th>
-                                <th data-field="postname">帖子名称</th>
+                                <th data-field="modelTitle">帖子名称</th>
                                 <th data-field="image">图片</th>
-                                <th data-field="order">排序</th>
+                                <th data-field="sequence">排序</th>
                                 <th data-field="activation">是否激活</th>
                                 <th data-formatter="postOperate" data-events="operateEvents">操作</th>
                             </tr>
@@ -94,12 +122,12 @@
                 </div>
             </div>
         </div>
-        <%--创建banner--%>
-        <div class="container-fluid hide" id="circleBannerCreate">
+        <%--编辑banner----精选圈子--%>
+        <div class="container-fluid hide" id="circleBannerEdit">
             <div class="row-fluid">
                 <div class="span12">
                     <h3 class="page-title">
-                        上传banner<small>statistics and more</small>
+                        圈子banner管理<small>statistics and more</small>
                     </h3>
                     <ul class="breadcrumb">
                         <li>
@@ -107,71 +135,49 @@
                             <a href="javascript:void(0)">圈子banner</a>
                             <i class="icon-angle-right"></i>
                         </li>
-                        <li><a href="#">创建</a></li>
+                        <li><a href="#">编辑</a></li>
                     </ul>
                 </div>
             </div>
             <div id="activity-create">
                 <div class="row-fluid">
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" id="circleBannerForm">
+                        <input type="hidden" name="id" id="circleId">
                         <div class="control-group">
-                            <label class="control-label">直播名称</label>
+                            <label class="control-label">圈子名称</label>
                             <div class="controls">
-                                <input type="text" class="span6 form-control" />
-                                <span class="help-inline">*</span>
+                                <input type="text" class="span6 form-control" id="circleName"/>
                             </div>
                         </div>
 
                         <div class="control-group">
                             <label class="control-label">推荐模块</label>
                             <div class="controls">
-                                <label class="checkbox"><input type="radio" name="module">首页微直播</label>
-                                <label class="checkbox"><input type="radio" name="module">看台轮播</label>
-                                <span class="help-inline">备注：默认不选择状态，下拉框隐藏。选择哪一个推荐模块，对应的下拉框才会出现，两个推荐模块可同时选择</span>
-                            </div>
-                        </div>
-
-                        <div class="control-group hide">
-                            <label class="control-label"></label>
-                            <div class="controls">
-                                <select class="span3">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                    <option>9</option>
-                                </select>
-                                <select class="span3">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
+                                <label class="radio"><input type="radio" id="homepageAreaRadio" name="area" value="1">首页热门圈子</label>
+                                <label class="radio"><input type="radio" name="area" id="circleAreaRadio" value="3">精选圈子</label>
                             </div>
                         </div>
 
                         <div class="control-group">
-                            <label class="control-label">图片</label>
                             <div class="controls">
-                                <button class="btn btn-default">上传图片</button>
+                                <select id="homepageSequence" class="span6 hide">
+                                </select>
+                                <select id="circleSequence" class="span6 hide">
+                                </select>
                             </div>
                         </div>
 
                         <div class="control-group">
                             <label class="control-label">推荐状态</label>
                             <div class="controls">
-                                <label class="radio"><input type="radio" name="bannerState">激活</label>
-                                <label class="radio"><input type="radio" name="bannerState">未激活</label>
+                                <label class="radio"><input type="radio" name="state" value="0">激活</label>
+                                <label class="radio"><input type="radio" name="state" value="1">未激活</label>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button class="btn btn-default">确定</button>
+                                <a class="btn btn-default" href="javascript:(0)" id="confirmDeva">确定</a>
                                 <a href="javascript:(0)" class="btn btn-default" onclick="window.location.reload();">返回</a>
                             </div>
                         </div>

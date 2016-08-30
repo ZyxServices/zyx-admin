@@ -38,8 +38,8 @@ div.checker span.checked {
 
 /*不是none和hidden的隐藏input的方法*/
 .hideInput {
-    width: 1px;
-    height: 1px;
+    width: 1px!important;
+    height: 1px!important;
     position: absolute;
     top: 0;
 }
@@ -54,6 +54,10 @@ div.checker span.checked {
     margin-right: 10px;
 
 }
+.activation .control-label ,#radio_checked .control-label{
+    text-align: left;
+
+}
 
 .radio_box {
     display: none;
@@ -65,4 +69,7 @@ div.checker span.checked {
 
 .circleModals input[type="radio"], .circleModals input[type="checkbox"] {
     margin: 0 2px 0 0;
+}
+.form_bottom{
+    margin:0px;
 }
