@@ -48,7 +48,7 @@
         <association property="modelTitle" select="selectConcernTitle" column="model_id"/>
     </resultMap>
     <select id="selectConcernTitle" parameterType="java.lang.Integer" resultType="java.lang.String">
-        SELECT topic_title  FROM corcern  WHERE id=#{0}
+        SELECT topic_title  FROM concern  WHERE id=#{0}
     </select>
     <resultMap id="getUser" type="com.zyx.vo.deva.DevaModelTitleVo" extends="FullDevaVo">
         <association property="modelTitle" select="selectUserNickname" column="model_id"/>
