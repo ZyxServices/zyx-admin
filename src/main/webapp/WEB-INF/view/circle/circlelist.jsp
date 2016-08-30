@@ -289,15 +289,11 @@
                 <div class="modal-body" style="padding:10px 20px ;">
                     <div class="container-fluid">
                         <div class="control-group  form-group">
-                        <label class="col-xs-6 col-md-4 control-label">
-                        精选圈子排序：
-                        </label>
+                            <label class="col-xs-6 col-md-4 control-label">
+                                精选圈子排序：
+                            </label>
                         <span class="col-xs-6 col-md-4">
-                            <select id="circleSelect" name="sequence">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
+                            <select id="circleSelect" name="sequence"></select>
                         </span>
                         </div>
                         <div class="control-group form-group">

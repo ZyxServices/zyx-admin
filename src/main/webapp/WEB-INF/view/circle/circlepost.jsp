@@ -248,7 +248,6 @@
                   enctype="multipart/form-data" method="post">
                 <div class="modal-body" style="padding:10px 20px ;">
                     <div class="container-fluid">
-
                         <div class="row">
                             <label class="control-label ">帖子名称:</label><span id="cricleTitle"></span>
                         </div>
@@ -256,37 +255,29 @@
                             <label class="col-xs-6 control-label ">推荐模块:</label>
                            <span class="col-xs-6 col-md-4" id="radio_checked">
                             <label class="control-label "><input type="radio" name="area" value="1"> 首页热门圈子讨论</label>
-                            <label class="control-label "><input type="radio" name="area" value="3"> 精选圈子轮播</label>
+                            <label class="control-label "><input type="radio" name="area" value="3"> 精选帖子轮播</label>
                            </span>
                             <div class="radio_box">
-                                <div>
+                                <div style="display: block">
                                     <label class="col-xs-6 control-label "> </label>
-                                    <select id="hotSelect" name="sequence">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    </select>
+                                    <select id="hotSelect"> </select>
                                 </div>
                                 <div>
                                     <p><label class="col-xs-6  control-label "></label>
-                                        <select id="chosenSelect" name="sequence">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                        </select></p>
-
+                                        <select id="chosenSelect"></select>
+                                    </p>
                                     <label class="col-xs-6  control-label ">图片:</label>
                                     <div id="imgWrap">
                                         <input type="hidden" name="imgFile">
                                         <input type="hidden" id="imgFile" name="imageUrl">
                                         <input id="lefile" type="file" name="file" class="hideInput">
                                         <a class="btn btn-default" href="javascript:void (0)" id="photoCover"
+                                           style="max-width:200px;white-space:nowrap; text-overflow:ellipsis; overflow: hidden;"
                                            onclick="$('input[id=lefile]').click();">选择文件</a>
                                     </div>
-                                    <input type="hidden" name="model" value="6">
+                                    <input type="hidden" name="model">
                                     <input type="hidden" name="modelId">
+                                    <input type="hidden" name="sequence">
                                 </div>
                             </div>
                         </div>
