@@ -26,12 +26,13 @@
         <!--<result column="masterName" property="masterName" jdbcType="VARCHAR"/>-->
         <!--<result column="type_name" property="circleTypeName" jdbcType="VARCHAR"/>-->
         <!--<result column="circleItem_count" property="circleItemCount" jdbcType="INTEGER"/>-->
+        <result column="circleTypeName" property="circleTypeName" jdbcType="VARCHAR" />
         <result column="concern_count" property="concernCount" jdbcType="INTEGER"/>
         <association property="circleItemCount" column="id" select="circleItemSelect"/>
         <association property="concernCount" column="id" select="myConcernSelect"/>
         <association property="userVo" column="create_id" select="userSelect"/>
         <association property="masterVo" column="circle_master_id" select="userSelect"/>
-        <association property="circleTypeVo" column="circle_type" select="circleTypeSelect"/>
+
     </resultMap>
 
     <select id="circleItemSelect" parameterType="int" resultType="int">
@@ -43,9 +44,9 @@
         SELECT id,nickname,official,authenticate FROM `user` WHERE id=#{user_id}
     </select>
 
-    <select id="circleTypeSelect" parameterType="int" resultType="com.zyx.model.CircleType">
-        SELECT * FROM circle_type WHERE id =#{circle_type_id}
-    </select>
+    <!--<select id="circleTypeSelect" parameterType="int" resultType="com.zyx.model.vo.CircleTypeVo">-->
+        <!--SELECT * FROM circle_type WHERE id =#{circle_type_id}-->
+    <!--</select>-->
 
 
     <select id="myConcernSelect" parameterType="int" resultType="int">
@@ -53,10 +54,29 @@
     </select>
 
     <select id="findByPager" resultMap="circleVo">
-    SELECT * FROM  circle
-    WHERE `circle`.state != -1
-    ORDER BY create_time DESC
-     LIMIT #{start},#{end}
+        SELECT
+        circle.id,
+        circle.title,
+        circle.create_id,
+        circle.create_time,
+        circle.state,
+        circle.type,
+        circle.circle_master_id,
+        circle.details,
+        circle.head_img_url,
+        circle.top,
+        circle.hot,
+        circle.admin_ids,
+        circle.tag,
+        circle.circle_type,
+        circle_type.type_name AS circleTypeName
+        FROM
+        circle
+        INNER JOIN circle_type ON circle.circle_type = circle_type.id
+        WHERE `circle`.state != -1
+        ORDER BY
+        circle.create_time DESC
+         LIMIT #{start},#{end}
     </select>
     <select id="findById" resultMap="circleMap">
         SELECT * FROM circle WHERE id=#{id} AND state != -1
@@ -72,8 +92,26 @@
     </select>
 
     <select id="search" resultMap="circleVo">
-    SELECT * FROM circle
-    WHERE `circle`.state != -1 AND  (`circle`.`title` LIKE  CONCAT('%','${title}','%'))  ORDER BY create_time DESC  LIMIT #{start},#{end}
+       SELECT
+        circle.id,
+        circle.title,
+        circle.create_id,
+        circle.create_time,
+        circle.state,
+        circle.type,
+        circle.circle_master_id,
+        circle.details,
+        circle.head_img_url,
+        circle.top,
+        circle.hot,
+        circle.admin_ids,
+        circle.tag,
+        circle.circle_type,
+        circle_type.type_name AS circleTypeName
+        FROM
+        circle
+        INNER JOIN circle_type ON circle.circle_type = circle_type.id
+        WHERE `circle`.state != -1 AND  (`circle`.`title` LIKE  CONCAT('%','${title}','%'))  ORDER BY create_time DESC  LIMIT #{start},#{end}
     </select>
 
     <select id="searchCount" resultType="java.lang.Integer">

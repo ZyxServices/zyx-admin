@@ -6,6 +6,7 @@ import com.zyx.mapper.CircleMapper;
 import com.zyx.mapper.DevaMapper;
 import com.zyx.model.Circle;
 import com.zyx.model.Devaluation;
+import com.zyx.model.vo.CircleVo;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.CircleService;
 import com.zyx.utils.MapUtils;
@@ -32,7 +33,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
     public Map<String, Object> findByPager(Integer start, Integer pageSize) {
         Optional.ofNullable(start).orElse(0);
         Optional.ofNullable(pageSize).orElse(0);
-        List<Circle> circles = circleMapper.findByPager(start * pageSize, pageSize);
+        List<CircleVo> circles = circleMapper.findByPager(start * pageSize, pageSize);
         Integer count = circleMapper.searchCount();
         Map<String, Object> countHas = new HashMap<>();
         countHas.put("total", count);
