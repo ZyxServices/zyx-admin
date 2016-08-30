@@ -61,27 +61,9 @@ function circleCreate() {
     $("#createId").chosen();
     $("input").val("");
     $("textarea[name=details]").val("");
-    $("#circleBtnSure").click(function (e) {
-        var formData = new FormData();
-        formData.append('imgFile', $("#lefile")[0].files[0]);
-        $.ajax({
-            url: "/v1/upload/file",
-            type: 'post',
-            data: formData,
-            processData: false,
-            contentType: false,
-            beforeSend: function () {
-                return $("#circleCreates").data('bootstrapValidator').isValid();
-            },
-            success: function (data) {
-                $("input[name=headImgUrl]").val(data.data);
-                circleEidtor("#circleCreates", '../../circle/createCircle', 200, "创建成功");
-            }
-
-        })
-    })
-
+    $("#circleRecommend").attr("value", 1);
 }
+
 $(function () {
     $("#headImgShow").hide();
     $("#circleCreates").bootstrapValidator({
@@ -184,9 +166,9 @@ $(function () {
             {field: '', checkbox: true, align: 'center', valign: 'middle'},
             {field: 'id', title: 'id', align: 'center', valign: 'middle'},
             {field: 'title', title: '圈子名称'},
-            {field: 'circleTypeName', title: '圈子类别'},
+            {field: '', title: '圈子类别', formatter: CircleType},
             {field: 'createTime', title: '创建时间', formatter: getLocalTime},
-            {field: 'userName', title: '创建人'},
+            {field: '', title: '创建人', formatter: infoFormatter},
             {field: 'masterName', title: '圈主', sortable: true,},
             {field: 'adminIds', title: '管理员', sortable: true},
             {field: 'circleItemCount', title: '帖子数量', sortable: true},
@@ -196,6 +178,14 @@ $(function () {
         ]
     })
 });
+//圈子类型
+function CircleType(value, row, index) {
+    return row.circleTypeVo.typeName
+}
+//圈子创建人
+function infoFormatter(value, row, index) {
+    return row.userVo.nickName
+}
 //时间转换
 function getLocalTime(value) {
     return (new Date(value).format("yyyy-mm-dd HH:MM:ss"));
@@ -252,6 +242,7 @@ var operateEvent = {
     },
     //编辑圈子
     'click .edit': function (e, value, row, index) {
+        $("#circleRecommend").attr("value", 2);
         console.log(row);
         $("#circleList").hide();
         $("#circleCreate").show();
@@ -297,8 +288,21 @@ var operateEvent = {
     //圈子推荐
     'click .recommend': function (e, value, row, index) {
         $("#circleModal").modal("show");
-        $("#circleSelect").val("");
-        $(".row").val(row.id)
+        $("input[name=modelId]").val(row.id);
+        $("#circleSelect").empty();
+        $.post("/v1/deva/sequence", {model: "3", area: "2"}, function (result) {
+            if (result.state == 200) {
+                if (result.data.length > 0) {
+                    for (var i = 0; i < result.data.length; i++) {
+                        $("#circleSelect").append("<option value='" + result.data[i] + "'>" + result.data[i] + "</option>");
+                    }
+                }
+                else {
+                    $("#circleSelect").html('<option value="">圈子序列号已满，请先删除</option>');
+                }
+            }
+
+        })
     },
     //圈子屏蔽
     'click .Shield': function (e, value, row, index) {
@@ -378,6 +382,34 @@ function adminSelect(select, values) {
         $(select).trigger("liszt:updated");
     }
 }
+//创建帖子编辑帖子
+$("#circleBtnSure").click(function (e) {
+    var states = $("#circleRecommend").val();
+    console.log(states);
+    if (states == "1") {
+        var formData = new FormData();
+        formData.append('imgFile', $("#lefile")[0].files[0]);
+        $.ajax({
+            url: "/v1/upload/file",
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            beforeSend: function () {
+                return $("#circleCreates").data('bootstrapValidator').isValid();
+            },
+            success: function (data) {
+                $("input[name=headImgUrl]").val(data.data);
+                circleEidtor("#circleCreates", '../../circle/createCircle', 200, "创建成功");
+            }
+
+        })
+    } else if (states == "2") {
+
+    }
+
+})
+
 //创建、编辑圈子公用方法
 function circleEidtor(button, url, state, text) {
     $(button).ajaxSubmit({
@@ -421,9 +453,6 @@ function getImgURL(file) {
 }
 //圈子推荐
 $("#RdSures").click(function () {
-    /*  var selectValue = $("#circleSelect").val();*/
-    var RowId = $(".row").val();
-    $("input[name=modelId]").val(RowId);
     $("#circleRecommend").ajaxSubmit({
         type: "post",
         dateType: "json",
@@ -435,11 +464,10 @@ $("#RdSures").click(function () {
                 title: "推荐成功"
             });
             $("#circleModal").modal("hide");
+            $('#activity-list-table').bootstrapTable('refresh');
         }
 
     })
-
-
 })
 
 

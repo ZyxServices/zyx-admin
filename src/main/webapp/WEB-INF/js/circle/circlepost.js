@@ -89,6 +89,7 @@ function createPost() {
 }
 
 $(function () {
+
     $("#CirclePost").bootstrapValidator({
         fields: {
             "title": {
@@ -230,14 +231,11 @@ var operateEvents = {
         $("#cricleTitle").html(row.title);
         $(".radio_box").hide();
         $("#headImgShow").hide();
-        var $checked = $('#radio_checked label');
-        $checked.click(function () {
-            $(".radio_box").show();
-            $(this).addClass('current').siblings().removeClass('current');
-            var index = $checked.index(this);
-            $('div.radio_box> div').eq(index).show().siblings().hide();
-        })
-        $(".row").val(row.id);
+        $("input[name=modelId]").val(row.id);
+
+        $("#hotSelect").empty();
+        $("#chosenSelect").empty();
+
 
     },
     //圈子屏蔽
@@ -306,7 +304,7 @@ var operateEvents = {
 function getLocalTime(value) {
     return (new Date(value).format("yyyy-mm-dd HH:MM:ss"));
 }
-//创建圈子编辑圈子
+//创建帖子编辑帖子
 $("#postSure").click(function () {
     var states = $("#CirclePost").val();
     console.log(states);
@@ -347,29 +345,54 @@ function circleEidtor(form, url, state, text) {
     });
 }
 //帖子推荐
-var RecommendNumber = function () {
-    $.ajax({
-        type: "get",
-        url: "/v1/deva/sequence",
-        dateType: "json",
-        async: false,
-        data: {
-            model: '3',
-            area: '2'
-        },
-        success: function (data) {
-            console.log(data)
+var $checked = $('#radio_checked label');
+$checked.click(function () {
+    $(".radio_box").show();
+    $(this).addClass('current').siblings().removeClass('current');
+    /*  $(this).find("input").attr("checked", true).siblings().attr("checked", false);*/
+    /*  $(this).siblings().find("input").attr("checked", false);*/
+    var index = $checked.index(this);
+    $('div.radio_box> div').eq(index).show().siblings().hide();
+
+});
+function List(model, area, id) {
+    $.post("/v1/deva/sequence", {model: model, area: area}, function (result) {
+        console.log(result);
+        console.log(result.data);
+        if (result.state == 200) {
+            if (result.data.length > 0) {
+                for (var i = 0; i < result.data.length; i++) {
+                    $(id).append("<option value='" + result.data[i] + "'>" + result.data[i] + "</option>");
+                }
+            }
+            else {
+                $(id).html('<option value="">圈子序列号已满，请先删除</option>');
+            }
         }
+
     });
 }
-RecommendNumber();
-$("#circleSure").click(function (e) {
-    /*var selectValue = $("#circleSelect").val();*/
-    var RowId = $(".row").val();
-    var formData = new FormData();
-    $("input[name=modelId]").val(RowId);
-    var inputValue = $("input[name=area]").val();
+
+$('input:radio[name="area"]').change(function () {
+    var inputValue = $(this).val();
     if (inputValue == "1") {
+        console.log(1);
+        List("3", "1", "#hotSelect");
+    }
+    else if (inputValue == "3") {
+        List("3", "2", "#chosenSelect");
+        console.log(2);
+    }
+})
+
+$("#circleSure").click(function (e) {
+    var inputValue = $('input:radio[name="area"]:checked').val();
+    var formData = new FormData();
+    var firstSequence = $("#hotSelect").val();
+    var SecendSequence = $("#chosenSelect").val();
+    if (inputValue == "1") {
+        $("input[name=sequence]").val(firstSequence);
+        $("input[name=model]").val("3");
         $("#PostRecommend").ajaxSubmit({
             type: "post",
             dateType: "json",
@@ -378,14 +401,15 @@ $("#circleSure").click(function (e) {
             success: function (result) {
                 $.Popup({
                     confirm: false,
-                    title: "推荐成功"
+                    title: "首页帖子推荐成功"
                 });
                 $("#circleModal").modal("hide");
             }
 
         })
-
-    } else if (inputValue == 3) {
+    } else if (inputValue == "3") {
+        $("input[name=sequence]").val(SecendSequence);
+        $("input[name=model]").val("6");
         formData.append('imgFile', $("#lefile")[0].files[0]);
         $.ajax({
             url: "/v1/upload/file",
@@ -394,7 +418,7 @@ $("#circleSure").click(function (e) {
             processData: false,
             contentType: false,
             success: function (data) {
-                console.log(data)
+                console.log(data);
                 $("input[name=imageUrl]").val(data.data);
                 $("#PostRecommend").ajaxSubmit({
                     type: "post",
@@ -404,7 +428,7 @@ $("#circleSure").click(function (e) {
                     success: function (result) {
                         $.Popup({
                             confirm: false,
-                            title: "推荐成功"
+                            title: "圈子帖子推荐成功"
                         });
                         $("#circleModal").modal("hide");
                     }
