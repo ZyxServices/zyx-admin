@@ -31,7 +31,7 @@
         SELECT COUNT(id) FROM zan WHERE zan.body_type=5
     </select>
     <select id="commentSelect" parameterType="int" resultType="int">
-        SELECT COUNT(id) FROM reply WHERE reply.reply_type=1 AND reply.reply_id!=-1 AND reply_id=#{circleId}
+        SELECT COUNT(id) FROM comment WHERE comment_type=1 AND comment_id=#{circleId}
     </select>
     <select id="findByPager" resultMap="circleItemVoMap">
         SELECT

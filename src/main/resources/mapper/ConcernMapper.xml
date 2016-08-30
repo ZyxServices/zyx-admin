@@ -27,7 +27,7 @@
     </select>
 
     <select id="commentCountsSelect" parameterType="int" resultType="int">
-       SELECT COUNT(id) FROM reply WHERE reply.reply_type = 3 AND reply.reply_id !=- 1 AND reply_id = #{concernId}
+       SELECT COUNT(id) FROM comment WHERE comment_type = 3  AND comment_id = #{concernId}
     </select>
 
     <select id="userSelect" parameterType="int" resultType="com.zyx.model.vo.UserVo">
