@@ -1572,6 +1572,7 @@ var ZYFILE = {
                         return self.funFilterEligibleFile(files)
                     },
                     onSelect: function (selectFiles, allFiles) {
+                        console.log(selectFiles, allFiles)
                         if (allFiles.length > para.fileNumber) {
                             $.Popup({
                                 confirm: false,

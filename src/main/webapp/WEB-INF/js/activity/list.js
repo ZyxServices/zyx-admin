@@ -134,6 +134,7 @@ $(function () {
     }).summernote({
         callbacks: {
             onImageUpload: function (files) {
+                console.log(files)
                 //上传图片到服务器，使用了formData对象，至于兼容性...据说对低版本IE不太友好
                 var formData = new FormData();
                 formData.append('imgFile', files[0]);

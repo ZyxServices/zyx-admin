@@ -159,13 +159,108 @@ var operateEventssssss = {
 
     },
     'click .recommend': function (e, value, row, index) {
-        //$.ajax({
-        //    url:'/concern/concernList?start=0&pageSize=50',
-        //    method:'get',
-        //    success: function (result) {
-        //        console.log(result)
-        //    }
-        //})
+        var html = ''
+        html += '   <form class="form-horizontal" role="form" id="recommend" enctype="multipart/form-data">            '
+        html += '	<div class="container-fluid">';
+        html += '	    <div class="row">';
+        html += '	        <label class="control-label ">动态名称:</label><span >' + row.topicTitle + '</span>';
+        html += '	    </div>';
+        html += '	    <div class="row">';
+        html += '	        <label class="col-xs-6 control-label ">推荐模块:</label>';
+        html += '	        <span class="col-xs-6 col-md-4" id="radio_checked">';
+        html += '	            <label class="control-label "  style="width: 90px"><input type="radio" value="1" name="area"> 首页</label>';
+        html += '	        </span>';
+        html += '	    </div>';
+        html += '	    <div class="row">';
+        html += '	            <div>';
+        html += '	                <input style="display: none" name="model" value="4">';
+        html += '	                <input style="display: none" name="modelId" value="' + row.id + '">';
+        html += '	                <label class="col-xs-6 control-label ">显示顺序: </label>';
+        html += '	                <select name="sequence" id="hotSelect">';
+        html += '	                </select>';
+        html += '	            </div>';
+        html += '	     </div>';
+        html += '	     <div class="row">';
+        html += '	         <label class="col-xs-6  control-label ">封面图:</label>';
+        html += '	         <label class="control-label "><input name="imageUrl"  id="Cover" type="file"></label>';
+        html += '	     </div>';
+        html += '	    <div class="row">';
+        html += '	        <label class="col-xs-6 control-label ">推荐状态:</label>';
+        html += '	        <span class="col-xs-6 col-md-4">';
+        html += '	            <label class="control-label " style="width: 90px"><input type="radio" value="1" name="state"> 激活</label>';
+        html += '	            <label class="control-label " style="width: 90px"><input type="radio" value="0" name="state"> 未激活</label>';
+        html += '	        </span>';
+        html += '	    </div>';
+        html += '	</div>';
+        html += '   </from>'
+        $.Popup({
+            title: '直播推荐',
+            template: html,
+            remove: false,
+            saveEvent: function () {
+                $("#upload").modal({backdrop: 'static', keyboard: false});
+                var formData = new FormData();
+                formData.append('imgFile', $('#Cover')[0].files[0]);
+                $.ajax({
+                    url: '/v1/upload/file',//后台文件上传接口
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (result) {
+                        if (result.state == 200) {
+                            $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="' + result.data + '" >');
+                            $.ajax({
+                                url: '/v1/deva/add',
+                                type: 'post',
+                                data: $('#recommend').serialize(),
+                                dataType: 'json',
+                                success: function (result) {
+                                    removeEvent('upload')
+                                    if (result.state == 200) {
+                                        $.Popup({
+                                            confirm: false,
+                                            template: '推荐成功'
+                                        })
+                                    }
+                                },
+                                error: function (res) {
+                                    removeEvent('upload')
+                                    $.Popup({
+                                        confirm: false,
+                                        template: '推荐上传失败（请检查内容是否填写完整！！！）'
+                                    })
+                                }
+                            })
+                        } else {
+                            removeEvent('upload')
+                            $.Popup({
+                                confirm: false,
+                                template: result.successmsg
+                            })
+                        }
+                    },
+                    error: function (res) {
+                        removeEvent('upload')
+                        $.Popup({
+                            confirm: false,
+                            template: '图片上传失败，图片不能为空'
+                        })
+                    }
+                });
+            }
+        })
+        $.ajax({
+            type: "get",
+            dateType: "json",
+            url: "/v1/deva/sequence?model=2&area=1",
+            async: false,
+            success: function (res) {
+                res.data.forEach(function (e) {
+                    $('#hotSelect').append("<option value='" + e + "'>" + e + "</option>")
+                })
+            }
+        })
     },
     'click .Shield': function (e, value, row, index) {
         var state, btnval, btn;
@@ -303,13 +398,9 @@ $(function () {
             //console.info(allFiles);
         },
         onDelete: function(file, surplusFiles){                     // 删除一个文件的回调方法
-            console.info("当前删除了此文件：");
-            console.info(file);
-            console.info("当前剩余的文件：");
-            console.info(surplusFiles);
+
         },
         onSuccess: function(file,response){                    // 文件上传成功的回调方法
-
             if(JSON.parse(response).state==902){
                     console.log(file)
                 alert(JSON.parse(response).errmsg)
