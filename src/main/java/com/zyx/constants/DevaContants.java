@@ -10,9 +10,11 @@ public interface DevaContants extends Constants {
     int DEVA_AREA_HOME_PAGE = 1;
     int DEVA_AREA_SECOND = 2;
 
-
     int DEVA_NOT_EXIST_MODEL_AREA = 73001;
     String MSG_DEVA_NOT_EXIST_MODEL_AREA = "not exist modle or area ";
+
+    int DEVA_REPEAT = 73002;
+    String MSG_DEVA_REPEAT="repeat set devaluation";
     Map<String, Integer> DEVA_AREA_MAX_ITEM = new HashMap<String, Integer>() {
         {
             put("1_1", 5);
