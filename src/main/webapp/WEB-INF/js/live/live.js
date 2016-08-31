@@ -175,10 +175,10 @@ var operateEventssssss = {
         html += '	        <label class="col-xs-4 control-label ">推荐模块:</label>';
         html += '           <div class="controls">';
         html += '	            <label class="radio col-xs-4 ">';
-        html += '	              <input type="radio" value="1" name="area"  > 首页';
+        html += '	              <input type="radio" value="1" name="area" onclick="liveSequence(1)" checked="checked"> 首页';
         html += '	            </label>'
         html += '	            <label class="radio col-xs-4 ">';
-        html += '	              <input type="radio" value="2" name="area" > 看台';
+        html += '	              <input type="radio" value="2" name="area" onclick="liveSequence(2)" > 看台';
         html += '	            </label>';
         html += '	        </div>';
         html += '	    </div>';
@@ -199,7 +199,7 @@ var operateEventssssss = {
         html += '	        <label class="col-xs-6 control-label ">推荐状态:</label>';
         html += '           <div class="controls">';
         html += '	            <label class="radio col-xs-4 ">';
-        html += '	              <input type="radio" value="1" name="state"  > 激活';
+        html += '	              <input type="radio" value="1" name="state" checked="checked" > 激活';
         html += '	            </label>'
         html += '	            <label class="radio col-xs-4 ">';
         html += '	              <input type="radio" value="0" name="state" > 未激活';
@@ -270,17 +270,8 @@ var operateEventssssss = {
                 });
             }
         })
-        $.ajax({
-            type: "get",
-            dateType: "json",
-            url: "/v1/deva/sequence?model=2&area=1",
-            async: false,
-            success: function (res) {
-                res.data.forEach(function (e) {
-                    $('#hotSelect').append("<option value='" + e + "'>" + e + "</option>")
-                })
-            }
-        })
+        //序列查詢初始化
+        liveSequence(1)
     },
     //屏蔽
     'click .Shield': function (e, value, row, index, obj) {
@@ -328,6 +319,21 @@ var operateEventssssss = {
         ajaxPlugins.remove(delUrl, 'live_table', 'post');
     }
 };
+//序列查詢
+function liveSequence(area){
+    $('#hotSelect').empty()
+    $.ajax({
+        type: "get",
+        dateType: "json",
+        url: "/v1/deva/sequence?model=2&area="+area+"",
+        async: false,
+        success: function (res) {
+            res.data.forEach(function (e) {
+                $('#hotSelect').append("<option value='" + e + "'>" + e + "</option>")
+            })
+        }
+    })
+}
 
 //直播分类操作按钮初始化
 function operateFormatterclass(value, row, index) {

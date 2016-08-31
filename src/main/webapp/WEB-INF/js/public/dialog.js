@@ -55,7 +55,6 @@ dialog.prototype = {
             }
         })
         $('#x' + globalID + '').click(function () {
-            console.log(this)
             sav.closeEvents(globalIDd,sav)
         })
         $('#maskCancel' + globalID + '').click(function () {
