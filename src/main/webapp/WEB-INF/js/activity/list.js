@@ -196,7 +196,7 @@ $(function () {
         search: true,
         sidePagination: "server",
         method: "get",
-        queryParamsType: "limit",
+        queryParamsType: "undefined",
         queryParams: queryParams,
         responseHandler: fromData
 
@@ -258,9 +258,10 @@ $("#activityStartTime,#activityEndTime,#signEndTime").focus(function () {
 });
 
 function queryParams(params) {
+    console.log(params);
     return {
-        pageDataNum: params.limit,
-        pageNum: (params.offset + 1),
+        pageDataNum: params.pageSize,
+        pageNum: params.pageNumber,
         search: params.search
     };
 }

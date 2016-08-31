@@ -47,7 +47,8 @@
         <result column="del" jdbcType="INTEGER" property="del"/>
         <result column="mask" jdbcType="INTEGER" property="mask"/>
         <result column="desc_content" jdbcType="LONGVARCHAR" property="descContent"/>
-        <association property="userName" column="user_id" select="com.zyx.mapper.AppUserMapper.selectAppUserGetName"></association>
+        <association property="userName" column="user_id"
+                     select="com.zyx.mapper.AppUserMapper.selectAppUserGetName"></association>
         <association property="isDeva" column="id" select="queryIsDeva"></association>
     </resultMap>
 
@@ -55,13 +56,13 @@
     <select id="queryActivity" parameterType="com.zyx.parm.activity.QueryActivityParm" resultMap="activitydto">
         select * from activity where 1=1
         <if test="groupName != null and groupName != ''">
-            and (title LIKE CONCAT('%','${groupName}','%' ) or address LIKE CONCAT('%','${groupName}','%' ))
+            and (title LIKE CONCAT('%',${groupName},'%' ) or address LIKE CONCAT('%',${groupName},'%' ))
         </if>
         <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
             and create_time &gt;= #{startTime}
             and end_time &lt;= #{endTime}
         </if>
-        AND del != 1
+        AND del = 0 AND mask = 0
         ORDER BY create_time desc
         <if test="pageNumber != null and page != null">
             limit #{page}, #{pageNumber}
@@ -70,6 +71,10 @@
 
     <select id="queryIsDeva" parameterType="java.lang.Integer" resultType="boolean">
         SELECT NOT ISNULL(id) as isDeva FROM devaluation WHERE model = 1 AND model_id = #{id}
+    </select>
+
+    <select id="selectCountActivity" resultType="java.lang.Integer">
+        SELECT COUNT(id) FROM activity WHERE del = 0 AND mask = 0;
     </select>
 
     <select id="queryActivityIn" parameterType="java.util.List" resultType="com.zyx.model.Activity">

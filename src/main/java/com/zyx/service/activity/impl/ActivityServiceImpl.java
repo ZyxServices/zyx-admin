@@ -63,7 +63,7 @@ public class ActivityServiceImpl implements ActivityService {
         parm.setGroupName(searchText);
         List<ActivityDto> activities = activityMapper.queryActivity(parm);
 
-        int i = activityMapper.selectCount(null);
+        int i = activityMapper.selectCountActivity();
         if (activities != null && activities.size() > 0) {
             Map<String, Object> map = MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", activities);
             map.put("dataCount", i);
