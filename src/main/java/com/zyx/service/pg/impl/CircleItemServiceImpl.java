@@ -24,6 +24,10 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
     @Resource
     private CircleItemMapper circleItemMapper;
 
+    public CircleItemServiceImpl() {
+        super(CircleItem.class);
+    }
+
     @Override
     public Map<String, Object> findByPager(Integer start, Integer pageSize, Integer circleId) {
         Optional.ofNullable(start).orElse(0);

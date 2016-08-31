@@ -13,4 +13,10 @@ public interface DevaMapper extends Mapper<Devaluation> {
 
     public List<DevaVo> selectDevaList(DevaParam devaParam);
     public List<Integer> selectUsedSequence(Integer model, Integer area);
+    /**
+     * 查询相关类型的所有首推ids
+     * @param param
+     * @return
+     */
+    List<Integer> queryModelIds(DevaParam param);
 }

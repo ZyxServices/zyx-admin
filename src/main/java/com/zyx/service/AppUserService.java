@@ -26,10 +26,14 @@ import java.util.Map;
  * @title AppUserService.java
  */
 @Service
-public class AppUserService {
+public class AppUserService extends BaseServiceImpl<AppUser>{
 
     @Autowired
     AppUserMapper appUserMapper;
+
+    public AppUserService() {
+        super(AppUser.class);
+    }
 
     public AppUser selectByPhone(String phone) {
         AppUser appUser = new AppUser();
@@ -173,5 +177,9 @@ public class AppUserService {
         } catch (Exception e) {
             return AppUserConstants.MAP_500;
         }
+    }
+
+    List<AppUserListDto> selectBaseInfo(List<Integer> ids){
+        return  null;
     }
 }

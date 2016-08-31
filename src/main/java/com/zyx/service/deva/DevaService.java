@@ -36,4 +36,6 @@ public interface DevaService extends BaseService<Devaluation>{
     List<DevaVo> getDevaList(Integer model, Integer area);
 
     List<Integer> getUsedSequence(Integer model, Integer area);
+    List<Integer> selectModelIds(Integer area,Integer model);
+
 }

@@ -25,6 +25,10 @@ public class CircleTypeServiceImpl extends BaseServiceImpl<CircleType> implement
     @Resource
     private CircleTypeMapper circleTypeMapper;
 
+    public CircleTypeServiceImpl() {
+        super(CircleType.class);
+    }
+
     @Override
     public Map<String, Object> createCircleType(String typeName) {
         if (Objects.equals(typeName, null) || Objects.equals(typeName, "")) {

@@ -33,6 +33,10 @@ public class DevaServiceImpl extends BaseServiceImpl<Devaluation> implements Dev
     @Resource
     protected RedisTemplate<String, String> stringRedisTemplate;
 
+    public DevaServiceImpl() {
+        super(Devaluation.class);
+    }
+
     @Override
     public List<Devaluation> getDevas(Integer model) {
         return getDevas(model,null);
@@ -56,5 +60,13 @@ public class DevaServiceImpl extends BaseServiceImpl<Devaluation> implements Dev
     @Override
     public List<Integer> getUsedSequence(Integer model, Integer area) {
         return devaMapper.selectUsedSequence(model,area);
+    }
+
+    @Override
+    public List<Integer> selectModelIds(Integer area, Integer model) {
+        DevaParam param =new DevaParam();
+        param.setArea(area);
+        param.setModel(model);
+        return devaMapper.queryModelIds(param);
     }
 }

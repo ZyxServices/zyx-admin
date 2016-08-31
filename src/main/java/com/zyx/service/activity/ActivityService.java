@@ -2,6 +2,7 @@ package com.zyx.service.activity;
 
 
 import com.zyx.model.Activity;
+import com.zyx.service.BaseService;
 
 import java.util.Map;
 
@@ -13,7 +14,7 @@ import java.util.Map;
  *          Copyright (c)2016 tyj-版权所有
  * @title com.zyx.service.activity
  */
-public interface ActivityService {
+public interface ActivityService extends BaseService<Activity>{
 
     /**
      * 添加活动

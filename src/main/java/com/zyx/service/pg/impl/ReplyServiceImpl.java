@@ -25,6 +25,10 @@ public class ReplyServiceImpl extends BaseServiceImpl<Reply> implements ReplySer
     @Resource
     private ReplyMapper replyMapper;
 
+    public ReplyServiceImpl() {
+        super(Reply.class);
+    }
+
 
     @Override
     public Map<String, Object> findReplyByParams(Integer replyType, Integer replyId, Integer replyState) {

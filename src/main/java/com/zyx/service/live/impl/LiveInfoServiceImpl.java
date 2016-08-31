@@ -21,7 +21,9 @@ import java.util.List;
 public class LiveInfoServiceImpl extends BaseServiceImpl<LiveInfo> implements LiveInfoService {
     @Autowired
     LiveInfoMapper liveInfoMapper;
-
+    public LiveInfoServiceImpl() {
+        super(LiveInfo.class);
+    }
     @Override
     public void addLiveInfo(LiveInfo liveInfo) {
         liveInfo.setDel(0);

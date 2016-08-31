@@ -27,6 +27,10 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
     @Resource
     private ConcernMapper concernMapper;
 
+    public ConcernServiceImpl() {
+        super(Concern.class);
+    }
+
     @Override
     public Map<String, Object> findByPager(int start, int pageSize) {
 

@@ -3,12 +3,22 @@ package com.zyx.controller.deva;
 import com.zyx.constants.Constants;
 import com.zyx.constants.DevaContants;
 import com.zyx.constants.LiveConstants;
+import com.zyx.constants.SystemConstants;
 import com.zyx.model.Devaluation;
+import com.zyx.service.AppUserService;
+import com.zyx.service.activity.ActivityService;
 import com.zyx.service.deva.DevaService;
+import com.zyx.service.live.LiveInfoService;
+import com.zyx.service.pg.CircleItemService;
+import com.zyx.service.pg.CircleService;
+import com.zyx.service.pg.ConcernService;
 import com.zyx.vo.deva.DevaVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.models.auth.In;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +38,22 @@ import java.util.Map;
 @RequestMapping("/v1/deva")
 @Api(description = "首推相关接口")
 public class DevaController {
-
+    @Autowired
+    ActivityService activityService;
+    @Autowired
+    LiveInfoService liveInfoService;
+    @Autowired
+    CircleService circleService;
+    @Autowired
+    CircleItemService circleItemService;
+    @Autowired
+    ConcernService concernService;
+    @Autowired
+    AppUserService appUserService;
+    @Autowired
+    RedisTemplate<String, List<Devaluation>> innerDevaTemplate;
+    @Autowired
+    RedisTemplate<String, List<Integer>> innerDevaIdTemplate;
     @Resource
     private DevaService devaService;
 
@@ -64,6 +89,7 @@ public class DevaController {
                 entity.setSequence(sequence);
                 entity.setState(state);
                 int n = devaService.save(entity);
+                refreshDevas(area, model);
                 result.put(Constants.STATE, LiveConstants.SUCCESS);
             }
         }
@@ -83,13 +109,17 @@ public class DevaController {
 
         Map<String, Object> result = new HashMap<>();
         //判断目前条数是否满
-        Devaluation entity = new Devaluation();
-        entity.setId(id);
-        entity.setArea(area);
-        entity.setImage(imageUrl);
-        entity.setSequence(sequence);
-        entity.setState(state);
-        devaService.updateNotNull(entity);
+        Devaluation deva = devaService.selectByKey(id);
+        if (deva != null) {
+            Devaluation entity = new Devaluation();
+            entity.setId(id);
+            entity.setArea(area);
+            entity.setImage(imageUrl);
+            entity.setSequence(sequence);
+            entity.setState(state);
+            devaService.updateNotNull(entity);
+            refreshDevas(deva.getArea(), deva.getModel());
+        }
         result.put(Constants.STATE, LiveConstants.SUCCESS);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(result);
@@ -101,7 +131,12 @@ public class DevaController {
     public ModelAndView deleteDeva(@ApiParam(required = true, name = "id", value = "推荐ID") @RequestParam(name = "id", required = true) Integer id
     ) {
         Map<String, Object> result = new HashMap<>();
-        devaService.delete(id);
+        Devaluation deva = devaService.selectByKey(id);
+        if (deva != null) {
+            devaService.delete(id);
+            refreshDevas(deva.getArea(), deva.getModel());
+        }
+
         result.put(Constants.STATE, LiveConstants.SUCCESS);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(result);
@@ -157,8 +192,40 @@ public class DevaController {
         return new ModelAndView(jsonView);
     }
 
-    private void refreshDevaRedis(Integer model, Integer area) {
+    private List refreshDevas(Integer area, Integer model) {
+        List<Integer> ids = devaService.selectModelIds(area, model);
 
+        if (null != ids && !ids.isEmpty()) {
+            List list = null;
+            switch (model) {
+                case Constants.MODEL_ACTIVITY:
+                    list = activityService.selectByIds(ids);
+                    break;
+                case Constants.MODEL_LIVE:
+                    list = liveInfoService.selectByIds(ids);
+                    break;
+                case Constants.MODEL_CIRCLE:
+                    list = circleService.selectByIds(ids);
+                    break;
+                case Constants.MODEL_CIRCLE_ITEM:
+                    list = circleItemService.selectByIds(ids);
+                    break;
+                case Constants.MODEL_CONCERN:
+                    list = concernService.selectByIds(ids);
+                    break;
+                case Constants.MODEL_USER:
+                    list = appUserService.selectByIds(ids, "id", "createTime", "phone", "nickname", "sex", "avatar");
+                    break;
+                case Constants.MODEL_SYSTEM:
+                    list = null;
+                    break;
+            }
+            if (list != null && !list.isEmpty()) {
+                innerDevaTemplate.delete(SystemConstants.MAKE_REDIS_INNER_DEVA + area + ":" + model);
+                innerDevaIdTemplate.delete(SystemConstants.MAKE_REDIS_INNER_DEVA_ID + area + ":" + model);
+            }
+        }
+        return null;
     }
 
 }

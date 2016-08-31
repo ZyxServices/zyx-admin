@@ -58,4 +58,18 @@ public interface BaseService<T> {
      * @return
      */
     List<T> search(String property,Object value);
+    /**
+     *  id查询
+     * @param keys
+     * @return
+     */
+    List<T> selectByIds(List<Integer> keys);
+
+    /**
+     * ids查询 可设置查询字段
+     * @param keys
+     * @param properties
+     * @return
+     */
+    List<T> selectByIds(List<Integer> keys,String... properties);
 }

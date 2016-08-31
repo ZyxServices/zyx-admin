@@ -1,9 +1,10 @@
 package com.zyx.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "t_live")
-public class LiveInfo {
+public class LiveInfo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

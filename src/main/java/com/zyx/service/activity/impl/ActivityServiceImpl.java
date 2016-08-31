@@ -6,6 +6,7 @@ import com.zyx.dto.ActivityDto;
 import com.zyx.mapper.ActivityMapper;
 import com.zyx.model.Activity;
 import com.zyx.parm.activity.QueryActivityParm;
+import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.activity.ActivityService;
 import com.zyx.utils.MapUtils;
 import org.springframework.stereotype.Service;
@@ -26,10 +27,14 @@ import java.util.Map;
  * @update 16-7-18 下午4:31
  */
 @Service
-public class ActivityServiceImpl implements ActivityService {
+public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements ActivityService {
 
     @Resource
     private ActivityMapper activityMapper;
+
+    public ActivityServiceImpl() {
+        super(Activity.class);
+    }
 
     @Override
     public Map<String, Object> insertActivity(Activity activity) {

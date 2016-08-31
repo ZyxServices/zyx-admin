@@ -77,4 +77,21 @@
       ORDER BY
       sequence
   </select>
+
+    <select id="queryModelIds" parameterType="com.zyx.parm.deva.DevaParam" resultType="java.lang.Integer">
+        select model_id
+        from devaluation
+        where
+        1=1
+        <if test="area != null">
+            AND
+            area = #{area}
+        </if>
+        <if test="model != null">
+            AND
+            model = #{model}
+        </if>
+        ORDER BY
+        create_time desc
+    </select>
 </mapper>

@@ -33,4 +33,5 @@ public interface AppUserMapper extends Mapper<AppUser> {
     int updateAppUserByPrimaryKey(AppUserCreateParam param);
 
     void updateAuthInfo(AppUserCreateParam param);
+
 }

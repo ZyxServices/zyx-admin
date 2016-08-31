@@ -3,6 +3,7 @@ package com.zyx.service.live.impl;
 import com.zyx.constants.LiveConstants;
 import com.zyx.mapper.LiveLabMapper;
 import com.zyx.model.LiveLab;
+import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.live.LiveLabService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -16,12 +17,15 @@ import java.util.List;
  */
 
 @Service("liveLabService")
-public class LiveLabServiceImpl implements LiveLabService {
+public class LiveLabServiceImpl extends BaseServiceImpl<LiveLab> implements LiveLabService {
     @Autowired
     LiveLabMapper liveLabMapper;
     @Autowired
     private RedisTemplate<String, LiveLab> redisTemplate;
 
+    public LiveLabServiceImpl() {
+        super(LiveLab.class);
+    }
     @Override
     public int addLiveLab(LiveLab liveLab) {
         liveLab.setDel(0);

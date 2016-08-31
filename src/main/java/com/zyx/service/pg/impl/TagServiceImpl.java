@@ -25,6 +25,10 @@ public class TagServiceImpl extends BaseServiceImpl<Tag> implements TagService {
     @Resource
     private TagMapper tagMapper;
 
+    public TagServiceImpl() {
+        super(Tag.class);
+    }
+
     @Override
     public Map<String, Object> findAll() {
         List<Tag> tags = tagMapper.findAll();

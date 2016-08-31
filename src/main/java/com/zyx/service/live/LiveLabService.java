@@ -1,13 +1,14 @@
 package com.zyx.service.live;
 
 import com.zyx.model.LiveLab;
+import com.zyx.service.BaseService;
 
 import java.util.List;
 
 /**
  * Created by MrDeng on 2016/7/18.
  */
-public interface LiveLabService {
+public interface LiveLabService extends BaseService<LiveLab> {
 
 
     public LiveLab getByLab(String lab);

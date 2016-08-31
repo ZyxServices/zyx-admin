@@ -31,6 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.zyx.service.BaseService;
 
 import tk.mybatis.mapper.common.Mapper;
+import tk.mybatis.mapper.entity.Example;
 
 /**
  * @author ZhangHuaRong
@@ -43,6 +44,11 @@ import tk.mybatis.mapper.common.Mapper;
  */
 public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
+    protected Class<?> propertyClazz;
+
+    public BaseServiceImpl(Class<?> propertyClazz) {
+        this.propertyClazz = propertyClazz;
+    }
     @Autowired
     protected Mapper<T> mapper;
 
@@ -91,5 +97,22 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
     @Override
     public List<T> search(String property, Object value) {
         return null;
+    }
+
+    @Override
+    public List<T> selectByIds(List<Integer> keys) {
+        Example example = new Example(propertyClazz);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andIn("id", keys);
+        return mapper.selectByExample(example);
+    }
+
+    @Override
+    public List<T> selectByIds(List<Integer> keys, String... properties) {
+        Example example = new Example(propertyClazz);
+        example.selectProperties(properties);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andIn("id", keys);
+        return mapper.selectByExample(example);
     }
 }

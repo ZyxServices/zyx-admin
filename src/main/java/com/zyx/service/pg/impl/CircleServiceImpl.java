@@ -29,6 +29,10 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
     @Resource
     private DevaMapper devaMapper;
 
+    public CircleServiceImpl() {
+        super(Circle.class);
+    }
+
     @Override
     public Map<String, Object> findByPager(Integer start, Integer pageSize) {
         Optional.ofNullable(start).orElse(0);

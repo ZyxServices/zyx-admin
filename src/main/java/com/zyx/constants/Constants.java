@@ -274,12 +274,43 @@ public interface Constants {
         put(Constants.ERROR_MSG, ERROR_UN_MASK_1004_MSG);
     }};
 
-    Map<Integer ,String> modelTable= new HashMap<Integer,String>(){{
-        put(1,"activity");
-        put(2,"");
-        put(3,"");
-        put(4,"");
-        put(5,"");
-        put(6,"user");
+    //////////////////Model 模块定义//////////////////
+    //子模块 当前数字后加两位如1子模块为101 11子模块为1101
+    /**
+     * 活动模块
+     */
+    int MODEL_ACTIVITY = 1;
+    /**
+     * 直播模块
+     */
+    int MODEL_LIVE = 2;
+    /**
+     * 圈子模块
+     */
+    int MODEL_CIRCLE = 3;
+    /**
+     * 帖子模块
+     */
+    int MODEL_CIRCLE_ITEM = 4;
+    /**
+     * 动态模块
+     */
+    int MODEL_CONCERN = 5;
+    /**
+     * 用户模块
+     */
+    int MODEL_USER = 6;
+    /**
+     * 系统模块
+     */
+    int MODEL_SYSTEM = 7;
+
+    Map<Integer, String> devaNames = new HashMap() {{
+        put(1, "activityDevas");
+        put(2, "liveDevas");
+        put(3, "cirleDevas");
+        put(4, "cirleItemDevas");
+        put(5, "concerDevas");
+        put(6, "userDevas");
     }};
 }
