@@ -11,6 +11,7 @@
     <meta content="" name="author" />
     <jsp:include page="../public/common-styles.jsp" />
     <link href="<%=request.getContextPath()%>/css/zyUpload.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../../css/tiyujia/style.css"/>
 </head>
 
 <body class="page-header-fixed">
