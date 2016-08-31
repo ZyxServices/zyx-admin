@@ -6,8 +6,8 @@
         <result column="create_time" jdbcType="BIGINT" property="createTime"/>
         <result column="auth" jdbcType="INTEGER" property="auth"/>
         <result column="type" jdbcType="INTEGER" property="type"/>
-        <result column="start" jdbcType="BIGINT" property="start"/>
-        <result column="end" jdbcType="BIGINT" property="end"/>
+        <result column="start_time" jdbcType="BIGINT" property="start"/>
+        <result column="end_time" jdbcType="BIGINT" property="end"/>
         <result column="user_id" jdbcType="BIGINT" property="userId"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="lab" jdbcType="INTEGER" property="lab"/>
@@ -22,8 +22,8 @@
         <result column="create_time" jdbcType="BIGINT" property="createTime"/>
         <result column="auth" jdbcType="INTEGER" property="auth"/>
         <result column="type" jdbcType="INTEGER" property="type"/>
-        <result column="start" jdbcType="BIGINT" property="start"/>
-        <result column="end" jdbcType="BIGINT" property="end"/>
+        <result column="start_time" jdbcType="BIGINT" property="start"/>
+        <result column="end_time" jdbcType="BIGINT" property="end"/>
         <result column="user_id" jdbcType="BIGINT" property="userId"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="lab" jdbcType="INTEGER" property="lab"/>
@@ -33,7 +33,7 @@
     </resultMap>
 
     <select id="search" parameterType="java.lang.String" resultType="com.zyx.vo.live.LiveInfoVo">
-        SELECT id,create_time,auth,type,start,end,user_id,title,lab,bgm_url,vedio_url,state
+        SELECT id,create_time,auth,type,start_time,end_time,user_id,title,lab,bgm_url,vedio_url,state
         FROM t_live AS tl
         WHERE tl.title LIKE #{keyword}
         OR

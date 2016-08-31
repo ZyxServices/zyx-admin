@@ -27,11 +27,13 @@ public class LiveInfo {
     /**
      * 开始时间
      */
+    @Column(name = "start_time")
     private Long start;
 
     /**
      * 结束时间
      */
+    @Column(name = "end_time")
     private Long end;
 
     /**
