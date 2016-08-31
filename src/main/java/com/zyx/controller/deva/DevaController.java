@@ -46,7 +46,7 @@ public class DevaController {
         Integer sSize = DevaContants.DEVA_AREA_MAX_ITEM.get(model + "_" + area);
         if (sSize == null) {
             result.put(Constants.STATE, DevaContants.DEVA_NOT_EXIST_MODEL_AREA);
-            result.put(Constants.ERROR_MSG, DevaContants.DEVA_NOT_EXIST_MODEL_AREA);
+            result.put(Constants.ERROR_MSG, DevaContants.MSG_DEVA_NOT_EXIST_MODEL_AREA);
         } else {
             //Redis判断目前条数是否满
             Devaluation entity = new Devaluation();

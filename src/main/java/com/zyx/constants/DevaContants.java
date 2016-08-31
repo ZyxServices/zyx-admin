@@ -32,9 +32,9 @@ public interface DevaContants extends Constants {
             put("3_1",3);
             put("5_1",9);
             put("6_1",10);
-            put("4_2",5);
-            put("3_2",3);
-            put("2_3",4);
+            put("4_3",5);
+            put("3_3",3);
+            put("2_2",4);
         }
     };
 }
