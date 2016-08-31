@@ -37,7 +37,7 @@ public class DevaController {
     public ModelAndView queryActivity(
             @ApiParam(required = true, name = "model", value = "模块类型（1活动，2直播，3圈子，4帖子，5动态，6用户，7系统）") @RequestParam(name = "model", required = true) Integer model,
             @ApiParam(required = true, name = "modelId", value = "模块ID") @RequestParam(name = "modelId", required = true) Integer modelId,
-            @ApiParam(required = true, name = "area", value = "展示区域（1首页，2精选圈子，3看台）") @RequestParam(name = "area", required = true) Integer area,
+            @ApiParam(required = true, name = "area", value = "展示区域（1首页，2看台，3精选圈子）") @RequestParam(name = "area", required = true) Integer area,
             @ApiParam(required = false, name = "imageUrl", value = "图片地址") @RequestParam(name = "imageUrl", required = false) String imageUrl,
             @ApiParam(required = true, name = "state", value = "状态（0-未激活，1-激活）") @RequestParam(name = "state", required = true) Integer state,
             @ApiParam(required = true, name = "sequence", value = "展示顺序") @RequestParam(name = "sequence", required = true) Integer sequence
