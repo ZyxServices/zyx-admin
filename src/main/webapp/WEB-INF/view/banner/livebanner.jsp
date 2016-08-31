@@ -39,7 +39,7 @@
     <!-- BEGIN PAGE -->
 
     <div class="page-content">
-        <div class="container-fluid" id="liveBannerList">
+        <div class="container-fluid" id="bannerList">
 
             <!-- BEGIN PAGE HEADER-->
 
@@ -74,7 +74,7 @@
                     <div>
                         <select class="form-control" onchange="liveDevaChange(this)">
                             <option value="1">首页微直播banner管理</option>
-                            <option value="2">看台轮播banner管理</option>
+                            <option value="2">看台直播banner管理</option>
                         </select>
                     </div>
                 </div>
@@ -99,7 +99,8 @@
                                 <th data-field="modelTitle">直播名称</th>
                                 <th data-field="image">图片</th>
                                 <th data-field="sequence">排序</th>
-                                <th data-field="activation">是否激活</th>
+                                <th data-field="state">是否激活</th>
+                                <th data-field="createTime" data-formatter="timeFormat">创建时间</th>
                                 <th data-formatter="operate" data-events="operateEvents">操作</th>
                             </tr>
                             </thead>
@@ -126,7 +127,7 @@
                                 <th data-field="image">图片</th>
                                 <th data-field="sequence">排序</th>
                                 <th data-field="activation">是否激活</th>
-                                <th data-formatter="standOperate" data-events="operateEvents">操作</th>
+                                <th data-formatter="operate" data-events="operateEvents">操作</th>
                             </tr>
                             </thead>
                         </table>
@@ -136,8 +137,8 @@
             </div>
 
         </div>
-        <%--创建banner--%>
-        <div class="container-fluid hide" id="liveBannerCreate">
+        <%--编辑banner--%>
+        <div class="container-fluid hide" id="bannerEdit">
 
             <!-- BEGIN PAGE HEADER-->
 
@@ -149,7 +150,7 @@
 
                     <h3 class="page-title">
 
-                        直播上传banner<small>statistics and more</small>
+                        直播banner<small>statistics and more</small>
 
                     </h3>
 
@@ -165,7 +166,7 @@
 
                         </li>
 
-                        <li><a href="#">上传</a></li>
+                        <li><a href="#">编辑</a></li>
                     </ul>
 
                     <!-- END PAGE TITLE & BREADCRUMB-->
@@ -176,70 +177,68 @@
 
             <!-- END PAGE HEADER-->
 
-            <div id="activity-create">
+            <div id="live-banner">
 
                 <!-- BEGIN DASHBOARD STATS -->
                 <div class="row-fluid">
 
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" id="bannerForm">
+                        <input type="hidden" name="id" id="devaId">
                         <div class="control-group">
                             <label class="control-label">直播名称</label>
                             <div class="controls">
-                                <input type="text" class="span6 form-control" />
-                                <span class="help-inline">*</span>
+                                <input type="text" class="span6 form-control" disabled id="title"/>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">直播原有封面图</label>
+                            <div class="controls" id="preImage">
+
                             </div>
                         </div>
 
                         <div class="control-group">
                             <label class="control-label">推荐模块</label>
                             <div class="controls">
-                                <label class="radio"><input type="radio" name="module">首页微直播</label>
-                                <label class="radio"><input type="radio" name="module">看台轮播</label>
-                                <span class="help-inline">备注：默认不选择状态，下拉框隐藏。选择哪一个推荐模块，对应的下拉框才会出现，两个推荐模块可同时选择</span>
+                                <label class="radio"><input type="radio" name="area" value="1">首页微直播</label>
+                                <label class="radio"><input type="radio" name="area" value="4">看台轮播</label>
                             </div>
                         </div>
 
-                        <div class="control-group hide">
+                        <div class="control-group">
                             <label class="control-label"></label>
                             <div class="controls">
-                                <select class="span3">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                    <option>9</option>
+                                <select class="span3" id="homepageSequence">
                                 </select>
-                                <select class="span3">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
+                                <select class="span3" id="standSequence">
                                 </select>
                             </div>
                         </div>
 
                         <div class="control-group">
-                            <label class="control-label">图片</label>
+                            <label class="control-label">封面</label>
                             <div class="controls">
-                                <button class="btn btn-default">上传图片</button>
+                                <input type="hidden" name="imageUrl" id="imageUrl">
+                                <input id="lefile" type="file" class="hideInput">
+                                <a class="btn btn-default" href="javascript:void (0)" id="photoCover" onclick="$('input[id=lefile]').click();">选择图片</a>
+                                <div style="margin-top: 10px" id="imagesWrap">
+                                    <img id="images" src="">
+                                </div>
                             </div>
                         </div>
 
                         <div class="control-group">
                             <label class="control-label">推荐状态</label>
                             <div class="controls">
-                                <label class="radio"><input type="radio" name="bannerState">激活</label>
-                                <label class="radio"><input type="radio" name="bannerState">未激活</label>
+                                <label class="radio"><input type="radio" name="state" value="1">激活</label>
+                                <label class="radio"><input type="radio" name="state" value="0">未激活</label>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button class="btn btn-default">确定</button>
+                                <a href="javascript:void(0)" id="confirmDeva" class="btn btn-default">确定</a>
                                 <a href="javascript:(0)" class="btn btn-default" onclick="window.location.reload();">返回</a>
                             </div>
                         </div>
@@ -268,6 +267,7 @@
 <jsp:include page="../public/common-js.jsp"/>
 <script src="../../js/app.js" type="text/javascript"></script>
 <script src="../../js/index.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../js/banner/bannerCommon.js"></script>
 <script type="text/javascript" src="../../js/banner/livebanner.js"></script>
 <script>
 

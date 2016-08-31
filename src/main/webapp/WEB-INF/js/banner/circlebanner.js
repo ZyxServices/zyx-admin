@@ -18,8 +18,8 @@ $(function(){
         sidePagination: 'server',
         queryParams: function (params) {
             return {
-                area: 1,
-                model: 3,
+                area: HOMEPAGEAREA,
+                model: POSTMODEL,
                 pageDataNum: params.limit,
                 pageNum: (params.offset + 1),
                 search: params.search
@@ -43,8 +43,8 @@ $(function(){
         sidePagination: 'server',
         queryParams: function (params) {
             return {
-                area: 3,
-                model: 3,
+                area: CIRCLEAREA,
+                model: POSTMODEL,
                 pageDataNum: params.limit,
                 pageNum: (params.offset + 1),
                 search: params.search
@@ -68,8 +68,8 @@ $(function(){
         sidePagination: 'server',
         queryParams: function (params) {
             return {
-                area: 2,
-                model: 3,
+                area: CIRCLEMODEL,
+                model: CIRCLEMODEL,
                 pageDataNum: params.limit,
                 pageNum: (params.offset + 1),
                 search: params.search
@@ -302,14 +302,14 @@ $("input[name=area]").change(function () {
     var _val = $(this).val();
     var option = '';
     if(_val == 1){/*首页*/
-        $("#homepageArea").show();
-        $("#circleArea").hide();
-        $("#circleArea").removeAttr("name");
-        $("#homepageArea").attr({"name":'sequence'});
+        $("#homepageSequence").show();
+        $("#circleSequence").hide();
+        $("#circleSequence").removeAttr("name");
+        $("#homepageSequence").attr({"name":'sequence'});
     }else{
-        $("#circleArea").show();
-        $("#homepageArea").hide();
-        $("#homepageArea").removeAttr("name");
-        $("#circleArea").attr({"name":'sequence'});
+        $("#circleSequence").show();
+        $("#homepageSequence").hide();
+        $("#homepageSequence").removeAttr("name");
+        $("#circleSequence").attr({"name":'sequence'});
     }
 })

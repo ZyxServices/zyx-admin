@@ -49,11 +49,11 @@
                             <thead>
                             <tr>
                                 <th data-checkbox="true"></th>
-                                <th data-field="activityName">活动名称</th>
+                                <th data-field="modelTitle">活动名称</th>
                                 <th data-field="id">ID</th>
                                 <th data-field="image">图片</th>
                                 <th data-field="sequence">排序</th>
-                                <th data-field="activation">是否激活</th>
+                                <th data-field="state">是否激活</th>
                                 <th data-field="createTime" data-formatter="timeFormat">创建时间</th>
                                 <th data-formatter="operate" data-events="operateEvents">操作</th>
                             </tr>
@@ -112,8 +112,8 @@
                         <div class="control-group">
                             <label class="control-label">banner状态</label>
                             <div class="controls">
-                                <label class="radio"><input type="radio" name="state" value="0">激活</label>
-                                <label class="radio"><input type="radio" name="state" value="1">未激活</label>
+                                <label class="radio"><input type="radio" name="state" value="1">激活</label>
+                                <label class="radio"><input type="radio" name="state" value="0">未激活</label>
                             </div>
                         </div>
 
@@ -160,6 +160,7 @@
 <jsp:include page="../public/common-js.jsp"/>
 <script src="../../js/app.js" type="text/javascript"></script>
 <script src="../../js/index.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../js/banner/bannerCommon.js"></script>
 <script type="text/javascript" src="../../js/banner/activitybanner.js"></script>
 <script>
 

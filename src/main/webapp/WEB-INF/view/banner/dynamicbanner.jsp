@@ -42,7 +42,7 @@
 
         <!-- BEGIN PAGE CONTAINER-->
 
-        <div class="container-fluid" id="dynamicBannerList">
+        <div class="container-fluid" id="bannerList">
 
             <!-- BEGIN PAGE HEADER-->
 
@@ -77,13 +77,115 @@
                             <thead>
                             <tr>
                                 <th data-field="id">ID</th>
-                                <th data-field="image">首图</th>
                                 <th data-field="publisher">发布者</th>
-                                <th data-field="order">排序</th>
+                                <th data-field="isOfficial">是否官方发布</th>
+                                <th data-field="image">首图</th>
+                                <th data-field="sequence">排序</th>
+                                <th data-field="state">是够激活</th>
+                                <th data-field="createTime" data-formatter="timeFormat">创建时间</th>
+                                <th data-formatter="operate" data-events="operateEvents">操作</th>
                             </tr>
                             </thead>
                         </table>
                     </div>
+
+                </div>
+
+                <!-- END DASHBOARD STATS -->
+
+            </div>
+
+        </div>
+        <div class="container-fluid hide" id="bannerEdit">
+
+            <!-- BEGIN PAGE HEADER-->
+
+            <div class="row-fluid">
+
+                <div class="span12">
+
+                    <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+                    <h3 class="page-title">
+
+                        动态banner<small>statistics and more</small>
+
+                    </h3>
+
+                    <ul class="breadcrumb">
+
+                        <li>
+
+                            <i class="icon-home"></i>
+
+                            <a href="javascript:void(0)">动态banner</a>
+
+                            <i class="icon-angle-right"></i>
+
+                        </li>
+
+                        <li><a href="#">编辑</a></li>
+                    </ul>
+
+                    <!-- END PAGE TITLE & BREADCRUMB-->
+
+                </div>
+
+            </div>
+
+            <!-- END PAGE HEADER-->
+
+            <div id="live-banner">
+
+                <!-- BEGIN DASHBOARD STATS -->
+                <div class="row-fluid">
+
+                    <form class="form-horizontal" role="form" id="bannerForm">
+                        <input type="hidden" name="id" id="devaId">
+
+                        <div class="control-group">
+                            <label class="control-label">动态原有封面图</label>
+                            <div class="controls" id="preImage">
+
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">封面</label>
+                            <div class="controls">
+                                <input type="hidden" name="imageUrl" id="imageUrl">
+                                <input id="lefile" type="file" class="hideInput">
+                                <a class="btn btn-default" href="javascript:void (0)" id="photoCover" onclick="$('input[id=lefile]').click();">选择图片</a>
+                                <div style="margin-top: 10px" id="imagesWrap">
+                                    <img id="images" src="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">banner排序</label>
+                            <div class="controls">
+                                <select class="span6" id="sequence" name="sequence">
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">推荐状态</label>
+                            <div class="controls">
+                                <label class="radio"><input type="radio" name="state" value="1">激活</label>
+                                <label class="radio"><input type="radio" name="state" value="0">未激活</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <a href="javascript:void(0)" id="confirmDeva" class="btn btn-default">确定</a>
+                                <a href="javascript:(0)" class="btn btn-default" onclick="window.location.reload();">返回</a>
+                            </div>
+                        </div>
+                    </form>
 
                 </div>
 
@@ -108,6 +210,7 @@
 <jsp:include page="../public/common-js.jsp"/>
 <script src="../../js/app.js" type="text/javascript"></script>
 <script src="../../js/index.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../js/banner/bannerCommon.js"></script>
 <script type="text/javascript" src="../../js/banner/dynamicbanner.js"></script>
 <script>
 

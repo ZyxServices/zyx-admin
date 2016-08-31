@@ -43,7 +43,7 @@
                 </div>
                 <div>
                     <select class="form-control" onchange="circleDevaChange(this)">
-                        <option value="1">首页热门圈子讨论管理</option>
+                        <option value="1">首页热门帖子讨论管理</option>
                         <option value="2">精选圈子里圈子管理</option>
                         <option value="3">精选圈子帖子banner管理</option>
                     </select>
@@ -153,8 +153,8 @@
                         <div class="control-group">
                             <label class="control-label">推荐模块</label>
                             <div class="controls">
-                                <label class="radio"><input type="radio" id="homepageAreaRadio" name="area" value="1">首页热门圈子</label>
-                                <label class="radio"><input type="radio" name="area" id="circleAreaRadio" value="3">精选圈子</label>
+                                <label class="radio"><input type="radio" name="area" value="1">首页热门圈子</label>
+                                <label class="radio"><input type="radio" name="area" value="3">精选圈子</label>
                             </div>
                         </div>
 
@@ -206,6 +206,7 @@
 <jsp:include page="../public/common-js.jsp"/>
 <script src="../../js/app.js" type="text/javascript"></script>
 <script src="../../js/index.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../js/banner/bannerCommon.js"></script>
 <script type="text/javascript" src="../../js/banner/circlebanner.js"></script>
 <script>
 
