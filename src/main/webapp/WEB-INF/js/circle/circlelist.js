@@ -166,7 +166,7 @@ $(function () {
             {field: '', checkbox: true, align: 'center', valign: 'middle'},
             {field: 'id', title: 'id', align: 'center', valign: 'middle'},
             {field: 'title', title: '圈子名称'},
-            {field: '', title: '圈子类别', formatter: CircleType},
+            {field: 'circleTypeName', title: '圈子类别'},
             {field: 'createTime', title: '创建时间', formatter: getLocalTime},
             {field: '', title: '创建人', formatter: infoFormatter},
             {field: 'masterName', title: '圈主', sortable: true,},
@@ -178,10 +178,6 @@ $(function () {
         ]
     })
 });
-//圈子类型
-function CircleType(value, row, index) {
-    return row.circleTypeVo.typeName
-}
 //圈子创建人
 function infoFormatter(value, row, index) {
     return row.userVo.nickName
@@ -290,7 +286,7 @@ var operateEvent = {
         $("#circleModal").modal("show");
         $("input[name=modelId]").val(row.id);
         $("#circleSelect").empty();
-        $.post("/v1/deva/sequence", {model: "3", area: "2"}, function (result) {
+        $.post("/v1/deva/sequence", {model: "3", area: "3"}, function (result) {
             if (result.state == 200) {
                 if (result.data.length > 0) {
                     for (var i = 0; i < result.data.length; i++) {

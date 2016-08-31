@@ -305,7 +305,7 @@
                         </div>
                         <input type="hidden" name="model" value="3">
                         <input type="hidden" name="modelId">
-                        <input type="hidden" name="area" value="2">
+                        <input type="hidden" name="area" value="3">
                     </div>
                 </div>
                 <div class="modal-footer">

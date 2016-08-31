@@ -232,7 +232,7 @@ var operateEvents = {
         $(".radio_box").hide();
         $("#headImgShow").hide();
         $("input[name=modelId]").val(row.id);
-
+        $("input[name=area]").attr("checked", false);
         $("#hotSelect").empty();
         $("#chosenSelect").empty();
 
@@ -356,13 +356,12 @@ $checked.click(function () {
 
 });
 function List(model, area, id) {
-    $.post("/v1/deva/sequence", {model: model, area: area}, function (result) {
-        console.log(result);
-        console.log(result.data);
-        if (result.state == 200) {
-            if (result.data.length > 0) {
-                for (var i = 0; i < result.data.length; i++) {
-                    $(id).append("<option value='" + result.data[i] + "'>" + result.data[i] + "</option>");
+    $.post("/v1/deva/sequence", {model: model, area: area}, function (data) {
+        console.log(data);
+        if (data.state == 200) {
+            if (data.data.length > 0) {
+                for (var i = 0; i < data.data.length; i++) {
+                    $(id).append("<option value='" + data.data[i] + "'>" + data.data[i] + "</option>");
                 }
             }
             else {
@@ -380,7 +379,7 @@ $('input:radio[name="area"]').change(function () {
         List("3", "1", "#hotSelect");
     }
     else if (inputValue == "3") {
-        List("3", "2", "#chosenSelect");
+        List("4", "3", "#chosenSelect");
         console.log(2);
     }
 })
@@ -391,6 +390,7 @@ $("#circleSure").click(function (e) {
     var firstSequence = $("#hotSelect").val();
     var SecendSequence = $("#chosenSelect").val();
     if (inputValue == "1") {
+        $("input[name=imageUrl]").val();
         $("input[name=sequence]").val(firstSequence);
         $("input[name=model]").val("3");
         $("#PostRecommend").ajaxSubmit({
@@ -403,13 +403,16 @@ $("#circleSure").click(function (e) {
                     confirm: false,
                     title: "首页帖子推荐成功"
                 });
+                $("#post-list-table").bootstrapTable('refresh');
                 $("#circleModal").modal("hide");
             }
 
         })
     } else if (inputValue == "3") {
+        console.log(222222);
+        $("input[name=imageUrl]").val();
         $("input[name=sequence]").val(SecendSequence);
-        $("input[name=model]").val("6");
+        $("input[name=model]").val("4");
         formData.append('imgFile', $("#lefile")[0].files[0]);
         $.ajax({
             url: "/v1/upload/file",
@@ -430,6 +433,7 @@ $("#circleSure").click(function (e) {
                             confirm: false,
                             title: "圈子帖子推荐成功"
                         });
+                        $("#post-list-table").bootstrapTable('refresh');
                         $("#circleModal").modal("hide");
                     }
 
