@@ -133,6 +133,10 @@ function seeUrlFormatter(value, row, index) {
         '<a class="seeUrl p5"   href="javascript:void(0)" title="Like">查看</a>',
     ].join('');
 }
+//判断标题是否为空
+function judgeTiltle(title) {
+    return title == null ? '标题为空' :title;
+}
 //操作事件eidt
 var operateEventssssss = {
     'click .preview': function (e, value, row, index) {
@@ -163,20 +167,26 @@ var operateEventssssss = {
         html += '   <form class="form-horizontal" role="form" id="recommend" enctype="multipart/form-data">            '
         html += '	<div class="container-fluid">';
         html += '	    <div class="row">';
-        html += '	        <label class="control-label ">动态名称:</label><span >' + row.topicTitle + '</span>';
+        html += '	        <label class="control-label ">动态名称:</label><label class="control-label " style="text-align: left" >' + judgeTiltle(row.topicTitle) + '</label>';
         html += '	    </div>';
         html += '	    <div class="row">';
-        html += '	        <label class="col-xs-6 control-label ">推荐模块:</label>';
-        html += '	        <span class="col-xs-6 col-md-4" id="radio_checked">';
-        html += '	            <label class="control-label "  style="width: 90px"><input type="radio" value="1" name="area"> 首页</label>';
-        html += '	        </span>';
+        html += '	        <label class="col-xs-4 control-label ">推荐模块:</label>';
+        html += '	            <label class="control-label " style="text-align: left" >首页</label>';
+        html += '           <div class="controls">';
+        html += '	            <label class="radio col-xs-4 ">';
+        html += '	              <input value="1" name="area" id="inlineCheckbox1" style="display: none" > ';
+        html += '	            </label>'
+        //html += '	            <label class="radio col-xs-4 ">';
+        //html += '	              <input type="radio" value="3" name="area" id="inlineCheckbox1" > 看台';
+        //html += '	            </label>';
+        html += '	        </div>';
         html += '	    </div>';
         html += '	    <div class="row">';
-        html += '	            <div>';
-        html += '	                <input style="display: none" name="model" value="4">';
+        html += '	            <div >';
+        html += '	                <input style="display: none" name="model" value="5">';
         html += '	                <input style="display: none" name="modelId" value="' + row.id + '">';
         html += '	                <label class="col-xs-6 control-label ">显示顺序: </label>';
-        html += '	                <select name="sequence" id="hotSelect">';
+        html += '	                <select name="sequence" class="span2" id="hotSelect">';
         html += '	                </select>';
         html += '	            </div>';
         html += '	     </div>';
@@ -186,21 +196,26 @@ var operateEventssssss = {
         html += '	     </div>';
         html += '	    <div class="row">';
         html += '	        <label class="col-xs-6 control-label ">推荐状态:</label>';
-        html += '	        <span class="col-xs-6 col-md-4">';
-        html += '	            <label class="control-label " style="width: 90px"><input type="radio" value="1" name="state"> 激活</label>';
-        html += '	            <label class="control-label " style="width: 90px"><input type="radio" value="0" name="state"> 未激活</label>';
-        html += '	        </span>';
+        html += '           <div class="controls">';
+        html += '	            <label class="radio col-xs-4 ">';
+        html += '	              <input type="radio" value="1" name="state" > 激活';
+        html += '	            </label>'
+        html += '	            <label class="radio col-xs-4 ">';
+        html += '	              <input type="radio" value="0" name="state"  > 未激活';
+        html += '	            </label>';
+        html += '	        </div>';
         html += '	    </div>';
         html += '	</div>';
         html += '   </from>'
         $.Popup({
-            title: '直播推荐',
+            title: '动态推荐',
             template: html,
             remove: false,
             saveEvent: function () {
                 $("#upload").modal({backdrop: 'static', keyboard: false});
                 var formData = new FormData();
                 formData.append('imgFile', $('#Cover')[0].files[0]);
+                console.log($('#Cover')[0].value)
                 $.ajax({
                     url: '/v1/upload/file',//后台文件上传接口
                     type: 'POST',
@@ -221,6 +236,11 @@ var operateEventssssss = {
                                         $.Popup({
                                             confirm: false,
                                             template: '推荐成功'
+                                        })
+                                    }else if(result.state == 73002){
+                                        $.Popup({
+                                            confirm: false,
+                                            template: '推荐内容重复'
                                         })
                                     }
                                 },
@@ -253,7 +273,7 @@ var operateEventssssss = {
         $.ajax({
             type: "get",
             dateType: "json",
-            url: "/v1/deva/sequence?model=2&area=1",
+            url: "/v1/deva/sequence?model=5&area=1",
             async: false,
             success: function (res) {
                 res.data.forEach(function (e) {

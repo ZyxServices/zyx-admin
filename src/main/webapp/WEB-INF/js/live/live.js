@@ -169,21 +169,25 @@ var operateEventssssss = {
         html += '   <form class="form-horizontal" role="form" id="recommend" enctype="multipart/form-data">            '
         html += '	<div class="container-fluid">';
         html += '	    <div class="row">';
-        html += '	        <label class="control-label ">直播名称:</label><span >' + row.title + '</span>';
+        html += '	        <label class="control-label ">直播名称:</label><label class="control-label " style="text-align: left" >' + row.title + '</label>';
         html += '	    </div>';
         html += '	    <div class="row">';
-        html += '	        <label class="col-xs-6 control-label ">推荐模块:</label>';
-        html += '	        <span class="col-xs-6 col-md-4" id="radio_checked">';
-        html += '	            <label class="control-label "  style="width: 90px"><input type="radio" value="1" name="area"> 首页</label>';
-        //html += '	            <label class="control-label "  style="width: 90px"><input type="radio" value="4" name="area"> 看台</label>';
-        html += '	        </span>';
+        html += '	        <label class="col-xs-4 control-label ">推荐模块:</label>';
+        html += '           <div class="controls">';
+        html += '	            <label class="radio col-xs-4 ">';
+        html += '	              <input type="radio" value="1" name="area"  > 首页';
+        html += '	            </label>'
+        html += '	            <label class="radio col-xs-4 ">';
+        html += '	              <input type="radio" value="2" name="area" > 看台';
+        html += '	            </label>';
+        html += '	        </div>';
         html += '	    </div>';
         html += '	    <div class="row">';
-        html += '	            <div>';
+        html += '	            <div >';
         html += '	                <input style="display: none" name="model" value="2">';
         html += '	                <input style="display: none" name="modelId" value="' + row.id + '">';
         html += '	                <label class="col-xs-6 control-label ">显示顺序: </label>';
-        html += '	                <select name="sequence" id="hotSelect">';
+        html += '	                <select name="sequence" class="span2" id="hotSelect">';
         html += '	                </select>';
         html += '	            </div>';
         html += '	     </div>';
@@ -193,10 +197,14 @@ var operateEventssssss = {
         html += '	     </div>';
         html += '	    <div class="row">';
         html += '	        <label class="col-xs-6 control-label ">推荐状态:</label>';
-        html += '	        <span class="col-xs-6 col-md-4">';
-        html += '	            <label class="control-label " style="width: 90px"><input type="radio" value="1" name="state"> 激活</label>';
-        html += '	            <label class="control-label " style="width: 90px"><input type="radio" value="0" name="state"> 未激活</label>';
-        html += '	        </span>';
+        html += '           <div class="controls">';
+        html += '	            <label class="radio col-xs-4 ">';
+        html += '	              <input type="radio" value="1" name="state"  > 激活';
+        html += '	            </label>'
+        html += '	            <label class="radio col-xs-4 ">';
+        html += '	              <input type="radio" value="0" name="state" > 未激活';
+        html += '	            </label>';
+        html += '	        </div>';
         html += '	    </div>';
         html += '	</div>';
         html += '   </from>'
@@ -228,6 +236,11 @@ var operateEventssssss = {
                                         $.Popup({
                                             confirm: false,
                                             template: '推荐成功'
+                                        })
+                                    } else if (result.state == 73002) {
+                                        $.Popup({
+                                            confirm: false,
+                                            template: '推荐内容重复'
                                         })
                                     }
                                 },
@@ -320,7 +333,7 @@ var operateEventssssss = {
 function operateFormatterclass(value, row, index) {
     return [
         '<a class="edit p5"   href="javascript:void(0)" title="preview">编辑</a>',
-        '<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>',
+        '<a class="recommend p5" href="javascript:void(0)" title="recommend"> 推荐 </a>',
         '<a class="Shield p5" href="javascript:void(0)" title="Shield">' + btnState(row) + '</a>',
         '<a class="remove p5" href="javascript:void(0)" title="remove">删除</a>'
     ].join('');
