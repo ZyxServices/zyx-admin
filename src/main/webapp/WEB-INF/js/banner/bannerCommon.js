@@ -1,9 +1,6 @@
 /**
  * Created by ZYX on 2016/8/31.
  */
-/*
-* 修改推荐
-* */
 var ACTIVITYMODEL = 1;
 var LIVEMODEL = 2;
 var CIRCLEMODEL = 3;
@@ -15,9 +12,20 @@ var SYSTEMMODEL = 7;
 var HOMEPAGEAREA = 1;
 var STANDAREA = 2;
 var CIRCLEAREA = 3;
-$("#confirmDeva").click(function () {
+/*活动banner+动态banner是不需要验证的*/
+var ISVALID = false;
+/*
+* 修改推荐
+* */
+$("#confirmDeva").click(function ( ) {
     if($("#lefile")[0].files[0]== undefined){
-        confirmDeva();
+        if(ISVALID){
+            confirmDeva();
+        }else{
+            if($("#bannerForm").data('bootstrapValidator').isValid()){
+                confirmDeva();
+            }
+        }
     }else{
         var formData = new FormData();
         formData.append('imgFile', $("#lefile")[0].files[0]);
@@ -27,6 +35,9 @@ $("#confirmDeva").click(function () {
             data: formData,
             processData: false,
             contentType: false,
+            beforeSend: function () {
+                return $("#bannerForm").data('bootstrapValidator').isValid();
+            },
             success:function (result) {
                 if(result.state == 200){
                     $("#imageUrl").val(result.data);
@@ -70,6 +81,7 @@ $('#lefile').change(function () {
             $("#images").attr("src", objUrl);
         }
     }else{
+        console.log($("#lefile")[0].files[0]);
         $("#photoCover").html("选择图片");
         $("#images").attr("src", "");
     }
@@ -110,6 +122,9 @@ var operateEvents = {
                                 confirm: false,
                                 template: '删除成功'
                             })
+                            /*if(){
+
+                            }*/
                             $('#homepage-list-table').bootstrapTable('refresh');
                         } else {
                             $.Popup({
@@ -129,14 +144,15 @@ var operateEvents = {
         $("#photoCover").html('选择图片');
         $("#images").attr({"src":""});
         if(row.model == ACTIVITYMODEL || row.model == DYNAMICMODEL){
+            ISVALID = true;
             var imgUrl = $(row.image).attr("href");
             $("#preImage").html('<img src='+imgUrl+'>');
-            $("#sequence").val(row.sequence);
             bannerSequence(row.model,row.area,row.sequence,'sequence');
+            $("#sequence").val(row.sequence);
         }else if(row.model == LIVEMODEL){
             var imgUrl = $(row.image).attr("href");
             $("#preImage").html('<img src='+imgUrl+'>');
-            if(row.area == ACTIVITYMODEL){
+            if(row.area == HOMEPAGEAREA){
                 $('input[name=area]').eq(0).attr({"checked":"checked"});
                 $("#homepageSequence").show();
                 $("#standSequence").hide();
@@ -155,6 +171,102 @@ var operateEvents = {
                 bannerSequence(row.model,HOMEPAGEAREA,'',"homepageSequence");
                 $("#standSequence").val(row.sequence)
             }
+        }else if(row.model == POSTMODEL || row.model == CIRCLEMODEL){
+            if(row.area == CIRCLEAREA && row.model == POSTMODEL){/*精选圈子的帖子--有图*/
+                $('input[name=area]').eq(1).attr({"checked":"checked"});
+                $("#homepageSequence").hide();
+                $("#circleSequence").show();
+                var imgUrl = $(row.image).attr("href");
+                $("#preImage").html('<img src='+imgUrl+'>');
+                $("#homepageSequence").removeAttr("name");
+                $("#circleSequence").attr({"name":'sequence'});
+                bannerSequence(row.model,row.area,row.sequence,"circleSequence");
+                $("input[name=area]").change(function () {
+                    var _val = $(this).val();
+                    var option = '';
+                    if(_val == 1){/*首页*/
+                        $("#imageWrap").hide();
+                        $("#homepageSequence").show();
+                        $("#circleSequence").hide();
+                        $("#circleSequence").removeAttr("name");
+                        $("#homepageSequence").attr({"name":'sequence'});
+                        bannerSequence(row.model,HOMEPAGEAREA,'',"homepageSequence");
+                        $('#bannerForm').data('bootstrapValidator')
+                            .updateStatus('sequence', 'NOT_VALIDATED', null)
+                            .validateField('sequence');
+                    }else{
+                        $("#imageWrap").show();
+                        $("#circleSequence").show();
+                        $("#homepageSequence").hide();
+                        $("#homepageSequence").removeAttr("name");
+                        $("#circleSequence").attr({"name":'sequence'});
+                        bannerSequence(row.model,row.area,row.sequence,"circleSequence");
+                        $('#bannerForm').data('bootstrapValidator')
+                            .updateStatus('sequence', 'NOT_VALIDATED', null)
+                            .validateField('sequence');
+                    }
+                })
+                $("#homepageSequence").val(row.sequence);
+                $('#bannerForm').data('bootstrapValidator').validateField('sequence');
+            }else{
+                if(row.area == HOMEPAGEAREA){/*首页的精选帖子--无图*/
+                    console.log("首页的精选帖子--无图");
+                    $("#preImgWrap").hide();
+                    $("#imageWrap").hide();
+                    $("#homepageSequence").show();
+                    $("#circleSequence").hide();
+                    $('input[name=area]').eq(0).attr({"checked":"checked"});
+                    bannerSequence(row.model,row.area,row.sequence,"homepageSequence");
+                    $("input[name=area]").change(function () {
+                        var _val = $(this).val();
+                        var option = '';
+                        if(_val == 1){/*帖子--首页*/
+                            $("#imageWrap").hide();
+                            $("#homepageSequence").show();
+                            $("#circleSequence").hide();
+                            $("#circleSequence").removeAttr("name");
+                            $("#homepageSequence").attr({"name":'sequence'});
+                            bannerSequence(row.model,row.area,row.sequence,"homepageSequence");
+                            $('#bannerForm').data('bootstrapValidator')
+                                .updateStatus('sequence', 'NOT_VALIDATED', null)
+                                .validateField('sequence');
+                            $('#bannerForm')
+                                .bootstrapValidator('removeField', 'imageR')
+                                .data('bootstrapValidator').validate();
+                        }else{/*帖子--圈子--有图*/
+                            $("#imageWrap").show();
+                            $("#circleSequence").show();
+                            $("#homepageSequence").hide();
+                            $("#homepageSequence").removeAttr("name");
+                            $("#circleSequence").attr({"name":'sequence'});
+                            bannerSequence(row.model,CIRCLEAREA,'',"circleSequence");
+                            $('#bannerForm').bootstrapValidator('addField', 'imageR', {
+                                validators: {
+                                    notEmpty: {
+                                        message: '精选圈子的帖子必须有图'
+                                    }
+                                }
+                            });
+                            $('#bannerForm').data('bootstrapValidator')
+                                .updateStatus('sequence', 'NOT_VALIDATED', null)
+                                .validateField('sequence')
+                                .updateStatus('imageR', 'NOT_VALIDATED', null)
+                                .validateField('imageR');
+                        }
+                    })
+                    $('#bannerForm').data('bootstrapValidator').validateField('sequence');
+                }else if(row.area == CIRCLEAREA){/*精选圈子里的圈子--无图*/
+                    console.log("精选圈子里的圈子--无图");
+                    $("#preImgWrap").hide();
+                    $("#area").hide();
+                    $("#imageWrap").hide();
+                    $("#circleSequence").show();
+                    bannerSequence(row.model,row.area,row.sequence,"circleSequence");
+                    $('#bannerForm')
+                        .bootstrapValidator('removeField', 'sequence')
+                        .data('bootstrapValidator').validate();
+                }
+            }
         }
         $("#title").val(row.modelTitle);
         $("#devaId").val(row.id);
@@ -169,7 +281,7 @@ var operateEvents = {
 /*
 * banner序列的请求
 * */
-function bannerSequence(model, area,currentSequence,idObj) {
+function bannerSequence(model, area, currentSequence, idObj) {
     $.ajax({
         url: "/v1/deva/sequence",
         type: 'POST',
@@ -177,19 +289,33 @@ function bannerSequence(model, area,currentSequence,idObj) {
         async:false,
         data: {model: model,area: area},
         success: function (result) {
-            var bannerNoArr = result.data;
-            var option = '';
-            if(currentSequence){
-                bannerNoArr.push(currentSequence);
-            }
-            bannerNoArr = bannerNoArr.sort(function(a,b){/*排序*/
-                return a - b
-            });
             if(result.state == 200){
-                for(var i = 0;i < result.data.length; i++){
-                    option += '<option>'+result.data[i]+'</option>';
+                var bannerNoArr = result.data;
+                var option = '';
+                if(currentSequence){
+                    bannerNoArr.push(currentSequence);
+                }
+                console.log(result.data)
+                if(result.data != ''){
+                    bannerNoArr = bannerNoArr.sort(function(a,b){/*排序*/
+                        return a - b
+                    });
+                    for(var i = 0;i < bannerNoArr.length; i++){
+                        option += '<option>'+result.data[i]+'</option>';
+                    }
+                }else{
+                    $.Popup({
+                        confirm: false,
+                        template: '活动banner序列号已满，请先删除其他序列号再推荐'
+                    });
+                    option = '<option value="">banner序列已满，请先删除</option>'
                 }
                 $("#"+idObj).html(option);
+            }else{
+                $.Popup({
+                    confirm: false,
+                    template: "未获取到banner序号，请刷新页面"
+                })
             }
         }
     });

@@ -26,7 +26,7 @@
 <div class="page-container">
     <jsp:include page="../public/nav.jsp"/>
     <div class="page-content">
-        <div class="container-fluid" id="circleBannerList">
+        <div class="container-fluid" id="bannerList">
             <div class="row-fluid">
                 <div class="span12">
                     <h3 class="page-title">
@@ -52,7 +52,7 @@
             <div id="homepage-list">
                 <div class="row-fluid">
                     <div class="span6">
-                        <h3>首页热门圈子讨论管理</h3>
+                        <h3>首页热门帖子讨论管理</h3>
                     </div>
                 </div>
                 <div class="row-fluid">
@@ -64,8 +64,8 @@
                                 <th data-field="id">ID</th>
                                 <th data-field="modelTitle">圈子名称</th>
                                 <th data-field="sequence">排序</th>
-                                <th data-field="activation">是否激活</th>
-                                <th data-formatter="homepageOperate" data-events="operateEvents">操作</th>
+                                <th data-field="state">是否激活</th>
+                                <th data-formatter="operate" data-events="operateEvents">操作</th>
                             </tr>
                             </thead>
                         </table>
@@ -88,8 +88,8 @@
                                 <th data-field="id">ID</th>
                                 <th data-field="modelTitle">圈子名称</th>
                                 <th data-field="sequence">排序</th>
-                                <th data-field="activation">是否激活</th>
-                                <th data-formatter="circleOperate" data-events="operateEvents">操作</th>
+                                <th data-field="state">是否激活</th>
+                                <th data-formatter="operate" data-events="operateEvents">操作</th>
                             </tr>
                             </thead>
                         </table>
@@ -113,8 +113,8 @@
                                 <th data-field="modelTitle">帖子名称</th>
                                 <th data-field="image">图片</th>
                                 <th data-field="sequence">排序</th>
-                                <th data-field="activation">是否激活</th>
-                                <th data-formatter="postOperate" data-events="operateEvents">操作</th>
+                                <th data-field="state">是否激活</th>
+                                <th data-formatter="operate" data-events="operateEvents">操作</th>
                             </tr>
                             </thead>
                         </table>
@@ -123,7 +123,7 @@
             </div>
         </div>
         <%--编辑banner----精选圈子--%>
-        <div class="container-fluid hide" id="circleBannerEdit">
+        <div class="container-fluid hide" id="bannerEdit">
             <div class="row-fluid">
                 <div class="span12">
                     <h3 class="page-title">
@@ -141,16 +141,23 @@
             </div>
             <div id="activity-create">
                 <div class="row-fluid">
-                    <form class="form-horizontal" role="form" id="circleBannerForm">
-                        <input type="hidden" name="id" id="circleId">
+                    <form class="form-horizontal" role="form" id="bannerForm">
+                        <input type="hidden" name="id" id="devaId">
                         <div class="control-group">
                             <label class="control-label">圈子名称</label>
                             <div class="controls">
-                                <input type="text" class="span6 form-control" id="circleName"/>
+                                <input type="text" class="span6 form-control" id="title" disabled/>
                             </div>
                         </div>
 
-                        <div class="control-group">
+                        <div class="control-group" id="preImgWrap">
+                            <label class="control-label">精选帖子原有封面图</label>
+                            <div class="controls" id="preImage">
+
+                            </div>
+                        </div>
+
+                        <div class="control-group" id="area">
                             <label class="control-label">推荐模块</label>
                             <div class="controls">
                                 <label class="radio"><input type="radio" name="area" value="1">首页热门圈子</label>
@@ -158,20 +165,33 @@
                             </div>
                         </div>
 
-                        <div class="control-group">
-                            <div class="controls">
-                                <select id="homepageSequence" class="span6 hide">
+                        <div class="control-group form-group">
+                            <label class="control-label">banner序列号</label>
+                            <div class="controls col-xs-5">
+                                <select id="homepageSequence" class="span6 hide" name="sequence">
                                 </select>
-                                <select id="circleSequence" class="span6 hide">
+                                <select id="circleSequence" class="span6 hide" name="sequence">
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group" id="imageWrap">
+                            <label class="control-label">封面</label>
+                            <div class="controls col-xs-5">
+                                <input type="hidden" name="imageUrl" id="imageUrl">
+                                <input id="lefile" type="file" class="hideInput" name="imageR">
+                                <a class="btn btn-default" href="javascript:void (0)" id="photoCover" onclick="$('input[id=lefile]').click();">选择图片</a>
+                                <div style="margin-top: 10px" id="imagesWrap">
+                                    <img id="images" src="">
+                                </div>
                             </div>
                         </div>
 
                         <div class="control-group">
                             <label class="control-label">推荐状态</label>
                             <div class="controls">
-                                <label class="radio"><input type="radio" name="state" value="0">激活</label>
-                                <label class="radio"><input type="radio" name="state" value="1">未激活</label>
+                                <label class="radio"><input type="radio" name="state" value="1">激活</label>
+                                <label class="radio"><input type="radio" name="state" value="0">未激活</label>
                             </div>
                         </div>
 

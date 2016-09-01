@@ -70,10 +70,10 @@
 
             <!-- END PAGE HEADER-->
 
-            <div id="banner-dynamic-list">
+            <div>
                 <div class="row-fluid">
                     <div class="span12 responsive">
-                        <table id="dynamic-list-table">
+                        <table id="homepage-list-table">
                             <thead>
                             <tr>
                                 <th data-field="id">ID</th>

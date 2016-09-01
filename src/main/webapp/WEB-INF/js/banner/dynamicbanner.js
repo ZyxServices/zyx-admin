@@ -2,14 +2,12 @@
  * Created by ZYX on 2016/7/14.
  */
 $(function(){
-    $("#dynamic-list-table").bootstrapTable({
+    $("#homepage-list-table").bootstrapTable({
         url: "/v1/deva/list",
         method:'post',
         locale: 'zh-US',
         pagination: true,
         cache: false,
-        search: true,
-        strictSearch: true,
         uniqueId: "id",
         height:500,
         pageSize: 20,

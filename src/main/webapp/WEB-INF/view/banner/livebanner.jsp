@@ -96,7 +96,7 @@
                             <tr>
                                 <th data-checkbox="true"></th>
                                 <th data-field="id">ID</th>
-                                <th data-field="modelTitle">直播名称</th>
+                                <th data-field="modelTitle">直播标题</th>
                                 <th data-field="image">图片</th>
                                 <th data-field="sequence">排序</th>
                                 <th data-field="state">是否激活</th>
@@ -123,7 +123,7 @@
                             <tr>
                                 <th data-checkbox="true"></th>
                                 <th data-field="id">ID</th>
-                                <th data-field="modelTitle">直播名称</th>
+                                <th data-field="modelTitle">直播标题</th>
                                 <th data-field="image">图片</th>
                                 <th data-field="sequence">排序</th>
                                 <th data-field="activation">是否激活</th>
