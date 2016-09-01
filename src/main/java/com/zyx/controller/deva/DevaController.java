@@ -108,17 +108,22 @@ public class DevaController {
             @ApiParam(required = true, name = "sequence", value = "展示顺序") @RequestParam(name = "sequence", required = true) Integer sequence) {
 
         Map<String, Object> result = new HashMap<>();
-        //判断目前条数是否满
-        Devaluation deva = devaService.selectByKey(id);
-        if (deva != null) {
-            Devaluation entity = new Devaluation();
-            entity.setId(id);
-            entity.setArea(area);
-            entity.setImage(imageUrl);
-            entity.setSequence(sequence);
-            entity.setState(state);
-            devaService.updateNotNull(entity);
-            refreshDevas(deva.getArea(), deva.getModel());
+        if(id==null){
+            result.put(LiveConstants.STATE, LiveConstants.PARAM_MISS);
+            result.put(LiveConstants.ERROR_MSG, LiveConstants.MSG_PARAM_MISS);
+        }else{
+            //判断目前条数是否满
+            Devaluation deva = devaService.selectByKey(id);
+            if (deva != null) {
+                Devaluation entity = new Devaluation();
+                entity.setId(id);
+                entity.setArea(area);
+                entity.setImage(imageUrl);
+                entity.setSequence(sequence);
+                entity.setState(state);
+                devaService.updateNotNull(entity);
+                refreshDevas(deva.getArea(), deva.getModel());
+            }
         }
         result.put(Constants.STATE, LiveConstants.SUCCESS);
         AbstractView jsonView = new MappingJackson2JsonView();

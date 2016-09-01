@@ -38,11 +38,25 @@
     <select id="selectCircleTitle" parameterType="java.lang.Integer" resultType="java.lang.String">
         SELECT title  FROM circle  WHERE id=#{0}
     </select>
+
+    <resultMap id="DevaUserVo" type="com.zyx.vo.deva.DevaUserVo">
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="official" jdbcType="INTEGER" property="official"/>
+    </resultMap>
     <resultMap id="getCircleItem" type="com.zyx.vo.deva.DevaModelTitleVo" extends="FullDevaVo">
         <association property="modelTitle" select="selectCircleItemTitle" column="model_id"/>
+        <association property="devaUserVo" select="selectCircleItemUserTitle" column="model_id"/>
     </resultMap>
     <select id="selectCircleItemTitle" parameterType="java.lang.Integer" resultType="java.lang.String">
         SELECT title  FROM circle_item  WHERE id=#{0}
+    </select>
+    <select id="selectCircleItemUserTitle" parameterType="java.lang.Integer" resultMap="DevaUserVo">
+        SELECT
+       u.`nickname`,u.`official`
+        FROM
+        circle_item ci LEFT JOIN user u ON ci.`create_id`=u.`id`
+        WHERE
+        ci.`id`=#{0}
     </select>
     <resultMap id="getConcern" type="com.zyx.vo.deva.DevaModelTitleVo" extends="FullDevaVo">
         <association property="modelTitle" select="selectConcernTitle" column="model_id"/>

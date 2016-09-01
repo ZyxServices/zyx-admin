@@ -6,6 +6,16 @@ package com.zyx.vo.deva;
 public class DevaModelTitleVo extends DevaVo{
     private String modelTitle;
 
+    DevaUserVo devaUserVo;
+
+    public DevaUserVo getDevaUserVo() {
+        return devaUserVo;
+    }
+
+    public void setDevaUserVo(DevaUserVo devaUserVo) {
+        this.devaUserVo = devaUserVo;
+    }
+
     public String getModelTitle() {
         return modelTitle;
     }
