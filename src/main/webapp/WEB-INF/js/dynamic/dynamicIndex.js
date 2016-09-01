@@ -79,9 +79,7 @@ function initTable() {
                         async: false,
                         type: "delete",
                         success: function (meg) {
-                            if (meg.state == 37000) {
                                 $table.bootstrapTable("refresh");
-                            }
                         }
 
                     })
@@ -136,6 +134,36 @@ function seeUrlFormatter(value, row, index) {
 //判断标题是否为空
 function judgeTiltle(title) {
     return title == null ? '标题为空' :title;
+}
+//动态推荐内容上传
+function devDynamic(){
+    $.ajax({
+        url: '/v1/deva/add',
+        type: 'post',
+        data: $('#recommend').serialize(),
+        dataType: 'json',
+        success: function (result) {
+            removeEvent('upload')
+            if (result.state == 200) {
+                $.Popup({
+                    confirm: false,
+                    template: '推荐成功'
+                })
+            }else if(result.state == 73002){
+                $.Popup({
+                    confirm: false,
+                    template: '推荐内容重复'
+                })
+            }
+        },
+        error: function (res) {
+            removeEvent('upload')
+            $.Popup({
+                confirm: false,
+                template: '推荐上传失败（请检查内容是否填写完整！！！）'
+            })
+        }
+    })
 }
 //操作事件eidt
 var operateEventssssss = {
@@ -224,33 +252,7 @@ var operateEventssssss = {
                     success: function (result) {
                         if (result.state == 200) {
                             $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="' + result.data + '" >');
-                            $.ajax({
-                                url: '/v1/deva/add',
-                                type: 'post',
-                                data: $('#recommend').serialize(),
-                                dataType: 'json',
-                                success: function (result) {
-                                    removeEvent('upload')
-                                    if (result.state == 200) {
-                                        $.Popup({
-                                            confirm: false,
-                                            template: '推荐成功'
-                                        })
-                                    }else if(result.state == 73002){
-                                        $.Popup({
-                                            confirm: false,
-                                            template: '推荐内容重复'
-                                        })
-                                    }
-                                },
-                                error: function (res) {
-                                    removeEvent('upload')
-                                    $.Popup({
-                                        confirm: false,
-                                        template: '推荐上传失败（请检查内容是否填写完整！！！）'
-                                    })
-                                }
-                            })
+                            devDynamic()
                         } else {
                             removeEvent('upload')
                             $.Popup({
@@ -260,11 +262,8 @@ var operateEventssssss = {
                         }
                     },
                     error: function (res) {
-                        removeEvent('upload')
-                        $.Popup({
-                            confirm: false,
-                            template: '图片上传失败，图片不能为空'
-                        })
+                        $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="" >');
+                        devDynamic()
                     }
                 });
             }
