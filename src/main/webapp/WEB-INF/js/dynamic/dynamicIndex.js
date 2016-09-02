@@ -79,7 +79,7 @@ function initTable() {
                         async: false,
                         type: "delete",
                         success: function (meg) {
-                                $table.bootstrapTable("refresh");
+                            $table.bootstrapTable("refresh");
                         }
 
                     })
@@ -133,10 +133,10 @@ function seeUrlFormatter(value, row, index) {
 }
 //判断标题是否为空
 function judgeTiltle(title) {
-    return title == null ? '标题为空' :title;
+    return title == null ? '标题为空' : title;
 }
 //动态推荐内容上传
-function devDynamic(){
+function devDynamic() {
     $.ajax({
         url: '/v1/deva/add',
         type: 'post',
@@ -149,7 +149,7 @@ function devDynamic(){
                     confirm: false,
                     template: '推荐成功'
                 })
-            }else if(result.state == 73002){
+            } else if (result.state == 73002) {
                 $.Popup({
                     confirm: false,
                     template: '推荐内容重复'
@@ -173,8 +173,8 @@ var operateEventssssss = {
         $('.topicContent').html(row.topicContent)
         $('.username').html(row.userVo.nickName)
         var strArry = row.imgUrl.split(',');
-        for (var i in strArry){
-            $('.dynamicPic').append('<img style="max-width: 13%"  src='+'http://image.tiyujia.com/'+strArry[i]+'>')
+        for (var i in strArry) {
+            $('.dynamicPic').append('<img style="max-width: 13%"  src=' + 'http://image.tiyujia.com/' + strArry[i] + '>')
             //$('.dynamicPic img').attr('src', 'http://image.tiyujia.com/' + row.imgUrl + '');
         }
     },
@@ -235,48 +235,55 @@ var operateEventssssss = {
         html += '	    </div>';
         html += '	</div>';
         html += '   </from>'
-        $.Popup({
-            title: '动态推荐',
-            template: html,
-            remove: false,
-            saveEvent: function () {
-                $("#upload").modal({backdrop: 'static', keyboard: false});
-                var formData = new FormData();
-                formData.append('imgFile', $('#Cover')[0].files[0]);
-                $.ajax({
-                    url: '/v1/upload/file',//后台文件上传接口
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (result) {
-                        if (result.state == 200) {
-                            $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="' + result.data + '" >');
-                            devDynamic()
-                        } else {
-                            removeEvent('upload')
-                            $.Popup({
-                                confirm: false,
-                                template: result.successmsg
-                            })
-                        }
-                    },
-                    error: function (res) {
-                        $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="" >');
-                        devDynamic()
-                    }
-                });
-            }
-        })
         $.ajax({
             type: "get",
             dateType: "json",
             url: "/v1/deva/sequence?model=5&area=1",
             async: false,
             success: function (res) {
-                res.data.forEach(function (e) {
-                    $('#hotSelect').append("<option value='" + e + "'>" + e + "</option>")
-                })
+                if (res.data == 0) {
+                    $.Popup({
+                        confirm: false,
+                        template: '推荐位置已满，请到banner推荐列表中删除，再重新上传推荐！！！'
+                    })
+                } else {
+                    $.Popup({
+                        title: '动态推荐',
+                        template: html,
+                        remove: false,
+                        saveEvent: function () {
+                            $("#upload").modal({backdrop: 'static', keyboard: false});
+                            var formData = new FormData();
+                            formData.append('imgFile', $('#Cover')[0].files[0]);
+                            $.ajax({
+                                url: '/v1/upload/file',//后台文件上传接口
+                                type: 'POST',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                success: function (result) {
+                                    if (result.state == 200) {
+                                        $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="' + result.data + '" >');
+                                        devDynamic()
+                                    } else {
+                                        removeEvent('upload')
+                                        $.Popup({
+                                            confirm: false,
+                                            template: result.successmsg
+                                        })
+                                    }
+                                },
+                                error: function (res) {
+                                    $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="" >');
+                                    devDynamic();
+                                }
+                            });
+                        }
+                    })
+                    res.data.forEach(function (e) {
+                        $('#hotSelect').append("<option value='" + e + "'>" + e + "</option>")
+                    })
+                }
             }
         })
     },
@@ -333,10 +340,10 @@ var operateEventssssss = {
             success: function (result) {
                 if (result.state == 200) {
                     window.location.reload();
-                } else  {
+                } else {
                     $.Popup({
-                        confirm:false,
-                        template:result.errmsg
+                        confirm: false,
+                        template: result.errmsg
                     })
                 }
             }
@@ -388,54 +395,41 @@ $(function () {
     //    return url;
     //}
     $("#demo").zyUpload({
-        width            :   "400px",                 // 宽度
-        height           :   "200px",                 // 宽度
-        itemWidth        :   "100px",                 // 文件项的宽度
-        itemHeight       :   "100px",                 // 文件项的高度
-        url              :   "/v1/upload/file",  // 上传文件的路径
-        fileType         :   ["jpg","png","jpeg","bmp","gif"],// 上传文件的类型
-        fileSize         :   51200000,                // 上传文件的大小
-        tailor           :   false,                    // 是否可以裁剪图片
-        multiple         :   true,                    // 是否可以多个文件上传
-        dragDrop         :   true,                    // 是否可以拖动上传文件
-        del              :   true,                    // 是否可以删除文件
-        finishDel        :   false,  				  // 是否在上传文件完成后删除预览
-        fileNumber       :     9,
+        width: "400px",                 // 宽度
+        height: "200px",                 // 宽度
+        itemWidth: "100px",                 // 文件项的宽度
+        itemHeight: "100px",                 // 文件项的高度
+        url: "/v1/upload/file",  // 上传文件的路径
+        fileType: ["jpg", "png", "jpeg", "bmp", "gif"],// 上传文件的类型
+        fileSize: 51200000,                // 上传文件的大小
+        tailor: false,                    // 是否可以裁剪图片
+        multiple: true,                    // 是否可以多个文件上传
+        dragDrop: true,                    // 是否可以拖动上传文件
+        del: true,                    // 是否可以删除文件
+        finishDel: false,  				  // 是否在上传文件完成后删除预览
+        fileNumber: 9,
+        mustUpload:function(){
+            $('#DynamicSubmit').click();
+        },
         /* 外部获得的回调接口 */
-        onSelect: function(files, allFiles){                    // 选择文件的回调方法
-            //console.log(allFiles)
-            //if(allFiles.length>3){
-            //    $.Popup({
-            //        confirm:false,
-            //        template:'选择文件不能超过3个'
-            //    })
-            //}
-            //console.info("当前选择了以下文件：");
-            //console.info(files);
-            //console.info("之前没上传的文件：");
-            //console.info(allFiles);
+        onSelect: function (files, allFiles) {                    // 选择文件的回调方法
         },
-        onDelete: function(file, surplusFiles){                     // 删除一个文件的回调方法
-
+        onDelete: function (file, surplusFiles) {                     // 删除一个文件的回调方法
         },
-        onSuccess: function(file,response){                    // 文件上传成功的回调方法
-            if(JSON.parse(response).state==902){
-                    console.log(file)
+        onSuccess: function (file, response) {                    // 文件上传成功的回调方法
+            if (JSON.parse(response).state == 902) {
                 alert(JSON.parse(response).errmsg)
-            }else{
-                $('#imgFileUrl').val($('#imgFileUrl').val()+JSON.parse(response).data+',')
+            } else {
+                $('#imgFileUrl').val($('#imgFileUrl').val() + JSON.parse(response).data + ',')
             }
-            //$('#uploadInf').append(JSON.parse(response).data)
         },
-        onFailure: function(file){                    // 文件上传失败的回调方法
+        onFailure: function (file) {                    // 文件上传失败的回调方法
             console.info("此文件上传失败：");
             console.info(file);
         },
-        onComplete: function(responseInfo){           // 上传完成的回调方法
-
+        onComplete: function (responseInfo) {           // 上传完成的回调方法
             $('#DynamicSubmit').click();
-            //operateEventssssss.createDynamic()
-            $('#imgFileUrl').val($('#imgFileUrl').val().substr(0,$('#imgFileUrl').val().length-1))
+            $('#imgFileUrl').val($('#imgFileUrl').val().substr(0, $('#imgFileUrl').val().length - 1))
         }
     });
     $(window).resize(function () {
