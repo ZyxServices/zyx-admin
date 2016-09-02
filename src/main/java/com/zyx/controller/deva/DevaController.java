@@ -108,10 +108,10 @@ public class DevaController {
             @ApiParam(required = true, name = "sequence", value = "展示顺序") @RequestParam(name = "sequence", required = true) Integer sequence) {
 
         Map<String, Object> result = new HashMap<>();
-        if(id==null){
+        if (id == null) {
             result.put(LiveConstants.STATE, LiveConstants.PARAM_MISS);
             result.put(LiveConstants.ERROR_MSG, LiveConstants.MSG_PARAM_MISS);
-        }else{
+        } else {
             //判断目前条数是否满
             Devaluation deva = devaService.selectByKey(id);
             if (deva != null) {
@@ -140,9 +140,10 @@ public class DevaController {
         if (deva != null) {
             devaService.delete(id);
             refreshDevas(deva.getArea(), deva.getModel());
+            result.put(Constants.STATE, LiveConstants.SUCCESS);
+        } else {
+            result.put(Constants.STATE, LiveConstants.ERROR);
         }
-
-        result.put(Constants.STATE, LiveConstants.SUCCESS);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(result);
         return new ModelAndView(jsonView);
@@ -199,9 +200,8 @@ public class DevaController {
 
     private List refreshDevas(Integer area, Integer model) {
         List<Integer> ids = devaService.selectModelIds(area, model);
-
+        List list = null;
         if (null != ids && !ids.isEmpty()) {
-            List list = null;
             switch (model) {
                 case Constants.MODEL_ACTIVITY:
                     list = activityService.selectByIds(ids);
@@ -225,12 +225,10 @@ public class DevaController {
                     list = null;
                     break;
             }
-            if (list != null && !list.isEmpty()) {
-                innerDevaTemplate.delete(SystemConstants.MAKE_REDIS_INNER_DEVA + area + ":" + model);
-                innerDevaIdTemplate.delete(SystemConstants.MAKE_REDIS_INNER_DEVA_ID + area + ":" + model);
-            }
         }
-        return null;
+        innerDevaTemplate.delete(SystemConstants.MAKE_REDIS_INNER_DEVA + area + ":" + model);
+        innerDevaIdTemplate.delete(SystemConstants.MAKE_REDIS_INNER_DEVA_ID + area + ":" + model);
+        return list;
     }
 
 }
