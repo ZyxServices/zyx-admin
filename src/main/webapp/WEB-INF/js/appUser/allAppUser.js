@@ -70,7 +70,12 @@ function operateFormatter(value, row, index) {
     }
     return _html.join('');
 }
-
+var operateEvents = {
+    'click .recommend': function (e, value, row, index) {
+        $("input[name=modelId]").val(row.id)
+        $("input[name=state]").val(1);
+    }
+}
 $(".create_live").click(function () {
     $("#createAppUserForm")[0].reset();
     $("#listType").html("创建用户");
@@ -82,31 +87,30 @@ $(".create_live").click(function () {
 
 $(function () {
     initTable();
-
     /*表单验证*/
     $("#createAppUserForm").bootstrapValidator({
         message: '数据无效',
         feedbackIcons: {
             validating: 'glyphicon glyphicon-refresh'
         },
-        fields:{
+        fields: {
             'nickname': {
                 validators: {
                     notEmpty: {
                         message: '账号不能为空'
                     }
                 }
-            },'phone': {
+            }, 'phone': {
                 validators: {
                     notEmpty: {
                         message: '电话号码必填'
                     },
                     regexp: {
-                        regexp: /^(1[3|4|5|7|8]\d{9})$/,/*只支持手机电话*/
+                        regexp: /^(1[3|4|5|7|8]\d{9})$/, /*只支持手机电话*/
                         message: '请输入正确手机号码'
                     }
                 }
-            },'password': {
+            }, 'password': {
                 validators: {
                     notEmpty: {
                         message: '密码必填'
@@ -115,16 +119,36 @@ $(function () {
             }
         }
     });
+    function List(model, area, id) {
+        $.post("/v1/deva/sequence", {model: model, area: area}, function (data) {
+            console.log(data);
+            if (data.state == 200) {
+                if (data.data.length > 0) {
+                    for (var i = 0; i < data.data.length; i++) {
+                        $(id).append("<option value='" + data.data[i] + "'>" + data.data[i] + "</option>");
+                    }
+                }
+                else {
+                    $(id).html('<option value="">圈子序列号已满，请先删除</option>');
+                }
+            }
 
+        });
+    }
+
+    List("6", "1", "#sequence");
     $("#devaForm").ajaxForm({
-        url: '/v1/deva/appUser',
+        url: '/v1/deva/add',
         type: 'post',
         dataType: 'json',
+        data: {model: 6, area: 1},
         beforeSubmit: function () {
             $("#devaButton").attr("disabled", true);
+
             return true;
         },
         success: function (result) {
+            console.log(1111111111);
             if (result.state == 200) {
                 alert("首推成功");
                 $("#appUserRecommend").modal('hide');
@@ -153,8 +177,8 @@ $("#createAppUserForm").ajaxForm({
         } else {
             if (result.state == 5001) {
                 $.Popup({
-                    confirm:false,
-                    template:'账号已存在'
+                    confirm: false,
+                    template: '账号已存在'
                 });
             }
         }
@@ -178,76 +202,76 @@ function backToUsers() {
     $('#app_user_table').bootstrapTable('refresh');
 }
 /*图片上传*/
-$('input[id=avatar]').change(function() {
-    if($(this).val()){
+$('input[id=avatar]').change(function () {
+    if ($(this).val()) {
         $('#photoCover').html($(this).val());
         $("#avatar").html($(this).val());
-        var objUrl = getImgURL(this.files[0]) ;
+        var objUrl = getImgURL(this.files[0]);
         if (objUrl) {
-            $("#avatarImg").attr("src", objUrl) ;
+            $("#avatarImg").attr("src", objUrl);
         }
     }
 });
 //图片预览
 //建立一個可存取到該file的url
 function getImgURL(file) {
-    var url = null ;
+    var url = null;
     if (window.createObjectURL != undefined) { // basic
-        url = window.createObjectURL(file) ;
+        url = window.createObjectURL(file);
     } else if (window.URL != undefined) { // mozilla(firefox)
-        url = window.URL.createObjectURL(file) ;
-    } else if (window.webkitURL!=undefined) { // webkit or chrome
-        url = window.webkitURL.createObjectURL(file) ;
+        url = window.URL.createObjectURL(file);
+    } else if (window.webkitURL != undefined) { // webkit or chrome
+        url = window.webkitURL.createObjectURL(file);
     }
-    return url ;
+    return url;
 }
 /*多图片上传*/
 $("#imgInit").zyUpload({
-    width            :   "600px",                 // 宽度
-    height           :   "",                 // 宽度
-    itemWidth        :   "100px",                 // 文件项的宽度
-    itemHeight       :   "100px",                 // 文件项的高度
-    url              :   "/v1/upload/file",  // 上传文件的路径
-    fileType         :   ["jpg","png","jpeg","bmp","gif"],// 上传文件的类型
-    fileSize         :   51200000,                // 上传文件的大小
-    tailor           :   false,                    // 是否可以裁剪图片
-    multiple         :   true,                    // 是否可以多个文件上传
-    dragDrop         :   true,                    // 是否可以拖动上传文件
-    del              :   true,                    // 是否可以删除文件
-    finishDel        :   false,  				  // 是否在上传文件完成后删除预览
-    fileNumber:3,
+    width: "600px",                 // 宽度
+    height: "",                 // 宽度
+    itemWidth: "100px",                 // 文件项的宽度
+    itemHeight: "100px",                 // 文件项的高度
+    url: "/v1/upload/file",  // 上传文件的路径
+    fileType: ["jpg", "png", "jpeg", "bmp", "gif"],// 上传文件的类型
+    fileSize: 51200000,                // 上传文件的大小
+    tailor: false,                    // 是否可以裁剪图片
+    multiple: true,                    // 是否可以多个文件上传
+    dragDrop: true,                    // 是否可以拖动上传文件
+    del: true,                    // 是否可以删除文件
+    finishDel: false,  				  // 是否在上传文件完成后删除预览
+    fileNumber: 3,
     btnS: false,
     /* 外部获得的回调接口 */
-    onSelect: function(files, allFiles){                    // 选择文件的回调方法
+    onSelect: function (files, allFiles) {                    // 选择文件的回调方法
         /* console.info("当前选择了以下文件：");
          console.info(files);
          console.info("之前没上传的文件：");
          console.info(allFiles.length);*/
         var html = '';
-        if(allFiles.length > 3){
+        if (allFiles.length > 3) {
             html = '已选择3张图片不能再多传';
             $("#imgNum").html(html);
             return false;
-        }else{
-            html = '还需上传'+ (3 - allFiles.length)+'张图片';
+        } else {
+            html = '还需上传' + (3 - allFiles.length) + '张图片';
             $("#imgNum").html(html);
         }
     },
-    onDelete: function(file, surplusFiles){                     // 删除一个文件的回调方法
+    onDelete: function (file, surplusFiles) {                     // 删除一个文件的回调方法
         console.info("当前删除了此文件：");
         console.info(file);
         console.info("当前剩余的文件：");
         console.info(surplusFiles);
     },
-    onSuccess: function(file,response){                    // 文件上传成功的回调方法
+    onSuccess: function (file, response) {                    // 文件上传成功的回调方法
         console.log(response);
-        $('#authFile').val($('#authFile').val()+JSON.parse(response).data+',');
+        $('#authFile').val($('#authFile').val() + JSON.parse(response).data + ',');
     },
-    onFailure: function(file){                    // 文件上传失败的回调方法
+    onFailure: function (file) {                    // 文件上传失败的回调方法
         console.info("此文件上传失败：");
         console.info(file);
     },
-    onComplete: function(responseInfo){           // 上传完成的回调方法
+    onComplete: function (responseInfo) {           // 上传完成的回调方法
         $("#createAppUserForm").submit();
     }
 });

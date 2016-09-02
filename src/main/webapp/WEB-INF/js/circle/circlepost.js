@@ -366,6 +366,7 @@ function List(model, area, id) {
             }
             else {
                 $(id).html('<option value="">圈子序列号已满，请先删除</option>');
+                $("#circleSure").attr("disabled", true);
             }
         }
 
@@ -375,12 +376,10 @@ function List(model, area, id) {
 $('input:radio[name="area"]').change(function () {
     var inputValue = $(this).val();
     if (inputValue == "1") {
-        console.log(1);
-        List("3", "1", "#hotSelect");
+        List("4", "1", "#hotSelect");
     }
     else if (inputValue == "3") {
         List("4", "3", "#chosenSelect");
-        console.log(2);
     }
 })
 
@@ -389,58 +388,60 @@ $("#circleSure").click(function (e) {
     var formData = new FormData();
     var firstSequence = $("#hotSelect").val();
     var SecendSequence = $("#chosenSelect").val();
-    if (inputValue == "1") {
-        $("input[name=imageUrl]").val();
-        $("input[name=sequence]").val(firstSequence);
-        $("input[name=model]").val("3");
-        $("#PostRecommend").ajaxSubmit({
-            type: "post",
-            dateType: "json",
-            url: "/v1/deva/add",
-            async: false,
-            success: function (result) {
-                $.Popup({
-                    confirm: false,
-                    title: "首页帖子推荐成功"
-                });
-                $("#post-list-table").bootstrapTable('refresh');
-                $("#circleModal").modal("hide");
-            }
+    if (SecendSequence != '') {
+        if (inputValue == "1") {
+            $("input[name=imageUrl]").val();
+            $("input[name=sequence]").val(firstSequence);
+            $("input[name=model]").val("4");
+            $("#PostRecommend").ajaxSubmit({
+                type: "post",
+                dateType: "json",
+                url: "/v1/deva/add",
+                async: false,
+                success: function (result) {
+                    $.Popup({
+                        confirm: false,
+                        title: "首页帖子推荐成功"
+                    });
+                    $("#post-list-table").bootstrapTable('refresh');
+                    $("#circleModal").modal("hide");
+                }
 
-        })
-    } else if (inputValue == "3") {
-        console.log(222222);
-        $("input[name=imageUrl]").val();
-        $("input[name=sequence]").val(SecendSequence);
-        $("input[name=model]").val("4");
-        formData.append('imgFile', $("#lefile")[0].files[0]);
-        $.ajax({
-            url: "/v1/upload/file",
-            type: 'post',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (data) {
-                console.log(data);
-                $("input[name=imageUrl]").val(data.data);
-                $("#PostRecommend").ajaxSubmit({
-                    type: "post",
-                    dateType: "json",
-                    url: "/v1/deva/add",
-                    async: false,
-                    success: function (result) {
-                        $.Popup({
-                            confirm: false,
-                            title: "圈子帖子推荐成功"
-                        });
-                        $("#post-list-table").bootstrapTable('refresh');
-                        $("#circleModal").modal("hide");
-                    }
+            })
+        } else if (inputValue == "3") {
+            console.log(222222);
+            $("input[name=imageUrl]").val();
+            $("input[name=sequence]").val(SecendSequence);
+            $("input[name=model]").val("4");
+            formData.append('imgFile', $("#lefile")[0].files[0]);
+            $.ajax({
+                url: "/v1/upload/file",
+                type: 'post',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    console.log(data);
+                    $("input[name=imageUrl]").val(data.data);
+                    $("#PostRecommend").ajaxSubmit({
+                        type: "post",
+                        dateType: "json",
+                        url: "/v1/deva/add",
+                        async: false,
+                        success: function (result) {
+                            $.Popup({
+                                confirm: false,
+                                title: "圈子帖子推荐成功"
+                            });
+                            $("#post-list-table").bootstrapTable('refresh');
+                            $("#circleModal").modal("hide");
+                        }
 
-                })
-            }
+                    })
+                }
 
-        })
+            })
+        }
     }
 
 });

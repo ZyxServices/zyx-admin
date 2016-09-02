@@ -1321,6 +1321,8 @@ var ZYFILE = {
                 finishDel: false,
                 fileNumber: '',
                 btnS:true,
+                mustUpload:'',
+
                 onSelect: function (selectFiles, allFiles) {
                 },
                 onDelete: function (file, files) {
@@ -1694,7 +1696,13 @@ var ZYFILE = {
 
                         $("#fileSubmit").click()
                     } else {
-                        alert("请先选中文件再点击上传")
+                        if ($.isFunction(para.mustUpload)) {
+                            para.mustUpload()
+                        }else{
+                            alert("请先选中文件再点击上传")
+                        }
+
+
                     }
                 });
                 if ($("#rapidAddImg").length > 0) {
