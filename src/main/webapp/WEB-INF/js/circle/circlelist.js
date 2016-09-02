@@ -295,6 +295,7 @@ var operateEvent = {
                 }
                 else {
                     $("#circleSelect").html('<option value="">圈子序列号已满，请先删除</option>');
+                    $("#RdSures").attr("disabled", true);
                 }
             }
 
@@ -449,21 +450,23 @@ function getImgURL(file) {
 }
 //圈子推荐
 $("#RdSures").click(function () {
-    $("#circleRecommend").ajaxSubmit({
-        type: "post",
-        dateType: "json",
-        url: "/v1/deva/add",
-        async: false,
-        success: function (result) {
-            $.Popup({
-                confirm: false,
-                title: "推荐成功"
-            });
-            $("#circleModal").modal("hide");
-            $('#activity-list-table').bootstrapTable('refresh');
-        }
+    if ($("select[name=sequence]").val() != '') {
+        $("#circleRecommend").ajaxSubmit({
+            type: "post",
+            dateType: "json",
+            url: "/v1/deva/add",
+            async: false,
+            success: function (result) {
+                $.Popup({
+                    confirm: false,
+                    title: "推荐成功"
+                });
+                $("#circleModal").modal("hide");
+                $('#activity-list-table').bootstrapTable('refresh');
+            }
 
-    })
+        })
+    }
 })
 
 
