@@ -373,8 +373,37 @@ function operateFormatterclass(value, row, index) {
 //直播操作分类事件
 var operateEventclass = {
     'click .edit': function (e, value, row, index) {
+        $('.create_liveType h3')[0].innerHTML='编辑直播分类';
+        $('#lab').val(row.lab);
+        $('#desc').val(row.description) ;
+        $('#createLiveClass').append('<input name="id" style="display:none" value="'+row.id+'" >')
+        $('.bootstrap-table').hide()
+        $(".liveSureBtn").removeAttr("onclick");
+        $(".liveSureBtn").click(function(){
+            $("#createLiveClass").ajaxSubmit({
+                url: '/v1/live/lab/update',
+                type: 'post',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.state == 23002) {
+                        $.Popup({
+                            confirm: false,
+                            template: '这个类别已经存在,请重新填写'
+                        })
+                    } else {
+                        $('#editLive').bootstrapTable('refresh');
+                        $.Popup({
+                            confirm: false,
+                            template: '编辑成功',
+                            cancelEvent:function(){
+                                window.location.reload()
+                            }
+                        })
 
-        alert('You click like action, row: ' + JSON.stringify(row));
+                    }
+                }
+            })
+        })
     },
     'click .recommend': function (e, value, row, index) {
 
@@ -410,17 +439,13 @@ var operateEventclass = {
         var delUrl = '/v1/live/lab/delete?id=' + row.id;
         ajaxPlugins.remove(delUrl, 'editLive', 'post')
     },
-    creatLive: function () {
-        var labvalue = $('#lab').val()
-        var descvalue = $('#desc').val()
-        var creatLiveUrl = '/v1/live/lab/create?lab=' + labvalue + '&desc=' + descvalue + '';
-        $.ajax({
-            url: creatLiveUrl,
-            async: false,
-            type: "post",
-            dateType: "json",
-            success: function (data) {
-                if (data.state == 23002) {
+    createLive: function () {
+        $("#createLiveClass").ajaxSubmit({
+            url: '/v1/live/lab/create',
+            type: 'post',
+            dataType: 'json',
+            success: function (result) {
+                if (result.state == 23002) {
                     $.Popup({
                         confirm: false,
                         template: '这个类别已经存在,请重新填写'
@@ -432,9 +457,11 @@ var operateEventclass = {
                         template: '添加成功'
                     })
                 }
-
             }
         })
+    },
+    updateLive:function(e, value, row, index){
+
     }
 };
 
