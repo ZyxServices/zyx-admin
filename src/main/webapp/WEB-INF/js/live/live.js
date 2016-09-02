@@ -248,33 +248,7 @@ var operateEventssssss = {
                         success: function (result) {
                             if (result.state == 200) {
                                 $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="' + result.data + '" >');
-                                $.ajax({
-                                    url: '/v1/deva/add',
-                                    type: 'post',
-                                    data: $('#recommend').serialize(),
-                                    dataType: 'json',
-                                    success: function (result) {
-                                        removeEvent('upload')
-                                        if (result.state == 200) {
-                                            $.Popup({
-                                                confirm: false,
-                                                template: '推荐成功'
-                                            })
-                                        } else if (result.state == 73002) {
-                                            $.Popup({
-                                                confirm: false,
-                                                template: '推荐内容重复'
-                                            })
-                                        }
-                                    },
-                                    error: function (res) {
-                                        removeEvent('upload')
-                                        $.Popup({
-                                            confirm: false,
-                                            template: '推荐上传失败（请检查内容是否填写完整！！！）'
-                                        })
-                                    }
-                                })
+                                liveDeva()
                             } else {
                                 removeEvent('upload')
                                 $.Popup({
@@ -284,11 +258,8 @@ var operateEventssssss = {
                             }
                         },
                         error: function (res) {
-                            removeEvent('upload')
-                            $.Popup({
-                                confirm: false,
-                                template: '图片上传失败，图片不能为空'
-                            })
+                            $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="" >');
+                            liveDeva()
                         }
                     });
                 }
@@ -341,6 +312,35 @@ var operateEventssssss = {
         ajaxPlugins.remove(delUrl, 'live_table', 'post');
     }
 };
+function liveDeva(){
+    $.ajax({
+        url: '/v1/deva/add',
+        type: 'post',
+        data: $('#recommend').serialize(),
+        dataType: 'json',
+        success: function (result) {
+            removeEvent('upload')
+            if (result.state == 200) {
+                $.Popup({
+                    confirm: false,
+                    template: '推荐成功'
+                })
+            } else if (result.state == 73002) {
+                $.Popup({
+                    confirm: false,
+                    template: '推荐内容重复'
+                })
+            }
+        },
+        error: function (res) {
+            removeEvent('upload')
+            $.Popup({
+                confirm: false,
+                template: '推荐上传失败（请检查内容是否填写完整！！！）'
+            })
+        }
+    })
+}
 //序列查詢
 function liveSequence(area){
     var result;
@@ -418,6 +418,7 @@ var operateEventclass = {
             url: creatLiveUrl,
             async: false,
             type: "post",
+            dateType: "json",
             success: function (data) {
                 if (data.state == 23002) {
                     $.Popup({
@@ -443,6 +444,5 @@ $(function () {
         $(".create_liveType").addClass('on')
         $(".live_index").addClass('hide')
     })
-    //$.fzk()
     initTable();
 })
