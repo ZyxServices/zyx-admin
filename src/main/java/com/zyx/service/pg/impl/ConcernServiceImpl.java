@@ -113,9 +113,9 @@ public class ConcernServiceImpl extends BaseServiceImpl<Concern> implements Conc
         if (Objects.equals(topVisible, null)) {
             return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30023, PgConstants.PG_ERROR_CODE_30023_MSG);
         }
-        if (Objects.equals(dbImgPath, null) || Objects.equals(dbImgPath, "")) {
-            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30013, PgConstants.PG_ERROR_CODE_30013_MSG);
-        }
+//        if (Objects.equals(dbImgPath, null) || Objects.equals(dbImgPath, "")) {
+//            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30013, PgConstants.PG_ERROR_CODE_30013_MSG);
+//        }
         Concern concern = new Concern();
         concern.setCreateTime(new Date().getTime());
         concern.setTopicContent(content);
