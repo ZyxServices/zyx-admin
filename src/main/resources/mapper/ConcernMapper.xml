@@ -16,8 +16,8 @@
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
     </resultMap>
     <resultMap id="concernVoMap" type="com.zyx.model.vo.ConcernVo" extends="concernMap">
-        <association property="zanCounts" column="id" select="zanCountsSelect"/>
-        <association property="commentCounts" column="id" select="commentCountsSelect"/>
+        <!--<association property="zanCounts" column="id" select="zanCountsSelect"/>-->
+        <!--<association property="commentCounts" column="id" select="commentCountsSelect"/>-->
         <association property="userVo" column="user_id" select="userSelect"/>
         <association property="appUserAuthDto" column="user_id" select="authSelect"/>
     </resultMap>
@@ -53,7 +53,9 @@
         concern.img_url,
         concern.video_url,
         concern.create_time,
-        concern.state
+        concern.state,
+        (SELECT COUNT(id) FROM zan WHERE zan.body_type = 2 AND body_id = concern.id) as zanCounts,
+        (SELECT COUNT(id) FROM comment WHERE comment_type = 3  AND comment_id =  concern.id) as commentCounts
     FROM
         concern
     ORDER BY
@@ -85,7 +87,9 @@
 	concern.img_url,
 	concern.video_url,
 	concern.create_time,
-	concern.state
+	concern.state,
+    (SELECT COUNT(id) FROM zan WHERE zan.body_type = 2 AND body_id = concern.id) as zanCounts,
+    (SELECT COUNT(id) FROM comment WHERE comment_type = 3  AND comment_id =  concern.id) as commentCounts
     FROM
 	concern
     INNER JOIN `user` ON concern.user_id = `user`.id
