@@ -16,6 +16,7 @@ public class CircleVo extends Circle {
     private String circleTypeName;
     private Integer circleItemCount;
     private Integer concernCount;
+    private boolean isDeva;
 
 
     public Integer getCircleItemCount() {
@@ -56,5 +57,13 @@ public class CircleVo extends Circle {
 
     public void setCircleTypeName(String circleTypeName) {
         this.circleTypeName = circleTypeName;
+    }
+
+    public boolean isDeva() {
+        return isDeva;
+    }
+
+    public void setDeva(boolean deva) {
+        isDeva = deva;
     }
 }

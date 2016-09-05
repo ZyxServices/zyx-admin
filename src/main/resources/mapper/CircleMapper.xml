@@ -27,12 +27,12 @@
         <!--<result column="type_name" property="circleTypeName" jdbcType="VARCHAR"/>-->
         <!--<result column="circleItem_count" property="circleItemCount" jdbcType="INTEGER"/>-->
         <result column="circleTypeName" property="circleTypeName" jdbcType="VARCHAR"/>
-        <result column="concern_count" property="concernCount" jdbcType="INTEGER"/>
+        <!--<result column="concern_count" property="concernCount" jdbcType="INTEGER"/>-->
         <association property="circleItemCount" column="id" select="circleItemSelect"/>
         <association property="concernCount" column="id" select="myConcernSelect"/>
         <association property="userVo" column="create_id" select="userSelect"/>
         <association property="masterVo" column="circle_master_id" select="userSelect"/>
-
+        <association property="isDeva" column="id" select="queryIsDeva"/>
     </resultMap>
 
     <select id="circleItemSelect" parameterType="int" resultType="int">
@@ -145,8 +145,12 @@
 
     <update id="deleteByIds">
         UPDATE circle SET state = -1 WHERE id IN
-        <foreach item="item"  index="index" collection="array"  open="(" separator="," close=")">
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
             #{item}
         </foreach>
     </update>
+
+    <select id="queryIsDeva" parameterType="java.lang.Integer" resultType="boolean">
+        SELECT NOT ISNULL(id) as isDeva FROM devaluation WHERE model = 3 AND model_id = #{id}
+    </select>
 </mapper>

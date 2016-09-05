@@ -26,6 +26,7 @@
         <!--<result column="comment_Counts" property="commentCounts" jdbcType="INTEGER"/>-->
         <association property="zanCounts" column="id" select="zanSelect"/>
         <association property="commentCounts" column="id" select="commentSelect"/>
+        <association property="isDeva" column="id" select="queryIsDeva"/>
     </resultMap>
 
     <select id="zanSelect" resultType="int">
@@ -104,10 +105,14 @@
     </update>
 
     <update id="deleteByIds">
-        UPDATE circle_item SET state = -1 WHERE  id IN
-        <foreach item="item"  index="index" collection="array"  open="(" separator="," close=")">
+        UPDATE circle_item SET state = -1 WHERE id IN
+        <foreach item="item" index="index" collection="array" open="(" separator="," close=")">
             #{item}
         </foreach>
     </update>
+
+    <select id="queryIsDeva" parameterType="java.lang.Integer" resultType="boolean">
+        SELECT NOT ISNULL(id) as isDeva FROM devaluation WHERE model = 4 AND model_id = #{id}
+    </select>
 
 </mapper>

@@ -14,6 +14,7 @@ public class CircleItemVo extends CircleItem {
     private String circleTypeName;
     private Integer zanCounts;
     private Integer commentCounts;
+    private boolean isDeva;
 
     public String getCreateUser() {
         return createUser;
@@ -53,5 +54,13 @@ public class CircleItemVo extends CircleItem {
 
     public void setCommentCounts(Integer commentCounts) {
         this.commentCounts = commentCounts;
+    }
+
+    public boolean isDeva() {
+        return isDeva;
+    }
+
+    public void setDeva(boolean deva) {
+        isDeva = deva;
     }
 }
