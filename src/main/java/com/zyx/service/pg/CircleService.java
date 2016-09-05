@@ -27,4 +27,6 @@ public interface CircleService extends BaseService<Circle> {
 
     Map<String, Object> editCircle(Integer circleId, String title, String file, Integer circleType, String details, Integer masterId, String adminIds);
 
+    Map<String,Object> delByIds(String ids);
+
 }

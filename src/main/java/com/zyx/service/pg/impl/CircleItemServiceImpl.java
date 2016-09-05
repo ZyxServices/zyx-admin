@@ -143,4 +143,24 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
         }
         return PgConstants.MAP_500;
     }
+
+    @Override
+    public Map<String, Object> deleteByIds(String ids) {
+        if (Objects.equals(ids, null) || Objects.equals(ids, "")) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30033, PgConstants.PG_ERROR_CODE_30033_MSG);
+        }
+        if (ids.contains(",")) {
+            String[] idsArray = ids.split(",");
+            Integer result = circleItemMapper.deleteByIds(idsArray);
+            if (result > 0) {
+                return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_39000_MSG, null);
+            }
+        } else {
+            Integer result = circleItemMapper.setVisible(-1, Integer.valueOf(ids));
+            if (result > 0) {
+                return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_39000_MSG, null);
+            }
+        }
+        return PgConstants.MAP_500;
+    }
 }

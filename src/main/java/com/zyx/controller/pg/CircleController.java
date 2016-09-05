@@ -4,11 +4,9 @@ import com.zyx.service.pg.CircleService;
 import com.zyx.utils.FileUploadUtils;
 import com.zyx.utils.ImagesVerifyUtils;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.AbstractView;
@@ -58,7 +56,7 @@ public class CircleController {
             @RequestParam("title") String title,
             @RequestParam(value = "createId") Integer createId,
             @RequestParam(value = "state", required = false) Integer state,
-            @RequestParam(value = "masterId",required = false) Integer masterId,
+            @RequestParam(value = "masterId", required = false) Integer masterId,
             @RequestParam(value = "adminIds", required = false) String adminIds,
             @RequestParam("circleType") Integer circleType,
             @RequestParam(value = "headImgUrl", required = false) String headImgUrl,
@@ -140,4 +138,15 @@ public class CircleController {
         jsonView.setAttributesMap(resultMap);
         return new ModelAndView(jsonView);
     }
+
+    @RequestMapping(value = "delete/{ids}", method = RequestMethod.DELETE)
+    @ApiOperation(value = "圈子批量删除", notes = "圈子批量删除")
+    @ApiParam(required = true, name = "ids", value = "圈子id字符串，以逗号隔开格式：1,2,3（逗号必须是英文类型）")
+    public ModelAndView deleteByIds(@PathVariable(value = "ids") String ids) {
+        Map<String, Object> map = circleService.delByIds(ids);
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
 }

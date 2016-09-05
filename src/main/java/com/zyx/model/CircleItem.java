@@ -30,6 +30,9 @@ public class CircleItem {
     @Column(name = "img_url")
     private String imgUrl;
 
+    @Column(name = "base_content")
+    private String baseContent;
+
     /**
      * @return id
      */
@@ -156,5 +159,13 @@ public class CircleItem {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public String getBaseContent() {
+        return baseContent;
+    }
+
+    public void setBaseContent(String baseContent) {
+        this.baseContent = baseContent;
     }
 }

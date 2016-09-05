@@ -26,7 +26,7 @@
         <!--<result column="masterName" property="masterName" jdbcType="VARCHAR"/>-->
         <!--<result column="type_name" property="circleTypeName" jdbcType="VARCHAR"/>-->
         <!--<result column="circleItem_count" property="circleItemCount" jdbcType="INTEGER"/>-->
-        <result column="circleTypeName" property="circleTypeName" jdbcType="VARCHAR" />
+        <result column="circleTypeName" property="circleTypeName" jdbcType="VARCHAR"/>
         <result column="concern_count" property="concernCount" jdbcType="INTEGER"/>
         <association property="circleItemCount" column="id" select="circleItemSelect"/>
         <association property="concernCount" column="id" select="myConcernSelect"/>
@@ -45,7 +45,7 @@
     </select>
 
     <!--<select id="circleTypeSelect" parameterType="int" resultType="com.zyx.model.vo.CircleTypeVo">-->
-        <!--SELECT * FROM circle_type WHERE id =#{circle_type_id}-->
+    <!--SELECT * FROM circle_type WHERE id =#{circle_type_id}-->
     <!--</select>-->
 
 
@@ -137,9 +137,16 @@
                 circle_master_id=#{circleMasterId},
             </if>
             <if test="adminIds!=null and adminIds!=''">
-                admin_ids=#{adminIds},
+                admin_ids=#{adminIds}
             </if>
         </set>
         WHERE id=#{id}
+    </update>
+
+    <update id="deleteByIds">
+        UPDATE circle SET state = -1 WHERE id IN
+        <foreach item="item"  index="index" collection="array"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </update>
 </mapper>

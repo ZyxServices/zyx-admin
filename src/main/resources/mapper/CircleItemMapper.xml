@@ -14,6 +14,7 @@
         <result column="top" property="top" jdbcType="INTEGER"/>
         <result column="content" property="content" jdbcType="LONGVARCHAR"/>
         <result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="base_content" property="baseContent" jdbcType="VARCHAR"/>
     </resultMap>
 
     <resultMap id="circleItemVoMap" type="com.zyx.model.vo.CircleItemVo" extends="circleItemMap">
@@ -45,6 +46,7 @@
         circle_item.create_time,
         circle_item.top,
         circle_item.state,
+        circle_item.base_content,
         `user`.nickname AS createUser,
         circle.title AS circleTitle,
         circle_type.type_name
@@ -80,7 +82,8 @@
         circle_item.state,
         `user`.nickname AS createUser,
         circle.title AS circleTitle,
-        circle_type.type_name
+        circle_type.type_name,
+        circle_item.base_content
         FROM
         circle_item
         INNER JOIN `user` ON circle_item.create_id = `user`.id
@@ -98,6 +101,13 @@
 
     <update id="editCircleItem">
         UPDATE circle_item SET title=#{title},content=#{content} WHERE id=#{id}
+    </update>
+
+    <update id="deleteByIds">
+        UPDATE circle_item SET state = -1 WHERE  id IN
+        <foreach item="item"  index="index" collection="array"  open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </update>
 
 </mapper>

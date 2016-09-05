@@ -25,4 +25,6 @@ public interface CircleMapper extends Mapper<Circle> {
     Integer searchCount();
 
     Integer editCircle(Circle circle);
+
+    Integer deleteByIds(String[] ids);
 }

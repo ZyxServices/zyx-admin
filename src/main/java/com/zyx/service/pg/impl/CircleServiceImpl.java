@@ -170,7 +170,7 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
             circleFind.setTitle(title);
             if (!Objects.equals(headImg, "")) {
                 circleFind.setHeadImgUrl(headImg);
-            }else{
+            } else {
                 circleFind.setHeadImgUrl("");
             }
             circleFind.setCircleType(circleType);
@@ -183,5 +183,30 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
             }
         }
         return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_35000, PgConstants.PG_ERROR_CODE_35000_MSG);
+    }
+
+    @Override
+    public Map<String, Object> delByIds(String ids) {
+        if (Objects.equals(ids, null) || Objects.equals(ids, "")) {
+            return MapUtils.buildErrorMap(PgConstants.PG_ERROR_CODE_30025, PgConstants.PG_ERROR_CODE_30025_MSG);
+        }
+        try {
+            if (ids.contains(",")) {
+                String[] idList = ids.split(",");
+                Integer result = circleMapper.deleteByIds(idList);
+                if (result > 0) {
+                    return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_39000_MSG, null);
+                }
+            } else {
+                Integer result = circleMapper.setState(-1, Integer.valueOf(ids));
+                if (result > 0) {
+                    return MapUtils.buildSuccessMap(PgConstants.SUCCESS, PgConstants.PG_ERROR_CODE_39000_MSG, null);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return PgConstants.MAP_500;
+        }
+        return PgConstants.MAP_500;
     }
 }

@@ -4,6 +4,7 @@ import com.zyx.service.pg.CircleItemService;
 import com.zyx.service.pg.CircleService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,9 +32,9 @@ public class CircleItemController {
     @ApiOperation(value = "帖子列表", notes = "帖子列表")
     public ModelAndView findByPager(@RequestParam(value = "start") Integer start,
                                     @RequestParam(value = "pageSize") Integer pageSize,
-                                    @RequestParam(value = "circleId",required = false) Integer circleId) {
+                                    @RequestParam(value = "circleId", required = false) Integer circleId) {
 
-        Map<String, Object> map = circleItemService.findByPager(start, pageSize,circleId);
+        Map<String, Object> map = circleItemService.findByPager(start, pageSize, circleId);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
@@ -97,6 +98,15 @@ public class CircleItemController {
                       @RequestParam(value = "title", required = false) String title,
                       @RequestParam(value = "content", required = false) String content) {
         Map<String, Object> map = circleItemService.editCircleItem(circleItemId, title, content);
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "deleteByIds/{ids}", method = RequestMethod.DELETE)
+    @ApiOperation(value = "帖子批量删除", notes = "帖子批量删除")
+    public ModelAndView deleteByIds(@PathVariable(value = "ids") String ids) {
+        Map<String, Object> map = circleItemService.deleteByIds(ids);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
