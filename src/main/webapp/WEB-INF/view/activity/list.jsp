@@ -407,7 +407,6 @@
               <div class="controls col-xs-5">
                 <select class="span6" id="sequence" name="sequence">
                 </select>
-                <span class="help-inline required" id="sequenceWarm">*</span>
               </div>
             </div>
             <input type="hidden" name="modelId" id="activityId">

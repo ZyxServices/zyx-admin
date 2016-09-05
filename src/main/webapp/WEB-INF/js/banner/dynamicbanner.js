@@ -41,10 +41,14 @@ function dynamicFormData(res) {
             dataObj.isOfficial = "是";
             if(item.imageUrl){
                 var imgUrl = item.imageUrl.split(".");
-                dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>';
+                if(imgUrl[1] == 'gif'){
+                    dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'"><img style="width: 30px" src="http://image.tiyujia.com/'+imgUrl[0]+'.'+imgUrl[1]+'"></a>';
+                }else{
+                    dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>';
+                }
             }
             dataObj.sequence = item.sequence;
-            dataObj.state = item.activation == 1? "是":"否";
+            dataObj.state = item.state == 1? "是":"否";
             dataArray.push(dataObj)
         });
         return {

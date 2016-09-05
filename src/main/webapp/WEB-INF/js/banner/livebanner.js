@@ -27,41 +27,81 @@ $(function(){
         },
         responseHandler:homepageFormData
     });
-    $("#stand-list-table").bootstrapTable({
-        url: "/v1/deva/list",
-        method:'post',
-        locale: 'zh-US',
-        pagination: true,
-        cache: false,
-        uniqueId: "id",
-        contentType: "application/x-www-form-urlencoded",
-        height:500,
-        pageSize: 20,
-        pageList: [20, 50, 100],
-        paginationPreText: "上一页",
-        paginationNextText: "下一页",
-        sidePagination: 'server',
-        queryParams: function (params) {
-            return {
-                area: STANDAREA,
-                model: LIVEMODEL,
-                pageDataNum: params.limit,
-                pageNum: (params.offset + 1),
-                search: params.search
-            }
+    $("#bannerForm").bootstrapValidator({
+        message: '数据无效',
+        feedbackIcons: {
+            validating: 'glyphicon glyphicon-refresh'
         },
-        responseHandler:standFormData
-    })
+        fields: {
+            'sequence': {
+                validators: {
+                    notEmpty: {
+                        message: 'banner序号不能为空'
+                    }
+                }
+            }
+        }
+    });
 })
 
 function liveDevaChange(obj) {
     var _val = $(obj).val();
     if(_val == 1){
-        $("#homepage-list-table").bootstrapTable('refresh');
+        $("#homepage-list-table").bootstrapTable('destroy');
+        $("#homepage-list-table").bootstrapTable({
+            url: "/v1/deva/list",
+            method:'post',
+            locale: 'zh-US',
+            pagination: true,
+            cache: false,
+            uniqueId: "id",
+            height:500,
+            pageSize: 20,
+            pageList: [20, 50, 100],
+            contentType: "application/x-www-form-urlencoded",
+            paginationPreText: "上一页",
+            paginationNextText: "下一页",
+            sidePagination: 'server',
+            queryParams: function (params) {
+                return {
+                    area: HOMEPAGEAREA,
+                    model: LIVEMODEL,
+                    pageDataNum: params.limit,
+                    pageNum: (params.offset + 1),
+                    search: params.search
+                }
+            },
+            responseHandler:homepageFormData
+        });
         $("#banner-list").show();
         $("#stand-banner-list").hide();
     }else if(_val == 2){
-        $("#stand-list-table").bootstrapTable('refresh');
+        $("#stand-list-table").bootstrapTable('destroy');
+        $("#stand-list-table").bootstrapTable({
+            url: "/v1/deva/list",
+            method:'post',
+            locale: 'zh-US',
+            pagination: true,
+            cache: false,
+            uniqueId: "id",
+            contentType: "application/x-www-form-urlencoded",
+            height:500,
+            pageSize: 20,
+            pageList: [20, 50, 100],
+            paginationPreText: "上一页",
+            paginationNextText: "下一页",
+            sidePagination: 'server',
+            queryParams: function (params) {
+                return {
+                    area: STANDAREA,
+                    model: LIVEMODEL,
+                    pageDataNum: params.limit,
+                    pageNum: (params.offset + 1),
+                    search: params.search
+                }
+            },
+            responseHandler:standFormData
+        });
         $("#banner-list").hide();
         $("#stand-banner-list").show();
     }
@@ -117,19 +157,3 @@ function standFormData(res) {
         }
     }
 }
-
-$("input[name=area]").change(function () {
-    var _val = $(this).val();
-    var option = '';
-    if(_val == 1){/*首页*/
-        $("#homepageSequence").show();
-        $("#standSequence").hide();
-        $("#standSequence").removeAttr("name");
-        $("#homepageSequence").attr({"name":'sequence'});
-    }else{
-        $("#standSequence").show();
-        $("#homepageSequence").hide();
-        $("#homepageSequence").removeAttr("name");
-        $("#standSequence").attr({"name":'sequence'});
-    }
-})

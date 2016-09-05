@@ -206,12 +206,12 @@
                             </div>
                         </div>
 
-                        <div class="control-group">
+                        <div class="control-group form-group">
                             <label class="control-label"></label>
-                            <div class="controls">
-                                <select class="span3" id="homepageSequence">
+                            <div class="controls col-xs-5">
+                                <select class="span6" id="homepageSequence" name="sequence">
                                 </select>
-                                <select class="span3" id="standSequence">
+                                <select class="span6" id="standSequence" name="sequence">
                                 </select>
                             </div>
                         </div>
