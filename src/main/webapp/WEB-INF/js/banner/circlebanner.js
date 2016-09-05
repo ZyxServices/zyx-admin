@@ -5,30 +5,28 @@ $(function(){
     /*
      * 对banner序列号的验证
      * */
-    $(function () {
-        $("#bannerForm").bootstrapValidator({
-            message: '数据无效',
-            feedbackIcons: {
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                'sequence': {
-                    validators: {
-                        notEmpty: {
-                            message: 'banner序号不能为空'
-                        }
+    $("#bannerForm").bootstrapValidator({
+        message: '数据无效',
+        feedbackIcons: {
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            'sequence': {
+                validators: {
+                    notEmpty: {
+                        message: 'banner序号不能为空'
                     }
-                },
-                'imageR': {
-                    validators: {
-                        notEmpty: {
-                            message: '精选圈子的帖子必须有图'
-                        }
+                }
+            },
+            'imageR': {
+                validators: {
+                    notEmpty: {
+                        message: '精选圈子的帖子必须有图'
                     }
                 }
             }
-        });
-    })
+        }
+    });
     $("#homepage-list-table").bootstrapTable({
         url: "/v1/deva/list",
         method:'post',

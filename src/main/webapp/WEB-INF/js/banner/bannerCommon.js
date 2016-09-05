@@ -14,16 +14,18 @@ var STANDAREA = 2;
 var CIRCLEAREA = 3;
 /*活动banner+动态banner是不需要验证的*/
 var ISVALID = false;
+var AREA = '';/*根据Area判断点击确定后返回的页面*/
+var MODEL = '';/*用于区分圈子和帖子*/
 /*
 * 修改推荐
 * */
-$("#confirmDeva").click(function ( ) {
+$("#confirmDeva").click(function () {
     if($("#lefile")[0].files[0]== undefined){
         if(ISVALID){
-            confirmDeva();
+            confirmDevaSubmit();
         }else{
             if($("#bannerForm").data('bootstrapValidator').isValid()){
-                confirmDeva();
+                confirmDevaSubmit(area);
             }
         }
     }else{
@@ -41,13 +43,13 @@ $("#confirmDeva").click(function ( ) {
             success:function (result) {
                 if(result.state == 200){
                     $("#imageUrl").val(result.data);
-                    confirmDeva();
+                    confirmDevaSubmit(area);
                 }
             }
         })
     }
 });
-function confirmDeva() {
+function confirmDevaSubmit(area) {
     $('#bannerForm').ajaxSubmit({
         url: '/v1/deva/update',
         type: 'post',
@@ -60,7 +62,17 @@ function confirmDeva() {
                 });
                 $("#bannerList").show();
                 $("#bannerEdit").hide();
-                $('#homepage-list-table').bootstrapTable('refresh');
+                if(AREA == STANDAREA){
+                    $('#stand-list-table').bootstrapTable('refresh');
+                }else if(AREA == CIRCLEAREA){
+                    if(MODEL == 3){
+                        $('#circle-list-table').bootstrapTable('refresh');
+                    }else{
+                        $('#post-list-table').bootstrapTable('refresh');
+                    }
+                }else{
+                    $('#homepage-list-table').bootstrapTable('refresh');
+                }
             } else if (result.state && result.state == 303) {
                 $.Popup({
                     confirm: false,
@@ -139,6 +151,8 @@ var operateEvents = {
     },
     'click .edit':function (e, value, row, index) {/*编辑有不是公用的部分*/
         console.log(row);
+        AREA = row.area;
+        MODEL = row.model;
         $("#bannerList").hide();
         $("#bannerEdit").show();
         $("#photoCover").html('选择图片');
@@ -159,8 +173,33 @@ var operateEvents = {
                 $("#standSequence").removeAttr("name");
                 $("#homepageSequence").attr({"name":'sequence'});
                 bannerSequence(row.model,row.area,row.sequence,"homepageSequence");
-                bannerSequence(row.model,STANDAREA,'',"standSequence");
-                $("#homepageSequence").val(row.sequence)
+                $("#homepageSequence").val(row.sequence);
+                $('#bannerForm').data('bootstrapValidator')
+                    .updateStatus('sequence', 'NOT_VALIDATED', null)
+                    .validateField('sequence');
+                $("input[name=area]").change(function () {
+                    var _val = $(this).val();
+                    var option = '';
+                    if(_val == 1){/*首页*/
+                        $("#homepageSequence").show();
+                        $("#standSequence").hide();
+                        $("#standSequence").removeAttr("name");
+                        $("#homepageSequence").attr({"name":'sequence'});
+                        bannerSequence(row.model,row.area,row.sequence,"homepageSequence");
+                        $('#bannerForm').data('bootstrapValidator')
+                            .updateStatus('sequence', 'NOT_VALIDATED', null)
+                            .validateField('sequence');
+                    }else{
+                        $("#standSequence").show();
+                        $("#homepageSequence").hide();
+                        $("#homepageSequence").removeAttr("name");
+                        $("#standSequence").attr({"name":'sequence'});
+                        bannerSequence(row.model,STANDAREA,'',"standSequence");
+                        $('#bannerForm').data('bootstrapValidator')
+                            .updateStatus('sequence', 'NOT_VALIDATED', null)
+                            .validateField('sequence');
+                    }
+                })
             }else{
                 $('input[name=area]').eq(1).attr({"checked":"checked"});
                 $("#standSequence").show();
@@ -168,9 +207,35 @@ var operateEvents = {
                 $("#homepageSequence").removeAttr("name");
                 $("#standSequence").attr({"name":'sequence'});
                 bannerSequence(row.model,row.area,row.sequence,"standSequence");
-                bannerSequence(row.model,HOMEPAGEAREA,'',"homepageSequence");
-                $("#standSequence").val(row.sequence)
+                $("#standSequence").val(row.sequence);
+                $('#bannerForm').data('bootstrapValidator')
+                    .updateStatus('sequence', 'NOT_VALIDATED', null)
+                    .validateField('sequence');
+                $("input[name=area]").change(function () {
+                    var _val = $(this).val();
+                    var option = '';
+                    if(_val == 1){/*首页*/
+                        $("#homepageSequence").show();
+                        $("#standSequence").hide();
+                        $("#standSequence").removeAttr("name");
+                        $("#homepageSequence").attr({"name":'sequence'});
+                        bannerSequence(row.model,HOMEPAGEAREA,'',"homepageSequence");
+                        $('#bannerForm').data('bootstrapValidator')
+                            .updateStatus('sequence', 'NOT_VALIDATED', null)
+                            .validateField('sequence');
+                    }else{
+                        $("#standSequence").show();
+                        $("#homepageSequence").hide();
+                        $("#homepageSequence").removeAttr("name");
+                        $("#standSequence").attr({"name":'sequence'});
+                        bannerSequence(row.model,row.area,row.sequence,"standSequence");
+                        $('#bannerForm').data('bootstrapValidator')
+                            .updateStatus('sequence', 'NOT_VALIDATED', null)
+                            .validateField('sequence');
+                    }
+                })
             }
+
         }else if(row.model == POSTMODEL || row.model == CIRCLEMODEL){
             if(row.area == CIRCLEAREA && row.model == POSTMODEL){/*精选圈子的帖子--有图*/
                 $('input[name=area]').eq(1).attr({"checked":"checked"});
@@ -210,7 +275,6 @@ var operateEvents = {
                 $('#bannerForm').data('bootstrapValidator').validateField('sequence');
             }else{
                 if(row.area == HOMEPAGEAREA){/*首页的精选帖子--无图*/
-                    console.log("首页的精选帖子--无图");
                     $("#preImgWrap").hide();
                     $("#imageWrap").hide();
                     $("#homepageSequence").show();
@@ -256,7 +320,6 @@ var operateEvents = {
                     })
                     $('#bannerForm').data('bootstrapValidator').validateField('sequence');
                 }else if(row.area == CIRCLEAREA){/*精选圈子里的圈子--无图*/
-                    console.log("精选圈子里的圈子--无图");
                     $("#preImgWrap").hide();
                     $("#area").hide();
                     $("#imageWrap").hide();
