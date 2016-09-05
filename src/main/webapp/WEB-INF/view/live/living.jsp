@@ -12,7 +12,7 @@
 <body class="page-header-fixed">
 
 <jsp:include page="../public/header.jsp"/>
-<div class="modal fade" id="upload"  aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="upload" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-body">
         <p>推荐上传中...</p>
     </div>
@@ -43,34 +43,56 @@
                         <i class="glyphicon glyphicon-remove"></i> 批量删除
                     </button>
                     <table id="live_table" class="table table-hover">
-
-
                     </table>
                 </div>
             </div>
-            <div class="create_liveType row-fluid form-horizontal bv-form">
+            <div class="create_liveType row-fluid form-horizontal bv-form createLiveClass">
                 <h3 style="margin: 0;display: inline-block">创建直播分类 </h3>
                 <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
-
-                <div class="control-group form-group">
-                    <label class="control-label " style="width: 58px;margin-right: 10px;text-align: left">创建名称</label>
-                    <div class=" col-xs-5">
-                        <input  id="lab" type="text"/>
+                <form class="form-horizontal" role="form" id="createLiveClass" enctype="multipart/form-data">
+                    <div class="control-group form-group">
+                        <label class="control-label "  style="width: 58px;margin-right: 10px;text-align: left">创建名称</label>
+                        <div class=" col-xs-5">
+                            <input id="lab" name="lab" type="text"/>
+                        </div>
                     </div>
-                </div>
 
-                <div class="control-group form-group">
-                    <label class="control-label" style="width: 58px;margin-right: 10px;text-align: left">备注</label>
-                    <div class=" col-xs-5">
-                       <input id="desc" type="text"/>
+                    <div class="control-group form-group">
+                        <label class="control-label" style="width: 58px;margin-right: 10px;text-align: left">备注</label>
+
+                        <div class=" col-xs-5">
+                            <input id="desc" name="desc" type="text"/>
+                        </div>
                     </div>
-                </div>
-
-                <button onclick="operateEventclass.creatLive()" class="btn btn-danger">确定</button>
+                </form>
+                <button onclick="operateEventclass.createLive()" class="btn btn-danger ">确定</button>
                 <button onclick="window.location.reload();" class="btn btn-danger">返回</button>
-                <h3 style="margin: 0;display: block">编辑直播分类 </h3>
-                <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
+                <%--<h3 style="margin: 0;display: block">编辑直播分类 </h3>--%>
+                <%--<HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>--%>
                 <table id="editLive"></table>
+            </div>
+            <div class=" row-fluid form-horizontal bv-form liveEditClass">
+                <h3 style="margin: 0;display: inline-block">编辑直播分类 </h3>
+                <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
+                <form class="form-horizontal" role="form" id="editLiveClass" enctype="multipart/form-data">
+                    <div class="control-group form-group">
+                        <label class="control-label "  style="width: 58px;margin-right: 10px;text-align: left">名称</label>
+                        <div class=" col-xs-5">
+                            <input id="editLab" name="lab" type="text"/>
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <label class="control-label" style="width: 58px;margin-right: 10px;text-align: left">备注</label>
+
+                        <div class=" col-xs-5">
+                            <input id="editDesc" name="desc" type="text"/>
+                        </div>
+                    </div>
+                    <div class="editLiveClassId"></div>
+                </form>
+                <button onclick="operateEventclass.editLive()"  class="btn btn-danger liveSureBtn">确定</button>
+                <button  class="btn btn-danger liveEditBackBtn">返回</button>
             </div>
         </div>
     </div>
