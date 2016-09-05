@@ -15,20 +15,14 @@
 .live_manage{
     margin-top: 20px;
 }
-.dynamicEdit, .create_liveType ,.dynamicPreview{
+.dynamicEdit, .create_liveType , .dynamicPreview , .liveEditClass , .createLiveClass{
     display: none;
 }
-.create_liveType.on {
-    display: block ;
-}
-.dynamicPreview.on {
+.create_liveType.on ,.dynamicPreview.on,.create_liveType.on,.liveEditClass.on,.createLiveClass.on{
     display: block ;
 }
 .dynamicEdit.on {
     display: inline-block;
-}
-.create_liveType.on{
-    display: block;
 }
 
 .dynamicPic{
