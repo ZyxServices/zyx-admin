@@ -110,21 +110,6 @@ $(function () {
             }
         }
     });
-    $("#devaForm").bootstrapValidator({
-        message: '数据无效',
-        feedbackIcons: {
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            'sequence': {
-                validators: {
-                    notEmpty: {
-                        message: 'banner序号不能为空'
-                    }
-                }
-            }
-        }
-    });
 
     $('#activity-summernote').on('summernote.change', function (content, $editable) {
         $("#desc").val($editable);
@@ -258,7 +243,6 @@ $("#activityStartTime,#activityEndTime,#signEndTime").focus(function () {
 });
 
 function queryParams(params) {
-    console.log(params);
     return {
         pageDataNum: params.pageSize,
         pageNum: params.pageNumber,
@@ -504,30 +488,6 @@ var operateEvents = {
         $("#activityList").hide();
     },
     'click .recommend': function (e, value, row, index) {
-        $("#activityRecommend").show();
-        $("#activityList").hide();
-        $("#listType").html("推荐");
-        $("#imageUrl").val('');
-        $.ajax({
-            url: "/v1/activity/queryActivityById",
-            type: 'POST',
-            dataType: 'json',
-            data: {activityId: row.id},
-            success: function (result) {
-                if (result.state == 200) {
-                    var datas = result.data;
-                    $("#activityName").val(datas.title);
-                    $("#activityId").val(datas.id);
-                    $("#activityImage").attr("src", "http://image.tiyujia.com/" + datas.imgUrls);
-                    $("#imageUrl").val(datas.imgUrls)
-                } else {
-                    $.Popup({
-                        confirm: false,
-                        template: result.successmsg
-                    })
-                }
-            }
-        });
         $.ajax({
             url: "/v1/deva/sequence",
             type: 'POST',
@@ -538,17 +498,39 @@ var operateEvents = {
                 var option = '';
                 if (result.state == 200) {
                     if(result.data.length > 0){
+                        $("#activityRecommend").show();
+                        $("#activityList").hide();
+                        $("#listType").html("推荐");
+                        $("#imageUrl").val('');
+                        $.ajax({
+                            url: "/v1/activity/queryActivityById",
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {activityId: row.id},
+                            success: function (result) {
+                                if (result.state == 200) {
+                                    var datas = result.data;
+                                    $("#activityName").val(datas.title);
+                                    $("#activityId").val(datas.id);
+                                    $("#activityImage").attr("src", "http://image.tiyujia.com/" + datas.imgUrls);
+                                    $("#imageUrl").val(datas.imgUrls)
+                                } else {
+                                    $.Popup({
+                                        confirm: false,
+                                        template: result.successmsg
+                                    })
+                                }
+                            }
+                        });
                         for(var i = 0;i < result.data.length; i++){
                             option += '<option>'+result.data[i]+'</option>';
                         }
                         $("#sequence").html(option);
-                    }else{
+                    }else{/*banner序列号满了就不能进入推荐了*/
                         $.Popup({
                             confirm: false,
                             template: '活动banner序列号已满，请先删除其他序列号再推荐'
                         });
-                        $("#sequence").html('<option value="">此处banner已满，请先删除</option>');
-                        $("#sequenceWarm").html('请先删除其他banner序列号');
                     }
                 } else {
                     $.Popup({
@@ -558,7 +540,6 @@ var operateEvents = {
                 }
             }
         });
-        $('#devaForm').data('bootstrapValidator').validateField('sequence');
     },
     'click .Shield': function (e, value, row, index) {
         var type = row.mask == 0 ? 1 : 0;

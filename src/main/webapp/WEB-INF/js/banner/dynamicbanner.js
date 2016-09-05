@@ -48,7 +48,7 @@ function dynamicFormData(res) {
                 }
             }
             dataObj.sequence = item.sequence;
-            dataObj.state = item.activation == 1? "是":"否";
+            dataObj.state = item.state == 1? "是":"否";
             dataArray.push(dataObj)
         });
         return {
