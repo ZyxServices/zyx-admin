@@ -147,20 +147,6 @@ $(function () {
         height: 200
     });
 
-    /*查询创建活动时需要选择的用户*/
-    $.ajax({
-        url: "/v1/appUser/list/official/all",
-        type: 'get',
-        dataType: 'json',
-        success: function (result) {
-            var user = '';
-            result.rows.forEach(function (item, i) {
-                user += '<option value=' + item.id + '>' + item.nickname + '</option>'
-            })
-            $("#choiceUser").append(user)
-        }
-    });
-
     $("#activity-list-table").bootstrapTable({
         url: "/v1/activity/queryActivity",
         toolbar: '#toolbar',        //工具按钮用哪个容器
@@ -680,6 +666,19 @@ function createActivity() {
     $("#activityList").hide();
     $("#images").attr({'src': ''});
     $("#avtivityId").val('');
+    /*查询创建活动时需要选择的用户*/
+    $.ajax({
+        url: "/v1/appUser/list/official/all",
+        type: 'get',
+        dataType: 'json',
+        success: function (result) {
+            var user = '';
+            result.rows.forEach(function (item, i) {
+                user += '<option value=' + item.id + '>' + item.nickname + '</option>'
+            })
+            $("#choiceUser").append(user)
+        }
+    });
     $('#activity-summernote').summernote('reset');
     var html = '<label class="checkbox"><input type="checkbox" name="memberString" value="手机号码">手机号码</label><label class="checkbox"><input type="checkbox" name="memberString" value="姓名">姓名</label> <label class="checkbox"><input type="checkbox" name="memberString" value="身份证号码">身份证号码</label> <label class="checkbox"><input name="memberString" type="checkbox" value="性别">性别</label> <label class="checkbox"><input name="memberString" type="checkbox" value="年龄">年龄</label> <label class="checkbox"><input name="memberString" type="checkbox" value="地址">地址</label> <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>'
     $("#template").html(html);

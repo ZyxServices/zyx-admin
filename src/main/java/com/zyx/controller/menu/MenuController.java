@@ -75,6 +75,11 @@ public class MenuController {
         return new ModelAndView("/banner/dynamicbanner");
     }
 
+    @RequestMapping(value = "/banner/userbanner", method = RequestMethod.GET)
+    public ModelAndView redirectUserBanner() {
+        return new ModelAndView("/banner/userbanner");
+    }
+
     @RequestMapping(value = "/live/living", method = RequestMethod.GET)
     public ModelAndView redirectLive() {
         return new ModelAndView("/live/living");

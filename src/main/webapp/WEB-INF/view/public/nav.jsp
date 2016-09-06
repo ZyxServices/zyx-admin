@@ -205,6 +205,11 @@
                             <a href="<%=request.getContextPath()%>/menu/banner/dynamicbanner">动态banner推荐</a>
                         </li>
                     </shiro:hasPermission>
+                    <shiro:hasPermission name="menu:banner:userbanner">
+                        <li class="userbanner">
+                            <a href="<%=request.getContextPath()%>/menu/banner/userbanner">用户banner推荐</a>
+                        </li>
+                    </shiro:hasPermission>
                 </ul>
             </li>
         </shiro:hasPermission>
