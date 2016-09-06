@@ -163,6 +163,9 @@ var operateEvents = {
             $("#preImage").html('<img src='+imgUrl+'>');
             bannerSequence(row.model,row.area,row.sequence,'sequence');
             $("#sequence").val(row.sequence);
+        }else if(row.model == USERMODEL){
+            ISVALID = true;
+            bannerSequence(row.model,row.area,row.sequence,'sequence');
         }else if(row.model == LIVEMODEL){
             var imgUrl = $(row.image).attr("href");
             $("#preImage").html('<img src='+imgUrl+'>');

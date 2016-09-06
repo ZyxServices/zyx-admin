@@ -114,7 +114,7 @@ function homepageFormData(res) {
         datas.forEach(function (item, a) {
             var dataObj = {};
             dataObj.id = item.id;
-            dataObj.modelTitle = item.modelTitle;
+            dataObj.modelTitle = item.devaModelVo.modelTitle;
             dataObj.area = item.area;
             dataObj.model = item.model;
             dataObj.createTime = item.createTime;
@@ -139,7 +139,7 @@ function standFormData(res) {
         datas.forEach(function (item, a) {
             var dataObj = {};
             dataObj.id = item.id;
-            dataObj.modelTitle = item.modelTitle;
+            dataObj.modelTitle = item.devaModelVo.modelTitle;
             dataObj.area = item.area;
             dataObj.model = item.model;
             dataObj.createTime = item.createTime;

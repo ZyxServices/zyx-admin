@@ -38,7 +38,7 @@ function dynamicFormData(res) {
             dataObj.area = item.area;
             dataObj.model = item.model;
             dataObj.createTime = item.createTime;
-            dataObj.isOfficial = "是";
+            dataObj.modelTitle = item.devaModelVo.nickname;/*动态的发布者*/
             if(item.imageUrl){
                 var imgUrl = item.imageUrl.split(".");
                 if(imgUrl[1] == 'gif'){
@@ -49,6 +49,7 @@ function dynamicFormData(res) {
             }
             dataObj.sequence = item.sequence;
             dataObj.state = item.state == 1? "是":"否";
+            dataObj.official = item.devaModelVo.official == 1? "是":"否";
             dataArray.push(dataObj)
         });
         return {

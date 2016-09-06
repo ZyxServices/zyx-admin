@@ -38,7 +38,7 @@ function packageFormData(res) {
             var dataObj = {};
             dataObj.id = item.id;
             dataObj.shopname = "活动banner";
-            dataObj.image = '<img src="http://image.tiyujia.com/group1/M00/00/05/052YyFe0A9iAWI5kAAA75RxRQgw234.png">';
+            dataObj.image = '<img src="http://image.tiyujia.com/group1/M00/00/05/052YyFe0A9iAWI5kAAA75RxRQgw234__30x30.png">';
             dataObj.sequence = item.sequence;
             dataObj.activation = item.activation == 1? "是":"否";
             dataArray.push(dataObj)

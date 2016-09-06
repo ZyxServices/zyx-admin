@@ -77,8 +77,8 @@
                             <thead>
                             <tr>
                                 <th data-field="id">ID</th>
-                                <th data-field="publisher">发布者</th>
-                                <th data-field="isOfficial">是否官方发布</th>
+                                <th data-field="modelTitle">发布者</th>
+                                <th data-field="official">是否官方发布</th>
                                 <th data-field="image">首图</th>
                                 <th data-field="sequence">排序</th>
                                 <th data-field="state">是够激活</th>

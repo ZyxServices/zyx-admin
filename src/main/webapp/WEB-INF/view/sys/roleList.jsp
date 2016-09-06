@@ -290,7 +290,7 @@
                 <!-- BEGIN DASHBOARD STATS -->
                 <div class="row-fluid">
 
-                    <form action="/v1/role/" id="roleEditForm" method="post" enctype="multipart/form-data"
+                    <form action="/v1/role/" id="roleEditForm" method="post"
                           class="form-horizontal" novalidate="novalidate" role="form">
                         <input type="hidden" id="editRoleId" name="editRoleId">
                         <div class="control-group form-group">
@@ -341,6 +341,7 @@
                                         <option value="menu:banner:circlebanner" data-section="banner推荐">圈子banner推荐</option>
                                         <option value="menu:banner:packagebanner" data-section="banner推荐">背包banner推荐</option>
                                         <option value="menu:banner:dynamicbanner" data-section="banner推荐">动态banner推荐</option>
+                                        <option value="menu:banner:userbanner" data-section="banner推荐">用户banner推荐</option>
                                     </select>
                                 </div>
                                 <span class="help-inline required">*</span>

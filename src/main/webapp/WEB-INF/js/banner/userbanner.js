@@ -21,8 +21,8 @@ $(function(){
         sidePagination: 'server',
         queryParams: function (params) {
             return {
-                area: ACTIVITYMODEL,
-                model: HOMEPAGEAREA,
+                area: HOMEPAGEAREA,
+                model: USERMODEL,
                 pageDataNum: params.limit,
                 pageNum: (params.offset + 1),
                 search: params.search
@@ -39,7 +39,7 @@ function groupFromData(res) {
         datas.forEach(function (item, a) {
             var dataObj = {};
             dataObj.id = item.id;
-            dataObj.modelTitle = item.modelTitle;
+            dataObj.modelTitle = item.devaModelVo.nickname;
             dataObj.model = item.model;
             dataObj.area = item.area;
             dataObj.createTime = item.createTime;
@@ -49,6 +49,7 @@ function groupFromData(res) {
             }
             dataObj.sequence = item.sequence;
             dataObj.state = item.state == 1? "是":"否";
+            dataObj.official = item.devaModelVo.official == 1? "是":"否";
             dataArray.push(dataObj)
         });
         return {

@@ -12,7 +12,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <meta content="体育家-首页banner" name="description" />
+    <meta content="体育家-用户banner" name="description" />
 
     <meta content="" name="author" />
 
@@ -30,12 +30,12 @@
             <div class="row-fluid">
                 <div class="span12">
                     <h3 class="page-title">
-                        首页banner管理<small>statistics and more</small>
+                        首页用户banner管理<small>statistics and more</small>
                     </h3>
                     <ul class="breadcrumb">
                         <li>
                             <i class="icon-home"></i>
-                            <a href="javascript:void(0)">首页banner</a>
+                            <a href="javascript:void(0)">首页用户banner</a>
                             <i class="icon-angle-right"></i>
                         </li>
                         <li><a href="#">列表</a></li>
@@ -49,9 +49,9 @@
                             <thead>
                             <tr>
                                 <th data-checkbox="true"></th>
-                                <th data-field="modelTitle">活动名称</th>
                                 <th data-field="id">ID</th>
-                                <th data-field="image">图片</th>
+                                <th data-field="modelTitle">用户名</th>
+                                <th data-field="official">是否是官方用户</th>
                                 <th data-field="sequence">排序</th>
                                 <th data-field="state">是否激活</th>
                                 <th data-field="createTime" data-formatter="timeFormat">创建时间</th>
@@ -69,12 +69,12 @@
             <div class="row-fluid">
                 <div class="span12">
                     <h3 class="page-title">
-                        首页banner管理<small>statistics and more</small>
+                        首页用户banner管理<small>statistics and more</small>
                     </h3>
                     <ul class="breadcrumb">
                         <li>
                             <i class="icon-home"></i>
-                            <a href="javascript:void(0)">首页banner</a>
+                            <a href="javascript:void(0)">首页用户banner</a>
                             <i class="icon-angle-right"></i>
                         </li>
                         <li><a href="#">编辑banner</a></li>
@@ -86,17 +86,11 @@
 
                     <form class="form-horizontal" role="form" id="bannerForm">
                         <input type="hidden" name="id" id="devaId">
+                        <input id="lefile" type="file" class="hide">
                         <div class="control-group form-group">
-                            <label class="control-label">活动名称</label>
+                            <label class="control-label">用户</label>
                             <div class="controls col-xs-5">
                                 <input type="text" id="title" class="span6" disabled/>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label">活动原有封面图</label>
-                            <div class="controls" id="preImage">
-
                             </div>
                         </div>
 
@@ -114,18 +108,6 @@
                             <div class="controls">
                                 <label class="radio"><input type="radio" name="state" value="1">激活</label>
                                 <label class="radio"><input type="radio" name="state" value="0">未激活</label>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label">封面</label>
-                            <div class="controls">
-                                <input type="hidden" name="imageUrl" id="imageUrl">
-                                <input id="lefile" type="file" class="hideInput">
-                                <a class="btn btn-default" href="javascript:void (0)" id="photoCover" onclick="$('input[id=lefile]').click();">选择图片</a>
-                                <div style="margin-top: 10px" id="imagesWrap">
-                                    <img id="images" src="">
-                                </div>
                             </div>
                         </div>
 
@@ -161,7 +143,7 @@
 <script src="../../js/app.js" type="text/javascript"></script>
 <script src="../../js/index.js" type="text/javascript"></script>
 <script type="text/javascript" src="../../js/banner/bannerCommon.js"></script>
-<script type="text/javascript" src="../../js/banner/activitybanner.js"></script>
+<script type="text/javascript" src="../../js/banner/userbanner.js"></script>
 <script>
 
     jQuery(document).ready(function() {

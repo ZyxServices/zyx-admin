@@ -158,7 +158,7 @@ function homepageFormData(res) {
             dataObj.id = item.id;
             dataObj.area = item.area;
             dataObj.model = item.model;
-            dataObj.modelTitle = item.modelTitle;
+            dataObj.modelTitle = item.devaModelVo.modelTitle;
             dataObj.sequence = item.sequence;
             dataObj.state = item.state == 1 ? "是":"否";
             dataArray.push(dataObj)
@@ -176,7 +176,7 @@ function postFormData(res) {
         datas.forEach(function (item, a) {
             var dataObj = {};
             dataObj.id = item.id;
-            dataObj.modelTitle = item.modelTitle;
+            dataObj.modelTitle = item.devaModelVo.modelTitle;
             dataObj.area = item.area;
             dataObj.model = item.model;
             if(item.imageUrl){
@@ -200,7 +200,7 @@ function circleFormData(res) {
         datas.forEach(function (item, a) {
             var dataObj = {};
             dataObj.id = item.id;
-            dataObj.modelTitle = item.modelTitle;
+            dataObj.modelTitle = item.devaModelVo.modelTitle;
             dataObj.sequence = item.sequence;
             dataObj.area = item.area;
             dataObj.model = item.model;
