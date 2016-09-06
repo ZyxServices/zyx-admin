@@ -312,9 +312,6 @@ function activityRecommend() {
         url: '/v1/deva/add',
         type: 'post',
         dataType: 'json',
-        beforeSubmit:function () {
-            return $("#devaForm").data('bootstrapValidator').isValid();
-        },
         success: function (result) {
             if (result.state && result.state == 200) {
                 $.Popup({
@@ -501,7 +498,6 @@ var operateEvents = {
                         $("#activityRecommend").show();
                         $("#activityList").hide();
                         $("#listType").html("推荐");
-                        $("#imageUrl").val('');
                         $.ajax({
                             url: "/v1/activity/queryActivityById",
                             type: 'POST',
