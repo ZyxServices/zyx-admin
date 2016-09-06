@@ -20,54 +20,50 @@
         </discriminator>
     </resultMap>
 
-    <resultMap id="getActivityInfo" type="com.zyx.vo.deva.DevaModelTitleVo" extends="FullDevaVo">
-        <association property="modelTitle" select="selectActivityTitle" column="model_id"/>
+    <resultMap id="getActivityInfo" type="com.zyx.vo.deva.DevaExVo" extends="FullDevaVo">
+        <association property="devaModelVo" select="selectActivityTitle" column="model_id"/>
     </resultMap>
-    <select id="selectActivityTitle" parameterType="java.lang.Integer" resultType="java.lang.String">
+    <select id="selectActivityTitle" parameterType="java.lang.Integer" resultType="com.zyx.vo.deva.DevaModelVo">
         SELECT title  FROM activity  WHERE id=#{0}
     </select>
-    <resultMap id="getLiveInfo" type="com.zyx.vo.deva.DevaModelTitleVo" extends="FullDevaVo">
-        <association property="modelTitle" select="selectLiveTitle" column="model_id"/>
+    <resultMap id="getLiveInfo" type="com.zyx.vo.deva.DevaExVo" extends="FullDevaVo">
+        <association property="devaModelVo" select="selectLiveTitle" column="model_id"/>
     </resultMap>
-    <select id="selectLiveTitle" parameterType="java.lang.Integer" resultType="java.lang.String">
+    <select id="selectLiveTitle" parameterType="java.lang.Integer" resultType="com.zyx.vo.deva.DevaModelVo">
         SELECT title  FROM t_live  WHERE id=#{0}
     </select>
-    <resultMap id="getCircle" type="com.zyx.vo.deva.DevaModelTitleVo" extends="FullDevaVo">
-        <association property="modelTitle" select="selectCircleTitle" column="model_id"/>
+    <resultMap id="getCircle" type="com.zyx.vo.deva.DevaExVo" extends="FullDevaVo">
+        <association property="devaModelVo" select="selectCircleTitle" column="model_id"/>
     </resultMap>
-    <select id="selectCircleTitle" parameterType="java.lang.Integer" resultType="java.lang.String">
+    <select id="selectCircleTitle" parameterType="java.lang.Integer" resultType="com.zyx.vo.deva.DevaModelVo">
         SELECT title  FROM circle  WHERE id=#{0}
     </select>
-
-    <resultMap id="DevaUserVo" type="com.zyx.vo.deva.DevaUserVo">
-        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
-        <result column="official" jdbcType="INTEGER" property="official"/>
+    <resultMap id="getCircleItem" type="com.zyx.vo.deva.DevaExVo" extends="FullDevaVo">
+        <association property="devaModelVo" select="selectCircleItemTitle" column="model_id"/>
     </resultMap>
-    <resultMap id="getCircleItem" type="com.zyx.vo.deva.DevaModelTitleVo" extends="FullDevaVo">
-        <association property="modelTitle" select="selectCircleItemTitle" column="model_id"/>
-        <association property="devaUserVo" select="selectCircleItemUserTitle" column="model_id"/>
-    </resultMap>
-    <select id="selectCircleItemTitle" parameterType="java.lang.Integer" resultType="java.lang.String">
-        SELECT title  FROM circle_item  WHERE id=#{0}
-    </select>
-    <select id="selectCircleItemUserTitle" parameterType="java.lang.Integer" resultMap="DevaUserVo">
+    <select id="selectCircleItemTitle" parameterType="java.lang.Integer" resultType="com.zyx.vo.deva.DevaModelVo">
         SELECT
-       u.`nickname`,u.`official`
+        ci.title,u.`nickname`,u.`official`
         FROM
         circle_item ci LEFT JOIN user u ON ci.`create_id`=u.`id`
         WHERE
         ci.`id`=#{0}
     </select>
-    <resultMap id="getConcern" type="com.zyx.vo.deva.DevaModelTitleVo" extends="FullDevaVo">
-        <association property="modelTitle" select="selectConcernTitle" column="model_id"/>
+    <resultMap id="getConcern" type="com.zyx.vo.deva.DevaExVo" extends="FullDevaVo">
+        <association property="devaModelVo" select="selectConcernTitle" column="model_id"/>
     </resultMap>
-    <select id="selectConcernTitle" parameterType="java.lang.Integer" resultType="java.lang.String">
-        SELECT topic_title  FROM concern  WHERE id=#{0}
+    <select id="selectConcernTitle" parameterType="java.lang.Integer" resultType="com.zyx.vo.deva.DevaModelVo">
+        SELECT
+        ci.topic_title,u.`nickname`,u.`official`
+        FROM
+        concern ci LEFT JOIN user u ON ci.`user_id`=u.`id`
+        WHERE
+        ci.`id`=#{0}
     </select>
-    <resultMap id="getUser" type="com.zyx.vo.deva.DevaModelTitleVo" extends="FullDevaVo">
-        <association property="modelTitle" select="selectUserNickname" column="model_id"/>
+    <resultMap id="getUser" type="com.zyx.vo.deva.DevaExVo" extends="FullDevaVo">
+        <association property="devaModelVo" select="selectUserNickname" column="model_id"/>
     </resultMap>
-    <select id="selectUserNickname" parameterType="java.lang.Integer" resultType="java.lang.String">
+    <select id="selectUserNickname" parameterType="java.lang.Integer" resultType="com.zyx.vo.deva.DevaModelVo">
         SELECT nickname  FROM user  WHERE id=#{0}
     </select>
     <select id="selectDevaList" parameterType="com.zyx.parm.deva.DevaParam" resultMap="FullDevaVo">
