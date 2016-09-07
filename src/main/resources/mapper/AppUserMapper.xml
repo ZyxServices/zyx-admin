@@ -40,6 +40,7 @@
         <result column="mask" jdbcType="BIT" property="mask"/>
         <result column="del" jdbcType="BIT" property="del"/>
         <result column="signature" jdbcType="VARCHAR" property="signature"/>
+        <result column="deva" jdbcType="TINYINT" property="deva"/>
         <association property="appUserAuthDto" column="id" select="selectAuthByAppUser"></association>
     </resultMap>
 
@@ -118,7 +119,7 @@
     </select>
 
     <select id="queryAppUserList" parameterType="com.zyx.parm.QueryAppUserParam" resultMap="AppUserListDto">
-        SELECT * FROM user where (nickname LIKE CONCAT('%','${searchText}','%' ) or phone LIKE
+        SELECT user.*,!ISNULL(ss.id) as deva FROM user LEFT JOIN (select * from `devaluation` where `devaluation`.model = 6) as ss ON user.id = `ss`.model_id where (nickname LIKE CONCAT('%','${searchText}','%' ) or phone LIKE
         CONCAT('%','${searchText}','%' ))
         <if test="authenticate != null and authenticate != ''">
             and authenticate = #{authenticate}
