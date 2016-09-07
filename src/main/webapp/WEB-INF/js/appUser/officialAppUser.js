@@ -112,9 +112,6 @@ $(function () {
 $("#createButton").click(function () {
     $("#editUserForm").ajaxSubmit();
 })
-function beginDeva() {
-    $("#devaForm").submit();
-}
 $('input[id=avatar]').change(function () {
     if ($(this).val()) {
         $('#photoCover').html($(this).val());
