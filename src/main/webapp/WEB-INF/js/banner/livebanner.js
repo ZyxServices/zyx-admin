@@ -5,6 +5,7 @@ $(function(){
     $("#homepage-list-table").bootstrapTable({
         url: "/v1/deva/list",
         method:'post',
+        striped: true,           //是否显示行间隔色
         locale: 'zh-US',
         pagination: true,
         cache: false,
@@ -53,6 +54,7 @@ function liveDevaChange(obj) {
             method:'post',
             locale: 'zh-US',
             pagination: true,
+            striped: true,           //是否显示行间隔色
             cache: false,
             uniqueId: "id",
             height:500,
@@ -80,6 +82,7 @@ function liveDevaChange(obj) {
         $("#stand-list-table").bootstrapTable({
             url: "/v1/deva/list",
             method:'post',
+            striped: true,           //是否显示行间隔色
             locale: 'zh-US',
             pagination: true,
             cache: false,

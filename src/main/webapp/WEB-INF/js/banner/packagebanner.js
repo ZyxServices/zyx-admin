@@ -6,6 +6,7 @@ $(function(){
         url: "/v1/deva/list",
         method:'post',
         locale: 'zh-US',
+        striped: true,           //是否显示行间隔色
         pagination: true,
         cache: false,
         search: true,

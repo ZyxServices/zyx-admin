@@ -77,7 +77,11 @@ function operateFormatter(value, row, index) {
     }*/
     // _html.push('<a class="preview p5" href="javascript:void(0)" title="preview">预览</a>');
     // _html.push('<a class="edit p5" href="javascript:void(0)" title="edit">编辑</a>');
-    _html.push('<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>');
+    if(row.deva){
+        _html.push('<a class="p5" href="javascript:void(0)" disabled>已推荐</a>')
+    }else{
+        _html.push('<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>');
+    }
     if (row.mask) {
         _html.push('<a class="unMask p5" href="javascript:void(0)" title="unMask">取消屏蔽</a>');
     } else {

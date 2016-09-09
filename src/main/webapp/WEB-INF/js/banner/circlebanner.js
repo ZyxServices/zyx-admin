@@ -30,6 +30,7 @@ $(function(){
     $("#homepage-list-table").bootstrapTable({
         url: "/v1/deva/list",
         method:'post',
+        striped: true,           //是否显示行间隔色
         locale: 'zh-US',
         pagination: true,
         cache: false,
@@ -65,6 +66,7 @@ function circleDevaChange(obj) {
             url: "/v1/deva/list",
             method:'post',
             locale: 'zh-US',
+            striped: true,           //是否显示行间隔色
             pagination: true,
             cache: false,
             contentType: "application/x-www-form-urlencoded",
@@ -95,6 +97,7 @@ function circleDevaChange(obj) {
             url: "/v1/deva/list",
             method:'post',
             locale: 'zh-US',
+            striped: true,           //是否显示行间隔色
             pagination: true,
             cache: false,
             uniqueId: "id",
@@ -126,6 +129,7 @@ function circleDevaChange(obj) {
             method:'post',
             locale: 'zh-US',
             pagination: true,
+            striped: true,           //是否显示行间隔色
             cache: false,
             uniqueId: "id",
             height:500,
