@@ -123,7 +123,7 @@ function homepageFormData(res) {
             dataObj.createTime = item.createTime;
             if(item.imageUrl){
                 var imgUrl = item.imageUrl.split(".");
-                dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>';
+                dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'" target="view_window"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>';
             }
             dataObj.sequence = item.sequence;
             dataObj.state = item.state == 1? "是":"否";
@@ -148,7 +148,7 @@ function standFormData(res) {
             dataObj.createTime = item.createTime;
             if(item.imageUrl){
                 var imgUrl = item.imageUrl.split(".");
-                dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>'
+                dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'" target="view_window"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>'
             }
             dataObj.sequence = item.sequence;
             dataObj.activation = item.activation == 1? "是":"否";

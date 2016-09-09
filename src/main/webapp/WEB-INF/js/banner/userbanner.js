@@ -58,7 +58,4 @@ function groupFromData(res) {
         }
     }
 }
-function timeFormat(data) {
-    return new Date(data).format("yyyy-mm-dd HH:MM:ss")
-}
 

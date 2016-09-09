@@ -42,9 +42,9 @@ function dynamicFormData(res) {
             if(item.imageUrl){
                 var imgUrl = item.imageUrl.split(".");
                 if(imgUrl[1] == 'gif'){
-                    dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'"><img style="width: 30px" src="http://image.tiyujia.com/'+imgUrl[0]+'.'+imgUrl[1]+'"></a>';
+                    dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'" target="view_window"><img style="width: 30px" src="http://image.tiyujia.com/'+imgUrl[0]+'.'+imgUrl[1]+'"></a>';
                 }else{
-                    dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>';
+                    dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'" target="view_window"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>';
                 }
             }
             dataObj.sequence = item.sequence;
