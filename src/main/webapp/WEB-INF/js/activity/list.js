@@ -298,14 +298,20 @@ function activityRecommend() {
         url: '/v1/deva/add',
         type: 'post',
         dataType: 'json',
+        beforeSubmit:function () {
+            $("uploadContent").html('推荐上传中...');
+            $("#upload").modal('show');
+            $("#activityRecommend").modal('hide');
+        },
+        complete:function () {
+            $("#upload").modal('hide');
+        },
         success: function (result) {
             if (result.state && result.state == 200) {
                 $.Popup({
                     confirm: false,
-                    template: result.successmsg
-                })
-                $("#activityList").show();
-                $("#activityRecommend").hide();
+                    template: '推荐成功'
+                });
                 $('#activity-list-table').bootstrapTable('refresh');
             } else {
                 $.Popup({
@@ -481,9 +487,7 @@ var operateEvents = {
                 var option = '';
                 if (result.state == 200) {
                     if(result.data.length > 0){
-                        $("#activityRecommend").show();
-                        $("#activityList").hide();
-                        $("#listType").html("推荐");
+                        $("#activityRecommend").modal('show');
                         $.ajax({
                             url: "/v1/activity/queryActivityById",
                             type: 'POST',
