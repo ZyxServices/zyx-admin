@@ -139,7 +139,8 @@ public class CombinationServiceImpl implements CombinationService {
             map.put("dataCount", i);
             return map;
         } else {
-            return MapUtils.buildErrorMap(Constants.NO_DATA, "差无数据");
+            List<Activity> list = new ArrayList<>();
+            return MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", list);
         }
     }
 
