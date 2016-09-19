@@ -18,8 +18,12 @@ public class AppUserCreateParam implements Serializable {
     private String avatar;
     private Integer sex;
     private String address;
-    private String authInfo;
+    private String authName;
+    private String authIDCard;
+    private String authMob;
     private String authFile;
+    private String authInfo;
+    private String authFileWork;
     private String nickname;
     private Integer official;
 
@@ -111,5 +115,37 @@ public class AppUserCreateParam implements Serializable {
 
     public void setModifyTime(Long modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public String getAuthName() {
+        return authName;
+    }
+
+    public void setAuthName(String authName) {
+        this.authName = authName;
+    }
+
+    public String getAuthIDCard() {
+        return authIDCard;
+    }
+
+    public void setAuthIDCard(String authIDCard) {
+        this.authIDCard = authIDCard;
+    }
+
+    public String getAuthMob() {
+        return authMob;
+    }
+
+    public void setAuthMob(String authMob) {
+        this.authMob = authMob;
+    }
+
+    public String getAuthFileWork() {
+        return authFileWork;
+    }
+
+    public void setAuthFileWork(String authFileWork) {
+        this.authFileWork = authFileWork;
     }
 }

@@ -48,8 +48,12 @@ public class AppUserCreateController {
                                @RequestParam String sex,
                                @RequestParam String official,
                                @RequestParam String address,
+                               @RequestParam String authName,
+                               @RequestParam String authIDCard,
+                               @RequestParam String authMob,
+                               @RequestParam String authFile,
                                @RequestParam String authInfo,
-                               @RequestParam String authFile) {
+                               @RequestParam String authFileWork) {
         AbstractView jsonView = new MappingJackson2JsonView();
         Map<String, Object> map;
         AppUser appUser = appUserService.selectByPhone(phone);
@@ -68,16 +72,12 @@ public class AppUserCreateController {
                 String _avatar = FileUploadUtils.uploadFile(avatar);
                 param.setAvatar(_avatar);
             }
-            param.setAuthInfo(authInfo);
-//            if (authFile != null && authFile.length != 0) {// 上传认证
-//                StringBuilder sb = new StringBuilder();
-//                for (MultipartFile _file : authFile) {
-//                    String _temp_url = FileUploadUtils.uploadFile(_file);
-//                    sb.append(_temp_url).append(",");
-//                }
-//                param.setAuthFile(sb.substring(0, sb.length() - 1).toString());
-//            }
+            param.setAuthName(authName);
+            param.setAuthIDCard(authIDCard);
+            param.setAuthMob(authMob);
             param.setAuthFile(authFile);
+            param.setAuthInfo(authInfo);
+            param.setAuthFileWork(authFileWork);
             map = appUserService.insertAppUser(param);
         }
 
@@ -95,8 +95,12 @@ public class AppUserCreateController {
                                @RequestParam(required = false) String sex,
                                @RequestParam(required = false) String official,
                                @RequestParam(required = false) String address,
+                               @RequestParam(required = false) String authName,
+                               @RequestParam(required = false) String authIDCard,
+                               @RequestParam(required = false) String authMob,
+                               @RequestParam(required = false) String authFile,
                                @RequestParam(required = false) String authInfo,
-                               @RequestParam(required = false) String authFile) {
+                               @RequestParam(required = false) String authFileWork) {
         AbstractView jsonView = new MappingJackson2JsonView();
         Map<String, Object> map;
         AppUser appUser = appUserService.selectByPhone(phone);

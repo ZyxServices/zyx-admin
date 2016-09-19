@@ -70,7 +70,7 @@
     </update>
 
     <insert id="insertAuthInfo" parameterType="com.zyx.parm.appUser.AppUserCreateParam">
-        INSERT INTO user_auth (user_id, authinfo, authfile) VALUES (#{appUserId}, #{authInfo}, #{authFile})
+        INSERT INTO user_auth (user_id,authname,authidcard,authmob,authfile,authinfo,authfilework,modify_time) VALUES (#{appUserId},#{authName},#{authIDCard},#{authMob},#{authFile},#{authInfo},#{authFileWork},#{modifyTime})
     </insert>
 
     <update id="updateAppUserByPrimaryKey" parameterType="com.zyx.parm.appUser.AppUserCreateParam">
@@ -100,14 +100,29 @@
     </update>
 
     <update id="updateAuthInfo" parameterType="com.zyx.parm.appUser.AppUserCreateParam">
-        update user_auth set modify_time = #{modifyTime}
+        UPDATE user_auth SET modify_time = #{modifyTime}
+        <if test="authName != null and authName != ''">
+            , authname = #{authName}
+        </if>
+        <if test="authIDCard != null and authIDCard != ''">
+            , authidcard = #{authIDCard}
+        </if>
+        <if test="authMob != null and authMob != ''">
+            , authmob = #{authMob}
+        </if>
+        <if test="authFileWork != null and authFileWork != ''">
+            , authfilework = #{authFileWork}
+        </if>
         <if test="authInfo != null and authInfo != ''">
-            ,authinfo = #{authInfo}
+            , authinfo = #{authInfo}
         </if>
         <if test="authFile != null and authFile != ''">
-            ,authfile = #{authFile}
+            , authfile = #{authFile}
         </if>
-        where user_id = #{appUserId}
+        <if test="modifyTime != null">
+            , modify_time = #{modifyTime}
+        </if>
+        WHERE user_id = #{appUserId}
     </update>
 
     <select id="selectAuthByAppUser" parameterType="int" resultType="com.zyx.dto.AppUserAuthDto">
