@@ -2,7 +2,6 @@ package com.zyx.controller.appuser;
 
 import com.zyx.constants.AppUserConstants;
 import com.zyx.constants.Constants;
-import com.zyx.file.csource.common.Base64;
 import com.zyx.model.AppUser;
 import com.zyx.parm.appUser.AppUserCreateParam;
 import com.zyx.service.AppUserService;
@@ -21,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.AbstractView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -30,7 +28,6 @@ import java.util.Map;
  * @author WeiMinSheng
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title AppUserCreateController.java
  */
 @Controller("appUserCreateController")
 @RequestMapping("/v1/appUser")
@@ -56,31 +53,33 @@ public class AppUserCreateController {
                                @RequestParam String authFileWork) {
         AbstractView jsonView = new MappingJackson2JsonView();
         Map<String, Object> map;
-        AppUser appUser = appUserService.selectByPhone(phone);
-
-        if (appUser != null) {
-            map = MapUtils.buildErrorMap(AppUserConstants.ERROR_APP_USER_5001, AppUserConstants.ERROR_APP_USER_5001_MSG);
-        } else {
-            AppUserCreateParam param = new AppUserCreateParam();
-            param.setPhone(phone);
-            param.setAddress(address);
-            param.setSex(Integer.parseInt(sex));
-            param.setNickname(nickname);
-            param.setOfficial(Integer.parseInt(official));
-            param.setPassword(CipherUtil.generatePassword(password));
-            if (!avatar.isEmpty()) {
-                String _avatar = FileUploadUtils.uploadFile(avatar);
-                param.setAvatar(_avatar);
+        try {
+            if (appUserService.selectByPhone(phone) != null) {
+                map = MapUtils.buildErrorMap(AppUserConstants.ERROR_APP_USER_5001, AppUserConstants.ERROR_APP_USER_5001_MSG);
+            } else {
+                AppUserCreateParam param = new AppUserCreateParam();
+                param.setPhone(phone);
+                param.setAddress(address);
+                param.setSex(Integer.parseInt(sex));
+                param.setNickname(nickname);
+                param.setOfficial(Integer.parseInt(official));
+                param.setPassword(CipherUtil.generatePassword(password));
+                if (!avatar.isEmpty()) {
+                    String _avatar = FileUploadUtils.uploadFile(avatar);
+                    param.setAvatar(_avatar);
+                }
+                param.setAuthName(authName);
+                param.setAuthIDCard(authIDCard);
+                param.setAuthMob(authMob);
+                param.setAuthFile(authFile);
+                param.setAuthInfo(authInfo);
+                param.setAuthFileWork(authFileWork);
+                map = appUserService.insertAppUser(param);
             }
-            param.setAuthName(authName);
-            param.setAuthIDCard(authIDCard);
-            param.setAuthMob(authMob);
-            param.setAuthFile(authFile);
-            param.setAuthInfo(authInfo);
-            param.setAuthFileWork(authFileWork);
-            map = appUserService.insertAppUser(param);
+        } catch (Exception e) {
+            e.printStackTrace();
+            map = Constants.MAP_500;
         }
-
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
