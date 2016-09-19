@@ -73,6 +73,8 @@ public class AppUserListDto implements Serializable {
      */
     private String signature;
 
+    private boolean deva;
+
     private AppUserAuthDto appUserAuthDto;
 
     public Integer getId() {
@@ -177,6 +179,14 @@ public class AppUserListDto implements Serializable {
 
     public void setSignature(String signature) {
         this.signature = signature;
+    }
+
+    public boolean isDeva() {
+        return deva;
+    }
+
+    public void setDeva(boolean deva) {
+        this.deva = deva;
     }
 
     public AppUserAuthDto getAppUserAuthDto() {

@@ -147,20 +147,6 @@ $(function () {
         height: 200
     });
 
-    /*查询创建活动时需要选择的用户*/
-    $.ajax({
-        url: "/v1/appUser/list/official/all",
-        type: 'get',
-        dataType: 'json',
-        success: function (result) {
-            var user = '';
-            result.rows.forEach(function (item, i) {
-                user += '<option value=' + item.id + '>' + item.nickname + '</option>'
-            })
-            $("#choiceUser").append(user)
-        }
-    });
-
     $("#activity-list-table").bootstrapTable({
         url: "/v1/activity/queryActivity",
         toolbar: '#toolbar',        //工具按钮用哪个容器
@@ -312,14 +298,20 @@ function activityRecommend() {
         url: '/v1/deva/add',
         type: 'post',
         dataType: 'json',
+        beforeSubmit:function () {
+            $("uploadContent").html('推荐上传中...');
+            $("#upload").modal('show');
+            $("#activityRecommend").modal('hide');
+        },
+        complete:function () {
+            $("#upload").modal('hide');
+        },
         success: function (result) {
             if (result.state && result.state == 200) {
                 $.Popup({
                     confirm: false,
-                    template: result.successmsg
-                })
-                $("#activityList").show();
-                $("#activityRecommend").hide();
+                    template: '推荐成功'
+                });
                 $('#activity-list-table').bootstrapTable('refresh');
             } else {
                 $.Popup({
@@ -495,9 +487,7 @@ var operateEvents = {
                 var option = '';
                 if (result.state == 200) {
                     if(result.data.length > 0){
-                        $("#activityRecommend").show();
-                        $("#activityList").hide();
-                        $("#listType").html("推荐");
+                        $("#activityRecommend").modal('show');
                         $.ajax({
                             url: "/v1/activity/queryActivityById",
                             type: 'POST',
@@ -680,6 +670,19 @@ function createActivity() {
     $("#activityList").hide();
     $("#images").attr({'src': ''});
     $("#avtivityId").val('');
+    /*查询创建活动时需要选择的用户*/
+    $.ajax({
+        url: "/v1/appUser/list/official/all",
+        type: 'get',
+        dataType: 'json',
+        success: function (result) {
+            var user = '';
+            result.rows.forEach(function (item, i) {
+                user += '<option value=' + item.id + '>' + item.nickname + '</option>'
+            })
+            $("#choiceUser").append(user)
+        }
+    });
     $('#activity-summernote').summernote('reset');
     var html = '<label class="checkbox"><input type="checkbox" name="memberString" value="手机号码">手机号码</label><label class="checkbox"><input type="checkbox" name="memberString" value="姓名">姓名</label> <label class="checkbox"><input type="checkbox" name="memberString" value="身份证号码">身份证号码</label> <label class="checkbox"><input name="memberString" type="checkbox" value="性别">性别</label> <label class="checkbox"><input name="memberString" type="checkbox" value="年龄">年龄</label> <label class="checkbox"><input name="memberString" type="checkbox" value="地址">地址</label> <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>'
     $("#template").html(html);

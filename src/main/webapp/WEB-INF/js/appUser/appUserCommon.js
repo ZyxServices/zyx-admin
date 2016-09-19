@@ -104,12 +104,28 @@ var operateEvent = {
         $('#editUserForm').data('bootstrapValidator').validate();
     },
     'click .recommend': function (e, value, row, index) {
-        $("#devaUserNickname").html(row.nickname);
-        $("#devaId").val(row.id);
-        if (row["avatar"]) {
-            $("#devaUserAvatar").attr("src", "http://image.tiyujia.com/" + row["avatar"]);
-        }
-        $("#appUserRecommend").modal('show');
+        $.post("/v1/deva/sequence", {model: 6, area: 1}, function (data) {
+            if (data.state == 200) {
+                if (data.data.length > 0) {
+                    $("#devaUserNickname").html(row.nickname);
+                    $("#modelId").val(row.id);
+                    if (row["avatar"]) {
+                        $("#devaUserAvatar").attr("src", "http://image.tiyujia.com/" + row["avatar"]);
+                    }
+                    for (var i = 0; i < data.data.length; i++) {
+                        $("#sequence").append("<option value='" + data.data[i] + "'>" + data.data[i] + "</option>");
+                    }
+                    $("#appUserRecommend").modal('show');
+                }
+                else {
+                    $.Popup({
+                        confirm: false,
+                        template: '用户banner序列号已满，请先删除其他序列号再推荐'
+                    })
+                }
+            }
+
+        });
     },
     'click .authPass': function (e, value, row, index) {// 审核通过
         // 弹出审核页面
@@ -215,21 +231,37 @@ var operateEvent = {
                 });
             }
         })
-    }/*,
-    'click .unDel': function (e, value, row, index) {
-        if (confirm('这是恢复删除是否的对话框?')) {
-            $.ajax({
-                url: "/v1/appUser/unDel",
-                data: {id: row.id},
-                type: "GET",
-                dataType: 'json',
-                success: function () {
-                    $('#app_user_table').bootstrapTable("refresh");
-                },
-                error: function (er) {
-                    alert("操作失败");
-                }
-            });
-        }
-    }*/
+    }
 };
+function beginDeva() {
+    $("#devaForm").ajaxSubmit({
+        url: '/v1/deva/add',
+        type: 'post',
+        dataType: 'json',
+        data: {model: 6, area: 1},
+        beforeSubmit: function () {
+            $("#devaButton").attr("disabled", true);
+            return true;
+        },
+        success: function (result) {
+            if (result.state == 200) {
+                $.Popup({
+                    confirm: false,
+                    template: '推荐成功'
+                });
+                $("#appUserRecommend").modal('hide');
+                $("#devaButton").attr("disabled", false);
+                $('#app_user_table').bootstrapTable('refresh');
+            } else {
+                $.Popup({
+                    confirm: false,
+                    template: result["errmsg"]
+                });
+                $("#devaButton").attr("disabled", false);
+            }
+        },
+        error: function () {
+            $("#createButton").attr("disabled", false);
+        }
+    });
+}

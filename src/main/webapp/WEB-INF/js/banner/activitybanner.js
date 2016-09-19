@@ -21,8 +21,8 @@ $(function(){
         sidePagination: 'server',
         queryParams: function (params) {
             return {
-                area: ACTIVITYMODEL,
-                model: HOMEPAGEAREA,
+                area: HOMEPAGEAREA,
+                model: ACTIVITYMODEL,
                 pageDataNum: params.limit,
                 pageNum: (params.offset + 1),
                 search: params.search
@@ -39,13 +39,13 @@ function groupFromData(res) {
         datas.forEach(function (item, a) {
             var dataObj = {};
             dataObj.id = item.id;
-            dataObj.modelTitle = item.modelTitle;
+            dataObj.modelTitle = item.devaModelVo.modelTitle;
             dataObj.model = item.model;
             dataObj.area = item.area;
             dataObj.createTime = item.createTime;
             if(item.imageUrl){
                 var imgUrl = item.imageUrl.split(".");
-                dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>';
+                dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'" target="view_window"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>';
             }
             dataObj.sequence = item.sequence;
             dataObj.state = item.state == 1? "是":"否";

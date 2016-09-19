@@ -5,9 +5,18 @@ import java.io.Serializable;
 /**
  * Created by MrDeng on 2016/9/1.
  */
-public class DevaUserVo implements Serializable{
+public class DevaModelVo  implements Serializable{
+    private String modelTitle;
     private String nickname;
     private String official;
+
+    public String getModelTitle() {
+        return modelTitle;
+    }
+
+    public void setModelTitle(String modelTitle) {
+        this.modelTitle = modelTitle;
+    }
 
     public String getNickname() {
         return nickname;

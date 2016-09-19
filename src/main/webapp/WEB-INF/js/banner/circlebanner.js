@@ -30,6 +30,7 @@ $(function(){
     $("#homepage-list-table").bootstrapTable({
         url: "/v1/deva/list",
         method:'post',
+        striped: true,           //是否显示行间隔色
         locale: 'zh-US',
         pagination: true,
         cache: false,
@@ -65,6 +66,7 @@ function circleDevaChange(obj) {
             url: "/v1/deva/list",
             method:'post',
             locale: 'zh-US',
+            striped: true,           //是否显示行间隔色
             pagination: true,
             cache: false,
             contentType: "application/x-www-form-urlencoded",
@@ -95,6 +97,7 @@ function circleDevaChange(obj) {
             url: "/v1/deva/list",
             method:'post',
             locale: 'zh-US',
+            striped: true,           //是否显示行间隔色
             pagination: true,
             cache: false,
             uniqueId: "id",
@@ -126,6 +129,7 @@ function circleDevaChange(obj) {
             method:'post',
             locale: 'zh-US',
             pagination: true,
+            striped: true,           //是否显示行间隔色
             cache: false,
             uniqueId: "id",
             height:500,
@@ -158,7 +162,7 @@ function homepageFormData(res) {
             dataObj.id = item.id;
             dataObj.area = item.area;
             dataObj.model = item.model;
-            dataObj.modelTitle = item.modelTitle;
+            dataObj.modelTitle = item.devaModelVo.modelTitle;
             dataObj.sequence = item.sequence;
             dataObj.state = item.state == 1 ? "是":"否";
             dataArray.push(dataObj)
@@ -176,12 +180,12 @@ function postFormData(res) {
         datas.forEach(function (item, a) {
             var dataObj = {};
             dataObj.id = item.id;
-            dataObj.modelTitle = item.modelTitle;
+            dataObj.modelTitle = item.devaModelVo.modelTitle;
             dataObj.area = item.area;
             dataObj.model = item.model;
             if(item.imageUrl){
                 var imgUrl = item.imageUrl.split(".");
-                dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>'
+                dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'" target="view_window"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>'
             }
             dataObj.sequence = item.sequence;
             dataObj.activation = item.activation == 1? "是":"否";
@@ -200,7 +204,7 @@ function circleFormData(res) {
         datas.forEach(function (item, a) {
             var dataObj = {};
             dataObj.id = item.id;
-            dataObj.modelTitle = item.modelTitle;
+            dataObj.modelTitle = item.devaModelVo.modelTitle;
             dataObj.sequence = item.sequence;
             dataObj.area = item.area;
             dataObj.model = item.model;

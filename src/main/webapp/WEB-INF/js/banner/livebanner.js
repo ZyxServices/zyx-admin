@@ -5,6 +5,7 @@ $(function(){
     $("#homepage-list-table").bootstrapTable({
         url: "/v1/deva/list",
         method:'post',
+        striped: true,           //是否显示行间隔色
         locale: 'zh-US',
         pagination: true,
         cache: false,
@@ -53,6 +54,7 @@ function liveDevaChange(obj) {
             method:'post',
             locale: 'zh-US',
             pagination: true,
+            striped: true,           //是否显示行间隔色
             cache: false,
             uniqueId: "id",
             height:500,
@@ -80,6 +82,7 @@ function liveDevaChange(obj) {
         $("#stand-list-table").bootstrapTable({
             url: "/v1/deva/list",
             method:'post',
+            striped: true,           //是否显示行间隔色
             locale: 'zh-US',
             pagination: true,
             cache: false,
@@ -114,13 +117,13 @@ function homepageFormData(res) {
         datas.forEach(function (item, a) {
             var dataObj = {};
             dataObj.id = item.id;
-            dataObj.modelTitle = item.modelTitle;
+            dataObj.modelTitle = item.devaModelVo.modelTitle;
             dataObj.area = item.area;
             dataObj.model = item.model;
             dataObj.createTime = item.createTime;
             if(item.imageUrl){
                 var imgUrl = item.imageUrl.split(".");
-                dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>';
+                dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'" target="view_window"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>';
             }
             dataObj.sequence = item.sequence;
             dataObj.state = item.state == 1? "是":"否";
@@ -139,13 +142,13 @@ function standFormData(res) {
         datas.forEach(function (item, a) {
             var dataObj = {};
             dataObj.id = item.id;
-            dataObj.modelTitle = item.modelTitle;
+            dataObj.modelTitle = item.devaModelVo.modelTitle;
             dataObj.area = item.area;
             dataObj.model = item.model;
             dataObj.createTime = item.createTime;
             if(item.imageUrl){
                 var imgUrl = item.imageUrl.split(".");
-                dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>'
+                dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'" target="view_window"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>'
             }
             dataObj.sequence = item.sequence;
             dataObj.activation = item.activation == 1? "是":"否";

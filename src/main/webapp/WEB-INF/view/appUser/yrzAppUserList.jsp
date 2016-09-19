@@ -14,6 +14,7 @@
     <meta content="体育家-用户操作" name="description"/>
     <meta content="" name="author"/>
     <jsp:include page="../public/common-styles.jsp"/>
+    <link rel="stylesheet" href="../../css/tiyujia/style.css" />
 </head>
 <body class="page-header-fixed">
 <jsp:include page="../public/header.jsp"/>
@@ -24,7 +25,8 @@
             <div class="row-fluid">
                 <div class="span12">
                     <h3 class="page-title">
-                        用户管理<small>statistics and more</small>
+                        用户管理
+                        <small>statistics and more</small>
                     </h3>
                     <ul class="breadcrumb">
                         <li>
@@ -60,10 +62,8 @@
         <button data-dismiss="modal" class="close" type="button"></button>
         <h3>用户推荐</h3></div>
     <div class="modal-body">
-        <form class="form-horizontal" id="devaForm" enctype="multipart/form-data">
-            <input name="devaId" type="hidden" value="6">
-            <input id="types" name="types" value="5" type="hidden">
-            <input id="activation" name="activation" value="1" type="hidden">
+        <form class="form-horizontal" id="devaForm">
+            <input  name="modelId" type="hidden" id="modelId">
             <div class="control-group"><label class="control-label">用户昵称</label>
                 <div class="controls"><span class="help-inline" id="devaUserNickname"></span></div>
             </div>
@@ -72,20 +72,15 @@
                 </div>
             </div>
             <div class="control-group"><label class="control-label">首页更多用户推荐</label>
-                <div class="controls"><select class="span6 m-wrap" id="sequence" name="sequence">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                    <option>11</option>
-                    <option>12</option>
+                <div class="controls"><select id="sequence" name="sequence">
+
                 </select></div>
+            </div>
+            <div class="control-group"><label class="control-label">推荐状态</label>
+                <div class="controls">
+                    <label class="radio"><input type="radio" checked value="1" name="state">激活</label>
+                    <label class="radio"><input type="radio" value="0" name="state">未激活</label>
+                </div>
             </div>
         </form>
     </div>

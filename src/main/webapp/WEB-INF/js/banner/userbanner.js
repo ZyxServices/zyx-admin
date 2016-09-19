@@ -2,7 +2,7 @@
  * Created by ZYX on 2016/7/14.
  */
 $(function(){
-    $("#package-list-table").bootstrapTable({
+    $("#homepage-list-table").bootstrapTable({
         url: "/v1/deva/list",
         method:'post',
         locale: 'zh-US',
@@ -13,35 +13,43 @@ $(function(){
         strictSearch: true,
         uniqueId: "id",
         height:500,
-        contentType: "application/x-www-form-urlencoded",
         pageSize: 20,
-        pageList: [20, 50, 100],
+        contentType: "application/x-www-form-urlencoded",
+        pageList: new Array(20, 50, 100),
         paginationPreText: "上一页",
         paginationNextText: "下一页",
         sidePagination: 'server',
         queryParams: function (params) {
             return {
-                area: 1,
-                model: 6,
+                area: HOMEPAGEAREA,
+                model: USERMODEL,
                 pageDataNum: params.limit,
                 pageNum: (params.offset + 1),
                 search: params.search
             }
         },
-        responseHandler:packageFormData
+        responseHandler:groupFromData
     })
 })
-function packageFormData(res) {
+
+function groupFromData(res) {
     if (res.state == 200) {
         var dataArray = [];
         var datas = res.data;
         datas.forEach(function (item, a) {
             var dataObj = {};
             dataObj.id = item.id;
-            dataObj.shopname = "活动banner";
-            dataObj.image = '<img src="http://image.tiyujia.com/group1/M00/00/05/052YyFe0A9iAWI5kAAA75RxRQgw234__30x30.png">';
+            dataObj.modelTitle = item.devaModelVo.nickname;
+            dataObj.model = item.model;
+            dataObj.area = item.area;
+            dataObj.createTime = item.createTime;
+            if(item.imageUrl){
+                var imgUrl = item.imageUrl.split(".");
+                dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>';
+            }
             dataObj.sequence = item.sequence;
-            dataObj.activation = item.activation == 1? "是":"否";
+            dataObj.state = item.state == 1? "是":"否";
+            dataObj.official = item.devaModelVo.official == 1? "是":"否";
             dataArray.push(dataObj)
         });
         return {
@@ -51,17 +59,3 @@ function packageFormData(res) {
     }
 }
 
-function operate(value, row, index) {
-    var dataArray = new Array();
-    dataArray.push('<a class="remove p5" href="javascript:void(0)" title="remove">删除</a>');
-    dataArray.push('<a class="edit p5" href="javascript:void(0)" title="edit">编辑</a>');
-    return dataArray.join('');
-}
-var operateEvents = {
-    'click .remove':function (e, value, row, index) {
-        console.log(row)
-    },
-    'click .edit':function (e, value, row, index) {
-        console.log(row)
-    }
-}

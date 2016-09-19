@@ -62,19 +62,17 @@ function initTable() {
 // 操作
 function operateFormatter(value, row, index) {
     var _html = [];
-    _html.push('<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>');
+    if(row.deva){
+        _html.push('<a class="p5" href="javascript:void(0)" disabled>已推荐</a>')
+    }else{
+        _html.push('<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>');
+    }
     if (row.mask) {
         _html.push('<a class="unMask p5" href="javascript:void(0)" title="unMask">取消屏蔽</a>');
     } else {
         _html.push('<a class="mask p5" href="javascript:void(0)" title="mask">屏蔽</a>');
     }
     return _html.join('');
-}
-var operateEvents = {
-    'click .recommend': function (e, value, row, index) {
-        $("input[name=modelId]").val(row.id)
-        $("input[name=state]").val(1);
-    }
 }
 $(".create_live").click(function () {
     $("#createAppUserForm")[0].reset();
@@ -119,49 +117,6 @@ $(function () {
             }
         }
     });
-    function List(model, area, id) {
-        $.post("/v1/deva/sequence", {model: model, area: area}, function (data) {
-            console.log(data);
-            if (data.state == 200) {
-                if (data.data.length > 0) {
-                    for (var i = 0; i < data.data.length; i++) {
-                        $(id).append("<option value='" + data.data[i] + "'>" + data.data[i] + "</option>");
-                    }
-                }
-                else {
-                    $(id).html('<option value="">圈子序列号已满，请先删除</option>');
-                }
-            }
-
-        });
-    }
-
-    List("6", "1", "#sequence");
-    $("#devaForm").ajaxForm({
-        url: '/v1/deva/add',
-        type: 'post',
-        dataType: 'json',
-        data: {model: 6, area: 1},
-        beforeSubmit: function () {
-            $("#devaButton").attr("disabled", true);
-
-            return true;
-        },
-        success: function (result) {
-            console.log(1111111111);
-            if (result.state == 200) {
-                alert("首推成功");
-                $("#appUserRecommend").modal('hide');
-                $("#devaButton").attr("disabled", false);
-            } else {
-                alert(result["errmsg"]);
-                $("#devaButton").attr("disabled", false);
-            }
-        },
-        error: function () {
-            $("#createButton").attr("disabled", false);
-        }
-    });
 });
 
 $("#createAppUserForm").ajaxForm({
@@ -190,10 +145,6 @@ $("#createAppUserForm").ajaxForm({
 
 function beginCreate() {
     $(".upload_btn").click();
-}
-
-function beginDeva() {
-    $("#devaForm").submit();
 }
 
 function backToUsers() {
