@@ -26,7 +26,7 @@ import java.util.Map;
  * @title AppUserService.java
  */
 @Service
-public class AppUserService extends BaseServiceImpl<AppUser>{
+public class AppUserService extends BaseServiceImpl<AppUser> {
 
     @Autowired
     AppUserMapper appUserMapper;
@@ -150,17 +150,16 @@ public class AppUserService extends BaseServiceImpl<AppUser>{
         appUser.setOfficial(param.getOfficial());
         appUser.setMask(false);
         appUser.setDel(false);
-        appUser.setAuthenticate(1);
+        appUser.setAuthenticate(0);
         try {
             int result = appUserMapper.insert(appUser);
             if (result >= 1) {
-                param.setAppUserId(appUser.getId());
-                appUserMapper.insertAuthInfo(param);
                 return MapUtils.buildSuccessMap(AppUserConstants.SUCCESS, AppUserConstants.MSG_SUCCESS, null);
             } else {
                 return MapUtils.buildErrorMap(AppUserConstants.ERROR_APP_USER_5002, AppUserConstants.ERROR_APP_USER_5002_MSG);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return AppUserConstants.MAP_500;
         }
     }
@@ -175,11 +174,34 @@ public class AppUserService extends BaseServiceImpl<AppUser>{
                 return MapUtils.buildErrorMap(AppUserConstants.ERROR_APP_USER_5003, AppUserConstants.ERROR_APP_USER_5003_MSG);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             return AppUserConstants.MAP_500;
         }
     }
 
-    List<AppUserListDto> selectBaseInfo(List<Integer> ids){
-        return  null;
+    List<AppUserListDto> selectBaseInfo(List<Integer> ids) {
+        return null;
+    }
+
+    public Map<String, Object> submitAppUserAuthInfo(AppUserCreateParam param) {
+        try {
+            int result = appUserMapper.authAppUserByPrimaryKey(param.getAppUserId(), 1);
+            if (result == 1) {
+                result = appUserMapper.selectAuthCount(param.getAppUserId());
+                if (result != 0) {
+                    result = appUserMapper.updateAuthInfo(param);
+                } else {
+                    result = appUserMapper.insertAuthInfo(param);
+                }
+            }
+            if (result >= 1) {
+                return MapUtils.buildSuccessMap(AppUserConstants.SUCCESS, AppUserConstants.MSG_SUCCESS, null);
+            } else {
+                return MapUtils.buildErrorMap(AppUserConstants.ERROR_APP_USER_5003, AppUserConstants.ERROR_APP_USER_5003_MSG);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return AppUserConstants.MAP_500;
+        }
     }
 }

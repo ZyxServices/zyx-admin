@@ -73,6 +73,10 @@
         INSERT INTO user_auth (user_id,authname,authidcard,authmob,authfile,authinfo,authfilework,modify_time) VALUES (#{appUserId},#{authName},#{authIDCard},#{authMob},#{authFile},#{authInfo},#{authFileWork},#{modifyTime})
     </insert>
 
+    <select id="selectAuthCount" parameterType="int" resultType="int">
+        SELECT count(id) FROM user_auth WHERE user_id = #{user_id}
+    </select>
+
     <update id="updateAppUserByPrimaryKey" parameterType="com.zyx.parm.appUser.AppUserCreateParam">
         update user set modify_time = #{modifyTime}
         <if test="phone != null and phone != ''">

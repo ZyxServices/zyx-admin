@@ -20,10 +20,6 @@ public interface AppUserMapper extends Mapper<AppUser> {
 
     int unMaskByPrimaryKey(Integer id);
 
-    int authAppUserByPrimaryKey(Integer id, int i);
-
-    int insertAuthInfo(AppUserCreateParam param);
-
     List<AppUserListDto> queryAppUserList(QueryAppUserParam param);
 
     int selectAppUserListCount(QueryAppUserParam param);
@@ -32,6 +28,12 @@ public interface AppUserMapper extends Mapper<AppUser> {
 
     int updateAppUserByPrimaryKey(AppUserCreateParam param);
 
-    void updateAuthInfo(AppUserCreateParam param);
+    // =============认证相关==============
+    int selectAuthCount(Integer user_id);
 
+    int insertAuthInfo(AppUserCreateParam param);
+
+    int updateAuthInfo(AppUserCreateParam param);
+
+    int authAppUserByPrimaryKey(Integer id, int i);
 }
