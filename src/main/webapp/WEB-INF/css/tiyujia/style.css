@@ -71,5 +71,10 @@ div.checker span.checked {
     margin: 0 2px 0 0;
 }
 .form_bottom{
-    margin:0px;
+    margin:0;
+}
+/*认证图片的示例样式*/
+.authImg img{
+    max-width: 200px;
+    max-height: 200px;
 }

@@ -61,7 +61,11 @@ $(function () {
         queryParams: queryParams,
         responseHandler: groupFromData
     })
+})
+
+function initActivity() {
     /*所有活动的列表*/
+    $('#choice-activity-table').bootstrapTable('destroy');
     $("#choice-activity-table").bootstrapTable({
         url: "/v1/activity/queryActivity",
         striped: true,           //是否显示行间隔色
@@ -121,7 +125,7 @@ $(function () {
                 .validateField('activityIds');
         }
     })
-})
+}
 
 /*activity-group-table列表请求的数据*/
 function queryParams(params) {
@@ -147,13 +151,8 @@ function groupFromData(res) {
             dataObj.createTime = item.createTime;
             dataObj.del = item.del;
             dataObj.mask = item.mask;
-            // dataObj.visible = 0;
             dataArray.push(dataObj)
         });
-        if (datas.length == 0) {
-            var dataObj = {};
-            dataArray.push(dataObj);
-        }
         return {
             rows: dataArray,
             total: res.dataCount
@@ -245,6 +244,7 @@ var operateEvents = {
         })
     },
     'click .edit':function (e, value, row, index) {
+        initActivity();
         $("#listType").html('编辑');
         $("#combinationId").val(row.id);
         $("#activityGroupList").hide();
@@ -403,13 +403,14 @@ function getGroupActivityDetail(id) {
     });
 }
 function createGroupActivity() {
+    initActivity();
     activityIds = [];
     $("#listType").html('创建');
     $("#activityGroupCreate").show();
     $("#activityGroupList").hide();
     // $("#imgWrap").hide();
     $("#combinationId").val("");
-    $('#choice-activity-table').bootstrapTable('refresh');
+    // $('#choice-activity-table').bootstrapTable('refresh');
     $('#group-form').bootstrapValidator('resetForm', true);   /*将表格清空*/
     $('#group-form').bootstrapValidator('addField', 'imageR',{
         validators: {

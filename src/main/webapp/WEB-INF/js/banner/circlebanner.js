@@ -208,7 +208,7 @@ function circleFormData(res) {
             dataObj.sequence = item.sequence;
             dataObj.area = item.area;
             dataObj.model = item.model;
-            dataObj.state = item.state == 1? "是":"否";
+            dataObj.activation = item.activation == 1? "是":"否";
             dataArray.push(dataObj)
         });
         return {

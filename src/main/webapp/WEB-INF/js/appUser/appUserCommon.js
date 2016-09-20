@@ -78,7 +78,7 @@ function detailFormatter(index, row, c) {
 //查看Url
 function seeUrlFormatter(value, row, index) {
     return [
-        '<a class="seeUrl p5"   href="javascript:void(0)" title="Like">查看</a>',
+        '<a class="seeUrl p5"   href="javascript:void(0)" title="Like">查看</a>'
     ].join('');
 }
 // 操作事件edit
@@ -93,14 +93,12 @@ var operateEvent = {
         $(".create_liveType").show();
         $("#nickname").val(row.nickname);
         $("#phone").val(row.phone);
-        $("#password").val(row.nickname);
-        $("#sex").val(row.sex);
+        $("#password").val(row.password);
+        $('input[name=sex]').eq(!row.sex).attr({"checked": "checked"});
         if(row.avatar){
             $("#avatarImg").attr("src","http://image.tiyujia.com/" + row.avatar);
         }
-        $("#official").val(1);
         $("#address").val(row.address);
-        $("#authInfo").val(row.appUserAuthDto.authInfo);
         $('#editUserForm').data('bootstrapValidator').validate();
     },
     'click .recommend': function (e, value, row, index) {
@@ -231,6 +229,14 @@ var operateEvent = {
                 });
             }
         })
+    },
+    'click .Authentication':function (e, value, row, index) {
+        $("#authForm")[0].reset();
+        $('#authForm').data('bootstrapValidator').resetForm(true);
+        $(".live_index").hide();
+        $(".create_liveType").hide();
+        $("#appUserAuth").show();
+        $("#authId").val(row.id);
     }
 };
 function beginDeva() {

@@ -356,7 +356,10 @@ $("#czS").click(function () {
                 }
             },
             error:function (result) {
-                alert(result)
+                $.Popup({
+                    confirm: false,
+                    template: result
+                });
             }
         })
     } else {

@@ -76,10 +76,56 @@ function operateFormatter(value, row, index) {
     } else {
         _html.push('<a class="mask p5" href="javascript:void(0)" title="mask">屏蔽</a>');
     }
-    // _html.push('<a class="del p5" href="javascript:void(0)" title="del">删除</a>');
+    if(row.authenticate == 1){
+        _html.push('<a class="p5" href="javascript:void(0)" title="Authentication">待审核</a>');
+    }else if(row.authenticate == 2){
+        _html.push('<a class="p5" href="javascript:void(0)" title="Authentication">已认证</a>');
+    }else if(row.authenticate == 3){
+        _html.push('<a class="p5" href="javascript:void(0)" title="Authentication">认证失败,再次申请</a>');
+    }else{
+        _html.push('<a class="Authentication p5" href="javascript:void(0)" title="Authentication">申请认证</a>');
+    }
     return _html.join('');
 }
 $(function () {
+    /*审核的验证*/
+    $("#authForm").bootstrapValidator({
+        message: '数据无效',
+        feedbackIcons: {
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields:{
+            'authName': {
+                validators: {
+                    notEmpty: {
+                        message: '真实姓名不能为空'
+                    }
+                }
+            },'authIDCard': {
+                validators: {
+                    notEmpty: {
+                        message: '身份证不能为空'
+                    }
+                }
+            },'authMob': {
+                validators: {
+                    notEmpty: {
+                        message: '手机号码必填'
+                    },
+                    regexp: {
+                        regexp: /^(1[3|4|5|7|8]\d{9})$/,/*只支持手机电话*/
+                        message: '请输入正确手机号码'
+                    }
+                }
+            },'imagePhoto': {
+                validators: {
+                    notEmpty: {
+                        message: '必须上传手持身份证的照片'
+                    }
+                }
+            }
+        }
+    });
     initTable();
     $("#editUserForm").bootstrapValidator({
         message: '数据无效',
@@ -103,18 +149,41 @@ $(function () {
                         message: '请输入正确手机号码'
                     }
                 }
-            },'password': {
+            },'address': {
                 validators: {
                     notEmpty: {
-                        message: '密码必填'
+                        message: '所在地必填'
                     }
                 }
             }
         }
     });
+
 });
 $("#createButton").click(function () {
-    $("#editUserForm").ajaxSubmit();
+    $("#editUserForm").ajaxSubmit({
+        url: '/v1/appUser/update',
+        type: 'post',
+        dataType: 'json',
+        beforeSubmit: function () {
+            return $('#createAppUserForm').data('bootstrapValidator').isValid();
+        },
+        success: function (result) {
+            if (result.state == 200) {
+                backToUsers();
+            } else {
+                if (result.state == 5001) {
+                    $.Popup({
+                        confirm: false,
+                        template: '账号已存在'
+                    });
+                }
+            }
+        },
+        error: function () {
+            $("#createButton").attr("disabled", false);
+        }
+    });
 })
 $('input[id=avatar]').change(function () {
     if ($(this).val()) {
@@ -128,6 +197,30 @@ $('input[id=avatar]').change(function () {
         $("#avatarImg").attr("src", "");
     }
 });
+$('#authFile').change(function () {
+    if ($(this).val()) {
+        $('#authPhotoCover').html($(this).val());
+        var objUrl = getImgURL(this.files[0]);
+        if (objUrl) {
+            $("#cardImg").attr("src", objUrl);
+        }
+    }else{
+        $("#authPhotoCover").html("选择文件");
+        $("#cardImg").attr("src", "");
+    }
+});
+$('#workFile').change(function () {
+    if ($(this).val()) {
+        $('#workPhotoCover').html($(this).val());
+        var objUrl = getImgURL(this.files[0]);
+        if (objUrl) {
+            $("#workImg").attr("src", objUrl);
+        }
+    }else{
+        $("#workPhotoCover").html("选择文件");
+        $("#workImg").attr("src", "");
+    }
+});
 function getImgURL(file) {
     var url = null;
     if (window.createObjectURL != undefined) { // basic
@@ -139,7 +232,138 @@ function getImgURL(file) {
     }
     return url;
 }
+
+/*提交审核*/
+$("#authButton").click(function () {
+    var formData = new FormData();
+    formData.append('imgFile', $("#authFile")[0].files[0]);/*获取图片对象*/
+    $.ajax({
+        url: '/v1/upload/file',
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,
+        beforeSend: function () {
+            /*传图片之前做验证*/
+            return $("#authForm").data('bootstrapValidator').isValid();
+        },
+        success: function (result) {
+            if (result.state == 200) {
+                $("#authFileStr").val(result.data.url);/*身份证必须上传*/
+                if($("#workFile")[0].files[0] != undefined){/*如果有工作照片，则上传*/
+                    var formWorkData = new FormData();
+                    formWorkData.append('imgFile', $("#workFile")[0].files[0]);/*获取图片对象*/
+                    $.ajax({
+                        url: '/v1/upload/file',
+                        type: 'post',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (result) {
+                            if (result.state == 200) {
+                                $("#authFileWork").val(result.data);/*工作照片选择上传*/
+                                authFormSubmit();/*最后才是上传表格*/
+                            }else{
+                                $.Popup({
+                                    confirm: false,
+                                    template: result.errmsg
+                                });
+                            }
+                        },
+                        error:function (result) {
+                            $.Popup({
+                                confirm: false,
+                                template: result
+                            });
+                        }
+                    })
+                }else{
+                    authFormSubmit();
+                }
+            }else{
+                $.Popup({
+                    confirm: false,
+                    template: result.errmsg
+                });
+            }
+        },
+        error:function (result) {
+            $.Popup({
+                confirm: false,
+                template: result
+            });
+        }
+    })
+})
+
+function authFormSubmit() {
+    $("#authForm").ajaxSubmit({
+        url: '/v1/user/submit_auth',
+        type: 'post',
+        dataType: 'json',
+        beforeSubmit:function () {
+
+        },
+        complete:function () {
+
+        },
+        success: function (result) {
+            if (result.state && result.state == 200) {
+                $.Popup({
+                    confirm: false,
+                    template: '认证资料提交成功，请等待审核',
+                    cancelEvent:function () {
+                        $(".live_index").show();
+                        $(".create_liveType").hide();
+                        $("#appUserAuth").hide();
+                        $('#app_user_table').bootstrapTable('refresh');
+                    }
+                });
+            } else {
+                $.Popup({
+                    confirm: false,
+                    template: result.errmsg
+                })
+            }
+        }
+    });
+}
+
+/*上传图片*/
+function imgUpload(id,image) {
+    var formData = new FormData();
+    formData.append('imgFile', $("#"+id)[0].files[0]);/*获取图片对象*/
+    $.ajax({
+        url: '/v1/upload/file',
+        type: 'post',
+        data: formData,
+        processData: false,
+        contentType: false,
+        beforeSend: function () {
+            /*传图片之前做验证*/
+            // return $("#authForm").data('bootstrapValidator').isValid();
+        },
+        success: function (result) {
+            if (result.state == 200) {
+                $("#"+image).val(result.data);
+            }else{
+                $.Popup({
+                    confirm: false,
+                    template: result.errmsg
+                });
+            }
+        },
+        error:function (result) {
+            $.Popup({
+                confirm: false,
+                template: result
+            });
+        }
+    })
+}
+
 /*多图片上传*/
+/*
 $("#imgInit").zyUpload({
     width            :   "600px",                 // 宽度
     height           :   "",                 // 宽度
@@ -153,12 +377,12 @@ $("#imgInit").zyUpload({
     dragDrop         :   true,                    // 是否可以拖动上传文件
     del              :   true,                    // 是否可以删除文件
     finishDel        :   false,  				  // 是否在上传文件完成后删除预览
-    /* 外部获得的回调接口 */
+    /!* 外部获得的回调接口 *!/
     onSelect: function(files, allFiles){                    // 选择文件的回调方法
-       /* console.info("当前选择了以下文件：");
+       /!* console.info("当前选择了以下文件：");
         console.info(files);
         console.info("之前没上传的文件：");
-        console.info(allFiles.length);*/
+        console.info(allFiles.length);*!/
         var html = '';
         if(allFiles.length > 3){
             html = '已选择3张图片不能再多传';
@@ -177,12 +401,12 @@ $("#imgInit").zyUpload({
     },
     onSuccess: function(file,response){                    // 文件上传成功的回调方法
         console.log(response);
-        /*if(JSON.parse(response).state==902){
+        /!*if(JSON.parse(response).state==902){
             console.log(file)
             alert(JSON.parse(response).errmsg)
         }else{
             $('#imgFileUrl').val($('#imgFileUrl').val()+JSON.parse(response).data+',')
-        }*/
+        }*!/
         //$('#uploadInf').append(JSON.parse(response).data)
         $('#authFile').val($('#authFile').val()+JSON.parse(response).data+',');
     },
@@ -193,4 +417,4 @@ $("#imgInit").zyUpload({
     onComplete: function(responseInfo){           // 上传完成的回调方法
 
     }
-});
+});*/

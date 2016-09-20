@@ -14,7 +14,6 @@
     <meta content="体育家-用户操作" name="description"/>
     <meta content="" name="author"/>
     <jsp:include page="../public/common-styles.jsp"/>
-    <link href="<%=request.getContextPath()%>/css/zyUpload.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../../css/tiyujia/style.css" />
 </head>
 <body class="page-header-fixed">
@@ -58,7 +57,7 @@
                         <label class="control-label">昵称</label>
 
                         <div class="controls col-xs-5">
-                            <input type="text" class="span6" name="nickname" id="nickname"/>
+                            <input type="text" class="span6" name="nickname" id="nickname" placeholder="输入昵称"/>
                             <span class="help-inline required">*</span>
                         </div>
                     </div>
@@ -67,7 +66,7 @@
                         <label class="control-label">电话</label>
 
                         <div class="controls col-xs-5">
-                            <input type="text" class="span6" name="phone" id="phone"/>
+                            <input type="text" class="span6" name="phone" id="phone" placeholder="输入手机号"/>
                             <span class="help-inline required">*</span>
                         </div>
                     </div>
@@ -76,7 +75,16 @@
                         <label class="control-label">密码</label>
 
                         <div class="controls col-xs-5">
-                            <input type="text" class="span6" name="password" id="password"/>
+                            <input type="text" class="span6" name="password" id="password" placeholder="输入密码"/>
+                            <span class="help-inline required">*</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <label class="control-label">地址</label>
+
+                        <div class="controls col-xs-5">
+                            <input type="text" class="span6" name="address" id="address" placeholder="输入地址"/>
                             <span class="help-inline required">*</span>
                         </div>
                     </div>
@@ -97,47 +105,19 @@
                         <label class="control-label">性别</label>
 
                         <div class="controls">
-                            <select class="span6" name="sex" id="sex">
-                                <option value="1">男</option>
-                                <option value="0">女</option>
-                            </select>
+                            <label class="radio"><input type="radio" name="sex" checked value="1">男</label>
+                            <label class="radio"><input type="radio" name="sex" value="0">女</label>
                         </div>
                     </div>
 
                     <div class="control-group">
                         <label class="control-label">官方账号</label>
                         <div class="controls">
-                            <select class="span6" name="official" id="official">
-                                <option value="1">是</option>
-                                <option value="0" selected>否</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">所在地</label>
-                        <div class="controls">
-                            <input type="text" class="span6" name="address" id="address"/>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">认证信息</label>
-                        <div class="controls">
-                            <input type="text" class="span6" name="authInfo" id="authInfo"/>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">认证资料</label>
-
-                        <div class="controls">
-                            <input type="hidden" name="authFile" id="authFile">
-                            <span class="help-inline required" id="imgNum">最多上传3张照片</span>
+                            <label class="radio"><input type="radio" name="official" checked value="1">是</label>
+                            <label class="radio"><input type="radio" name="official" value="0">否</label>
                         </div>
                     </div>
                 </form>
-                <div  id="imgInit" style="margin-left: 178px;"></div>
                 <div class="margin-bottom-25">
                     <button type="button" id="createButton" class="btn" onclick="beginCreate()">确认创建
                     </button>
@@ -151,7 +131,7 @@
 <!-- 用户推荐开始 -->
 <!-- 模态框（Modal） -->
 
-<div class="modal fade" id="appUserRecommend" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade hide" id="appUserRecommend" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
     <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button"></button>
@@ -186,6 +166,5 @@
 <!-- 用户推荐结束 -->
 <jsp:include page="../public/common-footer.jsp"/>
 </body>
-<script type="text/javascript" src="../../js/uploadImg/zyUpload.js"></script>
 <script type="text/javascript" src="../../js/appUser/appUserCommon.js"></script>
 <script type="text/javascript" src="../../js/appUser/allAppUser.js"></script>

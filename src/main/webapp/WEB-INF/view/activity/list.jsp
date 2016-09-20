@@ -343,7 +343,7 @@
 <!-- END CONTAINER -->
 
 <!-- BEGIN FOOTER -->
-<div class="modal fade" id="activityRecommend" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade hide" id="activityRecommend" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
   <div class="modal-header">
     <button data-dismiss="modal" class="close" type="button"></button>
@@ -399,7 +399,7 @@
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         <a href="javascript:void(0)" class="btn btn-default" id="confirmCmd">确定</a>
-        <a href="javascript:void(0)" class="btn btn-default" onclick="window.location.reload();">返回</a>
+        <a href="javascript:void(0)" class="btn btn-default" data-dismiss='modal'>取消</a>
       </div>
     </div>
   </div>
