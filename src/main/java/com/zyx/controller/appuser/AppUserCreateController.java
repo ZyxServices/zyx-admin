@@ -44,13 +44,7 @@ public class AppUserCreateController {
                                @RequestParam String nickname,
                                @RequestParam String sex,
                                @RequestParam String official,
-                               @RequestParam String address,
-                               @RequestParam String authName,
-                               @RequestParam String authIDCard,
-                               @RequestParam String authMob,
-                               @RequestParam String authFile,
-                               @RequestParam String authInfo,
-                               @RequestParam String authFileWork) {
+                               @RequestParam String address) {
         AbstractView jsonView = new MappingJackson2JsonView();
         Map<String, Object> map;
         try {
@@ -68,12 +62,6 @@ public class AppUserCreateController {
                     String _avatar = FileUploadUtils.uploadFile(avatar);
                     param.setAvatar(_avatar);
                 }
-                param.setAuthName(authName);
-                param.setAuthIDCard(authIDCard);
-                param.setAuthMob(authMob);
-                param.setAuthFile(authFile);
-                param.setAuthInfo(authInfo);
-                param.setAuthFileWork(authFileWork);
                 map = appUserService.insertAppUser(param);
             }
         } catch (Exception e) {
