@@ -16,6 +16,10 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * Created by SubDong on 16-8-10.
@@ -23,29 +27,59 @@ import java.util.Map;
  * @author SubDong
  * @version V1.0
  *          Copyright (c)2016 tyj-版权所有
- * @title UploadController
- * @package com.zyx.controller.jsoup
- * @update 16-8-10 下午6:31
  */
 @Controller
 @RequestMapping("/v1/upload")
 public class UploadController {
+    // 创建一个线程池
+    ExecutorService pool = Executors.newFixedThreadPool(100);
+
     @RequestMapping(value = "/file", method = RequestMethod.POST)
     @ApiOperation(value = "文件上传", notes = "文件上传")
-    public ModelAndView uploadFile(@RequestParam(name = "imgFile", required = true) MultipartFile file) {
+    public ModelAndView uploadFile(@RequestParam(name = "imgFile") MultipartFile file) {
 
         AbstractView jsonView = new MappingJackson2JsonView();
+        try {
+            if (file == null) {
+                jsonView.setAttributesMap(Constants.MAP_PARAM_MISS);
+            } else {
+                System.out.println("file  :  " + file);
+                System.out.println("file.getName()  :  " + file.getName());
 
-        String temp_url = FileUploadUtils.uploadFile(file);
-        Map<String, Object> map1 = ImagesVerifyUtils.verify(temp_url);
+                Callable c = new MyCallable(file);
+                // 执行任务并获取Future对象
+                Future f = pool.submit(c);
 
-
-        if (map1 != null) {
-            jsonView.setAttributesMap(map1);
-        } else {
-            Map<String, Object> map = MapUtils.buildSuccessMap(Constants.SUCCESS, "文件上传成功", temp_url);
-            jsonView.setAttributesMap(map);
+                String avatarId = f.get().toString();
+                Map<String, Object> map = ImagesVerifyUtils.verify(avatarId);
+                if (map != null) {
+                    jsonView.setAttributesMap(map);
+                } else {
+                    map = new HashMap<>();
+                    map.put(Constants.STATE, Constants.SUCCESS);
+                    map.put(Constants.SUCCESS_MSG, "图片上传成功");
+                    Map<String, Object> map2 = new HashMap<>();
+                    map2.put("url", avatarId);
+                    map.put(Constants.DATA, map2);
+                    jsonView.setAttributesMap(map);
+                }
+            }
+        } catch (Exception e) {
+            jsonView.setAttributesMap(Constants.MAP_500);
         }
         return new ModelAndView(jsonView);
+
+    }
+}
+
+class MyCallable implements Callable<Object> {
+    private MultipartFile file;
+
+    MyCallable(MultipartFile file) {
+        this.file = file;
+    }
+
+    public Object call() throws Exception {
+        return FileUploadUtils.uploadFile(file);
     }
 }
