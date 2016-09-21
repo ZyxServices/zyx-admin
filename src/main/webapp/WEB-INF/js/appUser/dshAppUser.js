@@ -69,14 +69,8 @@ function initTable() {
 //操作
 function operateFormatter(value, row, index) {
     var _html = [];
-
-    /*if (row.del) {
-        _html.push('<a class="unDel p5" href="javascript:void(0)" title="unDel">取消删除</a>');
-    } else {
-
-    }*/
-    _html.push('<a class="authPass p5" href="javascript:void(0)" title="审核通过">审核通过</a>');
-    _html.push('<a class="authFail p5" href="javascript:void(0)" title="审核不通过">审核不通过</a>');
+    _html.push('<a class="audit p5" href="javascript:void(0)" title="审核通过">审核</a>');
+    // _html.push('<a class="authFail p5" href="javascript:void(0)" title="审核不通过">审核不通过</a>');
 
     return _html.join('');
 }
@@ -84,3 +78,53 @@ function operateFormatter(value, row, index) {
 $(function () {
     initTable();
 });
+$("#authSuccess").click(function () {
+    $.ajax({
+        url: "/v1/appUser/authPass",
+        data: {id: $("#authId").val()},
+        type: "GET",
+        dataType: 'json',
+        success: function () {
+            $.Popup({
+                confirm: false,
+                template: '审核通过',
+                cancelEvent:function () {
+                    $(".live_index").show();
+                    $("#appUserAuth").hide();
+                    $('#app_user_table').bootstrapTable('refresh');
+                }
+            });
+        },
+        error: function (er) {
+            $.Popup({
+                confirm: false,
+                template: '操作失败，请刷新后再试'
+            });
+        }
+    });
+})
+$("#authFail").click(function () {
+    $.ajax({
+        url: "/v1/appUser/authFail",
+        data: {id: $("#authId").val()},
+        type: "GET",
+        dataType: 'json',
+        success: function () {
+            $.Popup({
+                confirm: false,
+                template: '审核未通过，请重新提交资料',
+                cancelEvent:function () {
+                    $(".live_index").show();
+                    $("#appUserAuth").hide();
+                    $('#app_user_table').bootstrapTable('refresh');
+                }
+            });
+        },
+        error: function (er) {
+            $.Popup({
+                confirm: false,
+                template: '操作失败，请刷新后再试'
+            });
+        }
+    });
+})

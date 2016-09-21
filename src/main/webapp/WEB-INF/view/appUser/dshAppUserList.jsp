@@ -56,6 +56,66 @@
                     </table>
                 </div>
             </div>
+            <%--审核详情--%>
+            <div class="row-fluid hide" id="appUserAuth">
+                <form class="form-horizontal" id="authForm" role="form">
+                    <input type="hidden" id="authId">
+
+                    <div class="control-group form-group">
+                        <label class="control-label">真实姓名</label>
+                        <div class="controls col-xs-5">
+                            <input type="text" class="span6" name="authName" id="authName" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <label class="control-label">身份证号码</label>
+
+                        <div class="controls col-xs-5">
+                            <input type="text" class="span6" name="authIDCard" id="authIDCard" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <label class="control-label">手机号</label>
+
+                        <div class="controls col-xs-5">
+                            <input type="text" class="span6" name="authMob" id="authMob" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="control-group form-group">
+                        <label class="control-label">手持身份证照片</label>
+
+                        <div class="controls col-xs-5">
+                            <img id="cardImg" src="">
+                        </div>
+                    </div>
+
+                    <hr>
+                    <h3>高级选项</h3>
+
+                    <div class="control-group">
+                        <label class="control-label">认证标签</label>
+                        <div class="controls">
+                            <input type="text" class="span6" name="authInfo" id="authInfo" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">工作证明照片</label>
+                        <div class="controls">
+                            <img id="workImg" src="">
+                        </div>
+                    </div>
+                </form>
+
+                <div class="margin-bottom-25">
+                    <button id="authSuccess" class="btn">审核通过</button>
+                    <button class="btn" id="authFail">审核不通过</button>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>

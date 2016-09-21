@@ -42,7 +42,7 @@ $("#confirmDeva").click(function () {
             },
             success:function (result) {
                 if(result.state == 200){
-                    $("#imageUrl").val(result.data);
+                    $("#imageUrl").val(result.data.url);
                     confirmDevaSubmit(area);
                 }
             }

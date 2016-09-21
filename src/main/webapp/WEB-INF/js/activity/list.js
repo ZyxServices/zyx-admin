@@ -132,7 +132,7 @@ $(function () {
                     success: function (result) {
                         console.log(result)
                         if (result.state == 200) {
-                            $('#activity-summernote').summernote('insertImage', "http://image.tiyujia.com/" + result.data, 'img');
+                            $('#activity-summernote').summernote('insertImage', "http://image.tiyujia.com/" + result.data.url, 'img');
                         } else {
                             $.Popup({
                                 confirm: false,
@@ -285,7 +285,7 @@ $("#confirmCmd").click(function () {
             contentType: false,
             success:function (result) {
                 if(result.state == 200){
-                    $("#imageUrl").val(result.data);
+                    $("#imageUrl").val(result.data.url);
                     activityRecommend();
                 }
             }
@@ -351,7 +351,7 @@ $("#czS").click(function () {
             },
             success: function (result) {
                 if (result.state == 200) {
-                    $("#image").val(result.data);
+                    $("#image").val(result.data.url);
                     updateCreateFrom('/v1/activity/release');
                 }
             },
@@ -389,7 +389,7 @@ $("#czS").click(function () {
                 },
                 success:function (result) {
                     if(result.state == 200){
-                        $("#image").val(result.data);
+                        $("#image").val(result.data.url);
                         updateCreateFrom('/v1/activity/update');
                     }
                 }

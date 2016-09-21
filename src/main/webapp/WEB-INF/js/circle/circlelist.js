@@ -273,7 +273,7 @@ var operateEvent = {
                         return $("#circleCreates").data('bootstrapValidator').isValid();
                     },
                     success: function (data) {
-                        $("input[name=imgFile]").val(data.data);
+                        $("input[name=imgFile]").val(data.data.url);
                         console.log(data.data);
                         circleEidtor("#circleCreates", '../../circle/edit', 200, "编辑成功");
                     }
@@ -396,7 +396,7 @@ $("#circleBtnSure").click(function (e) {
                 return $("#circleCreates").data('bootstrapValidator').isValid();
             },
             success: function (data) {
-                $("input[name=headImgUrl]").val(data.data);
+                $("input[name=headImgUrl]").val(data.data.url);
                 circleEidtor("#circleCreates", '../../circle/createCircle', 200, "创建成功");
             }
 

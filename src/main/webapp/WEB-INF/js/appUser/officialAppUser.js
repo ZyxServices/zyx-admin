@@ -261,7 +261,7 @@ $("#authButton").click(function () {
                         contentType: false,
                         success: function (result) {
                             if (result.state == 200) {
-                                $("#authFileWork").val(result.data);/*工作照片选择上传*/
+                                $("#authFileWork").val(result.data.url);/*工作照片选择上传*/
                                 authFormSubmit();/*最后才是上传表格*/
                             }else{
                                 $.Popup({
@@ -345,7 +345,7 @@ function imgUpload(id,image) {
         },
         success: function (result) {
             if (result.state == 200) {
-                $("#"+image).val(result.data);
+                $("#"+image).val(result.data.url);
             }else{
                 $.Popup({
                     confirm: false,

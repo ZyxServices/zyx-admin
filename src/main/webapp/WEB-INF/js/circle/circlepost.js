@@ -61,7 +61,7 @@ $('#post-summernote').on('summernote.change', function (content, $editable) {
                 success: function (result) {
                     console.log(result);
                     if (result.state == 200) {
-                        $('#post-summernote').summernote('insertImage', "http://image.tiyujia.com/" + result.data, 'img');
+                        $('#post-summernote').summernote('insertImage', "http://image.tiyujia.com/" + result.data.url, 'img');
                     } else {
                         $.Popup({
                             confirm: false,
@@ -422,7 +422,7 @@ $("#circleSure").click(function (e) {
                 contentType: false,
                 success: function (data) {
                     console.log(data);
-                    $("input[name=imageUrl]").val(data.data);
+                    $("input[name=imageUrl]").val(data.data.url);
                     $("#PostRecommend").ajaxSubmit({
                         type: "post",
                         dateType: "json",

@@ -125,35 +125,17 @@ var operateEvent = {
 
         });
     },
-    'click .authPass': function (e, value, row, index) {// 审核通过
+    'click .audit': function (e, value, row, index) {// 审核通过
         // 弹出审核页面
-        $.ajax({
-            url: "/v1/appUser/authPass",
-            data: {id: row.id},
-            type: "GET",
-            dataType: 'json',
-            success: function () {
-                $('#app_user_table').bootstrapTable("refresh");
-            },
-            error: function (er) {
-                alert("操作失败");
-            }
-        });
-    },
-    'click .authFail': function (e, value, row, index) {// 审核不通过
-        // 弹出审核页面
-        $.ajax({
-            url: "/v1/appUser/authFail",
-            data: {id: row.id},
-            type: "GET",
-            dataType: 'json',
-            success: function () {
-                $('#app_user_table').bootstrapTable("refresh");
-            },
-            error: function (er) {
-                alert("操作失败");
-            }
-        });
+        $("#authId").val(row.id);
+        $("#authName").val(row.authName);
+        $("#authIDCard").val(row.authIDCard);
+        $("#authMob").val(row.authMob);
+        $("#cardImg").attr("src",row.authFile);
+        $("#authInfo").val(row.authInfo);
+        $("#workImg").attr("src",row.authFileWork);
+        $(".live_index").hide();
+        $("#appUserAuth").show();
     },
     'click .mask': function (e, value, row, index) {
         $.Popup({
