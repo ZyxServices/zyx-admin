@@ -31,9 +31,9 @@ function initTable() {
         dataField: "data",
         queryParams: function queryParams(params) {   //设置查询参数
             var param = {
-                //pageNumber: params.pageNumber,
-                //pageSize: params.pageSize,
-                searchText: params.searchText
+                pageNumber: params.pageNumber,
+                pageSize: params.pageSize,
+                keyword: params.searchText
                 //sortName: params.sortName
                 //sortOrder: params.sortOrder
             };
@@ -116,12 +116,8 @@ function initTable() {
                         async: false,
                         type: "post",
                         success: function (meg) {
-                            console.log(meg)
-                            if (meg.state == 200) {
-                                $table.bootstrapTable("refresh");
-                            }
+                            meg.state == 200?$table.bootstrapTable("refresh"):''
                         }
-
                     })
                 });
             }
@@ -172,7 +168,6 @@ var operateEventssssss = {
             btnIndex = '<input type="radio" value="1" name="area" onclick="liveSequence(1)" checked="checked">首页',
             btnStand = ' <input type="radio" value="2" name="area" onclick="liveSequence(2)" >看台';
         if (liveSequence1 == 0 && liveSequence2 == 0) {
-            console.log(liveSequence1)
             $.Popup({
                 confirm: false,
                 template: '推荐位置已满，请到banner推荐列表中删除，再重新上传推荐！！！'
@@ -182,13 +177,12 @@ var operateEventssssss = {
             btnIndex = '首页位置已满'
             judgeBtn = 2
         } else if (liveSequence2 == 0) {
-            console.log(123)
             btnStand = '看台位置已满'
         }
-        if (judgeBtn == 2) {
-            alert(judgeBtn)
-            btnStand = ' <input type="radio" value="2" name="area" onclick="liveSequence(2)" checked="checked">看台';
-        }
+        judgeBtn == 2? btnStand = ' <input type="radio" value="2" name="area" onclick="liveSequence(2)" checked="checked">看台':''
+        //if (judgeBtn == 2) {
+        //    btnStand = ' <input type="radio" value="2" name="area" onclick="liveSequence(2)" checked="checked">看台';
+        //}
         html += '   <form class="form-horizontal" role="form" id="recommend" enctype="multipart/form-data">            '
         html += '	<div class="container-fluid">';
         html += '	    <div class="row">';
@@ -247,7 +241,7 @@ var operateEventssssss = {
                     contentType: false,
                     success: function (result) {
                         if (result.state == 200) {
-                            $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="' + result.data + '" >');
+                            $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="' + result.data.url + '" >');
                             liveDeva()
                         } else {
                             removeEvent('upload')

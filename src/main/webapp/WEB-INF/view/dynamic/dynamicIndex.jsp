@@ -1,7 +1,6 @@
 <%-- Created by IntelliJ IDEA. User: 文楷 Date: 2016/7/15 Time: 14:10 To change this template use File | Settings | File Templates. --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-
 <head>
 <head>
     <title>动态操作</title>
@@ -43,7 +42,7 @@
                 <div class="live_manage">
                     <h3 style="margin: 0;display: inline-block">直播管理 </h3>
                     <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
-                    <button class="fl btn btn-default ">自动/手动排序优先</button>
+                    <button class="fl btn btn-default " onclick="initTable()">自动/手动排序优先</button>
                     <button id="remove" class="btn btn-danger" style="margin-left: 10px" disabled>
                         <i class="glyphicon glyphicon-remove"></i> 批量删除
                     </button>
@@ -55,14 +54,10 @@
                 <h5 style="margin: 0;display: inline-block">图文动态 </h5>
                 <h5 style="margin: 0;display: inline-block">语音动态 </h5>
                 <HR style="border:1 dashed #987cb9;margin: 5px 0" width="100%" color=rgb(51, 51, 51) SIZE=1>
-
-
-                <%--<button onclick="upload()" class="release btn btn-danger">--%>
-                <%--发布--%>
                 <%--</button>--%>
                 <div id="demo" class="demo">
                     <form class="form-horizontal" role="form" id="createDynamicForm" enctype="multipart/form-data">
-                        <div class="control-group form-group">
+                        <div class="control-group form-group officeUser">
                             <label class="control-label " style="width: 100px;margin-right: 10px;text-align: left">选择官方账户户</label>
                             <div class="">
                                 <select id="choiceUser" name="createId" class="span3">
@@ -82,14 +77,14 @@
                         <div style="margin-top: 10px" id="imagesWrap">
                             <img id="images" src="">
                         </div>
-                        <button id="DynamicSubmit" onclick="operateEventssssss.createDynamic(this)" style="display: none" class=" btn btn-danger">发布</button>
+                        <button id="DynamicSubmit" onclick="operateEventssssss.createDynamic(this,0)" style="display: none" class=" btn btn-danger">发布</button>
                         <%--<button onclick="operateEventssssss.createDynamic(this)" class="dynamicEdit btn btn-danger">--%>
                         <%--确认修改--%>
                         <%--</button>--%>
                     </form>
                     <span>图片内容</span>
+                    <div id="dynamicImg"></div>
                 </div>
-
             </div>
             <div class="dynamicPreview">
                 <%--<h3 style="margin: 0;display: inline-block">动态预览</h3>--%>

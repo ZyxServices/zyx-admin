@@ -29,6 +29,12 @@ function initTable() {
         queryParamsType: "undefined",
         dataField: "data",
         silentSort: false,
+        //detailView:true,
+        //detailFormatter:function(index, row, c){
+        //    var html = [];
+        //            html.push('<p>nimabi</p>');
+        //    return html.join('');
+        //},
         queryParams: function queryParams(params) {   //设置查询参数
             var param = {
                 start: params.pageNumber - 1,
@@ -54,6 +60,7 @@ function initTable() {
             {field: 'createTime', title: '发布时间', formatter: timeFormat},
             //{field: 'type', title: '动态类型', sortable: true, formatter: typeFormatter},
             {field: 'appUserAuthDto.authInfo', title: '认证标签', sortable: true},
+            {field: 'topicContent', title: '内容简介', sortable: true,width:200},
             {field: 'zanCounts', title: '点赞量', sortable: true},
             {field: 'commentCounts', title: '评论量', sortable: true},
             {field: 'overTime', title: '分享量', sortable: true},
@@ -88,19 +95,9 @@ function initTable() {
         })
     });
     /*查询创建活动时需要选择的用户*/
-    $.ajax({
-        url: "/v1/appUser/list/official/all",
-        type: 'get',
-        dataType: 'json',
-        success: function (result) {
-            var user = '';
-            result.rows.forEach(function (item, i) {
-                user += '<option value=' + item.id + ' >' + item.nickname + '</option>'
-            })
-            $("#choiceUser").append(user)
-        }
-    });
+
 }
+
 // 认证状态格式化
 function authFormatter(value) {
     return value == 2 ? "已认证" : value == 1 ? "待审核" : value == 3 ? "认证失败" : "未认证";
@@ -113,10 +110,8 @@ function typeFormatter(data) {
 function btnState(row) {
     return row.state == 0 ? "屏蔽" : row.state == -1 ? "撤销删除" : "取消屏蔽";
 }
-
-
 //操作
-function operateFormatter(value, row, index) {
+ function operateFormatter(value, row, index) {
     return row.state == -1 ? [
         '<a class="unRemove p5" href="javascript:void(0)" title="unRemove">撤销删除</a>',
     ].join('') : ['<a class="preview p5"   href="javascript:void(0)" title="preview">预览</a>',
@@ -165,6 +160,7 @@ function devDynamic() {
         }
     })
 }
+
 //操作事件eidt
 var operateEventssssss = {
     'click .preview': function (e, value, row, index) {
@@ -179,16 +175,44 @@ var operateEventssssss = {
         }
     },
     'click .edit': function (e, value, row, index) {
-        //alert('You click like action, row: ' + JSON.stringify(row));
         $(".create_liveType").addClass('on')
         $(".live_index").addClass('hide')
         $('.create_liveType h3').html('编辑动态')
+        $('#dynamicContent').attr('name','topic_content')
+        $('#imgFileUrl').attr('name','img_url')
         $('#dynamicContent').val(row.topicContent)
+        $('#imgFileUrl').val(row.imgUrl)
+        $('#createDynamicForm').append('<input style="display: none" name="id"  value='+row.id+'>')
+        $(".officeUser").hide()
+        $('#dynamicImg').empty()
+        $('#DynamicSubmit').removeAttr("onclick")
+        $('#DynamicSubmit').click(function(){
+            operateEventssssss.createDynamic(this,1)
+        })
+        var strArry = row.imgUrl.split(',');
+        for (var i in strArry) {
+            strArry!=0?$('#dynamicImg').append('<img style="max-width: 20%" class="dynamicImg'+i+'"  src=' + 'http://image.tiyujia.com/' + strArry[i] + '>'):''
+            $('.dynamicImg'+i+'').bind("click", {index:  i}, clickHandler);
+        }
+        function clickHandler(event) {
+            var index = event.data.index;
+            var item = strArry[index];
+            var t;
+            $('.dynamicImg'+index+'').remove()
+            var s = $('#imgFileUrl').val().indexOf(item);
+             console.log(s)
+             console.log($('#imgFileUrl').val())
+             console.log(item)
+             $('#imgFileUrl').val($('#imgFileUrl').val().replace(',,',','))
+            if(s==0){
+                $('#imgFileUrl').val($('#imgFileUrl').val().replace(item+',',''))
+                $('#imgFileUrl').val($('#imgFileUrl').val().replace(item,''))
+            }else(
+                item==''?$('#imgFileUrl').val($('#imgFileUrl').val().replace(',,',',')):$('#imgFileUrl').val($('#imgFileUrl').val().replace(','+item,''))
+            )
+        }
         $(".dynamicEdit").addClass('on')
         $(".release").addClass('hide')
-        //$("input[name='imgFile']")
-        var createId = $("#choiceUser option:selected").val()
-
     },
     'click .recommend': function (e, value, row, index) {
         var html = ''
@@ -332,9 +356,12 @@ var operateEventssssss = {
         var delUrl = "/concern/setState?id=" + row.id + "&state=0";
         ajaxPlugins.unRemove(delUrl, 'dynamic_table', 'DELETE')
     },
-    createDynamic: function (obj) {
+    createDynamic: function (obj,eidt) {
+        var url;
+        eidt==true? url='/concern/edit':url='/concern/createConcern'
+        console.log(eidt)
         $("#createDynamicForm").ajaxForm({
-            url: '/concern/createConcern',
+            url: url,
             type: 'post',
             dataType: 'json',
             success: function (result) {
@@ -346,10 +373,16 @@ var operateEventssssss = {
                         template: result.errmsg
                     })
                 }
+            },
+            error:function(){
+                $.Popup({
+                    confirm: false,
+                    template: '上传失败,请检查内容是否填写完整'
+                })
             }
         })
-
     }
+
 };
 
 //查看Url事件
@@ -360,8 +393,29 @@ var seeUrl = {
 }
 $(function () {
     $(".create_live").click(function () {
-        $(".create_liveType").addClass('on')
-        $(".live_index").addClass('hide')
+        $.ajax({
+            url: "/v1/appUser/list/official/all",
+            type: 'get',
+            dataType: 'json',
+            success: function (result) {
+                console.log(result)
+                if(result.rows.length==0){
+                    $.Popup({
+                        confirm:false,
+                        template:'官方账户为空，请添加官方账户再继续!!!'
+                    })
+                }else{
+                    $(".create_liveType").addClass('on')
+                    $(".live_index").addClass('hide')
+                    var user = '';
+                    result.rows.forEach(function (item, i) {
+                        user += '<option value=' + item.id + ' >' + item.nickname + '</option>'
+                    })
+                    $("#choiceUser").append(user)
+                }
+
+            }
+        });
     })
     ///*创建中type=file的样式处理*/
     //$('input[id=imgFile]').change(function () {
@@ -408,7 +462,7 @@ $(function () {
         del: true,                    // 是否可以删除文件
         finishDel: false,  				  // 是否在上传文件完成后删除预览
         fileNumber: 9,
-        mustUpload:function(){
+        mustUpload: function () {
             $('#DynamicSubmit').click();
         },
         /* 外部获得的回调接口 */
@@ -420,7 +474,8 @@ $(function () {
             if (JSON.parse(response).state == 902) {
                 alert(JSON.parse(response).errmsg)
             } else {
-                $('#imgFileUrl').val($('#imgFileUrl').val() + JSON.parse(response).data + ',')
+                console.log(JSON.parse(response).data.url)
+                $('#imgFileUrl').val()!=''?$('#imgFileUrl').val($('#imgFileUrl').val()+',' + JSON.parse(response).data):$('#imgFileUrl').val(JSON.parse(response).data.url)
             }
         },
         onFailure: function (file) {                    // 文件上传失败的回调方法
@@ -429,7 +484,7 @@ $(function () {
         },
         onComplete: function (responseInfo) {           // 上传完成的回调方法
             $('#DynamicSubmit').click();
-            $('#imgFileUrl').val($('#imgFileUrl').val().substr(0, $('#imgFileUrl').val().length - 1))
+            $('#imgFileUrl').val($('#imgFileUrl').val().substr(0, $('#imgFileUrl').val().length))
         }
     });
     $(window).resize(function () {
