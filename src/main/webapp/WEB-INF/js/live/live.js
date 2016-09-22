@@ -144,9 +144,7 @@ function operateFormatter(value, row, index) {
         '<a class="remove p5" href="javascript:void(0)">删除</a>'
     ].join('');
 }
-//序列查詢初始化
-var liveSequence1 = liveSequence(1),
-    liveSequence2 = liveSequence(2);
+
 //直播操作事件
 var operateEventssssss = {
     //预览
@@ -166,7 +164,10 @@ var operateEventssssss = {
         var html = '',
             judgeBtn = 1,
             btnIndex = '<input type="radio" value="1" name="area" onclick="liveSequence(1)" checked="checked">首页',
-            btnStand = ' <input type="radio" value="2" name="area" onclick="liveSequence(2)" >看台';
+            btnStand = ' <input type="radio" value="2" name="area" onclick="liveSequence(2)" >看台',
+            liveSequence1 = liveSequence(1),
+            liveSequence2 = liveSequence(2);
+        //序列查詢初始化
         if (liveSequence1 == 0 && liveSequence2 == 0) {
             $.Popup({
                 confirm: false,
@@ -328,6 +329,7 @@ function liveDeva() {
         },
         error: function (res) {
             removeEvent('upload')
+            console.log(res)
             $.Popup({
                 confirm: false,
                 template: '推荐上传失败（请检查内容是否填写完整！！！）'
