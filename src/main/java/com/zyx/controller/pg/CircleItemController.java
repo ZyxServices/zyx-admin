@@ -2,6 +2,7 @@ package com.zyx.controller.pg;
 
 import com.zyx.service.pg.CircleItemService;
 import com.zyx.service.pg.CircleService;
+import com.zyx.utils.MapUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,9 @@ import org.springframework.web.servlet.view.AbstractView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author XiaoWei
@@ -32,9 +35,26 @@ public class CircleItemController {
     @ApiOperation(value = "帖子列表", notes = "帖子列表")
     public ModelAndView findByPager(@RequestParam(value = "start") Integer start,
                                     @RequestParam(value = "pageSize") Integer pageSize,
-                                    @RequestParam(value = "circleId", required = false) Integer circleId) {
+                                    @RequestParam(value = "circleId", required = false) Integer circleId,
+                                    @RequestParam(value = "searchText", required = false) String searchText) {
 
-        Map<String, Object> map = circleItemService.findByPager(start, pageSize, circleId);
+         Map<String, Object> map = null;
+        if (Objects.equals(searchText, null) || Objects.equals(searchText, "")) {
+            map = circleItemService.findByPager(start, pageSize, circleId);
+        } else {
+            map = circleItemService.search(start, pageSize, searchText);
+        }
+        AbstractView jsonView = new MappingJackson2JsonView();
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
+
+    @RequestMapping(value = "search", method = RequestMethod.GET)
+    @ApiOperation(value = "模糊查询帖子", notes = "根据帖子标题，发布人搜索帖子")
+    ModelAndView search(@RequestParam(value = "start") Integer start,
+                        @RequestParam(value = "pageSize") Integer pageSize,
+                        @RequestParam(value = "searchText") String searchText) {
+        Map<String, Object> map = circleItemService.search(start, pageSize, searchText);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
@@ -81,16 +101,6 @@ public class CircleItemController {
         return new ModelAndView(jsonView);
     }
 
-    @RequestMapping(value = "search", method = RequestMethod.POST)
-    @ApiOperation(value = "模糊查询帖子", notes = "根据帖子标题，发布人搜索帖子")
-    ModelAndView search(@RequestParam(value = "start") Integer start,
-                        @RequestParam(value = "pageSize") Integer pageSize,
-                        @RequestParam(value = "searchText") String searchText) {
-        Map<String, Object> map = circleItemService.search(start, pageSize, searchText);
-        AbstractView jsonView = new MappingJackson2JsonView();
-        jsonView.setAttributesMap(map);
-        return new ModelAndView(jsonView);
-    }
 
     @RequestMapping(value = "edit", method = RequestMethod.POST)
     @ApiOperation(value = "编辑帖子", notes = "编辑帖子")
