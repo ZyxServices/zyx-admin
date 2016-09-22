@@ -2,6 +2,7 @@ package com.zyx.mapper;
 
 import com.zyx.model.Circle;
 import com.zyx.model.CircleItem;
+import com.zyx.model.vo.CircleItemVo;
 import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 public interface CircleItemMapper extends Mapper<CircleItem> {
 
-    List<CircleItem> findByPager(@Param(value = "start") Integer start, @Param(value = "end") Integer end, @Param("circleId") Integer circleId);
+    List<CircleItemVo> findByPager(@Param(value = "start") Integer start, @Param(value = "end") Integer end, @Param("circleId") Integer circleId);
 
     CircleItem findOne(@Param(value = "id") Integer id);
 

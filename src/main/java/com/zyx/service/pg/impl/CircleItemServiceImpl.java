@@ -4,6 +4,7 @@ import com.zyx.constants.Constants;
 import com.zyx.constants.PgConstants;
 import com.zyx.mapper.CircleItemMapper;
 import com.zyx.model.CircleItem;
+import com.zyx.model.vo.CircleItemVo;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.CircleItemService;
 import com.zyx.utils.MapUtils;
@@ -30,9 +31,10 @@ public class CircleItemServiceImpl extends BaseServiceImpl<CircleItem> implement
 
     @Override
     public Map<String, Object> findByPager(Integer start, Integer pageSize, Integer circleId) {
-        Optional.ofNullable(start).orElse(0);
-        Optional.ofNullable(pageSize).orElse(0);
-        List<CircleItem> circleItems = circleItemMapper.findByPager(start * pageSize, pageSize, circleId);
+        start=Optional.ofNullable(start).orElse(0);
+        pageSize=Optional.ofNullable(pageSize).orElse(0);
+        circleId=Optional.ofNullable(circleId).orElse(-1);
+        List<CircleItemVo> circleItems = circleItemMapper.findByPager(start * pageSize, pageSize, circleId);
         Map<String, Object> mapCount = new HashMap<>();
         mapCount.put("total", circleItemMapper.searchCount(circleId));
         Map<String, Object> map = MapUtils.buildSuccessMap(Constants.SUCCESS, PgConstants.PG_ERROR_CODE_34000_MSG, circleItems, mapCount);

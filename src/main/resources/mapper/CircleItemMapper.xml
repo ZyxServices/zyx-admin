@@ -57,7 +57,7 @@
         INNER JOIN circle ON circle_item.circle_id = circle.id
         INNER JOIN circle_type ON circle.circle_type = circle_type.id
         WHERE circle_item.state != -1
-        <if test="circleId != null">
+        <if test="circleId != null and circleId != -1 ">
             AND circle_id=#{circleId}
         </if>
         ORDER BY create_time DESC
@@ -112,7 +112,7 @@
     </update>
 
     <select id="queryIsDeva" parameterType="java.lang.Integer" resultType="boolean">
-        SELECT NOT ISNULL(id) as isDeva FROM devaluation WHERE model = 4 AND model_id = #{id}
+        SELECT (case when count(id) > 0 then 1 else 0 end) as isDeva FROM devaluation WHERE model = 4 AND model_id = #{id}
     </select>
 
 </mapper>
