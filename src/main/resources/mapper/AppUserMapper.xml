@@ -77,6 +77,14 @@
         SELECT count(id) FROM user_auth WHERE user_id = #{user_id}
     </select>
 
+    <select id="queryAppUserByName" parameterType="java.util.List" resultType="java.lang.String">
+        SELECT nickname FROM user WHERE id IN
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
     <update id="updateAppUserByPrimaryKey" parameterType="com.zyx.parm.appUser.AppUserCreateParam">
         update user set modify_time = #{modifyTime}
         <if test="phone != null and phone != ''">
