@@ -181,7 +181,7 @@
                                 <input type="hidden" name="imageUrl" id="imageUrl">
                                 <input id="lefile" type="file" class="hideInput" name="imageR">
                                 <a class="btn btn-default" href="javascript:void (0)" id="photoCover" onclick="$('input[id=lefile]').click();">选择图片</a>
-                                <div style="margin-top: 10px" id="imagesWrap">
+                                <div style="margin-top: 10px" id="imagesWrap" class="showImg">
                                     <img id="images" src="">
                                 </div>
                             </div>

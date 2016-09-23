@@ -153,7 +153,8 @@
                         <div class="controls col-xs-5">
                             <input type="hidden" name="authFile" id="authFileStr">
                             <input id="authFile" type="file" class="hideInput" name="imagePhoto">
-                            <a class="btn btn-default" href="javascript:void (0)" id="authPhotoCover" onclick="$('input[id=authFile]').click();">选择文件</a>
+                            <a class="btn btn-default" href="javascript:void (0)" id="authPhotoCover"
+                               onclick="$('input[id=authFile]').click();">选择文件</a>
                             <span class="help-inline required">*</span>
                             <div id="imagesAuthWrap" class="authImg margin-top-10">
                                 <img id="cardImg" src="">
@@ -177,7 +178,8 @@
                         <div class="controls">
                             <input type="hidden" name="authFileWork" id="authFileWork">
                             <input id="workFile" type="file" class="hideInput">
-                            <a class="btn btn-default" href="javascript:void (0)" id="workPhotoCover" onclick="$('input[id=workFile]').click();">选择文件</a>
+                            <a class="btn btn-default" href="javascript:void (0)" id="workPhotoCover"
+                               onclick="$('input[id=workFile]').click();">选择文件</a>
                             <div id="imagesWorkWrap" class="authImg margin-top-10">
                                 <img id="workImg" src="">
                                 <span class="help-inline">示例：</span><img src="../../images/example.jpg">
@@ -232,6 +234,12 @@
     </div>
 </div>
 <!-- 用户推荐结束 -->
+<div class="modal fade hide" id="upload" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-body">
+        <p id="uploadContent"></p>
+    </div>
+</div>
+
 <jsp:include page="../public/common-footer.jsp"/>
 </body>
 <%--<script type="text/javascript" src="../../js/uploadImg/zyUpload.js"></script>--%>
