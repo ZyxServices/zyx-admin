@@ -162,6 +162,7 @@ $(function () {
         checkboxHeader: "true",
         sortable: true,           //是否启用排序
         strictSearch: true,
+        contentType: "application/x-www-form-urlencoded",
         height: 500,            //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
         uniqueId: "id",           //每一行的唯一标识，一般为主键列
         search: true,
@@ -450,8 +451,9 @@ function operate(value, row, index) {
 
 var operateEvents = {
     'click .edit': function (e, value, row, index) {
+        userList();
         $("#activityEndTime").attr({'disabled': false});
-        $("#signEndTime").attr({'disabled': false})
+        $("#signEndTime").attr({'disabled': false});
         $("#listType").html("编辑");
         queryActivityById(row.id, 0);
         $("#createModify").show();
@@ -666,13 +668,8 @@ function queryActivityById(id, type) {
 function timeFormat(data) {
     return new Date(data).format("yyyy-mm-dd HH:MM:ss")
 }
-function createActivity() {
-    $("#listType").html("创建");
-    $("#photoCover").html("选择文件");
-    $("#createModify").show();
-    $("#activityList").hide();
-    $("#images").attr({'src': ''});
-    $("#avtivityId").val('');
+
+function userList(){
     /*查询创建活动时需要选择的用户*/
     $.ajax({
         url: "/v1/appUser/list/official/all",
@@ -686,6 +683,15 @@ function createActivity() {
             $("#choiceUser").append(user)
         }
     });
+}
+function createActivity() {
+    userList();
+    $("#listType").html("创建");
+    $("#photoCover").html("选择文件");
+    $("#createModify").show();
+    $("#activityList").hide();
+    $("#images").attr({'src': ''});
+    $("#avtivityId").val('');
     $('#activity-summernote').summernote('reset');
     var html = '<label class="checkbox"><input type="checkbox" name="memberString" value="手机号码">手机号码</label><label class="checkbox"><input type="checkbox" name="memberString" value="姓名">姓名</label> <label class="checkbox"><input type="checkbox" name="memberString" value="身份证号码">身份证号码</label> <label class="checkbox"><input name="memberString" type="checkbox" value="性别">性别</label> <label class="checkbox"><input name="memberString" type="checkbox" value="年龄">年龄</label> <label class="checkbox"><input name="memberString" type="checkbox" value="地址">地址</label> <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>'
     $("#template").html(html);

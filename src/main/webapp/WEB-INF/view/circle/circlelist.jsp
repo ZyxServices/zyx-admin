@@ -210,7 +210,7 @@
                         <div class="control-group form-group">
                             <label class="control-label">头像</label>
                             <div class="controls  col-xs-6">
-                                <div id="imgWrap">
+                                <div id="imgWrap" class="showImg">
                                     <input type="hidden" name="imgFile">
                                     <input type="hidden" id="imgFile" name="headImgUrl">
                                     <input id="lefile" type="file" name="file" class="hideInput">

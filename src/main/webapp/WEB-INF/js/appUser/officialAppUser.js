@@ -81,7 +81,7 @@ function operateFormatter(value, row, index) {
     }else if(row.authenticate == 2){
         _html.push('<a class="p5" href="javascript:void(0)" title="Authentication">已认证</a>');
     }else if(row.authenticate == 3){
-        _html.push('<a class="p5" href="javascript:void(0)" title="Authentication">认证失败,再次申请</a>');
+        _html.push('<a class="Authentication p5" href="javascript:void(0)" title="Authentication">再次申请</a>');
     }else{
         _html.push('<a class="Authentication p5" href="javascript:void(0)" title="Authentication">申请认证</a>');
     }
@@ -105,6 +105,10 @@ $(function () {
                 validators: {
                     notEmpty: {
                         message: '身份证不能为空'
+                    },
+                    regexp: {
+                        regexp: /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/,
+                        message: '请输入正确的身份证号码'
                     }
                 }
             },'authMob': {
@@ -245,6 +249,8 @@ $("#authButton").click(function () {
         contentType: false,
         beforeSend: function () {
             /*传图片之前做验证*/
+            $("#uploadContent").html("提交审核中，请稍后...");
+            $("#upload").modal('show');
             return $("#authForm").data('bootstrapValidator').isValid();
         },
         success: function (result) {
@@ -256,7 +262,7 @@ $("#authButton").click(function () {
                     $.ajax({
                         url: '/v1/upload/file',
                         type: 'post',
-                        data: formData,
+                        data: formWorkData,
                         processData: false,
                         contentType: false,
                         success: function (result) {
@@ -305,7 +311,7 @@ function authFormSubmit() {
 
         },
         complete:function () {
-
+            $("#upload").modal('hide');
         },
         success: function (result) {
             if (result.state && result.state == 200) {
