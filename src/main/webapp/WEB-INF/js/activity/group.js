@@ -57,7 +57,7 @@ $(function () {
         sidePagination: "server",
         contentType: "application/x-www-form-urlencoded",
         method: "post",
-        queryParamsType: "limit",
+        queryParamsType: "undefined",
         queryParams: queryParams,
         responseHandler: groupFromData
     })
@@ -84,9 +84,9 @@ function initActivity() {
         height: 500,            //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
         uniqueId: "id",           //每一行的唯一标识，一般为主键列
         search: true,
+        queryParamsType: "undefined",
         sidePagination: "server",
         method: "get",
-        queryParamsType: "limit",
         queryParams: queryParams,
         responseHandler: choiceFromData,
         onLoadSuccess:function () {
@@ -130,8 +130,8 @@ function initActivity() {
 /*activity-group-table列表请求的数据*/
 function queryParams(params) {
     return {
-        pageDataNum: params.limit,
-        pageNum: params.offset + 1,
+        pageDataNum: params.pageSize,
+        pageNum: params.pageNumber,
         search: params.search
     };
 }
@@ -408,9 +408,7 @@ function createGroupActivity() {
     $("#listType").html('创建');
     $("#activityGroupCreate").show();
     $("#activityGroupList").hide();
-    // $("#imgWrap").hide();
     $("#combinationId").val("");
-    // $('#choice-activity-table').bootstrapTable('refresh');
     $('#group-form').bootstrapValidator('resetForm', true);   /*将表格清空*/
     $('#group-form').bootstrapValidator('addField', 'imageR',{
         validators: {
