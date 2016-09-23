@@ -134,10 +134,15 @@ var operateEvents = {
                                 confirm: false,
                                 template: '删除成功'
                             })
-                            /*if(){
-
-                            }*/
-                            $('#homepage-list-table').bootstrapTable('refresh');
+                            if(row.area == STANDAREA){
+                                $('#stand-list-table').bootstrapTable('refresh');
+                            }else if(row.area == CIRCLEAREA && row.model == CIRCLEMODEL){
+                                $('#circle-list-table').bootstrapTable('refresh');
+                            }else if(row.area == CIRCLEAREA && row.model == POSTMODEL){
+                                $('#post-list-table').bootstrapTable('refresh');
+                            }else{
+                                $('#homepage-list-table').bootstrapTable('refresh');
+                            }
                         } else {
                             $.Popup({
                                 confirm: false,
