@@ -2,10 +2,10 @@ package com.zyx.service.pg.impl;
 
 import com.zyx.constants.Constants;
 import com.zyx.constants.PgConstants;
+import com.zyx.mapper.AppUserMapper;
 import com.zyx.mapper.CircleMapper;
 import com.zyx.mapper.DevaMapper;
 import com.zyx.model.Circle;
-import com.zyx.model.Devaluation;
 import com.zyx.model.vo.CircleVo;
 import com.zyx.service.BaseServiceImpl;
 import com.zyx.service.pg.CircleService;
@@ -25,6 +25,8 @@ import java.util.*;
 public class CircleServiceImpl extends BaseServiceImpl<Circle> implements CircleService {
     @Resource
     private CircleMapper circleMapper;
+    @Resource
+    private AppUserMapper appUserMapper;
 
     @Resource
     private DevaMapper devaMapper;
@@ -38,6 +40,18 @@ public class CircleServiceImpl extends BaseServiceImpl<Circle> implements Circle
         Optional.ofNullable(start).orElse(0);
         Optional.ofNullable(pageSize).orElse(0);
         List<CircleVo> circles = circleMapper.findByPager(start * pageSize, pageSize);
+        circles.forEach(e ->{
+            if(e.getAdminIds() != null){
+                String[] strings = e.getAdminIds().split(",");
+                List<Integer> integers = new ArrayList<>();
+                for (String string : strings) {
+                    integers.add(Integer.valueOf(string));
+                }
+                List<String> strings1 = appUserMapper.queryAppUserByName(integers);
+                String replace = strings1.toString().replace("[","").replace("]","");
+                e.setAdminIds(replace);
+            }
+        });
         Integer count = circleMapper.searchCount();
         Map<String, Object> countHas = new HashMap<>();
         countHas.put("total", count);

@@ -14,6 +14,7 @@
     <meta content="体育家-用户操作" name="description"/>
     <meta content="" name="author"/>
     <jsp:include page="../public/common-styles.jsp"/>
+    <link rel="stylesheet" href="../../css/tiyujia/style.css" />
 </head>
 <body class="page-header-fixed">
 <jsp:include page="../public/header.jsp"/>
@@ -87,7 +88,7 @@
                     <div class="control-group form-group">
                         <label class="control-label">手持身份证照片</label>
 
-                        <div class="controls col-xs-5">
+                        <div class="controls col-xs-5 showImg">
                             <img id="cardImg" src="">
                         </div>
                     </div>
@@ -104,7 +105,7 @@
 
                     <div class="control-group">
                         <label class="control-label">工作证明照片</label>
-                        <div class="controls">
+                        <div class="controls showImg">
                             <img id="workImg" src="">
                         </div>
                     </div>

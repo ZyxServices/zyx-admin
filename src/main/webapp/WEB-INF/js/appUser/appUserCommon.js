@@ -128,12 +128,14 @@ var operateEvent = {
     'click .audit': function (e, value, row, index) {// 审核通过
         // 弹出审核页面
         $("#authId").val(row.id);
-        $("#authName").val(row.authName);
-        $("#authIDCard").val(row.authIDCard);
-        $("#authMob").val(row.authMob);
-        $("#cardImg").attr("src",row.authFile);
-        $("#authInfo").val(row.authInfo);
-        $("#workImg").attr("src",row.authFileWork);
+        $("#authName").val(row.appUserAuthDto.authName);
+        $("#authIDCard").val(row.appUserAuthDto.authIDCard);
+        $("#authMob").val(row.appUserAuthDto.authMob);
+        $("#cardImg").attr("src","http://image.tiyujia.com/" + row.appUserAuthDto.authFile);
+        $("#authInfo").val(row.appUserAuthDto.authInfo);
+        if(row.appUserAuthDto.authFileWork){
+            $("#workImg").attr("src","http://image.tiyujia.com/" + row.appUserAuthDto.authFileWork);
+        }
         $(".live_index").hide();
         $("#appUserAuth").show();
     },

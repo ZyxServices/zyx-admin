@@ -193,7 +193,7 @@
                   <a class="btn btn-default" href="javascript:void (0)" id="photoCover" onclick="$('input[id=lefile]').click();">选择文件</a>
                   <span class="help-inline required">*</span>
                 </div>
-                <div style="margin-top: 10px" id="imagesWrap">
+                <div style="margin-top: 10px" id="imagesWrap" class="showImg">
                   <img id="images" src="">
                 </div>
               </div>

@@ -188,7 +188,7 @@ function postFormData(res) {
                 dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'" target="view_window"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>'
             }
             dataObj.sequence = item.sequence;
-            dataObj.activation = item.activation == 1? "是":"否";
+            dataObj.state = item.state == 1 ? "是":"否";
             dataArray.push(dataObj)
         });
         return {
@@ -208,7 +208,7 @@ function circleFormData(res) {
             dataObj.sequence = item.sequence;
             dataObj.area = item.area;
             dataObj.model = item.model;
-            dataObj.activation = item.activation == 1? "是":"否";
+            dataObj.state = item.state == 1 ? "是":"否";
             dataArray.push(dataObj)
         });
         return {

@@ -25,7 +25,7 @@ $("#confirmDeva").click(function () {
             confirmDevaSubmit();
         }else{
             if($("#bannerForm").data('bootstrapValidator').isValid()){
-                confirmDevaSubmit(area);
+                confirmDevaSubmit(AREA);
             }
         }
     }else{
@@ -38,12 +38,16 @@ $("#confirmDeva").click(function () {
             processData: false,
             contentType: false,
             beforeSend: function () {
-                return $("#bannerForm").data('bootstrapValidator').isValid();
+                if(ISVALID){
+                    return true;
+                }else{
+                    return $("#bannerForm").data('bootstrapValidator').isValid();
+                }
             },
             success:function (result) {
                 if(result.state == 200){
                     $("#imageUrl").val(result.data.url);
-                    confirmDevaSubmit(area);
+                    confirmDevaSubmit(AREA);
                 }
             }
         })
@@ -58,7 +62,7 @@ function confirmDevaSubmit(area) {
             if (result.state && result.state == 200) {
                 $.Popup({
                     confirm: false,
-                    template: result.successmsg
+                    template: "修改成功"
                 });
                 $("#bannerList").show();
                 $("#bannerEdit").hide();
@@ -134,10 +138,15 @@ var operateEvents = {
                                 confirm: false,
                                 template: '删除成功'
                             })
-                            /*if(){
-
-                            }*/
-                            $('#homepage-list-table').bootstrapTable('refresh');
+                            if(row.area == STANDAREA){
+                                $('#stand-list-table').bootstrapTable('refresh');
+                            }else if(row.area == CIRCLEAREA && row.model == CIRCLEMODEL){
+                                $('#circle-list-table').bootstrapTable('refresh');
+                            }else if(row.area == CIRCLEAREA && row.model == POSTMODEL){
+                                $('#post-list-table').bootstrapTable('refresh');
+                            }else{
+                                $('#homepage-list-table').bootstrapTable('refresh');
+                            }
                         } else {
                             $.Popup({
                                 confirm: false,
@@ -150,7 +159,6 @@ var operateEvents = {
         })
     },
     'click .edit':function (e, value, row, index) {/*编辑有不是公用的部分*/
-        console.log(row);
         AREA = row.area;
         MODEL = row.model;
         $("#bannerList").hide();
@@ -361,7 +369,6 @@ function bannerSequence(model, area, currentSequence, idObj) {
                 if(currentSequence){
                     bannerNoArr.push(currentSequence);
                 }
-                console.log(result.data)
                 if(result.data != ''){
                     bannerNoArr = bannerNoArr.sort(function(a,b){/*排序*/
                         return a - b

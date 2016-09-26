@@ -20,6 +20,8 @@ public interface AppUserMapper extends Mapper<AppUser> {
 
     int unMaskByPrimaryKey(Integer id);
 
+    List<String> queryAppUserByName(List<Integer> userId);
+
     List<AppUserListDto> queryAppUserList(QueryAppUserParam param);
 
     int selectAppUserListCount(QueryAppUserParam param);
