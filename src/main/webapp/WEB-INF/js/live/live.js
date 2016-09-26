@@ -89,6 +89,7 @@ function initTable() {
         columns: [{field: '', checkbox: true, align: 'center', valign: 'middle'},
             {field: 'id', title: 'id', align: 'center', valign: 'middle'},
             {field: 'lab', title: '类别'},
+            {field: 'description', title: '备注'},
             {
                 field: 'operation',
                 title: '操作',
@@ -116,7 +117,7 @@ function initTable() {
                         async: false,
                         type: "post",
                         success: function (meg) {
-                            meg.state == 200?$table.bootstrapTable("refresh"):''
+                            meg.state == 200 ? $table.bootstrapTable("refresh") : ''
                         }
                     })
                 });
@@ -149,7 +150,6 @@ function operateFormatter(value, row, index) {
 var operateEventssssss = {
     //预览
     'click .preview': function (e, value, row, index) {
-
         $.ajax({
             url: "/v1/live/lab/update?id=7&lab=171&desc=11171&state=1",
             async: false,
@@ -163,10 +163,10 @@ var operateEventssssss = {
     'click .recommend': function (e, value, row, index) {
         var html = '',
             judgeBtn = 1,
-            btnIndex = '<input type="radio" value="1" name="area" onclick="liveSequence(1)" checked="checked">首页',
-            btnStand = ' <input type="radio" value="2" name="area" onclick="liveSequence(2)" >看台',
             liveSequence1 = liveSequence(1),
-            liveSequence2 = liveSequence(2);
+            liveSequence2 = liveSequence(2)
+            btnIndex = '<input type="radio" value="1" name="area" onclick="liveSequence(1)" checked="checked">首页',
+            btnStand = ' <input type="radio" value="2" name="area" onclick="liveSequence(2)" >看台';
         //序列查詢初始化
         if (liveSequence1 == 0 && liveSequence2 == 0) {
             $.Popup({
@@ -180,7 +180,7 @@ var operateEventssssss = {
         } else if (liveSequence2 == 0) {
             btnStand = '看台位置已满'
         }
-        judgeBtn == 2? btnStand = ' <input type="radio" value="2" name="area" onclick="liveSequence(2)" checked="checked">看台':''
+        judgeBtn == 2 ? btnStand = ' <input type="radio" value="2" name="area" onclick="liveSequence(2)" checked="checked">看台' : ''
         //if (judgeBtn == 2) {
         //    btnStand = ' <input type="radio" value="2" name="area" onclick="liveSequence(2)" checked="checked">看台';
         //}
@@ -234,29 +234,35 @@ var operateEventssssss = {
                 $("#upload").modal({backdrop: 'static', keyboard: false});
                 var formData = new FormData();
                 formData.append('imgFile', $('#Cover')[0].files[0]);
-                $.ajax({
-                    url: '/v1/upload/file',//后台文件上传接口
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (result) {
-                        if (result.state == 200) {
-                            $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="' + result.data.url + '" >');
+                if ($('#Cover')[0].files.length > 0) {
+                    $.ajax({
+                        url: '/v1/upload/file',//后台文件上传接口
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (result) {
+                            if (result.state == 200) {
+                                $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="' + result.data.url + '" >');
+                                liveDeva()
+                            } else {
+                                removeEvent('upload')
+                                $.Popup({
+                                    confirm: false,
+                                    template: result.successmsg
+                                })
+                            }
+                        },
+                        error: function (res) {
+                            $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="" >');
                             liveDeva()
-                        } else {
-                            removeEvent('upload')
-                            $.Popup({
-                                confirm: false,
-                                template: result.successmsg
-                            })
                         }
-                    },
-                    error: function (res) {
-                        $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="" >');
-                        liveDeva()
-                    }
-                });
+                    });
+                } else {
+                    $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="" >');
+                    liveDeva()
+                }
+
             }
         })
         liveSequence(judgeBtn)
@@ -443,6 +449,7 @@ var operateEventclass = {
             type: 'post',
             dataType: 'json',
             success: function (result) {
+                console.log(result)
                 if (result.state == 23002) {
                     $.Popup({
                         confirm: false,

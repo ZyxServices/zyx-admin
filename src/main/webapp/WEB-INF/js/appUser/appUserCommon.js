@@ -221,6 +221,35 @@ var operateEvent = {
         $(".create_liveType").hide();
         $("#appUserAuth").show();
         $("#authId").val(row.id);
+    },
+    'click .resetPwd': function (e, value, row, index) {
+        $.Popup({
+            title: '密码重置',
+            template: '确定密码重置？重置后密码为：123456！',
+            saveEvent: function () {
+                $.ajax({
+                    url: "/v1/appUser/resetPwd",
+                    async: false,
+                    type: "post",
+                    data: {phone: row.phone},
+                    dateType: "json",
+                    success: function (result) {
+                        if (result.state == 200) {
+                            $.Popup({
+                                confirm: false,
+                                template: '密码重置成功，请重新登录'
+                            });
+                            $('#app_user_table').bootstrapTable("refresh");
+                        } else {
+                            $.Popup({
+                                confirm: false,
+                                template: '重置失败，请刷新后再次尝试'
+                            })
+                        }
+                    }
+                });
+            }
+        })
     }
 };
 function beginDeva() {

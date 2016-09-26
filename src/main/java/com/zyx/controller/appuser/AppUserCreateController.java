@@ -122,4 +122,22 @@ public class AppUserCreateController {
 //        jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
+
+    @RequestMapping(value = "/resetPwd", method = RequestMethod.POST)
+    @ApiOperation(value = "APP用户接口-重置密码", notes = "APP用户接口-重置密码")
+    public ModelAndView resetPwd(@RequestParam String phone) {
+        AbstractView jsonView = new MappingJackson2JsonView();
+        Map<String, Object> map;
+        try {
+            AppUserCreateParam param = new AppUserCreateParam();
+            param.setPhone(phone);
+            param.setPassword(CipherUtil.generatePassword("7788119"));
+            map = appUserService.resetAppUser(param);
+        } catch (Exception e) {
+            e.printStackTrace();
+            map = Constants.MAP_500;
+        }
+        jsonView.setAttributesMap(map);
+        return new ModelAndView(jsonView);
+    }
 }

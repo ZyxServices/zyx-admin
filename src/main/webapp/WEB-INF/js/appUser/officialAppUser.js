@@ -317,14 +317,12 @@ function authFormSubmit() {
             if (result.state && result.state == 200) {
                 $.Popup({
                     confirm: false,
-                    template: '认证资料提交成功，请等待审核',
-                    cancelEvent:function () {
-                        $(".live_index").show();
-                        $(".create_liveType").hide();
-                        $("#appUserAuth").hide();
-                        $('#app_user_table').bootstrapTable('refresh');
-                    }
+                    template: '认证资料提交成功，请等待审核'
                 });
+                $(".live_index").show();
+                $(".create_liveType").hide();
+                $("#appUserAuth").hide();
+                $('#app_user_table').bootstrapTable('refresh');
             } else {
                 $.Popup({
                     confirm: false,
