@@ -114,6 +114,7 @@
                 <div class="margin-bottom-25">
                     <button id="authSuccess" class="btn">审核通过</button>
                     <button class="btn" id="authFail">审核不通过</button>
+                    <button type="button" class="btn" onclick="window.location.reload();">返回</button>
                 </div>
 
             </div>

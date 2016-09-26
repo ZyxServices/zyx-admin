@@ -121,6 +121,9 @@ function homepageFormData(res) {
             dataObj.area = item.area;
             dataObj.model = item.model;
             dataObj.createTime = item.createTime;
+            if(item.devaModelVo == null) {
+                return true;
+            }
             if(item.imageUrl){
                 var imgUrl = item.imageUrl.split(".");
                 dataObj.image = '<a href="http://image.tiyujia.com/'+item.imageUrl+'" target="view_window"><img src="http://image.tiyujia.com/'+imgUrl[0]+'__30x30.'+imgUrl[1]+'"></a>';

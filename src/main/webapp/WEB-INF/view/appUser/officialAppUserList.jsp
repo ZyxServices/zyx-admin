@@ -156,7 +156,7 @@
                             <a class="btn btn-default" href="javascript:void (0)" id="authPhotoCover"
                                onclick="$('input[id=authFile]').click();">选择文件</a>
                             <span class="help-inline required">*</span>
-                            <div id="imagesAuthWrap" class="authImg margin-top-10">
+                            <div id="imagesAuthWrap" class="showImg margin-top-10">
                                 <img id="cardImg" src="">
                                 <span class="help-inline">示例：</span><img src="../../images/example.jpg">
                             </div>
@@ -180,7 +180,7 @@
                             <input id="workFile" type="file" class="hideInput">
                             <a class="btn btn-default" href="javascript:void (0)" id="workPhotoCover"
                                onclick="$('input[id=workFile]').click();">选择文件</a>
-                            <div id="imagesWorkWrap" class="authImg margin-top-10">
+                            <div id="imagesWorkWrap" class="showImg margin-top-10">
                                 <img id="workImg" src="">
                                 <span class="help-inline">示例：</span><img src="../../images/example.jpg">
                             </div>

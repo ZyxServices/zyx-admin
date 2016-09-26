@@ -72,6 +72,7 @@ function operateFormatter(value, row, index) {
     } else {
         _html.push('<a class="mask p5" href="javascript:void(0)" title="mask">屏蔽</a>');
     }
+    _html.push('<a class="resetPwd p5" href="javascript:void(0)" title="resetPwd">重置密码</a>');
     return _html.join('');
 }
 $(".create_live").click(function () {

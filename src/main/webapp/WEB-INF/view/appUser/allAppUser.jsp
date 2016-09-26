@@ -143,7 +143,7 @@
                 <div class="controls"><span class="help-inline" id="devaUserNickname"></span></div>
             </div>
             <div class="control-group"><label class="control-label">用户头像</label>
-                <div class="controls showImg"><img id="devaUserAvatar" src="http://image.tiyujia.com/group1/M00/00/00/052YyFeIeIqASfONAAAJDB3enOc610.jpg" style="width:200px;height:200px;">
+                <div class="controls showImg"><img id="devaUserAvatar" src="" style="width:200px;height:200px;">
                 </div>
             </div>
             <div class="control-group"><label class="control-label">用户推荐banner号</label>
