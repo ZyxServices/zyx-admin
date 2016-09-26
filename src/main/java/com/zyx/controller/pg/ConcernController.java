@@ -51,8 +51,15 @@ public class ConcernController {
 
     @RequestMapping(value = "concernList", method = RequestMethod.GET)
     @ApiOperation(value = "动态列表", notes = "动态列表")
-    public ModelAndView findConcern(@RequestParam(value = "start") Integer page, @RequestParam(value = "pageSize") Integer pageSize) {
-        Map<String, Object> map = concernService.findByPager(page, pageSize);
+    public ModelAndView findConcern(@RequestParam(value = "start") Integer page,
+                                    @RequestParam(value = "pageSize") Integer pageSize,
+                                    @RequestParam(value = "searchText", required = false) String searchText) {
+        Map<String, Object> map = null;
+        if (Objects.equals(searchText, null) || Objects.equals(searchText, "")) {
+            map = concernService.findByPager(page, pageSize);
+        } else {
+            map = concernService.search(page, pageSize, searchText);
+        }
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
@@ -96,15 +103,15 @@ public class ConcernController {
         return new ModelAndView(jsonView);
     }
 
-    @RequestMapping(value = "search", method = RequestMethod.POST)
-    @ApiOperation(value = "动态模糊查询", notes = "动态模糊查询")
-    ModelAndView search(@RequestParam(value = "start") Integer start,
-                        @RequestParam(value = "pageSize") Integer pageSize,
-                        @RequestParam(value = "searchText") String searchText) {
-        Map<String, Object> map = concernService.search(start, pageSize, searchText);
-        AbstractView jsonView = new MappingJackson2JsonView();
-        jsonView.setAttributesMap(map);
-        return new ModelAndView(jsonView);
-    }
+//    @RequestMapping(value = "search", method = RequestMethod.POST)
+//    @ApiOperation(value = "动态模糊查询", notes = "动态模糊查询")
+//    ModelAndView search(@RequestParam(value = "start") Integer start,
+//                        @RequestParam(value = "pageSize") Integer pageSize,
+//                        @RequestParam(value = "searchText") String searchText) {
+//        Map<String, Object> map = concernService.search(start, pageSize, searchText);
+//        AbstractView jsonView = new MappingJackson2JsonView();
+//        jsonView.setAttributesMap(map);
+//        return new ModelAndView(jsonView);
+//    }
 
 }

@@ -93,6 +93,6 @@
     FROM
 	concern
     INNER JOIN `user` ON concern.user_id = `user`.id
-    WHERE `user`.nickname LIKE CONCAT('%','${userName}','%' )  ORDER BY create_time DESC  LIMIT #{start},#{end}
+    WHERE (`user`.nickname LIKE CONCAT('%','${userName}','%' ) OR `concern`.`topic_content` LIKE CONCAT('%','${userName}','%')) ORDER BY create_time DESC  LIMIT #{start},#{end}
     </select>
 </mapper>

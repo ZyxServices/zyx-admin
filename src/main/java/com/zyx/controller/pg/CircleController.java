@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.annotation.Resource;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author XiaoWei
@@ -38,8 +39,14 @@ public class CircleController {
     @RequestMapping(value = "circleList", method = RequestMethod.GET)
     @ApiOperation(value = "圈子列表", notes = "圈子列表")
     public ModelAndView findCircleList(@RequestParam(value = "start") Integer start,
-                                       @RequestParam(value = "pageSize") Integer pageSize) {
-        Map<String, Object> map = circleService.findByPager(start, pageSize);
+                                       @RequestParam(value = "pageSize") Integer pageSize,
+                                       @RequestParam(value = "searchText",required = false)String searchText) {
+        Map<String, Object> map = null;
+        if (Objects.equals(searchText, null) || Objects.equals(searchText, "")) {
+            map=circleService.findByPager(start, pageSize);
+        }else{
+            map = circleService.search(start, pageSize, searchText);
+        }
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
@@ -106,14 +113,14 @@ public class CircleController {
 //        return new ModelAndView(jsonView);
 //    }
 
-    @RequestMapping(value = "search", method = RequestMethod.POST)
-    @ApiOperation(value = "圈子列表搜索", notes = "圈子列表搜索")
-    public ModelAndView search(@RequestParam(value = "start") Integer start, @RequestParam(value = "pageSize") Integer pageSize, @RequestParam(value = "searchText") String searchText) {
-        Map<String, Object> map = circleService.search(start, pageSize, searchText);
-        AbstractView jsonView = new MappingJackson2JsonView();
-        jsonView.setAttributesMap(map);
-        return new ModelAndView(jsonView);
-    }
+//    @RequestMapping(value = "search", method = RequestMethod.POST)
+//    @ApiOperation(value = "圈子列表搜索", notes = "圈子列表搜索")
+//    public ModelAndView search(@RequestParam(value = "start") Integer start, @RequestParam(value = "pageSize") Integer pageSize, @RequestParam(value = "searchText") String searchText) {
+//        Map<String, Object> map = circleService.search(start, pageSize, searchText);
+//        AbstractView jsonView = new MappingJackson2JsonView();
+//        jsonView.setAttributesMap(map);
+//        return new ModelAndView(jsonView);
+//    }
 
     @RequestMapping(value = "edit", method = RequestMethod.POST)
     @ApiOperation(value = "编辑圈子信息", notes = "编辑圈子")
