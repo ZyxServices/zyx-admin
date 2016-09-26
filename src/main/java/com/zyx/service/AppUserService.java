@@ -204,4 +204,18 @@ public class AppUserService extends BaseServiceImpl<AppUser> {
             return AppUserConstants.MAP_500;
         }
     }
+
+    public Map<String,Object> resetAppUser(AppUserCreateParam param) {
+        try {
+            int result = appUserMapper.resetAppUser(param);
+            if (result >= 1) {
+                return MapUtils.buildSuccessMap(AppUserConstants.SUCCESS, AppUserConstants.MSG_SUCCESS, null);
+            } else {
+                return MapUtils.buildErrorMap(AppUserConstants.ERROR_APP_USER_5003, AppUserConstants.ERROR_APP_USER_5003_MSG);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return AppUserConstants.MAP_500;
+        }
+    }
 }

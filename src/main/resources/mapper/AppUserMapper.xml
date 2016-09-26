@@ -183,4 +183,8 @@
         </if>
     </select>
 
+    <update id="resetAppUser" parameterType="com.zyx.parm.appUser.AppUserCreateParam">
+        UPDATE `user` SET modify_time = #{modifyTime}, password = #{password} WHERE phone = #{phone}
+    </update>
+
 </mapper>
