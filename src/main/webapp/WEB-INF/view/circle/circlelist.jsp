@@ -96,8 +96,10 @@
                     </h3>
 
                     <div class="row-fluid margin-bottom-10">
-                        <a class="btn btn-default" href="javaScript:void(0)">自动/手动排序优先</a>
-                        <a class="btn btn-default" href="javaScript:void(0)"> 批量删除 </a>
+                        <button class="fl btn btn-default ">自动/手动排序优先</button>
+                        <button id="remove" class="btn btn-danger" style="margin-left: 10px" disabled>
+                            <i class="glyphicon glyphicon-remove"></i> 批量删除
+                        </button>
                     </div>
                 </div>
 
