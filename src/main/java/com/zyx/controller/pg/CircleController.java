@@ -1,10 +1,13 @@
 package com.zyx.controller.pg;
 
+import com.zyx.constants.Constants;
+import com.zyx.service.deva.DevaService;
 import com.zyx.service.pg.CircleService;
 import com.zyx.utils.FileUploadUtils;
 import com.zyx.utils.ImagesVerifyUtils;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,7 +31,8 @@ public class CircleController {
 
     @Resource
     private CircleService circleService;
-
+    @Autowired
+    DevaService devaService;
     /**
      * 圈子列表
      *
@@ -89,6 +93,7 @@ public class CircleController {
     @ApiOperation(value = "删除圈子", notes = "逻辑删除圈子")
     public ModelAndView deleteOne(@RequestParam(value = "id") Integer id) {
         Map<String, Object> map = circleService.deleteOne(id);
+        devaService.cascadeDelete(Constants.MODEL_LIVE,id);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);

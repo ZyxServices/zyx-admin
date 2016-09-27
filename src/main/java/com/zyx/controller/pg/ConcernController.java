@@ -1,11 +1,13 @@
 package com.zyx.controller.pg;
 
 import com.zyx.constants.Constants;
+import com.zyx.service.deva.DevaService;
 import com.zyx.service.pg.ConcernService;
 import com.zyx.utils.CharUtil;
 import com.zyx.utils.FileUploadUtils;
 import com.zyx.utils.MapUtils;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,7 +36,8 @@ public class ConcernController {
 
     @Resource
     private ConcernService concernService;
-
+    @Autowired
+    DevaService devaService;
     @RequestMapping(value = "createConcern", method = RequestMethod.POST)
     @ApiOperation(value = "创建动态", notes = "创建动态")
     public ModelAndView createConcern(
@@ -78,6 +81,7 @@ public class ConcernController {
     @ApiOperation(value = "删除动态", notes = "逻辑删除")
     public ModelAndView deleteOne(@RequestParam(value = "id") Integer id) {
         Map<String, Object> map = concernService.deleteOne(id);
+        devaService.cascadeDelete(Constants.MODEL_LIVE,id);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
