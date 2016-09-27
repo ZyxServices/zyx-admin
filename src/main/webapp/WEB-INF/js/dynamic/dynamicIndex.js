@@ -372,7 +372,7 @@ var operateEventssssss = {
             dataType: 'json',
             success: function (result) {
                 if (result.state == 200) {
-                    window.location.reload();
+                    //window.location.reload();
                 } else {
                     $.Popup({
                         confirm: false,
@@ -481,7 +481,7 @@ $(function () {
                 alert(JSON.parse(response).errmsg)
             } else {
                 console.log(JSON.parse(response).data.url)
-                $('#imgFileUrl').val() != '' ? $('#imgFileUrl').val($('#imgFileUrl').val() + ',' + JSON.parse(response).data) : $('#imgFileUrl').val(JSON.parse(response).data.url)
+                $('#imgFileUrl').val() != '' ? $('#imgFileUrl').val($('#imgFileUrl').val() + ',' + JSON.parse(response).data.url) : $('#imgFileUrl').val(JSON.parse(response).data.url)
             }
         },
         onFailure: function (file) {                    // 文件上传失败的回调方法
