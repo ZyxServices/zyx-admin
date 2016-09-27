@@ -1,9 +1,12 @@
 package com.zyx.controller.pg;
 
+import com.zyx.constants.Constants;
+import com.zyx.service.deva.DevaService;
 import com.zyx.service.pg.CircleItemService;
 import com.zyx.service.pg.CircleService;
 import com.zyx.utils.MapUtils;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +33,8 @@ public class CircleItemController {
 
     @Resource
     private CircleItemService circleItemService;
-
+    @Autowired
+    DevaService devaService;
     @RequestMapping(value = "circleItemList", method = RequestMethod.GET)
     @ApiOperation(value = "帖子列表", notes = "帖子列表")
     public ModelAndView findByPager(@RequestParam(value = "start") Integer start,
@@ -86,6 +90,7 @@ public class CircleItemController {
     @ApiOperation(value = "删除某一条帖子", notes = "逻辑删除某一条帖子")
     public ModelAndView deleteOne(@RequestParam(value = "id") Integer id) {
         Map<String, Object> map = circleItemService.deleteOne(id);
+        devaService.cascadeDelete(Constants.MODEL_LIVE,id);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);

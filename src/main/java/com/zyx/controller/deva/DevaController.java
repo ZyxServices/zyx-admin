@@ -50,10 +50,10 @@ public class DevaController {
     ConcernService concernService;
     @Autowired
     AppUserService appUserService;
-    @Autowired
-    RedisTemplate<String, List<Devaluation>> innerDevaTemplate;
-    @Autowired
-    RedisTemplate<String, List<Integer>> innerDevaIdTemplate;
+//    @Autowired
+//    RedisTemplate<String, List<Devaluation>> innerDevaTemplate;
+//    @Autowired
+//    RedisTemplate<String, List<Integer>> innerDevaIdTemplate;
     @Resource
     private DevaService devaService;
 
@@ -139,7 +139,7 @@ public class DevaController {
         Devaluation deva = devaService.selectByKey(id);
         if (deva != null) {
             devaService.delete(id);
-            refreshDevas(deva.getArea(), deva.getModel());
+//            refreshDevas(deva.getArea(), deva.getModel());
             result.put(Constants.STATE, LiveConstants.SUCCESS);
         } else {
             result.put(Constants.STATE, LiveConstants.ERROR);
@@ -226,8 +226,8 @@ public class DevaController {
                     break;
             }
         }
-        innerDevaTemplate.delete(SystemConstants.MAKE_REDIS_INNER_DEVA + area + ":" + model);
-        innerDevaIdTemplate.delete(SystemConstants.MAKE_REDIS_INNER_DEVA_ID + area + ":" + model);
+//        innerDevaTemplate.delete(SystemConstants.MAKE_REDIS_INNER_DEVA + area + ":" + model);
+//        innerDevaIdTemplate.delete(SystemConstants.MAKE_REDIS_INNER_DEVA_ID + area + ":" + model);
         return list;
     }
 

@@ -104,4 +104,24 @@
         ORDER BY
         create_time desc
     </select>
+
+
+    <delete id="cascadeDelete" parameterType="com.zyx.parm.deva.DevaParam">
+        DELETE
+        from devaluation
+        where
+        1=1
+        <if test="area != null">
+            AND
+            area = #{area}
+        </if>
+        <if test="model != null">
+            AND
+            model = #{model}
+        </if>
+        <if test="modelId != null">
+            AND
+            model_id = #{modelId}
+        </if>
+    </delete>
 </mapper>

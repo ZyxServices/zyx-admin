@@ -24,7 +24,6 @@ public interface DevaService extends BaseService<Devaluation>{
      * @return
      */
     List<Devaluation> getDevas(Integer model);
-
     /**
      *
      * @param model
@@ -38,4 +37,6 @@ public interface DevaService extends BaseService<Devaluation>{
     List<Integer> getUsedSequence(Integer model, Integer area);
     List<Integer> selectModelIds(Integer area,Integer model);
 
+    void cascadeDelete(Integer area,Integer model,Integer modelId);
+    void cascadeDelete(Integer model,Integer modelId);
 }

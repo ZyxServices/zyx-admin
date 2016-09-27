@@ -1,7 +1,9 @@
 package com.zyx.controller.appuser;
 
+import com.zyx.constants.Constants;
 import com.zyx.parm.QueryAppUserParam;
 import com.zyx.service.AppUserService;
+import com.zyx.service.deva.DevaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +29,8 @@ public class AppUserQueryController {
 
     @Autowired
     AppUserService appUserService;
-
+    @Autowired
+    DevaService devaService;
     @RequestMapping(value = "/list/all", method = RequestMethod.GET)
     public ModelAndView list(@RequestParam Integer pageSize, @RequestParam Integer pageNumber, @RequestParam(required = false) String searchText, @RequestParam(required = false) String sortName, @RequestParam(required = false) String sortOrder) {
         AbstractView jsonView = new MappingJackson2JsonView();
@@ -100,6 +103,7 @@ public class AppUserQueryController {
     public ModelAndView del(@RequestParam Integer id) {
         AbstractView jsonView = new MappingJackson2JsonView();
         Map<String, Object> map = appUserService.del(id);
+        devaService.cascadeDelete(Constants.MODEL_LIVE,id);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }

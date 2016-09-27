@@ -69,4 +69,17 @@ public class DevaServiceImpl extends BaseServiceImpl<Devaluation> implements Dev
         param.setModel(model);
         return devaMapper.queryModelIds(param);
     }
+
+    @Override
+    public void cascadeDelete(Integer area,Integer model,Integer modelId) {
+        if(model==null||modelId==null)
+            return;
+
+        devaMapper.cascadeDelete(new DevaParam(area,model,modelId));
+    }
+
+    @Override
+    public void cascadeDelete(Integer model, Integer modelId) {
+        cascadeDelete(null,model,modelId);
+    }
 }

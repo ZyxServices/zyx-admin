@@ -3,8 +3,10 @@ package com.zyx.controller.activity;
 import com.zyx.constants.Constants;
 import com.zyx.model.Activity;
 import com.zyx.service.activity.ActivityService;
+import com.zyx.service.deva.DevaService;
 import com.zyx.utils.MapUtils;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,7 +37,8 @@ public class ActivityController {
 
     @Resource
     private ActivityService activityService;
-
+    @Autowired
+    DevaService devaService;
     @RequestMapping(value = "/release", method = RequestMethod.POST)
     @ApiOperation(value = "活动发布", notes = "活动发布")
     public ModelAndView release(@RequestParam(name = "userId", required = true) Integer userId,
@@ -179,6 +182,7 @@ public class ActivityController {
         AbstractView jsonView = new MappingJackson2JsonView();
 
         Map<String, Object> map = activityService.delActivity(id, delType);
+        devaService.cascadeDelete(Constants.MODEL_ACTIVITY,id);
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }
