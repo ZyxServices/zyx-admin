@@ -35,30 +35,17 @@ $(function () {
                     notEmpty: {
                         message: '请选择开始时间'
                     },
-                    /*date: {
-                     message: '请输入正确的日期格式,如:2016-01-01 00:00',
-                     format: 'YYYY-MM-DD h:m'
-                     },*/
                     callback: {
-                        message: '开始日期不能大于结束日期或者开始时间不能小于截止时间',
+                        message: '开始日期不能大于结束日期',
                         callback: function (value, validator, $field) {
                             var endValue = $('#activityEndTime').val();
-                            var lastValue = $('#signEndTime').val();
                             var endTime = new Date(endValue.replace("-", "/").replace("-", "/"));
                             var startTime = new Date(value.replace("-", "/").replace("-", "/"));
-                            var lastTime = new Date(lastValue.replace("-", "/").replace("-", "/"));
-                            if (endValue == '' && lastValue == '') {
+                            if (endValue == '') {
                                 return true;
-                            } else if (endValue == '' && lastValue != '') {
-                                validator.updateStatus('lastTime', 'VALID');
-                                return lastTime <= startTime;
-                            } else if (endValue != '' && lastValue == '') {
+                            }else if (endValue != '') {
                                 validator.updateStatus('endTime', 'VALID');
                                 return startTime <= endTime;
-                            } else if (endValue != '' && lastValue != '') {
-                                validator.updateStatus('endTime', 'VALID');
-                                validator.updateStatus('lastTime', 'VALID');
-                                return startTime <= endTime && lastTime <= startTime;
                             }
                         }
                     }
@@ -79,7 +66,7 @@ $(function () {
                         }
                     }
                 }
-            }, 'lastTime': {
+            }/*, 'lastTime': {
                 validators: {
                     notEmpty: {
                         message: '请选择活动截止时间'
@@ -95,7 +82,7 @@ $(function () {
                         }
                     }
                 }
-            }, 'memberString': {
+            }*/, 'memberString': {
                 validators: {
                     notEmpty: {
                         message: '必须填一个'
@@ -300,8 +287,8 @@ function activityRecommend() {
         type: 'post',
         dataType: 'json',
         beforeSubmit:function () {
-            $("uploadContent").html('推荐上传中...');
             $("#upload").modal('show');
+            $("#uploadContent").html('推荐上传中...');
             $("#activityRecommend").modal('hide');
         },
         complete:function () {
@@ -336,6 +323,9 @@ $("#czS").click(function () {
             processData: false,
             contentType: false,
             beforeSend: function () {
+                $("#upload").modal('show');
+                $("#uploadContent").html('创建中，请稍后...');
+                console.log($("#updateCreateFrom").data('bootstrapValidator').isValid());
                 /*传图片之前做验证*/
                 if ($("#examine").val() == 1) {
                     var desc = "";
@@ -349,6 +339,9 @@ $("#czS").click(function () {
                     $("#memberTemplate").val(desc);
                 }
                 return $("#updateCreateFrom").data('bootstrapValidator').isValid();
+            },
+            complete:function () {
+                $("#upload").modal('hide');
             },
             success: function (result) {
                 if (result.state == 200) {
@@ -375,6 +368,8 @@ $("#czS").click(function () {
                 contentType: false,
                 beforeSend: function () {
                     /*传图片之前做验证*/
+                    $("#upload").modal('show');
+                    $("#uploadContent").html('活动修改中，请稍后...');
                     if ($("#examine").val() == 1) {
                         var desc = "";
                         $("#template").find("input:checked").each(function (item) {
@@ -397,6 +392,8 @@ $("#czS").click(function () {
             })
         }else{
             if($("#updateCreateFrom").data('bootstrapValidator').isValid()){
+                $("#upload").modal('show');
+                $("#uploadContent").html('活动修改中，请稍后...');
                 updateCreateFrom('/v1/activity/update');
             }
         }
@@ -408,6 +405,9 @@ function updateCreateFrom(url) {
         url: url,
         type: 'post',
         dataType: 'json',
+        complete:function () {
+            $("#upload").modal('hide');
+        },
         success: function (result) {
             if (result.state && result.state == 200) {
                 $.Popup({
@@ -680,7 +680,7 @@ function userList(){
             result.rows.forEach(function (item, i) {
                 user += '<option value=' + item.id + '>' + item.nickname + '</option>'
             })
-            $("#choiceUser").append(user)
+            $("#choiceUser").html(user)
         }
     });
 }
@@ -693,11 +693,13 @@ function createActivity() {
     $("#images").attr({'src': ''});
     $("#avtivityId").val('');
     $('#activity-summernote').summernote('reset');
-    var html = '<label class="checkbox"><input type="checkbox" name="memberString" value="手机号码">手机号码</label><label class="checkbox"><input type="checkbox" name="memberString" value="姓名">姓名</label> <label class="checkbox"><input type="checkbox" name="memberString" value="身份证号码">身份证号码</label> <label class="checkbox"><input name="memberString" type="checkbox" value="性别">性别</label> <label class="checkbox"><input name="memberString" type="checkbox" value="年龄">年龄</label> <label class="checkbox"><input name="memberString" type="checkbox" value="地址">地址</label> <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>'
+    var html = '<label class="checkbox"><input type="checkbox" value="手机号码">手机号码</label><label class="checkbox"><input type="checkbox" value="姓名">姓名</label> <label class="checkbox"><input type="checkbox" value="身份证号码">身份证号码</label> <label class="checkbox"><input type="checkbox" value="性别">性别</label> <label class="checkbox"><input type="checkbox" value="年龄">年龄</label> <label class="checkbox"><input type="checkbox" value="地址">地址</label> <a href="javascript:void (0)" onclick="choiceMore()" id="addBtn">+</a>'
     $("#template").html(html);
     $("#userRequired").hide();
     $('#updateCreateFrom')[0].reset();
     $('#updateCreateFrom').data('bootstrapValidator').resetForm(true);
+    $("#maxPeople").val("999");
+    $('#updateCreateFrom').data('bootstrapValidator').validateField('maxPeople');
 }
 /*是否需要审核*/
 function isReviewed(obj) {

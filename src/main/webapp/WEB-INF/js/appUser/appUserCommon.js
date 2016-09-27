@@ -87,8 +87,6 @@ var operateEvent = {
         alert('You click like action, row: ' + JSON.stringify(row));
     },
     'click .edit': function (e, value, row, index) {
-        console.log('You click like action, row: ' + JSON.stringify(row));
-        console.log(row);
         $(".live_index").hide();
         $(".create_liveType").show();
         $("#nickname").val(row.nickname);
@@ -128,13 +126,15 @@ var operateEvent = {
     'click .audit': function (e, value, row, index) {// 审核通过
         // 弹出审核页面
         $("#authId").val(row.id);
-        $("#authName").val(row.appUserAuthDto.authName);
-        $("#authIDCard").val(row.appUserAuthDto.authIDCard);
-        $("#authMob").val(row.appUserAuthDto.authMob);
-        $("#cardImg").attr("src","http://image.tiyujia.com/" + row.appUserAuthDto.authFile);
-        $("#authInfo").val(row.appUserAuthDto.authInfo);
-        if(row.appUserAuthDto.authFileWork){
-            $("#workImg").attr("src","http://image.tiyujia.com/" + row.appUserAuthDto.authFileWork);
+        if(row.appUserAuthDto != null){
+            $("#authName").val(row.appUserAuthDto.authName);
+            $("#authIDCard").val(row.appUserAuthDto.authIDCard);
+            $("#authMob").val(row.appUserAuthDto.authMob);
+            $("#cardImg").attr("src","http://image.tiyujia.com/" + row.appUserAuthDto.authFile);
+            $("#authInfo").val(row.appUserAuthDto.authInfo);
+            if(row.appUserAuthDto.authFileWork){
+                $("#workImg").attr("src","http://image.tiyujia.com/" + row.appUserAuthDto.authFileWork);
+            }
         }
         $(".live_index").hide();
         $("#appUserAuth").show();
