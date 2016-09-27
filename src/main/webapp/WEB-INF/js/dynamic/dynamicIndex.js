@@ -60,7 +60,7 @@ function initTable() {
             {field: 'createTime', title: '发布时间', formatter: timeFormat},
             //{field: 'type', title: '动态类型', sortable: true, formatter: typeFormatter},
             {field: 'appUserAuthDto.authInfo', title: '认证标签', sortable: true},
-            {field: 'topicContent', title: '内容简介', sortable: true,width:200},
+            {field: 'topicContent', title: '内容简介', sortable: true, width: 200},
             {field: 'zanCounts', title: '点赞量', sortable: true},
             {field: 'commentCounts', title: '评论量', sortable: true},
             {field: 'overTime', title: '分享量', sortable: true},
@@ -111,7 +111,7 @@ function btnState(row) {
     return row.state == 0 ? "屏蔽" : row.state == -1 ? "撤销删除" : "取消屏蔽";
 }
 //操作
- function operateFormatter(value, row, index) {
+function operateFormatter(value, row, index) {
     return row.state == -1 ? [
         '<a class="unRemove p5" href="javascript:void(0)" title="unRemove">撤销删除</a>',
     ].join('') : ['<a class="preview p5"   href="javascript:void(0)" title="preview">预览</a>',
@@ -178,39 +178,40 @@ var operateEventssssss = {
         $(".create_liveType").addClass('on')
         $(".live_index").addClass('hide')
         $('.create_liveType h3').html('编辑动态')
-        $('#dynamicContent').attr('name','topic_content')
-        $('#imgFileUrl').attr('name','img_url')
+        $('#dynamicContent').attr('name', 'topic_content')
+        $('#imgFileUrl').attr('name', 'img_url')
         $('#dynamicContent').val(row.topicContent)
         $('#imgFileUrl').val(row.imgUrl)
-        $('#createDynamicForm').append('<input style="display: none" name="id"  value='+row.id+'>')
+        $('#createDynamicForm').append('<input style="display: none" name="id"  value=' + row.id + '>')
         $(".officeUser").hide()
         $('#dynamicImg').empty()
         $('#DynamicSubmit').removeAttr("onclick")
-        $('#DynamicSubmit').click(function(){
-            operateEventssssss.createDynamic(this,1)
+        $('#DynamicSubmit').click(function () {
+            operateEventssssss.createDynamic(this, 1)
         })
         var strArry = row.imgUrl.split(',');
         for (var i in strArry) {
-            strArry!=0?$('#dynamicImg').append('<img style="max-width: 20%" class="dynamicImg'+i+'"  src=' + 'http://image.tiyujia.com/' + strArry[i] + '>'):''
-            $('.dynamicImg'+i+'').bind("click", {index:  i}, clickHandler);
+            strArry != 0 ? $('#dynamicImg').append('<img style="max-width: 20%" class="dynamicImg' + i + '"  src=' + 'http://image.tiyujia.com/' + strArry[i] + '>') : ''
+            $('.dynamicImg' + i + '').bind("click", {index: i}, clickHandler);
         }
         function clickHandler(event) {
             var index = event.data.index;
             var item = strArry[index];
             var t;
-            $('.dynamicImg'+index+'').remove()
+            $('.dynamicImg' + index + '').remove()
             var s = $('#imgFileUrl').val().indexOf(item);
-             console.log(s)
-             console.log($('#imgFileUrl').val())
-             console.log(item)
-             $('#imgFileUrl').val($('#imgFileUrl').val().replace(',,',','))
-            if(s==0){
-                $('#imgFileUrl').val($('#imgFileUrl').val().replace(item+',',''))
-                $('#imgFileUrl').val($('#imgFileUrl').val().replace(item,''))
-            }else(
-                item==''?$('#imgFileUrl').val($('#imgFileUrl').val().replace(',,',',')):$('#imgFileUrl').val($('#imgFileUrl').val().replace(','+item,''))
+            console.log(s)
+            console.log($('#imgFileUrl').val())
+            console.log(item)
+            $('#imgFileUrl').val($('#imgFileUrl').val().replace(',,', ','))
+            if (s == 0) {
+                $('#imgFileUrl').val($('#imgFileUrl').val().replace(item + ',', ''))
+                $('#imgFileUrl').val($('#imgFileUrl').val().replace(item, ''))
+            } else(
+                item == '' ? $('#imgFileUrl').val($('#imgFileUrl').val().replace(',,', ',')) : $('#imgFileUrl').val($('#imgFileUrl').val().replace(',' + item, ''))
             )
         }
+
         $(".dynamicEdit").addClass('on')
         $(".release").addClass('hide')
     },
@@ -250,7 +251,7 @@ var operateEventssssss = {
         html += '	        <label class="col-xs-6 control-label ">推荐状态:</label>';
         html += '           <div class="controls">';
         html += '	            <label class="radio col-xs-4 ">';
-        html += '	              <input type="radio" value="1" name="state" > 激活';
+        html += '	              <input type="radio" value="1" name="state" checked="checked" > 激活';
         html += '	            </label>'
         html += '	            <label class="radio col-xs-4 ">';
         html += '	              <input type="radio" value="0" name="state"  > 未激活';
@@ -279,29 +280,34 @@ var operateEventssssss = {
                             $("#upload").modal({backdrop: 'static', keyboard: false});
                             var formData = new FormData();
                             formData.append('imgFile', $('#Cover')[0].files[0]);
-                            $.ajax({
-                                url: '/v1/upload/file',//后台文件上传接口
-                                type: 'POST',
-                                data: formData,
-                                processData: false,
-                                contentType: false,
-                                success: function (result) {
-                                    if (result.state == 200) {
-                                        $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="' + result.data + '" >');
-                                        devDynamic()
-                                    } else {
-                                        removeEvent('upload')
-                                        $.Popup({
-                                            confirm: false,
-                                            template: result.successmsg
-                                        })
+                            if ($('#Cover')[0].files.length > 0) {
+                                $.ajax({
+                                    url: '/v1/upload/file',//后台文件上传接口
+                                    type: 'POST',
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false,
+                                    success: function (result) {
+                                        if (result.state == 200) {
+                                            $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="' + result.data + '" >');
+                                            devDynamic()
+                                        } else {
+                                            removeEvent('upload')
+                                            $.Popup({
+                                                confirm: false,
+                                                template: result.successmsg
+                                            })
+                                        }
+                                    },
+                                    error: function (res) {
+                                        $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="" >');
+                                        devDynamic();
                                     }
-                                },
-                                error: function (res) {
-                                    $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="" >');
-                                    devDynamic();
-                                }
-                            });
+                                });
+                            } else {
+                                $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="" >');
+                                devDynamic()
+                            }
                         }
                     })
                     res.data.forEach(function (e) {
@@ -356,9 +362,9 @@ var operateEventssssss = {
         var delUrl = "/concern/setState?id=" + row.id + "&state=0";
         ajaxPlugins.unRemove(delUrl, 'dynamic_table', 'DELETE')
     },
-    createDynamic: function (obj,eidt) {
+    createDynamic: function (obj, eidt) {
         var url;
-        eidt==true? url='/concern/edit':url='/concern/createConcern'
+        eidt == true ? url = '/concern/edit' : url = '/concern/createConcern'
         console.log(eidt)
         $("#createDynamicForm").ajaxForm({
             url: url,
@@ -374,7 +380,7 @@ var operateEventssssss = {
                     })
                 }
             },
-            error:function(){
+            error: function () {
                 $.Popup({
                     confirm: false,
                     template: '上传失败,请检查内容是否填写完整'
@@ -399,12 +405,12 @@ $(function () {
             dataType: 'json',
             success: function (result) {
                 console.log(result)
-                if(result.rows.length==0){
+                if (result.rows.length == 0) {
                     $.Popup({
-                        confirm:false,
-                        template:'官方账户为空，请添加官方账户再继续!!!'
+                        confirm: false,
+                        template: '官方账户为空，请添加官方账户再继续!!!'
                     })
-                }else{
+                } else {
                     $(".create_liveType").addClass('on')
                     $(".live_index").addClass('hide')
                     var user = '';
@@ -475,7 +481,7 @@ $(function () {
                 alert(JSON.parse(response).errmsg)
             } else {
                 console.log(JSON.parse(response).data.url)
-                $('#imgFileUrl').val()!=''?$('#imgFileUrl').val($('#imgFileUrl').val()+',' + JSON.parse(response).data):$('#imgFileUrl').val(JSON.parse(response).data.url)
+                $('#imgFileUrl').val() != '' ? $('#imgFileUrl').val($('#imgFileUrl').val() + ',' + JSON.parse(response).data) : $('#imgFileUrl').val(JSON.parse(response).data.url)
             }
         },
         onFailure: function (file) {                    // 文件上传失败的回调方法
