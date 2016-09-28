@@ -19,4 +19,6 @@ public interface DevaMapper extends Mapper<Devaluation> {
      * @return
      */
     List<Integer> queryModelIds(DevaParam param);
+
+    public void cascadeDelete(DevaParam param);
 }

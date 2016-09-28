@@ -87,8 +87,8 @@
 
         <div class="row-fluid margin-bottom-10">
           <div class="span6">
-            <%--<a class="btn btn-default" href="<%=request.getContextPath()%>/activity/create">创建活动</a>--%>
             <a class="btn btn-default" href="javascript:void(0)" onclick="createActivity()">创建活动</a>
+            <a class="btn btn-default" href="javascript:void(0)">批量删除</a>
           </div>
         </div>
         <div class="row-fluid">
@@ -227,14 +227,6 @@
             </div>
 
             <div class="control-group form-group">
-              <label class="control-label">报名截止时间</label>
-              <div class="controls col-xs-5">
-                <input type="text" class="span6" id="signEndTime" disabled name="lastTime" placeholder="报名截止时间"/>
-                <span class="help-inline required">*</span>
-              </div>
-            </div>
-
-            <div class="control-group form-group">
               <label class="control-label">类型</label>
               <div class="controls col-xs-5">
                 <label class="radio"><input type="radio" name="type" checked value="1">线下活动</label>
@@ -245,6 +237,13 @@
             <hr>
 
             <h4>高级选项</h4>
+
+            <div class="control-group">
+              <label class="control-label">报名截止时间</label>
+              <div class="controls">
+                <input type="text" class="span6" id="signEndTime" name="lastTime" placeholder="报名截止时间"/>
+              </div>
+            </div>
 
             <div class="control-group form-group">
               <label class="control-label">人数限制</label>
@@ -405,7 +404,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="upload"  aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade hide" id="upload" aria-hidden="true" data-backdrop="static">
   <div class="modal-body">
     <p id="uploadContent"></p>
   </div>

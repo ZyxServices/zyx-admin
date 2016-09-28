@@ -2,6 +2,7 @@
  * Created by guochunyan on 2016/7/14.
  */
 //用户列表
+var $table = $('#circle-list-table');
 var firstopction = "<option value=''></option>";
 var userList = $.ajax({
     url: "/v1/appUser/list/all",
@@ -131,6 +132,7 @@ $(function () {
 
 
 //圈子表格数据
+
     $("#circle-list-table").bootstrapTable({
         type: 'get',
         url: ("../../circle/circleList"),
@@ -184,6 +186,11 @@ $(function () {
             {field: 'operation', title: '操作', align: 'center', events: operateEvent, formatter: circleFormatter}
         ]
     })
+    $table.on('check.bs.table uncheck.bs.table ' +
+    'check-all.bs.table uncheck-all.bs.table', function () {
+        $("#remove").prop('disabled', !$table.bootstrapTable('getSelections').length);
+        selections = getIdSelections();
+    });
 });
 var numberEvent = {
     'click .PostNumber': function (e, value, row, index) {
@@ -493,6 +500,24 @@ $("#RdSures").click(function () {
 
         })
     }
+})
+//批量删除
+$("#remove").click(function(){
+    var ids = getIdSelections().toString();
+    $.Popup({
+        template: '确认批量删除吗?',
+        saveEvent: function () {
+                var delUrl = '/circle/delete/' + ids;
+                $.ajax({
+                    url: delUrl,
+                    async: false,
+                    type: 'delete',
+                    success: function (meg) {
+                        meg.state == 200 ? $table.bootstrapTable("refresh") : ''
+                    }
+                })
+        }
+    })
 })
 
 

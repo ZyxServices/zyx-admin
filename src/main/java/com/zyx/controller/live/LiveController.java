@@ -1,10 +1,12 @@
 package com.zyx.controller.live;
 
 import com.zyx.common.enums.LiveLabEnum;
+import com.zyx.constants.Constants;
 import com.zyx.constants.LiveConstants;
 import com.zyx.model.LiveInfo;
 import com.zyx.model.LiveLab;
 import com.zyx.parm.live.LiveInfoParm;
+import com.zyx.service.deva.DevaService;
 import com.zyx.service.live.LiveInfoService;
 import com.zyx.service.live.LiveLabService;
 import com.zyx.vo.live.LiveInfoVo;
@@ -36,6 +38,8 @@ public class LiveController {
     LiveLabService liveLabService;
     @Autowired
     LiveInfoService liveInfoService;
+    @Autowired
+    DevaService devaService;
 
     @RequestMapping(path = "/lab/create", method = {RequestMethod.POST})
     @ApiOperation(value = "添加直播标签", notes = "直播-添加直播标签")
@@ -253,6 +257,7 @@ public class LiveController {
         Map<String, Object> attrMap = new HashMap<>();
         // 系统补全参数
         liveInfoService.delete(id);
+        devaService.cascadeDelete(Constants.MODEL_LIVE,id);
         attrMap.put(LiveConstants.STATE, LiveConstants.SUCCESS);
         AbstractView jsonView = new MappingJackson2JsonView();
         jsonView.setAttributesMap(attrMap);
