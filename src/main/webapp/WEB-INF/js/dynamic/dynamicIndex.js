@@ -200,9 +200,6 @@ var operateEventssssss = {
             var t;
             $('.dynamicImg' + index + '').remove()
             var s = $('#imgFileUrl').val().indexOf(item);
-            console.log(s)
-            console.log($('#imgFileUrl').val())
-            console.log(item)
             $('#imgFileUrl').val($('#imgFileUrl').val().replace(',,', ','))
             if (s == 0) {
                 $('#imgFileUrl').val($('#imgFileUrl').val().replace(item + ',', ''))
@@ -318,21 +315,21 @@ var operateEventssssss = {
         })
     },
     'click .Shield': function (e, value, row, index) {
-        var state, btnval, btn;
+        var state, btnval, btn,html;
         var btnclick = this
         switch (this.innerHTML) {
             case '屏蔽':
-                state = -2, btnval = '取消屏蔽';
+                state = -2, btnval = '取消屏蔽',html='确认屏蔽吗?';
                 break;
             case '取消屏蔽':
-                state = 0, btnval = '屏蔽';
+                state = 0, btnval = '屏蔽',html='确定取消屏蔽吗?';
                 break;
             case '恢复删除':
                 state = -1, btnval = '屏蔽';
                 break;
         }
         $.Popup({
-            template: '确认屏蔽吗?',
+            template: html,
             saveEvent: function () {
                 $.ajax({
                     url: "/concern/setState?id=" + row.id + "&state=" + state + "",
@@ -372,7 +369,7 @@ var operateEventssssss = {
             dataType: 'json',
             success: function (result) {
                 if (result.state == 200) {
-                    //window.location.reload();
+                    window.location.reload();
                 } else {
                     $.Popup({
                         confirm: false,

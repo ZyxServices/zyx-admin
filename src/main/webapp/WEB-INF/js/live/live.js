@@ -51,7 +51,7 @@ function initTable() {
             {field: 'type', title: '类别'},
             {field: 'title', title: '直播名称'},
             {field: 'userId', title: '直播发起人'},
-            {field: 'lab', title: '直播类型', sortable: true,formatter: labFormatter},
+            {field: 'lab', title: '直播类型', sortable: true, formatter: labFormatter},
             {field: 'dynamic', title: '直播状态', sortable: true, formatter: operateFormatterssssss},
             {field: 'start', title: '直播开始时间', sortable: true, formatter: timeFormat},
             {field: 'end', title: '直播结束时间', sortable: true, formatter: timeFormat},
@@ -149,8 +149,16 @@ function operateFormatter(value, row, index) {
         '<a class="remove p5" href="javascript:void(0)">删除</a>'
     ].join('');
 }
-
-//直播操作事件
+//直播分类操作按钮初始化
+function operateFormatterclass(value, row, index) {
+    return [
+        '<a class="edit p5"   href="javascript:void(0)" title="preview">编辑</a>',
+        '<a class="recommend p5" href="javascript:void(0)" title="recommend"> 推荐 </a>',
+        '<a class="Shield p5" href="javascript:void(0)" title="Shield">' + btnState(row) + '</a>',
+        '<a class="remove p5" href="javascript:void(0)" title="remove">删除</a>'
+    ].join('');
+}
+//直播列表操作事件
 var operateEventssssss = {
     //预览
     'click .preview': function (e, value, row, index) {
@@ -169,7 +177,7 @@ var operateEventssssss = {
             judgeBtn = 1,
             liveSequence1 = liveSequence(1),
             liveSequence2 = liveSequence(2)
-            btnIndex = '<input type="radio" value="1" name="area" onclick="liveSequence(1)" checked="checked">首页',
+        btnIndex = '<input type="radio" value="1" name="area" onclick="liveSequence(1)" checked="checked">首页',
             btnStand = ' <input type="radio" value="2" name="area" onclick="liveSequence(2)" >看台';
         //序列查詢初始化
         if (liveSequence1 == 0 && liveSequence2 == 0) {
@@ -238,7 +246,7 @@ var operateEventssssss = {
                 $("#upload").modal({backdrop: 'static', keyboard: false});
                 var formData = new FormData();
                 formData.append('imgFile', $('#Cover')[0].files[0]);
-                if ($('#Cover')[0].files.length >0) {
+                if ($('#Cover')[0].files.length > 0) {
                     $.ajax({
                         url: '/v1/upload/file',//后台文件上传接口
                         type: 'POST',
@@ -262,33 +270,31 @@ var operateEventssssss = {
                             liveDeva()
                         }
                     });
-                } else{
-                    $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="'+row.bgmUrl+'" >');
+                } else {
+                    $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="' + row.bgmUrl + '" >');
                     liveDeva()
                 }
-
-
             }
         })
         liveSequence(judgeBtn)
     },
     //屏蔽
     'click .Shield': function (e, value, row, index, obj) {
-        var state, btnval, btn, stateText, statetext;
+        var state, btnval, btn, stateText, statetext,html;
         var btnclick = this
         if (this.innerHTML == '屏蔽') {
-            //return new btnstate{
             state = 1,
-                btnval = '取消屏蔽',
-                stateText = '已屏蔽'
-
+            btnval = '取消屏蔽',
+            stateText = '已屏蔽',
+            html='确认屏蔽吗?'
         } else {
             state = 0;
             btnval = '屏蔽';
-            stateText = '正常'
+            stateText = '正常',
+            html='确认取消屏蔽吗?'
         }
         $.Popup({
-            template: '确认屏蔽吗?',
+            template: html,
             saveEvent: function () {
                 $.ajax({
                     url: "/v1/live/update?id=" + row.id + "&state=" + state + "",
@@ -318,6 +324,7 @@ var operateEventssssss = {
         ajaxPlugins.remove(delUrl, 'live_table', 'post');
     }
 };
+//直播推荐接口
 function liveDeva() {
     $.ajax({
         url: '/v1/deva/add',
@@ -340,7 +347,6 @@ function liveDeva() {
         },
         error: function (res) {
             removeEvent('upload')
-            console.log(res)
             $.Popup({
                 confirm: false,
                 template: '推荐上传失败（请检查内容是否填写完整！！！）'
@@ -348,7 +354,7 @@ function liveDeva() {
         }
     })
 }
-//序列查詢
+//直播推荐序列查詢
 function liveSequence(area) {
     var result;
     $('#hotSelect').empty()
@@ -366,17 +372,6 @@ function liveSequence(area) {
     })
     return result
 }
-
-//直播分类操作按钮初始化
-function operateFormatterclass(value, row, index) {
-    return [
-        '<a class="edit p5"   href="javascript:void(0)" title="preview">编辑</a>',
-        '<a class="recommend p5" href="javascript:void(0)" title="recommend"> 推荐 </a>',
-        '<a class="Shield p5" href="javascript:void(0)" title="Shield">' + btnState(row) + '</a>',
-        '<a class="remove p5" href="javascript:void(0)" title="remove">删除</a>'
-    ].join('');
-}
-
 //直播操作分类事件
 var operateEventclass = {
     'click .edit': function (e, value, row, index) {
@@ -397,31 +392,70 @@ var operateEventclass = {
 
     },
     'click .Shield': function (e, value, row, index) {
-        var state;
-        var btnval;
-        var btn;
+        var state, btnval, btn, stateText,html;
+        var btnclick = this
         if (this.innerHTML == '屏蔽') {
-            state = 0;
-            btnval = '取消屏蔽';
-
+            state = 1,
+                btnval = '取消屏蔽',
+                html='确认屏蔽吗?'
         } else {
-            state = 1;
+            state = 0;
             btnval = '屏蔽';
+                html='确认取消屏蔽吗?'
         }
-        $.ajax({
-            url: "/v1/live/lab/update?id=" + row.id + "&state=" + state + "",
-            async: false,
-            type: "post",
-            dateType: "json",
-            success: function (result) {
-                if (result.state == 200) {
-                    btn = btnval
-                } else {
-                    alert(result.successmsg)
-                }
+        $.Popup({
+            template: html,
+            saveEvent: function () {
+                $.ajax({
+                    url: "/v1/live/lab/update?id=" + row.id + "&lab="+row.state+"&state=" + state + "",
+                    async: false,
+                    type: "post",
+                    dateType: "json",
+                    success: function (result) {
+                        if (result.state == 200) {
+                            btn = btnval
+                        } else {
+                            alert(result.successmsg)
+                        }
+                        $('#editLive').bootstrapTable('refresh');
+                    }
+                })
+                btnclick.innerHTML = btn;
             }
         })
-        this.innerHTML = btn
+        //var state;
+        //var btnval;
+        //var btn;
+        //if (this.innerHTML == '屏蔽') {
+        //    state = 0;
+        //    btnval = '取消屏蔽';
+        //
+        //} else {
+        //    state = 1;
+        //    btnval = '屏蔽';
+        //}
+        //$.Popup({
+        //    template: '确认屏蔽吗?',
+        //    saveEvent: function () {
+        //        $.ajax({
+        //            url: "/v1/live/lab/update?id=" + row.id + "&state=" + state + "",
+        //            async: false,
+        //            type: "post",
+        //            dateType: "json",
+        //            success: function (result) {
+        //                if (result.state == 200) {
+        //                    btn = btnval
+        //                } else {
+        //                    alert(result.successmsg)
+        //                }
+        //            }
+        //        })
+        //        btnclick.innerHTML = btn;
+        //        $(btnclick).parent().prevAll()[6].innerHTML = statetext;
+        //    }
+        //})
+
+        //this.innerHTML = btn
     },
     'click .remove': function (e, value, row, index) {
         var delUrl = '/v1/live/lab/delete?id=' + row.id;
