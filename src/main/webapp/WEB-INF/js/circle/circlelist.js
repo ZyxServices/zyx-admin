@@ -219,15 +219,22 @@ function getLocalTime(value) {
 //分类操作
 function circleFormatter(value, row, index) {
     var btnText;
+    var Recommend;
     if (row.state == 0) {
         btnText = "屏蔽"
     } else if (row.state == -2) {
         btnText = "取消屏蔽"
     }
+   if(row.deva ==true){
+       Recommend="已推荐"
+   }
+    else{
+       Recommend="推荐"
+   }
     return [
         '<a class="preview p5"   href="javascript:void(0)" title="preview">预览</a>',
         '<a class="edit p5"   href="javascript:void(0)" title="preview">编辑</a>',
-        '<a class="recommend p5" href="javascript:void(0)" title="recommend">推荐</a>',
+        '<a class="recommend p5" href="javascript:void(0)" title="recommend">'+Recommend+'</a>',
         '<a class="Shield p5" href="javascript:void(0)" title="Shield">' + btnText + '</a>',
         '<a class="remove p5" href="javascript:void(0)" title="remove">删除</a>'
     ].join('');
