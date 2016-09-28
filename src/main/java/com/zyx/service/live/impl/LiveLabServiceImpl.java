@@ -90,7 +90,7 @@ public class LiveLabServiceImpl extends BaseServiceImpl<LiveLab> implements Live
      * By ID
      */
     public void updateLiveLab(LiveLab liveLab) {
-        if(liveLab==null||liveLab.getId()==null||liveLab.getLab()==null){
+        if(liveLab==null||liveLab.getId()==null){
             return;
         }
         LiveLab rlab = (LiveLab) redisTemplate.opsForHash().get(LiveConstants.MARK_LIVE_ID_LIVE_LAB + liveLab.getId(), LiveConstants.HASH_LIVE_ID_LIVE_LAB);
