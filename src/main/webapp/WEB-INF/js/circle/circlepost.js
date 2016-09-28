@@ -4,28 +4,34 @@
 //帖子创建
 var firstopction = "<option value=''></option>";
 //获取圈子列表
-var circleList = function () {
-    $.ajax({
-        type: "get",
-        dateType: "json",
-        url: "../../circle/circleList",
-        data: {
-            start: 0,
-            pageSize: 20
+var thisURL = document.URL;
+var getval = thisURL.split('?')[1];
+var showval = getval.split("=")[1];
+/*circleList;
+ var circleList = function () {
+ $.ajax({
+ type: "get",
+ dateType: "json",
+ url: "../../circle/circleList",
+ data: {
+ start: 0,
+ pageSize: 20
 
-        },
-        async: false,
-        success: function (data) {
-            console.log(data);
-            var html = "";
-            html = html
-            for (var i = 0; i < data.data.length; i++) {
-                html = html + "<option value='" + data.data[i].id + "'>" + data.data[i].title + "</option>"
-            }
-            $("#circleList").append(firstopction + html);
-        }
-    });
-};
+ },
+ async: false,
+ success: function (data) {
+ console.log(data);
+ $("#circle_id").html(data.details)
+ /!*        var html = "";
+ html = html
+ for (var i = 0; i < data.data.length; i++) {
+ html = html + "<option value='" + data.data[i].id + "'>" + data.data[i].title + "</option>"
+ }
+ $("#circleList").append(firstopction + html);*!/
+ }
+
+ });
+ };*/
 /*查询圈子时需要选择的用户*/
 var officeUser = $.ajax({
     url: "/v1/appUser/list/official/all",
@@ -79,7 +85,6 @@ $('#post-summernote').on('summernote.change', function (content, $editable) {
 function createPost() {
     $("#postList").hide();
     $("#postCreate").show();
-    circleList();
     officeUser;
     $("input").val("");
     $('#post-summernote').summernote('code', "");
@@ -89,7 +94,6 @@ function createPost() {
 }
 
 $(function () {
-
     $("#CirclePost").bootstrapValidator({
         fields: {
             "title": {
@@ -132,7 +136,8 @@ $(function () {
         paginationPreText: "上一页",
         paginationNextText: "下一页",
         pageNumber: 0,            //初始化加载第一页，默认第一页
-        pageSize: 10,            //每页的记录行数（*）
+        pageSize: 10,
+        //每页的记录行数（*）
         checkbox: true,
         checkboxHeader: "true",
         sortable: true,           //是否启用排序
@@ -151,7 +156,8 @@ $(function () {
             var param = {
                 start: 0,
                 pageSize: params.pageSize,
-                searchText: params.searchText
+                searchText: params.searchText,
+                circleId: showval,
                 //sortName: params.sortName
                 //sortOrder: params.sortOrder
             };
@@ -166,7 +172,7 @@ $(function () {
             {field: 'title', title: '帖子标题'},
             {field: 'createUser', title: '发布人'},
             {field: 'createTime', title: '发布时间', formatter: getLocalTime},
-            {field: 'circleTitle', title: '所属圈子'},
+            {field: 'circleTitle', title: '所属圈子', formatter: circleTitle},
             {field: 'zanCounts', title: '点赞量'},
             {field: 'commentCounts', title: '评论量'},
             {field: 'typeName', title: '分享量'},
@@ -177,6 +183,11 @@ $(function () {
         ]
     })
 });
+function circleTitle(value) {
+    var circleNmae = value;
+    $("#circle_id").html(circleNmae);
+
+}
 //分类操作
 function circlePostFormatter(value, row, index) {
     var btnText;
@@ -200,7 +211,7 @@ var operateEvents = {
         $("#postList").hide();
         $("#postCreate").show();
         $("input[name=title]").val(row.title).attr("disabled", "disabled");
-        circleList();
+
         $("#circleList option[value='" + row.circleId + "']").attr("selected", true);
         $("#createId option[value='" + row.createId + "']").attr("selected", true);
         $("#circleList").chosen();
@@ -223,7 +234,6 @@ var operateEvents = {
         $("input[name=title]").val(row.title);
         $("input[name=content]").val(row.content);
         $("#postSure").show();
-        circleList();
         $("#circleList option[value='" + row.circleId + "']").attr("selected", true);
         $("#createId option[value='" + row.createId + "']").attr("selected", true);
         $("#createId").chosen();
@@ -231,6 +241,9 @@ var operateEvents = {
         $('#post-summernote').summernote('code', row.content);
         $("#CirclePost").attr("value", 2);
         $(".row").val(row.id)
+        $("#PostUserBox").show();
+        $("#PostUserChose").hide();
+        $("#PostUser").html(row.createUser)
     },
     //帖子推荐
     'click .recommend': function (e, value, row, index) {

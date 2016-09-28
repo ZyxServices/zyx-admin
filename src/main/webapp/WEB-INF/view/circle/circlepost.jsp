@@ -77,7 +77,7 @@
 
                     <h3 class="page-title">
 
-                        帖子列表
+                        圈子列表
                         <small>statistics and more</small>
 
                     </h3>
@@ -87,14 +87,13 @@
                         <li>
 
                             <i class="icon-home"></i>
-
-                            <a href="javascript:void(0)">帖子</a>
+                            <a href="/menu/circle/circlelist">圈子列表</a>
 
                             <i class="icon-angle-right"></i>
 
                         </li>
 
-                        <li><a href="#">列表</a></li>
+                        <li><a href="#">帖子列表</a></li>
 
                     </ul>
 
@@ -175,16 +174,22 @@
                           id="CirclePost">
                         <%--  <input type="hidden" name="circle_id" value="75">--%>
                         <%--   <input type="hidden" name="create_id" >--%>
-                        <div class="control-group form-group">
+                        <div class="control-group form-group" id="PostUserChose">
                             <label class="control-label">请选择发布账号:</label>
                             <div class="controls  col-xs-6">
                                 <select name="create_id" data-placeholder="请选择发布账号" id="createId" data-rel="chosen"
                                         style="width:350px;" class="chzn-select" tabindex="7">
-
                                 </select>
                                 <span class="help-inline">*</span>
                             </div>
                         </div>
+                            <div class="control-group form-group" id="PostUserBox" style="display: none">
+                                <label class="control-label">发布账号:</label>
+                                <div class="controls  col-xs-6">
+                                    <div id="PostUser"></div>
+
+                                </div>
+                            </div>
                         <div class="control-group form-group">
                             <label class="control-label">标题:</label>
                             <div class="controls">
@@ -206,11 +211,11 @@
                         <div class="control-group form-group">
                             <label class="control-label">所属圈子:</label>
                             <div class="controls">
-                                <select name="circle_id"
-                                        data-placeholder="请选择圈子哦" id="circleList" data-rel="chosen" class="chzn-select"
-                                        style="width:350px;" tabindex="8">
-                                </select>
-                                <span class="help-inline">*</span>
+                                <div id="circle_id"></div>
+                                <%--           <select name="circle_id"
+                                                   data-placeholder="请选择圈子哦" id="circleList" data-rel="chosen" class="chzn-select"
+                                                   style="width:350px;" tabindex="8">
+                                           </select>--%>
                             </div>
                         </div>
                         <div class="control-group form-group">

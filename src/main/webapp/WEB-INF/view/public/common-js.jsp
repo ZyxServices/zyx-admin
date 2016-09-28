@@ -40,14 +40,16 @@
     $(function () {
         var url = window.location.href;
         var urlLength = url.split("/").length;
+        console.log(urlLength)
         var getMenuObj = url.split("/")[urlLength - 2];
         var getSecondMenuObj = url.split("/")[urlLength - 1];
-        if(getSecondMenuObj == "home"){
+        var getThirdMenuObj = url.split("/")[5].split("?")[0];
+        if (getSecondMenuObj == "home") {
             $("." + getSecondMenuObj).addClass("active");
             $("." + getSecondMenuObj).find(".selected").show();
             return;
         }
-        if (getMenuObj == "circle" || getMenuObj == "shop" || getMenuObj == "appUser" || getMenuObj == "homepage" || getMenuObj == "banner" || getMenuObj == "sys" || getMenuObj == "activity") {
+        if (getMenuObj == "circle" && getThirdMenuObj != "circlepost" || getMenuObj == "shop" || getMenuObj == "appUser" || getMenuObj == "homepage" || getMenuObj == "banner" || getMenuObj == "sys" || getMenuObj == "activity") {
             $("." + getMenuObj).addClass("open");
             $("." + getMenuObj).addClass("active");
             $("." + getMenuObj).find(".arrow").addClass("open");

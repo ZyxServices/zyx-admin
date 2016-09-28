@@ -94,11 +94,11 @@
                                     class="selected"></span></a>
                         </li>
                     </shiro:hasPermission>
-                    <shiro:hasPermission name="menu:circle:circlepost">
+       <%--             <shiro:hasPermission name="menu:circle:circlepost">
                         <li class="circlepost postcreat">
                             <a href="<%=request.getContextPath()%>/menu/circle/circlepost">帖子列表</a>
                         </li>
-                    </shiro:hasPermission>
+                    </shiro:hasPermission>--%>
                 </ul>
             </li>
         </shiro:hasPermission>

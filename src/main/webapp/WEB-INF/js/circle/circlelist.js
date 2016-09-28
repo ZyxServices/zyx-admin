@@ -176,19 +176,35 @@ $(function () {
             {field: 'circleTypeName', title: '圈子类别'},
             {field: 'createTime', title: '创建时间', formatter: getLocalTime},
             {field: '', title: '创建人', formatter: infoFormatter},
-            {field: 'masterName', title: '圈主', sortable: true,},
+            {field: 'masterName', title: '圈主', sortable: true},
             {field: 'adminIds', title: '管理员', sortable: true},
-            {field: 'circleItemCount', title: '帖子数量', sortable: true},
+            {field: 'circleItemCount', title: '帖子数量', sortable: true, events: numberEvent, formatter: getCircleId},
             {field: 'concernCount', title: '关注人数', sortable: true},
             {field: '', title: '浏览量（主页）', sortable: true},
             {field: 'operation', title: '操作', align: 'center', events: operateEvent, formatter: circleFormatter}
         ]
     })
 });
+var numberEvent = {
+    'click .PostNumber': function (e, value, row, index) {
+        window.location.href = "/menu/circle/circlepost?circleId=" + row.id
+        if (value != 0 || value != "") {
+
+        }
+    }
+}
 //圈子创建人
+function getCircleId(value, row, index) {
+    console.log(value);
+    var number = row.circleItemCount;
+    return [
+        '<a class="PostNumber"   href="javascript:void(0)" title="preview">' + number + '</a>',
+    ].join('');
+}
 function infoFormatter(value, row, index) {
     return row.userVo.nickName
 }
+
 //时间转换
 function getLocalTime(value) {
     return (new Date(value).format("yyyy-mm-dd HH:MM:ss"));
@@ -259,6 +275,9 @@ var operateEvent = {
         //多个管理员
         adminSelect("#adminIds", row.adminIds);
         $("#adminIds").trigger("liszt:updated");
+        $("#nameHide").hide();
+        $("#nameShow").show();
+        $("#creatperson").html(row.userVo.nickName);
         $("#masterId").chosen();
         $("#adminIds").chosen();
         $("#category").find("option[value='" + row.circleType + "']").attr("selected", true);

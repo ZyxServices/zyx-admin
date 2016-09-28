@@ -189,7 +189,14 @@
                         <%--     <input name="createId" type="hidden" value="20"/>--%>
                         <input name="circleId" type="hidden"/>
                         <%--        <input name="state" type="hidden" value="-2">--%>
-                        <div class="control-group form-group">
+                        <div class="control-group form-group" id="nameShow" style="display:none">
+                            <label class="control-label">创建人</label>
+                            <div class="controls  col-xs-6">
+                                <div id="creatperson"></div>
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group" id="nameHide">
                             <label class="control-label">请选择发布账号</label>
                             <div class="controls  col-xs-6">
                                 <select name="createId" data-placeholder="请选择发布账号" id="createId" data-rel="chosen"
