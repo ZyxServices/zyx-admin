@@ -40,22 +40,23 @@
     $(function () {
         var url = window.location.href;
         var urlLength = url.split("/").length;
-        console.log(urlLength)
         var getMenuObj = url.split("/")[urlLength - 2];
-        var getSecondMenuObj = url.split("/")[urlLength - 1];
-        var getThirdMenuObj = url.split("/")[5].split("?")[0];
-        if (getSecondMenuObj == "home") {
-            $("." + getSecondMenuObj).addClass("active");
-            $("." + getSecondMenuObj).find(".selected").show();
+        var getSecondMenuObj = url.split("/")[urlLength - 1].split("?");
+        if(getSecondMenuObj.length == 2){
+            getSecondMenuObj[0] = 'circlelist';
+        }
+        if (getSecondMenuObj[0] == "home") {
+            $("." + getSecondMenuObj[0]).addClass("active");
+            $("." + getSecondMenuObj[0]).find(".selected").show();
             return;
         }
-        if (getMenuObj == "circle" && getThirdMenuObj != "circlepost" || getMenuObj == "shop" || getMenuObj == "appUser" || getMenuObj == "homepage" || getMenuObj == "banner" || getMenuObj == "sys" || getMenuObj == "activity") {
+        if (getMenuObj == "circle" || getMenuObj == "shop" || getMenuObj == "appUser" || getMenuObj == "homepage" || getMenuObj == "banner" || getMenuObj == "sys" || getMenuObj == "activity") {
             $("." + getMenuObj).addClass("open");
             $("." + getMenuObj).addClass("active");
             $("." + getMenuObj).find(".arrow").addClass("open");
             $("." + getMenuObj).find(".selected").show();
             $("." + getMenuObj).find(".sub-menu").show();
-            $("." + getSecondMenuObj).addClass("active");
+            $("." + getSecondMenuObj[0]).addClass("active");
         } else {
             $("." + getMenuObj).addClass("active");
             $("." + getMenuObj).find(".selected").show();
