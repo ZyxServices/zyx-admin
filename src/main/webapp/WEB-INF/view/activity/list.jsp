@@ -379,7 +379,7 @@
           <input type="hidden" name="imageUrl" id="imageUrl">
           <input id="recommendFile" type="file" class="hideInput">
           <a class="btn btn-default" href="javascript:void (0)" id="recommendPhotoCover" onclick="$('input[id=recommendFile]').click();">选择文件</a>
-          <div style="margin-top: 10px" id="recommendImgWrap">
+          <div style="margin-top: 10px" id="recommendImgWrap" class="showImg">
             <img id="recommendImg" src="">
           </div>
         </div>

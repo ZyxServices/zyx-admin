@@ -260,6 +260,9 @@ function fromData(res) {
 }
 
 $("#confirmCmd").click(function () {
+    $("#activityRecommend").modal('hide');
+    $("#upload").modal('show');
+    $("#uploadContent").html('推荐上传中...');
     if($("#recommendFile")[0].files[0] == undefined){/*没选图片*/
         activityRecommend();
     }else{
@@ -286,11 +289,6 @@ function activityRecommend() {
         url: '/v1/deva/add',
         type: 'post',
         dataType: 'json',
-        beforeSubmit:function () {
-            $("#upload").modal('show');
-            $("#uploadContent").html('推荐上传中...');
-            $("#activityRecommend").modal('hide');
-        },
         complete:function () {
             $("#upload").modal('hide');
         },
