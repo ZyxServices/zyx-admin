@@ -51,7 +51,7 @@ function initTable() {
             {field: 'type', title: '类别'},
             {field: 'title', title: '直播名称'},
             {field: 'userId', title: '直播发起人'},
-            {field: 'lab', title: '直播类型', sortable: true},
+            {field: 'lab', title: '直播类型', sortable: true,formatter: labFormatter},
             {field: 'dynamic', title: '直播状态', sortable: true, formatter: operateFormatterssssss},
             {field: 'start', title: '直播开始时间', sortable: true, formatter: timeFormat},
             {field: 'end', title: '直播结束时间', sortable: true, formatter: timeFormat},
@@ -126,6 +126,10 @@ function initTable() {
     });
 }
 
+//直播类型
+function labFormatter(value, row, index) {
+    return row.lab == 1 ? "图文直播" : "视频直播";
+}
 //直播状态初始化
 function operateFormatterssssss(value, row, index) {
     return row.state == 0 ? "正常" : "已屏蔽";
@@ -234,7 +238,7 @@ var operateEventssssss = {
                 $("#upload").modal({backdrop: 'static', keyboard: false});
                 var formData = new FormData();
                 formData.append('imgFile', $('#Cover')[0].files[0]);
-                if ($('#Cover')[0].files.length > 0) {
+                if ($('#Cover')[0].files.length >0) {
                     $.ajax({
                         url: '/v1/upload/file',//后台文件上传接口
                         type: 'POST',
@@ -258,10 +262,11 @@ var operateEventssssss = {
                             liveDeva()
                         }
                     });
-                } else {
-                    $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="" >');
+                } else{
+                    $('#recommend').append('<input style="display: none" class="CoverP" name="imageUrl"  value="'+row.bgmUrl+'" >');
                     liveDeva()
                 }
+
 
             }
         })
