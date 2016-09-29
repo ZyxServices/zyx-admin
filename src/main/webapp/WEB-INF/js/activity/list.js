@@ -2,7 +2,7 @@
  * Created by ZYX on 2016/7/12.
  */
 
-var ISCHANGEIMG = '';
+var ISCHANGEIMG = '';/*判断修改活动的时候是否修改了图片*/
 $(function () {
 
     /*表单验证*/
@@ -502,7 +502,7 @@ var operateEvents = {
                                     $("#activityName").val(datas.title);
                                     $("#activityId").val(datas.id);
                                     $("#activityImage").attr("src", "http://image.tiyujia.com/" + datas.imgUrls);
-                                    $("#imageUrl").val(datas.imgUrls)
+                                    $("#imageUrl").val(datas.imgUrls);
                                 } else {
                                     $.Popup({
                                         confirm: false,
@@ -790,3 +790,17 @@ function getImgURL(file) {
     }
     return url;
 }
+/*
+/!*选择推荐图*!/
+function choiceDevaImg(obj) {
+    var imgUrl = $(obj).find("img").attr("src").split("image.tiyujia.com/");
+    $(obj).find("span").toggle();
+    var isSelect = $(obj).find("span").hasClass("hide");
+    if(isSelect){
+        $(obj).find("span").removeClass("hide");
+        $("#imageUrl").val(imgUrl);
+    }else{
+        $(obj).find("span").addClass("hide");
+        $("#imageUrl").val("");
+    }
+}*/

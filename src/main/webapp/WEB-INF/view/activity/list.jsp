@@ -360,11 +360,24 @@
       <input type="hidden" name="model" value="1"/>
       <input type="hidden" name="area" value="1"/>
       <div class="control-group">
-        <label class="control-label">活动原有封面图</label>
-        <div class="controls">
-          <img id="activityImage" src="">
+        <label class="control-label">选择推荐图片</label>
+        <div class="controls showImg">
+          <%--<a href="javascript:void(0)" style="position: relative;display: inline-block" onclick="choiceDevaImg(this)">--%>
+            <img id="activityImage" src="">
+            <%--<span class="devaOk hide"><i class="icon-ok"></i></span>--%>
+          <%--</a>--%>
         </div>
       </div>
+      <%--<div class="control-group">
+        <div class="controls">
+          <input type="hidden" name="imageUrl" id="imageUrl">
+          <input id="recommendFile" type="file" class="hideInput">
+          <a class="btn btn-default" href="javascript:void (0)" id="recommendPhotoCover" onclick="$('input[id=recommendFile]').click();">选择文件</a>
+          <div style="margin-top: 10px" id="recommendImgWrap" class="showImg">
+            <img id="recommendImg" src="">
+          </div>
+        </div>
+      </div>--%>
       <div class="control-group form-group">
         <label class="control-label">banner排序</label>
         <div class="controls col-xs-5">
