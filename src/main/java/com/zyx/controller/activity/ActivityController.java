@@ -39,6 +39,7 @@ public class ActivityController {
     private ActivityService activityService;
     @Autowired
     DevaService devaService;
+
     @RequestMapping(value = "/release", method = RequestMethod.POST)
     @ApiOperation(value = "活动发布", notes = "活动发布")
     public ModelAndView release(@RequestParam(name = "userId", required = true) Integer userId,
@@ -59,7 +60,7 @@ public class ActivityController {
 
         AbstractView jsonView = new MappingJackson2JsonView();
 
-        if(image == null || image.equals("")){
+        if (image == null || image.equals("")) {
             jsonView.setAttributesMap(MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失"));
             return new ModelAndView(jsonView);
         }
@@ -109,7 +110,7 @@ public class ActivityController {
 
         AbstractView jsonView = new MappingJackson2JsonView();
 
-        if(image == null || image.equals("")){
+        if (image == null || image.equals("")) {
             jsonView.setAttributesMap(MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数缺失"));
             return new ModelAndView(jsonView);
         }
@@ -176,13 +177,18 @@ public class ActivityController {
 
     @RequestMapping(value = "/delActivity", method = RequestMethod.POST)
     @ApiOperation(value = "删除活动", notes = "删除活动")
-    public ModelAndView delActivity(@RequestParam(name = "id", required = true) Integer id,
+    public ModelAndView delActivity(@RequestParam(name = "id", required = true) String id,
                                     @RequestParam(name = "delType", required = true) Integer delType) {
 
         AbstractView jsonView = new MappingJackson2JsonView();
 
         Map<String, Object> map = activityService.delActivity(id, delType);
-        devaService.cascadeDelete(Constants.MODEL_ACTIVITY,id);
+        if (map.get("state").equals("200")) {
+            String[] ids = id.split(",");
+            for (String s : ids) {
+                devaService.cascadeDelete(Constants.MODEL_ACTIVITY, Integer.valueOf(s));
+            }
+        }
         jsonView.setAttributesMap(map);
         return new ModelAndView(jsonView);
     }

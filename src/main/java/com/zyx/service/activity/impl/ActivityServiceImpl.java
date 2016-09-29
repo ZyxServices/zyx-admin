@@ -124,13 +124,22 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
     }
 
     @Override
-    public Map<String, Object> delActivity(int id, int delType) {
-        if (delType > -1 && delType < 2 && id > 0) {
-            Activity activity = new Activity();
-            activity.setId(id);
-            activity.setDel(delType);
-            int i = activityMapper.updateActivity(activity);
-            if (i > 0) {
+    public Map<String, Object> delActivity(String id, int delType) {
+        if (delType > -1 && delType < 2 && id != null && !id.equals("")) {
+            int a = 0;
+            String[] ids = id.split(",");
+            for (String integer : ids) {
+                if (integer != null && Integer.valueOf(integer) > 0) {
+                    Activity activity = new Activity();
+                    activity.setId(Integer.valueOf(integer));
+                    activity.setDel(delType);
+                    int i = activityMapper.updateActivity(activity);
+                    if (i > 0) {
+                        a++;
+                    }
+                }
+            }
+            if (a > 0) {
                 return MapUtils.buildSuccessMap(Constants.SUCCESS, "成功", "");
             } else {
                 return MapUtils.buildErrorMap(Constants.DATA_UPDATE_FAILED, "数据删除失败");
@@ -139,5 +148,5 @@ public class ActivityServiceImpl extends BaseServiceImpl<Activity> implements Ac
             return MapUtils.buildErrorMap(Constants.PARAM_MISS, "参数有误");
         }
     }
-    
+
 }

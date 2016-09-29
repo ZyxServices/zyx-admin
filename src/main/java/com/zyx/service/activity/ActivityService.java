@@ -62,6 +62,6 @@ public interface ActivityService extends BaseService<Activity>{
      * @param delType
      * @return
      */
-    Map<String, Object> delActivity(int id,int delType);
+    Map<String, Object> delActivity(String id,int delType);
 
 }
