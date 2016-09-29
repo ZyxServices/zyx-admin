@@ -88,7 +88,7 @@
         <div class="row-fluid margin-bottom-10">
           <div class="span6">
             <a class="btn btn-default" href="javascript:void(0)" onclick="createActivity()">创建活动</a>
-            <a class="btn btn-default" href="javascript:void(0)">批量删除</a>
+            <a class="btn btn-default" href="javascript:void(0)" onclick="batchDelete()">批量删除</a>
           </div>
         </div>
         <div class="row-fluid">

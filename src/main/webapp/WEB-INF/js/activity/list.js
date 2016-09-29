@@ -581,17 +581,10 @@ var operateEvents = {
                     dateType: "json",
                     success: function (result) {
                         if (result.state == 200) {
-                            if (type == 1) {
-                                $.Popup({
-                                    confirm: false,
-                                    template: '删除成功'
-                                })
-                            } else {
-                                $.Popup({
-                                    confirm: false,
-                                    template: '恢复删除成功'
-                                })
-                            }
+                            $.Popup({
+                                confirm: false,
+                                template: '删除成功'
+                            })
                             $('#activity-list-table').bootstrapTable('refresh');
                         } else {
                             $.Popup({
@@ -804,3 +797,37 @@ function choiceDevaImg(obj) {
         $("#imageUrl").val("");
     }
 }*/
+/*活动批量删除*/
+function batchDelete() {
+    var bathId = [];
+    $.map($("#activity-list-table").bootstrapTable('getSelections'), function (row) {
+        bathId.push(row.id);
+    });
+    $.Popup({
+        title: '删除',
+        template: '这些活动的所有数据将被完全删除，不能再被浏览',
+        saveEvent: function () {
+            $.ajax({
+                url: "/v1/activity/delActivity",
+                async: false,
+                type: "post",
+                data: {id: bathId.join(), delType: 1},
+                dateType: "json",
+                success: function (result) {
+                    if (result.state == 200) {
+                        $.Popup({
+                            confirm: false,
+                            template: '删除成功'
+                        })
+                        $('#activity-list-table').bootstrapTable('refresh');
+                    } else {
+                        $.Popup({
+                            confirm: false,
+                            template: '删除失败'
+                        })
+                    }
+                }
+            });
+        }
+    })
+}
