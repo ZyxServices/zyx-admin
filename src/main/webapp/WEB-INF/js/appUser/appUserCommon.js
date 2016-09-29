@@ -87,6 +87,7 @@ var operateEvent = {
         alert('You click like action, row: ' + JSON.stringify(row));
     },
     'click .edit': function (e, value, row, index) {
+        $("#userId").val(row.id);
         $(".live_index").hide();
         $(".create_liveType").show();
         $("#nickname").val(row.nickname);

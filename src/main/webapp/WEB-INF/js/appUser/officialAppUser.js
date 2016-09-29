@@ -65,7 +65,7 @@ function initTable() {
 //操作
 function operateFormatter(value, row, index) {
     var _html = [];
-    _html.push('<a class="edit p5" href="javascript:void(0)" title="edit">编辑</a>');
+    // _html.push('<a class="edit p5" href="javascript:void(0)" title="edit">编辑</a>');
     if(row.deva){
         _html.push('<a class="p5" href="javascript:void(0)" disabled>已推荐</a>')
     }else{
@@ -88,6 +88,37 @@ function operateFormatter(value, row, index) {
     return _html.join('');
 }
 $(function () {
+    $("#editUserForm").bootstrapValidator({
+        message: '数据无效',
+        feedbackIcons: {
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields:{
+            'nickname': {
+                validators: {
+                    notEmpty: {
+                        message: '账号不能为空'
+                    }
+                }
+            },'phone': {
+                validators: {
+                    notEmpty: {
+                        message: '电话号码必填'
+                    },
+                    regexp: {
+                        regexp: /^(1[3|4|5|7|8]\d{9})$/,/*只支持手机电话*/
+                        message: '请输入正确手机号码'
+                    }
+                }
+            },'address': {
+                validators: {
+                    notEmpty: {
+                        message: '所在地必填'
+                    }
+                }
+            }
+        }
+    });
     /*审核的验证*/
     $("#authForm").bootstrapValidator({
         message: '数据无效',
@@ -131,38 +162,6 @@ $(function () {
         }
     });
     initTable();
-    $("#editUserForm").bootstrapValidator({
-        message: '数据无效',
-        feedbackIcons: {
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields:{
-            'nickname': {
-                validators: {
-                    notEmpty: {
-                        message: '账号不能为空'
-                    }
-                }
-            },'phone': {
-                validators: {
-                    notEmpty: {
-                        message: '电话号码必填'
-                    },
-                    regexp: {
-                        regexp: /^(1[3|4|5|7|8]\d{9})$/,/*只支持手机电话*/
-                        message: '请输入正确手机号码'
-                    }
-                }
-            },'address': {
-                validators: {
-                    notEmpty: {
-                        message: '所在地必填'
-                    }
-                }
-            }
-        }
-    });
-
 });
 $("#createButton").click(function () {
     $("#editUserForm").ajaxSubmit({
@@ -170,7 +169,7 @@ $("#createButton").click(function () {
         type: 'post',
         dataType: 'json',
         beforeSubmit: function () {
-            return $('#createAppUserForm').data('bootstrapValidator').isValid();
+            return $('#editUserForm').data('bootstrapValidator').isValid();
         },
         success: function (result) {
             if (result.state == 200) {

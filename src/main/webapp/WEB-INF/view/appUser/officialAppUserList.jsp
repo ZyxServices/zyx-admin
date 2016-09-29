@@ -54,6 +54,7 @@
             <%--官方用户编辑--%>
             <div class="create_liveType row-fluid hide">
                 <form class="form-horizontal" role="form" id="editUserForm" enctype="multipart/form-data" method="post">
+                    <input type="hidden" name="id" id="userId">
                     <div class="control-group form-group">
                         <label class="control-label">昵称</label>
 
